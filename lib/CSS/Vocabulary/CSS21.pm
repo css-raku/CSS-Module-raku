@@ -2,13 +2,10 @@ use v6;
 
 # specification: http://www.w3.org/TR/2011/REC-CSS2-20110607/propidx.html
 
-use CSS::Grammar::Validating::CSS1;
-use CSS::Grammar::CSS21;
+use CSS::Vocabulary::CSS1;
 
-grammar CSS::Grammar::Validating::CSS21:ver<20110607.000> 
-    is CSS::Grammar::CSS21
-    is CSS::Grammar::Validating::CSS1 
-{
+grammar CSS::Vocabulary::CSS21:ver<20110607.000> 
+    is CSS::Vocabulary::CSS1 {
 
     rule decl:sym<azimuth> {:i (azimuth) ':' [
                                  <angle>

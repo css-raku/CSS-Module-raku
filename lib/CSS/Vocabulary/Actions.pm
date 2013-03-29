@@ -1,9 +1,6 @@
 use v6;
 
-use CSS::Grammar::Actions;
-
-class CSS::Grammar::Validating::Actions
-    is CSS::Grammar::Actions {
+class CSS::Vocabulary::Actions {
 
     method declaration:sym<raw>($/)        {
         $.warning('dropping declaration', $<property>.ast);

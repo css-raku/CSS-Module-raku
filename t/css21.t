@@ -2,12 +2,12 @@
 
 use Test;
 
-use CSS::Grammar::Validating::CSS21;
-use CSS::Grammar::Validating::Actions;
+use CSS::Language::CSS21;
+use CSS::Language::Actions;
 use lib '.';
 use t::AST;
 
-my $css_actions = CSS::Grammar::Validating::Actions.new;
+my $css_actions = CSS::Language::Actions.new;
 
 for (
     decl => {input => 'azimuth: 30deg',       ast => {property => 'azimuth', expr=> [angle => 30]},
@@ -45,7 +45,7 @@ for (
     my $input = %test<input>;
 
     $css_actions.reset;
-     my $p3 = CSS::Grammar::Validating::CSS21.parse( $input, :rule($rule), :actions($css_actions));
+     my $p3 = CSS::Language::CSS21.parse( $input, :rule($rule), :actions($css_actions));
     t::AST::parse_tests($input, $p3, :rule($rule), :suite('css3'),
                          :warnings($css_actions.warnings),
                          :expected(%test) );

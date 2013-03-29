@@ -1,8 +1,6 @@
 use v6;
 
-use CSS::Grammar::CSS1;
-
-grammar CSS::Grammar::Validating::CSS1 is CSS::Grammar:CSS1 {
+grammar CSS::Vocabulary::CSS1 {
 
     rule decl:sym<background-attachment> {:i (background\-attachment) ':' [
                                                [ scroll | fixed ] & <ident>
