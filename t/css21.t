@@ -45,8 +45,8 @@ for (
     my $input = %test<input>;
 
     $css_actions.reset;
-     my $p3 = CSS::Language::CSS21.parse( $input, :rule($rule), :actions($css_actions));
-    t::AST::parse_tests($input, $p3, :rule($rule), :suite('css3'),
+     my $p = CSS::Language::CSS21.parse( $input, :rule($rule), :actions($css_actions));
+    t::AST::parse_tests($input, $p, :rule($rule), :suite('css21'),
                          :warnings($css_actions.warnings),
                          :expected(%test) );
 }

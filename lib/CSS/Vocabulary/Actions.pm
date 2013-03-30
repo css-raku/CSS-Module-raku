@@ -2,6 +2,20 @@ use v6;
 
 class CSS::Vocabulary::Actions {
 
+    method declaration:sym<raw>($/)        {
+        $.warning('unknown property', $<property>.ast, 'declaration dropped');
+    }
+
+    method declaration:sym<validated>($/)  {
+        return unless $<decl>.ast;
+        my %ast = $<decl>.ast;
+
+        %ast<prio> = $<prio>.ast
+            if $<prio> && $<prio>.ast.defined;
+
+        make %ast;
+    }
+
     method _make_decl($/, $synopsis) {
         # used by prop:sym<*> methods
         my $property = $0.Str.trim.lc;
