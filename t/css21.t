@@ -3,11 +3,11 @@
 use Test;
 
 use CSS::Language::CSS21;
-use CSS::Language::Actions;
+use CSS::Language::CSS21::Actions;
 use lib '.';
 use t::AST;
 
-my $css_actions = CSS::Language::Actions.new;
+my $css_actions = CSS::Language::CSS21::Actions.new;
 
 for (
     decl => {input => 'azimuth: 30deg',       ast => {property => 'azimuth', expr=> [angle => 30]},
