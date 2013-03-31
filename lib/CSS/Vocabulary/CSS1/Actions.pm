@@ -5,14 +5,26 @@ use CSS::Vocabulary::Actions;
 class CSS::Vocabulary::CSS1::Actions
     is CSS::Vocabulary::Actions {
 
-    method decl:sym<font-family>($/) { warn "font-family - tba" }
-
-    method decl:sym<font-style>($/) {
-        $._make_decl($/, '');
+    method font_family($/) { make $.node($/) }
+    method decl:sym<font-family>($/) {
+        if $<font_family> {
+            return make {property => 'font-family',
+                         expr => [ $<font_family>.map({$_.ast}) ]
+            }
+        }
+        $._make_decl($/, '[[<family-name> | <generic-family>],]* [<family-name> | <generic-family>]');
     }
 
-    method decl:sym<font-variant>($/) { warn "font-variant - tba" }
-    method decl:sym<font-weight>($/) { warn "font-weight - tba" }
+    method decl:sym<font-style>($/) {
+        $._make_decl($/, 'normal | italic | oblique');
+    }
+
+    method decl:sym<font-variant>($/) {
+        $._make_decl($/, 'normal | small-caps');
+    }
+    method decl:sym<font-weight>($/) {
+        $._make_decl($/, 'normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900');
+    },
     method decl:sym<font-size>($/) { warn "font-size - tba" }
     method decl:sym<font>($/) { warn "font - tba" }
     method decl:sym<color>($/) { warn "color - tba" }

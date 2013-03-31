@@ -4,13 +4,27 @@ grammar CSS::Vocabulary::CSS1 {
 
     # Fonts
     # - font-family: [[<family-name> | <generic-family>],]* [<family-name> | <generic-family>]
+
+    token font_family {:i [ serif | sans\-serif | cursive | fantasy | monospace] & <generic_family=.ident> || <family_name=.ident> | <family_name=.string> }
+    rule decl:sym<font-family> {:i (font\-family) ':' [
+                                     <font_family> [ ',' <font_family> ]*
+                                     | <inherit> || <bad_args> ] }
+
     # - font-style: normal | italic | oblique
-    rule decl:sym<font\-style> {:i (font\-style) ':' [
-                                     [ normal |bold | oblique ] & <ident>
+    rule decl:sym<font-style> {:i (font\-style) ':' [
+                                     [ normal | bold | oblique ] & <ident>
                                      | <inherit> || <bad_args> ] }
 
     # - font-variant: normal | small-caps
-    # - font-weight: normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
+    rule decl:sym<font-variant> {:i (font\-variant) ':' [
+                                     [ normal | small\-caps ] & <ident>
+                                     | <inherit> || <bad_args> ] }
+   # - font-weight: normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
+    rule decl:sym<font-weight> {:i (font\-weight) ':' [
+                                     [ normal | bold | bolder | lighter ] & <ident>
+                                     | [ 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 ] & <num>
+                                     | <inherit> || <bad_args> ] }
+
     # - font-size: <absolute-size> | <relative-size> | <length> | <percentage>
     # - font: [ <font-style> || <font-variant> || <font-weight> ]? <font-size> [ / <line-height> ]? <font-family>
     # - color: <color>
