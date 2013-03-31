@@ -4,29 +4,35 @@ grammar CSS::Vocabulary::CSS1 {
 
     # Fonts
     # - font-family: [[<family-name> | <generic-family>],]* [<family-name> | <generic-family>]
-
-    token font_family {:i [ serif | sans\-serif | cursive | fantasy | monospace] & <generic_family=.ident> || <family_name=.ident> | <family_name=.string> }
-    rule decl:sym<font-family> {:i (font\-family) ':' [
-                                     <font_family> [ ',' <font_family> ]*
-                                     | <inherit> || <bad_args> ] }
+    token font-family {:i [ serif | sans\-serif | cursive | fantasy | monospace] & <generic-family=.ident> || <family-name=.ident> | <family-name=.string> }
+    rule decl:sym<font-family> {:i (font\-family) ':' [ <font-family> [ ',' <font-family> ]*
+                                                        | <inherit> || <bad_args> ] }
 
     # - font-style: normal | italic | oblique
-    rule decl:sym<font-style> {:i (font\-style) ':' [
-                                     [ normal | bold | oblique ] & <ident>
-                                     | <inherit> || <bad_args> ] }
+    token font-style {:i [ normal | bold | oblique ] & <ident> }
+    rule decl:sym<font-style> {:i (font\-style) ':' [ <font-style> | <inherit> || <bad_args> ] }
 
     # - font-variant: normal | small-caps
-    rule decl:sym<font-variant> {:i (font\-variant) ':' [
-                                     [ normal | small\-caps ] & <ident>
-                                     | <inherit> || <bad_args> ] }
+    token font-variant {:i [ normal | small\-caps ] & <ident>}
+    rule decl:sym<font-variant> {:i (font\-variant) ':' [ <font-variant>
+                                                          | <inherit> || <bad_args> ] }
    # - font-weight: normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
-    rule decl:sym<font-weight> {:i (font\-weight) ':' [
-                                     [ normal | bold | bolder | lighter ] & <ident>
-                                     | [ 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 ] & <num>
-                                     | <inherit> || <bad_args> ] }
+    token font-weight {:i [ normal | bold | bolder | lighter ] & <ident>
+                           | [ 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 ] & <num> }
+    rule decl:sym<font-weight> {:i (font\-weight) ':' [ <font-weight>
+                                                        | <inherit> || <bad_args> ] }
 
     # - font-size: <absolute-size> | <relative-size> | <length> | <percentage>
+    token absolute-size {i: [x?x\-]?small | medium | [x?x\-]?large & <ident> }
+    token relative-size {:i [ larger | smaller ] & <ident> }
+    token font-size {:i <absolute-size> | <relative-size> | <length> | <percentage> }
+    rule decl:sym<font-size> {:i (font\-size) ':' [ <font-size>
+                                                    | <inherit> || <bad_args> ] }
     # - font: [ <font-style> || <font-variant> || <font-weight> ]? <font-size> [ / <line-height> ]? <font-family>
+    rule decl:sym<font> {:i (font) ':' [
+                              [  <font-style> | <font-variant> | <font-weight> ]* <font-size> [ '/' <line-height> ]? <font-family>
+                              | <inherit> || <bad_args> ] }
+                             
     # - color: <color>
     # Backgrounds
     # - background-color: <color> | transparent
@@ -68,6 +74,7 @@ grammar CSS::Vocabulary::CSS1 {
     # - text-align: left | right | center | justify
     # - text-indent: <length> | <percentage>
     # - line-height: normal | <number> | <length> | <percentage>
+    token line-height {:i normal & <ident> | <num> | <length> | <percentage>}
     # - margin-top: <length> | <percentage> | auto
     # - margin-right: <length> | <percentage> | auto
     # - margin-bottom: <length> | <percentage> | auto

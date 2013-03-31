@@ -5,28 +5,45 @@ use CSS::Vocabulary::Actions;
 class CSS::Vocabulary::CSS1::Actions
     is CSS::Vocabulary::Actions {
 
-    method font_family($/) { make $.node($/) }
+    method font-family($/) { make $.node($/) }
     method decl:sym<font-family>($/) {
-        if $<font_family> {
+        if $<font-family> {
             return make {property => 'font-family',
-                         expr => [ $<font_family>.map({$_.ast}) ]
+                         expr => [ $<font-family>.map({$_.ast}) ]
             }
         }
         $._make_decl($/, '[[<family-name> | <generic-family>],]* [<family-name> | <generic-family>]');
     }
 
+    method font-style($/) { make $.token($<ident>.ast) }
     method decl:sym<font-style>($/) {
         $._make_decl($/, 'normal | italic | oblique');
     }
 
+    method font-variant($/) { make $.token($<ident>.ast) }
     method decl:sym<font-variant>($/) {
         $._make_decl($/, 'normal | small-caps');
     }
+
+    method font-weight($/) { make $.token( ($<ident> || $<num>).ast ) }
     method decl:sym<font-weight>($/) {
         $._make_decl($/, 'normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900');
-    },
-    method decl:sym<font-size>($/) { warn "font-size - tba" }
-    method decl:sym<font>($/) { warn "font - tba" }
+    }
+
+    method absolute-size($/) { make $.token($<ident>.ast) }
+    method relative-size($/) { make $.token($<ident>.ast) }
+    method font-size($/)     { make $.node($/) }
+    method decl:sym<font-size>($/) {
+        if $<font-size> {
+            return make {property => 'font-size',
+                         expr => $<font-size>.ast}
+        }
+        $._make_decl($/, '[x?x-]small | medium | [x?x\-]large | larger | smaller | <length> | <percentage>');
+    }
+
+    method decl:sym<font>($/) {
+        $._make_decl($/, '[ <font-style> || <font-variant> || <font-weight> ]? <font-size> [ / <line-height> ]? <font-family>');
+    }
     method decl:sym<color>($/) { warn "color - tba" }
 
     method decl:sym<background-color>($/) {
@@ -57,6 +74,7 @@ class CSS::Vocabulary::CSS1::Actions
     method decl:sym<text-transform>($/) { warn "text-transform - tba" }
     method decl:sym<text-align>($/) { warn "text-align - tba" }
     method decl:sym<text-indent>($/) { warn "text-indent - tba" }
+    method line-height($/) { make $.node($/) }
     method decl:sym<line-height>($/) { warn "line-height - tba" }
     method decl:sym<margin-top>($/) { warn "margin-top - tba" }
     method decl:sym<margin-right>($/) { warn "margin-right - tba" }
