@@ -50,6 +50,14 @@ for (
     },
     decl => {input => 'background-position : 100% 90%', ast => {"property" => "background-position", "expr" => [["percentage" => 100, "percentage" => 90]]},
     },
+    decl => {input => 'background: url(chess.png) gray 50% repeat scroll', 
+             ast => {"property" => "background",
+                     "expr" => [["background-image" => {"url" => "chess.png"},
+                                 "background-color" => {"color" => {"r" => 128, "g" => 128, "b" => 128}},
+                                 "background-position" => ["percentage" => 50],
+                                 "background-repeat" => {"ident" => "repeat"},
+                                 "background-attachment" => {"ident" => "scroll"}]]},
+    },
     ) {
 
     my $rule = $_.key;

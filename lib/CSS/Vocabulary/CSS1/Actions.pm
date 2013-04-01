@@ -5,6 +5,34 @@ use CSS::Vocabulary::Actions;
 class CSS::Vocabulary::CSS1::Actions
     is CSS::Vocabulary::Actions {
 
+    method named-color($/) {
+        state %colors = (
+            black => [0,0,0],
+            silver => [192,192,192],
+            gray => [128,128,128],
+            white => [255,255,255],
+            maroon => [128,0,0],
+            red => [255,0,0],
+            purple => [128,0,128],
+            fuchsia => [255,0,255],
+            green => [0,128,0],
+            lime => [0,255,0],
+            olive => [128,128,0],
+            yellow => [255,255,0],
+            navy => [0,0,128],
+            blue => [0,0,255],
+            teal => [0,128,128],
+            aqua => [0,255,255],
+            );
+
+        my $color_name = $<ident>.ast;
+        my $rgb = %colors{$color_name}
+        or die  "unknown color: " ~ $color_name;
+
+        make {r => $rgb[0], g => $rgb[1], b => $rgb[2]};
+    }
+    method color:sym<named>($/) { make $<named-color>.ast } 
+
     method font-family($/) { make $.node($/) }
     method decl:sym<font-family>($/) {
         if $<font-family> {
@@ -34,11 +62,8 @@ class CSS::Vocabulary::CSS1::Actions
     method relative-size($/) { make $.token($<ident>.ast) }
     method font-size($/)     { make $.node($/) }
     method decl:sym<font-size>($/) {
-        if $<font-size> {
-            return make {property => 'font-size',
-                         expr => $<font-size>.ast}
-        }
-        $._make_decl($/, '[x?x-]small | medium | [x?x\-]large | larger | smaller | <length> | <percentage>');
+        $._make_decl($/, '[x?x-]small | medium | [x?x\-]large | larger | smaller | <length> | <percentage>',
+            :body($<font-size>));
     }
 
     method decl:sym<font>($/) {
@@ -46,27 +71,36 @@ class CSS::Vocabulary::CSS1::Actions
     }
     method decl:sym<color>($/) { warn "color - tba" }
 
+    method background-color($/) { make $.node($/) }
     method decl:sym<background-color>($/) {
-        $._make_decl($/, '<color> | transparent | inherit')
+        $._make_decl($/, '<color> | transparent | inherit', :body($<background-color>))
     };
 
+    method background-image($/) { make $.node($/) }
     method decl:sym<background-image>($/) {
-        $._make_decl($/, '<uri> | none | inherit')
+        $._make_decl($/, '<uri> | none | inherit', :body($<background-image>))
     };
 
+    method background-repeat($/) { make $.node($/) }
     method decl:sym<background-repeat>($/) {
-        $._make_decl($/, 'repeat | repeat-x | repeat-y | no-repeat')
+        $._make_decl($/, 'repeat | repeat-x | repeat-y | no-repeat', :body($<background-repeat>))
     };
 
+    method background-attachment($/) { make $.node($/) }
     method decl:sym<background-attachment>($/) {
-        $._make_decl($/, 'scroll | fixed | inherit');
+        $._make_decl($/, 'scroll | fixed | inherit', :body($<background-attachment>));
     };
 
+    method background-position($/) { make $.list($/) }
     method decl:sym<background-position>($/) {
-        $._make_decl($/, '[<percentage> | <length>]{1,2} | [top | center | bottom] || [left | center | right]')
+        $._make_decl($/, '[<percentage> | <length>]{1,2} | [top | center | bottom] || [left | center | right]',
+            :body($<background-position>))
     };
 
-    method decl:sym<background>($/) { warn "background - tba" }
+    method decl:sym<background>($/) {
+        $._make_decl($/, '<background-color> || <background-image> || <background-repeat> || <background-attachment> || <background-position>');
+    }
+
     method decl:sym<word-spacing>($/) { warn "word-spacing - tba" }
     method decl:sym<letter-spacing>($/) { warn "letter-spacing - tba" }
     method decl:sym<text-decoration>($/) { warn "text-decoration - tba" }

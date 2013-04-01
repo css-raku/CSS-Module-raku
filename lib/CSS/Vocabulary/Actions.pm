@@ -16,7 +16,7 @@ class CSS::Vocabulary::Actions {
         make %ast;
     }
 
-    method _make_decl($/, $synopsis) {
+    method _make_decl($/, $synopsis, :$body?) {
         # used by prop:sym<*> methods
         my $property = $0.Str.trim.lc;
 
@@ -27,7 +27,7 @@ class CSS::Vocabulary::Actions {
         %ast<property> = $property;
 
         my @expr;
-        for $.list($/) {
+        for $.list($body // $/) {
             my ($term, $val) = $_.kv;
             if $term eq 'inherit' {
                 %ast<inherit> = True;

@@ -2,6 +2,10 @@ use v6;
 
 grammar CSS::Vocabulary::CSS1 {
 
+    # allow color names and define our vocabulary
+    token named-color {:i [aqua | black | blue | fuchsia | gray | green | lime | maroon | navy | olive | purple | red | silver | teal | white | yellow] & <ident> }
+    rule color:sym<named> {<named-color>}
+
     # Fonts
     # - font-family: [[<family-name> | <generic-family>],]* [<family-name> | <generic-family>]
     token font-family {:i [ serif | sans\-serif | cursive | fantasy | monospace] & <generic-family=.ident> || <family-name=.ident> | <family-name=.string> }
@@ -36,35 +40,45 @@ grammar CSS::Vocabulary::CSS1 {
     # - color: <color>
     # Backgrounds
     # - background-color: <color> | transparent
+    token background-color {:i <color> | fixed & <ident> }
     rule decl:sym<background-color> {:i (background\-color) ':' [
-                                          <color>
-                                          | [ fixed & <ident> ]
+                                          <background-color>
                                           | <inherit> || <bad_args> ]}
 
     # - background-image: <url> | none
+    token background-image {:i <url> | fixed & <ident> }
     rule decl:sym<background-image> {:i (background\-image) ':' [
-                                          <url>
-                                          | [ fixed & <ident> ]
+                                          <background-image>
                                           | <inherit> || <bad_args> ]}
 
     # - background-repeat: repeat | repeat-x | repeat-y | no-repeat
+    token background-repeat {:i [ repeat[\-[x|y]]? | no\-repeat ] & <ident> }
     rule decl:sym<background-repeat> {:i (background\-repeat) ':' [
-                                          [ repeat[\-[x|y]]? | no\-repeat ] & <ident>
+                                          <background-repeat>
                                           | <inherit> || <bad_args> ]}
 
 
     # - background-attachment: scroll | fixed
+    token background-attachment {:i [ scroll | fixed ] & <ident> }
     rule decl:sym<background-attachment> {:i (background\-attachment) ':' [
-                                               [ scroll | fixed ] & <ident>
+                                               <background-attachment>
                                                | <inherit> || <bad_args> ]}
 
     # - background-position: [<percentage> | <length>]{1,2} | [top | center | bottom] || [left | center | right]
+    rule background-position {:i [ <percentage> | <length> ]**1..2
+                                    | [ top | center | bottom ] & <ident>
+                                    [[ left | center | right ] & <ident> ]?}
+
     rule decl:sym<background-position> {:i (background\-position) ':' [
-                                          [ <percentage> | <length> ]**1..2 | [ top | center | bottom ] & <ident>
-                                          [[ left | center | right ] & <ident> ]?
-                                          | <inherit> || <bad_args> ]}
+                                             <background-position>
+                                             | <inherit> || <bad_args> ]}
 
     # - background: <background-color> || <background-image> || <background-repeat> || <background-attachment> || <background-position>
+    rule decl:sym<background> {:i (background) ':' [
+                                    [ <background-color> | <background-image> | <background-repeat> | <background-attachment> | <background-position> ]+
+                                             | <inherit> || <bad_args> ]}
+
+
     # Text
     # - word-spacing: normal | <length>
     # - letter-spacing: normal | <length>
