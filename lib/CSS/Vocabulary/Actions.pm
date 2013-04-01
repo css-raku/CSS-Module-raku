@@ -18,6 +18,10 @@ class CSS::Vocabulary::Actions {
 
     method _make_decl($/, $synopsis, :$body?) {
         # used by prop:sym<*> methods
+
+        die "doesn't look like a property: " ~ $/.Str
+            unless $0;
+
         my $property = $0.Str.trim.lc;
 
         return $.warning('usage ' ~ $property ~ ': ' ~ $synopsis)

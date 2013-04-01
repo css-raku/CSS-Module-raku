@@ -82,35 +82,105 @@ grammar CSS::Vocabulary::CSS1 {
     # Text
     # - word-spacing: normal | <length>
     # - letter-spacing: normal | <length>
+   rule decl:sym<*-spacing> {:i ([word|letter]\-spacing) ':' [
+                                  normal & <ident> | <length>
+                                  | <inherit> || <bad_args> ]}
+
     # - text-decoration: none | [ underline || overline || line-through || blink ]
+    rule decl:sym<text-decoration> {:i (text\-decoration) ':' [
+                                         none & <ident>
+                                         | [[ underline | overline | line\-through | blink ] & <ident> ]+
+
+                                 | <inherit> || <bad_args> ]}
     # - vertical-align: baseline | sub | super | top | text-top | middle | bottom | text-bottom | <percentage>
+    rule decl:sym<vertical-align> {:i (vertical\-align) ':' [
+                                         [ baseline | sub | super | top | text\-top | middle | bottom | text\-bottom ] & <ident>
+                                         | <percentage>
+                                         | <inherit> || <bad_args> ]}
+    
+
     # - text-transform: capitalize | uppercase | lowercase | none
+    rule decl:sym<text-transform> {:i (text\-transform) ':' [
+                                        [ capitalize | uppercase | lowercase | none ] & <ident>
+                                        | <inherit> || <bad_args> ]}
+
     # - text-align: left | right | center | justify
+    rule decl:sym<text-align> {:i (text\-align) ':' [
+                                    [ left | right | center | justify ] & <ident>
+                                    | <inherit> || <bad_args> ]}
+
     # - text-indent: <length> | <percentage>
+    rule decl:sym<text-indent> {:i (text\-indent) ':' [
+                                     <length> | <percentage>
+                                     | <inherit> || <bad_args> ]}
+
     # - line-height: normal | <number> | <length> | <percentage>
-    token line-height {:i normal & <ident> | <num> | <length> | <percentage>}
+    token line-height {:i normal & <ident> | <num> | <length> | <percentage> }
+    rule decl:sym<line-height> {:i (line\-height) ':' [
+                                     <line-height>
+                                     | <inherit> || <bad_args> ]}
+
     # - margin-top: <length> | <percentage> | auto
     # - margin-right: <length> | <percentage> | auto
     # - margin-bottom: <length> | <percentage> | auto
     # - margin-left: <length> | <percentage> | auto
+    rule decl:sym<margin-*> {:i (margin\-[top|right|bottom|left]) ':' [
+                                  <length> | <percentage> | auto & <ident> 
+                                  | <inherit> || <bad_args> ]}
+
     # - margin: [ <length> | <percentage> | auto ]{1,4}
+    rule decl:sym<margin> {:i (margin) ':' [
+                                [ <length> | <percentage> | auto & <ident> ] ** 1..4
+                                | <inherit> || <bad_args> ]}
+
     # - padding-top: <length> | <percentage>
     # - padding-right: <length> | <percentage>
     # - padding-bottom: <length> | <percentage>
     # - padding-left: <length> | <percentage>
+    rule decl:sym<padding-*> {:i (padding\-[top|right|bottom|left]) ':' [
+                                   <length> | <percentage>
+                                   | <inherit> || <bad_args> ]}
+ 
     # - padding: [ <length> | <percentage> ]{1,4}
+    rule decl:sym<padding> {:i (padding) ':' [
+                                 [ <length> | <percentage> ] ** 1..4
+                                 | <inherit> || <bad_args> ]}
+
     # - border-top-width: thin | medium | thick | <length>
     # - border-right-width: thin | medium | thick | <length>
     # - border-bottom-width: thin | medium | thick | <length>
     # - border-left-width: thin | medium | thick | <length>
+    rule decl:sym<border-*-width> {:i (border\-[top|right|bottom|left]\-width) ':' [
+                                        [ thin | medium | thick ] & <ident>
+                                        | <length>
+                                        | <inherit> || <bad_args> ]}
+
     # - border-width: [thin | medium | thick | <length>]{1,4}
+    rule decl:sym<border-width> {:i (border\-width) ':' [
+                                      [ [ thin | medium | thick ] & <ident>
+                                        | <length> ] ** 1..4
+                                      | <inherit> || <bad_args> ]}
+
     # - border-color: <color>{1,4}
+    rule decl:sym<border-color> {:i (border\-color) ':' [
+                                      [ <color> ] ** 1..4
+                                      | <inherit> || <bad_args> ]}
+
     # - border-style: none | dotted | dashed | solid | double | groove | ridge | inset | outset
-    # - border-top: <border-top-width> || <border-style> || <color>
-    # - border-right: <border-right-width> || <border-style> || <color>
-    # - border-bottom: <border-bottom-width> || <border-style> || <color>
-    # - border-left: <border-left-width> || <border-style> || <color>
+    token border-style {:i [ none | dotted | dashed | solid | double | groove | ridge | inset | outset ] & <ident> }
+    rule decl:sym<border-style> {:i (border\-style) ':' [
+                                      <border-style>
+                                      | <inherit> || <bad_args> ]}
+
+    # - border-top: <border-width> || <border-style> || <color>
+    # - border-right: <border-width> || <border-style> || <color>
+    # - border-bottom: <border-width> || <border-style> || <color>
+    # - border-left: <border-width> || <border-style> || <color>   
     # - border: <border-width> || <border-style> || <color>
+    rule decl:sym<border-*> {:i (border[\-[top|right|bottom|left]]?) ':' [
+                                  [ <border-width> | <border-style> | <color> ]+
+                                  | <inherit> || <bad_args> ]}
+
     # Positioning etc
     # - width: <length> | <percentage> | auto
     # - height: <length> | <percentage> | auto

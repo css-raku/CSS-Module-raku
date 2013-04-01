@@ -40,11 +40,11 @@ class CSS::Vocabulary::CSS21::Actions
                 my $keyw = $<lr>.Str.trim.lc || 'behind';
                 my $bh = $<bh>.Str ?? 1 !! 0;
 
-                @expr = (angle => $.token(%angles{$keyw}[$bh], :type('angle'), :units('degrees') ));
+                @expr = (angle => $.token(%angles{$keyw}[$bh], :type<angle>, :units<degrees> ));
             }
             elsif $<delta> {
                 my $delta_angle = $<dl> ?? -20 !! 20;
-                @expr = (<delta> => $.token($delta_angle, :type('angle'), :units('degrees') ));
+                @expr = (<delta> => $.token($delta_angle, :type<angle>, :units<degrees> ));
             }
 
             %ast<expr> = @expr;
@@ -80,11 +80,11 @@ class CSS::Vocabulary::CSS21::Actions
                     );
 
                 my $keyw = $<tilt>.Str.trim.lc;
-                @expr = (angle => $.token(%angles{$keyw}, :type('angle'), :units('degrees') ));
+                @expr = (angle => $.token(%angles{$keyw}, :type<angle>, :units<degrees> ));
             }
             elsif $<delta> {
                 my $delta_angle = $<dl> ?? -10 !! 10;
-                @expr = (delta => $.token($delta_angle, :type('angle'), :units('degrees') ));
+                @expr = (delta => $.token($delta_angle, :type<angle>, :units<degrees> ));
             }
             %ast<expr> = @expr;
         }

@@ -53,10 +53,82 @@ for (
     decl => {input => 'background: url(chess.png) gray 50% repeat scroll', 
              ast => {"property" => "background",
                      "expr" => [["background-image" => {"url" => "chess.png"},
-                                 "background-color" => {"color" => {"r" => 128, "g" => 128, "b" => 128}},
+                                 "background-color" => {"color" => "rgb" => {"r" => 128, "g" => 128, "b" => 128}},
                                  "background-position" => ["percentage" => 50],
                                  "background-repeat" => {"ident" => "repeat"},
                                  "background-attachment" => {"ident" => "scroll"}]]},
+    },
+    decl => {input => 'word-spacing:1.5em',
+             ast => {"property" => "word-spacing",
+                     "expr" => [["length" => 1.5]]}
+    },
+    decl => {input => 'letter-spacing: normal',
+             ast => {"property" => "letter-spacing",
+                     "expr" => [["ident" => "normal"]]}
+    },
+    decl => {input => 'text-decoration: Underline',
+             ast => {"property" => "text-decoration",
+                     "expr" => [["ident" => "underline"]]}
+    },
+    decl => {input => 'vertical-align: text-top',
+             ast => {"property" => "vertical-align",
+                     "expr" => [["ident" => "text-top"]]}
+
+    },
+    decl => {input => 'text-transform: uppercase',
+             ast => {"property" => "text-transform",
+                     "expr" => [["ident" => "uppercase"]]}
+    },
+    decl => {input => 'text-align: justify',
+             ast => {"property" => "text-align",
+                     "expr" => [["ident" => "justify"]]}
+    },
+    decl => {input => 'line-height: 120%',
+             ast => {"property" => "line-height",
+                     "expr" => [["line-height" => {"percentage" => 120}]]}
+    },
+    decl => {input => 'margin-top: 1.25ex',
+             ast => {"property" => "margin-top",
+                     "expr" => [["length" => 1.25]]}
+    },
+    decl => {input => 'margin: 1.2ex 1.5em 125% 23px',
+             ast => {"property" => "margin",
+                     "expr" => [["length" => 1.2,
+                                 "length" => 1.5,
+                                 "percentage" => 125,
+                                 "length" => 23]]}
+    },
+    decl => {input => 'text-decoration: underline',
+             ast => {"property" => "text-decoration",
+                     "expr" => [["ident" => "underline"]]}
+    },
+    decl => {input => 'padding-bottom: 2em',
+             ast => {"property" => "padding-bottom",
+                     "expr" => [["length" => 2]]}
+    },
+    decl => {input => 'border-top-width: thick',
+             ast => {"property" => "border-top-width",
+                     "expr" => [["ident" => "thick"]]}
+    },
+    decl => {input => 'border-width: 2ex 1.5em 3ex 2em',
+             ast => {"property" => "border-width",
+                     "expr" => [["length" => 2,
+                                 "length" => 1.5,
+                                 "length" => 3,
+                                 "length" => 2]]}
+    },
+    decl => {input => 'border-color: #a7f #aa77ff rgb(100,150,20) aqua',
+             ast => {"property" => "border-color",
+                     "expr" => [["color" => "rgb" => {"r" => 170, "g" => 119, "b" => 255},
+                                 "color" => "rgb" => {"r" => 170, "g" => 119, "b" => 255},
+                                 "color" => "rgb" => {"r" => 100, "g" => 150, "b" => 20},
+                                 "color" => "rgb" => {"r" => 0, "g" => 255, "b" => 255}
+                                ]]},
+             
+    },
+    decl => {input => 'border-style: groove',
+             ast => {"property" => "border-style",
+                     "expr" => [["ident" => "groove"]]},
     },
     ) {
 

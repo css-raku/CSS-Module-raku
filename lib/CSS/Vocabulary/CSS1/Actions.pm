@@ -8,29 +8,31 @@ class CSS::Vocabulary::CSS1::Actions
     method named-color($/) {
         state %colors = (
             black => [0,0,0],
-            silver => [192,192,192],
-            gray => [128,128,128],
-            white => [255,255,255],
-            maroon => [128,0,0],
-            red => [255,0,0],
-            purple => [128,0,128],
+            silver  => [192,192,192],
+            gray    => [128,128,128],
+            white   => [255,255,255],
+            maroon  => [128,0,0],
+            red     => [255,0,0],
+            purple  => [128,0,128],
             fuchsia => [255,0,255],
-            green => [0,128,0],
-            lime => [0,255,0],
-            olive => [128,128,0],
-            yellow => [255,255,0],
-            navy => [0,0,128],
-            blue => [0,0,255],
-            teal => [0,128,128],
-            aqua => [0,255,255],
+            green   => [0,128,0],
+            lime    => [0,255,0],
+            olive   => [128,128,0],
+            yellow  => [255,255,0],
+            navy    => [0,0,128],
+            blue    => [0,0,255],
+            teal    => [0,128,128],
+            aqua    => [0,255,255],
             );
 
         my $color_name = $<ident>.ast;
-        my $rgb = %colors{$color_name}
+        my $color = %colors{$color_name}
         or die  "unknown color: " ~ $color_name;
 
-        make {r => $rgb[0], g => $rgb[1], b => $rgb[2]};
+        my %rgb; %rgb<r g b> = @$color;
+        make (rgb => %rgb );
     }
+
     method color:sym<named>($/) { make $<named-color>.ast } 
 
     method font-family($/) { make $.node($/) }
@@ -101,37 +103,73 @@ class CSS::Vocabulary::CSS1::Actions
         $._make_decl($/, '<background-color> || <background-image> || <background-repeat> || <background-attachment> || <background-position>');
     }
 
-    method decl:sym<word-spacing>($/) { warn "word-spacing - tba" }
-    method decl:sym<letter-spacing>($/) { warn "letter-spacing - tba" }
-    method decl:sym<text-decoration>($/) { warn "text-decoration - tba" }
-    method decl:sym<vertical-align>($/) { warn "vertical-align - tba" }
-    method decl:sym<text-transform>($/) { warn "text-transform - tba" }
-    method decl:sym<text-align>($/) { warn "text-align - tba" }
-    method decl:sym<text-indent>($/) { warn "text-indent - tba" }
-    method line-height($/) { make $.node($/) }
-    method decl:sym<line-height>($/) { warn "line-height - tba" }
-    method decl:sym<margin-top>($/) { warn "margin-top - tba" }
-    method decl:sym<margin-right>($/) { warn "margin-right - tba" }
-    method decl:sym<margin-bottom>($/) { warn "margin-bottom - tba" }
-    method decl:sym<margin-left>($/) { warn "margin-left - tba" }
-    method decl:sym<margin>($/) { warn "margin - tba" }
-    method decl:sym<padding-top>($/) { warn "padding-top - tba" }
-    method decl:sym<padding-right>($/) { warn "padding-right - tba" }
-    method decl:sym<padding-bottom>($/) { warn "padding-bottom - tba" }
-    method decl:sym<padding-left>($/) { warn "padding-left - tba" }
-    method decl:sym<padding>($/) { warn "padding - tba" }
-    method decl:sym<border-top-width>($/) { warn "border-top-width - tba" }
-    method decl:sym<border-right-width>($/) { warn "border-right-width - tba" }
-    method decl:sym<border-bottom-width>($/) { warn "border-bottom-width - tba" }
-    method decl:sym<border-left-width>($/) { warn "border-left-width - tba" }
-    method decl:sym<border-width>($/) { warn "border-width - tba" }
-    method decl:sym<border-color>($/) { warn "border-color - tba" }
-    method decl:sym<border-style>($/) { warn "border-style - tba" }
-    method decl:sym<border-top>($/) { warn "border-top - tba" }
-    method decl:sym<border-right>($/) { warn "border-right - tba" }
-    method decl:sym<border-bottom>($/) { warn "border-bottom - tba" }
-    method decl:sym<border-left>($/) { warn "border-left - tba" }
-    method decl:sym<border>($/) { warn "border - tba" }
+    method decl:sym<*-spacing>($/) {
+        $._make_decl($/, 'normal | <length>');
+    }
+
+    method decl:sym<text-decoration>($/) {
+        $._make_decl($/, 'none | [ underline || overline || line-through || blink ]');
+    }
+
+    method decl:sym<vertical-align>($/) {
+        $._make_decl($/, 'baseline | sub | super | top | text-top | middle | bottom | text-bottom | <percentage>');
+    }
+
+    method decl:sym<text-transform>($/) {
+        $._make_decl($/, 'capitalize | uppercase | lowercase | none');
+    }
+
+    method decl:sym<text-align>($/) {
+        $._make_decl($/, 'left | right | center | justify');
+    }
+
+    method decl:sym<text-indent>($/) {
+        $._make_decl($/, '<length> | <percentage>');
+    }
+
+    method line-height($/) { make $.node($/); }
+    method decl:sym<line-height>($/) {
+        $._make_decl($/, 'normal | <number> | <length> | <percentage>');
+    }
+
+    method decl:sym<margin-*>($/) {
+        $._make_decl($/, '<length> | <percentage> | auto');
+    }
+
+    method decl:sym<margin>($/) {
+        $._make_decl($/, '[ <length> | <percentage> | auto ]{1,4}');
+    }
+
+    method decl:sym<padding-*>($/) {
+        $._make_decl($/, '<length> | <percentage>');
+    }
+
+    method decl:sym<padding>($/) {
+        $._make_decl($/, '[ <length> | <percentage> ]{1,4}');
+    }
+
+    method decl:sym<border-*-width>($/) {
+        $._make_decl($/, 'thin | medium | thick | <length>');
+    }
+
+    method decl:sym<border-width>($/) {
+        $._make_decl($/, '[thin | medium | thick | <length>]{1,4}');
+    }
+
+    method decl:sym<border-color>($/) {
+        $._make_decl($/, '<color>{1,4}');
+    }
+
+    method border-style($/) { make $.list($/) }
+    method decl:sym<border-style>($/) {
+        $._make_decl($/, 'none | dotted | dashed | solid | double | groove | ridge | inset | outset',
+            :body($<border-style>));
+    }
+
+    method decl:sym<border-*>($/) {
+        $._make_decl($/, '<border-width> || <border-style> || <color>');
+    }
+
     method decl:sym<width>($/) {  warn "width - tba" }
     method decl:sym<height>($/) {  warn "height - tba" }
     method decl:sym<float>($/) { warn "float - tba" }
