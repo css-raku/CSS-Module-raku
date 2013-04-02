@@ -178,7 +178,7 @@ grammar CSS::Vocabulary::CSS1 {
     # - border-left: <border-width> || <border-style> || <color>   
     # - border: <border-width> || <border-style> || <color>
     rule decl:sym<border-*> {:i (border[\-[top|right|bottom|left]]?) ':' [
-                                  [ <border-width> | <border-style> | <color> ]+
+                                  [ <border-width> | <border-style> ]* <color>
                                   | <inherit> || <bad_args> ]}
 
     # Positioning etc

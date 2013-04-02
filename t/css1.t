@@ -10,7 +10,9 @@ use t::AST;
 my $css_actions = CSS::Language::CSS1::Actions.new;
 
 for (
-    decl => {input => 'font-family: Gill, "Helvetica", sans-serif',   ast => {"property" => "font-family", "expr" => [{"family-name" => "gill"}, {"family-name" => "Helvetica"}, {"generic-family" => "sans-serif"}]},
+    decl => {input => 'font-family: Gill, "Helvetica", sans-serif',   ast => {"property" => "font-family", "expr" => ["family-name" => "gill",
+                                                                                                                      "family-name" => "Helvetica",
+                                                                                                                      "generic-family" => "sans-serif"]},
     },
     decl => {input => 'font-style: bold', ast => {"property" => "font-style", expr => ["font-style" => 'bold']},
     },
@@ -28,107 +30,114 @@ for (
     },
     decl => {input => 'font: 12pt/14pt sans-serif',
              ast => {"property" => "font",
-                     "expr" => [["font-size" => {"length" => 12},
-                                 "line-height" => {"length" => 14},
-                                 "font-family" => {"generic-family" => "sans-serif"}]]}
+                     "expr" => ["font-size" => {"length" => 12},
+                                "line-height" => {"length" => 14},
+                                "font-family" => {"generic-family" => "sans-serif"}]}
     },
     decl => {input => 'font: normal small-caps 120%/120% fantasy',
              ast => {"property" => "font",
-                     "expr" => [["font-style" => "normal",
-                                 "font-variant" => "small-caps",
-                                 "font-size" => {"percentage" => 120},
-                                 "line-height" => {"percentage" => 120},
-                                 "font-family" => {"generic-family" => "fantasy"}]]}
+                     "expr" => ["font-style" => "normal",
+                                "font-variant" => "small-caps",
+                                "font-size" => {"percentage" => 120},
+                                "line-height" => {"percentage" => 120},
+                                "font-family" => {"generic-family" => "fantasy"}]}
     },
     decl => {input => 'background-attachment: FiXed',   ast => {property => 'background-attachment', expr => [ident => 'fixed']},
     },
-    decl => {input => 'background-color : #37a', ast => {property => 'background-color', expr => [color => { rgb => {r => 0x33, g => 0x77, b => 0xAA}}]},
+    decl => {input => 'background-color : #37a', ast => {property => 'background-color', expr => [color => {r => 0x33, g => 0x77, b => 0xAA}]},
     },
     decl => {input => 'background-image : url(images/ok.png)', ast => {property => 'background-image', expr => [url => 'images/ok.png']},
     },
     decl => {input => 'background-repeat : Repeat-x', ast => {property => 'background-repeat', expr => [ident => 'repeat-x']},
     },
-    decl => {input => 'background-position : 100% 90%', ast => {"property" => "background-position", "expr" => [["percentage" => 100, "percentage" => 90]]},
+    decl => {input => 'background-position : 100% 90%', ast => {"property" => "background-position", "expr" => ["percentage" => 100, "percentage" => 90]},
     },
     decl => {input => 'background: url(chess.png) gray 50% repeat scroll', 
              ast => {"property" => "background",
-                     "expr" => [["background-image" => {"url" => "chess.png"},
-                                 "background-color" => {"color" => "rgb" => {"r" => 128, "g" => 128, "b" => 128}},
-                                 "background-position" => ["percentage" => 50],
-                                 "background-repeat" => {"ident" => "repeat"},
-                                 "background-attachment" => {"ident" => "scroll"}]]},
+                     "expr" => ["background-image" => {"url" => "chess.png"},
+                                "background-color" => {"color" => {"r" => 128, "g" => 128, "b" => 128}},
+                                "background-position" => ["percentage" => 50],
+                                "background-repeat" => {"ident" => "repeat"},
+                                "background-attachment" => {"ident" => "scroll"}]},
     },
     decl => {input => 'word-spacing:1.5em',
              ast => {"property" => "word-spacing",
-                     "expr" => [["length" => 1.5]]}
+                     "expr" => ["length" => 1.5]}
     },
     decl => {input => 'letter-spacing: normal',
              ast => {"property" => "letter-spacing",
-                     "expr" => [["ident" => "normal"]]}
+                     "expr" => ["ident" => "normal"]}
     },
     decl => {input => 'text-decoration: Underline',
              ast => {"property" => "text-decoration",
-                     "expr" => [["ident" => "underline"]]}
+                     "expr" => ["ident" => "underline"]}
     },
     decl => {input => 'vertical-align: text-top',
              ast => {"property" => "vertical-align",
-                     "expr" => [["ident" => "text-top"]]}
+                     "expr" => ["ident" => "text-top"]}
 
     },
     decl => {input => 'text-transform: uppercase',
              ast => {"property" => "text-transform",
-                     "expr" => [["ident" => "uppercase"]]}
+                     "expr" => ["ident" => "uppercase"]}
     },
     decl => {input => 'text-align: justify',
              ast => {"property" => "text-align",
-                     "expr" => [["ident" => "justify"]]}
+                     "expr" => ["ident" => "justify"]}
     },
     decl => {input => 'line-height: 120%',
              ast => {"property" => "line-height",
-                     "expr" => [["line-height" => {"percentage" => 120}]]}
+                     "expr" => ["line-height" => {"percentage" => 120}]}
     },
     decl => {input => 'margin-top: 1.25ex',
              ast => {"property" => "margin-top",
-                     "expr" => [["length" => 1.25]]}
+                     "expr" => ["length" => 1.25]}
     },
     decl => {input => 'margin: 1.2ex 1.5em 125% 23px',
              ast => {"property" => "margin",
-                     "expr" => [["length" => 1.2,
-                                 "length" => 1.5,
-                                 "percentage" => 125,
-                                 "length" => 23]]}
+                     "expr" => [top => {"length" => 1.2},
+                                right => {"length" => 1.5},
+                                bottom => {"percentage" => 125},
+                                left => {"length" => 23}]}
     },
-    decl => {input => 'text-decoration: underline',
+    decl => {input => 'margin: 1.2ex 1.5em',
+             ast => {"property" => "margin",
+                     "expr" => [top => {"length" => 1.2},
+                                right => {"length" => 1.5},
+                                bottom => {"length" => 1.2},
+                                left => {"length" => 1.5}]}
+    },
+     decl => {input => 'text-decoration: underline',
              ast => {"property" => "text-decoration",
-                     "expr" => [["ident" => "underline"]]}
+                     "expr" => ["ident" => "underline"]}
     },
     decl => {input => 'padding-bottom: 2em',
              ast => {"property" => "padding-bottom",
-                     "expr" => [["length" => 2]]}
+                     "expr" => ["length" => 2]}
     },
     decl => {input => 'border-top-width: thick',
              ast => {"property" => "border-top-width",
-                     "expr" => [["ident" => "thick"]]}
+                     "expr" => ["ident" => "thick"]}
     },
     decl => {input => 'border-width: 2ex 1.5em 3ex 2em',
              ast => {"property" => "border-width",
-                     "expr" => [["length" => 2,
-                                 "length" => 1.5,
-                                 "length" => 3,
-                                 "length" => 2]]}
+                     "expr" => [top => "length" => 2,
+                                right => "length" => 1.5,
+                                bottom => "length" => 3,
+                                left => "length" => 2]}
     },
     decl => {input => 'border-color: #a7f #aa77ff rgb(100,150,20) aqua',
              ast => {"property" => "border-color",
-                     "expr" => [["color" => "rgb" => {"r" => 170, "g" => 119, "b" => 255},
-                                 "color" => "rgb" => {"r" => 170, "g" => 119, "b" => 255},
-                                 "color" => "rgb" => {"r" => 100, "g" => 150, "b" => 20},
-                                 "color" => "rgb" => {"r" => 0, "g" => 255, "b" => 255}
-                                ]]},
+                     "expr" => [top => "color" => {"r" => 170, "g" => 119, "b" => 255},
+                                right => "color" => {"r" => 170, "g" => 119, "b" => 255},
+                                bottom => "color" => {"r" => 100, "g" => 150, "b" => 20},
+                                left => "color" => {"r" => 0, "g" => 255, "b" => 255}
+                                ]},
              
     },
     decl => {input => 'border-style: groove',
              ast => {"property" => "border-style",
-                     "expr" => [["ident" => "groove"]]},
+                     "expr" => ["ident" => "groove"]},
     },
     ) {
 

@@ -7,22 +7,22 @@ class CSS::Vocabulary::CSS1::Actions
 
     method named-color($/) {
         state %colors = (
-            black => [0,0,0],
-            silver  => [192,192,192],
-            gray    => [128,128,128],
-            white   => [255,255,255],
-            maroon  => [128,0,0],
-            red     => [255,0,0],
-            purple  => [128,0,128],
-            fuchsia => [255,0,255],
-            green   => [0,128,0],
-            lime    => [0,255,0],
-            olive   => [128,128,0],
-            yellow  => [255,255,0],
-            navy    => [0,0,128],
-            blue    => [0,0,255],
-            teal    => [0,128,128],
-            aqua    => [0,255,255],
+            black   => [   0,   0,   0 ],
+            silver  => [ 192, 192, 192 ],
+            gray    => [ 128, 128, 128 ],
+            white   => [ 255, 255, 255 ],
+            maroon  => [ 128,   0,   0 ],
+            red     => [ 255,   0,   0 ],
+            purple  => [ 128,   0, 128 ],
+            fuchsia => [ 255,   0, 255 ],
+            green   => [   0, 128,   0 ],
+            lime    => [   0, 255,   0 ],
+            olive   => [ 128, 128,   0 ],
+            yellow  => [ 255, 255,   0 ],
+            navy    => [   0,   0, 128 ],
+            blue    => [   0,   0, 255 ],
+            teal    => [   0, 128, 128 ],
+            aqua    => [   0, 255, 255 ],
             );
 
         my $color_name = $<ident>.ast;
@@ -30,10 +30,10 @@ class CSS::Vocabulary::CSS1::Actions
         or die  "unknown color: " ~ $color_name;
 
         my %rgb; %rgb<r g b> = @$color;
-        make (rgb => %rgb );
+        make $.token(%rgb, :type<color>, :units<rgb>);
     }
 
-    method color:sym<named>($/) { make $<named-color>.ast } 
+    method color:sym<named>($/) { make $<named-color>.ast }
 
     method font-family($/) { make $.node($/) }
     method decl:sym<font-family>($/) {
@@ -132,12 +132,14 @@ class CSS::Vocabulary::CSS1::Actions
         $._make_decl($/, 'normal | <number> | <length> | <percentage>');
     }
 
+    method margin($/) { make $.node($/); }
     method decl:sym<margin-*>($/) {
         $._make_decl($/, '<length> | <percentage> | auto');
     }
 
     method decl:sym<margin>($/) {
-        $._make_decl($/, '[ <length> | <percentage> | auto ]{1,4}');
+        $._make_decl($/, '[ <length> | <percentage> | auto ]{1,4}',
+            :top_right_bottom_left(True));
     }
 
     method decl:sym<padding-*>($/) {
@@ -145,7 +147,9 @@ class CSS::Vocabulary::CSS1::Actions
     }
 
     method decl:sym<padding>($/) {
-        $._make_decl($/, '[ <length> | <percentage> ]{1,4}');
+        $._make_decl($/, '[ <length> | <percentage> ]{1,4}',
+                     :top_right_bottom_left(True));
+
     }
 
     method decl:sym<border-*-width>($/) {
@@ -153,11 +157,14 @@ class CSS::Vocabulary::CSS1::Actions
     }
 
     method decl:sym<border-width>($/) {
-        $._make_decl($/, '[thin | medium | thick | <length>]{1,4}');
+        $._make_decl($/, '[thin | medium | thick | <length>]{1,4}',
+                     :top_right_bottom_left(True));
+
     }
 
     method decl:sym<border-color>($/) {
-        $._make_decl($/, '<color>{1,4}');
+        $._make_decl($/, '<color>{1,4}',
+                     :top_right_bottom_left(True));
     }
 
     method border-style($/) { make $.list($/) }
