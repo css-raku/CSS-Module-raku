@@ -179,16 +179,47 @@ class CSS::Vocabulary::CSS1::Actions
         $._make_decl($/, '<border-width> || <border-style> || <color>');
     }
 
-    method decl:sym<width>($/) {  warn "width - tba" }
-    method decl:sym<height>($/) {  warn "height - tba" }
-    method decl:sym<float>($/) { warn "float - tba" }
-    method decl:sym<clear>($/) { warn "clear - tba" }
-    method decl:sym<display>($/) { warn "display - tba" }
-    method decl:sym<white-space>($/) { warn "white-space - tba" }
-    method decl:sym<list-style-type>($/) { warn "list-style-type - tba" }
-    method decl:sym<list-style-image>($/) { warn "list-style-image - tba" }
-    method decl:sym<list-style-position>($/) { warn "list-style-position - tba" }
-    method decl:sym<list-style>($/) { warn "list-style - tba" }
+    method decl:sym<width|height|left|top>($/) {
+        $._make_decl($/, '<length> | <percentage> | auto');
+    }
+
+    method decl:sym<float>($/) {
+        $._make_decl($/, 'left | right | none');
+    }
+
+    method decl:sym<clear>($/) {
+        $._make_decl($/, 'none | left | right | none');
+    }
+
+    method decl:sym<display>($/) {
+        $._make_decl($/, 'block | inline | list-item | none');
+    }
+
+    method decl:sym<white-space>($/) {
+        $._make_decl($/, 'normal | pre | nowrap');
+    }
+
+    method list-style-type($/) { make $.list($/) }
+    method decl:sym<list-style-type>($/) {
+        $._make_decl($/, 'disc | circle | square | decimal | lower-roman | upper-roman | lower-alpha | upper-alpha | none',
+                     :body($<list-style-type>) )         
+    }
+
+    method list-style-image($/) { make $.list($/) }
+    method decl:sym<list-style-image>($/) {
+        $._make_decl($/, '<url> | none', :body($<list-style-image>) );
+    }
+
+    method list-style-position($/) { make $.list($/) }
+    method decl:sym<list-style-position>($/) {
+        $._make_decl($/, 'inside | outside',  :body($<list-style-position>));
+                     
+    }
+
+    method decl:sym<list-style>($/) {
+        $._make_decl($/, '<keyword> || <position> || <url>', :expand<family> );
+    }
+
     method decl:sym<position>($/) { warn "position - tba" }
     method decl:sym<left>($/) { warn "left - tba" }
     method decl:sym<top>($/) { warn "top - tba" }

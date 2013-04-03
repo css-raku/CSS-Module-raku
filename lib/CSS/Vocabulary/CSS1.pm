@@ -184,17 +184,55 @@ grammar CSS::Vocabulary::CSS1 {
     # Positioning etc
     # - width: <length> | <percentage> | auto
     # - height: <length> | <percentage> | auto
-    # - float: left | right | none
-    # - clear: none | left | right | both
-    # - display: block | inline | list-item | none
-    # - white-space: normal | pre | nowrap
-    # - list-style-type: disc | circle | square | decimal | lower-roman | upper-roman | lower-alpha | upper-alpha | none
-    # - list-style-image: <url> | none
-    # - list-style-position: inside | outside
-    # - list-style: <keyword> || <position> || <url>
-    # - position: absolute | relative | static
     # - left: <length> | <percentage> | auto
     # - top: <length> | <percentage> | auto
+    rule decl:sym<width|height|left|top> {:i (width|height|left|top) ':' [
+                                  <length> | <percentage> | auto & <ident>
+                                  | <inherit> || <bad_args> ]}
+
+    # - float: left | right | none
+    rule decl:sym<float> {:i (float) ':' [
+                                  [ left | right | none ] & <ident>
+                                  | <inherit> || <bad_args> ]}
+
+    # - clear: none | left | right | both
+    rule decl:sym<clear> {:i (clear) ':' [
+                               [  none | left | right | both ] & <ident>
+                               | <inherit> || <bad_args> ]}
+
+    # - display: block | inline | list-item | none
+    rule decl:sym<display> {:i (display) ':' [
+                                 [ block | inline | list\-item | none ] & <ident>
+                                 | <inherit> || <bad_args> ]}
+
+    # - white-space: normal | pre | nowrap    
+    rule decl:sym<white-space> {:i (white\-space) ':' [
+                                     [ normal | pre | nowrap ] & <ident>
+                                     | <inherit> || <bad_args> ]}
+
+    # - list-style-type: disc | circle | square | decimal | lower-roman | upper-roman | lower-alpha | upper-alpha | none
+    token list-style-type {:i [ disc | circle | square | decimal | lower\-roman | upper\-roman | lower\-alpha | upper\-alpha | none ] & <ident> }
+    rule decl:sym<list-style-type> {:i (list\-style\-type) ':' [
+                                     <list-style-type>
+                                     | <inherit> || <bad_args> ]}
+
+    # - list-style-image: <url> | none
+    token list-style-image {:i  <url> | none & <ident> }
+    rule decl:sym<list-style-image> {:i (list\-style\-image) ':' [
+                                     <list-style-image>
+                                     | <inherit> || <bad_args> ]}
+
+    # - list-style-position: inside | outside
+    token list-style-position {:i  [ inside | outside ] & <ident> }
+    rule decl:sym<list-style-position> {:i (list\-style\-position) ':' [
+                                     <list-style-position>
+                                     | <inherit> || <bad_args> ]}
+
+    # - list-style: <keyword> || <position> || <url>
+     rule decl:sym<list-style> {:i (list\-style) ':' [
+                                     [ <list-style-type> | <list-style-image> | <list-style-position> ]+
+                                     | <inherit> || <bad_args> ]}
+   # - position: absolute | relative | static
     # - clip: <shape> | auto
     # - overflow: none | clip | scroll
     # - z-index: auto | <integer>
