@@ -113,7 +113,21 @@ for (
                          {"property" => "margin-bottom", "expr" => "length" => 1.2},
                          {"property" => "margin-left", "expr" => "length" => 1.5}]}
     },
-     decl => {input => 'text-decoration: underline',
+    decl => {input => 'margin: inherit',
+             ast => {"property_list" => [
+                         {"property" => "margin", inherit => True},
+                         ]},
+    },
+    declaration => {input => 'margin: em ex !IMPORTANT',
+             ast => {"property_list" => [
+                         {"property" => "margin", "prio" => "important"},
+                         {"property" => "margin-top", "expr" => "length" => 1, "prio" => "important"},
+                         {"property" => "margin-right", "expr" => "length" => 1, "prio" => "important"},
+                         {"property" => "margin-bottom", "expr" => "length" => 1, "prio" => "important"},
+                         {"property" => "margin-left", "expr" => "length" => 1, "prio" => "important"}
+                         ]},
+    },
+    decl => {input => 'text-decoration: underline',
              ast => {"property" => "text-decoration",
                      "expr" => ["ident" => "underline"]}
     },

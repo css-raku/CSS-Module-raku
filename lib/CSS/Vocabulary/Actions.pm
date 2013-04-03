@@ -12,8 +12,15 @@ class CSS::Vocabulary::Actions {
         return unless $<decl>.ast;
         my %ast = $<decl>.ast;
 
-        %ast<prio> = $<prio>.ast
-            if $<prio> && $<prio>.ast.defined;
+        if (my $prio = $<prio> && $<prio>[0].ast) {
+            # mark !important declarations
+            if (my $prop_list = %ast<property_list>) {
+                %$_<prio> = $prio for @$prop_list;
+            }
+            else {
+                %ast<prio> = $prio
+            }
+        }
 
         make %ast;
     }
@@ -51,41 +58,43 @@ class CSS::Vocabulary::Actions {
         if $expand {
             my @props;
 
+            # indicate the start of a property set
+            my %propset = (property => $property);
+            %propset<inherit> = True if $inherit;
+            @props.push({%propset});
+
             if $expand eq 'box' {
                 #  expand to a list of properties. eg: margin => margin-top,
                 #      margin-right margin-bottom margin-left
-                warn "too many arguments: @expr"
-                    if @expr > 4;
-                my %box;
-                %box<top right bottom left> = @expr;
-                %box<right>  //= %box<top>;
-                %box<bottom> //= %box<top>;
-                %box<left>   //= %box<right>;
+                if @expr {
+                    warn "too many arguments: @expr"
+                        if @expr > 4;
+                    my %box;
+                    %box<top right bottom left> = @expr;
+                    %box<right>  //= %box<top>;
+                    %box<bottom> //= %box<top>;
+                    %box<left>   //= %box<right>;
 
-                for %box.kv -> $side, $expr {
-                    my %prop = (property => $property ~ '-' ~ $side);
-                    %prop<expr> = $expr
-                        if $expr && @$expr;
-                    %prop<inherit> = True if $inherit;
+                    for %box.kv -> $side, $expr {
+                        my %prop = (property => $property ~ '-' ~ $side);
+                        %prop<expr> = [$expr]
+                            if $expr;
 
-                    @props.push( {%prop} );
+                        @props.push( {%prop} );
+                    }
                 }
             }
             elsif $expand eq 'family' {
 
-                @props = @expr.map({
+                for @expr {
                     my ($prop, $val) = $_.kv;
-                    {property => $prop, expr => $val};
-                });
+                    @props.push({property => $prop, expr => $val});
+                };
 
             }
             else {
                 die "bad :expand option: " ~ $expand;
             }
-
-            # just to indicate the start of a family and the need to
-            # reset values
-            @props.unshift({property => $property});
 
             %ast<property_list> = @props;
         }
