@@ -35,7 +35,7 @@ class CSS::Vocabulary::CSS1::Actions
 
     method color:sym<named>($/) { make $<named-color>.ast }
 
-    method font-family($/) { make $.node($/) }
+    method font-family($/) { make $.list($/) }
     method decl:sym<font-family>($/) {
         if $<font-family> {
             return make {property => 'font-family',
@@ -62,33 +62,34 @@ class CSS::Vocabulary::CSS1::Actions
 
     method absolute-size($/) { make $.token($<ident>.ast) }
     method relative-size($/) { make $.token($<ident>.ast) }
-    method font-size($/)     { make $.node($/) }
+    method font-size($/)     { make $.list($/) }
     method decl:sym<font-size>($/) {
         $._make_decl($/, '[x?x-]small | medium | [x?x\-]large | larger | smaller | <length> | <percentage>',
             :body($<font-size>));
     }
 
     method decl:sym<font>($/) {
-        $._make_decl($/, '[ <font-style> || <font-variant> || <font-weight> ]? <font-size> [ / <line-height> ]? <font-family>');
+        $._make_decl($/, '[ <font-style> || <font-variant> || <font-weight> ]? <font-size> [ / <line-height> ]? <font-family>',
+                     :expand<family>);
     }
     method decl:sym<color>($/) { warn "color - tba" }
 
-    method background-color($/) { make $.node($/) }
+    method background-color($/) { make $.list($/) }
     method decl:sym<background-color>($/) {
         $._make_decl($/, '<color> | transparent | inherit', :body($<background-color>))
     };
 
-    method background-image($/) { make $.node($/) }
+    method background-image($/) { make $.list($/) }
     method decl:sym<background-image>($/) {
         $._make_decl($/, '<uri> | none | inherit', :body($<background-image>))
     };
 
-    method background-repeat($/) { make $.node($/) }
+    method background-repeat($/) { make $.list($/) }
     method decl:sym<background-repeat>($/) {
         $._make_decl($/, 'repeat | repeat-x | repeat-y | no-repeat', :body($<background-repeat>))
     };
 
-    method background-attachment($/) { make $.node($/) }
+    method background-attachment($/) { make $.list($/) }
     method decl:sym<background-attachment>($/) {
         $._make_decl($/, 'scroll | fixed | inherit', :body($<background-attachment>));
     };
@@ -100,7 +101,8 @@ class CSS::Vocabulary::CSS1::Actions
     };
 
     method decl:sym<background>($/) {
-        $._make_decl($/, '<background-color> || <background-image> || <background-repeat> || <background-attachment> || <background-position>');
+        $._make_decl($/, '<background-color> || <background-image> || <background-repeat> || <background-attachment> || <background-position>',
+                     :expand<family>);
     }
 
     method decl:sym<*-spacing>($/) {
@@ -127,19 +129,19 @@ class CSS::Vocabulary::CSS1::Actions
         $._make_decl($/, '<length> | <percentage>');
     }
 
-    method line-height($/) { make $.node($/); }
+    method line-height($/) { make $.list($/); }
     method decl:sym<line-height>($/) {
         $._make_decl($/, 'normal | <number> | <length> | <percentage>');
     }
 
-    method margin($/) { make $.node($/); }
+    method margin($/) { make $.list($/); }
     method decl:sym<margin-*>($/) {
         $._make_decl($/, '<length> | <percentage> | auto');
     }
 
     method decl:sym<margin>($/) {
         $._make_decl($/, '[ <length> | <percentage> | auto ]{1,4}',
-            :box(True));
+            :expand<box>);
     }
 
     method decl:sym<padding-*>($/) {
@@ -148,7 +150,7 @@ class CSS::Vocabulary::CSS1::Actions
 
     method decl:sym<padding>($/) {
         $._make_decl($/, '[ <length> | <percentage> ]{1,4}',
-                     :box(True));
+                     :expand<box>);
 
     }
 
@@ -158,13 +160,13 @@ class CSS::Vocabulary::CSS1::Actions
 
     method decl:sym<border-width>($/) {
         $._make_decl($/, '[thin | medium | thick | <length>]{1,4}',
-                     :box(True));
+                     :expand<box>);
 
     }
 
     method decl:sym<border-color>($/) {
         $._make_decl($/, '<color>{1,4}',
-                     :box(True));
+                     :expand<box>);
     }
 
     method border-style($/) { make $.list($/) }

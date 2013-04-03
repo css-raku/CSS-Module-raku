@@ -20,7 +20,7 @@ class CSS::Vocabulary::Actions {
 
     #---- AST construction methods ----#
 
-    method _make_decl($/, $synopsis, :$body?, :$box?) {
+    method _make_decl($/, $synopsis, :$body?, :$expand?) {
         # used by prop:sym<*> methods
 
         die "doesn't look like a property: " ~ $/.Str
@@ -48,42 +48,48 @@ class CSS::Vocabulary::Actions {
             }
         }
 
-        if $box {
-            #  expand to a list of properties. eg: margin => margin-top,
-            #      margin-right margin-bottom margin-left
-            warn "too many arguments: @expr"
-                if @expr > 4;
-            my %box;
-            %box<top right bottom left> = @expr;
-            %box<right>  //= %box<top>;
-            %box<bottom> //= %box<top>;
-            %box<left>   //= %box<right>;
-
+        if $expand {
             my @props;
 
-            for %box.kv -> $side, $expr {
-                my %prop = (property => $property ~ '-' ~ $side);
+            if $expand eq 'box' {
+                #  expand to a list of properties. eg: margin => margin-top,
+                #      margin-right margin-bottom margin-left
+                warn "too many arguments: @expr"
+                    if @expr > 4;
+                my %box;
+                %box<top right bottom left> = @expr;
+                %box<right>  //= %box<top>;
+                %box<bottom> //= %box<top>;
+                %box<left>   //= %box<right>;
 
-                if $inherit {
-                    %prop<inherit> = True;
-                }
-                else {
-                    %prop<expr> = $expr;
-                }
+                for %box.kv -> $side, $expr {
+                    my %prop = (property => $property ~ '-' ~ $side);
+                    %prop<expr> = $expr
+                        if $expr && @$expr;
+                    %prop<inherit> = True if $inherit;
 
-                @props.push( {%prop} );
+                    @props.push( {%prop} );
+                }
+            }
+            elsif $expand eq 'family' {
+
+                @props = @expr.map({
+                    my ($prop, $val) = $_.kv;
+                    {property => $prop, expr => $val};
+                });
+
+            }
+            else {
+                die "bad :expand option: " ~ $expand;
             }
 
             %ast<property_list> = @props;
         }
         else {
             %ast<property> = $property;
-            if $inherit {
-                %ast<inherit> = True;
-            }
-            else {
-                %ast<expr> = @expr;
-            }
+            %ast<inherit> = True if $inherit;
+            %ast<expr> = @expr
+                if @expr;
         }
 
         make %ast;
