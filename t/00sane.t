@@ -20,11 +20,13 @@ for (
     declaration => {input => 'background-attachment: FiXed',   ast => {property => 'background-attachment', expr => [ident => 'fixed']},
     },
     # boxed properties should be expanded
-    declaration_list => {input => 'margin: 2em 3em',   ast => {
-        "margin-top" => {"expr" => "length" => 2},
-        "margin-right" => {"expr" => "length" => 3},
-        "margin-bottom" => {"expr" => "length" => 2},
-        "margin-left" => {"expr" => "length" => 3},
+    declaration_list => {input => 'margin: 2em 3em',  
+                         ast => {
+                             "margin" => {},
+                             "margin-top" => {"expr" => "length" => 2},
+                             "margin-right" => {"expr" => "length" => 3},
+                             "margin-bottom" => {"expr" => "length" => 2},
+                             "margin-left" => {"expr" => "length" => 3},
                          },
     },
   ) {

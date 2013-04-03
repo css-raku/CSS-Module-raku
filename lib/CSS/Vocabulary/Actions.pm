@@ -83,6 +83,10 @@ class CSS::Vocabulary::Actions {
                 die "bad :expand option: " ~ $expand;
             }
 
+            # just to indicate the start of a family and the need to
+            # reset values
+            @props.unshift({property => $property});
+
             %ast<property_list> = @props;
         }
         else {
