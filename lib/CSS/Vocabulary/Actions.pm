@@ -20,7 +20,7 @@ class CSS::Vocabulary::Actions {
 
     #---- AST construction methods ----#
 
-    method _make_decl($/, $synopsis, :$body?, :$top_right_bottom_left?) {
+    method _make_decl($/, $synopsis, :$body?, :$box?) {
         # used by prop:sym<*> methods
 
         die "doesn't look like a property: " ~ $/.Str
@@ -32,15 +32,15 @@ class CSS::Vocabulary::Actions {
             if $<bad_args>;
 
         my %ast;
-        %ast<property> = $property;
 
         my @expr;
+        my $inherit;
         for $.list($body // $/) {
             for @$_ {
                 my ($term, $val) = $_.kv;
 
                 if $term eq 'inherit' {
-                    %ast<inherit> = True;
+                    $inherit = True;
                 }
                 else {
                     @expr.push($_);
@@ -48,20 +48,43 @@ class CSS::Vocabulary::Actions {
             }
         }
 
-        if @expr && $top_right_bottom_left {
-            # map arguments to: top right bottom left
+        if $box {
+            #  expand to a list of properties. eg: margin => margin-top,
+            #      margin-right margin-bottom margin-left
             warn "too many arguments: @expr"
                 if @expr > 4;
-            my %props;
-            %props<top right bottom left> = @expr;
-            %props<right>  //= %props<top>;
-            %props<bottom> //= %props<top>;
-            %props<left>   //= %props<right>;
+            my %box;
+            %box<top right bottom left> = @expr;
+            %box<right>  //= %box<top>;
+            %box<bottom> //= %box<top>;
+            %box<left>   //= %box<right>;
 
-            @expr = %props;
+            my @props;
+
+            for %box.kv -> $side, $expr {
+                my %prop = (property => $property ~ '-' ~ $side);
+
+                if $inherit {
+                    %prop<inherit> = True;
+                }
+                else {
+                    %prop<expr> = $expr;
+                }
+
+                @props.push( {%prop} );
+            }
+
+            %ast<property_list> = @props;
         }
-
-        %ast<expr> = @expr if @expr;
+        else {
+            %ast<property> = $property;
+            if $inherit {
+                %ast<inherit> = True;
+            }
+            else {
+                %ast<expr> = @expr;
+            }
+        }
 
         make %ast;
     }

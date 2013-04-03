@@ -94,18 +94,17 @@ for (
                      "expr" => ["length" => 1.25]}
     },
     decl => {input => 'margin: 1.2ex 1.5em 125% 23px',
-             ast => {"property" => "margin",
-                     "expr" => [top => {"length" => 1.2},
-                                right => {"length" => 1.5},
-                                bottom => {"percentage" => 125},
-                                left => {"length" => 23}]}
+             ast => {property_list => [{"property" => "margin-top", "expr" => "length" => 1.2e0},
+                                       {"property" => "margin-right", "expr" => "length" => 1.5e0},
+                                       {"property" => "margin-bottom", "expr" => "percentage" => 125e0},
+                                       {"property" => "margin-left", "expr" => "length" => 23e0}],
+             }
     },
     decl => {input => 'margin: 1.2ex 1.5em',
-             ast => {"property" => "margin",
-                     "expr" => [top => {"length" => 1.2},
-                                right => {"length" => 1.5},
-                                bottom => {"length" => 1.2},
-                                left => {"length" => 1.5}]}
+             ast => {"property_list" => [{"property" => "margin-top", "expr" => "length" => 1.2e0},
+                                         {"property" => "margin-right", "expr" => "length" => 1.5e0},
+                                         {"property" => "margin-bottom", "expr" => "length" => 1.2e0},
+                                         {"property" => "margin-left", "expr" => "length" => 1.5e0}]}
     },
      decl => {input => 'text-decoration: underline',
              ast => {"property" => "text-decoration",
@@ -120,20 +119,16 @@ for (
                      "expr" => ["ident" => "thick"]}
     },
     decl => {input => 'border-width: 2ex 1.5em 3ex 2em',
-             ast => {"property" => "border-width",
-                     "expr" => [top => "length" => 2,
-                                right => "length" => 1.5,
-                                bottom => "length" => 3,
-                                left => "length" => 2]}
+             ast => {"property_list" => [{"property" => "border-width-top", "expr" => "length" => 2e0},
+                                         {"property" => "border-width-right", "expr" => "length" => 1.5e0},
+                                         {"property" => "border-width-bottom", "expr" => "length" => 3e0},
+                                         {"property" => "border-width-left", "expr" => "length" => 2e0}]},
     },
     decl => {input => 'border-color: #a7f #aa77ff rgb(100,150,20) aqua',
-             ast => {"property" => "border-color",
-                     "expr" => [top => "color" => {"r" => 170, "g" => 119, "b" => 255},
-                                right => "color" => {"r" => 170, "g" => 119, "b" => 255},
-                                bottom => "color" => {"r" => 100, "g" => 150, "b" => 20},
-                                left => "color" => {"r" => 0, "g" => 255, "b" => 255}
-                                ]},
-             
+             ast => {"property_list" => [{"property" => "border-color-top", "expr" => "color" => {"r" => 170, "g" => 119, "b" => 255}},
+                                         {"property" => "border-color-right", "expr" => "color" => {"r" => 170, "g" => 119, "b" => 255}},
+                                         {"property" => "border-color-bottom", "expr" => "color" => {"r" => 100e0, "g" => 150e0, "b" => 20e0}},
+                                         {"property" => "border-color-left", "expr" => "color" => {"r" => 0, "g" => 255, "b" => 255}}]},
     },
     decl => {input => 'border-style: groove',
              ast => {"property" => "border-style",

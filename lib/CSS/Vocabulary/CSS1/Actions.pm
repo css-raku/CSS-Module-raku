@@ -139,7 +139,7 @@ class CSS::Vocabulary::CSS1::Actions
 
     method decl:sym<margin>($/) {
         $._make_decl($/, '[ <length> | <percentage> | auto ]{1,4}',
-            :top_right_bottom_left(True));
+            :box(True));
     }
 
     method decl:sym<padding-*>($/) {
@@ -148,7 +148,7 @@ class CSS::Vocabulary::CSS1::Actions
 
     method decl:sym<padding>($/) {
         $._make_decl($/, '[ <length> | <percentage> ]{1,4}',
-                     :top_right_bottom_left(True));
+                     :box(True));
 
     }
 
@@ -158,13 +158,13 @@ class CSS::Vocabulary::CSS1::Actions
 
     method decl:sym<border-width>($/) {
         $._make_decl($/, '[thin | medium | thick | <length>]{1,4}',
-                     :top_right_bottom_left(True));
+                     :box(True));
 
     }
 
     method decl:sym<border-color>($/) {
         $._make_decl($/, '<color>{1,4}',
-                     :top_right_bottom_left(True));
+                     :box(True));
     }
 
     method border-style($/) { make $.list($/) }

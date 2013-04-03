@@ -19,6 +19,14 @@ for (
     },
     declaration => {input => 'background-attachment: FiXed',   ast => {property => 'background-attachment', expr => [ident => 'fixed']},
     },
+    # boxed properties should be expanded
+    declaration_list => {input => 'margin: 2em 3em',   ast => {
+        "margin-top" => {"expr" => "length" => 2e0},
+        "margin-right" => {"expr" => "length" => 3e0},
+        "margin-bottom" => {"expr" => "length" => 2e0},
+        "margin-left" => {"expr" => "length" => 3e0},
+                         },
+    },
   ) {
 
     my $rule = $_.key;
@@ -26,7 +34,7 @@ for (
     my $input = %test<input>;
 
     $css1_actions.reset;
-         my $p = CSS::Language::CSS1.parse( $input, :rule($rule), :actions($css1_actions));
+    my $p = CSS::Language::CSS1.parse( $input, :rule($rule), :actions($css1_actions));
     t::AST::parse_tests($input, $p, :rule($rule), :suite('css1'),
                          :warnings($css1_actions.warnings),
                          :expected(%test) );
