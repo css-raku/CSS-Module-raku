@@ -5,6 +5,15 @@ use CSS::Vocabulary::Actions;
 class CSS::Vocabulary::CSS1::Actions
     is CSS::Vocabulary::Actions {
 
+    method length:sym<num>($/) {
+        my $num = $<num>.ast;
+
+        return $.warning('number not followed by a length unit', $<num>.Str)
+            if $num && $.strict;
+
+        make $.token($num, :type<length>, :units<px>)
+    }
+
     method named-color($/) {
         state %colors = (
             black   => [   0,   0,   0 ],
@@ -158,9 +167,10 @@ class CSS::Vocabulary::CSS1::Actions
         $._make_decl($/, 'thin | medium | thick | <length>');
     }
 
+    method border-width($/) { make $.list($/) }
     method decl:sym<border-width>($/) {
         $._make_decl($/, '[thin | medium | thick | <length>]{1,4}',
-                     :expand<box>);
+                     :body($<border-width>), :expand<box>);
 
     }
 

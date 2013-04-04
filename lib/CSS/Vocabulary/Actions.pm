@@ -2,6 +2,8 @@ use v6;
 
 class CSS::Vocabulary::Actions {
 
+    has Bool $.strict is rw = True;
+
     # ---- CSS::Grammar overrides ----
 
     method declaration:sym<raw>($/)        {
@@ -42,6 +44,7 @@ class CSS::Vocabulary::Actions {
 
         my @expr;
         my $inherit;
+
         for $.list($body // $/) {
             for @$_ {
                 my ($term, $val) = $_.kv;

@@ -2,6 +2,9 @@ use v6;
 
 grammar CSS::Vocabulary::CSS1 {
 
+    # Allow raw numbers
+    token length:sym<num> {<num><!before ['%'|\w]>}
+
     # allow color names and define our vocabulary
     token named-color {:i [aqua | black | blue | fuchsia | gray | green | lime | maroon | navy | olive | purple | red | silver | teal | white | yellow] & <ident> }
     rule color:sym<named> {<named-color>}
@@ -156,9 +159,10 @@ grammar CSS::Vocabulary::CSS1 {
                                         | <inherit> || <bad_args> ]}
 
     # - border-width: [thin | medium | thick | <length>]{1,4}
+    token border-width {:i [ thin | medium | thick ] & <ident>
+                            | <length> }
     rule decl:sym<border-width> {:i (border\-width) ':' [
-                                      [ [ thin | medium | thick ] & <ident>
-                                        | <length> ] ** 1..4
+                                      [ <border-width> ] ** 1..4
                                       | <inherit> || <bad_args> ]}
 
     # - border-color: <color>{1,4}

@@ -96,13 +96,13 @@ for (
              ast => {"property" => "margin-top",
                      "expr" => ["length" => 1.25]}
     },
-    decl => {input => 'margin: 1.2ex 1.5em 125% 23px',
+    decl => {input => 'margin: 1.2ex 1.5em 125% 0',
              ast => {property_list => [
                          {"property" => "margin"},
                          {"property" => "margin-top", "expr" => "length" => 1.2},
                          {"property" => "margin-right", "expr" => "length" => 1.5},
                          {"property" => "margin-bottom", "expr" => "percentage" => 125},
-                         {"property" => "margin-left", "expr" => "length" => 23}],
+                         {"property" => "margin-left", "expr" => "length" => 0}],
              }
     },
     decl => {input => 'margin: 1.2ex 1.5em',
