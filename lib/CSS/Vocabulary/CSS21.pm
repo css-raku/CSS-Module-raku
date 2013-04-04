@@ -13,6 +13,13 @@ grammar CSS::Vocabulary::CSS21:ver<20110607.000>
                                  | $<delta>=[$<dl>=leftwards | $<dr>=rightwards]
                                  | <inherit> || <bad_args> ]}
 
+    # - clip: <shape> | auto
+    # interim <shape> token. need to be properly prototyped, etc
+    token shape {:i'rect(' <expr> ')'}
+    rule decl:sym<clip> {:i (clip) ':' [
+                              <shape>
+                              | auto  & <ident>
+                                 | <inherit> || <bad_args> ]}
     rule decl:sym<elevation> {:i (elevation) ':' [
                                    <angle>
                                    | $<tilt>=[below | level | above]

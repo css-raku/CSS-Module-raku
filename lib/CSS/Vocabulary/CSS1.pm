@@ -2,7 +2,7 @@ use v6;
 
 grammar CSS::Vocabulary::CSS1 {
 
-    # Allow raw numbers
+    # For handling undimensioned numbers
     token length:sym<num> {<num><!before ['%'|\w]>}
 
     # allow color names and define our vocabulary
@@ -43,13 +43,13 @@ grammar CSS::Vocabulary::CSS1 {
     # - color: <color>
     # Backgrounds
     # - background-color: <color> | transparent
-    token background-color {:i <color> | fixed & <ident> }
+    token background-color {:i <color> | transparent & <ident> }
     rule decl:sym<background-color> {:i (background\-color) ':' [
                                           <background-color>
                                           | <inherit> || <bad_args> ]}
 
     # - background-image: <url> | none
-    token background-image {:i <url> | fixed & <ident> }
+    token background-image {:i <url> | none & <ident> }
     rule decl:sym<background-image> {:i (background\-image) ':' [
                                           <background-image>
                                           | <inherit> || <bad_args> ]}
@@ -182,7 +182,7 @@ grammar CSS::Vocabulary::CSS1 {
     # - border-left: <border-width> || <border-style> || <color>   
     # - border: <border-width> || <border-style> || <color>
     rule decl:sym<border-*> {:i (border[\-[top|right|bottom|left]]?) ':' [
-                                  [ <border-width> | <border-style> ]* <color>
+                                  [ <border-width> | <border-style> | <color> ]+
                                   | <inherit> || <bad_args> ]}
 
     # Positioning etc
@@ -233,17 +233,46 @@ grammar CSS::Vocabulary::CSS1 {
                                      | <inherit> || <bad_args> ]}
 
     # - list-style: <keyword> || <position> || <url>
-     rule decl:sym<list-style> {:i (list\-style) ':' [
-                                     [ <list-style-type> | <list-style-image> | <list-style-position> ]+
-                                     | <inherit> || <bad_args> ]}
-   # - position: absolute | relative | static
-    # - clip: <shape> | auto
+    rule decl:sym<list-style> {:i (list\-style) ':' [
+                                    [ <list-style-type> | <list-style-image> | <list-style-position> ]+
+                                    | <inherit> || <bad_args> ]}
+    # - position: absolute | relative | static
+    rule decl:sym<position> {:i (position) ':' [
+                                 [ absolute | relative | static ] & <ident>
+                                 | <inherit> || <bad_args> ]}
+
     # - overflow: none | clip | scroll
+    rule decl:sym<overflow> {:i (overflow) ':' [
+                                 [ none | clip | scroll ] & <ident>
+                                 | <inherit> || <bad_args> ]}
+
     # - z-index: auto | <integer>
+    token integer {[\+|\-]?\d+}
+    rule decl:sym<z-index> {:i (z\-index) ':' [
+                                 <integer>
+                                 | <inherit> || <bad_args> ]}
+   
     # - visibility: inherit | visible | hidden
+    rule decl:sym<visibility> {:i (visibility) ':' [
+                                 [ inherit | visible | hidden ] & <ident>
+                                 | <inherit> || <bad_args> ]}
+    
     # - page-break-before: auto | allways | left | right
     # - page-break-after: auto | allways | left | right
+    rule decl:sym<page-break-*> {:i (page\-break\-[before|after]) ':' [
+                                 [  auto | allways | left | right ] & <ident>
+                                 | <inherit> || <bad_args> ]}
+    
     # - size: <length>{1,2} | auto | portrait | landscape
-    # - marks: crop || cross | none
+    rule decl:sym<size> {:i (size) ':' [
+                              <length> ** 1..2
+                              |  [ auto | portrait | landscape ] & <ident>
+                                 | <inherit> || <bad_args> ]}
 
+    # - marks: crop || cross | none
+    rule decl:sym<marks> {:i (marks) ':' [
+                               [ crop & <ident> ]? [ cross | none ] & <ident>
+                               | crop & <ident>
+                                 | <inherit> || <bad_args> ]}
+    
 }

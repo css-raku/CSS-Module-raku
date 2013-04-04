@@ -223,24 +223,39 @@ class CSS::Vocabulary::CSS1::Actions
     method list-style-position($/) { make $.list($/) }
     method decl:sym<list-style-position>($/) {
         $._make_decl($/, 'inside | outside',  :body($<list-style-position>));
-                     
     }
 
     method decl:sym<list-style>($/) {
         $._make_decl($/, '<keyword> || <position> || <url>', :expand<family> );
     }
 
-    method decl:sym<position>($/) { warn "position - tba" }
-    method decl:sym<left>($/) { warn "left - tba" }
-    method decl:sym<top>($/) { warn "top - tba" }
-    method decl:sym<clip>($/) { warn "clip - tba" }
-    method decl:sym<overflow>($/) { warn "overflow - tba" }
-    method decl:sym<z-index>($/) { warn "z-index - tba" }
-    method decl:sym<visibility>($/) { warn "visibility - tba" }
-    method decl:sym<page-break-before>($/) { warn "page-break-before - tba" }
-    method decl:sym<page-break-after>($/) { warn "page-break-after - tba" }
-    method decl:sym<size>($/) { warn "size - tba" }
-    method decl:sym<marks>($/) { warn "marks - tba" }
+    method decl:sym<position>($/) {
+        $._make_decl($/, 'absolute | relative | static');
+    }
 
+    method decl:sym<overflow>($/) {
+        $._make_decl($/, 'none | clip | scroll');
+    }
 
+    # only occurence of an integer token so far
+    method integer($/) { make $/.Int }
+    method decl:sym<z-index>($/) {
+        $._make_decl($/, 'auto | <integer>');
+    }
+
+    method decl:sym<visibility>($/) {
+        $._make_decl($/, 'inherit | visible | hidden');
+    }
+
+    method decl:sym<page-break-*>($/) {
+        $._make_decl($/, 'auto | allways | left | right');
+    }
+
+    method decl:sym<size>($/) {
+        $._make_decl($/, '<length>{1,2} | auto | portrait | landscape');
+    }
+
+    method decl:sym<marks>($/) {
+        $._make_decl($/, 'crop || cross | none');
+    }
 }

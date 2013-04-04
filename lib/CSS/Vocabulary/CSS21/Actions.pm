@@ -53,6 +53,10 @@ class CSS::Vocabulary::CSS21::Actions
         make %ast;
     }
 
+    method decl:sym<clip>($/) {
+        $._make_decl($/, ' <shape> | auto');
+    }
+
     method decl:sym<elevation>($/) {
         # see http://www.w3.org/TR/2011/REC-CSS2-20110607/aural.html
 
