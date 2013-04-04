@@ -7,6 +7,14 @@ use CSS::Vocabulary::CSS1;
 grammar CSS::Vocabulary::CSS21:ver<20110607.000> 
     is CSS::Vocabulary::CSS1 {
 
+    # --- Functions --- #
+
+    rule function:sym<attr>     {:i'attr(' [ <attribute_name=.ident> <type_or_unit=.ident>? [ ',' <fallback=.ident> ]? || <bad_args>] ')'}
+    rule function:sym<counter>  {:i'counter(' [ <ident> [ ',' <ident> ]* || <bad_args> ] ')'}
+    rule function:sym<counters> {:i'counters(' [ <ident> [ ',' <string> ]? || <bad_args> ] ')' }
+
+    # --- Properties --- #
+
     rule decl:sym<azimuth> {:i (azimuth) ':' [
                                  <angle>
                                  | [[$<lr>=[ left\-side | far\-left | left | center\-left | center | center\-right | right | far\-right | right\-side ] $<bh>='behind'? | $<bh>=behind ]]

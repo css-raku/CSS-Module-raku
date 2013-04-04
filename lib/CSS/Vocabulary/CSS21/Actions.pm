@@ -5,6 +5,30 @@ use CSS::Vocabulary::CSS1::Actions;
 class CSS::Vocabulary::CSS21::Actions
     is CSS::Vocabulary::CSS1::Actions {
 
+    # --- Functions --- #
+
+    method any_function($/)             {
+        $.warning('unknown function', $<ident>.ast.lc);
+    }
+
+    method function:sym<attr>($/)             {
+        return $.warning('usage: attr( attribute-name <type-or-unit>? [, <fallback> ]? )')
+            if $<bad_args>;
+        make {ident => 'attr', args => $.list($/)}
+    }
+    method function:sym<counter>($/) {
+        return $.warning('usage: counter(ident [, ident [,...] ])')
+            if $<bad_args>;
+        make {ident => 'counter', args => $.list($/)}
+    }
+    method function:sym<counters>($/) {
+        return $.warning('usage: counters(ident [, "string"])')
+            if $<bad_args>;
+        make {ident => 'counters', args => $.list($/)}
+    }
+
+    # --- Properties --- #
+
    method decl:sym<azimuth>($/) {
         # see http://www.w3.org/TR/2011/REC-CSS2-20110607/aural.html
 
