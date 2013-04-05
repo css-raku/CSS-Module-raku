@@ -1,5 +1,9 @@
 use v6;
 
+# reference: http://www.w3.org/TR/2008/REC-CSS1-20080411/#css1-properties
+
+use Grammar::Tracer;
+
 grammar CSS::Vocabulary::CSS1 {
 
     # For handling undimensioned numbers
@@ -9,14 +13,16 @@ grammar CSS::Vocabulary::CSS1 {
     token named-color {:i [aqua | black | blue | fuchsia | gray | green | lime | maroon | navy | olive | purple | red | silver | teal | white | yellow] & <ident> }
     rule color:sym<named> {<named-color>}
 
-    # Fonts
+
+    # 5.2 Font Properties
+    # -------------------
     # - font-family: [[<family-name> | <generic-family>],]* [<family-name> | <generic-family>]
-    token font-family {:i [ serif | sans\-serif | cursive | fantasy | monospace] & <generic-family=.ident> || <family-name=.ident> | <family-name=.string> }
+    rule font-family {:i [ serif | sans\-serif | cursive | fantasy | monospace ] & <generic-family=.ident> | [ <family-name=.ident> ]+ | <family-name=.string> }
     rule decl:sym<font-family> {:i (font\-family) ':' [ <font-family> [ ',' <font-family> ]*
                                                         | <inherit> || <bad_args> ] }
 
     # - font-style: normal | italic | oblique
-    token font-style {:i [ normal | bold | oblique ] & <ident> }
+    token font-style {:i [ normal | italic | oblique ] & <ident> }
     rule decl:sym<font-style> {:i (font\-style) ':' [ <font-style> | <inherit> || <bad_args> ] }
 
     # - font-variant: normal | small-caps
@@ -30,18 +36,24 @@ grammar CSS::Vocabulary::CSS1 {
                                                         | <inherit> || <bad_args> ] }
 
     # - font-size: <absolute-size> | <relative-size> | <length> | <percentage>
-    token absolute-size {i: [x?x\-]?small | medium | [x?x\-]?large & <ident> }
+    token absolute-size {:i [ [[xx|x]\-]?small | medium | [[xx|x]\-]?large ] & <ident> }
     token relative-size {:i [ larger | smaller ] & <ident> }
     token font-size {:i <absolute-size> | <relative-size> | <length> | <percentage> }
     rule decl:sym<font-size> {:i (font\-size) ':' [ <font-size>
                                                     | <inherit> || <bad_args> ] }
     # - font: [ <font-style> || <font-variant> || <font-weight> ]? <font-size> [ / <line-height> ]? <font-family>
     rule decl:sym<font> {:i (font) ':' [
-                              [  <font-style> | <font-variant> | <font-weight> ]* <font-size> [ '/' <line-height> ]? <font-family>
+                              [  <font-style> | <font-variant> | <font-weight> ]* <font-size> [ '/' <line-height> ]? <font-family> [ ',' <font-family> ]*
                               | <inherit> || <bad_args> ] }
-                             
+
+
+    # 5.3 Color and background properties
+    # -----------------------------------
     # - color: <color>
-    # Backgrounds
+    rule decl:sym<color> {:i (color) ':' [
+                               <color>
+                               | <inherit> || <bad_args> ]}
+
     # - background-color: <color> | transparent
     token background-color {:i <color> | transparent & <ident> }
     rule decl:sym<background-color> {:i (background\-color) ':' [
@@ -68,9 +80,9 @@ grammar CSS::Vocabulary::CSS1 {
                                                | <inherit> || <bad_args> ]}
 
     # - background-position: [<percentage> | <length>]{1,2} | [top | center | bottom] || [left | center | right]
-    rule background-position {:i [ <percentage> | <length> ]**1..2
-                                    | [ top | center | bottom ] & <ident>
-                                    [[ left | center | right ] & <ident> ]?}
+    rule background-position {:i  [ <percentage> | <length> ]**1..2
+                                  | [ [ top | center | bottom ] & <ident> ] [[ left | center | right ] & <ident> ]?
+                                  | [ left | center | right ] & <ident> }
 
     rule decl:sym<background-position> {:i (background\-position) ':' [
                                              <background-position>
@@ -82,7 +94,8 @@ grammar CSS::Vocabulary::CSS1 {
                                              | <inherit> || <bad_args> ]}
 
 
-    # Text
+    # 5.4 Text properties
+    # -------------------
     # - word-spacing: normal | <length>
     # - letter-spacing: normal | <length>
    rule decl:sym<*-spacing> {:i ([word|letter]\-spacing) ':' [
@@ -123,6 +136,8 @@ grammar CSS::Vocabulary::CSS1 {
                                      <line-height>
                                      | <inherit> || <bad_args> ]}
 
+    # 5.5 Box properties
+    # ------------------
     # - margin-top: <length> | <percentage> | auto
     # - margin-right: <length> | <percentage> | auto
     # - margin-bottom: <length> | <percentage> | auto
@@ -204,6 +219,8 @@ grammar CSS::Vocabulary::CSS1 {
                                [  none | left | right | both ] & <ident>
                                | <inherit> || <bad_args> ]}
 
+    # 5.6 Classification properties
+    # -----------------------------
     # - display: block | inline | list-item | none
     rule decl:sym<display> {:i (display) ':' [
                                  [ block | inline | list\-item | none ] & <ident>
@@ -236,6 +253,7 @@ grammar CSS::Vocabulary::CSS1 {
     rule decl:sym<list-style> {:i (list\-style) ':' [
                                     [ <list-style-type> | <list-style-image> | <list-style-position> ]+
                                     | <inherit> || <bad_args> ]}
+
     # - position: absolute | relative | static
     rule decl:sym<position> {:i (position) ':' [
                                  [ absolute | relative | static ] & <ident>

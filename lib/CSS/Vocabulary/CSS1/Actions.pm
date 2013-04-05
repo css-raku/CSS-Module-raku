@@ -56,24 +56,27 @@ class CSS::Vocabulary::CSS1::Actions
 
     method font-style($/) { make $.token($<ident>.ast) }
     method decl:sym<font-style>($/) {
-        $._make_decl($/, 'normal | italic | oblique');
+        $._make_decl($/, 'normal | italic | oblique',
+            :body($<font-style>));
     }
 
     method font-variant($/) { make $.token($<ident>.ast) }
     method decl:sym<font-variant>($/) {
-        $._make_decl($/, 'normal | small-caps');
+        $._make_decl($/, 'normal | small-caps',
+            :body($<font-variant>));
     }
 
     method font-weight($/) { make $.token( ($<ident> || $<num>).ast ) }
     method decl:sym<font-weight>($/) {
-        $._make_decl($/, 'normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900');
+        $._make_decl($/, 'normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900',
+                    :body($<font-weight>)); 
     }
 
     method absolute-size($/) { make $.token($<ident>.ast) }
     method relative-size($/) { make $.token($<ident>.ast) }
     method font-size($/)     { make $.list($/) }
     method decl:sym<font-size>($/) {
-        $._make_decl($/, '[x?x-]small | medium | [x?x\-]large | larger | smaller | <length> | <percentage>',
+        $._make_decl($/, '[[x]x-]small | medium | [[x]x\-]large | larger | smaller | <length> | <percentage>',
             :body($<font-size>));
     }
 
@@ -81,7 +84,9 @@ class CSS::Vocabulary::CSS1::Actions
         $._make_decl($/, '[ <font-style> || <font-variant> || <font-weight> ]? <font-size> [ / <line-height> ]? <font-family>',
                      :expand<family>);
     }
-    method decl:sym<color>($/) { warn "color - tba" }
+    method decl:sym<color>($/) {
+        $._make_decl($/, '<color>');
+    }
 
     method background-color($/) { make $.list($/) }
     method decl:sym<background-color>($/) {

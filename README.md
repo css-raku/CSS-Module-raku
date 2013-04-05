@@ -13,7 +13,7 @@ suite (source: CVS repository `:pserver:anonymous@dev.w3.org:/sources/public`, d
 
 To Do
 =====
-- Complete CSS1 property vocabulary
+- Complete CSS1 property vocabulary (done)
 - Complete CSS21 property vocabulary
 - Complete CSS3 extensions vocabulary (Colors, Fonts, Namespaces, Paged-media and Selectors)
 - Integrate with W3C CSS Validator test suite
@@ -21,7 +21,7 @@ To Do
 
 References
 ==========
-- CSS1 - http://129.69.59.141/css1pqre.htm ?
+- CSS1 - http://www.w3.org/TR/2008/REC-CSS1-20080411/#css1-properties
 - CSS21 - http://www.w3.org/TR/2011/REC-CSS2-20110607/propidx.html
 - CSS3 - http://www.w3.org/TR/2011/REC-CSS2-20110607/propidx.html + extension modules (*)
 
