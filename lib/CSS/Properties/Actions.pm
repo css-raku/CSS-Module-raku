@@ -1,6 +1,6 @@
 use v6;
 
-class CSS::Vocabulary::Actions {
+class CSS::Properties::Actions {
 
     has Bool $.strict is rw = True;
 
