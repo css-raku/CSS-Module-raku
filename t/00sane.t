@@ -29,6 +29,16 @@ for (
                              "margin-left" => {"expr" => "length" => 3},
                          },
     },
+    # also check !important
+    declaration => {input => 'margin: em -ex !IMPORTANT',
+             ast => {"property_list" => [
+                         {"property" => "margin", "prio" => "important"},
+                         {"property" => "margin-top", "expr" => "length" => 1, "prio" => "important"},
+                         {"property" => "margin-right", "expr" => "length" => -1, "prio" => "important"},
+                         {"property" => "margin-bottom", "expr" => "length" => 1, "prio" => "important"},
+                         {"property" => "margin-left", "expr" => "length" => -1, "prio" => "important"}
+                         ]},
+    },
   ) {
 
     my $rule = $_.key;

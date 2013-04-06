@@ -46,12 +46,7 @@ class CSS::Vocabulary::CSS1::Actions
 
     method font-family($/) { make $.list($/) }
     method decl:sym<font-family>($/) {
-        if $<font-family> {
-            return make {property => 'font-family',
-                         expr => [ $<font-family>.map({$_.ast}) ]
-            }
-        }
-        $._make_decl($/, '[[<family-name> | <generic-family>],]* [<family-name> | <generic-family>]');
+        $._make_decl($/, '[[<family-name> | <generic-family>],]* [<family-name> | <generic-family>]', :body($<font-family>));
     }
 
     method font-style($/) { make $.token($<ident>.ast) }

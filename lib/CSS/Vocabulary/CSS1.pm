@@ -16,8 +16,8 @@ grammar CSS::Vocabulary::CSS1 {
     # -------------------
     # - font-family: [[<family-name> | <generic-family>],]* [<family-name> | <generic-family>]
     rule font-family {:i [ serif | sans\-serif | cursive | fantasy | monospace ] & <generic-family=.ident> | [ <family-name=.ident> ]+ | <family-name=.string> }
-    rule decl:sym<font-family> {:i (font\-family) ':' [ <font-family> [ ',' <font-family> ]*
-                                                        | <inherit> || <bad_args> ] }
+    rule decl:sym<font-family> {:i (font\-family) ':' [ <inherit> || <font-family> [ ',' <font-family> || <any> ]*
+                                                        || <bad_args> ] }
 
     # - font-style: normal | italic | oblique
     token font-style {:i [ normal | italic | oblique ] & <ident> }
@@ -79,8 +79,8 @@ grammar CSS::Vocabulary::CSS1 {
 
     # - background-position: [<percentage> | <length>]{1,2} | [top | center | bottom] || [left | center | right]
     rule background-position {:i  [ <percentage> | <length> ]**1..2
-                                  | [ [ top | center | bottom ] & <ident> ] [[ left | center | right ] & <ident> ]?
-                                  | [ left | center | right ] & <ident> }
+                                  | [ [ top | center | bottom ] & <ident>  
+                                      | [ left | center | right ] & <ident> ]+ }
 
     rule decl:sym<background-position> {:i (background\-position) ':' [
                                              <background-position>

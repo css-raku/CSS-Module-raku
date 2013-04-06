@@ -38,7 +38,7 @@ class CSS::Vocabulary::Actions {
         my $property = $0.Str.trim.lc;
 
         return $.warning('usage ' ~ $property ~ ': ' ~ $synopsis)
-            if $<bad_args>;
+            if $<bad_args> || $<any>;
 
         my %ast;
 

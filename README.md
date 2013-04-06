@@ -9,7 +9,7 @@ build simpler higher-level ASTs.
 This is not ready for general consumption yet.
 
 My initial aim is to pass most or of the tests in W3C CSS Validator test
-suite (source: CVS repository `:pserver:anonymous@dev.w3.org:/sources/public`, directory `./css-validator/autotest/testsuite/`).
+suite https://github.com/w3c/css-validator.git
 
 To Do
 =====
