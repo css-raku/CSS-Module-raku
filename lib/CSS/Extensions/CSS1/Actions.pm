@@ -1,9 +1,9 @@
 use v6;
 
-use CSS::Properties::Actions;
+use CSS::Extensions::Actions;
 
-class CSS::Properties::CSS1::Actions
-    is CSS::Properties::Actions {
+class CSS::Extensions::CSS1::Actions
+    is CSS::Extensions::Actions {
 
     method length:sym<num>($/) {
         my $num = $<num>.ast;

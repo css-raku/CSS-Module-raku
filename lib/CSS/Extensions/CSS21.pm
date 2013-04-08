@@ -2,10 +2,10 @@ use v6;
 
 # specification: http://www.w3.org/TR/2011/REC-CSS2-20110607/propidx.html
 
-use CSS::Properties::CSS1;
+use CSS::Extensions::CSS1;
 
-grammar CSS::Properties::CSS21:ver<20110607.000> 
-    is CSS::Properties::CSS1 {
+grammar CSS::Extensions::CSS21:ver<20110607.000> 
+    is CSS::Extensions::CSS1 {
 
     # --- Functions --- #
 

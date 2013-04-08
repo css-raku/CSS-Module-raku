@@ -2,7 +2,7 @@ use v6;
 
 # reference: http://www.w3.org/TR/2008/REC-CSS1-20080411/#css1-properties
 
-grammar CSS::Properties::CSS1 {
+grammar CSS::Extensions::CSS1 {
 
     # For handling undimensioned numbers
     token length:sym<num> {<num><!before ['%'|\w]>}

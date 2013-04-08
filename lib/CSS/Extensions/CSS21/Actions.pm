@@ -1,9 +1,9 @@
 use v6;
 
-use CSS::Properties::CSS1::Actions;
+use CSS::Extensions::CSS1::Actions;
 
-class CSS::Properties::CSS21::Actions
-    is CSS::Properties::CSS1::Actions {
+class CSS::Extensions::CSS21::Actions
+    is CSS::Extensions::CSS1::Actions {
 
     # --- Functions --- #
 

@@ -1,6 +1,6 @@
 use v6;
 
-class CSS::Properties::Actions {
+class CSS::Extensions::Actions {
 
     has Bool $.strict is rw = True;
 
