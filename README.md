@@ -2,22 +2,34 @@ CSS::Language
 =============
 
 CSS::Language is under construction as a validating parser for CSS1 CSS2.1
-and CSS3. It is based on CSS::Grammar, but has a detailed knowledge of
-individual properties syntax and can therefore validate to a deeper level and
+and CSS3. This is not ready for general consumption yet.
+
+It is based on CSS::Grammar, but has a detailed knowledge of individual
+properties syntax and can therefore validate to a deeper level and
 build simpler higher-level ASTs.
 
-This is not ready for general consumption yet.
+In particular, it implements the synopsis grammar, which is used extensively
+in the W3C CSS specifications. For example http://www.w3.org/TR/2011/REC-CSS2-20110607/propidx.html has:
+
+    'content'	normal | none | [ <string> | <uri> | <counter> | attr(<identifier>) | open-quote | close-quote | no-open-quote | no-close-quote ]+ | inherit
+
 
 My initial aim is to pass most or of the tests in W3C CSS Validator test
 suite https://github.com/w3c/css-validator.git
 
 To Do
 =====
-- ~~Complete CSS1 property vocabulary~~ (done)
+- Implement property grammar/actions generation (sources etc/css1-properties.txt, etc/css21-properties.txt, css3 tba)
+- ~~Complete CSS1 property vocabulary~~ (done, but hand-coded rather than generated)
 - Complete CSS21 property vocabulary
 - Complete CSS3 extensions vocabulary (Colors, Fonts, Namespaces, Paged-media and Selectors)
 - Integrate with W3C CSS Validator test suite
 - Pass most of the W3C CSS Validator tests
+
+Specification Grammar
+---------------------
+`CSS::Language::Specification` implements the synopsis grammar used
+in the W3C documents to define properties and functions.
 
 Extension Modules
 ------------------
@@ -46,20 +58,23 @@ extension modules that you intend to support.
 
 E.g. to support the CSS3 Core grammar plus Paged Media and Fonts modules:
 
-    use CSS::Language::CSS3;
+    use CSS::Grammar::CSS3;
+    use CSS::Extensions::CSS21
     use CSS::Extensions::CSS3::Fonts;
     use CSS::Extensions::CSS3::PagedMedia;
     use CSS::Grammar::Actions;
 
     grammar My_CSS3_Grammar
+        is CSS::Extensions::CSS21
         is CSS::Extensions::CSS3::Fonts
         is CSS::Extensions::CSS3::PagedMedia
-        is CSS::Language::CSS3 {};
+        is CSS::Grammar::CSS3 {};
 
     class My_CSS3_Actions
+        is CSS::Extensions::CSS21::Actions
         is CSS::Extensions::CSS3::Fonts::Actions
         is CSS::Extensions::CSS3::PagedMedia::Actions
-        is CSS::Language::Actions {};
+        is CSS::Grammar::Actions {};
 
 This gives you a customised grammar and parser that understands the
 core CSS3 language, plus Fonts and Paged Media extensions
