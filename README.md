@@ -8,10 +8,12 @@ It is based on CSS::Grammar, but has a detailed knowledge of individual
 properties syntax and can therefore validate to a deeper level and
 build simpler higher-level ASTs.
 
-In particular, it implements the synopsis grammar, which is used extensively
-in the W3C CSS specifications. For example http://www.w3.org/TR/2011/REC-CSS2-20110607/propidx.html has:
+In particular, it implements the property notation grammar as described in http://www.w3.org/TR/2008/REC-CSS1-20080411/#css1-properties.
 
-    'content'	normal | none | [ <string> | <uri> | <counter> | attr(<identifier>) | open-quote | close-quote | no-open-quote | no-close-quote ]+ | inherit
+This is used extensively in the W3C CSS specifications. For example http://www.w3.org/TR/2011/REC-CSS2-20110607/propidx.html has:
+
+    'content'	normal | none | [ <string> | <uri> | <counter> | attr(<identifier>)
+                | open-quote | close-quote | no-open-quote | no-close-quote ]+ | inherit
 
 
 My initial aim is to pass most or of the tests in W3C CSS Validator test
