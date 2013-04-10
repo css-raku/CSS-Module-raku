@@ -9,8 +9,7 @@ use v6;
 # -- if you want the capability to to embed '@page' rules, you'll also need
 #    to load the Paged Media extension module in your class structure.
 
-grammar CSS::Extensions::CSS3::Media:ver<20120619.000> {
-
+grammar CSS::Extensions::CSS3::Media::Syntax {
     rule at_rule:sym<media> {(:i'media') <media_list> <media_rules> }
 
     rule media_rules {
@@ -25,6 +24,11 @@ grammar CSS::Extensions::CSS3::Media:ver<20120619.000> {
 
     token resolution {:i<num>(dpi|dpcm)}
     token quantity:sym<resolution> {<resolution>}
+}
+
+grammar CSS::Extensions::CSS3::Media:ver<20120619.000>
+    is  CSS::Extensions::CSS3::Media::Syntax {
+        # todo properties
 }
 
 class CSS::Extensions::CSS3::Media::Actions {
