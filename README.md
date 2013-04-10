@@ -2,25 +2,25 @@ CSS::Language
 =============
 
 CSS::Language is under construction as a validating parser for CSS1 CSS2.1
-and CSS3. This is not ready for general consumption yet.
+and CSS3.
 
-CSS::Language is an extension of CSS::Grammar, but is able to parse
+CSS::Language is an extension of [CSS::Grammar], but is able to parse
 specific properties along with functions and other arguments. Because of this
-it is able validate properties and produce meaningful property specific
+it is able validate properties and produce property specific error
 messages. A second benefit is simpler and more specific ASTs.
 
 This module implements the following grammars and actions:
 
-- CSS::Language::CSS1 + CSS::Language::CSS1::Actions
-- CSS::Language::CSS21 + CSS::Language::CSS21::Actions
-- CSS::Language::CSS3 + CSS::Language::CSS3::Actions
+- `CSS::Language::CSS1` + `CSS::Language::CSS1::Actions`
+- `CSS::Language::CSS21` + `CSS::Language::CSS21::Actions`
+- `CSS::Language::CSS3` + `CSS::Language::CSS3::Actions`
 
 Extension Modules
 ------------------
 CSS levels 1 an 2 have a single specification; whereas CSS level 3 is
 decomposed into a number of modules. CSS::Language::CSS3 is comprised
 of the following extension modules. These are under construction and
-are also included in this distribution:
+are also defined in this distribution:
 
 - `CSS::Extensions::CSS3::Colors`     - CSS 3.0 Colors (@color-profile)
 - `CSS::Extensions::CSS3::Selectors`  - CSS 3.0 Selectors
@@ -29,7 +29,14 @@ are also included in this distribution:
 - `CSS::Extensions::CSS3::Namespaces` - CSS 3.0 Namespace (@namespace)
 - `CSS::Extensions::CSS3::PagedMedia` - CSS 3.0 Paged Media (@page)
 
-There are a number of other CSS level 3 modules. 
+Specification Grammar
+---------------------
+`CSS::Language::Specification` is also included in this distribution.
+
+It implements the synopsis grammar used throughout the W3C documents to specify
+properties and functions. For example, the specification for `border-color` is:
+
+    'border-color' [ <color> | transparent ]{1,4} | inherit
 
 To Do
 =====
@@ -41,15 +48,6 @@ suite https://github.com/w3c/css-validator.git
 - Complete CSS3 extensions vocabulary (Colors, Fonts, Namespaces, Paged-media and Selectors)
 - Testing via W3C CSS Validator test suite and/or specifications (etc/css1-prpoerties.txt, etc/css21-properties.txt)
 - Pass most of the W3C CSS Validator tests
-
-Specification Grammar
----------------------
-CSS::Language::Specification is also included in this distribution.
-
-It implements the synopsis grammar used throughout the W3C documents to specify
-properties and functions. For example, the specification for `border-color` is:
-
-    'border-color' [ <color> | transparent ]{1,4} | inherit
 
 References
 ==========
