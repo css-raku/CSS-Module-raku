@@ -4,37 +4,23 @@ CSS::Language
 CSS::Language is under construction as a validating parser for CSS1 CSS2.1
 and CSS3. This is not ready for general consumption yet.
 
-It is based on CSS::Grammar, but has a detailed knowledge of individual
-properties syntax and can therefore validate to a deeper level and
-build simpler higher-level ASTs.
+CSS::Language is an extension of CSS::Grammar, but is able to parse
+specific properties along with functions and other arguments. Because of this
+it is able validate properties and produce meaningful property specific
+messages. A second benefit is simpler and more specific ASTs.
 
-In particular, it implements the property notation grammar as described in http://www.w3.org/TR/2008/REC-CSS1-20080411/#css1-properties.
+This module implements the following grammars and actions:
 
-This is used extensively in the W3C CSS specifications. For example http://www.w3.org/TR/2011/REC-CSS2-20110607/propidx.html has:
-
-    'content'	normal | none | [ <string> | <uri> | <counter> | attr(<identifier>)
-                | open-quote | close-quote | no-open-quote | no-close-quote ]+ | inherit
-
-
-My initial aim is to pass most or of the tests in W3C CSS Validator test
-suite https://github.com/w3c/css-validator.git
-
-To Do
-=====
-- ~~Complete CSS1 property vocabulary~~ (done)
-- Complete CSS21 property vocabulary
-- Complete CSS3 extensions vocabulary (Colors, Fonts, Namespaces, Paged-media and Selectors)
-- Testing via W3C CSS Validator test suite and/or specifications (etc/css1-prpoerties.txt, etc/css21-properties.txt)
-- Pass most of the W3C CSS Validator tests
-
-Specification Grammar
----------------------
-`CSS::Language::Specification` implements the synopsis grammar used
-in the W3C documents to define properties and functions.
+- CSS::Language::CSS1 + CSS::Language::CSS1::Actions
+- CSS::Language::CSS21 + CSS::Language::CSS21::Actions
+- CSS::Language::CSS3 + CSS::Language::CSS3::Actions
 
 Extension Modules
 ------------------
-This distribution includes the following optional CSS3 extension modules:
+CSS levels 1 an 2 have a single specification; whereas CSS level 3 is
+decomposed into a number of modules. CSS::Language::CSS3 is comprised
+of the following extension modules. These are under construction and
+are also included in this distribution:
 
 - `CSS::Extensions::CSS3::Colors`     - CSS 3.0 Colors (@color-profile)
 - `CSS::Extensions::CSS3::Selectors`  - CSS 3.0 Selectors
@@ -43,45 +29,27 @@ This distribution includes the following optional CSS3 extension modules:
 - `CSS::Extensions::CSS3::Namespaces` - CSS 3.0 Namespace (@namespace)
 - `CSS::Extensions::CSS3::PagedMedia` - CSS 3.0 Paged Media (@page)
 
-To enable all the above extensions, use the `CSS::Extensions::CSS3`
-grammar and `CSS::Extensions::CSS3::Actions` action class.
+There are a number of other CSS level 3 modules. 
 
-Enabling Specific CSS3 Extensions
----------------------------------
-CSS3 is evolving into a core grammar plus a comprehensive set of extension
-[modules](http://www.css3.info/modules/). Most are optional and may extend
-both the grammar and generated Abstract Syntax Tree (AST). This leads to a
-large number of possible grammar combinations.
+To Do
+=====
+My initial aim is to pass most or of the tests in W3C CSS Validator test
+suite https://github.com/w3c/css-validator.git
 
-If you wish to use a subset of the available extensions, you'll need to
-construct a custom grammar and actions that include just the particular CSS3
-extension modules that you intend to support.
+- ~~Complete CSS1 property vocabulary~~ (done)
+- Complete CSS21 property vocabulary
+- Complete CSS3 extensions vocabulary (Colors, Fonts, Namespaces, Paged-media and Selectors)
+- Testing via W3C CSS Validator test suite and/or specifications (etc/css1-prpoerties.txt, etc/css21-properties.txt)
+- Pass most of the W3C CSS Validator tests
 
-E.g. to support the CSS3 Core grammar plus Paged Media and Fonts modules:
+Specification Grammar
+---------------------
+CSS::Language::Specification is also included in this distribution.
 
-    use CSS::Grammar::CSS3;
-    use CSS::Extensions::CSS21
-    use CSS::Extensions::CSS3::Fonts;
-    use CSS::Extensions::CSS3::PagedMedia;
-    use CSS::Grammar::Actions;
+It implements the synopsis grammar used throughout the W3C documents to specify
+properties and functions. For example, the specification for `border-color` is:
 
-    grammar My_CSS3_Grammar
-        is CSS::Extensions::CSS21
-        is CSS::Extensions::CSS3::Fonts
-        is CSS::Extensions::CSS3::PagedMedia
-        is CSS::Grammar::CSS3 {};
-
-    class My_CSS3_Actions
-        is CSS::Extensions::CSS21::Actions
-        is CSS::Extensions::CSS3::Fonts::Actions
-        is CSS::Extensions::CSS3::PagedMedia::Actions
-        is CSS::Grammar::Actions {};
-
-This gives you a customised grammar and parser that understands the
-core CSS3 language, plus Fonts and Paged Media extensions
-
-    my $actions = My_CSS3_Actions.new;
-    my $parse = My_CSS3_Grammar.parse( $css_input, :actions($actions) );
+    'border-color' [ <color> | transparent ]{1,4} | inherit
 
 References
 ==========
