@@ -11,7 +11,7 @@ grammar CSS::Language::Specification {
 
     token ws {<!ww>' '*}
     token tab {\t}
-    token property-spec {<prop-names> [<tab>|<ws>] <synopsis=.value-list>}
+    token property-spec {<prop-names> [<.tab>|<.ws>] <synopsis=.value-list>}
 
     token prop-names {[' '?[\'<prop-name=.id>\'|<prop-name=.id>|'*']]+}
     token id { <[a..z]>[\w|\-]* }

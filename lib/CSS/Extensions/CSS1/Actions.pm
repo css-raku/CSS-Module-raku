@@ -163,6 +163,7 @@ class CSS::Extensions::CSS1::Actions
 
     }
 
+    # * = left|right|bottom|top
     method decl:sym<border-*-width>($/) {
         $._make_decl($/, 'thin | medium | thick | <length>');
     }
@@ -185,6 +186,7 @@ class CSS::Extensions::CSS1::Actions
             :body($<border-style>));
     }
 
+    # * = top|left|right|bottom
     method decl:sym<border-*>($/) {
         $._make_decl($/, '<border-width> || <border-style> || <color>');
     }
