@@ -2,7 +2,7 @@ use v6;
 
 # reference: http://www.w3.org/TR/2008/REC-CSS1-20080411/#css1-properties
 
-grammar CSS::Extensions::CSS1 {
+grammar CSS::Extensions::CSS1::Syntax {
 
     # For handling undimensioned numbers
     token length:sym<num> {<num><!before ['%'|\w]>}
@@ -10,8 +10,10 @@ grammar CSS::Extensions::CSS1 {
     # allow color names and define our vocabulary
     token named-color {:i [aqua | black | blue | fuchsia | gray | green | lime | maroon | navy | olive | purple | red | silver | teal | white | yellow] & <ident> }
     rule color:sym<named> {<named-color>}
+}
 
-
+grammar CSS::Extensions::CSS1:ver<20080411>
+ is CSS::Extensions::CSS1::Syntax {
     # 5.2 Font Properties
     # -------------------
     # - font-family: [[<family-name> | <generic-family>],]* [<family-name> | <generic-family>]

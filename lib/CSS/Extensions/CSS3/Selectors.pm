@@ -6,8 +6,7 @@ use v6;
 # -- have relaxed negation rule to take a list of arguments - in common use
 #    and supported  by major browsers.
 
-grammar CSS::Extensions::CSS3::Selectors:ver<20090929.000> {
-
+grammar CSS::Extensions::CSS3::Selectors::Syntax {
     # extensions:
     # ----------
     # inherited combinators: '+' (adjacent), '>' (child)
@@ -50,6 +49,11 @@ grammar CSS::Extensions::CSS3::Selectors:ver<20090929.000> {
     rule pseudo_function:sym<nth_selector> {<ident=.nth_functor>'(' [<args=.nth_args> || <bad_args> ] ')'} 
     rule negation_args {[<type_selector> | <universal> | <id> | <class> | <attrib> | $<nested>=[<?before [:i':not(']><pseudo>] | <pseudo> | <bad_arg> ]+}
     rule pseudo_function:sym<negation>  {:i'not(' [ <negation_args> || <bad_args> ] ')'}
+
+}
+
+grammar CSS::Extensions::CSS3::Selectors:ver<20090929.000>
+    is  CSS::Extensions::CSS3::Selectors::Syntax {
 }
 
 class CSS::Extensions::CSS3::Selectors::Actions {

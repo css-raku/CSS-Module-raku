@@ -6,8 +6,12 @@ use v6;
 # nb this standard is under revision (as of Feb 2013). Biggest change
 # is the proposed at-rule @font-feature-values
 
-grammar CSS::Extensions::CSS3::Fonts:ver<20130212.000> {
+grammar CSS::Extensions::CSS3::Fonts::Syntax {
     rule at_rule:sym<font_face> {(:i'font-face') <declarations> }
+}
+
+grammar CSS::Extensions::CSS3::Fonts:ver<20130212.000> 
+    is CSS::Extensions::CSS3::Fonts::Syntax {
 
     # functions
     # ---------

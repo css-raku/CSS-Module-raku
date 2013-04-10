@@ -4,7 +4,7 @@ use v6;
 # - reference: http://www.w3.org/TR/2006/WD-css3-page-20061010/
 #
 
-grammar CSS::Extensions::CSS3::PagedMedia:ver<20061010.000> {
+grammar CSS::Extensions::CSS3::PagedMedia::Syntax {
 
     proto rule page-pseudo {*}
     rule page-pseudo:sym<left>    {:i'left'}
@@ -25,6 +25,13 @@ grammar CSS::Extensions::CSS3::PagedMedia:ver<20061010.000> {
     token margin-box{:i[<box-hpos>'-'[<box-vpos>['-corner']?|<box-center>]
                       |<box-vpos>'-'[<box-hpos>['-corner']?|<box-center>]]}
     rule margin-declaration { <margin-box> <declarations> }
+
+}
+
+grammar CSS::Extensions::CSS3::PagedMedia:ver<20061010.000>
+    is CSS::Extensions::CSS3::PagedMedia::Syntax {
+
+        # nothing yet
 
 }
 

@@ -21,11 +21,10 @@ suite https://github.com/w3c/css-validator.git
 
 To Do
 =====
-- Implement property grammar/actions generation (sources etc/css1-properties.txt, etc/css21-properties.txt, css3 tba)
-- ~~Complete CSS1 property vocabulary~~ (done, but hand-coded rather than generated)
+- ~~Complete CSS1 property vocabulary~~ (done)
 - Complete CSS21 property vocabulary
 - Complete CSS3 extensions vocabulary (Colors, Fonts, Namespaces, Paged-media and Selectors)
-- Integrate with W3C CSS Validator test suite
+- Testing via W3C CSS Validator test suite and/or specifications (etc/css1-prpoerties.txt, etc/css21-properties.txt)
 - Pass most of the W3C CSS Validator tests
 
 Specification Grammar
