@@ -19,6 +19,7 @@ class CSS::Language::Specification::Actions {
     }
 
     method id($/)     { make $/.Str }
+    method keyw($/)   { make $<id>.subst(/\-/, '\-'):g }
     method digits($/) { make $/.Int }
 
     method value-inst($/) {
@@ -47,16 +48,17 @@ class CSS::Language::Specification::Actions {
     method occurs:sym<once_plus>($/) { make '+' }
     method occurs:sym<zero_plus>($/) { make '*' }
     method occurs:sym<range>($/) {
-        make ' ** ' ~ $<min>.ast ~ '..' ~ $<max>.ast;
+        make '**' ~ $<min>.ast ~ '..' ~ $<max>.ast;
     }
 
-    # to do: generate function prototype
-    method value:sym<func>($/)     { make '<' ~ $<id>.ast ~ '>' }
+    method value:sym<func>($/)     {
+        make "[ '" ~ $<keyw>.ast ~ "(' <.any_args> ')' ] & <function>";
+    }
     method value:sym<inherit>($/)  { make '<inherit>' }
     method value:sym<keywords>($/) {
-        my $keywords = @$<id> > 1
-            ?? '[ ' ~ $<id>.map({$_.ast.subst(/\-/, '\-'):g}).join(' | ') ~ ' ]'
-            !! $<id>[0].ast;
+        my $keywords = @$<keyw> > 1
+            ?? '[ ' ~ $<keyw>.map({$_.ast}).join(' | ') ~ ' ]'
+            !! $<keyw>[0].ast;
 
         make $keywords ~ ' & <ident> ';
     }

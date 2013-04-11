@@ -13,17 +13,17 @@ class CSS::Extensions::CSS21::Actions
 
     method function:sym<attr>($/)             {
         return $.warning('usage: attr( attribute-name <type-or-unit>? [, <fallback> ]? )')
-            if $<bad_args>;
+            if $<any_args>;
         make {ident => 'attr', args => $.list($/)}
     }
     method function:sym<counter>($/) {
         return $.warning('usage: counter(ident [, ident [,...] ])')
-            if $<bad_args>;
+            if $<any_args>;
         make {ident => 'counter', args => $.list($/)}
     }
     method function:sym<counters>($/) {
         return $.warning('usage: counters(ident [, "string"])')
-            if $<bad_args>;
+            if $<any_args>;
         make {ident => 'counters', args => $.list($/)}
     }
 
@@ -33,7 +33,7 @@ class CSS::Extensions::CSS21::Actions
         # see http://www.w3.org/TR/2011/REC-CSS2-20110607/aural.html
 
         return $.warning('usage azimuth: <angle> | [[ left-side | far-left | left | center-left | center | center-right | right | far-right | right-side ] || behind ] | leftwards | rightwards | inherit')
-            if $<bad_args>;
+            if $<any_args>;
 
         my %ast;
         %ast<property> = $0.Str.trim.lc;
@@ -201,7 +201,7 @@ class CSS::Extensions::CSS21::Actions
         # see http://www.w3.org/TR/2011/REC-CSS2-20110607/aural.html
 
         return $.warning('usage elevation: <angle> | below | level | above | higher | lower | inherit')
-            if $<bad_args>;
+            if $<any_args>;
 
         my %ast;
         %ast<property> = $0.Str.trim.lc;

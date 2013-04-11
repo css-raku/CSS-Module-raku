@@ -38,7 +38,7 @@ class CSS::Extensions::Actions {
         my $property = $0.Str.trim.lc;
 
         return $.warning('usage ' ~ $property ~ ': ' ~ $synopsis)
-            if $<bad_args> || $<any>;
+            if $<any_args> || $<any>;
 
         my %ast;
 

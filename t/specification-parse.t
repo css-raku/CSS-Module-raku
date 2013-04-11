@@ -16,7 +16,7 @@ for (
     'property-spec' => {'input' => "'content'\tnormal | none | [ <string> | <uri> | <counter> | attr(<identifier>) | open-quote | close-quote | no-open-quote | no-close-quote ]+ | inherit",
                         ast => {
                             "content" => {"synopsis" => "normal | none | [ <string> | <uri> | <counter> | attr(<identifier>) | open-quote | close-quote | no-open-quote | no-close-quote ]+ | inherit",
-                                          "grammar" => "[ [ normal | none ] \& <ident>  | [ [ <string> | <uri> | <counter> | <attr> | [ open\\-quote | close\\-quote | no\\-open\\-quote | no\\-close\\-quote ] \& <ident>  ] ]+ | <inherit> ]"}
+                                          "grammar" => "[ [ normal | none ] \& <ident>  | [ [ <string> | <uri> | <counter> | [ 'attr(' <.any_args> ')' ] \& <function> | [ open\\-quote | close\\-quote | no\\-open\\-quote | no\\-close\\-quote ] \& <ident>  ] ]+ | <inherit> ]"}
                         },
              
     },
