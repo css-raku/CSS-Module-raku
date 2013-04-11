@@ -4,30 +4,18 @@
 # Perl 6 grammars and actions
 
 use CSS::Language::Specification;
+use CSS::Lange::Specification::Actions;
 
 # actions to generate actions stub. You'll need to pipe stdout somewhere
 
-class Actions {
-    method id($/)  { make $/.Str }
-    method prop-names($/) {
-        my @prop_names = $<prop-name>.map({$_.ast});
-        make @prop_names;
-    }
-    method property-spec($/) {
-        my $synopsis = $<synopsis>.Str;
-        my %prop_defs = $<prop-names>.map({$_.ast => {synopsis => $synopsis}});
-        make %prop_defs;
-    }
-
-}
 
 multi MAIN('gen', 'grammar', $properties_spec?, $properties_isa?) {
-    die "tba - gen grammar";
+
 }
 
 multi MAIN('gen', 'actions', $properties_spec?, $base_properties?) {
 
-    my $actions = Actions.new;
+    my $actions = CSS::Lange::Specification::Actions.new;
     my %gen_props = load_props($properties_spec, $actions);
     my %base_props = load_props($base_properties, $actions)
         if $base_properties;

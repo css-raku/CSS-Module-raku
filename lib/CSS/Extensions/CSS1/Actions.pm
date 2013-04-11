@@ -105,7 +105,7 @@ class CSS::Extensions::CSS1::Actions
 
     method background-position($/) { make $.list($/) }
     method decl:sym<background-position>($/) {
-        $._make_decl($/, '[<percentage> | <length>]{1,2} | [top | center | bottom] || [left | center | right]',
+        $._make_decl($/, '[<percentage> | <length> ]{1,2} | [top | center | bottom] || [left | center | right]',
             :body($<background-position>))
     };
 

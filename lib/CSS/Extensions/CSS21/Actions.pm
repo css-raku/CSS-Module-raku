@@ -85,9 +85,9 @@ class CSS::Extensions::CSS21::Actions
 
 # -- background-image: <uri> | none | inherit  -- inherited
 
+# -- background-position: 
     method decl:sym<background-position>($/) {
-        $._make_decl($/, q{[ [ <percentage> | <length> | left | center | right ] [ <percentage> | <length> | top | center | bottom ]? ] | [ [ left | center | right ] || [ top | center | bottom ] ] | inherit},
-                     :body($<background-position>));
+        $._make_decl($/, q{[ <percentage> | <length> | left | center | right ] || [ <percentage> | <length> | top | center | bottom ] | inherit}, :body($<background-position>));
     }
 
 # -- background-repeat: repeat | repeat-x | repeat-y | no-repeat | inherit  -- inherited

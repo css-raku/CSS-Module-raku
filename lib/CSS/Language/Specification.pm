@@ -17,26 +17,26 @@ grammar CSS::Language::Specification {
     token id { <[a..z]>[\w|\-]* }
     token digits { \d+ }
 
-    proto rule value-list {<...>}
-    rule value-list:sym<either_or> { <value><occurs>? [ ('||') <value-list> ]+ }
-    rule value-list:sym<or>        { <value><occurs>? [ ('|')  <value-list> ]+ }
-    rule value-list:sym<values>    { <value><occurs>? [ <value-list> ]* }
+    rule value-list  { <or> * }
+    rule or   { <or2> [ ('|') <or2> ]* }
+    rule or2  { <value-inst> [ ('||') <value-inst> ]* }
+    rule value-inst { <value><occurs>? }
 
     proto rule occurs {<...>}
     rule occurs:sym<maybe>      {'?'}
     rule occurs:sym<once_plus>  {'+'}
     rule occurs:sym<zero_plus>  {'*'}
-    rule occurs:sym<narity>     {'{'$<min>=\d+[','$<max>=\d+]'}'}
+    rule occurs:sym<range>      {'{'<min=.digits>[','<max=.digits>]'}'}
 
     proto rule value {<...>}
-    rule value:sym<group>       { '[' <value-list> ']' }
     rule value:sym<func>        { <id>'(' <value-list> ')' }
+    rule value:sym<inherit>     { inherit }
+    rule value:sym<keywords>    { <id> [ '|' <id> ]* }
+    rule value:sym<numbers>     { <digits> [ '|' <digits> ]* }
+    rule value:sym<group>       { '[' <value-list> ']' }
     rule value:sym<rule>        { '<'<id>'>' }
     rule value:sym<prop>        { \'<id>\' }
-    rule value:sym<inherit>     { inherit }
-    rule value:sym<keyw>        { <id> }
     rule value:sym<punc>        { ',' | '/' }
     rule quote {\'|\‘|\’}
     rule value:sym<quoted>      {<.quote>(<- quote>*)<.quote>}
-    rule value:sym<num>         { <digits> }
 }
