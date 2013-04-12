@@ -14,6 +14,7 @@ grammar CSS::Extensions::CSS1::Syntax {
 
 grammar CSS::Extensions::CSS1:ver<20080411>
  is CSS::Extensions::CSS1::Syntax {
+
     # 5.2 Font Properties
     # -------------------
     # - font-family: [[<family-name> | <generic-family>],]* [<family-name> | <generic-family>]
@@ -98,9 +99,9 @@ grammar CSS::Extensions::CSS1:ver<20080411>
     # -------------------
     # - word-spacing: normal | <length>
     # - letter-spacing: normal | <length>
-   rule decl:sym<*-spacing> {:i ([word|letter]\-spacing) ':' [
-                                  normal & <ident> | <length>
-                                  | <inherit> || <any_args> ]}
+    rule decl:sym<*-spacing> {:i ([word|letter]\-spacing) ':' [
+                                   normal & <ident> | <length>
+                                   | <inherit> || <any_args> ]}
 
     # - text-decoration: none | [ underline || overline || line-through || blink ]
     rule decl:sym<text-decoration> {:i (text\-decoration) ':' [
@@ -285,12 +286,12 @@ grammar CSS::Extensions::CSS1:ver<20080411>
     rule decl:sym<size> {:i (size) ':' [
                               <length> ** 1..2
                               |  [ auto | portrait | landscape ] & <ident>
-                                 | <inherit> || <any_args> ]}
+                              | <inherit> || <any_args> ]}
 
     # - marks: crop || cross | none
     rule decl:sym<marks> {:i (marks) ':' [
                                [ crop & <ident> ]? [ cross | none ] & <ident>
                                | crop & <ident>
-                                 | <inherit> || <any_args> ]}
+                               | <inherit> || <any_args> ]}
     
 }

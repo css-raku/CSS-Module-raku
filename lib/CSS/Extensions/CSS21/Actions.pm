@@ -61,8 +61,8 @@ class CSS::Extensions::CSS21::Actions
                     'behind'       => [180, 180],
                     );
 
-                my $keyw = $<lr>.Str.trim.lc || 'behind';
-                my $bh = $<bh>.Str ?? 1 !! 0;
+                my $keyw = $<lr>.ast || 'behind';
+                my $bh = $<behind> ?? 1 !! 0;
 
                 @expr = (angle => $.token(%angles{$keyw}[$bh], :type<angle>, :units<degrees> ));
             }
@@ -100,10 +100,7 @@ class CSS::Extensions::CSS21::Actions
         $._make_decl($/, q{collapse | separate | inherit});
     }
 
-    method decl:sym<border-color>($/) {
-        $._make_decl($/, q{[ <color> | transparent ]{1,4} | inherit},
-                     :expand<box>);
-    }
+    # -- border-color: [ <color> | transparent ]{1,4} | inherit  -- inherited
 
     method decl:sym<border-spacing>($/) {
         $._make_decl($/, q{<length> <length>? | inherit});

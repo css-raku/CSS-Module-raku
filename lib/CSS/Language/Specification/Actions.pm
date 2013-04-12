@@ -2,15 +2,24 @@ use v6;
 
 class CSS::Language::Specification::Actions {
 
-    # these actions translate a css property specification to Perl 6 grammar.
+    # these actions translate a css property specification to Perl 6
+    # rules or actions.
 
     method property-spec($/) {
-        my $synopsis = $<synopsis>.Str;
+        my @props = @($<prop-names>.ast);
+        my $sym = @props.join('|');
+        my $sym_esc = $sym.subst(/\-/, '\-'):g;
         my $grammar = $<synopsis>.ast;
-        my %prop_defs = $<prop-names>.map({$_.ast => {synopsis => $synopsis,
-                                                      grammar => $grammar,
-                                           }});
-        make %prop_defs;
+        # snick in ... || <any_args>
+        $grammar ~~ s!\s*\]\s*$! || <any_args> ]!;
+
+        my %prop_def;
+        %prop_def<sym> = $sym;
+        %prop_def<props> = @props;
+        %prop_def<grammar> = '{:i (' ~ $sym_esc ~ ") ':' " ~ $grammar ~ ' }';
+        %prop_def<synopsis> = $<synopsis>.Str;
+
+        make %prop_def;
     }
 
     method prop-names($/) {
@@ -22,6 +31,9 @@ class CSS::Language::Specification::Actions {
     method keyw($/)   { make $<id>.subst(/\-/, '\-'):g }
     method digits($/) { make $/.Int }
 
+    method values($/) {
+        make $<value-inst>.map({$_.ast}).join(' ');
+    }
     method value-inst($/) {
         my $value = $<value>.ast // '??' ~ $<value>.Str;
         $value ~= $<occurs>[0].ast
@@ -30,18 +42,18 @@ class CSS::Language::Specification::Actions {
         make $value;
     }
 
-    method value-list($/) {
-        make $<or>.map({$_.ast}).join(' ');
+    method terms($/) {
+        make $<list>.map({$_.ast}).join(' ');
     }
 
-    method or($/) {
-        return make @$<or2>[0].ast unless @$<or2> > 1;
-        make '[ ' ~ $<or2>.map({$_.ast}).join(' | ') ~ ' ]';
+    method list($/) {
+        return make @$<either_or>[0].ast unless @$<either_or> > 1;
+        make '[ ' ~ $<either_or>.map({$_.ast}).join(' | ') ~ ' ]';
     }
 
-    method or2($/) {
-        return make $<value-inst>[0].ast unless @$<value-inst> > 1;
-        make '[ ' ~ $<value-inst>.map({$_.ast}).join(' | ') ~ ' ]+';
+    method either_or($/) {
+        return make $<values>[0].ast unless @$<values> > 1;
+        make '[ ' ~ $<values>.map({$_.ast}).join(' | ') ~ ' ]+';
     }
 
     method occurs:sym<maybe>($/)     { make '?' }
@@ -52,7 +64,7 @@ class CSS::Language::Specification::Actions {
     }
 
     method value:sym<func>($/)     {
-        make "[ '" ~ $<keyw>.ast ~ "(' <.any_args> ')' ] & <function>";
+        make "<?before '" ~ $<keyw>.ast ~ "('><function>";
     }
     method value:sym<inherit>($/)  { make '<inherit>' }
     method value:sym<keywords>($/) {
@@ -70,7 +82,7 @@ class CSS::Language::Specification::Actions {
         make $keywords ~ ' & <num> ';
     }
     method value:sym<group>($/) {
-        my $val = $<value-list>.ast;
+        my $val = $<terms>.ast;
         make '[ ' ~ $val ~ ' ]';
     }
     method value:sym<rule>($/)   { make '<' ~ $<id>.ast ~ '>' }

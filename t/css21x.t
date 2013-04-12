@@ -38,7 +38,11 @@ for (
     },
     decl => {input => 'background-position : 100% 90%', ast => {"property" => "background-position", "expr" => [["percentage" => 100, "percentage" => 90]]},
     },
-    ) {
+    decl => {input => 'border-collapse: separate',   ast => {property => 'border-collapse', expr => [ident => 'separate']},
+    },
+    decl => {input => 'border-spacing: 3em',   ast => {property => 'border-spacing', expr => [length => 3]},
+    },
+   ) {
 
     my $rule = $_.key;
     my %test = $_.value;
