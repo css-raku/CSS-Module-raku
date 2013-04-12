@@ -14,25 +14,25 @@ grammar CSS::Extensions::CSS3::Colors::Syntax {
 
     # <rgb> and <hex> are defined in CSS core grammar
     rule color:sym<rgba> {:i'rgba('
-                   [$<ok>=[<r=.color-range> ','
-                   <g=.color-range> ','
-                   <b=.color-range> ','
-                   <a=.color_alpha>] | <any>*]
+                              [ <r=.color-range> ','
+                                <g=.color-range> ','
+                                <b=.color-range> ','
+                                <a=.color_alpha> || <any_args> ]
                    ')'
     }
 
     rule color:sym<hsl> {:i'hsl('
-                   [$<ok>=[<h=.color_angle> ','
-                   <s=.color_alpha> ','
-                   <l=.color_alpha>] | <any>*]
-                   ')'
+                             [ <h=.color_angle> ','
+                               <s=.color_alpha> ','
+                               <l=.color_alpha> || <any_args> ]
+                    ')'
     }
 
     rule color:sym<hsla> {:i'hsla('
-                   [$<ok>=[<h=.color_angle> ','
-                   <s=.color_alpha> ','
-                   <l=.color_alpha> ','
-                   <a=.color_alpha>] | <any>*]
+                              [ <h=.color_angle> ','
+                                <s=.color_alpha> ','
+                                <l=.color_alpha> ','
+                                <a=.color_alpha> || <any_args> ]
                    ')'
     }
 
@@ -63,17 +63,17 @@ class CSS::Extensions::CSS3::Colors::Actions {
 
     method color:sym<rgba>($/) {
         return $.warning('usage: rgba(c,c,c,a) where c is 0..255 or 0%-100% and a is 0-1 or 0%-100%')
-            unless $<ok>;
+            if $<any_args>;
         make $.token($.node($/), :type<color>, :units<rgba>);
     }
     method color:sym<hsl>($/)  {
         return $.warning('usage: hsl(h,s,l) where h is 0..360  and s,l are 0-1 or 0%-100%')
-            unless $<ok>;
+            if $<any_args>;
         make $.token($.node($/), :type<color>, :units<hsl>);
     }
     method color:sym<hsla>($/) {
         return $.warning('usage: hsla(h,s,l,a) where h is 0..360  and s,l,a are 0-1 or 0%-100%')
-            unless $<ok>;
+            if $<any_args>;
         make $.token($.node($/), :type<color>, :units<hsla>);
     }
 }

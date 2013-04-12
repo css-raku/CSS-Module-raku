@@ -24,9 +24,16 @@ module t::AST {
                 if @warnings;
         }
         else {
-            my @expected_warnings = %expected<warnings> // ();
-            is(@warnings, @expected_warnings,
-               @expected_warnings ?? "{$suite} warnings" !! "{$suite} no warnings");
+            if %expected<warnings>.isa('Regex') {
+                my @matched = @warnings.grep({$_.match( %expected<warnings> )});
+                ok( @matched, "{$suite} warnings")
+                    or diag @warnings;
+            }
+            else {
+                my @expected_warnings = %expected<warnings> // ();
+                is(@warnings, @expected_warnings,
+                   @expected_warnings ?? "{$suite} warnings" !! "{$suite} no warnings");
+            }
         }
 
         if defined (my $ast = %expected<ast>) {
