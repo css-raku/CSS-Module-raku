@@ -1,26 +1,34 @@
 #!perl6
 
-# quick and dirty script to translate w3c property definitions to
-# Perl 6 grammars and actions
+# quick script to translate w3c property definitions to draft
+# Perl 6 grammars and actions.
+#
+# it was used to generatate the initial draft grammar and actions for
+# CSS::Language:CSS1 and CSS::Language:CSS21 etc. These have since been
+# hand-tailored.
+#
+# Example usage: perl6 etc/gen-properties.pl gen grammar etc/css21-properties.txt etc/css1-properties.txt > /tmp/css21-grammar.pm
+#
 
 use CSS::Language::Specification;
-use CSS::Lange::Specification::Actions;
+use CSS::Language::Specification::Actions;
 
 # actions to generate actions stub. You'll need to pipe stdout somewhere
 
+multi MAIN('gen', 'grammar', $properties_spec?, $base_properties?) {
 
-multi MAIN('gen', 'grammar', $properties_spec?, $properties_isa?) {
+    my $actions = CSS::Language::Specification::Actions.new;
+    my %props = load_props($properties_spec, $actions);
+    generate_perl6_rules(%props);
 
 }
 
 multi MAIN('gen', 'actions', $properties_spec?, $base_properties?) {
 
-    my $actions = CSS::Lange::Specification::Actions.new;
-    my %gen_props = load_props($properties_spec, $actions);
-    my %base_props = load_props($base_properties, $actions)
-        if $base_properties;
+    my $actions = CSS::Language::Specification::Actions.new;
+    my %props = load_props($properties_spec, $actions);
 
-    generate_perl6_actions(%gen_props, %base_props);
+    generate_perl6_actions(%props);
 }
 
 sub load_props ($properties_spec, $actions?) {
@@ -30,38 +38,50 @@ sub load_props ($properties_spec, $actions?) {
 
     for $fh.lines {
         my $/ = CSS::Language::Specification.parse($_, :rule('property-spec'), :actions($actions) );
-        my %prop = $/.ast;
+        my %prop_details = $/.ast;
+        my $prop_names = %prop_details.delete('props');
 
-        for %prop.kv -> $k,$v {
-            note "prop $k -> $v";
-            %props{$k} = $v;
+        for @$prop_names -> $prop_name {
+            note "prop $prop_name";
+            %props{ $prop_name } = %prop_details;
         }
     }
 
     return %props;
 }
 
-sub generate_perl6_actions(%gen_props,%base_props) {
+sub generate_perl6_rules(%gen_props) {
+
+    my %seen;
 
     for %gen_props.kv -> $prop, $def {
 
-        my $synopsis = $def<synopsis>;
-        my $cmp_synopsis = $synopsis.subst(/\s*\|\s*inherit\s*$/,'');
-        warn "$prop synopsis: $cmp_synopsis";
-        warn "base synopsis:" ~ %base_props{$prop}<synopsis>
-            if %base_props.exists($prop);
+        my $sym = $def<sym>;
+        next if %seen{$sym}++;
 
-        my $inherit = %base_props.exists($prop)
-            && %base_props{$prop}<synopsis> eq $cmp_synopsis;
+        my $synopsis = $def<synopsis>;
+        my $grammar = $def<grammar>;
 
         say;
-        if $inherit {
-            say "# -- $prop: $synopsis  -- inherited";
-        }
-        else {
-            say "    method decl:sym<{$prop}>(\$/) \{";
-            say "        \$._make_decl(\$/, q\{" ~ $synopsis ~ "\});";
-            say "    \}";
-        }
+        say "    # - $sym: $synopsis";
+        say "    rule decl:sym<{$sym}> $grammar";
+    }
+}
+
+sub generate_perl6_actions(%gen_props) {
+
+    my %seen;
+
+    for %gen_props.kv -> $prop, $def {
+
+        my $sym = $def<sym>;
+        next if %seen{$sym}++;
+
+        my $synopsis = $def<synopsis>;
+
+        say;
+        say "    method decl:sym<{$sym}>(\$/) \{";
+        say "        \$._make_decl(\$/, q\{" ~ $synopsis ~ "\});";
+        say "    \}";
     }
 }
