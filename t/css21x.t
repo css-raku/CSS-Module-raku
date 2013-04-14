@@ -42,6 +42,12 @@ for (
     },
     decl => {input => 'border-spacing: 3em',   ast => {property => 'border-spacing', expr => [length => 3]},
     },
+    decl => {input => 'border-bottom:thick dotted red',
+             ast => {"property" => "border-bottom",
+                     "expr" => ["border-width" => ["ident" => "thick"],
+                                "border-style" => ["ident" => "dotted"],
+                                "border-color" => ["color" => {"r" => 255, "g" => 0, "b" => 0}]]},
+    },
    ) {
 
     my $rule = $_.key;

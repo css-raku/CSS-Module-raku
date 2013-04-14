@@ -10,8 +10,9 @@ use CSS::Extensions::CSS3::Media;
 use CSS::Extensions::CSS3::Namespaces;
 use CSS::Extensions::CSS3::PagedMedia;
 use CSS::Extensions::CSS3::Selectors;
-use CSS::Extensions::CSS21;
-use CSS::Extensions::CSS21::Actions;
+
+use CSS::Language::CSS21;
+use CSS::Language::Actions;
 
 grammar CSS::Extensions::CSS3
     is CSS::Extensions::CSS3::Colors
@@ -20,7 +21,7 @@ grammar CSS::Extensions::CSS3
     is CSS::Extensions::CSS3::Namespaces
     is CSS::Extensions::CSS3::PagedMedia
     is CSS::Extensions::CSS3::Selectors
-    is CSS::Extensions::CSS21
+    is CSS::Language::CSS21
 {};
 
 class CSS::Extensions::CSS3::Actions
@@ -30,5 +31,5 @@ class CSS::Extensions::CSS3::Actions
     is CSS::Extensions::CSS3::Namespaces::Actions
     is CSS::Extensions::CSS3::PagedMedia::Actions
     is CSS::Extensions::CSS3::Selectors::Actions
-    is CSS::Extensions::CSS21::Actions
+    is CSS::Language::Actions
 {};

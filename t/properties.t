@@ -2,12 +2,17 @@
 
 use Test;
 
-use CSS::Language::CSS1;
 use CSS::Language::CSS1::Actions;
+use CSS::Language::CSS1;
+
+##use CSS::Language::CSS21::Actions;
+##use CSS::Language::CSS21;
+
 use lib '.';
 use t::AST;
 
-my $css_actions = CSS::Language::CSS1::Actions.new;
+my $css1_actions = CSS::Language::CSS1::Actions.new;
+##my $css21_actions = CSS::Language::CSS21::Actions.new;
 
 my %seen;
 
@@ -165,11 +170,11 @@ for (
                          {"property" => "margin-bottom", "expr" => "length" => 1.2},
                          {"property" => "margin-left", "expr" => "length" => 1.5}]}
     },
-    {prop => 'margin', decl => 'inherit',
-             ast => {"property_list" => [
-                         {"property" => "margin", inherit => True},
-                         ]},
-    },
+##    {prop => 'margin', decl => 'inherit',
+##             ast => {"property_list" => [
+##                         {"property" => "margin", inherit => True},
+##                         ]},
+##    },
     {prop => 'size', decl => '3ex', ast => {"property" => "size",
                                              "expr" => ["length" => 3]},
     },
@@ -217,22 +222,37 @@ for (
     my $prop = %test<prop>;
     my $input = $prop ~ ':' ~ %test<decl>;
 
-    $css_actions.reset;
-     my $p = CSS::Language::CSS1.parse( $input, :rule('decl'), :actions($css_actions));
-    t::AST::parse_tests($input, $p, :rule('decl'), :suite('css1'),
-                         :warnings($css_actions.warnings),
+    $css1_actions.reset;
+     my $p1 = CSS::Language::CSS1.parse( $input, :rule('decl'), :actions($css1_actions));
+    t::AST::parse_tests($input, $p1, :rule('decl'), :suite('css1'),
+                         :warnings($css1_actions.warnings),
                          :expected(%test) );
+
+##    $css21_actions.reset;
+##    my $p21 = CSS::Language::CSS21.parse( $input, :rule('decl'), :actions($css21_actions));
+##    t::AST::parse_tests($input, $p21, :rule('decl'), :suite('css21'),
+##                         :warnings($css21_actions.warnings),
+##                         :expected(%test) );
 
     unless %seen{$prop}++ {
 
         my $junk = $prop ~ ': junk 42';
-        $css_actions.reset;
-        $p = CSS::Language::CSS1.parse( $junk, :rule('decl'), :actions($css_actions));
-        is($p.Str, $junk, "$prop: able to parse unexpected input");
 
-        ok($css_actions.warnings.grep({/^usage:/}), "$prop : unexpected input produces warning")
-            or diag $css_actions.warnings;
+        $css1_actions.reset;
+        $p1 = CSS::Language::CSS1.parse( $junk, :rule('decl'), :actions($css1_actions));
+        is($p1.Str, $junk, "$prop: able to parse unexpected input");
+
+        ok($css1_actions.warnings.grep({/^usage:/}), "$prop : unexpected input produces warning")
+            or diag $css1_actions.warnings;
+
+##        $css21_actions.reset;
+##        $p21 = CSS::Language::CSS21.parse( $junk, :rule('decl'), :actions($css21_actions));
+##        is($p21.Str, $junk, "$prop: able to parse unexpected input");
+
+##        ok($css21_actions.warnings.grep({/^usage:/}), "$prop : unexpected input produces warning")
+##            or diag $css21_actions.warnings;
     }
+
 }
 
 done;

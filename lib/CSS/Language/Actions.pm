@@ -1,6 +1,9 @@
 use v6;
 
-class CSS::Extensions::Actions {
+use CSS::Grammar::Actions;
+
+class CSS::Language::Actions
+    is CSS::Grammar::Actions {
 
     has Bool $.strict is rw = True;
 
@@ -110,5 +113,46 @@ class CSS::Extensions::Actions {
 
         make %ast;
     }
+
+    #---- Language Extensions ----#
+
+    method length:sym<num>($/) {
+        my $num = $<num>.ast;
+
+        return $.warning('number not followed by a length unit', $<num>.Str)
+            if $num && $.strict;
+
+        make $.token($num, :type<length>, :units<px>)
+    }
+
+    method named-color($/) {
+        state %colors = (
+            black   => [   0,   0,   0 ],
+            silver  => [ 192, 192, 192 ],
+            gray    => [ 128, 128, 128 ],
+            white   => [ 255, 255, 255 ],
+            maroon  => [ 128,   0,   0 ],
+            red     => [ 255,   0,   0 ],
+            purple  => [ 128,   0, 128 ],
+            fuchsia => [ 255,   0, 255 ],
+            green   => [   0, 128,   0 ],
+            lime    => [   0, 255,   0 ],
+            olive   => [ 128, 128,   0 ],
+            yellow  => [ 255, 255,   0 ],
+            navy    => [   0,   0, 128 ],
+            blue    => [   0,   0, 255 ],
+            teal    => [   0, 128, 128 ],
+            aqua    => [   0, 255, 255 ],
+            );
+
+        my $color_name = $<ident>.ast;
+        my $color = %colors{$color_name}
+        or die  "unknown color: " ~ $color_name;
+
+        my %rgb; %rgb<r g b> = @$color;
+        make $.token(%rgb, :type<color>, :units<rgb>);
+    }
+
+    method color:sym<named>($/) { make $<named-color>.ast }
 
 }

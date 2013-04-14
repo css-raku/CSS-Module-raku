@@ -15,7 +15,7 @@ for (
                     ast => Mu,
     },
     declaration => {input => 'background-attachment: crud',
-                    warnings => 'usage background-attachment: scroll | fixed | inherit',
+                    warnings => 'usage background-attachment: scroll | fixed',
     },
     declaration => {input => 'background-attachment: FiXed',   ast => {property => 'background-attachment', expr => [ident => 'fixed']},
     },

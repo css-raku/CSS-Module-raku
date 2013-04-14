@@ -27,8 +27,8 @@ grammar CSS::Language::Specification {
     token digits { \d+ }
 
     rule terms       { <list>* }
-    rule list        { <either_or> [ '|' <either_or> ]* }
-    rule either_or   { <values> [ '||' <values> ]* }
+    rule list        { <either-or> [ '|' <either-or> ]* }
+    rule either-or   { <values> [ '||' <values> ]* }
     rule values      { <value-inst>+ }
     rule value-inst  { <value><occurs>? }
 
@@ -45,9 +45,8 @@ grammar CSS::Language::Specification {
     rule value:sym<numbers>     { <digits> [ '|' <digits> ]* }
     rule value:sym<group>       { '[' <terms> ']' }
     rule value:sym<rule>        { '<'<id>'>' }
-    rule value:sym<prop>        { \'<id>\' }
     rule value:sym<punc>        { ',' | '/' }
     rule quote {\'|\‘|\’}
-    rule value:sym<quoted>      {<.quote>(<- quote>*)<.quote>}
+    rule value:sym<quoted>      {<.quote>[<property-ref=id> || (<- quote>*)]<.quote>}
 
 }

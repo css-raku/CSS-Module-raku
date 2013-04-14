@@ -35,10 +35,9 @@ class CSS::Language::Specification::Actions {
         make $<value-inst>.map({$_.ast}).join(' ');
     }
     method value-inst($/) {
-        my $value = $<value>.ast // '??' ~ $<value>.Str;
+        my $value = $<value>.ast;
         $value ~= $<occurs>[0].ast
             if $<occurs>;
-
         make $value;
     }
 
@@ -47,13 +46,21 @@ class CSS::Language::Specification::Actions {
     }
 
     method list($/) {
-        return make @$<either_or>[0].ast unless @$<either_or> > 1;
-        make '[ ' ~ $<either_or>.map({$_.ast}).join(' | ') ~ ' ]';
+        my $choices = @$<either-or>.Int;
+        return make @$<either-or>[0].ast
+            unless $choices > 1;
+        # a || b || c represents combinations of a, b and c
+        # This production is a slightly more liberal approximation
+        # it allows elements to be repeated
+        
+        make '[ ' ~ $<either-or>.map({$_.ast}).join(' | ') ~ ' ]';
     }
 
-    method either_or($/) {
-        return make $<values>[0].ast unless @$<values> > 1;
-        make '[ ' ~ $<values>.map({$_.ast}).join(' | ') ~ ' ]+';
+    method either-or($/) {
+        my $choices = @$<values>.Int;
+      return make $<values>[0].ast
+          unless $choices > 1;
+        make '[ ' ~ $<values>.map({$_.ast}).join(' | ') ~ ' ]**1..' ~ $choices;
     }
 
     method occurs:sym<maybe>($/)     { make '?' }
@@ -85,10 +92,15 @@ class CSS::Language::Specification::Actions {
         my $val = $<terms>.ast;
         make '[ ' ~ $val ~ ' ]';
     }
-    method value:sym<rule>($/)   { make '<' ~ $<id>.ast ~ '>' }
-    method value:sym<prop>($/)   { make '<' ~ $<id>.ast ~ '>' }
-    method value:sym<punc>($/)   { make "'" ~ $/.Str ~ "'" }
-    method value:sym<quoted>($/) { make "'" ~ $0.Str ~ "'" }
-    method value:sym<num>($/)    { make $/.Str }
-    method value:sym<keyw>($/)   { make $/.Str }
+    method value:sym<rule>($/)     { make '<' ~ $<id>.ast ~ '>' }
+
+    method value:sym<punc>($/)     { make "'" ~ $/.Str ~ "'" }
+    method value:sym<quoted>($/)   {
+        make $<property-ref>
+            ?? '<' ~ $<property-ref>.ast ~ '>'
+            !! "'" ~ $0.Str ~ "'"
+    }
+            
+    method value:sym<num>($/)      { make $/.Str }
+    method value:sym<keyw>($/)     { make $/.Str }
 }
