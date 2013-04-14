@@ -5,14 +5,14 @@ use Test;
 use CSS::Language::CSS1::Actions;
 use CSS::Language::CSS1;
 
-##use CSS::Language::CSS21::Actions;
-##use CSS::Language::CSS21;
+use CSS::Language::CSS21::Actions;
+use CSS::Language::CSS21;
 
 use lib '.';
 use t::AST;
 
 my $css1_actions = CSS::Language::CSS1::Actions.new;
-##my $css21_actions = CSS::Language::CSS21::Actions.new;
+my $css21_actions = CSS::Language::CSS21::Actions.new;
 
 my %seen;
 
@@ -28,33 +28,30 @@ for (
     {prop => 'background-position ', decl => '100% 90%', ast => {"property" => "background-position", "expr" => ["percentage" => 100, "percentage" => 90]},
     },
     {prop => 'background', decl => 'url(chess.png) gray 50% repeat scroll', 
-             ast => {"property_list" => [
-                         {"property" => "background"},
-                         {"property" => "background-image", "expr" => ["url" => "chess.png"]},
-                         {"property" => "background-color", "expr" => ["color" => {"r" => 128, "g" => 128, "b" => 128}]},
-                         {"property" => "background-position", "expr" => ["percentage" => 50]},
-                         {"property" => "background-repeat", "expr" => ["ident" => "repeat"]},
-                         {"property" => "background-attachment", "expr" => ["ident" => "scroll"]}]},
+             ast => {"property" => "background",
+                     "expr" => ["background-image" => ["url" => "chess.png"],
+                                "background-color" => ["color" => {"r" => 128, "g" => 128, "b" => 128}],
+                                "background-position" => ["percentage" => 50e0],
+                                "background-repeat" => ["ident" => "repeat"],
+                                "background-attachment" => ["ident" => "scroll"]]},
     },
     {prop => 'border-top-width', decl => 'thick',
              ast => {"property" => "border-top-width",
                      "expr" => ["ident" => "thick"]}
     },
     {prop => 'border-width', decl => '2ex 1.5em 3ex 2em',
-             ast => {"property_list" => [
-                         {"property" => "border-width"},
-                         {"property" => "border-width-top", "expr" => "length" => 2},
-                         {"property" => "border-width-right", "expr" => "length" => 1.5},
-                         {"property" => "border-width-bottom", "expr" => "length" => 3},
-                         {"property" => "border-width-left", "expr" => "length" => 2}]},
+             ast => {"property" => "border-width",
+                     "expr" => ["border-width-top" => ["length" => 2e0],
+                                "border-width-right" => ["length" => 1.5e0],
+                                "border-width-bottom" => ["length" => 3e0],
+                                "border-width-left" => ["length" => 2e0]]},
     },
     {prop => 'border-color', decl => '#a7f #aa77ff rgb(100,150,20) aqua',
-             ast => {"property_list" => [
-                         {"property" => "border-color"},
-                         {"property" => "border-color-top", "expr" => "color" => {"r" => 170, "g" => 119, "b" => 255}},
-                         {"property" => "border-color-right", "expr" => "color" => {"r" => 170, "g" => 119, "b" => 255}},
-                         {"property" => "border-color-bottom", "expr" => "color" => {"r" => 100, "g" => 150, "b" => 20}},
-                         {"property" => "border-color-left", "expr" => "color" => {"r" => 0, "g" => 255, "b" => 255}}]},
+             ast => {"property" => "border-color", 
+                     "expr" => ["border-color-top" => ["color" => {"r" => 170, "g" => 119, "b" => 255}],
+                                "border-color-right" => ["color" => {"r" => 170, "g" => 119, "b" => 255}],
+                                "border-color-bottom" => ["color" => {"r" => 100e0, "g" => 150e0, "b" => 20e0}],
+                                "border-color-left" => ["color" => {"r" => 0, "g" => 255, "b" => 255}]]},
     },
     {prop => 'border-style', decl => 'groove', ast => {"property" => "border-style",
                                                       "expr" => ["ident" => "groove"]},
@@ -81,7 +78,7 @@ for (
     },
     {prop => 'font-weight', decl => 'bolder', ast => {"property" => "font-weight", expr => ["ident" => 'bolder']},
     },
-    {prop => 'font-weight', decl => '800', ast => {"property" => "font-weight", expr => ["num" => '800']},
+    {prop => 'font-weight', decl => '800', ast => {"property" => "font-weight", expr => ["number" => '800']},
     },
     {prop => 'font-size', decl => '12pt', ast => {"property" => "font-size", expr => [length => '12']},
     },
@@ -90,20 +87,18 @@ for (
     {prop => 'font-size', decl => 'Larger', ast => {"property" => "font-size", expr => [relative-size => 'larger']},
     },
     {prop => 'font', decl => '12pt/14pt sans-serif',
-             ast => {"property_list" => [
-                         {"property" => "font"},
-                         {"property" => "font-size", "expr" => ["length" => 12]},
-                         {"property" => "line-height", "expr" => ["length" => 14]},
-                         {"property" => "font-family", "expr" => ["generic-family" => "sans-serif"]}]},
+             ast => {"property" => "font",
+                     "expr" => ["font-size" => ["length" => 12e0],
+                                "line-height" => ["length" => 14e0],
+                                "font-family" => ["generic-family" => "sans-serif"]]},
     },
     {prop => 'font', decl => 'normal small-caps 120%/120% fantasy',
-             ast => {"property_list" => [
-                         {"property" => "font"},
-                         {"property" => "font-style", "expr" => "normal"},
-                         {"property" => "font-variant", "expr" => "small-caps"},
-                         {"property" => "font-size", "expr" => ["percentage" => 120]},
-                         {"property" => "line-height", "expr" => ["percentage" => 120]},
-                         {"property" => "font-family", "expr" => ["generic-family" => "fantasy"]}]},
+             ast => {"property" => "font",
+                     "expr" => ["font-style" => "normal",
+                                "font-variant" => "small-caps",
+                                "font-size" => ["percentage" => 120e0],
+                                "line-height" => ["percentage" => 120e0],
+                                "font-family" => ["generic-family" => "fantasy"]]},
     },
     {prop => 'letter-spacing', decl => 'normal',
              ast => {"property" => "letter-spacing",
@@ -119,19 +114,17 @@ for (
     },
     {prop => 'list-style-image', decl => 'url(snoopy.png)',
              ast => {"property" => "list-style-image",
-                     "expr" => ["url" => "snoopy.png"]},
+                     "expr" => ["uri" => "snoopy.png"]},
     },
     {prop => 'list-style-position', decl => 'outside',
              ast => {"property" => "list-style-position",
                      "expr" => [ident => 'outside']},
     },
     {prop => 'list-style', decl => 'url(http://png.com/ellipse.png) disc outside',
-             ast => {"property_list" => [
-                         {"property" => "list-style"},
-                         {"property" => "list-style-image", "expr" => ["url" => "http://png.com/ellipse.png"]},
-                         {"property" => "list-style-type", "expr" => ["ident" => "disc"]},
-                         {"property" => "list-style-position", "expr" => ["ident" => "outside"]},
-                         ]},
+             ast => {"property" => "list-style",
+                     "expr" => ["list-style-image" => ["uri" => "http://png.com/ellipse.png"],
+                                "list-style-type" => ["ident" => "disc"],
+                                "list-style-position" => ["ident" => "outside"]]},
     },
     {prop => 'overflow', decl => 'scroll', ast => {"property" => "overflow",
                                                  "expr" => ["ident" => "scroll"]},
@@ -140,9 +133,6 @@ for (
              ast => {"property" => "padding-bottom",
                      "expr" => ["length" => 2]}
     },
-    {prop => 'page-break-after', decl => 'auto', ast => {"property" => "page-break-after",
-                                             "expr" => ["ident" => "auto"]},
-    },
     {prop => 'position', decl => 'absolute', ast => {"property" => "position",
                                              "expr" => ["ident" => "absolute"]},
     },
@@ -150,33 +140,19 @@ for (
              ast => {"property" => "margin-top",
                      "expr" => ["length" => 1.25]}
     },
-    {prop => 'marks', decl => 'crop', ast => {"property" => "marks",
-                                             "expr" => ["ident" => "crop"]},
-    },
     {prop => 'margin', decl => '1.2ex 1.5em 125% 0',
-             ast => {property_list => [
-                         {"property" => "margin"},
-                         {"property" => "margin-top", "expr" => "length" => 1.2},
-                         {"property" => "margin-right", "expr" => "length" => 1.5},
-                         {"property" => "margin-bottom", "expr" => "percentage" => 125},
-                         {"property" => "margin-left", "expr" => "length" => 0}],
-             }
+             ast => {"property" => "margin",
+                     "expr" => ["margin-top" => ["length" => 1.2e0],
+                                "margin-right" => ["length" => 1.5e0],
+                                "margin-bottom" => ["percentage" => 125e0],
+                                "margin-left" => ["length" => 0e0]]},
     },
     {prop => 'margin', decl => '1.2ex 1.5em',
-             ast => {"property_list" => [
-                         {"property" => "margin"},
-                         {"property" => "margin-top", "expr" => "length" => 1.2},
-                         {"property" => "margin-right", "expr" => "length" => 1.5},
-                         {"property" => "margin-bottom", "expr" => "length" => 1.2},
-                         {"property" => "margin-left", "expr" => "length" => 1.5}]}
-    },
-##    {prop => 'margin', decl => 'inherit',
-##             ast => {"property_list" => [
-##                         {"property" => "margin", inherit => True},
-##                         ]},
-##    },
-    {prop => 'size', decl => '3ex', ast => {"property" => "size",
-                                             "expr" => ["length" => 3]},
+             ast => {"property" => "margin",
+                     "expr" => ["margin-top" => ["length" => 1.2e0],
+                                "margin-right" => ["length" => 1.5e0],
+                                "margin-bottom" => ["length" => 1.2e0],
+                                "margin-left" => ["length" => 1.5e0]]}
     },
     {prop => 'text-decoration', decl => 'Underline',
              ast => {"property" => "text-decoration",
@@ -209,9 +185,6 @@ for (
     {prop => 'white-space', decl => 'nowrap', ast => {"property" => "white-space",
                                              "expr" => ["ident" => "nowrap"]},
     },
-    {prop => 'visibility', decl => 'hidden', ast => {"property" => "visibility",
-                                             "expr" => ["ident" => "hidden"]},
-    },
     {prop => 'z-index', decl => '3', ast => {"property" => "z-index",
                                              "expr" => ["integer" => 3]},
     },
@@ -228,11 +201,11 @@ for (
                          :warnings($css1_actions.warnings),
                          :expected(%test) );
 
-##    $css21_actions.reset;
-##    my $p21 = CSS::Language::CSS21.parse( $input, :rule('decl'), :actions($css21_actions));
-##    t::AST::parse_tests($input, $p21, :rule('decl'), :suite('css21'),
-##                         :warnings($css21_actions.warnings),
-##                         :expected(%test) );
+    $css21_actions.reset;
+    my $p21 = CSS::Language::CSS21.parse( $input, :rule('decl'), :actions($css21_actions));
+    t::AST::parse_tests($input, $p21, :rule('decl'), :suite('css21'),
+                         :warnings($css21_actions.warnings),
+                         :expected(%test) );
 
     unless %seen{$prop}++ {
 
@@ -245,12 +218,12 @@ for (
         ok($css1_actions.warnings.grep({/^usage:/}), "$prop : unexpected input produces warning")
             or diag $css1_actions.warnings;
 
-##        $css21_actions.reset;
-##        $p21 = CSS::Language::CSS21.parse( $junk, :rule('decl'), :actions($css21_actions));
-##        is($p21.Str, $junk, "$prop: able to parse unexpected input");
+        $css21_actions.reset;
+        $p21 = CSS::Language::CSS21.parse( $junk, :rule('decl'), :actions($css21_actions));
+        is($p21.Str, $junk, "$prop: able to parse unexpected input");
 
-##        ok($css21_actions.warnings.grep({/^usage:/}), "$prop : unexpected input produces warning")
-##            or diag $css21_actions.warnings;
+        ok($css21_actions.warnings.grep({/^usage:/}), "$prop : unexpected input produces warning")
+            or diag $css21_actions.warnings;
     }
 
 }

@@ -14,6 +14,10 @@ grammar CSS::Language::CSS1:ver<20080411>
     token named-color {:i [aqua | black | blue | fuchsia | gray | green | lime | maroon | navy | olive | purple | red | silver | teal | white | yellow] & <ident> }
     rule color:sym<named> {<named-color>}
 
+    token integer {[\+|\-]?\d+}
+    token number  {<num>}
+    token uri     {<url>}
+
     # 5.2 Font Properties
     # -------------------
     # - font-family: [[<family-name> | <generic-family>],]* [<family-name> | <generic-family>]
@@ -31,7 +35,7 @@ grammar CSS::Language::CSS1:ver<20080411>
                                                           || <any_args> ] }
    # - font-weight: normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
     token font-weight {:i [ normal | bold | bolder | lighter ] & <ident>
-                           | [ 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 ] & <num> }
+                           | [ 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 ] & <number> }
     rule decl:sym<font-weight> {:i (font\-weight) ':' [ <font-weight>
                                                         || <any_args> ] }
 
@@ -100,7 +104,6 @@ grammar CSS::Language::CSS1:ver<20080411>
     rule decl:sym<text-decoration> {:i (text\-decoration) ':' [
                                          none & <ident>
                                          | [[ underline | overline | line\-through | blink ] & <ident> ]+
-
                                          || <any_args> ]}
     # - vertical-align: baseline | sub | super | top | text-top | middle | bottom | text-bottom | <percentage>
     rule decl:sym<vertical-align> {:i (vertical\-align) ':' [
@@ -125,7 +128,7 @@ grammar CSS::Language::CSS1:ver<20080411>
                                      || <any_args> ]}
 
     # - line-height: normal | <number> | <length> | <percentage>
-    token line-height {:i normal & <ident> | <num> | <length> | <percentage> }
+    token line-height {:i normal & <ident> | <number> | <length> | <percentage> }
     rule decl:sym<line-height> {:i (line\-height) ':' [ <line-height>
                                       || <any_args> ]}
 
@@ -230,7 +233,7 @@ grammar CSS::Language::CSS1:ver<20080411>
                                          || <any_args> ]}
 
     # - list-style-image: <url> | none
-    token list-style-image {:i  <url> | none & <ident> }
+    token list-style-image {:i  <uri> | none & <ident> }
     rule decl:sym<list-style-image> {:i (list\-style\-image) ':' [
                                           <list-style-image>
                                           || <any_args> ]}
@@ -257,32 +260,7 @@ grammar CSS::Language::CSS1:ver<20080411>
                                   || <any_args> ]}
 
     # - z-index: auto | <integer>
-    token integer {[\+|\-]?\d+}
     rule decl:sym<z-index> {:i (z\-index) ':' [
                                  <integer>
-                                 || <any_args> ]}
-   
-    # - visibility: visible | hidden
-    rule decl:sym<visibility> {:i (visibility) ':' [
-                                    [ visible | hidden ] & <ident>
-                                    || <any_args> ]}
-    
-    # - page-break-before: auto | allways | left | right
-    # - page-break-after: auto | allways | left | right
-    rule decl:sym<page-break-*> {:i (page\-break\-[before|after]) ':' [
-                                      [  auto | allways | left | right ] & <ident>
-                                      || <any_args> ]}
-    
-    # - size: <length>{1,2} | auto | portrait | landscape
-    rule decl:sym<size> {:i (size) ':' [
-                              <length> ** 1..2
-                              |  [ auto | portrait | landscape ] & <ident>
-                              || <any_args> ]}
-
-    # - marks: crop || cross | none
-    rule decl:sym<marks> {:i (marks) ':' [
-                               [ crop & <ident> ]? [ cross | none ] & <ident>
-                               | crop & <ident>
-                               || <any_args> ]}
-    
+                                 || <any_args> ]}    
 }

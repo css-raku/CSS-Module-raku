@@ -19,12 +19,7 @@ class CSS::Language::Actions
 
         if (my $prio = $<prio> && $<prio>[0].ast) {
             # mark !important declarations
-            if (my $prop_list = %ast<property_list>) {
-                %$_<prio> = $prio for @$prop_list;
-            }
-            else {
-                %ast<prio> = $prio
-            }
+            %ast<prio> = $prio
         }
 
         make %ast;
@@ -62,13 +57,6 @@ class CSS::Language::Actions
         }
 
         if $expand {
-            my @props;
-
-            # indicate the start of a property set
-            my %propset = (property => $property);
-            %propset<inherit> = True if $inherit;
-            @props.push({%propset});
-
             if $expand eq 'box' {
                 #  expand to a list of properties. eg: margin => margin-top,
                 #      margin-right margin-bottom margin-left
@@ -81,35 +69,23 @@ class CSS::Language::Actions
                     %box<bottom> //= %box<top>;
                     %box<left>   //= %box<right>;
 
-                    for %box.kv -> $side, $expr {
-                        my %prop = (property => $property ~ '-' ~ $side);
-                        %prop<expr> = [$expr]
-                            if $expr;
+                    @expr = ();
 
-                        @props.push( {%prop} );
+                    for %box.kv -> $k, $v {
+                        my $box_prop = $property ~ '-' ~ $k;
+                        @expr.push( $box_prop => [@$v] );
                     }
                 }
-            }
-            elsif $expand eq 'family' {
-
-                for @expr {
-                    my ($prop, $val) = $_.kv;
-                    @props.push({property => $prop, expr => $val});
-                };
-
             }
             else {
                 die "bad :expand option: " ~ $expand;
             }
-
-            %ast<property_list> = @props;
         }
-        else {
-            %ast<property> = $property;
-            %ast<inherit> = True if $inherit;
-            %ast<expr> = @expr
-                if @expr;
-        }
+        
+        %ast<property> = $property;
+        %ast<inherit> = True if $inherit;
+        %ast<expr> = @expr
+            if @expr;
 
         make %ast;
     }
@@ -155,4 +131,7 @@ class CSS::Language::Actions
 
     method color:sym<named>($/) { make $<named-color>.ast }
 
+    method integer($/) { make $/.Int }
+    method number($/)  { make $<num>.ast }
+    method uri($/)     { make $<url>.ast }
 }

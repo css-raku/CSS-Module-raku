@@ -114,7 +114,7 @@ class CSS::Language::CSS21::Actions
     method border-color($/) { make $.list($/) }
     method decl:sym<border-color>($/) {
         $._make_decl($/, q{[ <color> | transparent ]{1,4} | inherit},
-            :body($<border-color>));
+            :body($<border-color>), :expand<box>);
     }
     
     method decl:sym<border-spacing>($/) {
@@ -123,7 +123,8 @@ class CSS::Language::CSS21::Actions
 
     # - border-top|border-right|border-bottom|border-left: [ <border-width> || <border-style> || 'border-top-color' ] | inherit
     method decl:sym<border-*>($/) {
-        $._make_decl($/, q{[ <border-width> || <border-style> || 'border-color' ] | inherit});
+        $._make_decl($/, q{[ <border-width> || <border-style> || 'border-color' ] | inherit},
+            :body($<border-width>));
     }
 
      # - border-top-color|border-right-color|border-bottom-color|border-left-color: <color> | transparent | inherit
@@ -146,7 +147,7 @@ class CSS::Language::CSS21::Actions
     # - border-top-width|border-right-width|border-bottom-width|border-left-width: <border-width> | inherit
     method border-width($/) { make $.list($/) }
     method decl:sym<border-*-width>($/) {
-        $._make_decl($/, q{<border-width> | inherit});
+        $._make_decl($/, q{<border-width> | inherit}, :body($<border-width>));
     }
 
     method decl:sym<border-width>($/) {
@@ -166,6 +167,10 @@ class CSS::Language::CSS21::Actions
 
     method decl:sym<caption-side>($/) {
         $._make_decl($/, q{top | bottom | inherit});
+    }
+
+    method decl:sym<clear>($/) {
+        $._make_decl($/, 'none | left | right | none');
     }
 
     method decl:sym<clip>($/) {
@@ -276,7 +281,7 @@ class CSS::Language::CSS21::Actions
             :body($<font-variant>));
     }
 
-    method font-weight($/) { make $.token( ($<ident> || $<num>).ast ) }
+    method font-weight($/) { make $.token( ($<ident> || $<number>).ast ) }
     method decl:sym<font-weight>($/) {
         $._make_decl($/, 'normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900',
                     :body($<font-weight>)); 
@@ -290,16 +295,16 @@ class CSS::Language::CSS21::Actions
             :body($<font-size>));
     }
 
-   method decl:sym<font>($/) {
-        $._make_decl($/, q{[ [ 'font-style' || 'font-variant' || 'font-weight' ]? 'font-size' [ / 'line-height' ]? 'font-family' ] | caption | icon | menu | message-box | small-caption | status-bar | inherit},
-                     :expand<family>);
+    method decl:sym<font>($/) {
+        $._make_decl($/, q{[ [ 'font-style' || 'font-variant' || 'font-weight' ]? 'font-size' [ / 'line-height' ]? 'font-family' ] | caption | icon | menu | message-box | small-caption | status-bar | inherit});
     }
 
     method decl:sym<width|height|left|top>($/) {
         $._make_decl($/, '<length> | <percentage> | auto');
     }
 
-# - letter-spacing
+    # - letter-spacing: normal | <length>
+    # - word-spacing: normal | <length>
     method decl:sym<*-spacing>($/) {
         $._make_decl($/, 'normal | <length>');
     }
@@ -309,6 +314,7 @@ class CSS::Language::CSS21::Actions
         $._make_decl($/, 'normal | <number> | <length> | <percentage>');
     }
 
+    method list-style-image($/) { make $.list($/) }
     method decl:sym<list-style-image>($/) {
         $._make_decl($/, q{<uri> | none | inherit},
                      :body($<list-style-image>) );
@@ -331,13 +337,18 @@ class CSS::Language::CSS21::Actions
 
     # - margin-right|margin-left: <margin-width> | inherit
     # - margin-top|margin-bottom: <margin-width> | inherit
+    method margin-width($/) { make $.list($/) }
     method decl:sym<margin-*>($/) {
-        $._make_decl($/, q{<margin-width> | inherit});
+        $._make_decl($/, q{<margin-width> | inherit}, :body($<margin-width>));
     }
 
     method decl:sym<margin>($/) {
         $._make_decl($/, q{<margin-width>{1,4} | inherit},
-                     :expand<box>);
+                     :body($<margin-width>), :expand<box>);
+    }
+
+    method decl:sym<marks>($/) {
+        $._make_decl($/, 'crop || cross | none');
     }
 
     method decl:sym<max-[width|height]>($/) {
@@ -374,12 +385,13 @@ class CSS::Language::CSS21::Actions
 
     # - padding-top|padding-right|padding-bottom|padding-left: <padding-width> | inherit
     method decl:sym<padding-*>($/) {
-        $._make_decl($/, q{<padding-width> | inherit});
+        $._make_decl($/, q{<padding-width> | inherit}, :body($<padding-width>));
     }
 
+    method padding-width($/) { make $.list($/) }
     method decl:sym<padding>($/) {
         $._make_decl($/, q{<padding-width>{1,4} | inherit},
-                     :expand(<box>));
+                     :body($<padding-width>), :expand(<box>));
     }
 
     method decl:sym<page-break-[before|after]>($/) {
@@ -454,6 +466,10 @@ class CSS::Language::CSS21::Actions
         $._make_decl($/, q{auto | fixed | inherit});
     }
 
+    method decl:sym<text-align>($/) {
+        $._make_decl($/, 'left | right | center | justify | inherit');
+    }
+
     method decl:sym<text-decoration>($/) {
         $._make_decl($/, 'none | [ underline || overline || line-through || blink ]');
     }
@@ -494,8 +510,10 @@ class CSS::Language::CSS21::Actions
         $._make_decl($/, q{<integer> | inherit});
     }
 
-   # only occurence of an integer token so far
-    method integer($/) { make $/.Int }
+    method decl:sym<size>($/) {
+        $._make_decl($/, '<length>{1,2} | auto | portrait | landscape');
+    }
+
     method decl:sym<z-index>($/) {
         $._make_decl($/, 'auto | <integer>');
     }

@@ -21,23 +21,19 @@ for (
     },
     # boxed properties should be expanded
     declaration_list => {input => 'margin: 2em 3em',  
-                         ast => {
-                             "margin" => {},
-                             "margin-top" => {"expr" => "length" => 2},
-                             "margin-right" => {"expr" => "length" => 3},
-                             "margin-bottom" => {"expr" => "length" => 2},
-                             "margin-left" => {"expr" => "length" => 3},
-                         },
+                         ast => {"margin" => {"expr" => ["margin-top" => ["length" => 2e0],
+                                                         "margin-right" => ["length" => 3e0],
+                                                         "margin-bottom" => ["length" => 2e0],
+                                                         "margin-left" => ["length" => 3e0]]}},
     },
     # also check !important
     declaration => {input => 'margin: em -ex !IMPORTANT',
-             ast => {"property_list" => [
-                         {"property" => "margin", "prio" => "important"},
-                         {"property" => "margin-top", "expr" => "length" => 1, "prio" => "important"},
-                         {"property" => "margin-right", "expr" => "length" => -1, "prio" => "important"},
-                         {"property" => "margin-bottom", "expr" => "length" => 1, "prio" => "important"},
-                         {"property" => "margin-left", "expr" => "length" => -1, "prio" => "important"}
-                         ]},
+             ast => {"property" => "margin",
+                     "expr" => ["margin-top" => ["length" => 1],
+                                "margin-right" => ["length" => -1],
+                                "margin-bottom" => ["length" => 1],
+                                "margin-left" => ["length" => -1]],
+                     "prio" => "important"},
     },
   ) {
 

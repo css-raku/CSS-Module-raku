@@ -22,7 +22,7 @@ class CSS::Language::CSS1::Actions
             :body($<font-variant>));
     }
 
-    method font-weight($/) { make $.token( ($<ident> || $<num>).ast ) }
+    method font-weight($/) { make $.token( ($<ident> || $<number>).ast ) }
     method decl:sym<font-weight>($/) {
         $._make_decl($/, 'normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900',
                     :body($<font-weight>)); 
@@ -37,8 +37,7 @@ class CSS::Language::CSS1::Actions
     }
 
     method decl:sym<font>($/) {
-        $._make_decl($/, '[ <font-style> || <font-variant> || <font-weight> ]? <font-size> [ / <line-height> ]? <font-family>',
-                     :expand<family>);
+        $._make_decl($/, '[ <font-style> || <font-variant> || <font-weight> ]? <font-size> [ / <line-height> ]? <font-family>');
     }
 
     method decl:sym<color>($/) {
@@ -72,10 +71,11 @@ class CSS::Language::CSS1::Actions
     };
 
     method decl:sym<background>($/) {
-        $._make_decl($/, '<background-color> || <background-image> || <background-repeat> || <background-attachment>',
-                     :expand<family>);
+        $._make_decl($/, '<background-color> || <background-image> || <background-repeat> || <background-attachment>');
     }
 
+    # - letter-spacing: normal | <length>
+    # - word-spacing: normal | <length>
     method decl:sym<*-spacing>($/) {
         $._make_decl($/, 'normal | <length>');
     }
@@ -190,7 +190,7 @@ class CSS::Language::CSS1::Actions
     }
 
     method decl:sym<list-style>($/) {
-        $._make_decl($/, '<keyword> || <position> || <url>', :expand<family> );
+        $._make_decl($/, '<keyword> || <position> || <url>');
     }
 
     method decl:sym<position>($/) {
@@ -205,21 +205,5 @@ class CSS::Language::CSS1::Actions
     method integer($/) { make $/.Int }
     method decl:sym<z-index>($/) {
         $._make_decl($/, 'auto | <integer>');
-    }
-
-    method decl:sym<visibility>($/) {
-        $._make_decl($/, 'inherit | visible | hidden');
-    }
-
-    method decl:sym<page-break-*>($/) {
-        $._make_decl($/, 'auto | allways | left | right');
-    }
-
-    method decl:sym<size>($/) {
-        $._make_decl($/, '<length>{1,2} | auto | portrait | landscape');
-    }
-
-    method decl:sym<marks>($/) {
-        $._make_decl($/, 'crop || cross | none');
     }
 }

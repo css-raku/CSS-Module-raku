@@ -14,6 +14,11 @@ grammar CSS::Language::CSS21:ver<20110607.000>
     token named-color {:i [aqua | black | blue | fuchsia | gray | green | lime | maroon | navy | olive | purple | red | silver | teal | white | yellow] & <ident> }
     rule color:sym<named> {<named-color>}
  
+    # nomenclature
+    token integer {[\+|\-]?\d+}
+    token number  {<num>}
+    token uri     {<url>}
+
     # --- Functions --- #
 
     rule function:sym<attr>     {:i'attr(' [ <attribute_name=.ident> <type_or_unit=.ident>? [ ',' <fallback=.ident> ]? || <any_args>] ')'}
@@ -91,7 +96,7 @@ grammar CSS::Language::CSS21:ver<20110607.000>
                                       | <inherit> || <any_args> ]}
 
     # - border-top|border-right|border-bottom|border-left: [ <border-width> || <border-style> || 'border-top-color' ] | inherit
-    token border-width {:i [ thin | medium | thick ] & <ident> | <length> }
+    rule border-width {:i [ thin | medium | thick ] & <ident> | <length> }
     rule decl:sym<border-*> {:i (border\-[top|right|bottom|left]) ':' [ [ [ <border-width> | <border-style> | <border-color> ]**1..3 ] | <inherit> || <any_args> ] }
 
    # - border-top-color|border-right-color|border-bottom-color|border-left-color: <color> | transparent | inherit
@@ -170,49 +175,74 @@ grammar CSS::Language::CSS21:ver<20110607.000>
     rule decl:sym<float> {:i (float) ':' [ [ left | right | none ] & <ident>  | <inherit> || <any_args> ] }
 
     # - font-family: [[ <family-name> | <generic-family> ] [, <family-name> | <generic-family> ]* ] | inherit
-    rule decl:sym<font-family> {:i (font\-family) ':' [ [ [ [ <family-name> | <generic-family> ] ] [ [ ', ' <family-name> | <generic-family> ] ]* ] | <inherit> || <any_args> ] }
+    rule font-family {:i [ serif | sans\-serif | cursive | fantasy | monospace ] & <generic-family=.ident> | [ <family-name=.ident> ]+ | <family-name=.string> }
+    rule decl:sym<font-family> {:i (font\-family) ':' [ <font-family> [ ',' <font-family> || <any> ]*
+                                                        | <inherit> || <any_args> ] }
 
     # - font-size: <absolute-size> | <relative-size> | <length> | <percentage> | inherit
-    rule decl:sym<font-size> {:i (font\-size) ':' [ <absolute-size> | <relative-size> | <length> | <percentage> | <inherit> || <any_args> ] }
+    token absolute-size {:i [ [[xx|x]\-]?small | medium | [[xx|x]\-]?large ] & <ident> }
+    token relative-size {:i [ larger | smaller ] & <ident> }
+    token font-size {:i <absolute-size> | <relative-size> | <length> | <percentage> }
+    rule decl:sym<font-size> {:i (font\-size) ':' [ <font-size>
+                                                    | <inherit> || <any_args> ] }
 
     # - font-style: normal | italic | oblique | inherit
+    token font-style {:i [ normal | italic | oblique ] & <ident> }
     rule decl:sym<font-style> {:i (font\-style) ':' [ [ normal | italic | oblique ] & <ident>  | <inherit> || <any_args> ] }
 
     # - font-variant: normal | small-caps | inherit
+    token font-variant {:i [ normal | small\-caps ] & <ident>}
     rule decl:sym<font-variant> {:i (font\-variant) ':' [ [ normal | small\-caps ] & <ident>  | <inherit> || <any_args> ] }
 
     # - font-weight: normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | inherit
-    rule decl:sym<font-weight> {:i (font\-weight) ':' [ [ normal | bold | bolder | lighter ] & <ident>  | [ 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 ] & <num>  | <inherit> || <any_args> ] }
+    token font-weight {:i [ normal | bold | bolder | lighter ] & <ident>
+                           | [ 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 ] & <number> }
+    rule decl:sym<font-weight> {:i (font\-weight) ':' [ <font-weight>
+                                                        | <inherit> || <any_args> ] }
 
     # - font: [ [ 'font-style' || 'font-variant' || 'font-weight' ]? 'font-size' [ / 'line-height' ]? 'font-family' ] | caption | icon | menu | message-box | small-caption | status-bar | inherit
-    rule decl:sym<font> {:i (font) ':' [ [ [ [ <font-style> | <font-variant> | <font-weight> ]**1..3 ]? <font-size> [ '/ ' <line-height> ]? <font-family> ] | [ caption | icon | menu | message\-box | small\-caption | status\-bar ] & <ident>  | <inherit> || <any_args> ] }
+    rule decl:sym<font> {:i (font) ':' [
+                              [  <font-style> | <font-variant> | <font-weight> ]* <font-size> [ '/' <line-height> ]? <font-family> [ ',' <font-family> ]*
+                              | [ caption | icon | menu | message\-box | small\-caption | status\-bar ] & <ident>
+                              | <inherit> || <any_args> ] }
 
+    # - width: <length> | <percentage> | auto | inherit
     # - height: <length> | <percentage> | auto | inherit
-    rule decl:sym<height> {:i (height) ':' [ <length> | <percentage> | auto & <ident>  | <inherit> || <any_args> ] }
-
     # - left: <length> | <percentage> | auto | inherit
-    rule decl:sym<left> {:i (left) ':' [ <length> | <percentage> | auto & <ident>  | <inherit> || <any_args> ] }
+    # - right: <length> | <percentage> | auto | inherit
+    rule decl:sym<width|height|left|top> {:i (width|height|left|top) ':' [ <length> | <percentage> | auto & <ident>  | <inherit> || <any_args> ] }
 
     # - letter-spacing: normal | <length> | inherit
-    rule decl:sym<letter-spacing> {:i (letter\-spacing) ':' [ normal & <ident>  | <length> | <inherit> || <any_args> ] }
+    # - word-spacing: normal | <length> | inherit
+    rule decl:sym<*-spacing> {:i ([letter|word]\-spacing) ':' [ normal & <ident>  | <length> | <inherit> || <any_args> ] }
 
     # - line-height: normal | <number> | <length> | <percentage> | inherit
-    rule decl:sym<line-height> {:i (line\-height) ':' [ normal & <ident>  | <number> | <length> | <percentage> | <inherit> || <any_args> ] }
+    token line-height {:i normal & <ident> | <number> | <length> | <percentage> }
+    rule decl:sym<line-height> {:i (line\-height) ':' [ <line-height>
+                                                        | <inherit> || <any_args> ]}
 
     # - list-style-image: <uri> | none | inherit
-    rule decl:sym<list-style-image> {:i (list\-style\-image) ':' [ <uri> | none & <ident>  | <inherit> || <any_args> ] }
+    token list-style-image {:i  <uri> | none & <ident> }
+    rule decl:sym<list-style-image> {:i (list\-style\-image) ':' [
+                                          <list-style-image>
+                                          | <inherit> || <any_args> ]}
 
     # - list-style-position: inside | outside | inherit
-    rule decl:sym<list-style-position> {:i (list\-style\-position) ':' [ [ inside | outside ] & <ident>  | <inherit> || <any_args> ] }
+    token list-style-position {:i  [ inside | outside ] & <ident> }
+    rule decl:sym<list-style-position> {:i (list\-style\-position) ':' [
+                                             <list-style-position>
+                                             | <inherit> || <any_args> ]}
 
     # - list-style-type: disc | circle | square | decimal | decimal-leading-zero | lower-roman | upper-roman | lower-greek | lower-latin | upper-latin | armenian | georgian | lower-alpha | upper-alpha | none | inherit
-    rule decl:sym<list-style-type> {:i (list\-style\-type) ':' [ [ disc | circle | square | decimal | decimal\-leading\-zero | lower\-roman | upper\-roman | lower\-greek | lower\-latin | upper\-latin | armenian | georgian | lower\-alpha | upper\-alpha | none ] & <ident>  | <inherit> || <any_args> ] }
+    token list-style-type {:i [ disc | circle | square | decimal | decimal\-leading\-zero | lower\-roman | upper\-roman | lower\-greek | lower\-latin | upper\-latin | armenian | georgian | lower\-alpha | upper\-alpha | none ] & <ident> }
+    rule decl:sym<list-style-type> {:i (list\-style\-type) ':' [ <list-style-type>  | <inherit> || <any_args> ] }
 
     # - list-style: [ 'list-style-type' || 'list-style-position' || 'list-style-image' ] | inherit
     rule decl:sym<list-style> {:i (list\-style) ':' [ [ [ <list-style-type> | <list-style-position> | <list-style-image> ]**1..3 ] | <inherit> || <any_args> ] }
 
     # - margin-right|margin-left: <margin-width> | inherit
     # - margin-top|margin-bottom: <margin-width> | inherit
+    rule margin-width {:i <length> | <percentage> | auto & <ident> }
     rule decl:sym<margin-*> {:i (margin\-[right|left|bottom|top]) ':' [ <margin-width> | <inherit> || <any_args> ] }
 
     # - margin: <margin-width>{1,4} | inherit
@@ -252,22 +282,19 @@ grammar CSS::Language::CSS21:ver<20110607.000>
     rule decl:sym<padding-*> {:i (padding\-[top|right|bottom|left]) ':' [ <padding-width> | <inherit> || <any_args> ] }
 
     # - padding: <padding-width>{1,4} | inherit
+    token padding-width {:i <length> | <percentage> }
     rule decl:sym<padding> {:i (padding) ':' [ <padding-width>**1..4 | <inherit> || <any_args> ] }
 
     # - page-break-after: auto | always | avoid | left | right | inherit
-    rule decl:sym<page-break-after> {:i (page\-break\-after) ':' [ [ auto | always | avoid | left | right ] & <ident>  | <inherit> || <any_args> ] }
-
     # - page-break-before: auto | always | avoid | left | right | inherit
-    rule decl:sym<page-break-before> {:i (page\-break\-before) ':' [ [ auto | always | avoid | left | right ] & <ident>  | <inherit> || <any_args> ] }
+    rule decl:sym<page-break-[before|after]> {:i (page\-break\-[before|after]) ':' [ [ auto | always | avoid | left | right ] & <ident>  | <inherit> || <any_args> ] }
 
     # - page-break-inside: avoid | auto | inherit
     rule decl:sym<page-break-inside> {:i (page\-break\-inside) ':' [ [ avoid | auto ] & <ident>  | <inherit> || <any_args> ] }
 
     # - pause-after: <time> | <percentage> | inherit
-    rule decl:sym<pause-after> {:i (pause\-after) ':' [ <time> | <percentage> | <inherit> || <any_args> ] }
-
     # - pause-before: <time> | <percentage> | inherit
-    rule decl:sym<pause-before> {:i (pause\-before) ':' [ <time> | <percentage> | <inherit> || <any_args> ] }
+    rule decl:sym<pause-[before|after]> {:i (pause\-[before|after]) ':' [ <time> | <percentage> | <inherit> || <any_args> ] }
 
     # - pause: [ [<time> | <percentage>]{1,2} ] | inherit
     rule decl:sym<pause> {:i (pause) ':' [ [ [ [ <time> | <percentage> ] ]**1..2 ] | <inherit> || <any_args> ] }
@@ -290,8 +317,11 @@ grammar CSS::Language::CSS21:ver<20110607.000>
     # - richness: <number> | inherit
     rule decl:sym<richness> {:i (richness) ':' [ <number> | <inherit> || <any_args> ] }
 
-    # - right: <length> | <percentage> | auto | inherit
-    rule decl:sym<right> {:i (right) ':' [ <length> | <percentage> | auto & <ident>  | <inherit> || <any_args> ] }
+    # - size: <length>{1,2} | auto | portrait | landscape | inherit
+    rule decl:sym<size> {:i (size) ':' [
+                              <length> ** 1..2
+                              | [ auto | portrait | landscape ] & <ident>
+                              | <inherit> || <any_args> ]}
 
     # - speak-header: once | always | inherit
     rule decl:sym<speak-header> {:i (speak\-header) ':' [ [ once | always ] & <ident>  | <inherit> || <any_args> ] }
@@ -349,12 +379,6 @@ grammar CSS::Language::CSS21:ver<20110607.000>
 
     # - widows: <integer> | inherit
     rule decl:sym<widows> {:i (widows) ':' [ <integer> | <inherit> || <any_args> ] }
-
-    # - width: <length> | <percentage> | auto | inherit
-    rule decl:sym<width> {:i (width) ':' [ <length> | <percentage> | auto & <ident>  | <inherit> || <any_args> ] }
-
-    # - word-spacing: normal | <length> | inherit
-    rule decl:sym<word-spacing> {:i (word\-spacing) ':' [ normal & <ident>  | <length> | <inherit> || <any_args> ] }
 
     # - z-index: auto | <integer> | inherit
     rule decl:sym<z-index> {:i (z\-index) ':' [ auto & <ident>  | <integer> | <inherit> || <any_args> ] }

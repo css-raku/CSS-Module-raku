@@ -48,6 +48,23 @@ for (
                                 "border-style" => ["ident" => "dotted"],
                                 "border-color" => ["color" => {"r" => 255, "g" => 0, "b" => 0}]]},
     },
+    decl => {input => 'marks:crop', ast => {"property" => "marks",
+                                            "expr" => ["ident" => "crop"]},
+    },
+    decl => {input => 'margin:inherit',
+             ast => {"property_list" => [
+                         {"property" => "margin", inherit => True},
+                         ]},
+    },
+    decl => {input => 'size:3ex', ast => {"property" => "size",
+                                          "expr" => ["length" => 3]},
+    },
+    decl => {input => 'visibility:hidden', ast => {"property" => "visibility",
+                                                   "expr" => ["ident" => "hidden"]},
+    },
+    decl => {input => 'page-break-after:auto', ast => {"property" => "page-break-after",
+                                                       "expr" => ["ident" => "auto"]},
+    },
    ) {
 
     my $rule = $_.key;

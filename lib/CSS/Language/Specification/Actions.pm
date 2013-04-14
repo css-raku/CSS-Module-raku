@@ -86,7 +86,7 @@ class CSS::Language::Specification::Actions {
             ?? '[ ' ~ $<digits>.map({$_.ast}).join(' | ') ~ ' ]'
             !! $<digits>[0].ast;
 
-        make $keywords ~ ' & <num> ';
+        make $keywords ~ ' & <number> ';
     }
     method value:sym<group>($/) {
         my $val = $<terms>.ast;

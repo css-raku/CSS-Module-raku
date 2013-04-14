@@ -7,7 +7,7 @@
 # CSS::Language:CSS1 and CSS::Language:CSS21 etc. These have since been
 # hand-tailored.
 #
-# Example usage: perl6 etc/gen-properties.pl gen grammar etc/css21-properties.txt etc/css1-properties.txt > /tmp/css21-grammar.pm
+# Example usage: perl6 etc/gen-properties.pl gen grammar etc/css21-properties.txt > /tmp/css21-grammar.pm
 #
 
 use CSS::Language::Specification;
@@ -15,7 +15,7 @@ use CSS::Language::Specification::Actions;
 
 # actions to generate actions stub. You'll need to pipe stdout somewhere
 
-multi MAIN('gen', 'grammar', $properties_spec?, $base_properties?) {
+multi MAIN('gen', 'grammar', $properties_spec?) {
 
     my $actions = CSS::Language::Specification::Actions.new;
     my %props = load_props($properties_spec, $actions);
@@ -23,11 +23,10 @@ multi MAIN('gen', 'grammar', $properties_spec?, $base_properties?) {
 
 }
 
-multi MAIN('gen', 'actions', $properties_spec?, $base_properties?) {
+multi MAIN('gen', 'actions', $properties_spec?) {
 
     my $actions = CSS::Language::Specification::Actions.new;
     my %props = load_props($properties_spec, $actions);
-
     generate_perl6_actions(%props);
 }
 
