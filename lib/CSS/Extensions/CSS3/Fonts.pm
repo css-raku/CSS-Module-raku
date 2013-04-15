@@ -15,7 +15,7 @@ grammar CSS::Extensions::CSS3::Fonts:ver<20130212.000>
 
     # functions
     # ---------
-    rule function:sym<fmt-or-loc> {:i(format|local)'(' [ <string> || <any_args> ] ')'}
+    rule function:sym<fmt-or-loc> {:i(format|local)'(' [ <string> || <any-args> ] ')'}
 }
 
 class CSS::Extensions::CSS3::Fonts::Actions {
@@ -24,7 +24,7 @@ class CSS::Extensions::CSS3::Fonts::Actions {
     method function:sym<fmt-or-loc>($/) {
         my $func = $0.Str.lc;
         return $.warning("usage: $func(<string>)")
-            if $<any_args>;
+            if $<any-args>;
 
         make {ident => $func, args => $.list($/)}
     }

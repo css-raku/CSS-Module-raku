@@ -46,9 +46,9 @@ grammar CSS::Extensions::CSS3::Selectors::Syntax {
         ]<ws>?
     }
 
-    rule pseudo_function:sym<nth_selector> {<ident=.nth_functor>'(' [<args=.nth_args> || <any_args> ] ')'} 
-    rule negation_args {[<type_selector> | <universal> | <id> | <class> | <attrib> | $<nested>=[<?before [:i':not(']><pseudo>] | <pseudo> | <any_arg> ]+}
-    rule pseudo_function:sym<negation>  {:i'not(' [ <negation_args> || <any_args> ] ')'}
+    rule pseudo_function:sym<nth_selector> {<ident=.nth_functor>'(' [<args=.nth_args> || <any-args> ] ')'} 
+    rule negation_args {[<type_selector> | <universal> | <id> | <class> | <attrib> | $<nested>=[<?before [:i':not(']><pseudo>] | <pseudo> | <any-arg> ]+}
+    rule pseudo_function:sym<negation>  {:i'not(' [ <negation_args> || <any-args> ] ')'}
 
 }
 
@@ -70,7 +70,7 @@ class CSS::Extensions::CSS3::Selectors::Actions {
     method term:sym<unicode_range>($/) { make $.node($/) }
     method pseudo_function:sym<nth_selector>($/)  {
         return $.warning('usage '~$<ident>~'(an+b) e.g "4" "3n+1"')
-            if $<any_args>;
+            if $<any-args>;
         make $.node($/)
     }
 
@@ -95,16 +95,16 @@ class CSS::Extensions::CSS3::Selectors::Actions {
     method pseudo:sym<nth_child>($/)         { make $.node($/) }
 
     method negation_args($/) {
-        return $.warning('bad :not() argument', $<any_arg>.Str)
-            if $<any_arg>;
+        return $.warning('bad :not() argument', $<any-arg>.Str)
+            if $<any-arg>;
         return $.warning('illegal nested negation', $<nested>.Str)
             if $<nested>;
         make $.list($/);
     }
 
     method pseudo_function:sym<negation>($/) {
-        return $.warning('missing/incorrect arguments to :not()', $<any_args>.Str)
-            if $<any_args>;
+        return $.warning('missing/incorrect arguments to :not()', $<any-args>.Str)
+            if $<any-args>;
         return unless $<negation_args>.ast;
         make {ident => 'not', args => $<negation_args>.ast}
     }

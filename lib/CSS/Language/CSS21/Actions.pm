@@ -8,25 +8,25 @@ class CSS::Language::CSS21::Actions
 
     # --- Functions --- #
 
-    method any_function($/)             {
+    method any-function($/)             {
         $.warning('unknown function', $<ident>.ast.lc);
     }
 
     method function:sym<attr>($/)             {
         return $.warning('usage: attr( attribute-name <type-or-unit>? [, <fallback> ]? )')
-            if $<any_args>;
+            if $<any-args>;
         make {ident => 'attr', args => $.list($/)}
     }
 
     method function:sym<counter>($/) {
         return $.warning('usage: counter(ident [, ident [,...] ])')
-            if $<any_args>;
+            if $<any-args>;
         make {ident => 'counter', args => $.list($/)}
     }
 
     method function:sym<counters>($/) {
         return $.warning('usage: counters(ident [, "string"])')
-            if $<any_args>;
+            if $<any-args>;
         make {ident => 'counters', args => $.list($/)}
     }
 
@@ -36,7 +36,7 @@ class CSS::Language::CSS21::Actions
         # see http://www.w3.org/TR/2011/REC-CSS2-20110607/aural.html
 
         return $.warning('usage azimuth: <angle> | [[ left-side | far-left | left | center-left | center | center-right | right | far-right | right-side ] || behind ] | leftwards | rightwards | inherit')
-            if $<any_args>;
+            if $<any-args>;
 
         my %ast;
         %ast<property> = $0.Str.trim.lc;
@@ -195,12 +195,14 @@ class CSS::Language::CSS21::Actions
         $._make_decl($/, q{[ <identifier> <integer>? ]+ | none | inherit});
     }
 
+    method cue-after($/) { make $.list($/) }
     method decl:sym<cue-after>($/) {
-        $._make_decl($/, q{<uri> | none | inherit});
+        $._make_decl($/, q{<uri> | none | inherit}, :body($<cue-after>));
     }
 
+    method cue-before($/) { make $.list($/) }
     method decl:sym<cue-before>($/) {
-        $._make_decl($/, q{<uri> | none | inherit});
+        $._make_decl($/, q{<uri> | none | inherit}, :body($<cue-before>));
     }
 
     method decl:sym<cue>($/) {
@@ -223,7 +225,7 @@ class CSS::Language::CSS21::Actions
         # see http://www.w3.org/TR/2011/REC-CSS2-20110607/aural.html
 
         return $.warning('usage elevation: <angle> | below | level | above | higher | lower | inherit')
-            if $<any_args>;
+            if $<any-args>;
 
         my %ast;
         %ast<property> = $0.Str.trim.lc;

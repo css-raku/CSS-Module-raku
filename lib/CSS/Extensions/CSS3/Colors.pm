@@ -17,14 +17,14 @@ grammar CSS::Extensions::CSS3::Colors::Syntax {
                               [ <r=.color-range> ','
                                 <g=.color-range> ','
                                 <b=.color-range> ','
-                                <a=.color_alpha> || <any_args> ]
+                                <a=.color_alpha> || <any-args> ]
                    ')'
     }
 
     rule color:sym<hsl> {:i'hsl('
                              [ <h=.color_angle> ','
                                <s=.color_alpha> ','
-                               <l=.color_alpha> || <any_args> ]
+                               <l=.color_alpha> || <any-args> ]
                     ')'
     }
 
@@ -32,7 +32,7 @@ grammar CSS::Extensions::CSS3::Colors::Syntax {
                               [ <h=.color_angle> ','
                                 <s=.color_alpha> ','
                                 <l=.color_alpha> ','
-                                <a=.color_alpha> || <any_args> ]
+                                <a=.color_alpha> || <any-args> ]
                    ')'
     }
 
@@ -63,19 +63,19 @@ class CSS::Extensions::CSS3::Colors::Actions {
 
     method color:sym<rgba>($/) {
         return $.warning('usage: rgba(c,c,c,a) where c is 0..255 or 0%-100% and a is 0-1 or 0%-100%')
-            if $<any_args>;
+            if $<any-args>;
         make $.token($.node($/), :type<color>, :units<rgba>);
     }
 
     method color:sym<hsl>($/)  {
         return $.warning('usage: hsl(h,s,l) where h is 0..360  and s,l are 0-1 or 0%-100%')
-            if $<any_args>;
+            if $<any-args>;
         make $.token($.node($/), :type<color>, :units<hsl>);
     }
 
     method color:sym<hsla>($/) {
         return $.warning('usage: hsla(h,s,l,a) where h is 0..360  and s,l,a are 0-1 or 0%-100%')
-            if $<any_args>;
+            if $<any-args>;
         make $.token($.node($/), :type<color>, :units<hsla>);
     }
 }

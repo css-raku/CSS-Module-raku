@@ -36,7 +36,7 @@ class CSS::Language::Actions
         my $property = $0.Str.trim.lc;
 
         return $.warning('usage ' ~ $property ~ ': ' ~ $synopsis)
-            if $<any_args> || $<any>;
+            if $<any-args> || $<any>;
 
         my @expr;
         my $inherit = $<inherit> && $<inherit>.ast;
@@ -88,9 +88,9 @@ class CSS::Language::Actions
     #---- Language Extensions ----#
 
     method length:sym<num>($/) {
-        my $num = $<num>.ast;
+        my $num = $<number>.ast;
 
-        return $.warning('number not followed by a length unit', $<num>.Str)
+        return $.warning('number not followed by a length unit', $<number>.Str)
             if $num && $.strict;
 
         make $.token($num, :type<length>, :units<px>)

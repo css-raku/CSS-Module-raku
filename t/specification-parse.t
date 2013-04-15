@@ -15,8 +15,9 @@ for (
     },
     'property-spec' => {'input' => "'content'\tnormal | none | [ <string> | <uri> | <counter> | attr(<identifier>) | open-quote | close-quote | no-open-quote | no-close-quote ]+ | inherit",
                         ast => {"sym" => "content",
-                                "props" => ["content"], "grammar" => "\{:i (content) ':' [ [ normal | none ] \& <ident>  | [ [ <string> | <uri> | <counter> | <?before 'attr('><function> | [ open\\-quote | close\\-quote | no\\-open\\-quote | no\\-close\\-quote ] \& <ident>  ] ]+ | <inherit> || <any_args> ] }",
-                                "synopsis" => "normal | none | [ <string> | <uri> | <counter> | attr(<identifier>) | open-quote | close-quote | no-open-quote | no-close-quote ]+ | inherit"},
+                                "props" => ["content"],
+                                "match" => "content",
+                                "defn" => "[ [ normal | none ] \& <ident>  | [ [ <string> | <uri> | <counter> | <?before 'attr('><function> | [ open\\-quote | close\\-quote | no\\-open\\-quote | no\\-close\\-quote ] \& <ident>  ] ]+ | <inherit> ]", "synopsis" => "normal | none | [ <string> | <uri> | <counter> | attr(<identifier>) | open-quote | close-quote | no-open-quote | no-close-quote ]+ | inherit"},
     },
     ) {
 
