@@ -46,20 +46,20 @@ class CSS::Language::Specification::Actions {
     }
 
     method list($/) {
-        my $choices = @$<either-or>.Int;
-        return make @$<either-or>[0].ast
+        my $choices = @$<combo>.Int;
+        return make @$<combo>[0].ast
             unless $choices > 1;
-        # a || b || c represents combinations of a, b and c
-        # This production is a slightly more liberal approximation
+        # a || b || c represents a combination of one or more of a, b and c
+        # This production is a slightly more liberal approximation:
         # it allows elements to be repeated
         
-        make '[ ' ~ $<either-or>.map({$_.ast}).join(' | ') ~ ' ]';
+        make '[ ' ~ $<combo>.map({$_.ast}).join(' | ') ~ ' ]';
     }
 
-    method either-or($/) {
+    method combo($/) {
         my $choices = @$<values>.Int;
-      return make $<values>[0].ast
-          unless $choices > 1;
+        return make $<values>[0].ast
+            unless $choices > 1;
         make '[ ' ~ $<values>.map({$_.ast}).join(' | ') ~ ' ]**1..' ~ $choices;
     }
 

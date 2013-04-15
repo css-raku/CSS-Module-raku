@@ -38,21 +38,15 @@ class CSS::Language::Actions
         return $.warning('usage ' ~ $property ~ ': ' ~ $synopsis)
             if $<any_args> || $<any>;
 
-        my %ast;
-
         my @expr;
-        my $inherit;
+        my $inherit = $<inherit> && $<inherit>.ast;
 
         for $.list($body // $/) {
             for @$_ {
                 my ($term, $val) = $_.kv;
+                next if $term eq 'inherit';
 
-                if $term eq 'inherit' {
-                    $inherit = True;
-                }
-                else {
-                    @expr.push($_);
-                }
+                @expr.push($_);
             }
         }
 
@@ -82,6 +76,7 @@ class CSS::Language::Actions
             }
         }
         
+        my %ast;
         %ast<property> = $property;
         %ast<inherit> = True if $inherit;
         %ast<expr> = @expr
@@ -131,7 +126,10 @@ class CSS::Language::Actions
 
     method color:sym<named>($/) { make $<named-color>.ast }
 
-    method integer($/) { make $/.Int }
-    method number($/)  { make $<num>.ast }
-    method uri($/)     { make $<url>.ast }
+    method inherit($/)    { make True }
+    method integer($/)    { make $/.Int }
+    method number($/)     { make $<num>.ast }
+    method uri($/)        { make $<url>.ast }
+    # case sensitive identifiers
+    method identifier($/) { make $<ident-cs>.ast }
 }

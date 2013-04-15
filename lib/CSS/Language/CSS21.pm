@@ -15,9 +15,10 @@ grammar CSS::Language::CSS21:ver<20110607.000>
     rule color:sym<named> {<named-color>}
  
     # nomenclature
-    token integer {[\+|\-]?\d+}
-    token number  {<num>}
-    token uri     {<url>}
+    token integer    {[\+|\-]?\d+}
+    token number     {<num>}
+    token uri        {<url>}
+    token identifier {<ident-cs>}  # identifiers (case sensitive)
 
     # --- Functions --- #
 
@@ -96,23 +97,24 @@ grammar CSS::Language::CSS21:ver<20110607.000>
                                       | <inherit> || <any_args> ]}
 
     # - border-top|border-right|border-bottom|border-left: [ <border-width> || <border-style> || 'border-top-color' ] | inherit
-    rule border-width {:i [ thin | medium | thick ] & <ident> | <length> }
     rule decl:sym<border-*> {:i (border\-[top|right|bottom|left]) ':' [ [ [ <border-width> | <border-style> | <border-color> ]**1..3 ] | <inherit> || <any_args> ] }
 
    # - border-top-color|border-right-color|border-bottom-color|border-left-color: <color> | transparent | inherit
-    rule decl:sym<border-*-color> {:i (border\-[top|right|bottom|left]\-color) ':' [ <border-top-color>  | <inherit> || <any_args> ] }
+    rule decl:sym<border-*-color> {:i (border\-[top|right|bottom|left]\-color) ':' [ <border-color>  | <inherit> || <any_args> ] }
 
     # - border-top-style|border-right-style|border-bottom-style|border-left-style: <border-style> | inherit
-    rule decl:sym<border-*-style> {:i (border\-[top|right|bottom\|left]\-style) ':' [ <border-style> | <inherit> || <any_args> ] }
+    rule decl:sym<border-*-style> {:i (border\-[top|right|bottom|left]\-style) ':' [ <border-style> | <inherit> || <any_args> ] }
 
     # - border-top-width|border-right-width|border-bottom-width|border-left-width: <border-width> | inherit
+    rule border-width {:i [ thin | medium | thick ] & <ident> | <length> }
     rule decl:sym<border-*-width> {:i (border\-[top|rightbottom|left]\-width) ':' [ <border-width> | <inherit> || <any_args> ] }
 
     # - border-width: <border-width>{1,4} | inherit
     rule decl:sym<border-width> {:i (border\-width) ':' [ <border-width>**1..4 | <inherit> || <any_args> ] }
 
     # - border: [ <border-width> || <border-style> || 'border-top-color' ] | inherit
-    rule decl:sym<border> {:i (border) ':' [ [ [ <border-width> | <border-style> | <border-top-color> ]**1..3 ] | <inherit> || <any_args> ] }
+    # - refactored: border: [ <border-width> || <border-style> || <border-color> ] | inherit
+    rule decl:sym<border> {:i (border) ':' [ [ [ <border-width> | <border-style> | <border-color> ]**1..3 ] | <inherit> || <any_args> ] }
 
     # - bottom: <length> | <percentage> | auto | inherit
     rule decl:sym<bottom> {:i (bottom) ':' [ <length> | <percentage> | auto & <ident>  | <inherit> || <any_args> ] }
@@ -175,7 +177,7 @@ grammar CSS::Language::CSS21:ver<20110607.000>
     rule decl:sym<float> {:i (float) ':' [ [ left | right | none ] & <ident>  | <inherit> || <any_args> ] }
 
     # - font-family: [[ <family-name> | <generic-family> ] [, <family-name> | <generic-family> ]* ] | inherit
-    rule font-family {:i [ serif | sans\-serif | cursive | fantasy | monospace ] & <generic-family=.ident> | [ <family-name=.ident> ]+ | <family-name=.string> }
+    rule font-family {:i [ serif | sans\-serif | cursive | fantasy | monospace ] & <generic-family=.ident-cs> | [ <family-name=.ident-cs> ]+ | <family-name=.string> }
     rule decl:sym<font-family> {:i (font\-family) ':' [ <font-family> [ ',' <font-family> || <any> ]*
                                                         | <inherit> || <any_args> ] }
 

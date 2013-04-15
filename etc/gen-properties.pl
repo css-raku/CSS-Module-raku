@@ -30,6 +30,17 @@ multi MAIN('gen', 'actions', $properties_spec?) {
     generate_perl6_actions(%props);
 }
 
+multi MAIN('diff', $properties_spec1,  $properties_spec2) {
+
+    my $actions = CSS::Language::Specification::Actions.new;
+    my %props1 = load_props($properties_spec1, $actions);
+    my %props2 = load_props($properties_spec2, $actions);
+
+    for %props1.keys {
+        say $_ unless %props2.exists($_);
+    }
+}
+
 sub load_props ($properties_spec, $actions?) {
     my $fh = open($properties_spec // "etc/css21-properties.txt");
 

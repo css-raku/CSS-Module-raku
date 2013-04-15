@@ -14,14 +14,14 @@ grammar CSS::Language::CSS1:ver<20080411>
     token named-color {:i [aqua | black | blue | fuchsia | gray | green | lime | maroon | navy | olive | purple | red | silver | teal | white | yellow] & <ident> }
     rule color:sym<named> {<named-color>}
 
-    token integer {[\+|\-]?\d+}
-    token number  {<num>}
-    token uri     {<url>}
+    token integer    {[\+|\-]?\d+}
+    token number     {<num>}
+    token uri        {<url>}
 
     # 5.2 Font Properties
     # -------------------
     # - font-family: [[<family-name> | <generic-family>],]* [<family-name> | <generic-family>]
-    rule font-family {:i [ serif | sans\-serif | cursive | fantasy | monospace ] & <generic-family=.ident> | [ <family-name=.ident> ]+ | <family-name=.string> }
+    rule font-family {:i [ serif | sans\-serif | cursive | fantasy | monospace ] & <generic-family=.ident-cs> | [ <family-name=.ident-cs> ]+ | <family-name=.string> }
     rule decl:sym<font-family> {:i (font\-family) ':' [ <font-family> [ ',' <font-family> || <any> ]*
                                                         || <any_args> ] }
 

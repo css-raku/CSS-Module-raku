@@ -1,11 +1,11 @@
 # a grammar for CSS parsing CSS property specifications. General format of
 # each definition is: <properties> \t <synopsis> \t <initial-value> ...
 #
-# for example, from entries in http://www.w3.org/TR/CSS21/propidx.html:
+# An example, from http://www.w3.org/TR/CSS21/propidx.html:
 #
 #    'content'	normal
 #               | none
-#               | [ <string> | <uri> | <counter> | attr(<identifier>)
+#               | [  <string> | <uri> | <counter> | attr(<identifier>)
 #                  | open-quote | close-quote | no-open-quote | no-close-quote
 #                 ]+
 #               | inherit
@@ -27,8 +27,8 @@ grammar CSS::Language::Specification {
     token digits { \d+ }
 
     rule terms       { <list>* }
-    rule list        { <either-or> [ '|' <either-or> ]* }
-    rule either-or   { <values> [ '||' <values> ]* }
+    rule list        { <combo> [ '|' <combo> ]* }
+    rule combo       { <values> [ '||' <values> ]* }
     rule values      { <value-inst>+ }
     rule value-inst  { <value><occurs>? }
 

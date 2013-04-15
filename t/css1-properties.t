@@ -68,7 +68,7 @@ for (
     {prop => 'float ', decl => 'left', ast => {"property" => "float",
                                              "expr" => ["ident" => "left"]},
     },
-    {prop => 'font-family', decl => 'Gill, "Helvetica", sans-serif',   ast => {"property" => "font-family", "expr" => ["family-name" => "gill",
+    {prop => 'font-family', decl => 'Gill, "Helvetica", sans-serif',   ast => {"property" => "font-family", "expr" => ["family-name" => "Gill",
                                                                                                                       "family-name" => "Helvetica",
                                                                                                                       "generic-family" => "sans-serif"]},
     },

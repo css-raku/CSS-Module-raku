@@ -17,11 +17,13 @@ class CSS::Language::CSS21::Actions
             if $<any_args>;
         make {ident => 'attr', args => $.list($/)}
     }
+
     method function:sym<counter>($/) {
         return $.warning('usage: counter(ident [, ident [,...] ])')
             if $<any_args>;
         make {ident => 'counter', args => $.list($/)}
     }
+
     method function:sym<counters>($/) {
         return $.warning('usage: counters(ident [, "string"])')
             if $<any_args>;
@@ -123,19 +125,19 @@ class CSS::Language::CSS21::Actions
 
     # - border-top|border-right|border-bottom|border-left: [ <border-width> || <border-style> || 'border-top-color' ] | inherit
     method decl:sym<border-*>($/) {
-        $._make_decl($/, q{[ <border-width> || <border-style> || 'border-color' ] | inherit},
-            :body($<border-width>));
+        $._make_decl($/, q{[ <border-width> || <border-style> || 'border-color' ] | inherit});
     }
 
-     # - border-top-color|border-right-color|border-bottom-color|border-left-color: <color> | transparent | inherit
-     method decl:sym<border-*-color>($/) {
+    # - border-top-color|border-right-color|border-bottom-color|border-left-color: <color> | transparent | inherit
+    method decl:sym<border-*-color>($/) {
         $._make_decl($/, q{<color> | transparent | inherit},
             :body($<border-color>));
     }
 
     # - border-top-style|border-right-style|border-bottom-style|border-left-style: <border-style> | inherit
     method decl:sym<border-*-style>($/) {
-        $._make_decl($/, q{<border-style> | inherit});
+        $._make_decl($/, q{<border-style> | inherit},
+                     :body($<border-style>));
     }
 
     method border-style($/) { make $.list($/) }
@@ -145,11 +147,11 @@ class CSS::Language::CSS21::Actions
     }
 
     # - border-top-width|border-right-width|border-bottom-width|border-left-width: <border-width> | inherit
-    method border-width($/) { make $.list($/) }
     method decl:sym<border-*-width>($/) {
         $._make_decl($/, q{<border-width> | inherit}, :body($<border-width>));
     }
 
+    method border-width($/) { make $.list($/) }
     method decl:sym<border-width>($/) {
         $._make_decl($/, q{<border-width>{1,4} | inherit},
                      :body($<border-width>), :expand<box>);
