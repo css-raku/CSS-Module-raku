@@ -47,6 +47,7 @@ grammar CSS::Language::Specification {
     rule value:sym<rule>        { '<'<id>'>' }
     rule value:sym<punc>        { ',' | '/' }
     rule quote {\'|\‘|\’}
-    rule value:sym<quoted>      {<.quote>[<property-ref=id> || (<- quote>*)]<.quote>}
+    rule property-ref           {<id>}
+    rule value:sym<quoted>      {<.quote>[<property-ref> || (<- quote>*)]<.quote>}
 
 }

@@ -4,22 +4,22 @@ class CSS::Language::Specification::Actions {
 
     # these actions translate a css property specification to Perl 6
     # rules or actions.
+    has %.prop-refs is rw;
 
     method property-spec($/) {
         my @props = @($<prop-names>.ast);
         my $sym = @props.join('|');
-        my $sym_esc = $sym.subst(/\-/, '\-'):g;
+        my $match = $sym.subst(/\-/, '\-'):g;
         my $grammar = $<synopsis>.ast;
-        # snick in ... || <any_args>
-        $grammar ~~ s!\s*\]\s*$! || <any_args> ]!;
 
-        my %prop_def;
-        %prop_def<sym> = $sym;
-        %prop_def<props> = @props;
-        %prop_def<grammar> = '{:i (' ~ $sym_esc ~ ") ':' " ~ $grammar ~ ' }';
-        %prop_def<synopsis> = $<synopsis>.Str;
+        my %prop-def;
+        %prop-def<sym> = $sym;
+        %prop-def<props> = @props;
+        %prop-def<match> = $match;
+        %prop-def<defn> = $grammar;
+        %prop-def<synopsis> = $<synopsis>.Str;
 
-        make %prop_def;
+        make %prop-def;
     }
 
     method prop-names($/) {
@@ -95,6 +95,11 @@ class CSS::Language::Specification::Actions {
     method value:sym<rule>($/)     { make '<' ~ $<id>.ast ~ '>' }
 
     method value:sym<punc>($/)     { make "'" ~ $/.Str ~ "'" }
+    method property-ref($/)        {
+        my $prop-ref = $<id>.ast;
+        %.prop-refs{ $prop-ref }++;
+        make $prop-ref;
+    }
     method value:sym<quoted>($/)   {
         make $<property-ref>
             ?? '<' ~ $<property-ref>.ast ~ '>'
