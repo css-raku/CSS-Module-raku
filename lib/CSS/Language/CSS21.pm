@@ -22,9 +22,9 @@ grammar CSS::Language::CSS21:ver<20110607.000>
 
     # --- Functions --- #
 
-    rule function:sym<attr>     {:i'attr(' [ <attribute_name=.ident> <type_or_unit=.ident>? [ ',' <fallback=.ident> ]? || <any-args>] ')'}
-    rule function:sym<counter>  {:i'counter(' [ <ident> [ ',' <ident> ]* || <any-args> ] ')'}
-    rule function:sym<counters> {:i'counters(' [ <ident> [ ',' <string> ]? || <any-args> ] ')' }
+    rule attr     {:i'attr(' [ <attribute_name=.identifier> <type-or-unit=.ident>? [ ',' <fallback=.ident> ]? || <any-args>] ')'}
+    rule counter  {:i'counter(' [ <identifier> [ ',' <list-style-type=.ident> ]* || <any-args> ] ')'}
+    rule counters {:i'counters(' [ <identifier> [ ',' <string> ]? || <any-args> ] ')' }
 
     # --- Properties --- #
 
@@ -32,10 +32,10 @@ grammar CSS::Language::CSS21:ver<20110607.000>
      rule decl:sym<azimuth> {:i (azimuth) ':' [
                                   <angle>
                                   | [
-                                       [ [ [ left\-side | far\-left | left | center\-left | center | center\-right | right | far\-right | right\-side ] & <lr=.ident>  ]
+                                       [ [ [ left\-side | far\-left | left | center\-left | center | center\-right | right | far\-right | right\-side ] & <ident>  ]
                                         | behind & <behind=.ident>  ]**1..2
                                   ]
-                                  | [ $<dl>=leftwards | $<dr>=rightwards ] & <delta=.ident>
+                                  | leftwards & <leftwards=.ident>| rightwards & <rightwards=.ident>
                                   | <inherit> || <any-args> ] }
 
     # - background-attachment: scroll | fixed | inherit
@@ -138,7 +138,7 @@ grammar CSS::Language::CSS21:ver<20110607.000>
     rule decl:sym<color> {:i (color) ':' [ <color> | <inherit> || <any-args> ] }
 
     # - content: normal | none | [ <string> | <uri> | <counter> | attr(<identifier>) | open-quote | close-quote | no-open-quote | no-close-quote ]+ | inherit
-    rule decl:sym<content> {:i (content) ':' [ [ normal | none ] & <ident>  | [ [ <string> | <uri> | <counter> | <?before 'attr('><function> | [ open\-quote | close\-quote | no\-open\-quote | no\-close\-quote ] & <ident>  ] ]+ | <inherit> || <any-args> ] }
+    rule decl:sym<content> {:i (content) ':' [ [ normal | none ] & <ident>  | [ [ <string> | <uri> | <counter> | <attr> | [ open\-quote | close\-quote | no\-open\-quote | no\-close\-quote ] & <ident>  ] ]+ | <inherit> || <any-args> ] }
 
     # - counter-increment: [ <identifier> <integer>? ]+ | none | inherit
     rule decl:sym<counter-increment> {:i (counter\-increment) ':' [ [ <identifier> <integer>? ]+ | none & <ident>  | <inherit> || <any-args> ] }
@@ -168,8 +168,8 @@ grammar CSS::Language::CSS21:ver<20110607.000>
 
     rule decl:sym<elevation> {:i (elevation) ':' [
                                    <angle>
-                                   | $<tilt>=[below | level | above]
-                                   | $<delta>=[ $<dh>=higher | $<dl>=lower ]
+                                   | [below | level | above ] & <ident>
+                                   | [ higher | lower ] & <tilt=.ident>
                                    | <inherit> || <any-args> ]}
 
     # - empty-cells: show | hide | inherit

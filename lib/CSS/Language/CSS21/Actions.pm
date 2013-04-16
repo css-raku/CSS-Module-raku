@@ -9,25 +9,25 @@ class CSS::Language::CSS21::Actions
     # --- Functions --- #
 
     method any-function($/)             {
-        $.warning('unknown function', $<ident>.ast.lc);
+        $.warning('ignoring function', $<ident>.ast.lc);
     }
 
-    method function:sym<attr>($/)             {
+    method attr($/)             {
         return $.warning('usage: attr( attribute-name <type-or-unit>? [, <fallback> ]? )')
             if $<any-args>;
-        make {ident => 'attr', args => $.list($/)}
+        make $.node($/);
     }
 
-    method function:sym<counter>($/) {
+    method counter($/) {
         return $.warning('usage: counter(ident [, ident [,...] ])')
             if $<any-args>;
-        make {ident => 'counter', args => $.list($/)}
+        make $.list($/);
     }
 
-    method function:sym<counters>($/) {
+    method counters($/) {
         return $.warning('usage: counters(ident [, "string"])')
             if $<any-args>;
-        make {ident => 'counters', args => $.list($/)}
+        make $.node($/);
     }
 
     # --- Properties --- #
@@ -45,11 +45,14 @@ class CSS::Language::CSS21::Actions
             %ast<inherit> = True;
         }
         else {
-            my @expr;
+            %ast<expr> = $.list($/);
+
+            # compute the derived angle
+            my $result;
             if $<angle> {
-                @expr = (<angle> => $<angle>.ast);
+                $result = (angle => $<angle>.ast);
             }
-            elsif $<lr> || $<bh> {
+            elsif $<ident> || $<behind> {
 
                 state %angles = (
                     'left-side'    => [270, 270],
@@ -64,17 +67,17 @@ class CSS::Language::CSS21::Actions
                     'behind'       => [180, 180],
                     );
 
-                my $keyw = $<lr>.ast || 'behind';
+                my $keyw = ($<ident> || $<behind>).ast;
                 my $bh = $<behind> ?? 1 !! 0;
 
-                @expr = (angle => $.token(%angles{$keyw}[$bh], :type<angle>, :units<degrees> ));
+                $result = (angle => $.token(%angles{$keyw}[$bh], :type<angle>, :units<degrees> ));
             }
-            elsif $<delta> {
-                my $delta_angle = $<dl> ?? -20 !! 20;
-                @expr = (<delta> => $.token($delta_angle, :type<angle>, :units<degrees> ));
+            else {
+                my $delta_angle = $<leftwards> ?? -20 !! 20;
+                $result = (delta => $.token($delta_angle, :type<angle>, :units<degrees> ));
             }
 
-            %ast<expr> = @expr;
+            %ast<_result> = $result;
         }
 
         make %ast;
@@ -229,17 +232,18 @@ class CSS::Language::CSS21::Actions
 
         my %ast;
         %ast<property> = $0.Str.trim.lc;
+        %ast<expr> = $.list($/);
 
         if $<inherit> {
             %ast<inherit> = True;
         }
         else {
-            my @expr;
+            my $result;
 
             if $<angle> {
-                @expr = (<angle> => $<angle>.ast);
+                $result = (angle => $<angle>.ast);
             }
-            elsif $<tilt> {
+            elsif $<ident> {
 
                 state %angles = (
                     'below'    => -90,
@@ -247,14 +251,14 @@ class CSS::Language::CSS21::Actions
                     'above'    =>  90,
                     );
 
-                my $keyw = $<tilt>.Str.trim.lc;
-                @expr = (angle => $.token(%angles{$keyw}, :type<angle>, :units<degrees> ));
+                my $keyw = $<ident>.ast;
+                $result = (angle => $.token(%angles{$keyw}, :type<angle>, :units<degrees> ));
             }
-            elsif $<delta> {
-                my $delta_angle = $<dl> ?? -10 !! 10;
-                @expr = (delta => $.token($delta_angle, :type<angle>, :units<degrees> ));
+            elsif $<tilt> {
+                my $delta_angle = $<tilt>.ast eq 'lower' ?? -10 !! 10;
+                $result = (delta => $.token($delta_angle, :type<angle>, :units<degrees> ));
             }
-            %ast<expr> = @expr;
+            %ast<_result> = $result;
         }
 
         make %ast;

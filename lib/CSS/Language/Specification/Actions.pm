@@ -71,7 +71,8 @@ class CSS::Language::Specification::Actions {
     }
 
     method value:sym<func>($/)     {
-        make "<?before '" ~ $<keyw>.ast ~ "('><function>";
+        # todo - save function prototype
+        make '<' ~ $<keyw>.ast ~ '>';
     }
     method value:sym<inherit>($/)  { make '<inherit>' }
     method value:sym<keywords>($/) {

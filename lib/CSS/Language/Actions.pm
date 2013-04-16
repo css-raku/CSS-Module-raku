@@ -75,7 +75,7 @@ class CSS::Language::Actions
                 die "bad :expand option: " ~ $expand;
             }
         }
-        
+
         my %ast;
         %ast<property> = $property;
         %ast<inherit> = True if $inherit;
