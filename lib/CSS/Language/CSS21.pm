@@ -155,7 +155,7 @@ grammar CSS::Language::CSS21:ver<20110607.000>
     rule decl:sym<cue-before> {:i (cue\-before) ':'  [ <cue-before> | inherit || <any-args> ] }
 
     # - cue: [ 'cue-before' || 'cue-after' ] | inherit
-    rule decl:sym<cue> {:i (cue) ':' [ [ [ <cue-before> | <cue-after> ]**1..2 ] | <inherit> || <any-args> ] }
+    rule decl:sym<cue> {:i (cue) ':' [ <cue-before> <cue-after>? | <inherit> || <any-args> ] }
 
     # - cursor: [ [<uri> ,]* [ auto | crosshair | default | pointer | move | e-resize | ne-resize | nw-resize | n-resize | se-resize | sw-resize | s-resize | w-resize | text | wait | help | progress ] ] | inherit
     rule decl:sym<cursor> {:i (cursor) ':' [ [ [ <uri> ',' ]* [ [ auto | crosshair | default | pointer | move | e\-resize | ne\-resize | nw\-resize | n\-resize | se\-resize | sw\-resize | 's-resize' | w\-resize | text | wait | help | progress ] & <ident>  ] ] | <inherit> || <any-args> ] }
@@ -164,7 +164,7 @@ grammar CSS::Language::CSS21:ver<20110607.000>
     rule decl:sym<direction> {:i (direction) ':' [ [ ltr | rtl ] & <ident>  | <inherit> || <any-args> ] }
 
     # - display: inline | block | list-item | inline-block | table | inline-table | table-row-group | table-header-group | table-footer-group | table-row | table-column-group | table-column | table-cell | table-caption | none | inherit
-    rule decl:sym<display> {:i (display) ':' [ [ inline | block | list\-item | inline\-block | table | inline\-table | table\-row\-group | table\-header\-group | table\-footer\-group | table\-row | table\-column\-group | table\-column | table\-cell | table\-caption | none ] & <ident>  | <inherit> || <any-args> ] }
+    rule decl:sym<display> {:i (display) ':' [ [ block | inline[\-[block|table]]? | list\-item | table[\-[cell|caption|[header|footer]\-group]|[row|column][\-group]?] | none ] & <ident> | <inherit> || <any-args> ] }
 
     rule decl:sym<elevation> {:i (elevation) ':' [
                                    <angle>
@@ -179,7 +179,7 @@ grammar CSS::Language::CSS21:ver<20110607.000>
     rule decl:sym<float> {:i (float) ':' [ [ left | right | none ] & <ident>  | <inherit> || <any-args> ] }
 
     # - font-family: [[ <family-name> | <generic-family> ] [, <family-name> | <generic-family> ]* ] | inherit
-    rule font-family {:i [ serif | sans\-serif | cursive | fantasy | monospace ] & <generic-family=.ident-cs> | [ <family-name=.ident-cs> ]+ | <family-name=.string> }
+    rule font-family {:i [ serif | sans\-serif | cursive | fantasy | monospace ] & <generic-family=.ident-cs> || [ <family-name=.ident-cs> ]+ | <family-name=.string> }
     rule decl:sym<font-family> {:i (font\-family) ':' [ <font-family> [ ',' <font-family> || <any> ]*
                                                         | <inherit> || <any-args> ] }
 
@@ -253,16 +253,12 @@ grammar CSS::Language::CSS21:ver<20110607.000>
     rule decl:sym<margin> {:i (margin) ':' [ <margin-width>**1..4 | <inherit> || <any-args> ] }
 
     # - max-height: <length> | <percentage> | none | inherit
-    rule decl:sym<max-height> {:i (max\-height) ':' [ <length> | <percentage> | none & <ident>  | <inherit> || <any-args> ] }
-
     # - max-width: <length> | <percentage> | none | inherit
-    rule decl:sym<max-width> {:i (max\-width) ':' [ <length> | <percentage> | none & <ident>  | <inherit> || <any-args> ] }
+    rule decl:sym<max-[width|height]> {:i (max\-[width|height]) ':' [ <length> | <percentage> | none & <ident>  | <inherit> || <any-args> ] }
 
     # - min-height: <length> | <percentage> | inherit
-    rule decl:sym<min-height> {:i (min\-height) ':' [ <length> | <percentage> | <inherit> || <any-args> ] }
-
     # - min-width: <length> | <percentage> | inherit
-    rule decl:sym<min-width> {:i (min\-width) ':' [ <length> | <percentage> | <inherit> || <any-args> ] }
+    rule decl:sym<min-[width|height]> {:i (min\-[width|height]) ':' [ <length> | <percentage> | <inherit> || <any-args> ] }
 
     # - orphans: <integer> | inherit
     rule decl:sym<orphans> {:i (orphans) ':' [ <integer> | <inherit> || <any-args> ] }
@@ -272,15 +268,13 @@ grammar CSS::Language::CSS21:ver<20110607.000>
     rule decl:sym<outline-color> {:i (outline\-color) ':'  [ <outline-color> | inherit || <any-args> ] }
 
     # - outline-style: <border-style> | inherit
-    token outline-style {:i <border-style> }
-    rule decl:sym<outline-style> {:i (outline\-style) ':'  [ <outline-style> | inherit || <any-args> ] }
+    rule decl:sym<outline-style> {:i (outline\-style) ':'  [ <outline-style=.border-style> | inherit || <any-args> ] }
 
     # - outline-width: <border-width> | inherit
-    token outline-width {:i <border-width> }
-    rule decl:sym<outline-width> {:i (outline\-width) ':'  [ <outline-width> | inherit || <any-args> ] }
+    rule decl:sym<outline-width> {:i (outline\-width) ':'  [ <outline-width=.border-width> | inherit || <any-args> ] }
 
    # - outline: [ 'outline-color' || 'outline-style' || 'outline-width' ] | inherit
-    rule decl:sym<outline> {:i (outline) ':' [ [ [ <outline-color> | <outline-style> | <outline-width> ]**1..3 ] | <inherit> || <any-args> ] }
+    rule decl:sym<outline> {:i (outline) ':' [ [ [ <outline-color> | <outline-style=.border-style> | <outline-width=.border-width> ]**1..3 ] | <inherit> || <any-args> ] }
 
     # - overflow: visible | hidden | scroll | auto | inherit
     rule decl:sym<overflow> {:i (overflow) ':' [ [ visible | hidden | scroll | auto ] & <ident>  | <inherit> || <any-args> ] }
@@ -301,10 +295,11 @@ grammar CSS::Language::CSS21:ver<20110607.000>
 
     # - pause-after: <time> | <percentage> | inherit
     # - pause-before: <time> | <percentage> | inherit
-    rule decl:sym<pause-[before|after]> {:i (pause\-[before|after]) ':' [ <time> | <percentage> | <inherit> || <any-args> ] }
+    token pause {:i <time> | <percentage> }
+    rule decl:sym<pause-[before|after]> {:i (pause\-[before|after]) ':' [ <pause> | <inherit> || <any-args> ] }
 
     # - pause: [ [<time> | <percentage>]{1,2} ] | inherit
-    rule decl:sym<pause> {:i (pause) ':' [ [ [ [ <time> | <percentage> ] ]**1..2 ] | <inherit> || <any-args> ] }
+    rule decl:sym<pause> {:i (pause) ':' [ <pause-before=.pause> <pause-after=.pause>? | <inherit> || <any-args> ] }
 
     # - pitch-range: <number> | inherit
     rule decl:sym<pitch-range> {:i (pitch\-range) ':' [ <number> | <inherit> || <any-args> ] }

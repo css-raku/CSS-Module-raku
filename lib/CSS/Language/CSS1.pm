@@ -21,7 +21,7 @@ grammar CSS::Language::CSS1:ver<20080411>
     # 5.2 Font Properties
     # -------------------
     # - font-family: [[<family-name> | <generic-family>],]* [<family-name> | <generic-family>]
-    rule font-family {:i [ serif | sans\-serif | cursive | fantasy | monospace ] & <generic-family=.ident-cs> | [ <family-name=.ident-cs> ]+ | <family-name=.string> }
+    rule font-family {:i [ serif | sans\-serif | cursive | fantasy | monospace ] & <generic-family=.ident-cs> || [ <family-name=.ident-cs> ]+ | <family-name=.string> }
     rule decl:sym<font-family> {:i (font\-family) ':' [ <font-family> [ ',' <font-family> || <any> ]*
                                                         || <any-args> ] }
 

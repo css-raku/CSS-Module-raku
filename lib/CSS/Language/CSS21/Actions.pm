@@ -371,16 +371,17 @@ class CSS::Language::CSS21::Actions
         $._make_decl($/, q{<integer> | inherit});
     }
 
+    method outline-color($/) { make $.list($/) }
     method decl:sym<outline-color>($/) {
-        $._make_decl($/, q{<color> | invert | inherit});
+        $._make_decl($/, q{<color> | invert | inherit}, :body($<outline-color>));
     }
 
     method decl:sym<outline-style>($/) {
-        $._make_decl($/, q{<border-style> | inherit});
+        $._make_decl($/, q{<border-style> | inherit}, :body($<outline-style>));
     }
 
     method decl:sym<outline-width>($/) {
-        $._make_decl($/, q{<border-width> | inherit});
+        $._make_decl($/, q{<border-width> | inherit}, :body($<outline-width>));
     }
 
     method decl:sym<outline>($/) {
@@ -410,8 +411,9 @@ class CSS::Language::CSS21::Actions
         $._make_decl($/, q{avoid | auto | inherit});
     }
 
+    method pause($/) { make $.list($/) }
     method decl:sym<pause-[before|after]>($/) {
-        $._make_decl($/, q{<time> | <percentage> | inherit});
+        $._make_decl($/, q{<time> | <percentage> | inherit}, :body($<pause>));
     }
 
     method decl:sym<pause>($/) {
