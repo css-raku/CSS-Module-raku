@@ -31,41 +31,41 @@ my $embedded_page = 'media print and (width: 21cm) and (height: 29.7cm) {
       @page { margin: 3cm; }
    }';
 
-my $embedded_page_ast = {"media_list" => ["media_query" => ["media" => "print",
-                                                            "media_expr" => {"media_feature" => "width", "expr" => ["term" => 21]},
-                                                            "media_expr" => {"media_feature" => "height", "expr" => ["term" => 29.7]}]],
-                         "media_rules" => ["at_rule" => {"declarations" => {"margin" => {"expr" => ["term" => 3]}}},
+my $embedded_page_ast = {"media-list" => ["media-query" => ["media" => "print",
+                                                            "media-expr" => {"media-feature" => "width", "expr" => ["term" => 21]},
+                                                            "media-expr" => {"media-feature" => "height", "expr" => ["term" => 29.7]}]],
+                         "media-rules" => ["at-rule" => {"declarations" => {"margin" => {"expr" => ["term" => 3]}}},
                                            '@' => "page"],
                          '@' => "media"};
 
 for (
     term      => {input => '300dpi', ast => 300, token => {type => 'resolution', units => 'dpi'}},
-    at_rule   => {input => 'media all { body { background:lime } }',
-                  ast => {"media_list" => ["media_query" => ["media" => "all"]], "media_rules" => ["ruleset" => {"selectors" => ["selector" => ["simple_selector" => ["element_name" => "body"]]], "declarations" => {"background" => {"expr" => ["term" => "lime"]}}}], '@' => "media"},
+    at-rule   => {input => 'media all { body { background:lime } }',
+                  ast => {"media-list" => ["media-query" => ["media" => "all"]], "media-rules" => ["ruleset" => {"selectors" => ["selector" => ["simple-selector" => ["element-name" => "body"]]], "declarations" => {"background" => {"expr" => ["term" => "lime"]}}}], '@' => "media"},
     },
-    at_rule => {input => 'media all and (color) { }',
-                ast => {"media_list" => ["media_query" => ["media" => "all", "media_expr" => {"media_feature" => "color"}]], "media_rules" => [], '@' => "media"},
+    at-rule => {input => 'media all and (color) { }',
+                ast => {"media-list" => ["media-query" => ["media" => "all", "media-expr" => {"media-feature" => "color"}]], "media-rules" => [], '@' => "media"},
     },
-    at_rule => {input => 'media all and (min-color: 2) { }',
-                ast => {"media_list" => ["media_query" => ["media" => "all", "media_expr" => {"media_feature" => "min-color", "expr" => ["term" => 2]}]], "media_rules" => [], '@' => "media"},
+    at-rule => {input => 'media all and (min-color: 2) { }',
+                ast => {"media-list" => ["media-query" => ["media" => "all", "media-expr" => {"media-feature" => "min-color", "expr" => ["term" => 2]}]], "media-rules" => [], '@' => "media"},
     },
     # try out dpi and dpcm term extensions
-    at_rule => {input => 'media all AND (min-resolution: 300dpi) And (min-resolution: 118dpcm) {}',
-                ast => {"media_list" => ["media_query" => ["media" => "all", "media_expr" => {"media_feature" => "min-resolution", "expr" => ["term" => 300]}, "media_expr" => {"media_feature" => "min-resolution", "expr" => ["term" => 118]}]], "media_rules" => [], '@' => "media"},
+    at-rule => {input => 'media all AND (min-resolution: 300dpi) And (min-resolution: 118dpcm) {}',
+                ast => {"media-list" => ["media-query" => ["media" => "all", "media-expr" => {"media-feature" => "min-resolution", "expr" => ["term" => 300]}, "media-expr" => {"media-feature" => "min-resolution", "expr" => ["term" => 118]}]], "media-rules" => [], '@' => "media"},
     },
-    at_rule => {input => 'media noT print {body{margin : 1cm}}',
-                ast => {"media_list" => ["media_query" => ["media_op" => "not", "media" => "print"]], "media_rules" => ["ruleset" => {"selectors" => ["selector" => ["simple_selector" => ["element_name" => "body"]]], "declarations" => {"margin" => {"expr" => ["term" => 1e0]}}}], "\@" => "media"},
+    at-rule => {input => 'media noT print {body{margin : 1cm}}',
+                ast => {"media-list" => ["media-query" => ["media-op" => "not", "media" => "print"]], "media-rules" => ["ruleset" => {"selectors" => ["selector" => ["simple-selector" => ["element-name" => "body"]]], "declarations" => {"margin" => {"expr" => ["term" => 1e0]}}}], "\@" => "media"},
     },
-    at_rule => {input => 'media ONLY all And (none) { }',
-                ast => {"media_list" => ["media_query" => ["media_op" => "only", "media" => "all", "media_expr" => {"media_feature" => "none"}]], "media_rules" => [], '@' => "media"},
+    at-rule => {input => 'media ONLY all And (none) { }',
+                ast => {"media-list" => ["media-query" => ["media-op" => "only", "media" => "all", "media-expr" => {"media-feature" => "none"}]], "media-rules" => [], '@' => "media"},
     },
     # we should also have extended the import at-rule
     import => {input => '@import url(example.css) screen and (color), projection and (color);',
                ast => {"url" => "example.css",
-                       "media_list" => ["media_query" => ["media" => "screen", "media_expr" => {"media_feature" => "color"}],
-                                        "media_query" => ["media" => "projection", "media_expr" => {"media_feature" => "color"}]]},
+                       "media-list" => ["media-query" => ["media" => "screen", "media-expr" => {"media-feature" => "color"}],
+                                        "media-query" => ["media" => "projection", "media-expr" => {"media-feature" => "color"}]]},
     },
-    at_rule => {input => $embedded_page, ast => $embedded_page_ast},
+    at-rule => {input => $embedded_page, ast => $embedded_page_ast},
     ) {
     my $rule = $_.key;
     my %test = $_.value;

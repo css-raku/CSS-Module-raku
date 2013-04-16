@@ -10,17 +10,17 @@ use v6;
 #    to load the Paged Media extension module in your class structure.
 
 grammar CSS::Extensions::CSS3::Media::Syntax {
-    rule at_rule:sym<media> {(:i'media') <media_list> <media_rules> }
+    rule at-rule:sym<media> {(:i'media') <media-list> <media-rules> }
 
-    rule media_rules {
-        '{' ['@'<?before [:i'page']><at_rule>|<ruleset>]* <.end_block>
+    rule media-rules {
+        '{' ['@'<?before [:i'page']><at-rule>|<ruleset>]* <.end-block>
     }
 
-    rule media_list  {<media_query> [',' <media_query>]*}
-    rule media_query {[<media_op>? <media=.ident>|<media_expr>]
-                      [:i'and' <media_expr>]*}
-    rule media_op    {:i['only'|'not']}
-    rule media_expr  { '(' <media_feature=.ident> [ ':' <expr> ]? ')' }
+    rule media-list  {<media-query> [',' <media-query>]*}
+    rule media-query {[<media-op>? <media=.ident>|<media-expr>]
+                      [:i'and' <media-expr>]*}
+    rule media-op    {:i['only'|'not']}
+    rule media-expr  { '(' <media-feature=.ident> [ ':' <expr> ]? ')' }
 
     token resolution {:i<num>(dpi|dpcm)}
     token quantity:sym<resolution> {<resolution>}
@@ -33,9 +33,9 @@ grammar CSS::Extensions::CSS3::Media:ver<20120619.000>
 
 class CSS::Extensions::CSS3::Media::Actions {
 
-    # media_rules, media_list, media_query, media see core actions
-    method media_op($/)              { make $/.Str.lc }
-    method media_expr($/)            { make $.node($/) }
+    # media-rules, media-list, media-query, media see core actions
+    method media-op($/)              { make $/.Str.lc }
+    method media-expr($/)            { make $.node($/) }
     method resolution($/)            { make $.token($<num>.ast, :units($0.Str.lc), :type('resolution')) }
     method quantity:sym<resolution>($/) { make $<resolution>.ast }
 }

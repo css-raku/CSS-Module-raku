@@ -40,14 +40,14 @@ my $top_center_ast = {"declarations" => {"color" => {"expr" => ["term" => "red"]
                       '@' => "page"};
 
 for (
-    at_rule   => {input => 'page :left { margin-left: 4cm; }',
+    at-rule   => {input => 'page :left { margin-left: 4cm; }',
                   ast => {"page" => "left", "declarations" => {"margin-left" => {"expr" => ["term" => 4e0]}}, "\@" => "page"},
     },
-    at_rule   => {input => 'page :junk { margin-right: 2cm }',
+    at-rule   => {input => 'page :junk { margin-right: 2cm }',
                   ast => {"declarations" => {"margin-right" => {"expr" => ["term" => 2e0]}}, "\@" => "page"},
                   warnings => 'ignoring page pseudo: junk',
     },
-    at_rule   => {input => 'page : { margin-right: 2cm }',
+    at-rule   => {input => 'page : { margin-right: 2cm }',
                   ast => Mu,
                   warnings => "':' should be followed by one of: left right first",
     },
@@ -60,7 +60,7 @@ for (
                  ast => {"\@top-center" => {"margin-box" => {"box-vpos" => "top", "box-center" => "center"},
                                            "declarations" => {"content" => {"expr" => ["term" => "Page ", "term" => {"ident" => "counters", "args" => ["term" => "page"]}]}}}},
     },
-    at_rule => {input => $top_center, ast => $top_center_ast},
+    at-rule => {input => $top_center, ast => $top_center_ast},
     ) {
     my $rule = $_.key;
     my %test = $_.value;

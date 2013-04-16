@@ -13,10 +13,10 @@ grammar CSS::Extensions::CSS3::PagedMedia::Syntax {
     rule page-pseudo:sym<other>   {<ident>}
     rule page-pseudo:sym<missing> {''}
 
-    rule at_rule:sym<page>  {(:i'page') [\:<page=.page-pseudo>]? <declarations=.page-declarations> }
+    rule at-rule:sym<page>  {(:i'page') [\:<page=.page-pseudo>]? <declarations=.page-declarations> }
 
     rule page-declarations {
-        '{' [ '@'<declaration=.margin-declaration> | <declaration> || <dropped_decl> ]* <.end_block>
+        '{' [ '@'<declaration=.margin-declaration> | <declaration> || <dropped-decl> ]* <.end-block>
     }
 
     token box-hpos   {:i[left|right]}
@@ -43,7 +43,7 @@ class CSS::Extensions::CSS3::PagedMedia::Actions {
     method page-pseudo:sym<other>($/) {$.warning('ignoring page pseudo', $/.Str)}
     method page-pseudo:sym<missing>($/) {$.warning("':' should be followed by one of: left right first")}
 
-    method page-declarations($/) { make $.declaration_list($/) }
+    method page-declarations($/) { make $.declaration-list($/) }
 
     method box-hpos($/)   { make $/.Str.lc }
     method box-vpos($/)   { make $/.Str.lc }

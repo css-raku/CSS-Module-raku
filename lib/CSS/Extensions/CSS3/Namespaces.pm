@@ -6,7 +6,7 @@ use v6;
 
 grammar CSS::Extensions::CSS3::Namespaces::Syntax {
 
-    rule at_decl:sym<namespace> {(:i'namespace') <prefix=.ident>? [<url=.string>|<url>] ';' }
+    rule at-decl:sym<namespace> {(:i'namespace') <prefix=.ident>? [<url=.string>|<url>] ';' }
 
 }
 
@@ -15,6 +15,6 @@ grammar CSS::Extensions::CSS3::Namespaces:ver<20110929.000>
 }
 
 class CSS::Extensions::CSS3::Namespaces::Actions {
-    method at_decl:sym<namespace>($/) { make $.at_rule($/) }
+    method at-decl:sym<namespace>($/) { make $.at-rule($/) }
 }
 

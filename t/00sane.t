@@ -20,7 +20,7 @@ for (
     declaration => {input => 'background-attachment: FiXed',   ast => {property => 'background-attachment', expr => [ident => 'fixed']},
     },
     # boxed properties should be expanded
-    declaration_list => {input => 'margin: 2em 3em',  
+    declaration-list => {input => 'margin: 2em 3em',  
                          ast => {"margin" => {"expr" => ["margin-top" => ["length" => 2e0],
                                                          "margin-right" => ["length" => 3e0],
                                                          "margin-bottom" => ["length" => 2e0],

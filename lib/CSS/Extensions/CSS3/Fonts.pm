@@ -7,7 +7,7 @@ use v6;
 # is the proposed at-rule @font-feature-values
 
 grammar CSS::Extensions::CSS3::Fonts::Syntax {
-    rule at_rule:sym<font_face> {(:i'font-face') <declarations> }
+    rule at-rule:sym<font_face> {(:i'font-face') <declarations> }
 }
 
 grammar CSS::Extensions::CSS3::Fonts:ver<20130212.000> 
@@ -19,7 +19,7 @@ grammar CSS::Extensions::CSS3::Fonts:ver<20130212.000>
 }
 
 class CSS::Extensions::CSS3::Fonts::Actions {
-    method at_rule:sym<font_face>($/) { make $.at_rule($/) }
+    method at-rule:sym<font_face>($/) { make $.at-rule($/) }
 
     method function:sym<fmt-or-loc>($/) {
         my $func = $0.Str.lc;

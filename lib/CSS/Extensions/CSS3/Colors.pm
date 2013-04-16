@@ -7,32 +7,32 @@ grammar CSS::Extensions::CSS3::Colors::Syntax {
 
 # extensions and at rules for CSS3 Color Module
 
-    rule at_rule:sym<color_profile> {(:i'color-profile') <declarations> }
+    rule at-rule:sym<color-profile> {(:i'color-profile') <declarations> }
 
-    rule color_angle{<num>$<percentage>=[\%]?}
-    rule color_alpha{<num>$<percentage>=[\%]?}
+    rule color-angle{<num>$<percentage>=[\%]?}
+    rule color-alpha{<num>$<percentage>=[\%]?}
 
     # <rgb> and <hex> are defined in CSS core grammar
     rule color:sym<rgba> {:i'rgba('
                               [ <r=.color-range> ','
                                 <g=.color-range> ','
                                 <b=.color-range> ','
-                                <a=.color_alpha> || <any-args> ]
+                                <a=.color-alpha> || <any-args> ]
                    ')'
     }
 
     rule color:sym<hsl> {:i'hsl('
-                             [ <h=.color_angle> ','
-                               <s=.color_alpha> ','
-                               <l=.color_alpha> || <any-args> ]
+                             [ <h=.color-angle> ','
+                               <s=.color-alpha> ','
+                               <l=.color-alpha> || <any-args> ]
                     ')'
     }
 
     rule color:sym<hsla> {:i'hsla('
-                              [ <h=.color_angle> ','
-                                <s=.color_alpha> ','
-                                <l=.color_alpha> ','
-                                <a=.color_alpha> || <any-args> ]
+                              [ <h=.color-angle> ','
+                                <s=.color-alpha> ','
+                                <l=.color-alpha> ','
+                                <a=.color-alpha> || <any-args> ]
                    ')'
     }
 
@@ -45,16 +45,16 @@ grammar CSS::Extensions::CSS3::Colors:ver<20110607.000>
 
 class CSS::Extensions::CSS3::Colors::Actions {
 
-    method at_rule:sym<color_profile>($/) { make $.at_rule($/) }
+    method at-rule:sym<color-profile>($/) { make $.at-rule($/) }
 
-    method color_angle($/) {
+    method color-angle($/) {
         my $angle = %<num>.ast;
         $angle = ($angle * 3.6).round
             if $<percentage>.Str;
         make $.token($angle, :type('num'), :units('degrees'));
     }
 
-    method color_alpha($/) {
+    method color-alpha($/) {
         my $alpha = %<num>.ast;
         $alpha = ($alpha / 100)
             if $<percentage>.Str;

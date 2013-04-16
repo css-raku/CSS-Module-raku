@@ -25,20 +25,20 @@ use t::AST;
 my $css_actions = t::CSS3::NamespaceActions.new;
 
 for (
-    at_decl => {input => 'namespace empty "";',
+    at-decl => {input => 'namespace empty "";',
                 ast => {"prefix" => "empty", "url" => "", '@' => "namespace"},
     },
-    at_decl => {input => 'NAMESPACE "";',
+    at-decl => {input => 'NAMESPACE "";',
                 ast => {"url" => "", '@' => "namespace"},
     },
-    at_decl => {input => 'namespace "http://www.w3.org/1999/xhtml";',
+    at-decl => {input => 'namespace "http://www.w3.org/1999/xhtml";',
                 ast => {"url" => "http://www.w3.org/1999/xhtml", '@' => "namespace"},
     },
-    at_decl => {input => 'namespace svg "http://www.w3.org/2000/svg";',
+    at-decl => {input => 'namespace svg "http://www.w3.org/2000/svg";',
                 ast => {"prefix" => "svg", "url" => "http://www.w3.org/2000/svg", '@' => "namespace"},
     },
     stylesheet => {input => '@namespace toto url(http://toto.example.org);',
-                ast => [at_rule => {"prefix" => "toto", "url" => "http://toto.example.org", '@' => "namespace"}],
+                ast => [at-rule => {"prefix" => "toto", "url" => "http://toto.example.org", '@' => "namespace"}],
     },
     ) {
     my $rule = $_.key;

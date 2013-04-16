@@ -15,40 +15,40 @@ grammar CSS::Extensions::CSS3::Selectors::Syntax {
     # allow '::' element selectors
     rule pseudo:sym<element2> {'::'<element=.ident>}
  
-    rule namespace_prefix {[<ident>|<wildcard>]?'|'}
+    rule namespace-prefix {[<ident>|<wildcard>]?'|'}
     rule wildcard {'*'}
 
-    token simple_selector { <namespace_prefix>? [<element_name>|<wildcard>] [<id> | <class> | <attrib> | <pseudo>]*
+    token simple-selector { <namespace-prefix>? [<element-name>|<wildcard>] [<id> | <class> | <attrib> | <pseudo>]*
                           | [<id> | <class> | <attrib> | <pseudo>]+ }
 
-    rule type_selector {<namespace_prefix>? <element_name>}
+    rule type-selector {<namespace-prefix>? <element-name>}
     
-    rule attrib        {'[' <ident> [ <attribute_selector> [<ident>|<string>] ]? ']'}
+    rule attrib        {'[' <ident> [ <attribute-selector> [<ident>|<string>] ]? ']'}
 
-    rule universal      {<namespace_prefix>? <wildcard>}
+    rule universal      {<namespace-prefix>? <wildcard>}
 
-    rule term:sym<unicode_range> {'U+'<unicode_range>}
+    rule term:sym<unicode-range> {'U+'<unicode-range>}
 
     # inherited from base: = ~= |=
-    rule attribute_selector:sym<prefix>    {'^='}
-    rule attribute_selector:sym<suffix>    {'$='}
-    rule attribute_selector:sym<substring> {'*='}
+    rule attribute-selector:sym<prefix>    {'^='}
+    rule attribute-selector:sym<suffix>    {'$='}
+    rule attribute-selector:sym<substring> {'*='}
 
-    token nth_functor {:i[nth|first|last|'nth-last']'-'['child'|'of-type']}
+    token nth-functor {:i[nth|first|last|'nth-last']'-'['child'|'of-type']}
     # to compute a.n + b
-    proto token nth_args {*}
-    token nth_args:sym<odd>   {:i 'odd' }
-    token nth_args:sym<even>  {:i 'even' }
-    token nth_args:sym<expr> {
+    proto token nth-args {*}
+    token nth-args:sym<odd>   {:i 'odd' }
+    token nth-args:sym<even>  {:i 'even' }
+    token nth-args:sym<expr> {
         <ws>?
-        [$<a_sign>=[\+|\-]? <a=.posint>? $<n>=<[Nn]> <ws>? [$<b_sign>=[\+|\-] <ws>? <b=.posint>]?
+        [$<a-sign>=[\+|\-]? <a=.posint>? $<n>=<[Nn]> <ws>? [$<b-sign>=[\+|\-] <ws>? <b=.posint>]?
         |<b=.posint>
         ]<ws>?
     }
 
-    rule pseudo_function:sym<nth_selector> {<ident=.nth_functor>'(' [<args=.nth_args> || <any-args> ] ')'} 
-    rule negation_args {[<type_selector> | <universal> | <id> | <class> | <attrib> | $<nested>=[<?before [:i':not(']><pseudo>] | <pseudo> | <any-arg> ]+}
-    rule pseudo_function:sym<negation>  {:i'not(' [ <negation_args> || <any-args> ] ')'}
+    rule pseudo-function:sym<nth-selector> {<ident=.nth-functor>'(' [<args=.nth-args> || <any-args> ] ')'} 
+    rule negation_args {[<type-selector> | <universal> | <id> | <class> | <attrib> | $<nested>=[<?before [:i':not(']><pseudo>] | <pseudo> | <any-arg> ]+}
+    rule pseudo-function:sym<negation>  {:i'not(' [ <negation_args> || <any-args> ] ')'}
 
 }
 
@@ -58,41 +58,41 @@ grammar CSS::Extensions::CSS3::Selectors:ver<20090929.000>
 
 class CSS::Extensions::CSS3::Selectors::Actions {
 
-    method namespace_prefix($/) { make $.node($/) }
+    method namespace-prefix($/) { make $.node($/) }
     method wildcard($/)         { make $/.Str }
-    method type_selector($/)    { make $.node($/) }
+    method type-selector($/)    { make $.node($/) }
     method universal($/)        { make $.node($/) }
 
-    method attribute_selector:sym<prefix>($/)    { make $/.Str }
-    method attribute_selector:sym<suffix>($/)    { make $/.Str }
-    method attribute_selector:sym<substring>($/) { make $/.Str }
+    method attribute-selector:sym<prefix>($/)    { make $/.Str }
+    method attribute-selector:sym<suffix>($/)    { make $/.Str }
+    method attribute-selector:sym<substring>($/) { make $/.Str }
 
-    method term:sym<unicode_range>($/) { make $.node($/) }
-    method pseudo_function:sym<nth_selector>($/)  {
+    method term:sym<unicode-range>($/) { make $.node($/) }
+    method pseudo-function:sym<nth-selector>($/)  {
         return $.warning('usage '~$<ident>~'(an+b) e.g "4" "3n+1"')
             if $<any-args>;
         make $.node($/)
     }
 
-    method nth_args:sym<odd>($/)     { make {a => 2, b=> 1} }
-    method nth_args:sym<even>($/)    { make {a => 2 } }
-    method nth_args:sym<expr>($/)    {
+    method nth-args:sym<odd>($/)     { make {a => 2, b=> 1} }
+    method nth-args:sym<even>($/)    { make {a => 2 } }
+    method nth-args:sym<expr>($/)    {
 
         my %node = $.node($/);
 
-        if $<a_sign> {
+        if $<a-sign> {
             %node<a> //= 1;
-            %node<a> = -%node<a> if $<a_sign>.Str eq '-';
+            %node<a> = -%node<a> if $<a-sign>.Str eq '-';
         }
 
-        if $<b_sign> {
-            %node<b> = -%node<b> if $<b_sign>.Str eq '-';
+        if $<b-sign> {
+            %node<b> = -%node<b> if $<b-sign>.Str eq '-';
         }
 
         make %node;
     }
-    method nth_functor($/)                   { make $/.Str.lc  }
-    method pseudo:sym<nth_child>($/)         { make $.node($/) }
+    method nth-functor($/)                   { make $/.Str.lc  }
+    method pseudo:sym<nth-child>($/)         { make $.node($/) }
 
     method negation_args($/) {
         return $.warning('bad :not() argument', $<any-arg>.Str)
@@ -102,7 +102,7 @@ class CSS::Extensions::CSS3::Selectors::Actions {
         make $.list($/);
     }
 
-    method pseudo_function:sym<negation>($/) {
+    method pseudo-function:sym<negation>($/) {
         return $.warning('missing/incorrect arguments to :not()', $<any-args>.Str)
             if $<any-args>;
         return unless $<negation_args>.ast;

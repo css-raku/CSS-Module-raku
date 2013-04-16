@@ -25,7 +25,7 @@ use t::AST;
 my $css_actions = t::CSS3::FontActions.new;
 
 for (
-    at_rule   => {input => q:to 'END_INPUT',
+    at-rule   => {input => q:to 'END_INPUT',
                            font-face {
                                   font-family: MainText;
                                   src: url(gentium.eot); /* for use with older non-conformant user agents */
