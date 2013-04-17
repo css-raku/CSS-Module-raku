@@ -11,6 +11,7 @@ class CSS::Language::Specification::Actions {
         my $sym = @props.join('|');
         my $match = $sym.subst(/\-/, '\-'):g;
         my $grammar = $<synopsis>.ast;
+        $grammar = $grammar.subst(/^\s*\[\*/,'').subst(/\s*\]\*$/,'');
 
         my %prop-def;
         %prop-def<sym> = $sym;

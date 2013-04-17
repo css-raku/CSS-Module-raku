@@ -198,12 +198,11 @@ class CSS::Language::CSS21::Actions
         $._make_decl($/, q{[ <identifier> <integer>? ]+ | none | inherit});
     }
 
-    method cue-after($/) { make $.list($/) }
+    method cue($/) { make $.list($/) }
     method decl:sym<cue-after>($/) {
         $._make_decl($/, q{<uri> | none | inherit}, :body($<cue-after>));
     }
 
-    method cue-before($/) { make $.list($/) }
     method decl:sym<cue-before>($/) {
         $._make_decl($/, q{<uri> | none | inherit}, :body($<cue-before>));
     }
@@ -504,6 +503,8 @@ class CSS::Language::CSS21::Actions
         $._make_decl($/, q{visible | hidden | collapse | inherit});
     }
 
+    method generic-voice($/) { make $.list($/) }
+    method specific-voice($/) { make $.list($/) }
     method decl:sym<voice-family>($/) {
         $._make_decl($/, q{[[<specific-voice> | <generic-voice> ],]* [<specific-voice> | <generic-voice> ] | inherit});
     }
