@@ -6,6 +6,8 @@ use CSS::Grammar::Actions;
 class CSS::Language::CSS21::Actions
     is CSS::Language::Actions {
 
+    method color:sym<system>($/) { make $.node($/) }
+
     # --- Functions --- #
 
     method any-function($/)             {
@@ -30,7 +32,14 @@ class CSS::Language::CSS21::Actions
         make $.node($/);
     }
 
-    # --- Properties --- #
+    method shape-arg($/) { make $.node($/) }
+    method shape($/)     {
+        return $.warning('usage: rect(<top>, <right>, <botom>, <left>)')
+            if $<any-args>;
+        make $.node($/);
+    }
+
+   # --- Properties --- #
 
    method decl:sym<azimuth>($/) {
         # see http://www.w3.org/TR/2011/REC-CSS2-20110607/aural.html

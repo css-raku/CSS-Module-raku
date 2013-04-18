@@ -7,12 +7,12 @@ use CSS::Grammar::CSS1;
 grammar CSS::Language::CSS1:ver<20080411>
  is CSS::Grammar::CSS1 {
 
-    # For handling undimensioned numbers
+    # For handling undimensioned numbers and angles
     token length:sym<num> {<number>}
+    token angle:sym<num>  {<number>}
 
     # allow color names and define our vocabulary
-    token named-color {:i [aqua | black | blue | fuchsia | gray | green | lime | maroon | navy | olive | purple | red | silver | teal | white | yellow] & <ident> }
-    rule color:sym<named> {<named-color>}
+    rule color:sym<named>  {:i [aqua | black | blue | fuchsia | gray | green | lime | maroon | navy | olive | purple | red | silver | teal | white | yellow] & <ident> }
 
     token integer    {[\+|\-]?\d+ <!before ['%'|\w|'.']>}
     token number     {<num> <!before ['%'|\w]>}

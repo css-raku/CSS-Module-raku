@@ -7,12 +7,14 @@ use CSS::Grammar::CSS21;
 grammar CSS::Language::CSS21:ver<20110607.000> 
     is CSS::Grammar::CSS21 {
 
-    # For handling undimensioned numbers
-    token length:sym<num> {<number>}
+    # For handling undimensioned quantities
+    token length:sym<num>    {<number>}
+    token angle:sym<num>     {<number>}
+    token frequency:sym<num> {<number>}
 
     # allow color names and define our vocabulary
-    token named-color {:i [aqua | black | blue | fuchsia | gray | green | lime | maroon | navy | olive | purple | red | silver | teal | white | yellow] & <ident> }
-    rule color:sym<named> {<named-color>}
+    rule color:sym<named> {:i [ aqua | black | blue | fuchsia | gray | green | lime | maroon | navy | olive | orange | purple | red | silver | teal | white | yellow ] & <ident> }
+    rule color:sym<system> {:i [ ActiveBorder | ActiveCaption | AppWorkspace | Background | ButtonFace | ButtonHighlight | ButtonShadow | ButtonText | CaptionText | GrayText | Highlight | HighlightText | InactiveBorder | InactiveCaption | InactiveCaptionText | InfoBackground | InfoText | Menu | MenuText | Scrollbar | ThreeDDarkShadow | ThreeDFace | ThreeDHighlight | ThreeDLightShadow | ThreeDShadow | Window | WindowFrame | WindowText ] & <system=.ident> }
  
     # nomenclature
     token integer    {[\+|\-]?\d+ <!before ['%'|\w|'.']>}
@@ -25,17 +27,19 @@ grammar CSS::Language::CSS21:ver<20110607.000>
     rule attr     {:i'attr(' [ <attribute_name=.identifier> <type-or-unit=.ident>? [ ',' <fallback=.ident> ]? || <any-args>] ')'}
     rule counter  {:i'counter(' [ <identifier> [ ',' <list-style-type=.ident> ]* || <any-args> ] ')'}
     rule counters {:i'counters(' [ <identifier> [ ',' <string> ]? || <any-args> ] ')' }
+    rule shape-arg {:i <length> | auto & <ident> }
+    rule shape    {:i'rect(' [ <top=.shape-arg> ',' <right=.shape-arg> ',' <bottom=.shape-arg> ',' <left=.shape-arg> || <any-args> ] ')' }
 
     # --- Properties --- #
 
     # - azimuth: <angle> | [[ left-side | far-left | left | center-left | center | center-right | right | far-right | right-side ] || behind ] | leftwards | rightwards | inherit
      rule decl:sym<azimuth> {:i (azimuth) ':' [
                                   <angle>
+                                  | leftwards & <leftwards=.ident>| rightwards & <rightwards=.ident>
                                   | [
-                                       [ [ [ left\-side | far\-left | left | center\-left | center | center\-right | right | far\-right | right\-side ] & <ident>  ]
+                                       [ [ [ left[\-side]? | far\-[left|right] | center[\-[left|right]]? | right[\-side]? ] & <ident>  ]
                                         | behind & <behind=.ident>  ]**1..2
                                   ]
-                                  | leftwards & <leftwards=.ident>| rightwards & <rightwards=.ident>
                                   | <inherit> || <any-args> ] }
 
     # - background-attachment: scroll | fixed | inherit
@@ -90,8 +94,8 @@ grammar CSS::Language::CSS21:ver<20110607.000>
     # - border-spacing: <length> <length>? | inherit
     rule decl:sym<border-spacing> {:i (border\-spacing) ':' [ <length> <length>? | <inherit> || <any-args> ] }
 
-    # - border-style: none | dotted | dashed | solid | double | groove | ridge | inset | outset
-    token border-style {:i [ none | dotted | dashed | solid | double | groove | ridge | inset | outset ] & <ident> }
+    # - border-style: none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset
+    token border-style {:i [ none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset ] & <ident> }
     rule decl:sym<border-style> {:i (border\-style) ':' [
                                       <border-style> ** 1..4
                                       | <inherit> || <any-args> ]}
@@ -127,7 +131,6 @@ grammar CSS::Language::CSS21:ver<20110607.000>
 
     # - clip: <shape> | auto
     # interim <shape> token. needs to be properly prototyped, etc
-    token shape {:i'<?before rect('<function>}
     rule decl:sym<clip> {:i (clip) ':' [
                               <shape>
                               | auto  & <ident>
@@ -163,7 +166,7 @@ grammar CSS::Language::CSS21:ver<20110607.000>
     rule decl:sym<direction> {:i (direction) ':' [ [ ltr | rtl ] & <ident> | <inherit> || <any-args> ] }
 
     # - display: inline | block | list-item | inline-block | table | inline-table | table-row-group | table-header-group | table-footer-group | table-row | table-column-group | table-column | table-cell | table-caption | none | inherit
-    rule decl:sym<display> {:i (display) ':' [ [ block | inline[\-[block|table]]? | list\-item | table[\-[cell|caption|[header|footer]\-group]|[row|column][\-group]?] | none ] & <ident> | <inherit> || <any-args> ] }
+    rule decl:sym<display> {:i (display) ':' [ [ block | inline[\-[block|table]]? | list\-item | table[\-[cell|caption|[header|footer]\-group|[row|column][\-group]?]]? | none ] & <ident> | <inherit> || <any-args> ] }
 
     rule decl:sym<elevation> {:i (elevation) ':' [
                                    <angle>
@@ -381,7 +384,7 @@ grammar CSS::Language::CSS21:ver<20110607.000>
     rule decl:sym<volume> {:i (volume) ':' [ <number> | <percentage> | [ silent | x\-soft | soft | medium | loud | x\-loud ] & <ident> | <inherit> || <any-args> ] }
 
     # - white-space: normal | pre | nowrap | pre-wrap | pre-line | inherit
-    rule decl:sym<white-space> {:i (white\-space) ':' [ [ normal | pre | nowrap | pre\-wrap | pre\-line ] & <ident> | <inherit> || <any-args> ] }
+    rule decl:sym<white-space> {:i (white\-space) ':' [ [ normal | pre[\-[wrap|line]]? | nowrap ] & <ident> | <inherit> || <any-args> ] }
 
     # - widows: <integer> | inherit
     rule decl:sym<widows> {:i (widows) ':' [ <integer> | <inherit> || <any-args> ] }

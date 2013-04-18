@@ -4,10 +4,8 @@ CSS::Language
 CSS::Language is under construction as a validating parser for CSS1 CSS2.1
 and CSS3.
 
-CSS::Language is an extension of [CSS::Grammar], but is able to parse
-specific properties along with functions and other arguments. Because of this
-it is able validate properties and produce property specific error
-messages. A second benefit is simpler and more specific ASTs.
+CSS::Language is an extension of [CSS::Grammar]. It is able to parse
+and validate specific properties, including functions and other arguments.
 
 This module implements the following grammars and actions:
 
@@ -44,7 +42,7 @@ My initial aim is to pass most or of the tests in W3C CSS Validator test
 suite https://github.com/w3c/css-validator.git
 
 - ~~Complete CSS1 property vocabulary~~ (done)
-- Complete CSS21 property vocabulary
+- ~~Complete CSS21 property vocabulary~~ (done)
 - Complete CSS3 extensions vocabulary (Colors, Fonts, Namespaces, Paged-media and Selectors)
 - Testing via W3C CSS Validator test suite and/or specifications (etc/css1-prpoerties.txt, etc/css21-properties.txt)
 - Pass most of the W3C CSS Validator tests

@@ -96,7 +96,25 @@ class CSS::Language::Actions
         make $.token($num, :type<length>, :units<px>)
     }
 
-    method named-color($/) {
+    method angle:sym<num>($/) {
+        my $num = $<number>.ast;
+
+        return $.warning('angle not followed by "deg", "rad" or "grad"', $<number>.Str)
+            if $num && $.strict;
+
+        make $.token($num, :type<angle>, :units<deg>)
+    }
+
+    method frequency:sym<num>($/) {
+        my $num = $<number>.ast;
+
+        return $.warning('non-zero frequency not followed by "Hz" or "KHz"', $<number>.Str)
+            if $num && $.strict;
+
+        make $.token($num, :type<frequency>, :units<hz>)
+    }
+
+   method color:sym<named>($/) {
         state %colors = (
             black   => [   0,   0,   0 ],
             silver  => [ 192, 192, 192 ],
@@ -104,6 +122,7 @@ class CSS::Language::Actions
             white   => [ 255, 255, 255 ],
             maroon  => [ 128,   0,   0 ],
             red     => [ 255,   0,   0 ],
+            orange  => [ 255, 165,   0 ],
             purple  => [ 128,   0, 128 ],
             fuchsia => [ 255,   0, 255 ],
             green   => [   0, 128,   0 ],
@@ -123,8 +142,6 @@ class CSS::Language::Actions
         my %rgb; %rgb<r g b> = @$color;
         make $.token(%rgb, :type<color>, :units<rgb>);
     }
-
-    method color:sym<named>($/) { make $<named-color>.ast }
 
     method inherit($/)    { make True }
     method integer($/)    { make $/.Int }
