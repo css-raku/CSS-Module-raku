@@ -17,7 +17,7 @@ for (
                         ast => {"sym" => "content",
                                 "props" => ["content"],
                                 "match" => "content",
-                                "defn" => "[ [ normal | none ] \& <ident>  | [ [ <string> | <uri> | <counter> | <attr> | [ open\\-quote | close\\-quote | no\\-open\\-quote | no\\-close\\-quote ] \& <ident>  ] ]+ | <inherit> ]", "synopsis" => "normal | none | [ <string> | <uri> | <counter> | attr(<identifier>) | open-quote | close-quote | no-open-quote | no-close-quote ]+ | inherit"},
+                                "defn" => "[ [ normal | none ] \& <keyw>  | [ [ <string> | <uri> | <counter> | <attr> | [ open\\-quote | close\\-quote | no\\-open\\-quote | no\\-close\\-quote ] \& <keyw>  ] ]+ | <inherit> ]", "synopsis" => "normal | none | [ <string> | <uri> | <counter> | attr(<identifier>) | open-quote | close-quote | no-open-quote | no-close-quote ]+ | inherit"},
     },
     ) {
 

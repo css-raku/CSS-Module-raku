@@ -10,26 +10,26 @@ class CSS::Language::CSS1::Actions
         $._make_decl($/, '[[<family-name> | <generic-family>],]* [<family-name> | <generic-family>]', :body($<font-family>));
     }
 
-    method font-style($/) { make $.token($<ident>.ast) }
+    method font-style($/) { make $.token($<keyw>.ast) }
     method decl:sym<font-style>($/) {
         $._make_decl($/, 'normal | italic | oblique',
             :body($<font-style>));
     }
 
-    method font-variant($/) { make $.token($<ident>.ast) }
+    method font-variant($/) { make $.token($<keyw>.ast) }
     method decl:sym<font-variant>($/) {
         $._make_decl($/, 'normal | small-caps',
             :body($<font-variant>));
     }
 
-    method font-weight($/) { make $.token( ($<ident> || $<number>).ast ) }
+    method font-weight($/) { make $.token( ($<keyw> || $<number>).ast ) }
     method decl:sym<font-weight>($/) {
         $._make_decl($/, 'normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900',
                     :body($<font-weight>)); 
     }
 
-    method absolute-size($/) { make $.token($<ident>.ast) }
-    method relative-size($/) { make $.token($<ident>.ast) }
+    method absolute-size($/) { make $.token($<keyw>.ast) }
+    method relative-size($/) { make $.token($<keyw>.ast) }
     method font-size($/)     { make $.list($/) }
     method decl:sym<font-size>($/) {
         $._make_decl($/, '[[x]x-]small | medium | [[x]x\-]large | larger | smaller | <length> | <percentage>',

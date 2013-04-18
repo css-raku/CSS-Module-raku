@@ -17,7 +17,7 @@ for (
     declaration => {input => 'background-attachment: crud',
                     warnings => 'usage background-attachment: scroll | fixed',
     },
-    declaration => {input => 'background-attachment: FiXed',   ast => {property => 'background-attachment', expr => [ident => 'fixed']},
+    declaration => {input => 'background-attachment: FiXed',   ast => {property => 'background-attachment', expr => [keyw => 'fixed']},
     },
     # boxed properties should be expanded
     declaration-list => {input => 'margin: 2em 3em',  

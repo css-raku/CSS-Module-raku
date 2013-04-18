@@ -135,7 +135,7 @@ class CSS::Language::Actions
             aqua    => [   0, 255, 255 ],
             );
 
-        my $color_name = $<ident>.ast;
+        my $color_name = $<keyw>.ast;
         my $color = %colors{$color_name}
         or die  "unknown color: " ~ $color_name;
 
@@ -147,6 +147,7 @@ class CSS::Language::Actions
     method integer($/)    { make $/.Int }
     method number($/)     { make $<num>.ast }
     method uri($/)        { make $<url>.ast }
+    method keyw($/)       { make $<ident>.ast }
     # case sensitive identifiers
     method identifier($/) { make $<ident-cs>.ast }
 }

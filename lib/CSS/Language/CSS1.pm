@@ -12,36 +12,38 @@ grammar CSS::Language::CSS1:ver<20080411>
     token angle:sym<num>  {<number>}
 
     # allow color names and define our vocabulary
-    rule color:sym<named>  {:i [aqua | black | blue | fuchsia | gray | green | lime | maroon | navy | olive | purple | red | silver | teal | white | yellow] & <ident> }
+    rule color:sym<named>  {:i [aqua | black | blue | fuchsia | gray | green | lime | maroon | navy | olive | purple | red | silver | teal | white | yellow] & <keyw> }
 
     token integer    {[\+|\-]?\d+ <!before ['%'|\w|'.']>}
     token number     {<num> <!before ['%'|\w]>}
     token uri        {<url>}
+    token keyw       {<ident>}     # keywords (case insensitive)
+    token identifier {<ident-cs>}  # identifiers (case sensitive)
 
     # 5.2 Font Properties
     # -------------------
     # - font-family: [[<family-name> | <generic-family>],]* [<family-name> | <generic-family>]
-    rule font-family {:i [ serif | sans\-serif | cursive | fantasy | monospace ] & <generic-family=.ident-cs> || [ <family-name=.ident-cs> ]+ | <family-name=.string> }
+    rule font-family {:i [ serif | sans\-serif | cursive | fantasy | monospace ] & <generic-family=.identifier> || [ <family-name=.identifier> ]+ | <family-name=.string> }
     rule decl:sym<font-family> {:i (font\-family) ':' [ <font-family> [ ',' <font-family> || <any> ]*
                                                         || <any-args> ] }
 
     # - font-style: normal | italic | oblique
-    token font-style {:i [ normal | italic | oblique ] & <ident> }
+    token font-style {:i [ normal | italic | oblique ] & <keyw> }
     rule decl:sym<font-style> {:i (font\-style) ':' [ <font-style>  || <any-args> ] }
 
     # - font-variant: normal | small-caps
-    token font-variant {:i [ normal | small\-caps ] & <ident>}
+    token font-variant {:i [ normal | small\-caps ] & <keyw>}
     rule decl:sym<font-variant> {:i (font\-variant) ':' [ <font-variant>
                                                           || <any-args> ] }
    # - font-weight: normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
-    token font-weight {:i [ normal | bold | bolder | lighter ] & <ident>
+    token font-weight {:i [ normal | bold | bolder | lighter ] & <keyw>
                            | [ 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 ] & <number> }
     rule decl:sym<font-weight> {:i (font\-weight) ':' [ <font-weight>
                                                         || <any-args> ] }
 
     # - font-size: <absolute-size> | <relative-size> | <length> | <percentage>
-    token absolute-size {:i [ [[xx|x]\-]?small | medium | [[xx|x]\-]?large ] & <ident> }
-    token relative-size {:i [ larger | smaller ] & <ident> }
+    token absolute-size {:i [ [[xx|x]\-]?small | medium | [[xx|x]\-]?large ] & <keyw> }
+    token relative-size {:i [ larger | smaller ] & <keyw> }
     token font-size {:i <absolute-size> | <relative-size> | <length> | <percentage> }
     rule decl:sym<font-size> {:i (font\-size) ':' [ <font-size>
                                                     || <any-args> ] }
@@ -57,31 +59,31 @@ grammar CSS::Language::CSS1:ver<20080411>
     rule decl:sym<color> {:i (color) ':' [ <color> || <any-args> ]}
 
     # - background-color: <color> | transparent
-    token background-color {:i <color> | transparent & <ident> }
+    token background-color {:i <color> | transparent & <keyw> }
     rule decl:sym<background-color> {:i (background\-color) ':' [ <background-color>
                                                                   || <any-args> ]}
 
     # - background-image: <url> | none
-    token background-image {:i <url> | none & <ident> }
+    token background-image {:i <url> | none & <keyw> }
     rule decl:sym<background-image> {:i (background\-image) ':' [ <background-image>
                                                                   || <any-args> ]}
 
     # - background-repeat: repeat | repeat-x | repeat-y | no-repeat
-    token background-repeat {:i [ repeat[\-[x|y]]? | no\-repeat ] & <ident> }
+    token background-repeat {:i [ repeat[\-[x|y]]? | no\-repeat ] & <keyw> }
     rule decl:sym<background-repeat> {:i (background\-repeat) ':' [ <background-repeat>
                                                                     || <any-args> ]}
 
 
     # - background-attachment: scroll | fixed
-    token background-attachment {:i [ scroll | fixed ] & <ident> }
+    token background-attachment {:i [ scroll | fixed ] & <keyw> }
     rule decl:sym<background-attachment> {:i (background\-attachment) ':' [
                                                <background-attachment>
                                                 || <any-args> ]}
 
     # - background-position: [<percentage> | <length>]{1,2} | [top | center | bottom] || [left | center | right]
     rule background-position {:i  [ <percentage> | <length> ]**1..2
-                                  | [ [ top | center | bottom ] & <ident>  
-                                      | [ left | center | right ] & <ident> ]+ }
+                                  | [ [ top | center | bottom ] & <keyw>  
+                                      | [ left | center | right ] & <keyw> ]+ }
 
     rule decl:sym<background-position> {:i (background\-position) ':' [ <background-position>
                                                                         || <any-args> ]}
@@ -97,29 +99,29 @@ grammar CSS::Language::CSS1:ver<20080411>
     # - word-spacing: normal | <length>
     # - letter-spacing: normal | <length>
     rule decl:sym<*-spacing> {:i ([word|letter]\-spacing) ':' [
-                                   normal & <ident> | <length>
+                                   normal & <keyw> | <length>
                                     || <any-args> ]}
 
     # - text-decoration: none | [ underline || overline || line-through || blink ]
     rule decl:sym<text-decoration> {:i (text\-decoration) ':' [
-                                         none & <ident>
-                                         | [[ underline | overline | line\-through | blink ] & <ident> ]+
+                                         none & <keyw>
+                                         | [[ underline | overline | line\-through | blink ] & <keyw> ]+
                                          || <any-args> ]}
     # - vertical-align: baseline | sub | super | top | text-top | middle | bottom | text-bottom | <percentage>
     rule decl:sym<vertical-align> {:i (vertical\-align) ':' [
-                                        [ baseline | sub | super | top | text\-top | middle | bottom | text\-bottom ] & <ident>
+                                        [ baseline | sub | super | top | text\-top | middle | bottom | text\-bottom ] & <keyw>
                                         | <percentage>
                                         || <any-args> ]}
     
 
     # - text-transform: capitalize | uppercase | lowercase | none
     rule decl:sym<text-transform> {:i (text\-transform) ':' [
-                                        [ capitalize | uppercase | lowercase | none ] & <ident>
+                                        [ capitalize | uppercase | lowercase | none ] & <keyw>
                                         || <any-args> ]}
 
     # - text-align: left | right | center | justify
     rule decl:sym<text-align> {:i (text\-align) ':' [
-                                    [ left | right | center | justify ] & <ident>
+                                    [ left | right | center | justify ] & <keyw>
                                     || <any-args> ]}
 
     # - text-indent: <length> | <percentage>
@@ -128,7 +130,7 @@ grammar CSS::Language::CSS1:ver<20080411>
                                      || <any-args> ]}
 
     # - line-height: normal | <number> | <length> | <percentage>
-    token line-height {:i normal & <ident> | <number> | <length> | <percentage> }
+    token line-height {:i normal & <keyw> | <number> | <length> | <percentage> }
     rule decl:sym<line-height> {:i (line\-height) ':' [ <line-height>
                                       || <any-args> ]}
 
@@ -139,12 +141,12 @@ grammar CSS::Language::CSS1:ver<20080411>
     # - margin-bottom: <length> | <percentage> | auto
     # - margin-left: <length> | <percentage> | auto
     rule decl:sym<margin-*> {:i (margin\-[top|right|bottom|left]) ':' [
-                                  <length> | <percentage> | auto & <ident> 
+                                  <length> | <percentage> | auto & <keyw> 
                                   || <any-args> ]}
 
     # - margin: [ <length> | <percentage> | auto ]{1,4}
     rule decl:sym<margin> {:i (margin) ':' [
-                                [ <length> | <percentage> | auto & <ident> ] ** 1..4
+                                [ <length> | <percentage> | auto & <keyw> ] ** 1..4
                                 || <any-args> ]}
 
     # - padding-top: <length> | <percentage>
@@ -165,12 +167,12 @@ grammar CSS::Language::CSS1:ver<20080411>
     # - border-bottom-width: thin | medium | thick | <length>
     # - border-left-width: thin | medium | thick | <length>
     rule decl:sym<border-*-width> {:i (border\-[top|right|bottom|left]\-width) ':' [
-                                        [ thin | medium | thick ] & <ident>
+                                        [ thin | medium | thick ] & <keyw>
                                         | <length>
                                         || <any-args> ]}
 
     # - border-width: [thin | medium | thick | <length>]{1,4}
-    token border-width {:i [ thin | medium | thick ] & <ident> | <length> }
+    token border-width {:i [ thin | medium | thick ] & <keyw> | <length> }
     rule decl:sym<border-width> {:i (border\-width) ':' [
                                       [ <border-width> ] ** 1..4
                                       || <any-args> ]}
@@ -181,7 +183,7 @@ grammar CSS::Language::CSS1:ver<20080411>
                                       || <any-args> ]}
 
     # - border-style: none | dotted | dashed | solid | double | groove | ridge | inset | outset
-    token border-style {:i [ none | dotted | dashed | solid | double | groove | ridge | inset | outset ] & <ident> }
+    token border-style {:i [ none | dotted | dashed | solid | double | groove | ridge | inset | outset ] & <keyw> }
     rule decl:sym<border-style> {:i (border\-style) ':' [
                                       <border-style>
                                       || <any-args> ]}
@@ -201,45 +203,45 @@ grammar CSS::Language::CSS1:ver<20080411>
     # - left: <length> | <percentage> | auto
     # - top: <length> | <percentage> | auto
     rule decl:sym<width|height|left|top> {:i (width|height|left|top) ':' [
-                                               <length> | <percentage> | auto & <ident>
+                                               <length> | <percentage> | auto & <keyw>
                                                || <any-args> ]}
 
     # - float: left | right | none
     rule decl:sym<float> {:i (float) ':' [
-                               [ left | right | none ] & <ident>
+                               [ left | right | none ] & <keyw>
                                || <any-args> ]}
 
     # - clear: none | left | right | both
     rule decl:sym<clear> {:i (clear) ':' [
-                               [  none | left | right | both ] & <ident>
+                               [  none | left | right | both ] & <keyw>
                                || <any-args> ]}
 
     # 5.6 Classification properties
     # -----------------------------
     # - display: block | inline | list-item | none
     rule decl:sym<display> {:i (display) ':' [
-                                 [ block | inline | list\-item | none ] & <ident>
+                                 [ block | inline | list\-item | none ] & <keyw>
                                  || <any-args> ]}
 
     # - white-space: normal | pre | nowrap    
     rule decl:sym<white-space> {:i (white\-space) ':' [
-                                     [ normal | pre | nowrap ] & <ident>
+                                     [ normal | pre | nowrap ] & <keyw>
                                      || <any-args> ]}
 
     # - list-style-type: disc | circle | square | decimal | lower-roman | upper-roman | lower-alpha | upper-alpha | none
-    token list-style-type {:i [ disc | circle | square | decimal | lower\-roman | upper\-roman | lower\-alpha | upper\-alpha | none ] & <ident> }
+    token list-style-type {:i [ disc | circle | square | decimal | lower\-roman | upper\-roman | lower\-alpha | upper\-alpha | none ] & <keyw> }
     rule decl:sym<list-style-type> {:i (list\-style\-type) ':' [
                                          <list-style-type>
                                          || <any-args> ]}
 
     # - list-style-image: <url> | none
-    token list-style-image {:i  <uri> | none & <ident> }
+    token list-style-image {:i  <uri> | none & <keyw> }
     rule decl:sym<list-style-image> {:i (list\-style\-image) ':' [
                                           <list-style-image>
                                           || <any-args> ]}
 
     # - list-style-position: inside | outside
-    token list-style-position {:i  [ inside | outside ] & <ident> }
+    token list-style-position {:i  [ inside | outside ] & <keyw> }
     rule decl:sym<list-style-position> {:i (list\-style\-position) ':' [
                                              <list-style-position>
                                              || <any-args> ]}
@@ -251,12 +253,12 @@ grammar CSS::Language::CSS1:ver<20080411>
 
     # - position: absolute | relative | static
     rule decl:sym<position> {:i (position) ':' [
-                                  [ absolute | relative | static ] & <ident>
+                                  [ absolute | relative | static ] & <keyw>
                                   || <any-args> ]}
 
     # - overflow: none | clip | scroll
     rule decl:sym<overflow> {:i (overflow) ':' [
-                                  [ none | clip | scroll ] & <ident>
+                                  [ none | clip | scroll ] & <keyw>
                                   || <any-args> ]}
 
     # - z-index: auto | <integer>

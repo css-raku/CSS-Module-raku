@@ -81,7 +81,7 @@ class CSS::Language::Specification::Actions {
             ?? '[ ' ~ $<keyw>.map({$_.ast}).join(' | ') ~ ' ]'
             !! $<keyw>[0].ast;
 
-        make $keywords ~ ' & <ident> ';
+        make $keywords ~ ' & <keyw> ';
     }
     method value:sym<numbers>($/) {
         my $keywords = @$<digits> > 1
