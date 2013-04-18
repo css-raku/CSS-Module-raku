@@ -81,14 +81,14 @@ class CSS::Language::Specification::Actions {
             ?? '[ ' ~ $<keyw>.map({$_.ast}).join(' | ') ~ ' ]'
             !! $<keyw>[0].ast;
 
-        make $keywords ~ ' & <keyw> ';
+        make $keywords ~ ' & <keyw>';
     }
     method value:sym<numbers>($/) {
         my $keywords = @$<digits> > 1
             ?? '[ ' ~ $<digits>.map({$_.ast}).join(' | ') ~ ' ]'
             !! $<digits>[0].ast;
 
-        make $keywords ~ ' & <number> ';
+        make $keywords ~ ' & <number>';
     }
     method value:sym<group>($/) {
         my $val = $<terms>.ast;

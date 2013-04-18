@@ -114,8 +114,7 @@ class CSS::Language::Actions
         make $.token($num, :type<frequency>, :units<hz>)
     }
 
-   method color:sym<named>($/) {
-        state %colors = (
+    has Hash $.colors = {
             black   => [   0,   0,   0 ],
             silver  => [ 192, 192, 192 ],
             gray    => [ 128, 128, 128 ],
@@ -133,10 +132,11 @@ class CSS::Language::Actions
             blue    => [   0,   0, 255 ],
             teal    => [   0, 128, 128 ],
             aqua    => [   0, 255, 255 ],
-            );
+            };
 
+   method color:sym<named>($/) {
         my $color_name = $<keyw>.ast;
-        my $color = %colors{$color_name}
+        my $color = $.colors{$color_name}
         or die  "unknown color: " ~ $color_name;
 
         my %rgb; %rgb<r g b> = @$color;

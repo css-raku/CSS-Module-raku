@@ -2,20 +2,23 @@
 
 use Test;
 
-use CSS::Grammar;
 use CSS::Grammar::CSS3;
 use CSS::Grammar::Actions;
+use CSS::Language::CSS21;
+use CSS::Language::CSS21::Actions;
 use CSS::Extensions::CSS3::Colors;
 
 # prepare our own composite class with color extensions
 
+# test this extension in isolation
 grammar t::CSS3::ColorGrammar
-      is CSS::Grammar::CSS3
-      is CSS::Extensions::CSS3::Colors {};
+    is CSS::Extensions::CSS3::Colors
+    is CSS::Extensions::CSS21
+    is CSS::Grammar::CSS3 {};
 
 class t::CSS3::ColorActions
-    is CSS::Grammar::Actions
-    is CSS::Extensions::CSS3::Colors::Actions {};
+    is CSS::Extensions::CSS3::Colors::Actions
+    is CSS::Language::CSS21::Actions { };
 
 use lib '.';
 use t::AST;
@@ -52,11 +55,20 @@ for (
               ast => Mu,
               warnings => rx{^usage\: \s hsla\(},
     },
-    at-rule => {input => 'color-profile { name: acme_cmyk; src: url(http://printers.example.com/acmecorp/model1234); }',
-                ast => {"declarations" => {"name" => {"expr" => ["term" => "acme_cmyk"]},
-                                           "src" => {"expr" => ["term" => "http://printers.example.com/acmecorp/model1234"]}},
-                        '@' => "color-profile"},
-    },
+    color => {input => 'orange', ast => {"r" => 255, "g" => 165, "b" => 0}},
+    color => {input => 'hotpink', ast => {"r" => 255, "g" => 105, "b" => 180}},
+    color => {input => 'lavenderblush', ast => {"r" => 255, "g" => 240, "b" => 245}},
+    color => {input => 'currentcolor', ast => 'currentcolor'},
+    decl  => {input => 'opacity: .33',
+              ast => {"property" => "opacity",
+                      "expr" => ["alphavalue" => 0.33]}},
+# http://www.w3.org/TR/2011/REC-css3-color-20110607
+# @color-profile is in the process of being dropped
+##    at-rule => {input => 'color-profile { name: acmAe_cmyk; src: url(http://printers.example.com/acmecorp/model1234); }',
+##                ast => {"declarations" => {"name" => {"expr" => ["term" => "acme_cmyk"]},
+##                                           "src" => {"expr" => ["term" => "http://printers.example.com/acmecorp/model1234"]}},
+##                        '@' => "color-profile"},
+##    },
     ) {
     my $rule = $_.key;
     my %test = $_.value;

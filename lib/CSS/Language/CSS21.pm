@@ -4,8 +4,13 @@ use v6;
 
 use CSS::Grammar::CSS21;
 
-grammar CSS::Language::CSS21:ver<20110607.000> 
-    is CSS::Grammar::CSS21 {
+grammar CSS::Extensions::CSS21 {...}
+
+grammar CSS::Language::CSS21:ver<20110607.000>
+    is CSS::Extensions::CSS21 
+    is CSS::Grammar::CSS21 {};
+
+grammar CSS::Extensions::CSS21 {
 
     # For handling undimensioned quantities
     token length:sym<num>    {<number>}

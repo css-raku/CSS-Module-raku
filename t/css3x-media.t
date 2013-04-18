@@ -54,7 +54,7 @@ for (
                 ast => {"media-list" => ["media-query" => ["media" => "all", "media-expr" => {"media-feature" => "min-resolution", "expr" => ["term" => 300]}, "media-expr" => {"media-feature" => "min-resolution", "expr" => ["term" => 118]}]], "media-rules" => [], '@' => "media"},
     },
     at-rule => {input => 'media noT print {body{margin : 1cm}}',
-                ast => {"media-list" => ["media-query" => ["media-op" => "not", "media" => "print"]], "media-rules" => ["ruleset" => {"selectors" => ["selector" => ["simple-selector" => ["element-name" => "body"]]], "declarations" => {"margin" => {"expr" => ["term" => 1e0]}}}], "\@" => "media"},
+                ast => {"media-list" => ["media-query" => ["media-op" => "not", "media" => "print"]], "media-rules" => ["ruleset" => {"selectors" => ["selector" => ["simple-selector" => ["element-name" => "body"]]], "declarations" => {"margin" => {"expr" => ["term" => 1]}}}], "\@" => "media"},
     },
     at-rule => {input => 'media ONLY all And (none) { }',
                 ast => {"media-list" => ["media-query" => ["media-op" => "only", "media" => "all", "media-expr" => {"media-feature" => "none"}]], "media-rules" => [], '@' => "media"},

@@ -21,10 +21,10 @@ for (
     },
     # boxed properties should be expanded
     declaration-list => {input => 'margin: 2em 3em',  
-                         ast => {"margin" => {"expr" => ["margin-top" => ["length" => 2e0],
-                                                         "margin-right" => ["length" => 3e0],
-                                                         "margin-bottom" => ["length" => 2e0],
-                                                         "margin-left" => ["length" => 3e0]]}},
+                         ast => {"margin" => {"expr" => ["margin-top" => ["length" => 2],
+                                                         "margin-right" => ["length" => 3],
+                                                         "margin-bottom" => ["length" => 2],
+                                                         "margin-left" => ["length" => 3]]}},
     },
     # also check !important
     declaration => {input => 'margin: em -ex !IMPORTANT',

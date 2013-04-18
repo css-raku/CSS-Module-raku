@@ -11,13 +11,14 @@ my $spec_actions = CSS::Language::Specification::Actions.new;
 
 for (
     'terms' => {'input' => "<single-animation-direction> [ ‘,’ <single-animation-direction> ]*",
-                     ast => "<single-animation-direction> [ ',' <single-animation-direction> ]*",
+                ast => "<single-animation-direction> [ ',' <single-animation-direction> ]*",
     },
     'property-spec' => {'input' => "'content'\tnormal | none | [ <string> | <uri> | <counter> | attr(<identifier>) | open-quote | close-quote | no-open-quote | no-close-quote ]+ | inherit",
                         ast => {"sym" => "content",
                                 "props" => ["content"],
                                 "match" => "content",
-                                "defn" => "[ [ normal | none ] \& <keyw>  | [ [ <string> | <uri> | <counter> | <attr> | [ open\\-quote | close\\-quote | no\\-open\\-quote | no\\-close\\-quote ] \& <keyw>  ] ]+ | <inherit> ]", "synopsis" => "normal | none | [ <string> | <uri> | <counter> | attr(<identifier>) | open-quote | close-quote | no-open-quote | no-close-quote ]+ | inherit"},
+                                "defn" => "[ [ normal | none ] \& <keyw> | [ [ <string> | <uri> | <counter> | <attr> | [ open\\-quote | close\\-quote | no\\-open\\-quote | no\\-close\\-quote ] \& <keyw> ] ]+ | <inherit> ]",
+                                "synopsis" => "normal | none | [ <string> | <uri> | <counter> | attr(<identifier>) | open-quote | close-quote | no-open-quote | no-close-quote ]+ | inherit"},
     },
     ) {
 

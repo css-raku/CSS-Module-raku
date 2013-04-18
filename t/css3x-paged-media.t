@@ -41,10 +41,10 @@ my $top_center_ast = {"declarations" => {"color" => {"expr" => ["term" => "red"]
 
 for (
     at-rule   => {input => 'page :left { margin-left: 4cm; }',
-                  ast => {"page" => "left", "declarations" => {"margin-left" => {"expr" => ["term" => 4e0]}}, "\@" => "page"},
+                  ast => {"page" => "left", "declarations" => {"margin-left" => {"expr" => ["term" => 4]}}, "\@" => "page"},
     },
     at-rule   => {input => 'page :junk { margin-right: 2cm }',
-                  ast => {"declarations" => {"margin-right" => {"expr" => ["term" => 2e0]}}, "\@" => "page"},
+                  ast => {"declarations" => {"margin-right" => {"expr" => ["term" => 2]}}, "\@" => "page"},
                   warnings => 'ignoring page pseudo: junk',
     },
     at-rule   => {input => 'page : { margin-right: 2cm }',
