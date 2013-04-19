@@ -143,11 +143,13 @@ class CSS::Language::Actions
         make $.token(%rgb, :type<color>, :units<rgb>);
     }
 
-    method inherit($/)    { make True }
-    method integer($/)    { make $/.Int }
-    method number($/)     { make $<num>.ast }
-    method uri($/)        { make $<url>.ast }
-    method keyw($/)       { make $<ident>.ast }
+    method inherit($/)     { make True }
+    method integer($/)     { make $/.Int }
+    method number($/)      { make $<num>.ast }
+    method uri($/)         { make $<url>.ast }
+    method keyw($/)        { make $<ident>.ast }
     # case sensitive identifiers
-    method identifier($/) { make $<ident-cs>.ast }
+    method identifier($/)  { make $<ident-cs>.ast }
+    # identifiers strung-together, e.g New Century Schoolbook
+    method identifiers($/) { make $<identifier>.map({$_.ast }).join(' ') }
 }

@@ -14,16 +14,17 @@ grammar CSS::Language::CSS1:ver<20080411>
     # allow color names and define our vocabulary
     rule color:sym<named>  {:i [aqua | black | blue | fuchsia | gray | green | lime | maroon | navy | olive | purple | red | silver | teal | white | yellow] & <keyw> }
 
-    token integer    {[\+|\-]?\d+ <!before ['%'|\w|'.']>}
-    token number     {<num> <!before ['%'|\w]>}
-    token uri        {<url>}
-    token keyw       {<ident>}     # keywords (case insensitive)
-    token identifier {<ident-cs>}  # identifiers (case sensitive)
+    token integer     {[\+|\-]?\d+ <!before ['%'|\w|'.']>}
+    token number      {<num> <!before ['%'|\w]>}
+    token uri         {<url>}
+    token keyw        {<ident>}           # keywords (case insensitive)
+    token identifier  {<ident-cs>}        # identifiers (case sensitive)
+    rule identifiers  {[ <identifier> ]+} # sequences of identifiers
 
     # 5.2 Font Properties
     # -------------------
     # - font-family: [[<family-name> | <generic-family>],]* [<family-name> | <generic-family>]
-    rule font-family {:i [ serif | sans\-serif | cursive | fantasy | monospace ] & <generic-family=.identifier> || [ <family-name=.identifier> ]+ | <family-name=.string> }
+    rule font-family {:i [ serif | sans\-serif | cursive | fantasy | monospace ] & <generic-family=.identifier> || <family-name=.identifiers> | <family-name=.string> }
     rule decl:sym<font-family> {:i (font\-family) ':' [ <font-family> [ ',' <font-family> || <any> ]*
                                                         || <any-args> ] }
 

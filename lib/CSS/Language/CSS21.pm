@@ -24,11 +24,12 @@ grammar CSS::Extensions::CSS21 {
     rule color:sym<system> {:i [ ActiveBorder | ActiveCaption | AppWorkspace | Background | ButtonFace | ButtonHighlight | ButtonShadow | ButtonText | CaptionText | GrayText | Highlight | HighlightText | InactiveBorder | InactiveCaption | InactiveCaptionText | InfoBackground | InfoText | Menu | MenuText | Scrollbar | ThreeDDarkShadow | ThreeDFace | ThreeDHighlight | ThreeDLightShadow | ThreeDShadow | Window | WindowFrame | WindowText ] & <system=.keyw> }
  
     # nomenclature
-    token integer    {[\+|\-]?\d+ <!before ['%'|\w|'.']>}
-    token number     {<num> <!before ['%'|\w]>}
-    token uri        {<url>}
-    token keyw       {<ident>}     # keywords (case insensitive)
-    token identifier {<ident-cs>}  # identifiers (case sensitive)
+    token integer     {[\+|\-]?\d+ <!before ['%'|\w|'.']>}
+    token number      {<num> <!before ['%'|\w]>}
+    token uri         {<url>}
+    token keyw        {<ident>}           # keywords (case insensitive)
+    token identifier  {<ident-cs>}        # identifiers (case sensitive)
+    rule identifiers  {[ <identifier> ]+} # sequences of identifiers
 
     # --- Functions --- #
 
@@ -189,7 +190,7 @@ grammar CSS::Extensions::CSS21 {
     rule decl:sym<float> {:i (float) ':' [ [ left | right | none ] & <keyw> | <inherit> || <any-args> ] }
 
     # - font-family: [[ <family-name> | <generic-family> ] [, <family-name> | <generic-family> ]* ] | inherit
-    rule font-family {:i [ serif | sans\-serif | cursive | fantasy | monospace ] & <generic-family=.ident-cs> || [ <family-name=.ident-cs> ]+ | <family-name=.string> }
+    rule font-family {:i [ serif | sans\-serif | cursive | fantasy | monospace ] & <generic-family=.keyw> || <family-name=.identifiers> | <family-name=.string> }
     rule decl:sym<font-family> {:i (font\-family) ':' [ <font-family> [ ',' <font-family> || <any> ]*
                                                         | <inherit> || <any-args> ] }
 
