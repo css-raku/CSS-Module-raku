@@ -2,22 +2,23 @@
 
 use Test;
 
-use CSS::Grammar;
 use CSS::Grammar::CSS3;
 use CSS::Grammar::Actions;
+use CSS::Language::CSS21;
+use CSS::Language::CSS21::Actions;
 use CSS::Extensions::CSS3::Fonts;
 
 # prepare our own composite class with font extensions
 
 grammar t::CSS3::FontGrammar
-      is CSS::Extensions::CSS3::Fonts
-      is CSS::Grammar::CSS3
+    is CSS::Extensions::CSS3::Fonts
+    is CSS::Extensions::CSS21
+    is CSS::Grammar::CSS3
       {};
 
 class t::CSS3::FontActions
     is CSS::Extensions::CSS3::Fonts::Actions
-    is CSS::Grammar::Actions
-{};
+    is CSS::Language::CSS21::Actions {};
 
 use lib '.';
 use t::AST;
@@ -32,12 +33,10 @@ for (
                                   src: local("Gentium"), url(gentium.ttf) format("truetype");  /* Overrides src definition */
                                 }
                            END_INPUT
-                  ast => {"declarations" => {"font-family" => {"expr" => ["term" => "maintext"]},
-                                             "src" => {"expr" => ["term" => {"ident" => "local", "args" => ["string" => "Gentium"]},
-                                                                  "operator" => ",",
-                                                                  "term" => "gentium.ttf",
-                                                                  "term" => {"ident" => "format", "args" => ["string" => "truetype"]}]}},
-                          '@' => "font-face"},
+                  ast => {"declarations" => {"font-family" => {"expr" => ["family-name" => "MainText"]},
+                                             "src" => {"expr" => ["src" => {"local" => "Gentium"},
+                                                                  "src" => {"uri" => "gentium.ttf", "format" => "truetype"}]}},
+                          "\@" => "font-face"},
     },
     ) {
     my $rule = $_.key;

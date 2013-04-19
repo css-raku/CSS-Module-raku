@@ -42,14 +42,12 @@ grammar CSS::Extensions::CSS21 {
     # --- Properties --- #
 
     # - azimuth: <angle> | [[ left-side | far-left | left | center-left | center | center-right | right | far-right | right-side ] || behind ] | leftwards | rightwards | inherit
-     rule decl:sym<azimuth> {:i (azimuth) ':' [
-                                  <angle>
-                                  | leftwards & <leftwards=.keyw>| rightwards & <rightwards=.keyw>
-                                  | [
-                                       [ [ [ left[\-side]? | far\-[left|right] | center[\-[left|right]]? | right[\-side]? ] & <keyw>  ]
-                                        | behind & <behind=.keyw>  ]**1..2
-                                  ]
-                                  | <inherit> || <any-args> ] }
+     rule decl:sym<azimuth> {:i (azimuth) ':' [ <angle>
+                                                | leftwards & <leftwards=.keyw>
+                                                | rightwards & <rightwards=.keyw>
+                                                | [ [ [ [ left[\-side]? | far\-[left|right] | center[\-[left|right]]? | right[\-side]? ] & <keyw>  ]
+                                                      | behind & <behind=.keyw>  ]**1..2 ]
+                                                | <inherit> || <any-args> ] }
 
     # - background-attachment: scroll | fixed | inherit
     token background-attachment {:i [ scroll | fixed ] & <keyw> }
@@ -71,43 +69,37 @@ grammar CSS::Extensions::CSS21 {
 
     # - background-position: [ [ <percentage> | <length> | left | center | right ] [ <percentage> | <length> | top | center | bottom ]? ] | [ [ left | center | right ] || [ top | center | bottom ] ] | inherit
     # refactored as [ <percentage> | <length> | left | center | right ] || [ <percentage> | <length> | top | center | bottom ] | inherit
-    rule background-position {:i  [ 
-                                   [ <percentage> | <length> | [ left | center | right ] & <keyw>  ] 
-                                   | [ <percentage> | <length> | [ top | center | bottom ] & <keyw>  ]
-                                  ]**1..2 }
+    rule background-position {:i  [ [ <percentage> | <length> | [ left | center | right ] & <keyw>  ] 
+                                    | [ top | bottom ] & <keyw> ]**1..2 }
     rule decl:sym<background-position> {:i (background\-position) ':' [
                                              <background-position>
                                              | <inherit> || <any-args> ]}
 
     # - background-repeat: repeat | repeat-x | repeat-y | no-repeat
     token background-repeat {:i [ repeat[\-[x|y]]? | no\-repeat ] & <keyw> }
-    rule decl:sym<background-repeat> {:i (background\-repeat) ':' [
-                                          <background-repeat>
-                                          | <inherit> || <any-args> ]}
+    rule decl:sym<background-repeat> {:i (background\-repeat) ':' [ <background-repeat>
+                                                                    | <inherit> || <any-args> ]}
 
 
     # - background: <background-color> || <background-image> || <background-repeat> || <background-attachment> || <background-position> | inherit
-    rule decl:sym<background> {:i (background) ':' [
-                                    [ <background-color> | <background-image> | <background-repeat> | <background-attachment> | <background-position> ]**1..5
-                                    | <inherit> || <any-args> ]}
+    rule decl:sym<background> {:i (background) ':' [ [ <background-color> | <background-image> | <background-repeat> | <background-attachment> | <background-position> ]**1..5
+                                                     | <inherit> || <any-args> ]}
 
     # - border-collapse: collapse | separate | inherit
     rule decl:sym<border-collapse> {:i (border\-collapse) ':' [ [ collapse | separate ] & <keyw> | <inherit> || <any-args> ] }
 
     # - border-color: [ <color> | transparent ]{1,4} | inherit
     rule border-color { <color> | transparent & <keyw>  }
-    rule decl:sym<border-color> {:i (border\-color) ':' [
-                                      [ <border-color> ] ** 1..4
-                                      | <inherit> || <any-args> ]}
+    rule decl:sym<border-color> {:i (border\-color) ':' [ [ <border-color> ] ** 1..4
+                                                          | <inherit> || <any-args> ]}
 
     # - border-spacing: <length> <length>? | inherit
     rule decl:sym<border-spacing> {:i (border\-spacing) ':' [ <length> <length>? | <inherit> || <any-args> ] }
 
     # - border-style: none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset
     token border-style {:i [ none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset ] & <keyw> }
-    rule decl:sym<border-style> {:i (border\-style) ':' [
-                                      <border-style> ** 1..4
-                                      | <inherit> || <any-args> ]}
+    rule decl:sym<border-style> {:i (border\-style) ':' [ <border-style> ** 1..4
+                                                          | <inherit> || <any-args> ]}
 
     # - border-top|border-right|border-bottom|border-left: [ <border-width> || <border-style> || 'border-top-color' ] | inherit
     rule decl:sym<border-*> {:i (border\-[top|right|bottom|left]) ':' [ [ [ <border-width> | <border-style> | <border-color> ]**1..3 ] | <inherit> || <any-args> ] }
@@ -140,23 +132,24 @@ grammar CSS::Extensions::CSS21 {
 
     # - clip: <shape> | auto
     # interim <shape> token. needs to be properly prototyped, etc
-    rule decl:sym<clip> {:i (clip) ':' [
-                              <shape>
-                              | auto  & <keyw>
-                              | <inherit> || <any-args> ]}
+    rule decl:sym<clip> {:i (clip) ':' [ <shape> | auto  & <keyw>
+                                         | <inherit> || <any-args> ]}
 
 
     # - color: <color> | inherit
     rule decl:sym<color> {:i (color) ':' [ <color> | <inherit> || <any-args> ] }
 
     # - content: normal | none | [ <string> | <uri> | <counter> | attr(<identifier>) | open-quote | close-quote | no-open-quote | no-close-quote ]+ | inherit
-    rule decl:sym<content> {:i (content) ':' [ [ normal | none ] & <keyw> | [ [ <string> | <uri> | <counter> | <attr> | [ open\-quote | close\-quote | no\-open\-quote | no\-close\-quote ] & <keyw>  ] ]+ | <inherit> || <any-args> ] }
+    rule decl:sym<content> {:i (content) ':' [ [ normal | none ] & <keyw> | [ [ <string> | <uri> | <counter> | <attr> | [ open\-quote | close\-quote | no\-open\-quote | no\-close\-quote ] & <keyw>  ] ]+
+                                               | <inherit> || <any-args> ] }
 
     # - counter-increment: [ <identifier> <integer>? ]+ | none | inherit
-    rule decl:sym<counter-increment> {:i (counter\-increment) ':' [ [ <identifier> <integer>? ]+ | none & <keyw> | <inherit> || <any-args> ] }
+    rule decl:sym<counter-increment> {:i (counter\-increment) ':' [ [ <identifier> <integer>? ]+ | none & <keyw>
+                                                                    | <inherit> || <any-args> ] }
 
     # - counter-reset: [ <identifier> <integer>? ]+ | none | inherit
-    rule decl:sym<counter-reset> {:i (counter\-reset) ':' [ [ <identifier> <integer>? ]+ | none & <keyw> | <inherit> || <any-args> ] }
+    rule decl:sym<counter-reset> {:i (counter\-reset) ':' [ [ <identifier> <integer>? ]+ | none & <keyw>
+                                                            | <inherit> || <any-args> ] }
 
     # - cue-after: <uri> | none | inherit
     token cue {:i <uri> | none & <keyw> }
@@ -169,19 +162,21 @@ grammar CSS::Extensions::CSS21 {
     rule decl:sym<cue> {:i (cue) ':' [ <cue-before=.cue> <cue-after=.cue>? | <inherit> || <any-args> ] }
 
     # - cursor: [ [<uri> ,]* [ auto | crosshair | default | pointer | move | e-resize | ne-resize | nw-resize | n-resize | se-resize | sw-resize | s-resize | w-resize | text | wait | help | progress ] ] | inherit
-    rule decl:sym<cursor> {:i (cursor) ':' [ [ [ <uri> ',' ]* [ [ auto | crosshair | default | pointer | move | e\-resize | ne\-resize | nw\-resize | n\-resize | se\-resize | sw\-resize | 's-resize' | w\-resize | text | wait | help | progress ] & <keyw>  ] ] | <inherit> || <any-args> ] }
+    rule decl:sym<cursor> {:i (cursor) ':' [ [ [ <uri> ',' ]*
+                                               [ [ auto | crosshair | default | pointer | move | e\-resize | ne\-resize | nw\-resize | n\-resize | se\-resize | sw\-resize | 's-resize' | w\-resize | text | wait | help | progress ] & <keyw>  ] ]
+                                             | <inherit> || <any-args> ] }
 
     # - direction: ltr | rtl | inherit
     rule decl:sym<direction> {:i (direction) ':' [ [ ltr | rtl ] & <keyw> | <inherit> || <any-args> ] }
 
     # - display: inline | block | list-item | inline-block | table | inline-table | table-row-group | table-header-group | table-footer-group | table-row | table-column-group | table-column | table-cell | table-caption | none | inherit
-    rule decl:sym<display> {:i (display) ':' [ [ block | inline[\-[block|table]]? | list\-item | table[\-[cell|caption|[header|footer]\-group|[row|column][\-group]?]]? | none ] & <keyw> | <inherit> || <any-args> ] }
+    rule decl:sym<display> {:i (display) ':' [ [ block | inline[\-[block|table]]? | list\-item | table[\-[cell|caption|[header|footer]\-group|[row|column][\-group]?]]? | none ] & <keyw>
+                                               | <inherit> || <any-args> ] }
 
-    rule decl:sym<elevation> {:i (elevation) ':' [
-                                   <angle>
-                                   | [below | level | above ] & <keyw>
-                                   | [ higher | lower ] & <tilt=.keyw>
-                                   | <inherit> || <any-args> ]}
+    rule decl:sym<elevation> {:i (elevation) ':' [ <angle>
+                                                   | [below | level | above ] & <keyw>
+                                                   | [ higher | lower ] & <tilt=.keyw>
+                                                   | <inherit> || <any-args> ]}
 
     # - empty-cells: show | hide | inherit
     rule decl:sym<empty-cells> {:i (empty\-cells) ':' [ [ show | hide ] & <keyw> | <inherit> || <any-args> ] }
@@ -206,8 +201,8 @@ grammar CSS::Extensions::CSS21 {
     rule decl:sym<font-style> {:i (font\-style) ':' [ [ normal | italic | oblique ] & <keyw> | <inherit> || <any-args> ] }
 
     # - font-variant: normal | small-caps | inherit
-    token font-variant {:i [ normal | small\-caps ] & <keyw>}
-    rule decl:sym<font-variant> {:i (font\-variant) ':' [ [ normal | small\-caps ] & <keyw> | <inherit> || <any-args> ] }
+    token font-variant-css21 {:i [ normal | small\-caps ] & <keyw>}
+    rule decl:sym<font-variant> {:i (font\-variant) ':' [ <font-variant=.font-variant-css21> | <inherit> || <any-args> ] }
 
     # - font-weight: normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | inherit
     token font-weight {:i [ normal | bold | bolder | lighter ] & <keyw>
@@ -217,7 +212,7 @@ grammar CSS::Extensions::CSS21 {
 
     # - font: [ [ 'font-style' || 'font-variant' || 'font-weight' ]? 'font-size' [ / 'line-height' ]? 'font-family' ] | caption | icon | menu | message-box | small-caption | status-bar | inherit
     rule decl:sym<font> {:i (font) ':' [
-                              [  <font-style> | <font-variant> | <font-weight> ]* <font-size> [ '/' <line-height> ]? <font-family> [ ',' <font-family> ]*
+                              [  <font-style> | <font-variant=.font-variant-css21> | <font-weight> ]* <font-size> [ '/' <line-height> ]? <font-family> [ ',' <font-family> ]*
                               | [ caption | icon | menu | message\-box | small\-caption | status\-bar ] & <keyw>
                               | <inherit> || <any-args> ] }
 
@@ -238,15 +233,13 @@ grammar CSS::Extensions::CSS21 {
 
     # - list-style-image: <uri> | none | inherit
     token list-style-image {:i  <uri> | none & <keyw> }
-    rule decl:sym<list-style-image> {:i (list\-style\-image) ':' [
-                                          <list-style-image>
-                                          | <inherit> || <any-args> ]}
+    rule decl:sym<list-style-image> {:i (list\-style\-image) ':' [ <list-style-image>
+                                                                   | <inherit> || <any-args> ]}
 
     # - list-style-position: inside | outside | inherit
     token list-style-position {:i  [ inside | outside ] & <keyw> }
-    rule decl:sym<list-style-position> {:i (list\-style\-position) ':' [
-                                             <list-style-position>
-                                             | <inherit> || <any-args> ]}
+    rule decl:sym<list-style-position> {:i (list\-style\-position) ':' [ <list-style-position>
+                                                                         | <inherit> || <any-args> ]}
 
     # - list-style-type: disc | circle | square | decimal | decimal-leading-zero | lower-roman | upper-roman | lower-greek | lower-latin | upper-latin | armenian | georgian | lower-alpha | upper-alpha | none | inherit
     token list-style-type {:i [ disc | circle | square | decimal | decimal\-leading\-zero | lower\-roman | upper\-roman | lower\-greek | lower\-latin | upper\-latin | armenian | georgian | lower\-alpha | upper\-alpha | none ] & <keyw> }
@@ -334,10 +327,8 @@ grammar CSS::Extensions::CSS21 {
     rule decl:sym<right> {:i (right) ':'  [ <length> | <percentage> | auto & <keyw>  | <inherit> || <any-args> ] }
 
     # - size: <length>{1,2} | auto | portrait | landscape | inherit
-    rule decl:sym<size> {:i (size) ':' [
-                              <length> ** 1..2
-                              | [ auto | portrait | landscape ] & <keyw>
-                              | <inherit> || <any-args> ]}
+    rule decl:sym<size> {:i (size) ':' [ <length> ** 1..2 | [ auto | portrait | landscape ] & <keyw>
+                                         | <inherit> || <any-args> ]}
 
     # - speak-header: once | always | inherit
     rule decl:sym<speak-header> {:i (speak\-header) ':' [ [ once | always ] & <keyw> | <inherit> || <any-args> ] }

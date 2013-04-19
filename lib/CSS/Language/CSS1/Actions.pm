@@ -16,7 +16,8 @@ class CSS::Language::CSS1::Actions
             :body($<font-style>));
     }
 
-    method font-variant($/) { make $.token($<keyw>.ast) }
+    method font-variant-css1($/)  { make $.token($<keyw>.ast) }
+
     method decl:sym<font-variant>($/) {
         $._make_decl($/, 'normal | small-caps',
             :body($<font-variant>));

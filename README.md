@@ -38,13 +38,13 @@ properties and functions. For example, the specification for `border-color` is:
 
 To Do
 =====
-My initial aim is to pass most or of the tests in W3C CSS Validator test
+The initial aim is to pass most or of the tests in W3C CSS Validator test
 suite https://github.com/w3c/css-validator.git
 
 - ~~Complete CSS1 property vocabulary~~ (done)
 - ~~Complete CSS21 property vocabulary~~ (done)
-- Complete CSS3 extensions vocabulary (Colors, Fonts, Namespaces, Paged-media and Selectors)
-- Testing via W3C CSS Validator test suite and/or specifications (etc/css1-prpoerties.txt, etc/css21-properties.txt)
+- Complete CSS3 extensions vocabulary (~~Colors~~, Fonts, Namespaces, Paged-media and Selectors)
+- Testing via W3C CSS Validator test suite and/or specifications (etc/css1-properties.txt, etc/css21-properties.txt)
 - Pass most of the W3C CSS Validator tests
 
 References
