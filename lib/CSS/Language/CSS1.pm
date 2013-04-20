@@ -33,8 +33,8 @@ grammar CSS::Language::CSS1:ver<20080411>
     rule decl:sym<font-style> {:i (font\-style) ':' [ <font-style>  || <any-args> ] }
 
     # - font-variant: normal | small-caps
-    token font-variant-css1 {:i [ normal | small\-caps ] & <keyw>}
-    rule decl:sym<font-variant> {:i (font\-variant) ':' [ <font-variant=.font-variant-css1> || <any-args> ] }
+    token font-variant {:i [ normal | small\-caps ] & <keyw>}
+    rule decl:sym<font-variant> {:i (font\-variant) ':' [ <font-variant> || <any-args> ] }
    # - font-weight: normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
     token font-weight {:i [ normal | bold | bolder | lighter ] & <keyw>
                            | [ 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 ] & <number> }
@@ -47,7 +47,7 @@ grammar CSS::Language::CSS1:ver<20080411>
     rule decl:sym<font-size> {:i (font\-size) ':' [ <font-size> || <any-args> ] }
     # - font: [ <font-style> || <font-variant> || <font-weight> ]? <font-size> [ / <line-height> ]? <font-family>
     rule decl:sym<font> {:i (font) ':' [
-                              [  <font-style> | <font-variant=.font-variant-css1> | <font-weight> ]* <font-size> [ '/' <line-height> ]? <font-family> [ ',' <font-family> ]*
+                              [  <font-style> | <font-variant> | <font-weight> ]* <font-size> [ '/' <line-height> ]? <font-family> [ ',' <font-family> ]*
                               || <any-args> ] }
 
 
