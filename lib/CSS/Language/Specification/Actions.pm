@@ -70,12 +70,15 @@ class CSS::Language::Specification::Actions {
     method occurs:sym<range>($/) {
         make '**' ~ $<min>.ast ~ '..' ~ $<max>.ast;
     }
+    method occurs:sym<hash>($/) { make '' }
 
     method value:sym<func>($/)     {
         # todo - save function prototype
         make '<' ~ $<keyw>.ast ~ '>';
     }
+
     method value:sym<inherit>($/)  { make '<inherit>' }
+
     method value:sym<keywords>($/) {
         my $keywords = @$<keyw> > 1
             ?? '[ ' ~ $<keyw>.map({$_.ast}).join(' | ') ~ ' ]'
@@ -83,6 +86,7 @@ class CSS::Language::Specification::Actions {
 
         make $keywords ~ ' & <keyw>';
     }
+
     method value:sym<numbers>($/) {
         my $keywords = @$<digits> > 1
             ?? '[ ' ~ $<digits>.map({$_.ast}).join(' | ') ~ ' ]'
@@ -90,24 +94,27 @@ class CSS::Language::Specification::Actions {
 
         make $keywords ~ ' & <number>';
     }
+
     method value:sym<group>($/) {
         my $val = $<terms>.ast;
         make '[ ' ~ $val ~ ' ]';
     }
+
     method value:sym<rule>($/)     { make '<' ~ $<id>.ast ~ '>' }
 
     method value:sym<punc>($/)     { make "'" ~ $/.Str ~ "'" }
-    method property-ref($/)        {
-        my $prop-ref = $<id>.ast;
+
+    method property-ref:sym<css21>($/) { make $<id>.ast }
+    method property-ref:sym<css3>($/)  { make $<id>.ast }
+    method value:sym<prop-ref>($/)        {
+        my $prop-ref = $<property-ref>.ast;
         %.prop-refs{ $prop-ref }++;
-        make $prop-ref;
+        make '<' ~ $prop-ref ~ '>';
     }
-    method value:sym<quoted>($/)   {
-        make $<property-ref>
-            ?? '<' ~ $<property-ref>.ast ~ '>'
-            !! "'" ~ $0.Str ~ "'"
-    }
+
+    method value:sym<quoted>($/)   { make "'" ~ $0.Str ~ "'"}
             
     method value:sym<num>($/)      { make $/.Str }
+
     method value:sym<keyw>($/)     { make $/.Str }
 }

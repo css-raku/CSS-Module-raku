@@ -10,7 +10,7 @@ use t::AST;
 my $spec_actions = CSS::Language::Specification::Actions.new;
 
 for (
-    'terms' => {'input' => "<single-animation-direction> [ ‘,’ <single-animation-direction> ]*",
+    'terms' => {'input' => "<single-animation-direction> [ ‘,’ <'single-animation-direction'> ]*",
                 ast => "<single-animation-direction> [ ',' <single-animation-direction> ]*",
     },
     'property-spec' => {'input' => "'content'\tnormal | none | [ <string> | <uri> | <counter> | attr(<identifier>) | open-quote | close-quote | no-open-quote | no-close-quote ]+ | inherit",

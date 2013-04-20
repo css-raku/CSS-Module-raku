@@ -37,6 +37,7 @@ grammar CSS::Language::Specification {
     rule occurs:sym<once_plus>  {'+'}
     rule occurs:sym<zero_plus>  {'*'}
     rule occurs:sym<range>      {'{'<min=.digits>[','<max=.digits>]'}'}
+    rule occurs:sym<hash>       {'#'}   # Not sure what this means yet
 
     proto rule value {<...>}
     rule value:sym<func>        { <keyw>'(' <.terms> ')' }
@@ -47,7 +48,10 @@ grammar CSS::Language::Specification {
     rule value:sym<rule>        { '<'<id>'>' }
     rule value:sym<punc>        { ',' | '/' }
     rule quote {\'|\‘|\’}
-    rule property-ref           {<id>}
-    rule value:sym<quoted>      {<.quote>[<property-ref> || (<- quote>*)]<.quote>}
+    proto token property-ref      {<...>}
+    token property-ref:sym<css21> {<.quote>[<id>]<.quote>}
+    token property-ref:sym<css3>  {'<'<.quote>[<id>]<.quote>'>'}
+    rule value:sym<prop-ref>      {<property-ref>}
+    rule value:sym<quoted>        {<.quote>(<- quote>*)<.quote>}
 
 }
