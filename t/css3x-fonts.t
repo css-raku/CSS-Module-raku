@@ -2,28 +2,14 @@
 
 use Test;
 
-use CSS::Grammar::Actions;
-use CSS::Language::CSS21;
-use CSS::Language::CSS21::Actions;
 use CSS::Extensions::CSS3::Fonts;
-use CSS::Grammar::CSS3;
 
 # prepare our own composite class with font extensions
-
-grammar t::CSS3::FontGrammar
-    is CSS::Extensions::CSS3::Fonts
-    is CSS::Extensions::CSS21
-    is CSS::Grammar::CSS3
-      {};
-
-class t::CSS3::FontActions
-    is CSS::Extensions::CSS3::Fonts::Actions
-    is CSS::Language::CSS21::Actions {};
 
 use lib '.';
 use t::AST;
 
-my $css_actions = t::CSS3::FontActions.new;
+my $css_actions = CSS::Extensions::CSS3::Fonts::Actions.new;
 
 for (
     at-rule   => {input => q:to 'END_INPUT',
@@ -44,7 +30,7 @@ for (
     my $input = %test<input>;
 
     $css_actions.reset;
-    my $p3 = t::CSS3::FontGrammar.parse( $input, :rule($rule), :actions($css_actions));
+    my $p3 = CSS::Extensions::CSS3::Fonts.parse( $input, :rule($rule), :actions($css_actions));
     t::AST::parse_tests($input, $p3, :rule($rule), :suite('css3-font-composite'),
                          :warnings($css_actions.warnings),
                          :expected(%test) );

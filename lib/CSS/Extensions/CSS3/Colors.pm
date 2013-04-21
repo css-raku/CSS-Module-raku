@@ -85,7 +85,8 @@ grammar CSS::Extensions::CSS3::Colors:ver<20110607.000>
 
 }
 
-class CSS::Extensions::CSS3::Colors::Actions {
+class CSS::Extensions::CSS3::Colors::Actions 
+    is CSS::Extensions::CSS3::_Base::Actions {
 
     has Hash $.colors = {
         aliceblue	=> [ 240,248,255 ],

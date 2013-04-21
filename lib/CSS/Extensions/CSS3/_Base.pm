@@ -1,6 +1,7 @@
 use v6;
 
 use CSS::Grammar::CSS3;
+use CSS::Language::Actions;
 
 grammar CSS::Extensions::CSS3::_Base
     is CSS::Grammar::CSS3 {
@@ -10,4 +11,8 @@ grammar CSS::Extensions::CSS3::_Base
         token keyw        {<ident>}           # keywords (case insensitive)
         token identifier  {<ident-cs>}        # identifiers (case sensitive)
         rule identifiers  {[ <identifier> ]+} # sequences of identifiers
+}
+
+class CSS::Extensions::CSS3::_Base::Actions 
+    is CSS::Language::Actions {
 }

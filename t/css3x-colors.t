@@ -2,28 +2,14 @@
 
 use Test;
 
-use CSS::Grammar::Actions;
-use CSS::Language::CSS21;
-use CSS::Language::CSS21::Actions;
 use CSS::Extensions::CSS3::Colors;
-use CSS::Grammar::CSS3;
 
 # prepare our own composite class with color extensions
-
-# test this extension in isolation
-grammar t::CSS3::ColorGrammar
-    is CSS::Extensions::CSS3::Colors
-    is CSS::Extensions::CSS21
-    is CSS::Grammar::CSS3 {};
-
-class t::CSS3::ColorActions
-    is CSS::Extensions::CSS3::Colors::Actions
-    is CSS::Language::CSS21::Actions { };
 
 use lib '.';
 use t::AST;
 
-my $css_actions = t::CSS3::ColorActions.new;
+my $css_actions = CSS::Extensions::CSS3::Colors::Actions.new;
 
 for (
     term   => {input => 'rgb(70%, 50%, 10%)',
@@ -75,7 +61,7 @@ for (
     my $input = %test<input>;
 
     $css_actions.reset;
-    my $p3 = t::CSS3::ColorGrammar.parse( $input, :rule($rule), :actions($css_actions));
+    my $p3 = CSS::Extensions::CSS3::Colors.parse( $input, :rule($rule), :actions($css_actions));
     t::AST::parse_tests($input, $p3, :rule($rule), :suite('css3-color'),
                          :warnings($css_actions.warnings),
                          :expected(%test) );

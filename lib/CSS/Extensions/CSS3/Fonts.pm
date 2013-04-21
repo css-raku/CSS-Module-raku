@@ -82,7 +82,9 @@ grammar CSS::Extensions::CSS3::Fonts:ver<20130212.000>
 
 }
 
-class CSS::Extensions::CSS3::Fonts::Actions {
+class CSS::Extensions::CSS3::Fonts::Actions 
+    is CSS::Extensions::CSS3::_Base::Actions {
+
     method at-rule:sym<font-face>($/) { make $.at-rule($/) }
 
     method format($/) {
@@ -110,6 +112,11 @@ class CSS::Extensions::CSS3::Fonts::Actions {
 
     method decl:sym<font-size-adjust>($/) {
         make $._make_decl($/, '<none> | <auto> | <number>');
+    }
+
+    method font-family($/) { make $.list($/) }
+    method decl:sym<font-family>($/) {
+        $._make_decl($/, '[[<family-name> | <generic-family>],]* [<family-name> | <generic-family>]', :body($<font-family>));
     }
 
     method decl:sym<font-synthesis>($/) {
