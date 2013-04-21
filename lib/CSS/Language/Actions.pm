@@ -13,7 +13,7 @@ class CSS::Language::Actions
         $.warning('unknown property', $<property>.ast, 'declaration dropped');
     }
 
-    method declaration:sym<validated>($/)  {
+     method declaration:sym<validated>($/)  {
         return unless $<decl>.ast;
         my %ast = $<decl>.ast;
 

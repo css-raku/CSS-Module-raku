@@ -74,7 +74,7 @@ class CSS::Language::Specification::Actions {
 
     method value:sym<func>($/)     {
         # todo - save function prototype
-        make '<' ~ $<keyw>.ast ~ '>';
+        make '<' ~ $<id>.ast ~ '>';
     }
 
     method value:sym<inherit>($/)  { make '<inherit>' }

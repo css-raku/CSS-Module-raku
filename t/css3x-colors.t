@@ -2,11 +2,11 @@
 
 use Test;
 
-use CSS::Grammar::CSS3;
 use CSS::Grammar::Actions;
 use CSS::Language::CSS21;
 use CSS::Language::CSS21::Actions;
 use CSS::Extensions::CSS3::Colors;
+use CSS::Grammar::CSS3;
 
 # prepare our own composite class with color extensions
 

@@ -74,17 +74,18 @@ sub generate-perl6-rules(%gen-props, %prop-refs) {
         my $defn = $def<defn>;
         my $props = $def<props>;
 
+        for $defn {
+            next unless /^\s*\[/ && /\]\s*$/;
+            s/^\s*\[\s*//;
+            s/\s*\]\s*$//;
+        }
+
         say;
         say "    # - $sym: $synopsis";
 
         if @$props == 1 && %prop-refs{ $props[0] } {
             # property is referenced by other definitions; factor out body
-            for $defn {
-                s/\|\s*\<inherit\>\s*//;
-                s/^\s*\[\s*//;
-                s/\s*\]\s*$//;
-            }
-
+            $defn ~~  s/\|\s*\<inherit\>\s*//;
             say "    token $sym \{:i $defn \}";
             say "    rule decl:sym<{$sym}> \{:i ($match) ':'  [ <$sym> | inherit || <any-args> ] \}";
         }

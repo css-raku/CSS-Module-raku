@@ -40,7 +40,7 @@ grammar CSS::Language::Specification {
     rule occurs:sym<hash>       {'#'}   # Not sure what this means yet
 
     proto rule value {<...>}
-    rule value:sym<func>        { <keyw>'(' <.terms> ')' }
+    rule value:sym<func>        { <id>'(' <.terms> ')' }
     rule value:sym<inherit>     { inherit }
     rule value:sym<keywords>    { <keyw> [ '|' <keyw> ]* }
     rule value:sym<numbers>     { <digits> [ '|' <digits> ]* }

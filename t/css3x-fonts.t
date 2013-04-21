@@ -2,11 +2,11 @@
 
 use Test;
 
-use CSS::Grammar::CSS3;
 use CSS::Grammar::Actions;
 use CSS::Language::CSS21;
 use CSS::Language::CSS21::Actions;
 use CSS::Extensions::CSS3::Fonts;
+use CSS::Grammar::CSS3;
 
 # prepare our own composite class with font extensions
 
@@ -33,9 +33,9 @@ for (
                                   src: local("Gentium"), url(gentium.ttf) format("truetype");  /* Overrides src definition */
                                 }
                            END_INPUT
-                  ast => {"declarations" => {"font-family" => {"expr" => ["family-name" => "MainText"]},
-                                             "src" => {"expr" => ["src" => {"local" => "Gentium"},
-                                                                  "src" => {"uri" => "gentium.ttf", "format" => "truetype"}]}},
+                  ast => {"font-description" => {"font-family" => {"expr" => ["family-name" => "MainText"]},
+                                                 "src" => {"expr" => ["src" => {"local" => "Gentium"},
+                                                                      "src" => {"uri" => "gentium.ttf", "format" => "truetype"}]}},
                           "\@" => "font-face"},
     },
     ) {
