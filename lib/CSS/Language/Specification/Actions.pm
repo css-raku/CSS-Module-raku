@@ -37,8 +37,15 @@ class CSS::Language::Specification::Actions {
     }
     method value-inst($/) {
         my $value = $<value>.ast;
-        $value ~= $<occurs>[0].ast
-            if $<occurs>;
+        if $<occurs> {
+            my $occurs = $<occurs>[0].ast;
+            if $occurs eq '#' {         # a list
+                $value = "[ $value [ ',' $value ]* ]";
+            }
+            else {
+                $value ~= $occurs;
+            }
+        }
         make $value;
     }
 
@@ -67,10 +74,10 @@ class CSS::Language::Specification::Actions {
     method occurs:sym<maybe>($/)     { make '?' }
     method occurs:sym<once_plus>($/) { make '+' }
     method occurs:sym<zero_plus>($/) { make '*' }
+    method occurs:sym<list>($/)      { make '#' }
     method occurs:sym<range>($/) {
         make '**' ~ $<min>.ast ~ '..' ~ $<max>.ast;
     }
-    method occurs:sym<hash>($/) { make '' }
 
     method value:sym<func>($/)     {
         # todo - save function prototype

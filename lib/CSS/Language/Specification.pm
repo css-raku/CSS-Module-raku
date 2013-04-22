@@ -37,7 +37,7 @@ grammar CSS::Language::Specification {
     rule occurs:sym<once_plus>  {'+'}
     rule occurs:sym<zero_plus>  {'*'}
     rule occurs:sym<range>      {'{'<min=.digits>[','<max=.digits>]'}'}
-    rule occurs:sym<hash>       {'#'}   # Not sure what this means yet
+    rule occurs:sym<list>       {'#'}
 
     proto rule value {<...>}
     rule value:sym<func>        { <id>'(' <.terms> ')' }
