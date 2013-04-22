@@ -4,17 +4,17 @@ use Test;
 
 use CSS::Grammar::CSS3;
 use CSS::Grammar::Actions;
-use CSS::Extensions::CSS3::PagedMedia;
+use CSS::Language::CSS3::PagedMedia;
 
 # prepare our own composite class with paged media extensions
 
 grammar t::CSS3::PagedMediaGrammar
-    is CSS::Extensions::CSS3::PagedMedia
+    is CSS::Language::CSS3::PagedMedia
     is CSS::Grammar::CSS3
     {};
 
 class t::CSS3::PagedMediaActions
-    is CSS::Extensions::CSS3::PagedMedia::Actions
+    is CSS::Language::CSS3::PagedMedia::Actions
     is CSS::Grammar::Actions
     {};
 

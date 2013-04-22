@@ -5,17 +5,17 @@ use Test;
 use CSS::Grammar;
 use CSS::Grammar::CSS3;
 use CSS::Grammar::Actions;
-use CSS::Extensions::CSS3::Namespaces;
+use CSS::Language::CSS3::Namespaces;
 
 # prepare our own composite class with namespace extensions
 
 grammar t::CSS3::NamespaceGrammar
-      is CSS::Extensions::CSS3::Namespaces
+      is CSS::Language::CSS3::Namespaces
       is CSS::Grammar::CSS3
       {};
 
 class t::CSS3::NamespaceActions
-    is CSS::Extensions::CSS3::Namespaces::Actions
+    is CSS::Language::CSS3::Namespaces::Actions
     is CSS::Grammar::Actions
 {};
 

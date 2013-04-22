@@ -3,9 +3,9 @@ use v6;
 # CSS3 Color Module Extensions
 # specification: http://www.w3.org/TR/2011/REC-css3-color-20110607/
 
-use CSS::Extensions::CSS3::_Base;
+use CSS::Language::CSS3::_Base;
 
-grammar CSS::Extensions::CSS3::Colors::Syntax {
+grammar CSS::Language::CSS3::Colors::Syntax {
 
 # extensions and at rules for CSS3 Color Module
 
@@ -73,9 +73,9 @@ grammar CSS::Extensions::CSS3::Colors::Syntax {
 
 }
 
-grammar CSS::Extensions::CSS3::Colors:ver<20110607.000>
-    is CSS::Extensions::CSS3::Colors::Syntax
-    is CSS::Extensions::CSS3::_Base {
+grammar CSS::Language::CSS3::Colors:ver<20110607.000>
+    is CSS::Language::CSS3::Colors::Syntax
+    is CSS::Language::CSS3::_Base {
 
     # ---- Properties ---- #
 
@@ -85,8 +85,8 @@ grammar CSS::Extensions::CSS3::Colors:ver<20110607.000>
 
 }
 
-class CSS::Extensions::CSS3::Colors::Actions 
-    is CSS::Extensions::CSS3::_Base::Actions {
+class CSS::Language::CSS3::Colors::Actions 
+    is CSS::Language::CSS3::_Base::Actions {
 
     has Hash $.colors = {
         aliceblue	=> [ 240,248,255 ],

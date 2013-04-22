@@ -6,17 +6,17 @@ use v6;
 # nb this standard is under revision (as of Feb 2013). Biggest change
 # is the proposed at-rule @font-feature-values
 
-use CSS::Extensions::CSS3::Fonts::AtFontFace;
-use CSS::Extensions::CSS3::_Base;
+use CSS::Language::CSS3::Fonts::AtFontFace;
+use CSS::Language::CSS3::_Base;
 
-grammar CSS::Extensions::CSS3::Fonts::Syntax {
-    rule font-description {<declarations=.CSS::Extensions::CSS3::Fonts::AtFontFace::declarations>}
+grammar CSS::Language::CSS3::Fonts::Syntax {
+    rule font-description {<declarations=.CSS::Language::CSS3::Fonts::AtFontFace::declarations>}
     rule at-rule:sym<font-face> {(:i'font-face') <font-description> }
 }
 
-grammar CSS::Extensions::CSS3::Fonts:ver<20130212.000> 
-    is CSS::Extensions::CSS3::Fonts::Syntax
-    is CSS::Extensions::CSS3::_Base {
+grammar CSS::Language::CSS3::Fonts:ver<20130212.000> 
+    is CSS::Language::CSS3::Fonts::Syntax
+    is CSS::Language::CSS3::_Base {
 
     # ---- Properties ----
     # Initial generation:
@@ -82,8 +82,8 @@ grammar CSS::Extensions::CSS3::Fonts:ver<20130212.000>
 
 }
 
-class CSS::Extensions::CSS3::Fonts::Actions 
-    is CSS::Extensions::CSS3::_Base::Actions {
+class CSS::Language::CSS3::Fonts::Actions 
+    is CSS::Language::CSS3::_Base::Actions {
 
     method at-rule:sym<font-face>($/) { make $.at-rule($/) }
 

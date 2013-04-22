@@ -9,7 +9,7 @@ use v6;
 # -- if you want the capability to to embed '@page' rules, you'll also need
 #    to load the Paged Media extension module in your class structure.
 
-grammar CSS::Extensions::CSS3::Media::Syntax {
+grammar CSS::Language::CSS3::Media::Syntax {
     rule at-rule:sym<media> {(:i'media') <media-list> <media-rules> }
 
     rule media-rules {
@@ -26,12 +26,12 @@ grammar CSS::Extensions::CSS3::Media::Syntax {
     token quantity:sym<resolution> {<resolution>}
 }
 
-grammar CSS::Extensions::CSS3::Media:ver<20120619.000>
-    is  CSS::Extensions::CSS3::Media::Syntax {
+grammar CSS::Language::CSS3::Media:ver<20120619.000>
+    is  CSS::Language::CSS3::Media::Syntax {
         # todo properties
 }
 
-class CSS::Extensions::CSS3::Media::Actions {
+class CSS::Language::CSS3::Media::Actions {
 
     # media-rules, media-list, media-query, media see core actions
     method media-op($/)              { make $/.Str.lc }

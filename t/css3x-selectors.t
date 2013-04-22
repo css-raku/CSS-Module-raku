@@ -3,18 +3,18 @@
 use Test;
 
 use CSS::Grammar::CSS3;
-use CSS::Extensions::CSS3::Selectors;
+use CSS::Language::CSS3::Selectors;
 use CSS::Grammar::Actions;
 
 # prepare our own composite class with paged selector extensions
 
 grammar t::CSS3::SelectorsGrammar
-    is CSS::Extensions::CSS3::Selectors
+    is CSS::Language::CSS3::Selectors
     is CSS::Grammar::CSS3
     {};
 
 class t::CSS3::SelectorsActions
-    is CSS::Extensions::CSS3::Selectors::Actions
+    is CSS::Language::CSS3::Selectors::Actions
     is CSS::Grammar::Actions
     {};
 

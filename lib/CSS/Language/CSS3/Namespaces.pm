@@ -4,17 +4,17 @@ use v6;
 # specification: http://www.w3.org/TR/2011/REC-css3-namespace-20110929/
 #
 
-grammar CSS::Extensions::CSS3::Namespaces::Syntax {
+grammar CSS::Language::CSS3::Namespaces::Syntax {
 
     rule at-decl:sym<namespace> {(:i'namespace') <prefix=.ident>? [<url=.string>|<url>] ';' }
 
 }
 
-grammar CSS::Extensions::CSS3::Namespaces:ver<20110929.000>
-    is CSS::Extensions::CSS3::Namespaces::Syntax {
+grammar CSS::Language::CSS3::Namespaces:ver<20110929.000>
+    is CSS::Language::CSS3::Namespaces::Syntax {
 }
 
-class CSS::Extensions::CSS3::Namespaces::Actions {
+class CSS::Language::CSS3::Namespaces::Actions {
     method at-decl:sym<namespace>($/) { make $.at-rule($/) }
 }
 

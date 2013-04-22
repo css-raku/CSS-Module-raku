@@ -1,15 +1,11 @@
 use CSS::Grammar::CSS3;
 
-use CSS::Extensions::CSS3::_Base;
+use CSS::Language::CSS3::_Base;
 
-grammar CSS::Extensions::CSS3::Fonts::AtFontFace
-    is CSS::Extensions::CSS3::_Base {
+grammar CSS::Language::CSS3::Fonts::AtFontFace
+    is CSS::Language::CSS3::_Base {
 
     # @font-face declarations
-
-    token uri         {<url>}
-    token identifier  {<ident-cs>}        # identifiers (case sensitive)
-    rule identifiers  {[ <identifier> ]+} # sequences of identifiers
 
     # ---- Functions ----
     rule format {:i'format(' [ <format=.string> | <format=.keyw> || <any-args> ] ')'}

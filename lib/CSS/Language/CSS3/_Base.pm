@@ -3,7 +3,7 @@ use v6;
 use CSS::Grammar::CSS3;
 use CSS::Language::Actions;
 
-grammar CSS::Extensions::CSS3::_Base
+grammar CSS::Language::CSS3::_Base
     is CSS::Grammar::CSS3 {
         token integer     {[\+|\-]?\d+ <!before ['%'|\w|'.']>}
         token number      {<num> <!before ['%'|\w]>}
@@ -13,6 +13,6 @@ grammar CSS::Extensions::CSS3::_Base
         rule identifiers  {[ <identifier> ]+} # sequences of identifiers
 }
 
-class CSS::Extensions::CSS3::_Base::Actions 
+class CSS::Language::CSS3::_Base::Actions 
     is CSS::Language::Actions {
 }

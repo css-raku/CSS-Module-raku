@@ -6,7 +6,7 @@ use v6;
 # -- have relaxed negation rule to take a list of arguments - in common use
 #    and supported  by major browsers.
 
-grammar CSS::Extensions::CSS3::Selectors::Syntax {
+grammar CSS::Language::CSS3::Selectors::Syntax {
     # extensions:
     # ----------
     # inherited combinators: '+' (adjacent), '>' (child)
@@ -52,11 +52,11 @@ grammar CSS::Extensions::CSS3::Selectors::Syntax {
 
 }
 
-grammar CSS::Extensions::CSS3::Selectors:ver<20090929.000>
-    is  CSS::Extensions::CSS3::Selectors::Syntax {
+grammar CSS::Language::CSS3::Selectors:ver<20090929.000>
+    is  CSS::Language::CSS3::Selectors::Syntax {
 }
 
-class CSS::Extensions::CSS3::Selectors::Actions {
+class CSS::Language::CSS3::Selectors::Actions {
 
     method namespace-prefix($/) { make $.node($/) }
     method wildcard($/)         { make $/.Str }
