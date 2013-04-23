@@ -213,7 +213,7 @@ for (
 
     unless %seen{$prop}++ {
 
-        my $junk = $prop ~ ': junk 42';
+        my $junk = $prop ~ ': junk +42';
 
         $css1_actions.reset;
         $p1 = CSS::Language::CSS1.parse( $junk, :rule('decl'), :actions($css1_actions));

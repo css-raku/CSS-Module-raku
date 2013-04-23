@@ -28,8 +28,8 @@ grammar CSS::Extensions::CSS21 {
     token number      {<num> <!before ['%'|\w]>}
     token uri         {<url>}
     token keyw        {<ident>}           # keywords (case insensitive)
-    token identifier  {<ident-cs>}        # identifiers (case sensitive)
-    rule identifiers  {[ <identifier> ]+} # sequences of identifiers
+    token identifier  {<name>}            # identifiers (case sensitive)
+    rule identifiers  {[ <identifier> ]+} # sequence of identifiers
 
     # --- Functions --- #
 
@@ -212,7 +212,7 @@ grammar CSS::Extensions::CSS21 {
 
     # - font: [ [ 'font-style' || 'font-variant' || 'font-weight' ]? 'font-size' [ / 'line-height' ]? 'font-family' ] | caption | icon | menu | message-box | small-caption | status-bar | inherit
     rule decl:sym<font> {:i (font) ':' [
-                              [  <font-style> | <font-variant=.font-variant-css21> | <font-weight> ]* <font-size> [ '/' <line-height> ]? <font-family> [ ',' <font-family> ]*
+                              [  <font-style> | <font-variant=.font-variant-css21> | <font-weight> ]**0..3 <font-size> [ '/' <line-height> ]? <font-family> [ ',' <font-family> ]*
                               | [ caption | icon | menu | message\-box | small\-caption | status\-bar ] & <keyw>
                               | <inherit> || <any-args> ] }
 

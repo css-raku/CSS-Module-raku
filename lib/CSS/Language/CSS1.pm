@@ -18,7 +18,7 @@ grammar CSS::Language::CSS1:ver<20080411>
     token number      {<num> <!before ['%'|\w]>}
     token uri         {<url>}
     token keyw        {<ident>}           # keywords (case insensitive)
-    token identifier  {<ident-cs>}        # identifiers (case sensitive)
+    token identifier  {<name>}        # identifiers (case sensitive)
     rule identifiers  {[ <identifier> ]+} # sequences of identifiers
 
     # 5.2 Font Properties
@@ -47,7 +47,7 @@ grammar CSS::Language::CSS1:ver<20080411>
     rule decl:sym<font-size> {:i (font\-size) ':' [ <font-size> || <any-args> ] }
     # - font: [ <font-style> || <font-variant> || <font-weight> ]? <font-size> [ / <line-height> ]? <font-family>
     rule decl:sym<font> {:i (font) ':' [
-                              [  <font-style> | <font-variant> | <font-weight> ]* <font-size> [ '/' <line-height> ]? <font-family> [ ',' <font-family> ]*
+                              [  <font-style> | <font-variant> | <font-weight> ]* <font-size> [ '/' <line-height> ]? <font-family> [ ',' <font-family> ]**0..3
                               || <any-args> ] }
 
 

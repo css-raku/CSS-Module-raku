@@ -149,7 +149,7 @@ class CSS::Language::Actions
     method uri($/)         { make $<url>.ast }
     method keyw($/)        { make $<ident>.ast }
     # case sensitive identifiers
-    method identifier($/)  { make $<ident-cs>.ast }
+    method identifier($/)  { make $<name>.ast }
     # identifiers strung-together, e.g New Century Schoolbook
     method identifiers($/) { make $<identifier>.map({$_.ast }).join(' ') }
 }
