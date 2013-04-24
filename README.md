@@ -27,11 +27,11 @@ for any unexpected input.
     my $actions =  CSS::Language::CSS21::Actions.new;
     my $p = CSS::Language::CSS21.parse($css, :actions($actions));
     note $_ for $actions.warnings;
-    say "declarations: " ~ $p.ast[0]<ruleset><declarations>.perl;
+    say "declaration: " ~ $p.ast[0]<ruleset><declarations>.perl;
     # output:
     # unknown property: foo - declaration dropped
     # usage background-color: <color> | transparent | inherit
-    # declarations: {"color" => {"expr" => ["color" => {"r" => 0, "g" => 0, "b" => 255}]}}
+    # declaration: {"color" => {"expr" => ["color" => {"r" => 0, "g" => 0, "b" => 255}]}}
 
 Specification Grammar
 ---------------------
@@ -42,7 +42,8 @@ properties and functions. For example, the specification for `border-color` is:
 
     'border-color' [ <color> | transparent ]{1,4} | inherit
 
-It was used to generate the initial grammars and actions. For example:
+It was used to generate the initial grammars and actions in this modules.
+Example usage:
 
     % etc/gen-properties.pl gen grammar etc/css21-properties.txt
 
