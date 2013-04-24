@@ -291,7 +291,7 @@ class CSS::Language::CSS21::Actions
             :body($<font-style>));
     }
 
-    method font-variant-css21($/) { make $.token($<keyw>.ast) }
+    method font-variant($/) { make $.token($<keyw>.ast) }
 
     method decl:sym<font-variant>($/) {
         $._make_decl($/, 'normal | small-caps',

@@ -201,8 +201,8 @@ grammar CSS::Extensions::CSS21 {
     rule decl:sym<font-style> {:i (font\-style) ':' [ [ normal | italic | oblique ] & <keyw> | <inherit> || <any-args> ] }
 
     # - font-variant: normal | small-caps | inherit
-    token font-variant-css21 {:i [ normal | small\-caps ] & <keyw>}
-    rule decl:sym<font-variant> {:i (font\-variant) ':' [ <font-variant=.font-variant-css21> | <inherit> || <any-args> ] }
+    token font-variant {:i [ normal | small\-caps ] & <keyw>}
+    rule decl:sym<font-variant> {:i (font\-variant) ':' [ <font-variant> | <inherit> || <any-args> ] }
 
     # - font-weight: normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | inherit
     token font-weight {:i [ normal | bold | bolder | lighter ] & <keyw>
@@ -212,7 +212,7 @@ grammar CSS::Extensions::CSS21 {
 
     # - font: [ [ 'font-style' || 'font-variant' || 'font-weight' ]? 'font-size' [ / 'line-height' ]? 'font-family' ] | caption | icon | menu | message-box | small-caption | status-bar | inherit
     rule decl:sym<font> {:i (font) ':' [
-                              [  <font-style> | <font-variant=.font-variant-css21> | <font-weight> ]**0..3 <font-size> [ '/' <line-height> ]? <font-family> [ ',' <font-family> ]*
+                              [ <font-style> | <font-variant> | <font-weight> ]**0..3 <font-size> [ '/' <line-height> ]? <font-family> [ ',' <font-family> ]*
                               | [ caption | icon | menu | message\-box | small\-caption | status\-bar ] & <keyw>
                               | <inherit> || <any-args> ] }
 
