@@ -1,4 +1,4 @@
-#!perl6
+#!/usr/bin/env perl6
 
 # quick script to translate w3c property definitions to draft
 # Perl 6 grammars and actions.
