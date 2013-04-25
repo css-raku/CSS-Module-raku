@@ -49,9 +49,8 @@ Example usage:
 
 See Also
 ========
--- [CSS::Grammar](https://github.com/p6-css/perl6-CSS-Grammar) - base grammars
--- [CSS::Language::CSS3](https://github.com/p6-css/perl6-CSS-Language-CSS3)
-- under construction as a CSS Level 3 validating parser
+- [CSS::Grammar](https://github.com/p6-css/perl6-CSS-Grammar) - base grammars
+- [CSS::Language::CSS3](https://github.com/p6-css/perl6-CSS-Language-CSS3) - under construction as a CSS Level 3 validating parser
 
 References
 ==========
