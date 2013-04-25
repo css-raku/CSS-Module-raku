@@ -1,11 +1,11 @@
 CSS::Language
 =============
 
-CSS::Language is under construction as a validating parser for CSS Levels
-1 and 2.1.
+CSS::Language is under construction as a Perl 6 validating parser for CSS
+Levels 1 and 2.1.
 
-CSS::Language extends [CSS::Grammar]. It performs property-specific
-validation on declarations.
+CSS::Language extends [CSS::Grammar](https://github.com/p6-css/perl6-CSS-Grammar). 
+It performs property-specific parsing and validation of declarations.
 
 This module implements the following grammars and actions:
 
@@ -49,14 +49,14 @@ Example usage:
 
 See Also
 ========
-[CSS::Language::CSS3](https://github.com/p6-css/perl6-CSS-Language-CSS3)
-is under construction as a CSS Level 3 validating parser
+-- [CSS::Grammar](https://github.com/p6-css/perl6-CSS-Grammar) - base grammars
+-- [CSS::Language::CSS3](https://github.com/p6-css/perl6-CSS-Language-CSS3)
+- under construction as a CSS Level 3 validating parser
 
 References
 ==========
 - CSS1 - http://www.w3.org/TR/2008/REC-CSS1-20080411/#css1-properties
 - CSS21 - http://www.w3.org/TR/2011/REC-CSS2-20110607/propidx.html
-- CSS3 - http://www.w3.org/TR/2011/REC-CSS2-20110607/propidx.html
 
 
 
