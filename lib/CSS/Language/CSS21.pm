@@ -70,7 +70,7 @@ grammar CSS::Extensions::CSS21 {
     # - background-position: [ [ <percentage> | <length> | left | center | right ] [ <percentage> | <length> | top | center | bottom ]? ] | [ [ left | center | right ] || [ top | center | bottom ] ] | inherit
     # refactored as [ <percentage> | <length> | left | center | right ] || [ <percentage> | <length> | top | center | bottom ] | inherit
     rule background-position {:i [ <percentage> | <length> | [ left | center | right ] & <keyw>
-                                    | [ top | bottom ] & <keyw> ]**1..2 }
+                                   | [ top | bottom ] & <keyw> ]**1..2 }
     rule decl:sym<background-position> {:i (background\-position) ':' [
                                              <background-position>
                                              | <inherit> || <any-args> ]}
@@ -140,7 +140,7 @@ grammar CSS::Extensions::CSS21 {
     rule decl:sym<color> {:i (color) ':' [ <color> | <inherit> || <any-args> ] }
 
     # - content: normal | none | [ <string> | <uri> | <counter> | attr(<identifier>) | open-quote | close-quote | no-open-quote | no-close-quote ]+ | inherit
-    rule decl:sym<content> {:i (content) ':' [ [ normal | none ] & <keyw> | [ [ <string> | <uri> | <counter> | <attr> | [ open\-quote | close\-quote | no\-open\-quote | no\-close\-quote ] & <keyw>  ] ]+
+    rule decl:sym<content> {:i (content) ':' [ [ normal | none ] & <keyw> | [ [ <string> | <uri> | <counter> | <counters> | <attr> | [ open\-quote | close\-quote | no\-open\-quote | no\-close\-quote ] & <keyw>  ] | <any> ]+
                                                | <inherit> || <any-args> ] }
 
     # - counter-increment: [ <identifier> <integer>? ]+ | none | inherit
