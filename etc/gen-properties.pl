@@ -3,11 +3,11 @@
 # quick script to translate w3c property definitions to draft
 # Perl 6 grammars and actions.
 #
-# it was used to generatate the initial draft grammar and actions for
+# it was used to generate the initial draft grammar and actions for
 # CSS::Language:CSS1 and CSS::Language:CSS21 etc. These have since been
 # hand-tailored.
 #
-# Example usage: perl6 etc/gen-properties.pl gen grammar etc/css21-properties.txt > /tmp/css21-grammar.pm
+# Example: perl6 etc/gen-properties.pl gen grammar etc/css21-properties.txt
 #
 
 use CSS::Language::Specification;

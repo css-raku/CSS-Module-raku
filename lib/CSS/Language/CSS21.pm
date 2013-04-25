@@ -45,8 +45,8 @@ grammar CSS::Extensions::CSS21 {
      rule decl:sym<azimuth> {:i (azimuth) ':' [ <angle>
                                                 | leftwards & <leftwards=.keyw>
                                                 | rightwards & <rightwards=.keyw>
-                                                | [ [ [ [ left[\-side]? | far\-[left|right] | center[\-[left|right]]? | right[\-side]? ] & <keyw>  ]
-                                                      | behind & <behind=.keyw>  ]**1..2 ]
+                                                | [ [ left[\-side]? | far\-[left|right] | center[\-[left|right]]? | right[\-side]? ] & <keyw>
+                                                    | behind & <behind=.keyw> ]**1..2
                                                 | <inherit> || <any-args> ] }
 
     # - background-attachment: scroll | fixed | inherit
@@ -69,7 +69,7 @@ grammar CSS::Extensions::CSS21 {
 
     # - background-position: [ [ <percentage> | <length> | left | center | right ] [ <percentage> | <length> | top | center | bottom ]? ] | [ [ left | center | right ] || [ top | center | bottom ] ] | inherit
     # refactored as [ <percentage> | <length> | left | center | right ] || [ <percentage> | <length> | top | center | bottom ] | inherit
-    rule background-position {:i  [ [ <percentage> | <length> | [ left | center | right ] & <keyw>  ] 
+    rule background-position {:i [ <percentage> | <length> | [ left | center | right ] & <keyw>
                                     | [ top | bottom ] & <keyw> ]**1..2 }
     rule decl:sym<background-position> {:i (background\-position) ':' [
                                              <background-position>
@@ -90,7 +90,7 @@ grammar CSS::Extensions::CSS21 {
 
     # - border-color: [ <color> | transparent ]{1,4} | inherit
     rule border-color { <color> | transparent & <keyw>  }
-    rule decl:sym<border-color> {:i (border\-color) ':' [ [ <border-color> ] ** 1..4
+    rule decl:sym<border-color> {:i (border\-color) ':' [ <border-color>**1..4
                                                           | <inherit> || <any-args> ]}
 
     # - border-spacing: <length> <length>? | inherit
@@ -102,7 +102,7 @@ grammar CSS::Extensions::CSS21 {
                                                           | <inherit> || <any-args> ]}
 
     # - border-top|border-right|border-bottom|border-left: [ <border-width> || <border-style> || 'border-top-color' ] | inherit
-    rule decl:sym<border-*> {:i (border\-[top|right|bottom|left]) ':' [ [ [ <border-width> | <border-style> | <border-color> ]**1..3 ] | <inherit> || <any-args> ] }
+    rule decl:sym<border-*> {:i (border\-[top|right|bottom|left]) ':' [ [ <border-width> | <border-style> | <border-color> ]**1..3 | <inherit> || <any-args> ] }
 
    # - border-top-color|border-right-color|border-bottom-color|border-left-color: <color> | transparent | inherit
     rule decl:sym<border-*-color> {:i (border\-[top|right|bottom|left]\-color) ':' [ <border-color> | <inherit> || <any-args> ] }
@@ -119,7 +119,7 @@ grammar CSS::Extensions::CSS21 {
 
     # - border: [ <border-width> || <border-style> || 'border-top-color' ] | inherit
     # - refactored: border: [ <border-width> || <border-style> || <border-color> ] | inherit
-    rule decl:sym<border> {:i (border) ':' [ [ [ <border-width> | <border-style> | <border-color> ]**1..3 ] | <inherit> || <any-args> ] }
+    rule decl:sym<border> {:i (border) ':' [ [ <border-width> | <border-style> | <border-color> ]**1..3 | <inherit> || <any-args> ] }
 
     # - bottom: <length> | <percentage> | auto | inherit
     rule decl:sym<bottom> {:i (bottom) ':' [ <length> | <percentage> | auto & <keyw> | <inherit> || <any-args> ] }
@@ -246,7 +246,7 @@ grammar CSS::Extensions::CSS21 {
     rule decl:sym<list-style-type> {:i (list\-style\-type) ':' [ <list-style-type> | <inherit> || <any-args> ] }
 
     # - list-style: [ 'list-style-type' || 'list-style-position' || 'list-style-image' ] | inherit
-    rule decl:sym<list-style> {:i (list\-style) ':' [ [ [ <list-style-type> | <list-style-position> | <list-style-image> ]**1..3 ] | <inherit> || <any-args> ] }
+    rule decl:sym<list-style> {:i (list\-style) ':' [ [ <list-style-type> | <list-style-position> | <list-style-image> ]**1..3  | <inherit> || <any-args> ] }
 
     # - margin-right|margin-left: <margin-width> | inherit
     # - margin-top|margin-bottom: <margin-width> | inherit
@@ -278,7 +278,7 @@ grammar CSS::Extensions::CSS21 {
     rule decl:sym<outline-width> {:i (outline\-width) ':'  [ <outline-width=.border-width> | inherit || <any-args> ] }
 
    # - outline: [ 'outline-color' || 'outline-style' || 'outline-width' ] | inherit
-    rule decl:sym<outline> {:i (outline) ':' [ [ [ <outline-color> | <outline-style=.border-style> | <outline-width=.border-width> ]**1..3 ] | <inherit> || <any-args> ] }
+    rule decl:sym<outline> {:i (outline) ':' [ [ <outline-color> | <outline-style=.border-style> | <outline-width=.border-width> ]**1..3 | <inherit> || <any-args> ] }
 
     # - overflow: visible | hidden | scroll | auto | inherit
     rule decl:sym<overflow> {:i (overflow) ':' [ [ visible | hidden | scroll | auto ] & <keyw> | <inherit> || <any-args> ] }
@@ -355,7 +355,7 @@ grammar CSS::Extensions::CSS21 {
     rule decl:sym<text-align> {:i (text\-align) ':' [ [ left | right | center | justify ] & <keyw> | <inherit> || <any-args> ] }
 
     # - text-decoration: none | [ underline || overline || line-through || blink ] | inherit
-    rule decl:sym<text-decoration> {:i (text\-decoration) ':' [ none & <keyw> | [ [ underline | overline | line\-through | blink & <keyw> ] & <keyw> ]**1..4 | <inherit> || <any-args> ] }
+    rule decl:sym<text-decoration> {:i (text\-decoration) ':' [ none | [ [ underline | overline | line\-through | blink ] & <keyw> ]**1..4 | <inherit> || <any-args> ] }
 
     # - text-indent: <length> | <percentage> | inherit
     rule decl:sym<text-indent> {:i (text\-indent) ':' [ <length> | <percentage> | <inherit> || <any-args> ] }

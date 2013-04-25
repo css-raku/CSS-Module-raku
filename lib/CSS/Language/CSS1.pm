@@ -35,7 +35,7 @@ grammar CSS::Language::CSS1:ver<20080411>
     # - font-variant: normal | small-caps
     token font-variant {:i [ normal | small\-caps ] & <keyw>}
     rule decl:sym<font-variant> {:i (font\-variant) ':' [ <font-variant> || <any-args> ] }
-   # - font-weight: normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
+    # - font-weight: normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
     token font-weight {:i [ normal | bold | bolder | lighter ] & <keyw>
                            | [ 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 ] & <number> }
     rule decl:sym<font-weight> {:i (font\-weight) ':' [ <font-weight> || <any-args> ] }
@@ -47,7 +47,7 @@ grammar CSS::Language::CSS1:ver<20080411>
     rule decl:sym<font-size> {:i (font\-size) ':' [ <font-size> || <any-args> ] }
     # - font: [ <font-style> || <font-variant> || <font-weight> ]? <font-size> [ / <line-height> ]? <font-family>
     rule decl:sym<font> {:i (font) ':' [
-                              [  <font-style> | <font-variant> | <font-weight> ]* <font-size> [ '/' <line-height> ]? <font-family> [ ',' <font-family> ]**0..3
+                              [ <font-style> | <font-variant> | <font-weight> ]* <font-size> [ '/' <line-height> ]? <font-family> [ ',' <font-family> ]**0..3
                               || <any-args> ] }
 
 
@@ -84,7 +84,7 @@ grammar CSS::Language::CSS1:ver<20080411>
 
     # - background: <background-color> || <background-image> || <background-repeat> || <background-attachment> || <background-position>
     rule decl:sym<background> {:i (background) ':' [
-                                    [ <background-color> | <background-image> | <background-repeat> | <background-attachment> | <background-position> ]+
+                                    [ <background-color> | <background-image> | <background-repeat> | <background-attachment> | <background-position> ]**1..5
                                     || <any-args> ]}
 
 
@@ -221,7 +221,7 @@ grammar CSS::Language::CSS1:ver<20080411>
 
     # - list-style: <keyword> || <position> || <url>
     rule decl:sym<list-style> {:i (list\-style) ':' [
-                                    [ <list-style-type> | <list-style-image> | <list-style-position> ]+
+                                    [ <list-style-type> | <list-style-image> | <list-style-position> ]**1..3
                                     || <any-args> ]}
 
     # - position: absolute | relative | static
