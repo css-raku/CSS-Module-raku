@@ -41,54 +41,48 @@ class CSS::Language::CSS21::Actions
 
    # --- Properties --- #
 
-   method decl:sym<azimuth>($/) {
+    method decl:sym<azimuth>($/) {
         # see http://www.w3.org/TR/2011/REC-CSS2-20110607/aural.html
 
-        return $.warning('usage azimuth: <angle> | [[ left-side | far-left | left | center-left | center | center-right | right | far-right | right-side ] || behind ] | leftwards | rightwards | inherit')
-            if $<any-args>;
+        return $._make_decl($/, 'usage azimuth: <angle> | [[ left-side | far-left | left | center-left | center | center-right | right | far-right | right-side ] || behind ] | leftwards | rightwards | inherit')
+            if $<misc>;
 
         my %ast;
         %ast<property> = $0.Str.trim.lc;
 
-        if $<inherit> {
-            %ast<inherit> = True;
+        %ast<expr> = $.list($/);
+
+        # compute the derived angle
+        my $result;
+        if $<angle> {
+            $result = (angle => $<angle>.ast);
+        }
+        elsif $<keyw> || $<behind> {
+
+            state %angles = (
+                'left-side'    => [270, 270],
+                'far-left'     => [300, 240],
+                'left'         => [320, 220],
+                'center-left'  => [340, 200],
+                'center'       => [0,   180],
+                'center-right' => [20,  160],
+                'right'        => [40,  140],
+                'far-right'    => [60,  120],
+                'right-side'   => [90,  90],
+                'behind'       => [180, 180],
+                );
+
+            my $keyw = ($<keyw> || $<behind>).ast;
+            my $bh = $<behind> ?? 1 !! 0;
+
+            $result = (angle => $.token(%angles{$keyw}[$bh], :type<angle>, :units<degrees> ));
         }
         else {
-            %ast<expr> = $.list($/);
-
-            # compute the derived angle
-            my $result;
-            if $<angle> {
-                $result = (angle => $<angle>.ast);
-            }
-            elsif $<keyw> || $<behind> {
-
-                state %angles = (
-                    'left-side'    => [270, 270],
-                    'far-left'     => [300, 240],
-                    'left'         => [320, 220],
-                    'center-left'  => [340, 200],
-                    'center'       => [0,   180],
-                    'center-right' => [20,  160],
-                    'right'        => [40,  140],
-                    'far-right'    => [60,  120],
-                    'right-side'   => [90,  90],
-                    'behind'       => [180, 180],
-                    );
-
-                my $keyw = ($<keyw> || $<behind>).ast;
-                my $bh = $<behind> ?? 1 !! 0;
-
-                $result = (angle => $.token(%angles{$keyw}[$bh], :type<angle>, :units<degrees> ));
-            }
-            else {
-                my $delta_angle = $<leftwards> ?? -20 !! 20;
-                $result = (delta => $.token($delta_angle, :type<angle>, :units<degrees> ));
-            }
-
-            %ast<_result> = $result;
+            my $delta_angle = $<leftwards> ?? -20 !! 20;
+            $result = (delta => $.token($delta_angle, :type<angle>, :units<degrees> ));
         }
 
+        %ast<_result> = $result;
         make %ast;
     }
 
@@ -234,41 +228,35 @@ class CSS::Language::CSS21::Actions
 
     method decl:sym<elevation>($/) {
         # see http://www.w3.org/TR/2011/REC-CSS2-20110607/aural.html
-
-        return $.warning('usage elevation: <angle> | below | level | above | higher | lower | inherit')
-            if $<any-args>;
+        return $/._make_decl($/)
+            if $<misc>;
 
         my %ast;
         %ast<property> = $0.Str.trim.lc;
         %ast<expr> = $.list($/);
 
-        if $<inherit> {
-            %ast<inherit> = True;
+        my $result;
+
+        if $<angle> {
+            $result = (angle => $<angle>.ast);
         }
-        else {
-            my $result;
+        elsif $<keyw> {
 
-            if $<angle> {
-                $result = (angle => $<angle>.ast);
-            }
-            elsif $<keyw> {
+            state %angles = (
+                'below'    => -90,
+                'level'    =>   0,
+                'above'    =>  90,
+                );
 
-                state %angles = (
-                    'below'    => -90,
-                    'level'    =>   0,
-                    'above'    =>  90,
-                    );
-
-                my $keyw = $<keyw>.ast;
-                $result = (angle => $.token(%angles{$keyw}, :type<angle>, :units<degrees> ));
-            }
-            elsif $<tilt> {
-                my $delta_angle = $<tilt>.ast eq 'lower' ?? -10 !! 10;
-                $result = (delta => $.token($delta_angle, :type<angle>, :units<degrees> ));
-            }
-            %ast<_result> = $result;
+            my $keyw = $<keyw>.ast;
+            $result = (angle => $.token(%angles{$keyw}, :type<angle>, :units<degrees> ));
+        }
+        elsif $<tilt> {
+            my $delta_angle = $<tilt>.ast eq 'lower' ?? -10 !! 10;
+            $result = (delta => $.token($delta_angle, :type<angle>, :units<degrees> ));
         }
 
+        %ast<_result> = $result;
         make %ast;
     }
 

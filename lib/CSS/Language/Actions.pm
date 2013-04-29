@@ -13,8 +13,9 @@ class CSS::Language::Actions
         $.warning('unknown property', $<property>.ast, 'declaration dropped');
     }
 
-     method declaration:sym<validated>($/)  {
+    method declaration:sym<validated>($/)  {
         return unless $<decl>.ast;
+        
         my %ast = $<decl>.ast;
 
         if (my $prio = $<prio> && $<prio>[0].ast) {
@@ -23,6 +24,15 @@ class CSS::Language::Actions
         }
 
         make %ast;
+    }
+
+    method inherit($/) { make True }
+    method initial($/) { make True }
+    method misc($/) {
+        # miscellaneous and fallback handling, including 'inherit' (css2) and
+        # 'initial' css3
+        make $.node($/)
+            unless $<any-args>;
     }
 
     #---- AST construction methods ----#
@@ -36,17 +46,21 @@ class CSS::Language::Actions
         my $property = $0.Str.trim.lc;
 
         return $.warning('usage ' ~ $property ~ ': ' ~ $synopsis)
-            if $<any-args> || $<any>;
+            if ($<misc> && !$<misc>.ast) || $<any>;
 
         my @expr;
-        my $inherit = $<inherit> && $<inherit>.ast;
 
-        for $.list($body // $/) {
-            for @$_ {
-                my ($term, $val) = $_.kv;
-                next if $term eq 'inherit';
-
-                @expr.push($_);
+        if $<misc> {
+            @expr = %( $<misc>.ast );
+        }
+        else {
+            for $.list($body // $/) {
+                for @$_ {
+                    my ($term, $val) = $_.kv;
+                    next if $term eq 'inherit';
+                    
+                    @expr.push($_);
+                }
             }
         }
 
@@ -78,9 +92,7 @@ class CSS::Language::Actions
 
         my %ast;
         %ast<property> = $property;
-        %ast<inherit> = True if $inherit;
-        %ast<expr> = @expr
-            if @expr;
+        %ast<expr> = @expr;
 
         make %ast;
     }
@@ -143,7 +155,7 @@ class CSS::Language::Actions
         make $.token(%rgb, :type<color>, :units<rgb>);
     }
 
-    method inherit($/)     { make True }
+    method std($/)         { make $/.Str.lc }
     method integer($/)     { make $/.Int }
     method number($/)      { make $<num>.ast }
     method uri($/)         { make $<url>.ast }

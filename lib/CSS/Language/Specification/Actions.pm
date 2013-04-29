@@ -84,8 +84,6 @@ class CSS::Language::Specification::Actions {
         make '<' ~ $<id>.ast ~ '>';
     }
 
-    method value:sym<inherit>($/)  { make '<inherit>' }
-
     method value:sym<keywords>($/) {
         my $keywords = @$<keyw> > 1
             ?? '[ ' ~ $<keyw>.map({$_.ast}).join(' | ') ~ ' ]'

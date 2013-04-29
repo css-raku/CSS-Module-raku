@@ -21,8 +21,8 @@ grammar CSS::Language::Specification {
     token tab {\t}
     token property-spec {<prop-names> [<.tab>|<.ws>] <synopsis=.list> }
 
-    token prop-names {[' '?[\'<prop-name=.id>\'|<prop-name=.id>|'*']]+}
-    token id { <!before inherit><[a..z]>[\w|\-]* }
+    token prop-names {[' '?[<.quote><prop-name=.id><.quote>|<prop-name=.id>|'*']]+}
+    token id { <[a..z]>[\w|\-]* }
     token keyw { <id> }
     token digits { \d+ }
 
@@ -41,7 +41,6 @@ grammar CSS::Language::Specification {
 
     proto rule value {<...>}
     rule value:sym<func>        { <id>'(' <.terms> ')' }
-    rule value:sym<inherit>     { inherit }
     rule value:sym<keywords>    { <keyw> [ '|' <keyw> ]* }
     rule value:sym<numbers>     { <digits> [ '|' <digits> ]* }
     rule value:sym<group>       { '[' <terms> ']' }
