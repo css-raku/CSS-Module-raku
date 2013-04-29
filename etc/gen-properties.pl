@@ -46,8 +46,12 @@ sub load-props ($properties-spec, $actions?) {
 
     my %props;
 
-    for $fh.lines {
-        my $/ = CSS::Language::Specification.parse($_, :rule('property-spec'), :actions($actions) );
+    for $fh.lines ~> $spec {
+        # '| inherit' annd '| initial' are used inconsistantly. get rid
+        # of them
+        $spec = $spec.subst(/\s* '|' \s* [inherit|intial]/, ''):g;
+
+        my $/ = CSS::Language::Specification.parse($spec, :rule('property-spec'), :actions($actions) );
         my %prop_details = $/.ast;
         my $prop_names = %prop_details.<props>;
 
@@ -87,10 +91,10 @@ sub generate-perl6-rules(%gen-props, %prop-refs) {
             # property is referenced by other definitions; factor out body
             $defn ~~  s/\|\s*\<inherit\>\s*//;
             say "    token $sym \{:i $defn \}";
-            say "    rule decl:sym<{$sym}> \{:i ($match) ':'  [ <$sym> | inherit || <any-args> ] \}";
+            say "    rule decl:sym<{$sym}> \{:i ($match) ':'  [ <$sym> || <misc> ] \}";
         }
         else {
-            say "    rule decl:sym<{$sym}> \{:i ($match) ':'  [ $defn || <any-args> ] \}";
+            say "    rule decl:sym<{$sym}> \{:i ($match) ':'  [ $defn || <misc> ] \}";
         }
     }
 }
