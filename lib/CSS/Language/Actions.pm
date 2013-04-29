@@ -92,7 +92,8 @@ class CSS::Language::Actions
 
         my %ast;
         %ast<property> = $property;
-        %ast<expr> = @expr;
+        %ast<expr> = @expr
+            if @expr;
 
         make %ast;
     }
