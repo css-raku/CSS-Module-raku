@@ -26,7 +26,7 @@ grammar CSS::Language::CSS1:ver<20080411>
     # -------------------
     # - font-family: [[<family-name> | <generic-family>],]* [<family-name> | <generic-family>]
     rule font-family {:i [ serif | sans\-serif | cursive | fantasy | monospace ] & <generic-family=.identifier> || <family-name=.identifiers> | <family-name=.string> }
-    rule decl:sym<font-family> {:i (font\-family) ':' [ <font-family> [ ',' <font-family> || <any> ]*
+    rule decl:sym<font-family> {:i (font\-family) ':' [ <font-family> [ ',' <font-family> || <any-arg> ]*
                                                         || <misc> ] }
 
     # - font-style: normal | italic | oblique

@@ -16,8 +16,9 @@ grammar CSS::Extensions::CSS21 {
     token length:sym<num>    {<number>}
     token angle:sym<num>     {<number>}
     token frequency:sym<num> {<number>}
-    token inherit {:i inherit}
-    token misc { <inherit> || <any-args> }
+    rule inherit-etc         {:i[ inherit & <keyw> ] <any-arg>*}
+    
+    token misc { <inherit-etc> | <any-args> }
 
     # allow color names and define our vocabulary
     rule color:sym<named> {:i [ aqua | black | blue | fuchsia | gray | green | lime | maroon | navy | olive | orange | purple | red | silver | teal | white | yellow ] & <keyw> }
@@ -142,12 +143,15 @@ grammar CSS::Extensions::CSS21 {
     rule decl:sym<color> {:i (color) ':' [ <color> || <misc> ] }
 
     # - content: normal | none | [ <string> | <uri> | <counter> | attr(<identifier>) | open-quote | close-quote | no-open-quote | no-close-quote ]+ | inherit
-    rule decl:sym<content> {:i (content) ':' [ [ normal | none ] & <keyw> | [ [ <string> | <uri> | <counter> | <counters> | <attr> | [ open\-quote | close\-quote | no\-open\-quote | no\-close\-quote ] & <keyw>  ] | <any> ]+
+    rule decl:sym<content> {:i (content) ':' [ <inherit-etc> | [ normal | none ] & <keyw> | [ [ <string> | <uri> | <counter> | <counters> | <attr> | [ open\-quote | close\-quote | no\-open\-quote | no\-close\-quote ] & <keyw>  ] || <any-arg>+ ]+
                                                || <misc> ] }
 
     # - counter-increment: [ <identifier> <integer>? ]+ | none | inherit
-    rule decl:sym<counter-increment> {:i (counter\-increment) ':' [ [ <identifier> <integer>? ]+ | none & <keyw>
-                                                                    || <misc> ] }
+    rule decl:sym<counter-increment> {:i (counter\-increment) ':' [ 
+                                           <inherit-etc>
+                                           | [ <identifier> <integer>? <any>* ]+ 
+                                           | none & <keyw>
+                                           || <misc> ] }
 
     # - counter-reset: [ <identifier> <integer>? ]+ | none | inherit
     rule decl:sym<counter-reset> {:i (counter\-reset) ':' [ [ <identifier> <integer>? ]+ | none & <keyw>
@@ -155,10 +159,10 @@ grammar CSS::Extensions::CSS21 {
 
     # - cue-after: <uri> | none | inherit
     token cue {:i <uri> | none & <keyw> }
-    rule decl:sym<cue-after> {:i (cue\-after) ':'  [ <cue-after=.cue> | inherit || <any-args> ] }
+    rule decl:sym<cue-after> {:i (cue\-after) ':'  [ <cue-after=.cue> || <misc> ] }
 
     # - cue-before: <uri> | none | inherit
-    rule decl:sym<cue-before> {:i (cue\-before) ':'  [ <cue-before=.cue> | inherit || <any-args> ] }
+    rule decl:sym<cue-before> {:i (cue\-before) ':'  [ <cue-before=.cue> || <misc> ] }
 
     # - cue: [ 'cue-before' || 'cue-after' ] | inherit
     rule decl:sym<cue> {:i (cue) ':' [ <cue-before=.cue> <cue-after=.cue>? || <misc> ] }
@@ -175,6 +179,7 @@ grammar CSS::Extensions::CSS21 {
     rule decl:sym<display> {:i (display) ':' [ [ block | inline[\-[block|table]]? | list\-item | table[\-[cell|caption|[header|footer]\-group|[row|column][\-group]?]]? | none ] & <keyw>
                                                || <misc> ] }
 
+    # - elavation: <angle> | below | level | above | higher | lower | inherit
     rule decl:sym<elevation> {:i (elevation) ':' [ <angle>
                                                    | [below | level | above ] & <keyw>
                                                    | [ higher | lower ] & <tilt=.keyw>
@@ -188,7 +193,8 @@ grammar CSS::Extensions::CSS21 {
 
     # - font-family: [[ <family-name> | <generic-family> ] [, <family-name> | <generic-family> ]* ] | inherit
     rule font-family {:i [ serif | sans\-serif | cursive | fantasy | monospace ] & <generic-family=.keyw> || <family-name=.identifiers> | <family-name=.string> }
-    rule decl:sym<font-family> {:i (font\-family) ':' [ <font-family> [ ',' <font-family> || <any> ]*
+    rule decl:sym<font-family> {:i (font\-family) ':' [ <inherit-etc>
+                                                        | <font-family> [ ',' <font-family> || <any> ]*
                                                         || <misc> ] }
 
     # - font-size: <absolute-size> | <relative-size> | <length> | <percentage> | inherit
@@ -271,13 +277,13 @@ grammar CSS::Extensions::CSS21 {
 
      # - outline-color: <color> | invert | inherit
     token outline-color {:i <color> | invert & <keyw> }
-    rule decl:sym<outline-color> {:i (outline\-color) ':'  [ <outline-color> | inherit || <any-args> ] }
+    rule decl:sym<outline-color> {:i (outline\-color) ':'  [ <outline-color> || <misc> ] }
 
     # - outline-style: <border-style> | inherit
-    rule decl:sym<outline-style> {:i (outline\-style) ':'  [ <outline-style=.border-style> | inherit || <any-args> ] }
+    rule decl:sym<outline-style> {:i (outline\-style) ':'  [ <outline-style=.border-style> || <misc> ] }
 
     # - outline-width: <border-width> | inherit
-    rule decl:sym<outline-width> {:i (outline\-width) ':'  [ <outline-width=.border-width> | inherit || <any-args> ] }
+    rule decl:sym<outline-width> {:i (outline\-width) ':'  [ <outline-width=.border-width> || <misc> ] }
 
    # - outline: [ 'outline-color' || 'outline-style' || 'outline-width' ] | inherit
     rule decl:sym<outline> {:i (outline) ':' [ [ <outline-color> | <outline-style=.border-style> | <outline-width=.border-width> ]**1..3 || <misc> ] }
@@ -380,7 +386,7 @@ grammar CSS::Extensions::CSS21 {
     # - voice-family: [[<specific-voice> | <generic-voice> ],]* [<specific-voice> | <generic-voice> ] | inherit
     token generic-voice {:i [ male | female | child ] & <keyw> }
     token specific-voice {:i <identifier> | <string> }
-    rule decl:sym<voice-family> {:i (voice\-family) ':' [  [ <generic-voice> || <specific-voice> ]  [ ',' [ <generic-voice> || <specific-voice> ] ]* || <misc> ] }
+    rule decl:sym<voice-family> {:i (voice\-family) ':' [  <inherit-etc> || [ <generic-voice> || <specific-voice> ] [ ',' [ <generic-voice> || <specific-voice> ] ]* || <misc> ] }
 
     # - volume: <number> | <percentage> | silent | x-soft | soft | medium | loud | x-loud | inherit
     rule decl:sym<volume> {:i (volume) ':' [ <number> | <percentage> | [ silent | x\-soft | soft | medium | loud | x\-loud ] & <keyw> || <misc> ] }

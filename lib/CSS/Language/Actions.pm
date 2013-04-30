@@ -18,6 +18,11 @@ class CSS::Language::Actions
         
         my %ast = $<decl>.ast;
 
+        if $<any-arg> {
+            return $.warning("extra terms following '{%ast<property>}' declaration",
+                             $<any-arg>.Str, 'dropped');
+        }
+
         if (my $prio = $<prio> && $<prio>[0].ast) {
             # mark !important declarations
             %ast<prio> = $prio
@@ -26,13 +31,16 @@ class CSS::Language::Actions
         make %ast;
     }
 
-    method inherit($/) { make True }
-    method initial($/) { make True }
+    method inherit-etc($/) {
+        return if $<any-arg>;
+        make {$<keyw>.ast => True};
+    }
+
     method misc($/) {
         # miscellaneous and fallback handling, including 'inherit' (css2) and
         # 'initial' css3
-        make $.node($/)
-            unless $<any-args>;
+        make $<inherit-etc>.ast
+            if $<inherit-etc> && !$<any-args>;
     }
 
     #---- AST construction methods ----#
@@ -46,22 +54,25 @@ class CSS::Language::Actions
         my $property = $0.Str.trim.lc;
 
         return $.warning('usage ' ~ $property ~ ': ' ~ $synopsis)
-            if ($<misc> && !$<misc>.ast) || $<any>;
+            if ($<misc> && !$<misc>.ast) 
+            || ($<inherit-etc> && !$<inherit-etc>.ast) 
+            || $<any> || $<any-arg> || $<any-args>;
 
         my @expr;
 
-        if $<misc> {
-            @expr = %( $<misc>.ast );
+        my $misc = $<misc> || $<inherit-etc>;
+        if $misc {
+            my %misc = $misc.ast;
+            @expr = %misc;
         }
         else {
-            for $.list($body // $/) {
-                for @$_ {
-                    my ($term, $val) = $_.kv;
-                    next if $term eq 'inherit';
-                    
-                    @expr.push($_);
-                }
-            }
+
+            my $m = $body.defined
+                && ($body.can('caps') ?? $body.caps !! @$body)
+                ?? $body
+                !! $/;
+
+            @expr = @( $.list($m) );
         }
 
         if $expand {

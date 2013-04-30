@@ -228,7 +228,7 @@ class CSS::Language::CSS21::Actions
 
     method decl:sym<elevation>($/) {
         # see http://www.w3.org/TR/2011/REC-CSS2-20110607/aural.html
-        return $/._make_decl($/)
+        return $._make_decl($/, '<angle> | below | level | above | higher | lower | inherit')
             if $<misc>;
 
         my %ast;
