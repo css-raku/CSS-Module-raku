@@ -40,7 +40,7 @@ class CSS::Language::Specification::Actions {
         if $<occurs> {
             my $occurs = $<occurs>[0].ast;
             if $occurs eq '#' {         # a list
-                $value = "[ $value [ ',' $value ]* ]";
+                $value = "$value +% ','";
             }
             else {
                 $value ~= $occurs;

@@ -7,6 +7,8 @@ use CSS::Grammar::CSS1;
 grammar CSS::Language::CSS1:ver<20080411>
  is CSS::Grammar::CSS1 {
 
+    rule declaration:sym<validated> { <decl> <prio>? <any-arg>* <end-decl> }
+
     # For handling undimensioned numbers and angles
     token length:sym<num> {<number>}
     token angle:sym<num>  {<number>}
@@ -22,14 +24,11 @@ grammar CSS::Language::CSS1:ver<20080411>
     token identifier  {<name>}        # identifiers (case sensitive)
     rule identifiers  {[ <identifier> ]+} # sequences of identifiers
 
-    rule declaration:sym<validated> { <decl> <prio>? <end-decl> }
-
     # 5.2 Font Properties
     # -------------------
     # - font-family: [[<family-name> | <generic-family>],]* [<family-name> | <generic-family>]
     rule font-family {:i [ serif | sans\-serif | cursive | fantasy | monospace ] & <generic-family=.identifier> || <family-name=.identifiers> | <family-name=.string> }
-    rule decl:sym<font-family> {:i (font\-family) ':' [ <font-family> [ ',' <font-family> || <any-arg> ]*
-                                                        || <misc> ] }
+    rule decl:sym<font-family> {:i (font\-family) ':' [ <font-family> +% ',' <any>* || <misc> ] }
 
     # - font-style: normal | italic | oblique
     token font-style {:i [ normal | italic | oblique ] & <keyw> }
@@ -50,9 +49,8 @@ grammar CSS::Language::CSS1:ver<20080411>
     rule decl:sym<font-size> {:i (font\-size) ':' [ <font-size> || <misc> ] }
     # - font: [ <font-style> || <font-variant> || <font-weight> ]? <font-size> [ / <line-height> ]? <font-family>
     rule decl:sym<font> {:i (font) ':' [
-                              [ <font-style> | <font-variant> | <font-weight> ]* <font-size> [ '/' <line-height> ]? <font-family> [ ',' <font-family> ]**0..3
+                              [ <font-style> | <font-variant> | <font-weight> ]**0..3 <font-size> [ '/' <line-height> ]? <font-family> +% ','
                               || <misc> ] }
-
 
     # 5.3 Color and background properties
     # -----------------------------------

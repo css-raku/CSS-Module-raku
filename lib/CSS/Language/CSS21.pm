@@ -12,6 +12,8 @@ grammar CSS::Language::CSS21:ver<20110607.000>
 
 grammar CSS::Extensions::CSS21 {
 
+    rule declaration:sym<validated> { <decl> <prio>? <any-arg>* <end-decl> }
+
     # For handling undimensioned quantities
     token length:sym<num>    {<number>}
     token angle:sym<num>     {<number>}
@@ -43,7 +45,6 @@ grammar CSS::Extensions::CSS21 {
     rule shape    {:i'rect(' [ <top=.shape-arg> ',' <right=.shape-arg> ',' <bottom=.shape-arg> ',' <left=.shape-arg> || <any-args> ] ')' }
 
     # --- Properties --- #
-    rule declaration:sym<validated> { <decl> <prio>? <any-arg>* <end-decl> }
 
     # - azimuth: <angle> | [[ left-side | far-left | left | center-left | center | center-right | right | far-right | right-side ] || behind ] | leftwards | rightwards | inherit
      rule decl:sym<azimuth> {:i (azimuth) ':' [ <angle>
@@ -189,7 +190,7 @@ grammar CSS::Extensions::CSS21 {
     # - font-family: [[ <family-name> | <generic-family> ] [, <family-name> | <generic-family> ]* ] | inherit
     rule font-family {:i [ serif | sans\-serif | cursive | fantasy | monospace ] & <generic-family=.keyw> || <family-name=.identifiers> | <family-name=.string> }
     rule decl:sym<font-family> {:i (font\-family) ':' [ <inherit-etc>
-                                                        | <font-family> [ ',' <font-family> || <any> ]*
+                                                        | <font-family> +% ',' <any>*
                                                         || <misc> ] }
 
     # - font-size: <absolute-size> | <relative-size> | <length> | <percentage> | inherit
@@ -215,7 +216,7 @@ grammar CSS::Extensions::CSS21 {
 
     # - font: [ [ 'font-style' || 'font-variant' || 'font-weight' ]? 'font-size' [ / 'line-height' ]? 'font-family' ] | caption | icon | menu | message-box | small-caption | status-bar | inherit
     rule decl:sym<font> {:i (font) ':' [
-                              [ <font-style> | <font-variant> | <font-weight> ]**0..3 <font-size> [ '/' <line-height> ]? <font-family> [ ',' <font-family> ]*
+                              [ <font-style> | <font-variant> | <font-weight> ]**0..3 <font-size> [ '/' <line-height> ]? [ <font-family> +% ',' ]
                               | [ caption | icon | menu | message\-box | small\-caption | status\-bar ] & <keyw>
                               || <misc> ] }
 
@@ -381,7 +382,7 @@ grammar CSS::Extensions::CSS21 {
     # - voice-family: [[<specific-voice> | <generic-voice> ],]* [<specific-voice> | <generic-voice> ] | inherit
     token generic-voice {:i [ male | female | child ] & <keyw> }
     token specific-voice {:i <identifier> | <string> }
-    rule decl:sym<voice-family> {:i (voice\-family) ':' [  <inherit-etc> || [ <generic-voice> || <specific-voice> ] [ ',' [ <generic-voice> || <specific-voice> ] ]* || <misc> ] }
+    rule decl:sym<voice-family> {:i (voice\-family) ':' [  <inherit-etc> || [ <generic-voice> || <specific-voice> ] +% ',' || <misc> ] }
 
     # - volume: <number> | <percentage> | silent | x-soft | soft | medium | loud | x-loud | inherit
     rule decl:sym<volume> {:i (volume) ':' [ <number> | <percentage> | [ silent | x\-soft | soft | medium | loud | x\-loud ] & <keyw> || <misc> ] }
