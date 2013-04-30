@@ -15,12 +15,12 @@ grammar CSS::Extensions::CSS21 {
     rule declaration:sym<validated> { <decl> <prio>? <any-arg>* <end-decl> }
 
     # For handling undimensioned quantities
-    token length:sym<num>    {<number>}
-    token angle:sym<num>     {<number>}
-    token frequency:sym<num> {<number>}
-    rule inherit-etc         {:i[ inherit & <keyw> ] <any-arg>*}
-    
-    token misc { <inherit-etc> | <any-args> }
+    token length:sym<num>       {<number>}
+    token angle:sym<num>        {<number>}
+    token frequency:sym<num>    {<number>}
+    proto token proforma        { <...> }
+    token proforma:sym<inherit> {:i inherit}
+    rule misc                   {<proforma>? <any-arg>*}
 
     # allow color names and define our vocabulary
     rule color:sym<named> {:i [ aqua | black | blue | fuchsia | gray | green | lime | maroon | navy | olive | orange | purple | red | silver | teal | white | yellow ] & <keyw> }
@@ -144,13 +144,13 @@ grammar CSS::Extensions::CSS21 {
     rule decl:sym<color> {:i (color) ':' [ <color> || <misc> ] }
 
     # - content: normal | none | [ <string> | <uri> | <counter> | attr(<identifier>) | open-quote | close-quote | no-open-quote | no-close-quote ]+ | inherit
-    rule decl:sym<content> {:i (content) ':' [ <inherit-etc> | [ normal | none ] & <keyw> | [ [ <string> | <uri> | <counter> | <counters> | <attr> | [ open\-quote | close\-quote | no\-open\-quote | no\-close\-quote ] & <keyw>  ] || <any-arg>+ ]+
+    rule decl:sym<content> {:i (content) ':' [ <proforma> | [ normal | none ] & <keyw> | [ [ <string> | <uri> | <counter> | <counters> | <attr> | [ open\-quote | close\-quote | no\-open\-quote | no\-close\-quote ] & <keyw>  ] || <any-arg>+ ]+
                                                || <misc> ] }
 
     # - counter-increment: [ <identifier> <integer>? ]+ | none | inherit
     # - counter-reset: [ <identifier> <integer>? ]+ | none | inherit
     rule decl:sym<counter-[increment|reset]> {:i (counter\-[increment|reset]) ':' [ 
-                                           <inherit-etc>
+                                           <proforma>
                                            | none & <keyw>
                                            | [ <identifier> <integer>? <any>* ]+ 
                                            || <misc> ] }
@@ -189,7 +189,7 @@ grammar CSS::Extensions::CSS21 {
 
     # - font-family: [[ <family-name> | <generic-family> ] [, <family-name> | <generic-family> ]* ] | inherit
     rule font-family {:i [ serif | sans\-serif | cursive | fantasy | monospace ] & <generic-family=.keyw> || <family-name=.identifiers> | <family-name=.string> }
-    rule decl:sym<font-family> {:i (font\-family) ':' [ <inherit-etc>
+    rule decl:sym<font-family> {:i (font\-family) ':' [ <proforma>
                                                         | <font-family> +% ',' <any>*
                                                         || <misc> ] }
 
@@ -382,7 +382,7 @@ grammar CSS::Extensions::CSS21 {
     # - voice-family: [[<specific-voice> | <generic-voice> ],]* [<specific-voice> | <generic-voice> ] | inherit
     token generic-voice {:i [ male | female | child ] & <keyw> }
     token specific-voice {:i <identifier> | <string> }
-    rule decl:sym<voice-family> {:i (voice\-family) ':' [  <inherit-etc> || [ <generic-voice> || <specific-voice> ] +% ',' || <misc> ] }
+    rule decl:sym<voice-family> {:i (voice\-family) ':' [  <proforma> || [ <generic-voice> || <specific-voice> ] +% ',' || <misc> ] }
 
     # - volume: <number> | <percentage> | silent | x-soft | soft | medium | loud | x-loud | inherit
     rule decl:sym<volume> {:i (volume) ':' [ <number> | <percentage> | [ silent | x\-soft | soft | medium | loud | x\-loud ] & <keyw> || <misc> ] }

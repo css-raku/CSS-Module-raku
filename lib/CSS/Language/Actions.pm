@@ -31,16 +31,14 @@ class CSS::Language::Actions
         make %ast;
     }
 
-    method inherit-etc($/) {
-        return if $<any-arg>;
-        make {$<keyw>.ast => True};
-    }
+    method proforma:sym<inherit>($/) { make {inherit => True } }
+    method proforma:sym<initial>($/) { make {initial => True } }
 
     method misc($/) {
         # miscellaneous and fallback handling, including 'inherit' (css2) and
         # 'initial' css3
-        make $<inherit-etc>.ast
-            if $<inherit-etc> && !$<any-args>;
+        make $<proforma>[0].ast
+            if $<proforma> && !$<any-args>;
     }
 
     #---- AST construction methods ----#
@@ -55,15 +53,15 @@ class CSS::Language::Actions
 
         return $.warning('usage ' ~ $property ~ ': ' ~ $synopsis)
             if ($<misc> && !$<misc>.ast) 
-            || ($<inherit-etc> && !$<inherit-etc>.ast) 
+            || ($<proforma> && !$<proforma>.ast) 
             || $<any> || $<any-arg> || $<any-args>;
 
         my @expr;
 
-        my $misc = $<misc> || $<inherit-etc>;
-        if $misc {
-            my %misc = $misc.ast;
-            @expr = %misc;
+        my $proforma = $<misc> || $<proforma>;
+        if $proforma {
+            my %proforma = $proforma.ast;
+            @expr = %proforma;
         }
         else {
 
