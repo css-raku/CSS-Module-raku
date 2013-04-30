@@ -22,6 +22,8 @@ grammar CSS::Language::CSS1:ver<20080411>
     token identifier  {<name>}        # identifiers (case sensitive)
     rule identifiers  {[ <identifier> ]+} # sequences of identifiers
 
+    rule declaration:sym<validated> { <decl> <prio>? <end-decl> }
+
     # 5.2 Font Properties
     # -------------------
     # - font-family: [[<family-name> | <generic-family>],]* [<family-name> | <generic-family>]

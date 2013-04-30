@@ -43,6 +43,7 @@ grammar CSS::Extensions::CSS21 {
     rule shape    {:i'rect(' [ <top=.shape-arg> ',' <right=.shape-arg> ',' <bottom=.shape-arg> ',' <left=.shape-arg> || <any-args> ] ')' }
 
     # --- Properties --- #
+    rule declaration:sym<validated> { <decl> <prio>? <any-arg>* <end-decl> }
 
     # - azimuth: <angle> | [[ left-side | far-left | left | center-left | center | center-right | right | far-right | right-side ] || behind ] | leftwards | rightwards | inherit
      rule decl:sym<azimuth> {:i (azimuth) ':' [ <angle>
@@ -134,7 +135,6 @@ grammar CSS::Extensions::CSS21 {
     rule decl:sym<clear> {:i (clear) ':' [ [ none | left | right | both ] & <keyw> || <misc> ] }
 
     # - clip: <shape> | auto
-    # interim <shape> token. needs to be properly prototyped, etc
     rule decl:sym<clip> {:i (clip) ':' [ <shape> | auto  & <keyw>
                                          || <misc> ]}
 
@@ -147,22 +147,17 @@ grammar CSS::Extensions::CSS21 {
                                                || <misc> ] }
 
     # - counter-increment: [ <identifier> <integer>? ]+ | none | inherit
-    rule decl:sym<counter-increment> {:i (counter\-increment) ':' [ 
+    # - counter-reset: [ <identifier> <integer>? ]+ | none | inherit
+    rule decl:sym<counter-[increment|reset]> {:i (counter\-[increment|reset]) ':' [ 
                                            <inherit-etc>
-                                           | [ <identifier> <integer>? <any>* ]+ 
                                            | none & <keyw>
+                                           | [ <identifier> <integer>? <any>* ]+ 
                                            || <misc> ] }
 
-    # - counter-reset: [ <identifier> <integer>? ]+ | none | inherit
-    rule decl:sym<counter-reset> {:i (counter\-reset) ':' [ [ <identifier> <integer>? ]+ | none & <keyw>
-                                                            || <misc> ] }
-
+    # - cue-before: <uri> | none | inherit
     # - cue-after: <uri> | none | inherit
     token cue {:i <uri> | none & <keyw> }
-    rule decl:sym<cue-after> {:i (cue\-after) ':'  [ <cue-after=.cue> || <misc> ] }
-
-    # - cue-before: <uri> | none | inherit
-    rule decl:sym<cue-before> {:i (cue\-before) ':'  [ <cue-before=.cue> || <misc> ] }
+    rule decl:sym<cue-[before|after]> {:i (cue\-[before|after]) ':'  [ <cue-after=.cue> || <misc> ] }
 
     # - cue: [ 'cue-before' || 'cue-after' ] | inherit
     rule decl:sym<cue> {:i (cue) ':' [ <cue-before=.cue> <cue-after=.cue>? || <misc> ] }
@@ -275,7 +270,7 @@ grammar CSS::Extensions::CSS21 {
     # - orphans: <integer> | inherit
     rule decl:sym<orphans> {:i (orphans) ':' [ <integer> || <misc> ] }
 
-     # - outline-color: <color> | invert | inherit
+    # - outline-color: <color> | invert | inherit
     token outline-color {:i <color> | invert & <keyw> }
     rule decl:sym<outline-color> {:i (outline\-color) ':'  [ <outline-color> || <misc> ] }
 
