@@ -46,12 +46,14 @@ sub load-props ($properties-spec, $actions?) {
 
     my %props;
 
-    for $fh.lines ~> $spec {
+    for $fh.lines {
         # '| inherit' annd '| initial' are used inconsistantly. get rid
         # of them
-        $spec = $spec.subst(/\s* '|'? \s* [inherit|initial]/, ''):g;
+        my $spec = $_.subst(/\s* '|' \s* [inherit|initial]/, ''):g;
 
         my $/ = CSS::Language::Specification.parse($spec, :rule('property-spec'), :actions($actions) );
+        die "unable to parse: $spec"
+            unless $/.ast;
         my %prop_details = $/.ast;
         my $prop_names = %prop_details.<props>;
 
