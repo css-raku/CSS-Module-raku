@@ -30,7 +30,7 @@ grammar CSS::Language::Specification {
     rule list        { <combo> [ '|' <combo> ]* }
     rule combo       { <values> [ '||' <values> ]* }
     rule values      { <value-inst>+ }
-    rule value-inst  { <value><occurs>? }
+    rule value-inst  { <value><occurs>**0..1 }
 
     proto rule occurs {<...>}
     rule occurs:sym<maybe>      {'?'}

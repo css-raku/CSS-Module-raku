@@ -7,7 +7,7 @@ use CSS::Grammar::CSS1;
 grammar CSS::Language::CSS1:ver<20080411>
  is CSS::Grammar::CSS1 {
 
-    rule declaration:sym<validated> { <decl> <prio>? <any-arg>* <end-decl> }
+    rule declaration:sym<validated> { <decl> <prio>**0..1 <any-arg>* <end-decl> }
 
     # For handling undimensioned numbers and angles
     token length:sym<num> {<number>}

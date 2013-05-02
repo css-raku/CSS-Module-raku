@@ -42,7 +42,7 @@ properties and functions. For example, the specification for `border-color` is:
 
     'border-color' [ <color> | transparent ]{1,4} | inherit
 
-It was used to generate the initial grammars and actions in this modules.
+It was used to generate the initial grammars and actions in this module.
 Example usage:
 
     % etc/gen-properties.pl gen grammar etc/css21-properties.txt

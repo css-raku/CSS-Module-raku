@@ -12,7 +12,7 @@ grammar CSS::Language::CSS21:ver<20110607.000>
 
 grammar CSS::Extensions::CSS21 {
 
-    rule declaration:sym<validated> { <decl> <prio>? <any-arg>* <end-decl> }
+    rule declaration:sym<validated> { <decl> <prio>**0..1 <any-arg>* <end-decl> }
 
     # For handling undimensioned quantities
     token length:sym<num>       {<number>}
@@ -20,7 +20,7 @@ grammar CSS::Extensions::CSS21 {
     token frequency:sym<num>    {<number>}
     proto token proforma        { <...> }
     token proforma:sym<inherit> {:i inherit}
-    rule misc                   {<proforma>? <any-arg>*}
+    rule misc                   {<proforma>**0..1 <any-arg>*}
 
     # allow color names and define our vocabulary
     rule color:sym<named> {:i [ aqua | black | blue | fuchsia | gray | green | lime | maroon | navy | olive | orange | purple | red | silver | teal | white | yellow ] & <keyw> }
