@@ -80,7 +80,6 @@ sub generate-perl6-rules(%gen-props, %prop-refs) {
         my $defn = $def<defn>;
         my $props = $def<props>;
 
-        say $defn;
         for $defn {
             next unless /^\s*\[/ && /\]\s*$/;
             s/^\s*\[\s*//;
