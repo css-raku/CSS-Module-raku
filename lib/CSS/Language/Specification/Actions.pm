@@ -6,12 +6,13 @@ class CSS::Language::Specification::Actions {
     # rules or actions.
     has %.prop-refs is rw;
 
+    method TOP($/) { make $<property-spec>.map({$_.ast}) };
+
     method property-spec($/) {
         my @props = @($<prop-names>.ast);
         my $sym = @props.join('|');
         my $match = $sym.subst(/\-/, '\-'):g;
         my $grammar = $<synopsis>.ast;
-        $grammar = $grammar.subst(/^\s*\[\*/,'').subst(/\s*\]\*$/,'');
 
         my %prop-def;
         %prop-def<sym> = $sym;
@@ -107,7 +108,7 @@ class CSS::Language::Specification::Actions {
 
     method value:sym<rule>($/)     { make '<' ~ $<id>.ast ~ '>' }
 
-    method value:sym<punc>($/)     { make "'" ~ $/.Str ~ "'" }
+    method value:sym<punc>($/)     { make "'" ~ $/.Str.trim ~ "'" }
 
     method property-ref:sym<css21>($/) { make $<id>.ast }
     method property-ref:sym<css3>($/)  { make $<id>.ast }

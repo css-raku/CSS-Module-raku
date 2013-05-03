@@ -1,0 +1,27 @@
+background	[ <bg-layer> , ]* <final-bg-layer>	see individual properties	all elements	no	see individual properties	visual
+background-attachment	<attachment> [ , <attachment> ]*	scroll	all elements	no	N/A	visual
+background-clip	<box> [ , <box> ]*	border-box	all elements	no	N/A	visual
+background-color	<color>	transparent	all elements	no	N/A	visual
+background-image	<bg-image> [ , <bg-image> ]*	none	all elements	no	N/A	visual
+background-origin	<box> [ , <box> ]*	padding-box	all elements	no	N/A	visual
+background-position	<position> [ , <position> ]*	0% 0%	all elements	no	refer to size of background positioning area minus size of background image; see text	visual
+background-repeat	<repeat-style> [ , <repeat-style> ]*	repeat	all elements	no	N/A	visual
+background-size	<bg-size> [ , <bg-size> ]*	auto	all elements	no	see text	visual
+border	<border-width> || <border-style> || <color>	See individual properties	all elements	no	N/A	visual
+border-color	<color>{1,4}	(see individual properties)	all elements	no	N/A	visual
+border-image	<‘border-image-source’> || <‘border-image-slice’> [ / <‘border-image-width’> | / <‘border-image-width’>? / <‘border-image-outset’> ]? || <‘border-image-repeat’>	See individual properties	See individual properties	no	N/A	visual
+border-image-outset	[ <length> | <number> ]{1,4}	0	All elements, except internal table elements when ‘border-collapse’ is ‘collapse’	no	N/A	visual
+border-image-repeat	[ stretch | repeat | round | space ]{1,2}	stretch	All elements, except internal table elements when ‘border-collapse’ is ‘collapse’	no	N/A	visual
+border-image-slice	[<number> | <percentage>]{1,4} && fill?	100%	All elements, except internal table elements when ‘border-collapse’ is ‘collapse’	no	refer to size of the border image	visual
+border-image-source	none | <image>	none	All elements, except internal table elements when ‘border-collapse’ is ‘collapse’	no	N/A	visual
+border-image-width	[ <length> | <percentage> | <number> | auto ]{1,4}	1	All elements, except table elements when ‘border-collapse’ is ‘collapse’	no	Relative to width/height of the border image area	visual
+border-radius	[ <length> | <percentage> ]{1,4} [ / [ <length> | <percentage> ]{1,4} ]?	see individual properties	all elements (but see prose)	no	Refer to corresponding dimension of the border box.	visual
+border-style	<border-style>{1,4}	(see individual properties)	all elements	no	N/A	visual
+border-top, border-right, border-bottom, border-left	<border-width> || <border-style> || <color>	See individual properties	all elements	no	N/A	visual
+border-top-color , border-right-color, border-bottom-color, border-left-color	<color>	currentColor	all elements	no	N/A	visual
+border-top-left-radius, border-top-right-radius, border-bottom-right-radius, border-bottom-left-radius	[ <length> | <percentage> ]{1,2}	0	all elements (but see prose)	no	Refer to corresponding dimension of the border box.	visual
+border-top-style, border-right-style, border-bottom-style, border-left-style	<border-style>	none	all elements	no	N/A	visual
+border-top-width, border-right-width, border-bottom-width, border-left-width	<border-width>	medium	all elements	no	N/A	visual
+border-width	<border-width>{1,4}	(see individual properties)	all elements	no	see individual properties	visual
+box-decoration-break	slice | clone	slice	all elements	no	N/A	visual
+box-shadow	none | <shadow> [ , <shadow> ]*	none	all elements	no	N/A	visual
