@@ -51,10 +51,11 @@ class CSS::Language::Specification::Actions {
     }
 
     method property-spec($/) {
-        my ($pfx, @props) = _right_reduce( @($<prop-names>.ast) );
-        (my $sfx, @props) = _left_reduce( @props );
+        my @props = @($<prop-names>.ast);
+        my ($pfx, @props-reduced) = _right_reduce( @props );
+        (my $sfx, @props-reduced) = _left_reduce( @props-reduced );
 
-        my $sym = @props.join('|');
+        my $sym = @props-reduced.join('|');
         $sym = $pfx ~ '[' ~ $sym ~ ']' ~ $sfx
             unless $pfx eq '' && $sfx eq '';
 
