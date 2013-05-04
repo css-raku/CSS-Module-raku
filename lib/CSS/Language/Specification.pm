@@ -21,7 +21,7 @@ grammar CSS::Language::Specification {
     token tab {\t}
     token property-spec {<prop-names> [<.tab>|<.ws>] <synopsis=.list> }
 
-    token prop-names {[' '?[<.quote><prop-name=.id><.quote>|<prop-name=.id>|'*']]+}
+    rule prop-names { [ <.quote><prop-name=.id><.quote>|<prop-name=.id> | '*' ] +% [ \,? ] }
     token id { <[a..z]>[\w|\-]* }
     token keyw { <id> }
     token digits { \d+ }

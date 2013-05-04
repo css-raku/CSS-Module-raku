@@ -113,6 +113,8 @@ sub generate-perl6-actions(%gen-props, %prop-refs) {
         my $props = $def<props>;
 
         say;
+        say "    # - $sym: $synopsis";
+
         if @$props == 1 && %prop-refs{ $props[0] } {
             # property is referenced by other definitions; factor out body
             say "    method {$sym}(\$/) \{ make \$.list(\$/) \}";
