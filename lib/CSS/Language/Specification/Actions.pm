@@ -8,9 +8,32 @@ class CSS::Language::Specification::Actions {
 
     method TOP($/) { make $<property-spec>.map({$_.ast}) };
 
+    sub _reduce( @props ) {
+        return ('', @props)
+            unless @props > 1;
+
+        my $pfx;
+        my $pfx-len;
+        for 1..@props[0].chars -> $try-len {
+            my $try-pfx = @props[0].substr(0, $try-len);
+            last if @props.grep({$_.substr(0, $try-len) ne $try-pfx});
+            $pfx = $try-pfx;
+            $pfx-len = $try-len;
+        }
+        return ('', @props)
+            unless $pfx-len;
+
+        my @remainder = @props.map({$_.substr($pfx-len)});
+        return $pfx, @remainder;
+    }
+
     method property-spec($/) {
-        my @props = @($<prop-names>.ast);
+        my ($pfx, @props) = _reduce( @($<prop-names>.ast) );
+
         my $sym = @props.join('|');
+        $sym = $pfx ~ '[' ~ $sym ~ ']'
+            unless $pfx eq '';
+
         my $match = $sym.subst(/\-/, '\-'):g;
         my $grammar = $<synopsis>.ast;
 
