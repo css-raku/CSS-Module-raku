@@ -8,7 +8,7 @@ class CSS::Language::Specification::Actions {
 
     method TOP($/) { make $<property-spec>.map({$_.ast}) };
 
-    sub _reduce( @props ) {
+    sub _right_reduce( @props ) {
         return ('', @props)
             unless @props > 1;
 
@@ -27,12 +27,36 @@ class CSS::Language::Specification::Actions {
         return $pfx, @remainder;
     }
 
+    sub _left_reduce( @props ) {
+        return ('', @props)
+            unless @props > 1;
+
+        my $sfx;
+        my $sfx-len;
+        for 1..@props[0].chars -> $try-len {
+            my $try-sfx = @props[0].substr(* - $try-len);
+            last if @props.grep({$_.substr(* - $try-len) ne $try-sfx});
+
+            $sfx = $try-sfx;
+            $sfx-len = $try-len;
+
+            # stop on a '-'
+            last if $try-sfx.substr(0,1) eq '-';
+        }
+        return ('', @props)
+            unless $sfx-len;
+
+        my @remainder = @props.map({$_.substr(0, * - $sfx-len)});
+        return $sfx, @remainder;
+    }
+
     method property-spec($/) {
-        my ($pfx, @props) = _reduce( @($<prop-names>.ast) );
+        my ($pfx, @props) = _right_reduce( @($<prop-names>.ast) );
+        (my $sfx, @props) = _left_reduce( @props );
 
         my $sym = @props.join('|');
-        $sym = $pfx ~ '[' ~ $sym ~ ']'
-            unless $pfx eq '';
+        $sym = $pfx ~ '[' ~ $sym ~ ']' ~ $sfx
+            unless $pfx eq '' && $sfx eq '';
 
         my $match = $sym.subst(/\-/, '\-'):g;
         my $grammar = $<synopsis>.ast;
