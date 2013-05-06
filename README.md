@@ -77,12 +77,12 @@ References
 - CSS1 - http://www.w3.org/TR/2008/REC-CSS1-20080411/#css1-properties
 - CSS21 - http://www.w3.org/TR/2011/REC-CSS2-20110607/propidx.html
 - CSS3
--- CSS Snapshot 2010 - http://www.w3.org/TR/2011/NOTE-css-2010-20110512/
--- CSS Color Module Level 3 - http://www.w3.org/TR/2011/REC-css3-color-20110607/
--- CSS Fonts Module Level 3 - http://www.w3.org/TR/2013/WD-css3-fonts-20130212/
--- CSS3 Namespaces Module - http://www.w3.org/TR/2011/REC-css3-namespace-20110929/
--- CSS3 Media Query Extensions - http://www.w3.org/TR/2012/REC-css3-mediaqueries-20120619/
--- CSS3 Module: Paged Media - http://www.w3.org/TR/2006/WD-css3-page-20061010/
--- CSS Selectors Module Level 3 - http://www.w3.org/TR/2011/REC-css3-selectors-20110929/
+- - CSS Snapshot 2010 - http://www.w3.org/TR/2011/NOTE-css-2010-20110512/
+- - CSS Color Module Level 3 - http://www.w3.org/TR/2011/REC-css3-color-20110607/
+- - CSS Fonts Module Level 3 - http://www.w3.org/TR/2013/WD-css3-fonts-20130212/
+- - CSS3 Namespaces Module - http://www.w3.org/TR/2011/REC-css3-namespace-20110929/
+- - CSS3 Media Query Extensions - http://www.w3.org/TR/2012/REC-css3-mediaqueries-20120619/
+- - CSS3 Module: Paged Media - http://www.w3.org/TR/2006/WD-css3-page-20061010/
+- - CSS Selectors Module Level 3 - http://www.w3.org/TR/2011/REC-css3-selectors-20110929/
 
 
