@@ -73,21 +73,17 @@ grammar CSS::Extensions::CSS21 {
                                           || <misc> ]}
 
     # - background-position: [ [ <percentage> | <length> | left | center | right ] [ <percentage> | <length> | top | center | bottom ]? ] | [ [ left | center | right ] || [ top | center | bottom ] ] | inherit
-    # refactored as [ <percentage> | <length> | left | center | right ] || [ <percentage> | <length> | top | center | bottom ] | inherit
-    rule background-position {:i [ <percentage> | <length> | [ left | center | right ] & <keyw>
-                                   | [ top | bottom ] & <keyw> ]**1..2 }
-    rule decl:sym<background-position> {:i (background\-position) ':' [
-                                             <background-position>
-                                             || <misc> ]}
+    # simplification of http://www.w3.org/TR/2012/CR-css3-background-20120724/#ltpositiongt
+    rule position {:i [ <percentage> | <length> | [ [ left | center | right | top | bottom ] & <keyw> ] [ <percentage> | <length> ] ? ] ** 1..2 }
+    rule decl:sym<background-position> {:i (background\-position) ':' [ <position> || <misc> ]}
 
     # - background-repeat: repeat | repeat-x | repeat-y | no-repeat
     token background-repeat {:i [ repeat[\-[x|y]]? | no\-repeat ] & <keyw> }
     rule decl:sym<background-repeat> {:i (background\-repeat) ':' [ <background-repeat>
                                                                     || <misc> ]}
 
-
     # - background: <background-color> || <background-image> || <background-repeat> || <background-attachment> || <background-position> | inherit
-    rule decl:sym<background> {:i (background) ':' [ [ <background-color> | <background-image> | <background-repeat> | <background-attachment> | <background-position> ]**1..5
+    rule decl:sym<background> {:i (background) ':' [ [ <background-color> | <background-image> | <background-repeat> | <background-attachment> | <background-position=.position> ]**1..5
                                                      || <misc> ]}
 
     # - border-collapse: collapse | separate | inherit
@@ -117,7 +113,7 @@ grammar CSS::Extensions::CSS21 {
 
     # - border-top-width|border-right-width|border-bottom-width|border-left-width: <border-width> | inherit
     rule border-width {:i [ thin | medium | thick ] & <keyw> | <length> }
-    rule decl:sym<border-*-width> {:i (border\-[top|rightbottom|left]\-width) ':' [ <border-width> || <misc> ] }
+    rule decl:sym<border-*-width> {:i (border\-[top|right|bottom|left]\-width) ':' [ <border-width> || <misc> ] }
 
     # - border-width: <border-width>{1,4} | inherit
     rule decl:sym<border-width> {:i (border\-width) ':' [ <border-width>**1..4 || <misc> ] }
@@ -152,7 +148,7 @@ grammar CSS::Extensions::CSS21 {
     rule decl:sym<counter-[increment|reset]> {:i (counter\-[increment|reset]) ':' [ 
                                            <proforma>
                                            | none & <keyw>
-                                           | [ <identifier> <integer>? <any>* ]+ 
+                                           | [ <identifier> <integer>? <any>*? ]+ 
                                            || <misc> ] }
 
     # - cue-before: <uri> | none | inherit

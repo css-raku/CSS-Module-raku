@@ -107,9 +107,9 @@ class CSS::Language::CSS21::Actions
 
     # - background-position: [ [ <percentage> | <length> | left | center | right ] [ <percentage> | <length> | top | center | bottom ]? ] | [ [ left | center | right ] || [ top | center | bottom ] ] | inherit
     # refactored as [ <percentage> | <length> | left | center | right ] || [ <percentage> | <length> | top | center | bottom ] | inherit
-    method background-position($/) { make $.list($/) }
+    method position($/) { make $.list($/) }
     method decl:sym<background-position>($/) {
-        $._make_decl($/, q{[ <percentage> | <length> | left | center | right ] || [ <percentage> | <length> | top | center | bottom ] | inherit}, :body($<background-position>));
+        $._make_decl($/, q{[ <percentage> | <length> | left | center | right ] || [ <percentage> | <length> | top | center | bottom ] | inherit}, :body($<position>));
     }
 
     # - background-repeat: repeat | repeat-x | repeat-y | no-repeat
