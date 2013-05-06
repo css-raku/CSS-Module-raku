@@ -8,11 +8,14 @@ use CSS::Language::CSS1;
 use CSS::Language::CSS21::Actions;
 use CSS::Language::CSS21;
 
+use CSS::Language::CSS3;
+
 use lib '.';
 use t::AST;
 
 my $css1_actions = CSS::Language::CSS1::Actions.new;
 my $css21_actions = CSS::Language::CSS21::Actions.new;
+my $css3_actions = CSS::Language::CSS3::Actions.new;
 
 my %seen;
 
@@ -172,6 +175,12 @@ for (
                          :warnings($css21_actions.warnings),
                          :expected(%test) );
 
+    $css3_actions.reset;
+    my $p3 = CSS::Language::CSS3.parse( $input, :rule('decl'), :actions($css3_actions));
+    t::AST::parse_tests($input, $p3, :rule('decl'), :suite('css3'),
+                         :warnings($css3_actions.warnings),
+                         :expected(%test) );
+
     unless %seen{$prop.lc}++ {
         # usage and inheritence  tests
         my $junk = $prop ~ ': junk +-42';
@@ -180,17 +189,21 @@ for (
         $p1 = CSS::Language::CSS1.parse( $junk, :rule('decl'), :actions($css1_actions));
         is($p1.Str, $junk, "$prop: able to parse unexpected input");
 
-        ok($css1_actions.warnings.grep({/^usage:/}), "$prop : unexpected input produces warning")
+        ok($css1_actions.warnings.grep({/^usage:/}), "css1 $prop : unexpected input produces warning")
             or diag $css1_actions.warnings;
 
         $css21_actions.reset;
         $p21 = CSS::Language::CSS21.parse( $junk, :rule('declaration'), :actions($css21_actions));
-        is($p21.Str, $junk, "$prop: able to parse unexpected input");
+        is($p21.Str, $junk, "css21 $prop: able to parse unexpected input");
 
-        ok($css21_actions.warnings, "$prop : unexpected input produces warning")
+        $css3_actions.reset;
+        $p3 = CSS::Language::CSS3.parse( $junk, :rule('declaration'), :actions($css3_actions));
+        is($p3.Str, $junk, "css3 $prop: able to parse unexpected input");
+
+       ok($css21_actions.warnings, "$prop : unexpected input produces warning")
             or diag $css21_actions.warnings;
 
-        for <inherit> -> $misc {
+        for <inherit initial> -> $misc {
             my $decl = $prop ~ ': ' ~ $misc;
 
             my @_expr = ($misc => True);
@@ -200,11 +213,21 @@ for (
 
             my %ast = (property => $prop, expr => @expr);
 
-            $css21_actions.reset;
-            $p21 = CSS::Language::CSS21.parse( $decl, :rule('decl'), :actions($css21_actions));
+            unless $misc eq 'initial' { # applicable to css3 only
+                $css21_actions.reset;
+                $p21 = CSS::Language::CSS21.parse( $decl, :rule('decl'), :actions($css21_actions));
 
-            t::AST::parse_tests($decl, $p21, :rule('decl'), :suite('css21'),
-                                :warnings($css21_actions.warnings),
+                t::AST::parse_tests($decl, $p21, :rule('decl'), :suite('css21'),
+                                    :warnings($css21_actions.warnings),
+                                    :expected({ast => %ast}) );
+
+            }
+
+            $css3_actions.reset;
+            $p3 = CSS::Language::CSS3.parse( $decl, :rule('decl'), :actions($css3_actions));
+
+            t::AST::parse_tests($decl, $p3, :rule('decl'), :suite('css3'),
+                                :warnings($css3_actions.warnings),
                                 :expected({ast => %ast}) );
         }
     }
