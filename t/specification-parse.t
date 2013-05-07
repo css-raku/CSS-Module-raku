@@ -15,7 +15,6 @@ for (
     },
     # precedence tests taken from: https://developer.mozilla.org/en-US/docs/CSS/Value_definition_syntax
     'terms' => {input => 'bold thin && <length>',
-                # todo: would prefer: ... [ [ bold | thin ] & <keyw> ] ...
                 ast => "[ bold \& <keyw> thin \& <keyw> | <length> ]**1..2",
     },
     'terms' => {input => 'bold || thin && <length>',
