@@ -102,10 +102,10 @@ class CSS::Language::Specification::Actions {
     }
 
     method terms($/) {
-        make $<list>.map({$_.ast}).join(' ');
+        make $<options>.map({$_.ast}).join(' ');
     }
 
-    method list($/) {
+    method options($/) {
         my @choices = @$<pick>.map({$_.ast});
         return make @choices[0]
             unless @choices > 1;

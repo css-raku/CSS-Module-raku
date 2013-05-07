@@ -16,7 +16,7 @@ grammar CSS::Language::Specification {
 
     token ws {<!ww>' '*}
     token tab {\t}
-    token property-spec {<prop-names> [<.tab>|<.ws>] <synopsis=.list> }
+    token property-spec {<prop-names> [<.tab>|<.ws>] <synopsis=.terms> }
 
     rule quote {\'|\‘|\’}
     rule prop-names { [ <.quote><prop-name=.id><.quote> | <prop-name=.id> | '*' ] +% [ \,? ] }
@@ -24,8 +24,8 @@ grammar CSS::Language::Specification {
     rule keyw { <id> }
     rule digits { \d+ }
 
-    rule terms       { <list>* }
-    rule list        { <pick>     +% '|'  }
+    rule terms       { <options>* }
+    rule options     { <pick>     +% '|'  }
     rule pick        { <required> +% '||' }
     rule required    { <values>   +% '&&' }
     rule values      { <value-inst>+ }
