@@ -1,5 +1,4 @@
-# a grammar for CSS parsing CSS property specifications. General format of
-# each definition is: <properties> \t <synopsis> \t <initial-value> ...
+# a grammar for CSS parsing CSS property specifications.
 #
 # An example, from http://www.w3.org/TR/CSS21/propidx.html:
 #
@@ -10,8 +9,6 @@
 #                 ]+
 #               | inherit
 #
-# we are only parsing properties and synopsis, these are the most regular
-# and useful columns
 #
 
 grammar CSS::Language::Specification {
@@ -21,14 +18,16 @@ grammar CSS::Language::Specification {
     token tab {\t}
     token property-spec {<prop-names> [<.tab>|<.ws>] <synopsis=.list> }
 
-    rule prop-names { [ <.quote><prop-name=.id><.quote>|<prop-name=.id> | '*' ] +% [ \,? ] }
+    rule quote {\'|\‘|\’}
+    rule prop-names { [ <.quote><prop-name=.id><.quote> | <prop-name=.id> | '*' ] +% [ \,? ] }
     token id { <[a..z]>[\w|\-]* }
     token keyw { <id> }
     token digits { \d+ }
 
     rule terms       { <list>* }
-    rule list        { <combo> [ '|' <combo> ]* }
-    rule combo       { <values> [ '||' <values> ]* }
+    rule list        { <pick>     +% '|'  }
+    rule pick        { <required> +% '||' }
+    rule required    { <values>   +% '&&' }
     rule values      { <value-inst>+ }
     rule value-inst  { <value><occurs>**0..1 }
 
@@ -46,11 +45,11 @@ grammar CSS::Language::Specification {
     rule value:sym<group>       { '[' <terms> ']' }
     rule value:sym<rule>        { '<'<id>'>' }
     rule value:sym<punc>        { ',' | '/' }
-    rule quote {\'|\‘|\’}
+
     proto token property-ref      {<...>}
     token property-ref:sym<css21> {<.quote>[<id>]<.quote>}
     token property-ref:sym<css3>  {'<'<.quote>[<id>]<.quote>'>'}
-    rule value:sym<prop-ref>      {<property-ref>}
-    rule value:sym<quoted>        {<.quote>(<- quote>*)<.quote>}
+    rule value:sym<prop-ref>      { <property-ref> }
+    rule value:sym<quoted>        { <.quote>(<- quote>*)<.quote> }
 
 }

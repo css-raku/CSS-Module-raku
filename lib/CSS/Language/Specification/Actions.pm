@@ -8,7 +8,10 @@ class CSS::Language::Specification::Actions {
 
     method TOP($/) { make $<property-spec>.map({$_.ast}) };
 
-    sub _right_reduce( @props ) {
+    # contraction eg: 'border-top-style' ... 'border-left-style' 
+    # ==> pfx='border' props=<top right bottom left> sfx='-style'
+
+    sub _right_contract( @props ) {
         return ('', @props)
             unless @props > 1;
 
@@ -27,7 +30,7 @@ class CSS::Language::Specification::Actions {
         return $pfx, @remainder;
     }
 
-    sub _left_reduce( @props ) {
+    sub _left_contract( @props ) {
         return ('', @props)
             unless @props > 1;
 
@@ -52,10 +55,10 @@ class CSS::Language::Specification::Actions {
 
     method property-spec($/) {
         my @props = @($<prop-names>.ast);
-        my ($pfx, @props-reduced) = _right_reduce( @props );
-        (my $sfx, @props-reduced) = _left_reduce( @props-reduced );
+        my ($pfx, @props-contracted) = _right_contract( @props );
+        (my $sfx, @props-contracted) = _left_contract( @props-contracted );
 
-        my $sym = @props-reduced.join('|');
+        my $sym = @props-contracted.join('|');
         $sym = $pfx ~ '[' ~ $sym ~ ']' ~ $sfx
             unless $pfx eq '' && $sfx eq '';
 
@@ -103,21 +106,25 @@ class CSS::Language::Specification::Actions {
     }
 
     method list($/) {
-        my $choices = @$<combo>.Int;
-        return make @$<combo>[0].ast
-            unless $choices > 1;
-        # a || b || c represents a combination of one or more of a, b and c
-        # This production is a slightly more liberal approximation:
-        # it allows elements to be repeated
+        my @choices = @$<pick>.map({$_.ast});
+        return make @choices[0]
+            unless @choices > 1;
         
-        make '[ ' ~ $<combo>.map({$_.ast}).join(' | ') ~ ' ]';
+        make '[ ' ~ @choices.join(' | ') ~ ' ]';
     }
 
-    method combo($/) {
-        my $choices = @$<values>.Int;
-        return make $<values>[0].ast
-            unless $choices > 1;
-        make '[ ' ~ $<values>.map({$_.ast}).join(' | ') ~ ' ]**1..' ~ $choices;
+    method pick($/) {
+        my @choices = @$<required>.map({$_.ast});
+        return make @choices[0]
+            unless @choices > 1;
+        make '[ ' ~ @choices.join(' | ') ~ ' ]**1..' ~ @choices.Int;
+    }
+
+    method required($/) {
+        my @choices = $<values>.map({$_.ast});
+        return make @choices[0]
+            unless @choices > 1;
+        make '[ ' ~ @choices.join(' | ') ~ ' ]**1..' ~ @choices.Int
     }
 
     method occurs:sym<maybe>($/)     { make '?' }
