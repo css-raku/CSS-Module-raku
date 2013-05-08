@@ -1,3 +1,4 @@
+# source: http://www.w3.org/TR/2013/WD-css3-fonts-20130212/#property-index
 font	[ [ <‘font-style’> || <font-variant-css21> || <‘font-weight’> || <‘font-stretch’> ]? <‘font-size’> [ / <‘line-height’> ]? <‘font-family’> ] | caption | icon | menu | message-box | small-caption | status-bar	see individual properties	all elements	yes	see individual properties	visual
 font-family	[ <family-name> | <generic-family> ]#	depends on user agent	all elements	yes	N/A	visual
 font-feature-settings	normal | <feature-tag-value>#	normal	all elements	yes	N/A	visual
