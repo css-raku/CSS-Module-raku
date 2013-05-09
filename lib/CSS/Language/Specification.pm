@@ -14,11 +14,13 @@
 grammar CSS::Language::Specification {
     rule TOP {^ <property-spec>* $}
 
-    rule property-spec {<prop-names> <synopsis=.terms> }
+    rule property-spec {<prop-names>[\t| \: ]<synopsis=.terms>}
 
     rule quote {\'|\‘|\’}
-    rule prop-names { [ <.quote><prop-name=.id><.quote> | <prop-name=.id> | '*' ] +% [ \,? ] }
+    rule prop-sep {<[\x20 \, \*]>+}
+    token prop-names { [ <id=.id-quoted> | <id> ] +%% <.prop-sep> }
     token id { <[a..z]>[\w|\-]* }
+    token id-quoted { <.quote> <id> <.quote> }
     rule keyw { <id> }
     rule digits { \d+ }
 
@@ -33,7 +35,7 @@ grammar CSS::Language::Specification {
     rule occurs:sym<maybe>      {'?'}
     rule occurs:sym<once_plus>  {'+'}
     rule occurs:sym<zero_plus>  {'*'}
-    rule occurs:sym<range>      {'{'<min=.digits>[','<max=.digits>]'}'}
+    rule occurs:sym<range>      {'{'<min=.digits>','<max=.digits>'}'}
     rule occurs:sym<list>       {'#'}
 
     proto rule value {<...>}
@@ -44,10 +46,10 @@ grammar CSS::Language::Specification {
     rule value:sym<rule>        { '<'<id>'>' }
     rule value:sym<punc>        { ',' | '/' }
 
-    proto token property-ref      {<...>}
-    token property-ref:sym<css21> {<.quote>[<id>]<.quote>}
-    token property-ref:sym<css3>  {'<'<.quote>[<id>]<.quote>'>'}
+    proto token property-ref      { <...> }
+    token property-ref:sym<css21> { <id=.id-quoted> }
+    token property-ref:sym<css3>  { '<' <id=.id-quoted> '>' }
     rule value:sym<prop-ref>      { <property-ref> }
-    rule value:sym<quoted>        { <.quote>(<- quote>*)<.quote> }
+    rule value:sym<literal>       { <.quote>(<- quote>*)<.quote> }
 
 }

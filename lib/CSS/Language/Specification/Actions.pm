@@ -76,13 +76,14 @@ class CSS::Language::Specification::Actions {
     }
 
     method prop-names($/) {
-        my @prop_names = $<prop-name>.map({$_.ast});
+        my @prop_names = $<id>.map({$_.ast});
         make @prop_names;
     }
 
-    method id($/)     { make $/.Str }
-    method keyw($/)   { make $<id>.subst(/\-/, '\-'):g }
-    method digits($/) { make $/.Int }
+    method id($/)        { make $/.Str }
+    method id-quoted($/) { make $<id>.ast }
+    method keyw($/)      { make $<id>.subst(/\-/, '\-'):g }
+    method digits($/)    { make $/.Int }
 
     method values($/) {
         make $<value-inst>.map({$_.ast}).join(' ');
@@ -173,7 +174,7 @@ class CSS::Language::Specification::Actions {
         make '<' ~ $prop-ref ~ '>';
     }
 
-    method value:sym<quoted>($/)   { make "'" ~ $0.Str ~ "'"}
+    method value:sym<literal>($/)  { make "'" ~ $0.Str ~ "'"}
             
     method value:sym<num>($/)      { make $/.Str }
 
