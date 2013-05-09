@@ -106,14 +106,14 @@ class CSS::Language::Specification::Actions {
     }
 
     method options($/) {
-        my @choices = @$<pick>.map({$_.ast});
+        my @choices = @$<combo>.map({$_.ast});
         return make @choices[0]
             unless @choices > 1;
         
         make '[ ' ~ @choices.join(' | ') ~ ' ]';
     }
 
-    method pick($/) {
+    method combo($/) {
         my @choices = @$<required>.map({$_.ast});
         return make @choices[0]
             unless @choices > 1;
@@ -124,7 +124,7 @@ class CSS::Language::Specification::Actions {
         my @choices = $<values>.map({$_.ast});
         return make @choices[0]
             unless @choices > 1;
-        make '[ ' ~ @choices.join(' | ') ~ ' ]**1..' ~ @choices.Int
+        make '[ ' ~ @choices.join(' | ') ~ ' ]**' ~ @choices.Int
     }
 
     method occurs:sym<maybe>($/)     { make '?' }

@@ -25,8 +25,8 @@ grammar CSS::Language::Specification {
     rule digits { \d+ }
 
     rule terms       { <options>* }
-    rule options     { <pick>     +% '|'  }
-    rule pick        { <required> +% '||' }
+    rule options     { <combo>    +% '|'  }
+    rule combo       { <required> +% '||' }
     rule required    { <values>   +% '&&' }
     rule values      { <value-inst>+ }
     rule value-inst  { <value><occurs>**0..1 }
