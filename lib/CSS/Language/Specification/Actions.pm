@@ -2,16 +2,16 @@ use v6;
 
 class CSS::Language::Specification::Actions {
 
-    # these actions translate a css property specification to Perl 6
+    # these actions translate a CSS property specification to Perl 6
     # rules or actions.
     has %.prop-refs is rw;
 
     method TOP($/) { make $<property-spec>.map({$_.ast}) };
 
-    # contraction eg: 'border-top-style' ... 'border-left-style' 
+    # condensation eg: 'border-top-style' ... 'border-left-style' 
     # ==> pfx='border' props=<top right bottom left> sfx='-style'
 
-    sub _right_contract( @props ) {
+    sub _right_condense( @props ) {
         return ('', @props)
             unless @props > 1;
 
@@ -30,7 +30,7 @@ class CSS::Language::Specification::Actions {
         return $pfx, @remainder;
     }
 
-    sub _left_contract( @props ) {
+    sub _left_condense( @props ) {
         return ('', @props)
             unless @props > 1;
 
@@ -55,10 +55,10 @@ class CSS::Language::Specification::Actions {
 
     method property-spec($/) {
         my @props = @($<prop-names>.ast);
-        my ($pfx, @props-contracted) = _right_contract( @props );
-        (my $sfx, @props-contracted) = _left_contract( @props-contracted );
+        my ($pfx, @props-condensed) = _right_condense( @props );
+        (my $sfx, @props-condensed) = _left_condense( @props-condensed );
 
-        my $sym = @props-contracted.join('|');
+        my $sym = @props-condensed.join('|');
         $sym = $pfx ~ '[' ~ $sym ~ ']' ~ $sfx
             unless $pfx eq '' && $sfx eq '';
 

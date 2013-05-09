@@ -19,7 +19,7 @@ grammar CSS::Language::Specification {
     rule prop-sep    {<[\x20 \, \*]>+}
     token prop-names { [ <id=.id-quoted> | <id> ] +%% <.prop-sep> }
     token id         { <[a..z]>[\w|\-]* }
-    rule quote       {\'|\‘|\’}
+    token quote      {<[\' \‘ \’]>}
     token id-quoted  { <.quote> <id> <.quote> }
     rule keyw        { <id> }
     rule digits      { \d+ }
@@ -31,12 +31,12 @@ grammar CSS::Language::Specification {
     rule values      { <value-inst>+ }
     rule value-inst  { <value><occurs>**0..1 }
 
-    proto rule occurs {<...>}
-    rule occurs:sym<maybe>        {'?'}
-    rule occurs:sym<once_plus>    {'+'}
-    rule occurs:sym<zero_plus>    {'*'}
-    rule occurs:sym<range>        {'{'<min=.digits>','<max=.digits>'}'}
-    rule occurs:sym<list>         {'#'}
+    proto token occurs {<...>}
+    token occurs:sym<maybe>       {'?'}
+    token occurs:sym<once_plus>   {'+'}
+    token occurs:sym<zero_plus>   {'*'}
+    token occurs:sym<range>       {'{'<min=.digits>','<max=.digits>'}'}
+    token occurs:sym<list>        {'#'}
 
     proto rule value {<...>}
     rule value:sym<func>          { <id>'(' <.terms> ')' }
