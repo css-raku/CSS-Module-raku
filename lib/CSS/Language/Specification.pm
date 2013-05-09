@@ -16,13 +16,13 @@ grammar CSS::Language::Specification {
 
     rule property-spec {<prop-names>[\t| \: ]<synopsis=.terms>}
 
-    rule quote {\'|\‘|\’}
-    rule prop-sep {<[\x20 \, \*]>+}
+    rule prop-sep    {<[\x20 \, \*]>+}
     token prop-names { [ <id=.id-quoted> | <id> ] +%% <.prop-sep> }
-    token id { <[a..z]>[\w|\-]* }
-    token id-quoted { <.quote> <id> <.quote> }
-    rule keyw { <id> }
-    rule digits { \d+ }
+    token id         { <[a..z]>[\w|\-]* }
+    rule quote       {\'|\‘|\’}
+    token id-quoted  { <.quote> <id> <.quote> }
+    rule keyw        { <id> }
+    rule digits      { \d+ }
 
     rule terms       { <options>* }
     rule options     { <combo>    +% '|'  }
@@ -32,19 +32,19 @@ grammar CSS::Language::Specification {
     rule value-inst  { <value><occurs>**0..1 }
 
     proto rule occurs {<...>}
-    rule occurs:sym<maybe>      {'?'}
-    rule occurs:sym<once_plus>  {'+'}
-    rule occurs:sym<zero_plus>  {'*'}
-    rule occurs:sym<range>      {'{'<min=.digits>','<max=.digits>'}'}
-    rule occurs:sym<list>       {'#'}
+    rule occurs:sym<maybe>        {'?'}
+    rule occurs:sym<once_plus>    {'+'}
+    rule occurs:sym<zero_plus>    {'*'}
+    rule occurs:sym<range>        {'{'<min=.digits>','<max=.digits>'}'}
+    rule occurs:sym<list>         {'#'}
 
     proto rule value {<...>}
-    rule value:sym<func>        { <id>'(' <.terms> ')' }
-    rule value:sym<keywords>    { <keyw>   +% '|' }
-    rule value:sym<numbers>     { <digits> +% '|' }
-    rule value:sym<group>       { '[' <terms> ']' }
-    rule value:sym<rule>        { '<'<id>'>' }
-    rule value:sym<punc>        { ',' | '/' }
+    rule value:sym<func>          { <id>'(' <.terms> ')' }
+    rule value:sym<keywords>      { <keyw>   +% '|' }
+    rule value:sym<numbers>       { <digits> +% '|' }
+    rule value:sym<group>         { '[' <terms> ']' }
+    rule value:sym<rule>          { '<'<id>'>' }
+    rule value:sym<punc>          { ',' | '/' }
 
     proto token property-ref      { <...> }
     token property-ref:sym<css21> { <id=.id-quoted> }
