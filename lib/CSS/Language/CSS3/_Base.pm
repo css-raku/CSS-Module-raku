@@ -6,7 +6,7 @@ use CSS::Language::Actions;
 grammar CSS::Language::CSS3::_Base
     is CSS::Grammar::CSS3 {
  
-        rule declaration:sym<validated> { <decl> <prio>? <any-arg>* <end-decl> }
+        rule declaration:sym<validated> { <decl> <prio>**0..1 <any-arg>* <end-decl> }
 
         token integer     {[\+|\-]?\d+ <!before ['%'|\w|'.']>}
         token number      {<num> <!before ['%'|\w]>}
@@ -21,6 +21,9 @@ grammar CSS::Language::CSS3::_Base
         token proforma:sym<inherit> {:i inherit}
         token proforma:sym<initial> {:i initial}
         rule misc                   {<proforma>**0..1 <any-arg>*}
+
+        # base colors - may be extended by css3x::colors
+        rule color:sym<named> {:i [ aqua | black | blue | fuchsia | gray | green | lime | maroon | navy | olive | orange | purple | red | silver | teal | white | yellow ] & <keyw> }
 }
 
 class CSS::Language::CSS3::_Base::Actions 
