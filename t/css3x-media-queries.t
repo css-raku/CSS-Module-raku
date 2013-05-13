@@ -10,16 +10,16 @@ use t::AST;
 my $css_actions = CSS::Language::CSS3::Actions.new;
 
 my $embedded_page = 'media print and (width: 21cm) and (height: 29.7cm) {
-      @page { margin: 3cm; }
+      @page { margin-left: 3cm; }
    }';
 
 my $embedded_page_ast = {"media-list" => ["media-query" => ["media" => "print",
-                                                            "media-expr" => {"property" => "width", "expr" => ["length" => 21]},
-                                                            "media-expr" => {"property" => "height", "expr" => ["length" => 29.7]}]],
-                         "media-rules" => ["at-rule" => {"declarations" => {"margin" => {"expr" => ["margin-top" => ["length" => 3],
-                                                                                                    "margin-right" => ["length" => 3],
-                                                                                                    "margin-bottom" => ["length" => 3],
-                                                                                                    "margin-left" => ["length" => 3]]}}, "\@" => "page"}],
+                                                            "media-expr" => {"property" => "width",
+                                                                             "expr" => ["length" => 21]},
+                                                            "media-expr" => {"property" => "height",
+                                                                             "expr" => ["length" => 29.7]}]],
+                         "media-rules" => ["at-rule" => {"declarations" => {"margin-left" => {expr => ["length" => 3]}},
+                                                         "\@" => "page"}],
                          "\@" => "media"};
 
 for (
@@ -56,10 +56,10 @@ for (
     at-rule => {input => 'media noT print {body{margin : 1cm}}',
                 ast => {"media-list" => ["media-query" => ["media-op" => "not", "media" => "print"]],
                         "media-rules" => ["ruleset" => {"selectors" => ["selector" => ["simple-selector" => ["element-name" => "body"]]],
-                                                        "declarations" => {"margin" => {"expr" => ["margin-top" => ["length" => 1],
-                                                                                                   "margin-right" => ["length" => 1],
-                                                                                                   "margin-bottom" => ["length" => 1],
-                                                                                                   "margin-left" => ["length" => 1]]}}}],
+                                                        "declarations" => {"margin-top" => {"expr" => ["length" => 1e0]},
+                                                                           "margin-right" => {"expr" => ["length" => 1e0]},
+                                                                           "margin-bottom" => {"expr" => ["length" => 1e0]},
+                                                                           "margin-left" => {"expr" => ["length" => 1e0]}}}],
                         "\@" => "media"},
     },
     at-rule => {input => 'media ONLY all And (none) { }',

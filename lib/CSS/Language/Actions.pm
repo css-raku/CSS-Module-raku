@@ -19,13 +19,12 @@ class CSS::Language::Actions
         my %ast = $<decl>.ast;
 
         if $<any-arg> {
-            return $.warning("extra terms following '{%ast<property>}' declaration",
+            return $.warning("extra terms following '{%ast.keys}' declaration",
                              $<any-arg>.Str, 'dropped');
         }
 
         if (my $prio = $<prio> && $<prio>[0].ast) {
-            # mark !important declarations
-            %ast<prio> = $prio
+            %ast<prio> = $prio;
         }
 
         make %ast;
@@ -73,36 +72,36 @@ class CSS::Language::Actions
             @expr = @( $.list($m) );
         }
 
+        my %ast;
+
         if $expand {
             if $expand eq 'box' {
+                my @properties;
                 #  expand to a list of properties. eg: margin => margin-top,
                 #      margin-right margin-bottom margin-left
-                if @expr {
-                    warn "too many arguments: @expr"
-                        if @expr > 4;
-                    my %box;
-                    %box<top right bottom left> = @expr;
-                    %box<right>  //= %box<top>;
-                    %box<bottom> //= %box<top>;
-                    %box<left>   //= %box<right>;
+                warn "too many arguments: @expr"
+                    if @expr > 4;
+                my %box;
+                %box<top right bottom left> = @expr;
+                %box<right>  //= %box<top>;
+                %box<bottom> //= %box<top>;
+                %box<left>   //= %box<right>;
 
-                    @expr = ();
-
-                    for %box.kv -> $k, $v {
-                        my $box_prop = $property ~ '-' ~ $k;
-                        @expr.push( $box_prop => [@$v] );
-                    }
+                for %box.kv -> $edge, $val {
+                    my $prop = $property ~ '-' ~ $edge;
+                    @properties.push( {property => $prop, expr => [$val]} );
                 }
+                %ast<property-list> = @properties;
             }
             else {
                 die "bad :expand option: " ~ $expand;
             }
         }
-
-        my %ast;
-        %ast<property> = $property;
-        %ast<expr> = @expr
-            if @expr;
+        else {
+            %ast<property> = $property;
+            %ast<expr> = @expr
+                if @expr;
+        }
 
         make %ast;
     }

@@ -29,19 +29,27 @@ for (
     },
     # boxed properties should be expanded
     declaration-list => {input => 'margin: 2em 3em',  
-                         ast => {"margin" => {"expr" => ["margin-top" => ["length" => 2],
-                                                         "margin-right" => ["length" => 3],
-                                                         "margin-bottom" => ["length" => 2],
-                                                         "margin-left" => ["length" => 3]]}},
+                         ast => {"margin-top" => {expr => ["length" => 2]},
+                                 "margin-right" => {expr => ["length" => 3]},
+                                 "margin-bottom" => {expr => ["length" => 2]},
+                                 "margin-left" => {expr => ["length" => 3]}
+                                 },
+    },
+    # check override rules
+    declaration-list => {input => 'margin-right: 5em; margin-top: 10em !IMPORTANT; margin: 2em 3em; margin-bottom: 1em',  
+                         ast => {"margin-right" => {expr => ["length" => 3]},
+                                 "margin-top" => {expr => ["length" => 10], prio => "important"},
+                                 "margin-bottom" => {expr => ["length" => 1]},
+                                 "margin-left" => {expr => ["length" => 3]}
+                                 },
     },
     # also check !important
-    declaration => {input => 'margin: em -ex !IMPORTANT',
-             ast => {"property" => "margin",
-                     "expr" => ["margin-top" => ["length" => 1],
-                                "margin-right" => ["length" => -1],
-                                "margin-bottom" => ["length" => 1],
-                                "margin-left" => ["length" => -1]],
-                     "prio" => "important"},
+    declaration-list => {input => 'margin: em -ex !IMPORTANT',
+             ast => {"margin-top" => {expr => ["length" => 1], "prio" => "important"},
+                     "margin-right" => {expr => ["length" => -1], "prio" => "important"},
+                     "margin-bottom" => {expr => ["length" => 1], "prio" => "important"},
+                     "margin-left" => {expr => ["length" => -1], "prio" => "important"},
+                     },
     },
   ) {
 

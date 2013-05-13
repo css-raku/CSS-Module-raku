@@ -121,11 +121,10 @@ for (
      expr => [keyw => "show"],
     },
     {prop => 'margin', decl => 'inherit',
-     box => True,
-     expr => ["margin-top" => ["inherit" => Bool::True],
-                "margin-right" => ["inherit" => Bool::True],
-                "margin-bottom" => ["inherit" => Bool::True],
-                "margin-left" => ["inherit" => Bool::True]],
+     box => ["top" => ["inherit" => Bool::True],
+             "right" => ["inherit" => Bool::True],
+             "bottom" => ["inherit" => Bool::True],
+             "left" => ["inherit" => Bool::True]],
     },
     {prop => 'max-width', decl => '30%', expr => [percentage => "30"],
     },
@@ -193,22 +192,32 @@ for (
 
     my %test = %$_;
     my $prop = %test<prop>;
-    my $expr = %test<expr>;
 
-    my %ast = (property => $prop.lc, expr => $expr);
-    %ast<_result> = %test<_result> if %test<_result>;
-    %test<ast> = %ast;
+    my %declarations;
+
+    if %test<box> {
+        for @(%test<box>) {
+            my ($edge, $val) = $_.kv;
+            %declarations{$prop.lc ~ '-' ~ $edge} = {expr => $val}
+        }
+    }
+    else {
+        %declarations{ $prop.lc } = {expr => %test<expr>};
+    }
+
+    %declarations<_result> = %test<_result> if %test<_result>;
+    %test<ast> = %declarations;
 
     my $input = $prop ~ ':' ~ %test<decl>;
 
     $css21_actions.reset;
-    my $p21 = CSS::Language::CSS21.parse( $input, :rule('decl'), :actions($css21_actions));
+    my $p21 = CSS::Language::CSS21.parse( $input, :rule('declaration-list'), :actions($css21_actions));
     t::AST::parse_tests($input, $p21, :rule('decl'), :suite('css21'),
                          :warnings($css21_actions.warnings),
                          :expected(%test) );
 
     $css3_actions.reset;
-    my $p3 = CSS::Language::CSS3.parse( $input, :rule('decl'), :actions($css3_actions));
+    my $p3 = CSS::Language::CSS3.parse( $input, :rule('declaration-list'), :actions($css3_actions));
     t::AST::parse_tests($input, $p3, :rule('decl'), :suite('css3'),
                          :warnings($css3_actions.warnings),
                          :expected(%test) );
@@ -218,7 +227,7 @@ for (
         my $junk = $prop ~ ': junk "x" 42';
 
         $css21_actions.reset;
-        $p21 = CSS::Language::CSS21.parse( $junk, :rule('declaration'), :actions($css21_actions));
+        $p21 = CSS::Language::CSS21.parse( $junk, :rule('declaration-list'), :actions($css21_actions));
         is($p21.Str, $junk, "$prop: able to parse unexpected input");
 
         ok($css21_actions.warnings, "$prop : unexpected input produces warning")
@@ -228,15 +237,14 @@ for (
             my $decl = $prop ~ ': ' ~ $misc;
 
             my @_expr = ($misc => True);
-            my @expr = %test<box>
-                ?? <top right bottom left>.map({($prop ~ '-' ~ $_) => @_expr})
-                !! @_expr;;
 
-            my %ast = (property => $prop.lc, expr => @expr);
+            my %ast = %test<box>
+                ?? <top right bottom left>.map({($prop.lc ~ '-' ~ $_) => [expr => @_expr]})
+                !! ($prop.lc => [expr => @_expr]);
 
             unless $misc eq 'initial' { # applicable to css3 only
                 $css21_actions.reset;
-                $p21 = CSS::Language::CSS21.parse( $decl, :rule('decl'), :actions($css21_actions));
+                $p21 = CSS::Language::CSS21.parse( $decl, :rule('declaration-list'), :actions($css21_actions));
 
                 t::AST::parse_tests($decl, $p21, :rule('decl'), :suite('css21'),
                                     :warnings($css21_actions.warnings),
@@ -244,7 +252,7 @@ for (
             }
 
             $css3_actions.reset;
-            $p3 = CSS::Language::CSS3.parse( $decl, :rule('decl'), :actions($css3_actions));
+            $p3 = CSS::Language::CSS3.parse( $decl, :rule('declaration-list'), :actions($css3_actions));
 
             t::AST::parse_tests($decl, $p3, :rule('decl'), :suite('css3'),
                                 :warnings($css3_actions.warnings),

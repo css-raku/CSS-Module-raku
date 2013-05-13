@@ -40,18 +40,16 @@ for (
     {prop => 'border-top-width', decl => 'thick', expr => ["keyw" => "thick"]
     },
     {prop => 'border-width', decl => '2ex 1.5em 3ex 2em',
-     box => True,
-     expr => ["border-width-top" => ["length" => 2],
-              "border-width-right" => ["length" => 1.5],
-              "border-width-bottom" => ["length" => 3],
-              "border-width-left" => ["length" => 2]],
+     box => ["top" => ["length" => 2],
+             "right" => ["length" => 1.5],
+             "bottom" => ["length" => 3],
+             "left" => ["length" => 2]],
     },
     {prop => 'border-color', decl => '#a7f #aa77ff rgb(100,150,20) aqua',
-     box => True,
-     expr => ["border-color-top" => ["color" => {"r" => 170, "g" => 119, "b" => 255}],
-              "border-color-right" => ["color" => {"r" => 170, "g" => 119, "b" => 255}],
-              "border-color-bottom" => ["color" => {"r" => 100, "g" => 150, "b" => 20}],
-              "border-color-left" => ["color" => {"r" => 0, "g" => 255, "b" => 255}]],
+     box => ["top" => ["color" => {"r" => 170, "g" => 119, "b" => 255}],
+             "right" => ["color" => {"r" => 170, "g" => 119, "b" => 255}],
+             "bottom" => ["color" => {"r" => 100, "g" => 150, "b" => 20}],
+             "left" => ["color" => {"r" => 0, "g" => 255, "b" => 255}]],
     },
     {prop => 'border-style', decl => 'groove', expr => ["keyw" => "groove"],
     },
@@ -121,18 +119,16 @@ for (
     {prop => 'margin-top', decl => '1.25ex', expr => ["length" => 1.25]
     },
     {prop => 'margin', decl => '1.2ex 1.5em 125% 0',
-     box => True,
-     expr => ["margin-top" => ["length" => 1.2],
-              "margin-right" => ["length" => 1.5],
-              "margin-bottom" => ["percentage" => 125],
-              "margin-left" => ["length" => 0]],
+     box => ["top" => ["length" => 1.2],
+             "right" => ["length" => 1.5],
+             "bottom" => ["percentage" => 125],
+             "left" => ["length" => 0]],
     },
     {prop => 'margin', decl => '1.2ex 1.5em',
-     box => True,
-     expr => ["margin-top" => ["length" => 1.2],
-              "margin-right" => ["length" => 1.5],
-              "margin-bottom" => ["length" => 1.2],
-              "margin-left" => ["length" => 1.5]]
+     box => ["top" => ["length" => 1.2],
+             "right" => ["length" => 1.5],
+             "bottom" => ["length" => 1.2],
+             "left" => ["length" => 1.5]]
     },
     {prop => 'text-decoration', decl => 'Underline', expr => ["keyw" => "underline"]
     },
@@ -157,26 +153,37 @@ for (
 
     my %test = %$_;
     my $prop = %test<prop>;
-    my $expr = %test<expr>;
 
-    %test<ast> = {property => $prop.lc, expr => $expr};
+    my %declarations;
+
+    if %test<box> {
+        for @(%test<box>) {
+            my ($edge, $val) = $_.kv;
+            %declarations{$prop.lc ~ '-' ~ $edge} = {expr => $val}
+        }
+    }
+    else {
+        %declarations{ $prop.lc } = {expr => %test<expr>};
+    }
+
+    %test<ast> = %declarations;
 
     my $input = $prop ~ ':' ~ %test<decl>;
 
     $css1_actions.reset;
-     my $p1 = CSS::Language::CSS1.parse( $input, :rule('decl'), :actions($css1_actions));
+    my $p1 = CSS::Language::CSS1.parse( $input, :rule('declaration-list'), :actions($css1_actions));
     t::AST::parse_tests($input, $p1, :rule('decl'), :suite('css1'),
                          :warnings($css1_actions.warnings),
                          :expected(%test) );
 
     $css21_actions.reset;
-    my $p21 = CSS::Language::CSS21.parse( $input, :rule('decl'), :actions($css21_actions));
+    my $p21 = CSS::Language::CSS21.parse( $input, :rule('declaration-list'), :actions($css21_actions));
     t::AST::parse_tests($input, $p21, :rule('decl'), :suite('css21'),
                          :warnings($css21_actions.warnings),
                          :expected(%test) );
 
     $css3_actions.reset;
-    my $p3 = CSS::Language::CSS3.parse( $input, :rule('decl'), :actions($css3_actions));
+    my $p3 = CSS::Language::CSS3.parse( $input, :rule('declaration-list'), :actions($css3_actions));
     t::AST::parse_tests($input, $p3, :rule('decl'), :suite('css3'),
                          :warnings($css3_actions.warnings),
                          :expected(%test) );
@@ -186,18 +193,18 @@ for (
         my $junk = $prop ~ ': junk +-42';
 
         $css1_actions.reset;
-        $p1 = CSS::Language::CSS1.parse( $junk, :rule('decl'), :actions($css1_actions));
+        $p1 = CSS::Language::CSS1.parse( $junk, :rule('declaration-list'), :actions($css1_actions));
         is($p1.Str, $junk, "$prop: able to parse unexpected input");
 
         ok($css1_actions.warnings.grep({/^usage:/}), "css1 $prop : unexpected input produces warning")
             or diag $css1_actions.warnings;
 
         $css21_actions.reset;
-        $p21 = CSS::Language::CSS21.parse( $junk, :rule('declaration'), :actions($css21_actions));
+        $p21 = CSS::Language::CSS21.parse( $junk, :rule('declaration-list'), :actions($css21_actions));
         is($p21.Str, $junk, "css21 $prop: able to parse unexpected input");
 
         $css3_actions.reset;
-        $p3 = CSS::Language::CSS3.parse( $junk, :rule('declaration'), :actions($css3_actions));
+        $p3 = CSS::Language::CSS3.parse( $junk, :rule('declaration-list'), :actions($css3_actions));
         is($p3.Str, $junk, "css3 $prop: able to parse unexpected input");
 
        ok($css21_actions.warnings, "$prop : unexpected input produces warning")
@@ -207,24 +214,22 @@ for (
             my $decl = $prop ~ ': ' ~ $misc;
 
             my @_expr = ($misc => True);
-            my @expr = %test<box>
-                ?? <top right bottom left>.map({($prop ~ '-' ~ $_) => @_expr})
-                !! @_expr;;
-
-            my %ast = (property => $prop, expr => @expr);
+            my %ast = %test<box>
+                ?? <top right bottom left>.map({($prop.lc ~ '-' ~ $_) => [expr => @_expr]})
+                !! ($prop.lc => [expr => @_expr]);
 
             unless $misc eq 'initial' { # applicable to css3 only
                 $css21_actions.reset;
-                $p21 = CSS::Language::CSS21.parse( $decl, :rule('decl'), :actions($css21_actions));
+                $p21 = CSS::Language::CSS21.parse( $decl, :rule('declaration-list'), :actions($css21_actions));
 
-                t::AST::parse_tests($decl, $p21, :rule('decl'), :suite('css21'),
+                t::AST::parse_tests($decl, $p21, :rule('declaration-list'), :suite('css21'),
                                     :warnings($css21_actions.warnings),
                                     :expected({ast => %ast}) );
 
             }
 
             $css3_actions.reset;
-            $p3 = CSS::Language::CSS3.parse( $decl, :rule('decl'), :actions($css3_actions));
+            $p3 = CSS::Language::CSS3.parse( $decl, :rule('declaration-list'), :actions($css3_actions));
 
             t::AST::parse_tests($decl, $p3, :rule('decl'), :suite('css3'),
                                 :warnings($css3_actions.warnings),
