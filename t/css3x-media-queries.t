@@ -23,6 +23,7 @@ my $embedded_page_ast = {"media-list" => ["media-query" => ["media" => "print",
                          "\@" => "media"};
 
 for (
+    resolution      => {input => '300dpi', ast => 300, token => {type => 'resolution', units => 'dpi'}},
     media-expr => {input => 'min-width: 25cm',
                    ast => {"property" => "min-width",
                            "expr" => ["length" => 25]},
