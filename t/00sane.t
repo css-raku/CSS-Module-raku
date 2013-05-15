@@ -51,6 +51,7 @@ for (
                      "margin-left" => {expr => ["length" => -1], "prio" => "important"},
                      },
     },
+    resolution      => {input => '300dpi', ast => 300, token => {type => 'resolution', units => 'dpi'}},
   ) {
 
     my $rule = $_.key;

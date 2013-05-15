@@ -46,8 +46,6 @@ grammar CSS::Language::CSS3::MediaQueries::Syntax {
 
     rule media-expr:sym<bool> {:i (height|color[\-index]?|[device\-]?[width|height]|[device\-]?aspect\-ratio|monochrome|resolution|grid|none) }
 
-    token resolution {:i<num>(dpi|dpcm)}
-    token quantity:sym<resolution> {<resolution>}
 }
 
 grammar CSS::Language::CSS3::MediaQueries:ver<20120619.000>
@@ -103,6 +101,4 @@ class CSS::Language::CSS3::MediaQueries::Actions
         $.warning('unknown media-feature', $<media-feature>.ast);
         # todo - treat as 'not all'
     }
-    method resolution($/)            { make $.token($<num>.ast, :units($0.Str.lc), :type('resolution')) }
-    method quantity:sym<resolution>($/) { make $<resolution>.ast }
 }
