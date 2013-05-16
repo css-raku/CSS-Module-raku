@@ -1,7 +1,7 @@
 use v6;
 
 # CSS3 Selectors Module
-# specification: http://www.w3.org/TR/2011/CR-css3-selectors-20110929/
+# specification: http://www.w3.org/TR/2011/REC-css3-selectors-20110929/
 # Notes:
 # -- have relaxed negation rule to take a list of arguments - in common use
 #    and supported  by major browsers.
