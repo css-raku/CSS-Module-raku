@@ -1,7 +1,7 @@
 use v6;
 
 # CSS3 Selectors Module
-# specification: http://www.w3.org/TR/2001/CR-css3-selectors-20090929/
+# specification: http://www.w3.org/TR/2011/CR-css3-selectors-20110929/
 # Notes:
 # -- have relaxed negation rule to take a list of arguments - in common use
 #    and supported  by major browsers.
@@ -34,16 +34,15 @@ grammar CSS::Language::CSS3::Selectors::Syntax {
     rule attribute-selector:sym<suffix>    {'$='}
     rule attribute-selector:sym<substring> {'*='}
 
-    token nth-functor {:i[nth|first|last|'nth-last']'-'['child'|'of-type']}
+    token nth-functor {:i [nth|first|last|nth\-last]\-[child|of\-type] }
     # to compute a.n + b
-    proto token nth-args {*}
-    token nth-args:sym<odd>   {:i 'odd' }
-    token nth-args:sym<even>  {:i 'even' }
-    token nth-args:sym<expr> {
-        <ws>?
-        [$<a-sign>=[\+|\-]? <a=.posint>? $<n>=<[Nn]> <ws>? [$<b-sign>=[\+|\-] <ws>? <b=.posint>]?
-        |<b=.posint>
-        ]<ws>?
+    proto rule nth-args {*}
+    rule nth-args:sym<odd>   {:i odd }
+    rule nth-args:sym<even>  {:i even }
+    rule nth-args:sym<expr> {
+        [$<a-sign>=[\+|\-]?<a=.posint>?$<n>=<[Nn]> [$<b-sign>=[\+|\-] <b=.posint>]?
+        |$<b-sign>=[\+|\-]?<b=.posint>
+        ]
     }
 
     rule pseudo-function:sym<nth-selector> {<ident=.nth-functor>'(' [<args=.nth-args> || <any-args> ] ')'} 
@@ -52,7 +51,7 @@ grammar CSS::Language::CSS3::Selectors::Syntax {
 
 }
 
-grammar CSS::Language::CSS3::Selectors:ver<20090929.000>
+grammar CSS::Language::CSS3::Selectors:ver<20110929.000>
     is  CSS::Language::CSS3::Selectors::Syntax {
 }
 
