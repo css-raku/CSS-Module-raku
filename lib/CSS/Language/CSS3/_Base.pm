@@ -30,12 +30,15 @@ grammar CSS::Language::CSS3::_Base
     # base resolution units, used by Media Queries module. May be extended
     # by Units and Values module
     token resolution-units {:i[dpi|dpcm]}
-    token resolution {<num>(<.resolution-units>)}
+    proto token resolution {<...>}
+    token resolution:sym<dim> {<num>(<.resolution-units>)}
+    token dimension:sym<resolution> {<resolution>}
 }
 
 class CSS::Language::CSS3::_Base::Actions 
     is CSS::Language::Actions {
 
-    method resolution($/)            { make $.token($<num>.ast, :units($0.Str.lc), :type('resolution')) }
+    method resolution:sym<dim>($/)        { make $.token($<num>.ast, :units($0.Str.lc), :type('resolution')) }
+    method dimension:sym<resolution>($/)  { make $<resolution>.ast }
 
 }
