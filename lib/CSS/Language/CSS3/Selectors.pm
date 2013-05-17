@@ -15,17 +15,21 @@ grammar CSS::Language::CSS3::Selectors::Syntax {
     # allow '::' element selectors
     rule pseudo:sym<::element> {'::'<element=.ident>}
  
-    rule namespace-prefix {[<ident>|<wildcard>]?'|'}
+    rule no-namespace {''}
     rule wildcard {'*'}
+    rule namespace-prefix {[<namespace=.ident>|<any-namespace=.wildcard>|<no-namespace>]'|'}
 
-    rule simple-selector { <namespace-prefix>? [<element-name>|<element-name=.wildcard>][<id>|<class>|<attrib>|<pseudo>]*
-                          | [<id>|<class>|<attrib>|<pseudo>]+ }
+    # use <qname> in preference to <type_selector>
+    # - see http://www.w3.org/TR/2008/CR-css3-namespace-20080523/#css-qnames
+    rule qname      {<namespace-prefix>? <element-name>}
+    rule universal  {<namespace-prefix>? <element-name=.wildcard>}
+    rule simple-selector { [<qname>|<universal>][<id>|<class>|<attrib>|<pseudo>]*
+                               | [<id>|<class>|<attrib>|<pseudo>]+ }
 
     rule type-selector {<namespace-prefix>? <element-name>}
     
     rule attrib        {'[' <ident> [ <attribute-selector> [<ident>|<string>] ]? ']'}
 
-    rule universal      {<namespace-prefix>? <element-name=.wildcard>}
 
     rule term:sym<unicode-range> {'U+'<unicode-range>}
 
@@ -61,9 +65,11 @@ class CSS::Language::CSS3::Selectors::Actions {
 
     method pseudo:sym<::element>($/) { make $.node($/) }
 
+    method no-namespace($/)     { make True }
     method namespace-prefix($/) { make $.node($/) }
     method wildcard($/)         { make $/.Str }
     method type-selector($/)    { make $.node($/) }
+    method qname($/)            { make $.node($/) }
     method universal($/)        { make $.node($/) }
 
     method attribute-selector:sym<prefix>($/)    { make $/.Str }
