@@ -9,7 +9,7 @@ class CSS::Language::Actions
 
     # ---- CSS::Grammar overrides ----
 
-    method declaration:sym<raw>($/)        {
+    method declaration:sym<core>($/)        {
         $.warning('unknown property', $<property>.ast, 'declaration dropped');
     }
 
@@ -164,9 +164,8 @@ class CSS::Language::Actions
         make $.token(%rgb, :type<color>, :units<rgb>);
     }
 
-    method std($/)         { make $/.Str.lc }
-    method integer($/)     { make $/.Int }
-    method number($/)      { make $<num>.ast }
+    method integer($/)     { make $.token($/.Int, :type<integer>) }
+    method number($/)      { make $.token($<num>.ast, :type<number>) }
     method uri($/)         { make $<url>.ast }
     method keyw($/)        { make $<ident>.ast }
     # case sensitive identifiers

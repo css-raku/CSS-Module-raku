@@ -54,11 +54,9 @@ class CSS::Language::CSS21::Actions
         %ast<expr> = $.list($/);
 
         # compute the derived angle
-        my $result;
-        if $<angle> {
-            $result = (angle => $<angle>.ast);
-        }
-        elsif $<keyw> || $<behind> {
+        my $implied;
+
+        if $<keyw> || $<behind> {
 
             state %angles = (
                 'left-side'    => [270, 270],
@@ -76,14 +74,16 @@ class CSS::Language::CSS21::Actions
             my $keyw = ($<keyw> || $<behind>).ast;
             my $bh = $<behind> ?? 1 !! 0;
 
-            $result = (angle => $.token(%angles{$keyw}[$bh], :type<angle>, :units<degrees> ));
+            $implied = (angle => $.token(%angles{$keyw}[$bh], :type<angle>, :units<degrees> ));
         }
-        else {
-            my $delta_angle = $<leftwards> ?? -20 !! 20;
-            $result = (delta => $.token($delta_angle, :type<angle>, :units<degrees> ));
+        elsif $<delta> {
+            my $delta_angle = $<delta>.ast eq 'leftwards' ?? -20 !! 20;
+            $implied = (delta => $.token($delta_angle, :type<angle>, :units<degrees> ));
         }
 
-        %ast<_result> = $result;
+        %ast<_implied> = $implied
+            if $implied;
+
         make %ast;
     }
 
@@ -254,12 +254,9 @@ class CSS::Language::CSS21::Actions
         %ast<property> = $0.Str.trim.lc;
         %ast<expr> = $.list($/);
 
-        my $result;
+        my $implied;
 
-        if $<angle> {
-            $result = (angle => $<angle>.ast);
-        }
-        elsif $<keyw> {
+        if $<keyw> {
 
             state %angles = (
                 'below'    => -90,
@@ -268,14 +265,16 @@ class CSS::Language::CSS21::Actions
                 );
 
             my $keyw = $<keyw>.ast;
-            $result = (angle => $.token(%angles{$keyw}, :type<angle>, :units<degrees> ));
+            $implied = (angle => $.token(%angles{$keyw}, :type<angle>, :units<degrees> ));
         }
         elsif $<tilt> {
             my $delta_angle = $<tilt>.ast eq 'lower' ?? -10 !! 10;
-            $result = (delta => $.token($delta_angle, :type<angle>, :units<degrees> ));
+            $implied = (delta => $.token($delta_angle, :type<angle>, :units<degrees> ));
         }
 
-        %ast<_result> = $result;
+        %ast<_implied> = $implied
+            if $implied;
+
         make %ast;
     }
 

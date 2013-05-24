@@ -20,9 +20,9 @@ grammar CSS::Language::CSS1:ver<20080411.000>
     token integer     {[\+|\-]?\d+ <!before ['%'|\w|'.']>}
     token number      {<num> <!before ['%'|\w]>}
     token uri         {<url>}
-    token keyw        {<ident>}           # keywords (case insensitive)
-    token identifier  {<name>}        # identifiers (case sensitive)
-    rule identifiers  {[ <identifier> ]+} # sequences of identifiers
+    token keyw        {<ident>}             # keywords (case insensitive)
+    token identifier  {<name>}              # identifiers (case sensitive)
+    rule identifiers  {[ <identifier> ]+}   # sequences of identifiers
 
     # 5.2 Font Properties
     # -------------------

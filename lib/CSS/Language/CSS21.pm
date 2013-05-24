@@ -48,8 +48,7 @@ grammar CSS::Extensions::CSS21 {
 
     # - azimuth: <angle> | [[ left-side | far-left | left | center-left | center | center-right | right | far-right | right-side ] || behind ] | leftwards | rightwards | inherit
      rule decl:sym<azimuth> {:i (azimuth) ':' [ <angle>
-                                                | leftwards & <leftwards=.keyw>
-                                                | rightwards & <rightwards=.keyw>
+                                                | [ leftwards | rightwards]  & <delta=.keyw>
                                                 | [ [ left[\-side]? | far\-[left|right] | center[\-[left|right]]? | right[\-side]? ] & <keyw>
                                                     | behind & <behind=.keyw> ]**1..2
                                                 || <misc> ] }

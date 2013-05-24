@@ -16,21 +16,19 @@ my $css3_actions = CSS::Language::CSS3::Actions.new;
 my %seen;
 
 for (
-    {prop => 'azimuth', decl => '30deg',
-     expr => ["angle" => 30],
-     "_result" => "angle" => 30,
+    {prop => 'azimuth', decl => '30deg',     expr => ["angle" => 30],
     },
     {prop => 'Azimuth', decl => 'far-right',
      expr => ["keyw" => "far-right"],
-     "_result" => "angle" => 60,
+     "_implied" => "angle" => 60,
     },
     {prop => 'azimuth', decl => 'center-left behind',  
      expr => ["keyw" => "center-left", "behind" => "behind"],
-     "_result" => "angle" => 200,
+     "_implied" => "angle" => 200,
     },
     {prop => 'AZIMUTH', decl => 'Rightwards',
-     expr => ["rightwards" => "rightwards"],
-     "_result" => "delta" => 20,
+     expr => ["delta" => "rightwards"],
+     "_implied" => "delta" => 20,
     },
     {prop => 'azimuth', decl => 'inherit', expr => [inherit => True],
     },
@@ -107,15 +105,14 @@ for (
     },
     {prop => 'elevation', decl => '65DEG',
      expr => ["angle" => 65],
-     _result => angle => 65,
     },
     {prop => 'elevation', decl => 'above',
      expr => ["keyw" => "above"],
-     _result => angle => 90,
+     _implied => angle => 90,
     },
     {prop => 'elevation', decl => 'LOWER',
      expr => ["tilt" => "lower"],
-     _result => delta => -10,
+     _implied => delta => -10,
     },
     {prop => 'empty-cells', decl => 'show',
      expr => [keyw => "show"],
@@ -205,7 +202,7 @@ for (
         %declarations{ $prop.lc } = {expr => %test<expr>};
     }
 
-    %declarations<_result> = %test<_result> if %test<_result>;
+    %declarations<_implied> = %test<_implied> if %test<_implied>;
     %test<ast> = %declarations;
 
     my $input = $prop ~ ':' ~ %test<decl>;
