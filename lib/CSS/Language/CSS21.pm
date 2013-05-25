@@ -35,6 +35,9 @@ grammar CSS::Extensions::CSS21 {
     token keyw        {<ident>}           # keywords (case insensitive)
     token identifier  {<name>}            # identifiers (case sensitive)
     rule identifiers  {[ <identifier> ]+} # sequence of identifiers
+    # property - rule for processing right hand side of property declarations
+    # experimental
+    rule rhs($expr)   { $<expr>=$expr:i:s || <misc> }
 
     # --- Functions --- #
 
@@ -54,10 +57,9 @@ grammar CSS::Extensions::CSS21 {
                                                 || <misc> ] }
 
     # - background-attachment: scroll | fixed | inherit
+    # Note: using the experimental <rhs(..)> rule
     token background-attachment {:i [ scroll | fixed ] & <keyw> }
-    rule decl:sym<background-attachment> {:i (background\-attachment) ':' [
-                                               <background-attachment>
-                                               || <misc> ]}
+    rule decl:sym<background-attachment> {:i (background\-attachment) ':' <rhs(rx[<background-attachment>])>}
 
     # - background-color: <color> | transparent | inherit
     token background-color {:i <color> | transparent & <keyw> }

@@ -39,6 +39,9 @@ class CSS::Language::CSS21::Actions
         make $.node($/);
     }
 
+    # experimental rule
+    method rhs($/) { make $.node($<expr> // $/) }
+
    # --- Properties --- #
 
     # - azimuth: <angle> | [[ left-side | far-left | left | center-left | center | center-right | right | far-right | right-side ] || behind ] | leftwards | rightwards | inherit
@@ -90,7 +93,7 @@ class CSS::Language::CSS21::Actions
     # - background-attachment: scroll | fixed | inherit
     method background-attachment($/) { make $.list($/) }
     method decl:sym<background-attachment>($/) {
-        $._make_decl($/, 'scroll | fixed | inherit', :body($<background-attachment>));
+        make $._decl($0, $<rhs>, 'scroll | fixed | inherit', :cap<background-attachment>);
     };
 
     # - background-color: <color> | transparent | inherit
