@@ -84,7 +84,7 @@ class CSS::Language::CSS3::Selectors::Actions {
     }
 
     method nth-args:sym<odd>($/)     { make {a => 2, b=> 1} }
-    method nth-args:sym<even>($/)    { make {a => 2 } }
+    method nth-args:sym<even>($/)    { make {a => 2, b=> 0} }
     method nth-args:sym<expr>($/)    {
 
         my %node = $.node($/);
@@ -94,6 +94,7 @@ class CSS::Language::CSS3::Selectors::Actions {
             %node<a> = -%node<a> if $<a-sign>.Str eq '-';
         }
 
+        %node<b> //= 0;
         if $<b-sign> {
             %node<b> = -%node<b> if $<b-sign>.Str eq '-';
         }

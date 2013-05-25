@@ -115,7 +115,7 @@ for (
     selector => {input => 'bar:nth-child(  even  )',
                  ast => ["simple-selector" => [qname => {"element-name" => "bar"},
                                                "pseudo" => {"function" => {"ident" => "nth-child",
-                                                                           "args" => {"a" => 2}}}]],
+                                                                           "args" => {"a" => 2, "b" => 0}}}]],
     },
     selector => {input => 'tr:nth-last-child(-n+2)',
                  ast => ["simple-selector" => [qname => {"element-name" => "tr"}, "pseudo" => {"function" => {"ident" => "nth-last-child", "args" => {"b" => 2, "a" => -1}}}]],
@@ -126,7 +126,7 @@ for (
                                                                            "args" => {"b" => 3}}}]],
     },
     selector => {input => 'tr:nth-last-child(2n)',
-                 ast => ["simple-selector" => [qname => {"element-name" => "tr"}, "pseudo" => {"function" => {"ident" => "nth-last-child", "args" => {"a" => 2}}}]],
+                 ast => ["simple-selector" => [qname => {"element-name" => "tr"}, "pseudo" => {"function" => {"ident" => "nth-last-child", "args" => {"a" => 2, "b" => 0}}}]],
     },
     # white-space - valid
     selector => {input => 'tr:nth-child( 3n + 1 )',
