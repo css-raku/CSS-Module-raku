@@ -37,12 +37,12 @@ grammar CSS::Extensions::CSS21 {
     rule identifiers  {[ <identifier> ]+} # sequence of identifiers
     # property - rule for processing right hand side of property declarations
     # experimental
-    rule rhs($expr)   { $<expr>=$expr:i:s || <misc> }
+    rule val($expr)   { $<expr>=$expr:i:s || <misc> }
 
     # --- Functions --- #
 
     rule attr     {:i'attr(' [ <attribute_name=.identifier> || <any-args>] ')'}
-    rule counter  {:i'counter(' [ <identifier> [ ',' <list-style-type=.keyw> ]* || <any-args> ] ')'}
+    rule counter  {:i'counter(' [ <identifier> [ ',' <list-style-type> ]* || <any-args> ] ')'}
     rule counters {:i'counters(' [ <identifier> [ ',' <string> ]? || <any-args> ] ')' }
     rule shape-arg {:i <length> | auto & <keyw> }
     rule shape    {:i'rect(' [ <top=.shape-arg> ',' <right=.shape-arg> ',' <bottom=.shape-arg> ',' <left=.shape-arg> || <any-args> ] ')' }
@@ -57,9 +57,9 @@ grammar CSS::Extensions::CSS21 {
                                                 || <misc> ] }
 
     # - background-attachment: scroll | fixed | inherit
-    # Note: using the experimental <rhs(..)> rule
+    # Note: using the experimental <val(..)> rule
     token background-attachment {:i [ scroll | fixed ] & <keyw> }
-    rule decl:sym<background-attachment> {:i (background\-attachment) ':' <rhs(rx[<background-attachment>])>}
+    rule decl:sym<background-attachment> {:i (background\-attachment) ':' <val(rx[<background-attachment>])> }
 
     # - background-color: <color> | transparent | inherit
     token background-color {:i <color> | transparent & <keyw> }
@@ -199,7 +199,7 @@ grammar CSS::Extensions::CSS21 {
 
     # - font-style: normal | italic | oblique | inherit
     token font-style {:i [ normal | italic | oblique ] & <keyw> }
-    rule decl:sym<font-style> {:i (font\-style) ':' [ [ normal | italic | oblique ] & <keyw> || <misc> ] }
+    rule decl:sym<font-style> {:i (font\-style) ':' <val(rx[<font-style>])> }
 
     # - font-variant: normal | small-caps | inherit
     token font-variant {:i [ normal | small\-caps ] & <keyw>}
@@ -221,7 +221,7 @@ grammar CSS::Extensions::CSS21 {
     # - height: <length> | <percentage> | auto | inherit
     # - left: <length> | <percentage> | auto | inherit
     # - right: <length> | <percentage> | auto | inherit
-    rule decl:sym<width|height|left|top> {:i (width|height|left|top) ':' [ <length> | <percentage> | auto & <keyw> || <misc> ] }
+    rule decl:sym<width|height|left|top> {:i (width|height|left|top) ':' <val(rx[<length> | <percentage> | auto & <keyw> ])> }
 
     # - letter-spacing: normal | <length> | inherit
     # - word-spacing: normal | <length> | inherit
@@ -244,7 +244,7 @@ grammar CSS::Extensions::CSS21 {
 
     # - list-style-type: disc | circle | square | decimal | decimal-leading-zero | lower-roman | upper-roman | lower-greek | lower-latin | upper-latin | armenian | georgian | lower-alpha | upper-alpha | none | inherit
     token list-style-type {:i [ disc | circle | square | decimal | decimal\-leading\-zero | lower\-roman | upper\-roman | lower\-greek | lower\-latin | upper\-latin | armenian | georgian | lower\-alpha | upper\-alpha | none ] & <keyw> }
-    rule decl:sym<list-style-type> {:i (list\-style\-type) ':' [ <list-style-type> || <misc> ] }
+    rule decl:sym<list-style-type> {:i (list\-style\-type) ':' <val(rx[<list-style-type>])> }
 
     # - list-style: [ 'list-style-type' || 'list-style-position' || 'list-style-image' ] | inherit
     rule decl:sym<list-style> {:i (list\-style) ':' [ [ <list-style-type> | <list-style-position> | <list-style-image> ]**1..3  || <misc> ] }

@@ -40,7 +40,7 @@ class CSS::Language::CSS21::Actions
     }
 
     # experimental rule
-    method rhs($/) { make $.node($<expr> // $/) }
+    method val($/) { make $.node($<expr> // $/) }
 
    # --- Properties --- #
 
@@ -93,7 +93,7 @@ class CSS::Language::CSS21::Actions
     # - background-attachment: scroll | fixed | inherit
     method background-attachment($/) { make $.list($/) }
     method decl:sym<background-attachment>($/) {
-        make $._decl($0, $<rhs>, 'scroll | fixed | inherit', :cap<background-attachment>);
+        make $._decl($0, $<val>, 'scroll | fixed | inherit', :cap<background-attachment>);
     };
 
     # - background-color: <color> | transparent | inherit
@@ -309,8 +309,7 @@ class CSS::Language::CSS21::Actions
     # - font-style: normal | italic | oblique | inherit
     method font-style($/) { make $.token($<keyw>.ast) }
     method decl:sym<font-style>($/) {
-        $._make_decl($/, 'normal | italic | oblique',
-            :body($<font-style>));
+        make $._decl($0, $<val>, 'normal | italic | oblique', :cap<font-style>);
     }
 
     # - font-variant: normal | small-caps | inherit
@@ -337,7 +336,7 @@ class CSS::Language::CSS21::Actions
     # - left: <length> | <percentage> | auto | inherit
     # - right: <length> | <percentage> | auto | inherit
     method decl:sym<width|height|left|top>($/) {
-        $._make_decl($/, '<length> | <percentage> | auto');
+        make $._decl($0, $<val>, '<length> | <percentage> | auto');
     }
 
     # - letter-spacing: normal | <length>
@@ -368,8 +367,8 @@ class CSS::Language::CSS21::Actions
     # - list-style-type: disc | circle | square | decimal | decimal-leading-zero | lower-roman | upper-roman | lower-greek | lower-latin | upper-latin | armenian | georgian | lower-alpha | upper-alpha | none | inherit
     method list-style-type($/) { make $.list($/) }
     method decl:sym<list-style-type>($/) {
-        $._make_decl($/, q{disc | circle | square | decimal | decimal-leading-zero | lower-roman | upper-roman | lower-greek | lower-latin | upper-latin | armenian | georgian | lower-alpha | upper-alpha | none | inherit},
-                     :body($<list-style-type>) );
+        make $._decl($0, $<val>, q{disc | circle | square | decimal | decimal-leading-zero | lower-roman | upper-roman | lower-greek | lower-latin | upper-latin | armenian | georgian | lower-alpha | upper-alpha | none | inherit},
+                     :cap<list-style-type> );
     }
 
     # - list-style: [ 'list-style-type' || 'list-style-position' || 'list-style-image' ] | inherit
