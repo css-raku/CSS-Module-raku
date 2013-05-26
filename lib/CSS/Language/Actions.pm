@@ -107,7 +107,7 @@ class CSS::Language::Actions
         make %ast;
     }
 
-    method _decl($prop, $/, $synopsis, :$cap?, :$expand?) {
+    method _decl($prop, $/, $synopsis, :$expand?) {
         # used by prop:sym<*> methods
 
         die "doesn't look like a property: " ~ $/.Str
@@ -130,9 +130,9 @@ class CSS::Language::Actions
             @expr = %proforma;
         }
         else {
-            my $m = $<expr> // $/;
-            $m = $m{$cap} if $cap && $m{$cap};
-
+            my $m = $/;
+            # automatic dereference of $<expr>
+            $m = $m<expr> while $m<expr>;
             @expr = @( $.list($m) );
         }
 

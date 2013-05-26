@@ -59,7 +59,7 @@ grammar CSS::Extensions::CSS21 {
     # - background-attachment: scroll | fixed | inherit
     # Note: using the experimental <val(..)> rule
     token background-attachment {:i [ scroll | fixed ] & <keyw> }
-    rule decl:sym<background-attachment> {:i (background\-attachment) ':' <val(rx[<background-attachment>])> }
+    rule decl:sym<background-attachment> {:i (background\-attachment) ':' <val(rx[<expr=.background-attachment>])> }
 
     # - background-color: <color> | transparent | inherit
     token background-color {:i <color> | transparent & <keyw> }
@@ -199,7 +199,7 @@ grammar CSS::Extensions::CSS21 {
 
     # - font-style: normal | italic | oblique | inherit
     token font-style {:i [ normal | italic | oblique ] & <keyw> }
-    rule decl:sym<font-style> {:i (font\-style) ':' <val(rx[<font-style>])> }
+    rule decl:sym<font-style> {:i (font\-style) ':' <val(rx[<expr=.font-style>])> }
 
     # - font-variant: normal | small-caps | inherit
     token font-variant {:i [ normal | small\-caps ] & <keyw>}
@@ -244,7 +244,7 @@ grammar CSS::Extensions::CSS21 {
 
     # - list-style-type: disc | circle | square | decimal | decimal-leading-zero | lower-roman | upper-roman | lower-greek | lower-latin | upper-latin | armenian | georgian | lower-alpha | upper-alpha | none | inherit
     token list-style-type {:i [ disc | circle | square | decimal | decimal\-leading\-zero | lower\-roman | upper\-roman | lower\-greek | lower\-latin | upper\-latin | armenian | georgian | lower\-alpha | upper\-alpha | none ] & <keyw> }
-    rule decl:sym<list-style-type> {:i (list\-style\-type) ':' <val(rx[<list-style-type>])> }
+    rule decl:sym<list-style-type> {:i (list\-style\-type) ':' <val(rx[<expr=.list-style-type>])> }
 
     # - list-style: [ 'list-style-type' || 'list-style-position' || 'list-style-image' ] | inherit
     rule decl:sym<list-style> {:i (list\-style) ':' [ [ <list-style-type> | <list-style-position> | <list-style-image> ]**1..3  || <misc> ] }
