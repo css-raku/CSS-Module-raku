@@ -120,7 +120,7 @@ class CSS::Language::CSS1::Actions
     # - line-height: normal | <number> | <length> | <percentage>
     method line-height($/) { make $.list($/); }
     method decl:sym<line-height>($/) {
-        $._make_decl($/, 'normal | <number> | <length> | <percentage>');
+        $._make_decl($/, 'normal | <number> | <length> | <percentage>', :body($<line-height>));
     }
 
     # - margin-top: <length> | <percentage> | auto

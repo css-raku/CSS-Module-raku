@@ -205,7 +205,7 @@ class CSS::Language::CSS3::Fonts::Actions
 
     method line-height($/) { make $.list($/); }
     method decl:sym<line-height>($/) {
-        $._make_decl($/, 'normal | <number> | <length> | <percentage>');
+        $._make_decl($/, 'normal | <number> | <length> | <percentage>', :body($<line-height>));
     }
 
     method src($/) { make $.node($/) }

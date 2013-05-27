@@ -19,7 +19,7 @@ class CSS::Language::Actions
         my %ast = $<decl>.ast;
 
         if $<any-arg> {
-            return $.warning("extra terms following '{%ast.keys}' declaration",
+            return $.warning("extra terms following '{%ast<property>}' declaration",
                              $<any-arg>.Str, 'dropped');
         }
 

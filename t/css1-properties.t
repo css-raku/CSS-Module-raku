@@ -97,7 +97,7 @@ for (
     },
     {prop => 'letter-spacing', decl => 'normal', expr => ["keyw" => "normal"]
     },
-    {prop => 'line-height', decl => '120%', expr => ["line-height" => {"percentage" => 120}]
+    {prop => 'line-height', decl => '120%', expr => ["percentage" => 120]
     },
     {prop => 'list-style-type', decl => 'square', expr => ["keyw" => "square"],
     },

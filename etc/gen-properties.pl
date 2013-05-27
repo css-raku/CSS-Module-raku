@@ -95,7 +95,7 @@ sub generate-perl6-rules(%gen-props, %prop-refs) {
         if @$props == 1 && %prop-refs{ $props[0] } {
             # property is referenced by other definitions; factor out body
             say "    token $sym \{:i $defn \}";
-            say "    rule decl:sym<{$sym}> \{:i ($match) ':'  <val(rx\{<ref=.$sym>\})> \}";
+            say "    rule decl:sym<{$sym}> \{:i ($match) ':'  <val(rx:s:i\{<ref=.$sym>\})> \}";
         }
         else {
             say "    rule decl:sym<{$sym}> \{:i ($match) ':'  <val(rx:s:i\{ $defn \})> \}";
