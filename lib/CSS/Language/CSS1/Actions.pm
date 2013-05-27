@@ -8,28 +8,25 @@ class CSS::Language::CSS1::Actions
     # - font-family: [[<family-name> | <generic-family>],]* [<family-name> | <generic-family>]
     method font-family($/) { make $.list($/) }
     method decl:sym<font-family>($/) {
-        $._make_decl($/, '[[<family-name> | <generic-family>],]* [<family-name> | <generic-family>]', :body($<font-family>));
+        $._make_decl($/, '[[<family-name> | <generic-family>],]* [<family-name> | <generic-family>]');
     }
 
     # - font-style: normal | italic | oblique
     method font-style($/) { make $.token($<keyw>.ast) }
     method decl:sym<font-style>($/) {
-        $._make_decl($/, 'normal | italic | oblique',
-            :body($<font-style>));
+        $._make_decl($/, 'normal | italic | oblique');
     }
 
     # - font-variant: normal | small-caps
     method font-variant($/)  { make $.token($<keyw>.ast) }
     method decl:sym<font-variant>($/) {
-        $._make_decl($/, 'normal | small-caps',
-            :body($<font-variant>));
+        $._make_decl($/, 'normal | small-caps');
     }
 
     # - font-weight: normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
     method font-weight($/) { make $.token( ($<keyw> || $<number>).ast ) }
     method decl:sym<font-weight>($/) {
-        $._make_decl($/, 'normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900',
-                    :body($<font-weight>)); 
+        $._make_decl($/, 'normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900'); 
     }
 
     # - font-size: <absolute-size> | <relative-size> | <length> | <percentage>
@@ -37,8 +34,7 @@ class CSS::Language::CSS1::Actions
     method relative-size($/) { make $.token($<keyw>.ast) }
     method font-size($/)     { make $.list($/) }
     method decl:sym<font-size>($/) {
-        $._make_decl($/, '[[x]x-]small | medium | [[x]x\-]large | larger | smaller | <length> | <percentage>',
-            :body($<font-size>));
+        $._make_decl($/, '[[x]x-]small | medium | [[x]x\-]large | larger | smaller | <length> | <percentage>');
     }
 
     method decl:sym<font>($/) {
@@ -53,32 +49,31 @@ class CSS::Language::CSS1::Actions
     # - background-color: <color> | transparent
     method background-color($/) { make $.list($/) }
     method decl:sym<background-color>($/) {
-        $._make_decl($/, '<color> | transparent', :body($<background-color>))
+        $._make_decl($/, '<color> | transparent')
     };
 
     # - background-image: <url> | none
     method background-image($/) { make $.list($/) }
     method decl:sym<background-image>($/) {
-        $._make_decl($/, '<uri> | none', :body($<background-image>))
+        $._make_decl($/, '<uri> | none')
     };
 
     # - background-repeat: repeat | repeat-x | repeat-y | no-repeat
     method background-repeat($/) { make $.list($/) }
     method decl:sym<background-repeat>($/) {
-        $._make_decl($/, 'repeat | repeat-x | repeat-y | no-repeat', :body($<background-repeat>))
+        $._make_decl($/, 'repeat | repeat-x | repeat-y | no-repeat')
     };
 
     # - background-attachment: scroll | fixed
     method background-attachment($/) { make $.list($/) }
     method decl:sym<background-attachment>($/) {
-        $._make_decl($/, 'scroll | fixed', :body($<background-attachment>));
+        $._make_decl($/, 'scroll | fixed');
     };
 
     # - background-position: [<percentage> | <length>]{1,2} | [top | center | bottom] || [left | center | right]
     method background-position($/) { make $.list($/) }
     method decl:sym<background-position>($/) {
-        $._make_decl($/, '[<percentage> | <length> ]{1,2} | [top | center | bottom] || [left | center | right]',
-            :body($<background-position>))
+        $._make_decl($/, '[<percentage> | <length> ]{1,2} | [top | center | bottom] || [left | center | right]')
     };
 
     # - background: <background-color> || <background-image> || <background-repeat> || <background-attachment> || <background-position>
@@ -120,7 +115,7 @@ class CSS::Language::CSS1::Actions
     # - line-height: normal | <number> | <length> | <percentage>
     method line-height($/) { make $.list($/); }
     method decl:sym<line-height>($/) {
-        $._make_decl($/, 'normal | <number> | <length> | <percentage>', :body($<line-height>));
+        $._make_decl($/, 'normal | <number> | <length> | <percentage>');
     }
 
     # - margin-top: <length> | <percentage> | auto
@@ -165,21 +160,19 @@ class CSS::Language::CSS1::Actions
     method border-width($/) { make $.list($/) }
     method decl:sym<border-width>($/) {
         $._make_decl($/, '[thin | medium | thick | <length>]{1,4}',
-                     :body($<border-width>), :expand<box>);
+                     :expand<box>);
 
     }
 
     # - border-color: <color>{1,4}
     method decl:sym<border-color>($/) {
-        $._make_decl($/, '<color>{1,4}',
-                     :expand<box>);
+        $._make_decl($/, '<color>{1,4}', :expand<box>);
     }
 
     # - border-style: none | dotted | dashed | solid | double | groove | ridge | inset | outset
     method border-style($/) { make $.list($/) }
     method decl:sym<border-style>($/) {
-        $._make_decl($/, 'none | dotted | dashed | solid | double | groove | ridge | inset | outset',
-            :body($<border-style>));
+        $._make_decl($/, 'none | dotted | dashed | solid | double | groove | ridge | inset | outset');
     }
 
     # - border-top: <border-width> || <border-style> || <color>
@@ -222,20 +215,19 @@ class CSS::Language::CSS1::Actions
     # - list-style-type: disc | circle | square | decimal | lower-roman | upper-roman | lower-alpha | upper-alpha | none
     method list-style-type($/) { make $.list($/) }
     method decl:sym<list-style-type>($/) {
-        $._make_decl($/, 'disc | circle | square | decimal | lower-roman | upper-roman | lower-alpha | upper-alpha | none',
-                     :body($<list-style-type>) )         
+        $._make_decl($/, 'disc | circle | square | decimal | lower-roman | upper-roman | lower-alpha | upper-alpha | none')
     }
 
     # - list-style-image: <url> | none
     method list-style-image($/) { make $.list($/) }
     method decl:sym<list-style-image>($/) {
-        $._make_decl($/, '<url> | none', :body($<list-style-image>) );
+        $._make_decl($/, '<url> | none');
     }
 
     # - list-style-position: inside | outside
     method list-style-position($/) { make $.list($/) }
     method decl:sym<list-style-position>($/) {
-        $._make_decl($/, 'inside | outside',  :body($<list-style-position>));
+        $._make_decl($/, 'inside | outside');
     }
 
     # - list-style: <keyword> || <position> || <url>

@@ -42,7 +42,7 @@ class CSS::Language::Actions
 
     #---- AST construction methods ----#
 
-    method _make_decl($/, $synopsis, :$body?, :$expand?) {
+    method _make_decl($/, $synopsis, :$expand?) {
         # *** OBSELETE *** use _decl() method
         # used by prop:sym<*> methods
 
@@ -64,12 +64,9 @@ class CSS::Language::Actions
             @expr = %proforma;
         }
         else {
-
-            my $m = $body.defined
-                && ($body.can('caps') ?? $body.caps !! @$body)
-                ?? $body
-                !! $/;
-
+            my $m = $<expr> // $/;
+            # automatic dereference
+            $m = $m<ref> while $m<ref>;
             @expr = @( $.list($m) );
         }
 

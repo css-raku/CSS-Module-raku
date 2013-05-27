@@ -207,8 +207,8 @@ for (
         $p3 = CSS::Language::CSS3.parse( $junk, :rule('declaration-list'), :actions($css3_actions));
         is($p3.Str, $junk, "css3 $prop: able to parse unexpected input");
 
-       ok($css21_actions.warnings, "$prop : unexpected input produces warning")
-            or diag $css21_actions.warnings;
+       ok($css3_actions.warnings, "$prop : unexpected input produces warning")
+            or diag $css3_actions.warnings;
 
         for <inherit initial> -> $misc {
             my $decl = $prop ~ ': ' ~ $misc;

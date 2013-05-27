@@ -28,25 +28,25 @@ grammar CSS::Language::CSS1:ver<20080411.000>
     # -------------------
     # - font-family: [[<family-name> | <generic-family>],]* [<family-name> | <generic-family>]
     rule font-family {:i [ serif | sans\-serif | cursive | fantasy | monospace ] & <generic-family=.identifier> || <family-name=.identifiers> | <family-name=.string> }
-    rule decl:sym<font-family> {:i (font\-family) ':' [ <font-family> +% ',' <any>* || <misc> ] }
+    rule decl:sym<font-family> {:i (font\-family) ':' [ <ref=.font-family> +% [ ',' ] <any>* || <misc> ] }
 
     # - font-style: normal | italic | oblique
     token font-style {:i [ normal | italic | oblique ] & <keyw> }
-    rule decl:sym<font-style> {:i (font\-style) ':' [ <font-style>  || <misc> ] }
+    rule decl:sym<font-style> {:i (font\-style) ':' [ <ref=.font-style>  || <misc> ] }
 
     # - font-variant: normal | small-caps
     token font-variant {:i [ normal | small\-caps ] & <keyw>}
-    rule decl:sym<font-variant> {:i (font\-variant) ':' [ <font-variant> || <misc> ] }
+    rule decl:sym<font-variant> {:i (font\-variant) ':' [ <ref=.font-variant> || <misc> ] }
     # - font-weight: normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
     token font-weight {:i [ normal | bold | bolder | lighter ] & <keyw>
                            | [ 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 ] & <number> }
-    rule decl:sym<font-weight> {:i (font\-weight) ':' [ <font-weight> || <misc> ] }
+    rule decl:sym<font-weight> {:i (font\-weight) ':' [ <ref=.font-weight> || <misc> ] }
 
     # - font-size: <absolute-size> | <relative-size> | <length> | <percentage>
     token absolute-size {:i [ [[xx|x]\-]?small | medium | [[xx|x]\-]?large ] & <keyw> }
     token relative-size {:i [ larger | smaller ] & <keyw> }
     token font-size {:i <absolute-size> | <relative-size> | <length> | <percentage> }
-    rule decl:sym<font-size> {:i (font\-size) ':' [ <font-size> || <misc> ] }
+    rule decl:sym<font-size> {:i (font\-size) ':' [ <ref=.font-size> || <misc> ] }
     # - font: [ <font-style> || <font-variant> || <font-weight> ]? <font-size> [ / <line-height> ]? <font-family>
     rule decl:sym<font> {:i (font) ':' [
                               [ <font-style> | <font-variant> | <font-weight> ]**0..3 <font-size> [ '/' <line-height> ]? <font-family> +% ','
@@ -59,20 +59,20 @@ grammar CSS::Language::CSS1:ver<20080411.000>
 
     # - background-color: <color> | transparent
     token background-color {:i <color> | transparent & <keyw> }
-    rule decl:sym<background-color> {:i (background\-color) ':' [ <background-color> || <misc> ]}
+    rule decl:sym<background-color> {:i (background\-color) ':' [ <ref=.background-color> || <misc> ]}
 
     # - background-image: <url> | none
     token background-image {:i <url> | none & <keyw> }
-    rule decl:sym<background-image> {:i (background\-image) ':' [ <background-image> || <misc> ]}
+    rule decl:sym<background-image> {:i (background\-image) ':' [ <ref=.background-image> || <misc> ]}
 
     # - background-repeat: repeat | repeat-x | repeat-y | no-repeat
     token background-repeat {:i [ repeat[\-[x|y]]? | no\-repeat ] & <keyw> }
-    rule decl:sym<background-repeat> {:i (background\-repeat) ':' [ <background-repeat> || <misc> ]}
+    rule decl:sym<background-repeat> {:i (background\-repeat) ':' [ <ref=.background-repeat> || <misc> ]}
 
 
     # - background-attachment: scroll | fixed
     token background-attachment {:i [ scroll | fixed ] & <keyw> }
-    rule decl:sym<background-attachment> {:i (background\-attachment) ':' [ <background-attachment>
+    rule decl:sym<background-attachment> {:i (background\-attachment) ':' [ <ref=.background-attachment>
                                                                             || <misc> ]}
 
     # - background-position: [<percentage> | <length>]{1,2} | [top | center | bottom] || [left | center | right]
@@ -80,7 +80,7 @@ grammar CSS::Language::CSS1:ver<20080411.000>
                                   | [ [ top | center | bottom ] & <keyw>  
                                       | [ left | center | right ] & <keyw> ]+ }
 
-    rule decl:sym<background-position> {:i (background\-position) ':' [ <background-position>
+    rule decl:sym<background-position> {:i (background\-position) ':' [ <ref=.background-position>
                                                                         || <misc> ]}
 
     # - background: <background-color> || <background-image> || <background-repeat> || <background-attachment> || <background-position>
@@ -121,7 +121,7 @@ grammar CSS::Language::CSS1:ver<20080411.000>
 
     # - line-height: normal | <number> | <length> | <percentage>
     token line-height {:i normal & <keyw> | <number> | <length> | <percentage> }
-    rule decl:sym<line-height> {:i (line\-height) ':' [ <line-height> || <misc> ]}
+    rule decl:sym<line-height> {:i (line\-height) ':' [ <ref=.line-height> || <misc> ]}
 
     # 5.5 Box properties
     # ------------------
@@ -159,7 +159,7 @@ grammar CSS::Language::CSS1:ver<20080411.000>
 
     # - border-width: [thin | medium | thick | <length>]{1,4}
     token border-width {:i [ thin | medium | thick ] & <keyw> | <length> }
-    rule decl:sym<border-width> {:i (border\-width) ':' [ [ <border-width> ] ** 1..4
+    rule decl:sym<border-width> {:i (border\-width) ':' [ [ <ref=.border-width> ] ** 1..4
                                                           || <misc> ]}
 
     # - border-color: <color>{1,4}
@@ -168,7 +168,7 @@ grammar CSS::Language::CSS1:ver<20080411.000>
 
     # - border-style: none | dotted | dashed | solid | double | groove | ridge | inset | outset
     token border-style {:i [ none | dotted | dashed | solid | double | groove | ridge | inset | outset ] & <keyw> }
-    rule decl:sym<border-style> {:i (border\-style) ':' [ <border-style> || <misc> ]}
+    rule decl:sym<border-style> {:i (border\-style) ':' [ <ref=.border-style> || <misc> ]}
 
     # - border-top: <border-width> || <border-style> || <color>
     # - border-right: <border-width> || <border-style> || <color>
@@ -209,15 +209,15 @@ grammar CSS::Language::CSS1:ver<20080411.000>
 
     # - list-style-type: disc | circle | square | decimal | lower-roman | upper-roman | lower-alpha | upper-alpha | none
     token list-style-type {:i [ disc | circle | square | decimal | lower\-roman | upper\-roman | lower\-alpha | upper\-alpha | none ] & <keyw> }
-    rule decl:sym<list-style-type> {:i (list\-style\-type) ':' [ <list-style-type> || <misc> ]}
+    rule decl:sym<list-style-type> {:i (list\-style\-type) ':' [ <ref=.list-style-type> || <misc> ]}
 
     # - list-style-image: <url> | none
     token list-style-image {:i  <uri> | none & <keyw> }
-    rule decl:sym<list-style-image> {:i (list\-style\-image) ':' [ <list-style-image> || <misc> ]}
+    rule decl:sym<list-style-image> {:i (list\-style\-image) ':' [ <ref=.list-style-image> || <misc> ]}
 
     # - list-style-position: inside | outside
     token list-style-position {:i  [ inside | outside ] & <keyw> }
-    rule decl:sym<list-style-position> {:i (list\-style\-position) ':' [ <list-style-position>
+    rule decl:sym<list-style-position> {:i (list\-style\-position) ':' [ <ref=.list-style-position>
                                                                          || <misc> ]}
 
     # - list-style: <keyword> || <position> || <url>
