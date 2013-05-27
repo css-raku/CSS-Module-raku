@@ -49,9 +49,10 @@ sub load-props ($properties-spec, $actions?) {
     for $fh.lines {
         # handle full line comments
         next if /^\#/;
-        # '| inherit' and '| initial' are used inconsistantly and are
-        # implied anyway; get rid of them
-        my $spec = $_.subst(/\s* '|' \s* [inherit|initial]/, ''):g;
+        my @cols = $_.split(/\t/);
+        my $spec = "@cols[0] : @cols[1]";
+        # '| inherit' and '| initial' are implied anyway; get rid of them
+        $spec = $spec.subst(/\s* '|' \s* [inherit|initial]/, ''):g;
 
         my $/ = CSS::Language::Specification.parse($spec, :rule('property-spec'), :actions($actions) );
         die "unable to parse: $spec"
@@ -94,10 +95,10 @@ sub generate-perl6-rules(%gen-props, %prop-refs) {
         if @$props == 1 && %prop-refs{ $props[0] } {
             # property is referenced by other definitions; factor out body
             say "    token $sym \{:i $defn \}";
-            say "    rule decl:sym<{$sym}> \{:i ($match) ':'  [ <$sym> || <misc> ] \}";
+            say "    rule decl:sym<{$sym}> \{:i ($match) ':'  <val(rx\{<ref=.$sym>\})> \}";
         }
         else {
-            say "    rule decl:sym<{$sym}> \{:i ($match) ':'  [ $defn || <misc> ] \}";
+            say "    rule decl:sym<{$sym}> \{:i ($match) ':'  <val(rx\{$defn\})> \}";
         }
     }
 }
@@ -120,14 +121,10 @@ sub generate-perl6-actions(%gen-props, %prop-refs) {
         if @$props == 1 && %prop-refs{ $props[0] } {
             # property is referenced by other definitions; factor out body
             say "    method {$sym}(\$/) \{ make \$.list(\$/) \}";
-            say "    method decl:sym<{$sym}>(\$/) \{";
-            say "        \$._make_decl(\$/, q\{" ~ $synopsis ~ "\}, :body(\$<$sym>));";
-            say "    \}";      
         }
-        else {
-            say "    method decl:sym<{$sym}>(\$/) \{";
-            say "        \$._make_decl(\$/, q\{" ~ $synopsis ~ "\});";
-            say "    \}";
-        }
+
+        say "    method decl:sym<{$sym}>(\$/) \{";
+        say "        make \$._decl(\$0, \$<val>, q\{" ~ $synopsis ~ "\});";
+        say "    \}";
     }
 }

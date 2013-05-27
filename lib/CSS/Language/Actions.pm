@@ -130,9 +130,9 @@ class CSS::Language::Actions
             @expr = %proforma;
         }
         else {
-            my $m = $/;
-            # automatic dereference of $<expr>
-            $m = $m<expr> while $m<expr>;
+            my $m = $<expr> // $/;
+            # automatic dereference
+            $m = $m<ref> while $m<ref>;
             @expr = @( $.list($m) );
         }
 
