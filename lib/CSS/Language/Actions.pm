@@ -42,68 +42,6 @@ class CSS::Language::Actions
 
     #---- AST construction methods ----#
 
-    method _make_decl($/, $synopsis, :$expand?) {
-        # *** OBSELETE *** use _decl() method
-        # used by prop:sym<*> methods
-
-        die "doesn't look like a property: " ~ $/.Str
-            unless $0;
-
-        my $property = $0.Str.trim.lc;
-
-        return $.warning('usage ' ~ $property ~ ': ' ~ $synopsis)
-            if ($<misc> && !$<misc>.ast) 
-            || ($<proforma> && !$<proforma>.ast) 
-            || $<any> || $<any-arg> || $<any-args>;
-
-        my @expr;
-
-        my $proforma = $<misc> || $<proforma>;
-        if $proforma {
-            my %proforma = $proforma.ast;
-            @expr = %proforma;
-        }
-        else {
-            my $m = $<expr> // $/;
-            # automatic dereference
-            $m = $m<ref> while $m<ref>;
-            @expr = @( $.list($m) );
-        }
-
-        my %ast;
-
-        if $expand {
-            if $expand eq 'box' {
-                my @properties;
-                #  expand to a list of properties. eg: margin => margin-top,
-                #      margin-right margin-bottom margin-left
-                warn "too many arguments: @expr"
-                    if @expr > 4;
-                my %box;
-                %box<top right bottom left> = @expr;
-                %box<right>  //= %box<top>;
-                %box<bottom> //= %box<top>;
-                %box<left>   //= %box<right>;
-
-                for %box.kv -> $edge, $val {
-                    my $prop = $property ~ '-' ~ $edge;
-                    @properties.push( {property => $prop, expr => [$val]} );
-                }
-                %ast<property-list> = @properties;
-            }
-            else {
-                die "bad :expand option: " ~ $expand;
-            }
-        }
-        else {
-            %ast<property> = $property;
-            %ast<expr> = @expr
-                if @expr;
-        }
-
-        make %ast;
-    }
-
     method _decl($prop, $/, $synopsis, :$expand?) {
         # used by prop:sym<*> methods
 
