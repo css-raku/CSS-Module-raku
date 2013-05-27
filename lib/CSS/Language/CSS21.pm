@@ -41,7 +41,7 @@ grammar CSS::Extensions::CSS21 {
 
     # --- Functions --- #
 
-    rule attr     {:i'attr(' [ <attribute_name=.identifier> || <any-args>] ')'}
+    rule attr     {:i'attr(' [ <attribute_name=.qname> || <any-args>] ')'}
     rule counter  {:i'counter(' [ <identifier> [ ',' <list-style-type> ]* || <any-args> ] ')'}
     rule counters {:i'counters(' [ <identifier> [ ',' <string> ]? || <any-args> ] ')' }
     rule shape-arg {:i <length> | auto & <keyw> }
@@ -50,11 +50,10 @@ grammar CSS::Extensions::CSS21 {
     # --- Properties --- #
 
     # - azimuth: <angle> | [[ left-side | far-left | left | center-left | center | center-right | right | far-right | right-side ] || behind ] | leftwards | rightwards | inherit
-     rule decl:sym<azimuth> {:i (azimuth) ':' [ <angle>
+     rule decl:sym<azimuth> {:i (azimuth) ':' <val(rx:s:i{ <angle>
                                                 | [ leftwards | rightwards]  & <delta=.keyw>
                                                 | [ [ left[\-side]? | far\-[left|right] | center[\-[left|right]]? | right[\-side]? ] & <keyw>
-                                                    | behind & <behind=.keyw> ]**1..2
-                                                || <misc> ] }
+                                                | behind & <behind=.keyw> ]**1..2 })> }
 
     # - background-attachment: scroll | fixed | inherit
     # Note: using the experimental <val(..)> rule
@@ -173,10 +172,9 @@ grammar CSS::Extensions::CSS21 {
                                                || <misc> ] }
 
     # - elavation: <angle> | below | level | above | higher | lower | inherit
-    rule decl:sym<elevation> {:i (elevation) ':' [ <angle>
-                                                   | [below | level | above ] & <keyw>
-                                                   | [ higher | lower ] & <tilt=.keyw>
-                                                   || <misc> ]}
+    rule decl:sym<elevation> {:i (elevation) ':' <val(rx:s:i{<angle>
+                                                               | [below | level | above ] & <keyw>
+                                                               | [ higher | lower ] & <tilt=.keyw> })> }
 
     # - empty-cells: show | hide | inherit
     rule decl:sym<empty-cells> {:i (empty\-cells) ':' [ [ show | hide ] & <keyw> || <misc> ] }
@@ -221,7 +219,7 @@ grammar CSS::Extensions::CSS21 {
     # - height: <length> | <percentage> | auto | inherit
     # - left: <length> | <percentage> | auto | inherit
     # - right: <length> | <percentage> | auto | inherit
-    rule decl:sym<width|height|left|top> {:i (width|height|left|top) ':' <val(rx[<length> | <percentage> | auto & <keyw> ])> }
+    rule decl:sym<width|height|left|top> {:i (width|height|left|top) ':' <val(rx:s:i[ <length> | <percentage> | auto & <keyw> ])> }
 
     # - letter-spacing: normal | <length> | inherit
     # - word-spacing: normal | <length> | inherit

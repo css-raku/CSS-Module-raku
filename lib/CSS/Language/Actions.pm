@@ -119,7 +119,7 @@ class CSS::Language::Actions
             || ($<proforma> && !$<proforma>.ast) 
             || $<any> || $<any-arg> || $<any-args> {
                 $.warning('usage ' ~ $property ~ ': ' ~ $synopsis);
-                return Mu;
+                return Any;
         }
 
         my @expr;

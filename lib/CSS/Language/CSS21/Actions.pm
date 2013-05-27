@@ -48,46 +48,43 @@ class CSS::Language::CSS21::Actions
     method decl:sym<azimuth>($/) {
         # see http://www.w3.org/TR/2011/REC-CSS2-20110607/aural.html
 
-        return $._make_decl($/, 'usage azimuth: <angle> | [[ left-side | far-left | left | center-left | center | center-right | right | far-right | right-side ] || behind ] | leftwards | rightwards | inherit')
-            if $<misc>;
+        my $ast = $._decl($0, $<val>, 'usage azimuth: <angle> | [[ left-side | far-left | left | center-left | center | center-right | right | far-right | right-side ] || behind ] | leftwards | rightwards | inherit');
 
-        my %ast;
-        %ast<property> = $0.Str.trim.lc;
+        if $ast && $ast<expr> {
+            my %expr = %(@($ast<expr>));
+            # compute implied angles
+            my $implied;
 
-        %ast<expr> = $.list($/);
+            if %expr<keyw> || %expr<behind> {
 
-        # compute the derived angle
-        my $implied;
+                state %angles = (
+                    'left-side'    => [270, 270],
+                    'far-left'     => [300, 240],
+                    'left'         => [320, 220],
+                    'center-left'  => [340, 200],
+                    'center'       => [0,   180],
+                    'center-right' => [20,  160],
+                    'right'        => [40,  140],
+                    'far-right'    => [60,  120],
+                    'right-side'   => [90,  90],
+                    'behind'       => [180, 180],
+                    );
 
-        if $<keyw> || $<behind> {
+                my $keyw = %expr<keyw> || %expr<behind>;
+                my $bh = %expr<behind> ?? 1 !! 0;
 
-            state %angles = (
-                'left-side'    => [270, 270],
-                'far-left'     => [300, 240],
-                'left'         => [320, 220],
-                'center-left'  => [340, 200],
-                'center'       => [0,   180],
-                'center-right' => [20,  160],
-                'right'        => [40,  140],
-                'far-right'    => [60,  120],
-                'right-side'   => [90,  90],
-                'behind'       => [180, 180],
-                );
+                $implied = (angle => $.token(%angles{$keyw}[$bh], :type<angle>, :units<degrees> ));
+            }
+            elsif %expr<delta> {
+                my $delta_angle = %expr<delta> eq 'leftwards' ?? -20 !! 20;
+                $implied = (delta => $.token($delta_angle, :type<angle>, :units<degrees> ));
+            }
 
-            my $keyw = ($<keyw> || $<behind>).ast;
-            my $bh = $<behind> ?? 1 !! 0;
-
-            $implied = (angle => $.token(%angles{$keyw}[$bh], :type<angle>, :units<degrees> ));
+            $ast<_implied> = $implied
+                if $implied;
         }
-        elsif $<delta> {
-            my $delta_angle = $<delta>.ast eq 'leftwards' ?? -20 !! 20;
-            $implied = (delta => $.token($delta_angle, :type<angle>, :units<degrees> ));
-        }
 
-        %ast<_implied> = $implied
-            if $implied;
-
-        make %ast;
+        make $ast;
     }
 
     # - background-attachment: scroll | fixed | inherit
@@ -247,38 +244,37 @@ class CSS::Language::CSS21::Actions
         $._make_decl($/, q{inline | block | list-item | inline-block | table | inline-table | table-row-group | table-header-group | table-footer-group | table-row | table-column-group | table-column | table-cell | table-caption | none | inherit});
     }
 
-    # - elavation: <angle> | below | level | above | higher | lower | inherit
+    # - elevation: <angle> | below | level | above | higher | lower | inherit
     method decl:sym<elevation>($/) {
         # see http://www.w3.org/TR/2011/REC-CSS2-20110607/aural.html
-        return $._make_decl($/, '<angle> | below | level | above | higher | lower | inherit')
-            if $<misc>;
+        my $ast = $._decl($0, $<val>, '<angle> | below | level | above | higher | lower | inherit');
 
-        my %ast;
-        %ast<property> = $0.Str.trim.lc;
-        %ast<expr> = $.list($/);
+        if $ast && $ast<expr> {
+            my %expr = %(@($ast<expr>));
+ 
+            my $implied;
 
-        my $implied;
+            if %expr<keyw> {
 
-        if $<keyw> {
+                state %angles = (
+                    'below'    => -90,
+                    'level'    =>   0,
+                    'above'    =>  90,
+                    );
 
-            state %angles = (
-                'below'    => -90,
-                'level'    =>   0,
-                'above'    =>  90,
-                );
+                my $keyw = %expr<keyw>;
+                $implied = (angle => $.token(%angles{$keyw}, :type<angle>, :units<degrees> ));
+            }
+            elsif %expr<tilt> {
+                my $delta_angle = %expr<tilt> eq 'lower' ?? -10 !! 10;
+                $implied = (delta => $.token($delta_angle, :type<angle>, :units<degrees> ));
+            }
 
-            my $keyw = $<keyw>.ast;
-            $implied = (angle => $.token(%angles{$keyw}, :type<angle>, :units<degrees> ));
-        }
-        elsif $<tilt> {
-            my $delta_angle = $<tilt>.ast eq 'lower' ?? -10 !! 10;
-            $implied = (delta => $.token($delta_angle, :type<angle>, :units<degrees> ));
-        }
+            $ast<_implied> = $implied
+                if $implied;
+         }
 
-        %ast<_implied> = $implied
-            if $implied;
-
-        make %ast;
+        make $ast;
     }
 
     # - empty-cells: show | hide | inherit

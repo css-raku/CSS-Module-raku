@@ -98,7 +98,7 @@ sub generate-perl6-rules(%gen-props, %prop-refs) {
             say "    rule decl:sym<{$sym}> \{:i ($match) ':'  <val(rx\{<ref=.$sym>\})> \}";
         }
         else {
-            say "    rule decl:sym<{$sym}> \{:i ($match) ':'  <val(rx\{$defn\})> \}";
+            say "    rule decl:sym<{$sym}> \{:i ($match) ':'  <val(rx:s:i\{ $defn \})> \}";
         }
     }
 }
