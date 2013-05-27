@@ -26,21 +26,21 @@ grammar CSS::Language::CSS3::MediaQueries::Syntax {
 
     proto rule media-expr {<...>}
 
-    rule media-expr:sym<width|height> {:i ([[min|max|device]\-]?[width|height]) ':' [ <length> || <any-args> ] }
+    rule media-expr:sym<width|height> {:i ([[min|max|device]\-]?[width|height]) ':' <val(rx:i:s[ <length> ])> }
 
-    rule media-expr:sym<orientation> {:i (orientation) ':' [ [ portrait | landscape ] & <keyw> || <any-args> ] }
+    rule media-expr:sym<orientation> {:i (orientation) ':' <val(rx:i:s[ [ portrait | landscape ] & <keyw> ])> }
 
-    rule media-expr:sym<aspect-ratio> {:i ([device\-]?aspect\-ratio) ':' [ <horizontal=.integer> '/' <vertical=.integer> || <any-args> ] }
+    rule media-expr:sym<aspect-ratio> {:i ([device\-]?aspect\-ratio) ':' <val(rx:i:s[ <horizontal=.integer> '/' <vertical=.integer> ])> }
 
-    rule media-expr:sym<color> {:i ([min|max]\-color[\-index]?) ':' [ <integer> || <any-args> ] }
+    rule media-expr:sym<color> {:i ([min|max]\-color[\-index]?) ':' <val(rx:i:s[ <integer> ])> }
 
-    rule media-expr:sym<monochrome> {:i ([min|max]\-monochrome) ':' [ <integer> || <any-args> ] }
+    rule media-expr:sym<monochrome> {:i ([min|max]\-monochrome) ':' <val(rx:i:s[ <integer> ])> }
 
-    rule media-expr:sym<resolution> {:i ([min|max]\-resolution) ':' [ <resolution> || <any-args> ] }
+    rule media-expr:sym<resolution> {:i ([min|max]\-resolution) ':' <val(rx:i:s[ <resolution> ])> }
 
-    rule media-expr:sym<scan> {:i (scan) ':' [ [ progressive | interlace] & <keyw> || <any-args> ] }
+    rule media-expr:sym<scan> {:i (scan) ':' <val(rx:i:s[ [ progressive | interlace] & <keyw> ])> }
 
-    rule media-expr:sym<grid> {:i (grid) ':' [ [0 | 1 ] & <integer> || <any-args> ] }
+    rule media-expr:sym<grid> {:i (grid) ':' <val(rx:i:s[ [0 | 1 ] & <integer> ])> }
 
     rule media-expr:sym<any>  { '(' <media-feature=.ident> [ ':' <expr> ]? ')' }
 
@@ -61,40 +61,40 @@ class CSS::Language::CSS3::MediaQueries::Actions
 
     method media-expr:sym<width|height>($/) {
         return $.warning($0.Str.lc ~ ': length cannot be negative')
-            if $<length> && $<length>.ast < 0;
-        $._make_decl($/,'<length>');
+            if $<val> && $<val>.match(/\-/);
+        make $._decl($0, $<val>, '<length>');
     }
 
     method media-expr:sym<bool>($/) {
-        $._make_decl($/, '');
+        make $._decl($0, $/, '');
     }
 
     method media-expr:sym<orientation>($/) {
-        $._make_decl($/, 'portrait | landscape');
+        make $._decl($0, $<val>, 'portrait | landscape');
     }
 
     method media-expr:sym<aspect-ratio>($/) {
-        $._make_decl($/, '<horizontal> "/" <vertical>   (e.g. "16/9")');
+        make $._decl($0, $<val>, '<horizontal> "/" <vertical>   (e.g. "16/9")');
     }
 
     method media-expr:sym<color>($/) {
-        $._make_decl($/, '<integer>');
+        make $._decl($0, $<val>, '<integer>');
     }
 
     method media-expr:sym<monochrome>($/) {
-        $._make_decl($/, '<integer>');
+        make $._decl($0, $<val>, '<integer>');
     }
 
     method media-expr:sym<resolution>($/) {
-        $._make_decl($/, '<resolution>');
+        make $._decl($0, $<val>, '<resolution>');
     }
 
     method media-expr:sym<scan>($/) {
-        $._make_decl($/, 'progressive | interlace');
+        make $._decl($0, $<val>, 'progressive | interlace');
     }
 
     method media-expr:sym<grid>($/) {
-        $._make_decl($/, '<integer>');
+        make $._decl($0, $<val>, '<integer>');
     }
 
     method media-expr:sym<any>($/)   {

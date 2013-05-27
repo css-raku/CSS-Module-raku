@@ -25,76 +25,72 @@ grammar CSS::Language::CSS3::Fonts:ver<20130212.000>
     # % etc/gen-properties.pl gen grammar etc/css3x-font-properties.txt
     # - font: [ [ <‘font-style’> || <font-variant-css21> || <‘font-weight’> || <‘font-stretch’> ]? <‘font-size’> [ / <‘line-height’> ]? <‘font-family’> ] | caption | icon | menu | message-box | small-caption | status-bar
     token font-variant-css21 {:i [ normal | small\-caps ] & <keyw>}
-    rule  decl:sym<font> {:i (font) ':' [
-                               <proforma>
-                               | [ <font-style> | <font-variant=.font-variant-css21> | <font-weight> | <font-stretch> ]**0..4 <font-size> [ '/' <line-height> ]? <font-family> +% [ ',' ]
+    rule  decl:sym<font> {:i (font) ':'
+                               <val(rx:i:s[ [ <font-style> | <font-variant=.font-variant-css21> | <font-weight> | <font-stretch> ]**0..4 <font-size> [ '/' <line-height> ]? <font-family> +% [ ',' ]
                                | [ caption | icon | menu | message\-box | small\-caption | status\-bar ] & <keyw>
-                               || <misc> ] }
+                               ])> }
 
     # - font-family: [ <family-name> | <generic-family> ]#
     rule font-family {:i [ serif | sans\-serif | cursive | fantasy | monospace ] & <generic-family=.keyw> || <family-name=.identifiers> | <family-name=.string> }
-    rule decl:sym<font-family> {:i (font\-family) ':' [
-                                     <proforma>
-                                     | <ref=.font-family> +% [ ',' ]
-                                     || <misc> ] }
+    rule decl:sym<font-family> {:i (font\-family) ':' <val(rx:i:s[ <ref=.font-family> +% [ ',' ] ])> }
 
     # - font-feature-settings: normal | <feature-tag-value>#
-    rule decl:sym<font-feature-settings> {:i (font\-feature\-settings) ':'  [ normal & <keyw> | <feature-tag-value> +% [ ',' ] || <misc> ] }
+    rule decl:sym<font-feature-settings> {:i (font\-feature\-settings) ':'  <val(rx:i:s[ normal & <keyw> | <feature-tag-value> +% [ ',' ] ])> }
 
     # - font-kerning: auto | normal | none
-    rule decl:sym<font-kerning> {:i (font\-kerning) ':'  [ [ auto | normal | none ] & <keyw> || <misc> ] }
+    rule decl:sym<font-kerning> {:i (font\-kerning) ':'  <val(rx:i:s[ [ auto | normal | none ] & <keyw> ])> }
 
     # - font-language-override: normal | <string>
-    rule decl:sym<font-language-override> {:i (font\-language\-override) ':'  [ normal & <keyw> | <string> || <misc> ] }
+    rule decl:sym<font-language-override> {:i (font\-language\-override) ':'  <val(rx:i:s[ normal & <keyw> | <string> ])> }
 
     # - font-size: <absolute-size> | <relative-size> | <length> | <percentage>
     token absolute-size {:i [ [[xx|x]\-]?small | medium | [[xx|x]\-]?large ] & <keyw> }
     token relative-size {:i [ larger | smaller ] & <keyw> }
     token font-size {:i <absolute-size> | <relative-size> | <length> | <percentage> }
-    rule decl:sym<font-size> {:i (font\-size) ':'  [ <ref=.font-size> || <misc> ] }
+    rule decl:sym<font-size> {:i (font\-size) ':'  <val(rx:i:s[ <ref=.font-size> ])> }
 
     # - font-size-adjust: none | auto | <number>
-    rule decl:sym<font-size-adjust> {:i (font\-size\-adjust) ':'  [ [ none | auto ] & <keyw> | <number> || <misc> ] }
+    rule decl:sym<font-size-adjust> {:i (font\-size\-adjust) ':'  <val(rx:i:s[ [ none | auto ] & <keyw> | <number> ])> }
 
     # - font-stretch: normal | ultra-condensed | extra-condensed | condensed | semi-condensed | semi-expanded | expanded | extra-expanded | ultra-expanded
     token font-stretch {:i [ normal | ultra\-condensed | extra\-condensed | condensed | semi\-condensed | semi\-expanded | expanded | extra\-expanded | ultra\-expanded ] & <keyw> }
-    rule decl:sym<font-stretch> {:i (font\-stretch) ':'  [ <ref=.font-stretch> || <misc> ] }
+    rule decl:sym<font-stretch> {:i (font\-stretch) ':'  <val(rx:i:s[ <ref=.font-stretch> ])> }
 
     # - font-style: normal | italic | oblique
     token font-style {:i [ normal | italic | oblique ] & <keyw> }
-    rule decl:sym<font-style> {:i (font\-style) ':'  [ <ref=.font-style> || <misc> ] }
+    rule decl:sym<font-style> {:i (font\-style) ':'  <val(rx:i:s[ <ref=.font-style> ])> }
 
     # - font-synthesis: none | [ weight || style ]
-    rule decl:sym<font-synthesis> {:i (font\-synthesis) ':'  [ none & <keyw> | [ [ [ weight | style ] & <keyw> ]**1..2 ] || <misc> ] }
+    rule decl:sym<font-synthesis> {:i (font\-synthesis) ':'  <val(rx:i:s[ none & <keyw> | [ [ [ weight | style ] & <keyw> ]**1..2 ] ])> }
 
     # - font-variant: normal | none | [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> || stylistic(<feature-value-name>) || historical-forms || styleset(<feature-value-name>#) || character-variant(<feature-value-name>#) || swash(<feature-value-name>) || ornaments(<feature-value-name>) || annotation(<feature-value-name>) || [ small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps ] || <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero || <east-asian-variant-values> || <east-asian-width-values> || ruby ]
-    rule decl:sym<font-variant> {:i (font\-variant) ':'  [ [ [ normal | none ] & <keyw> | [ [ <common-lig-values> | <discretionary-lig-values> | <historical-lig-values> | <contextual-alt-values> | <stylistic> | historical\-forms & <keyw> | <styleset> | <character-variant> | <swash> | <ornaments> | <annotation> | [ [ small\-caps | all\-small\-caps | petite\-caps | all\-petite\-caps | unicase | titling\-caps ] & <keyw> ] | <numeric-figure-values> | <numeric-spacing-values> | <numeric-fraction-values> | ordinal & <keyw> | slashed\-zero & <keyw> | <east-asian-variant-values> | <east-asian-width-values> | ruby & <keyw> ] [ ',' ]? ]**1..20 ] || <misc> ] }
+    rule decl:sym<font-variant> {:i (font\-variant) ':'  <val(rx:i:s[ [ [ normal | none ] & <keyw> | [ [ <common-lig-values> | <discretionary-lig-values> | <historical-lig-values> | <contextual-alt-values> | <stylistic> | historical\-forms & <keyw> | <styleset> | <character-variant> | <swash> | <ornaments> | <annotation> | [ [ small\-caps | all\-small\-caps | petite\-caps | all\-petite\-caps | unicase | titling\-caps ] & <keyw> ] | <numeric-figure-values> | <numeric-spacing-values> | <numeric-fraction-values> | ordinal & <keyw> | slashed\-zero & <keyw> | <east-asian-variant-values> | <east-asian-width-values> | ruby & <keyw> ] [ ',' ]? ]**1..20 ] ])> }
 
     # - font-variant-alternates: normal | [ stylistic(<feature-value-name>) || historical-forms || styleset(<feature-value-name>#) || character-variant(<feature-value-name>#) || swash(<feature-value-name>) || ornaments(<feature-value-name>) || annotation(<feature-value-name>) ]
-    rule decl:sym<font-variant-alternates> {:i (font\-variant\-alternates) ':'  [ normal & <keyw> | [ [ <stylistic> | historical\-forms & <keyw> | <styleset> | <character-variant> | <swash> | <ornaments> | <annotation> ]**1..7 ] || <misc> ] }
+    rule decl:sym<font-variant-alternates> {:i (font\-variant\-alternates) ':'  <val(rx:i:s[ normal & <keyw> | [ [ <stylistic> | historical\-forms & <keyw> | <styleset> | <character-variant> | <swash> | <ornaments> | <annotation> ]**1..7 ] ])> }
 
     # - font-variant-caps: normal | small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps
-    rule decl:sym<font-variant-caps> {:i (font\-variant\-caps) ':'  [ [ normal | small\-caps | all\-small\-caps | petite\-caps | all\-petite\-caps | unicase | titling\-caps ] & <keyw> || <misc> ] }
+    rule decl:sym<font-variant-caps> {:i (font\-variant\-caps) ':'  <val(rx:i:s[ [ normal | small\-caps | all\-small\-caps | petite\-caps | all\-petite\-caps | unicase | titling\-caps ] & <keyw> ])> }
 
     # - font-variant-east-asian: normal | [ <east-asian-variant-values> || <east-asian-width-values> || ruby ]
-    rule decl:sym<font-variant-east-asian> {:i (font\-variant\-east\-asian) ':'  [ normal & <keyw> | [ [ <east-asian-variant-values> | <east-asian-width-values> | ruby & <keyw> ]**1..3 ] || <misc> ] }
+    rule decl:sym<font-variant-east-asian> {:i (font\-variant\-east\-asian) ':'  <val(rx:i:s[ normal & <keyw> | [ [ <east-asian-variant-values> | <east-asian-width-values> | ruby & <keyw> ]**1..3 ] ])> }
 
     # - font-variant-ligatures: normal | none | [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> ]
-    rule decl:sym<font-variant-ligatures> {:i (font\-variant\-ligatures) ':'  [ [ normal | none ] & <keyw> | [ [ <common-lig-values> | <discretionary-lig-values> | <historical-lig-values> | <contextual-alt-values> ]**1..4 ] || <misc> ] }
+    rule decl:sym<font-variant-ligatures> {:i (font\-variant\-ligatures) ':'  <val(rx:i:s[ [ normal | none ] & <keyw> | [ [ <common-lig-values> | <discretionary-lig-values> | <historical-lig-values> | <contextual-alt-values> ]**1..4 ] ])> }
 
     # - font-variant-numeric: normal | [ <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero ]
-    rule decl:sym<font-variant-numeric> {:i (font\-variant\-numeric) ':'  [ normal & <keyw> | [ [ <numeric-figure-values> | <numeric-spacing-values> | <numeric-fraction-values> | ordinal & <keyw> | slashed\-zero & <keyw> ]**1..5 ] || <misc> ] }
+    rule decl:sym<font-variant-numeric> {:i (font\-variant\-numeric) ':'  <val(rx:i:s[ normal & <keyw> | [ [ <numeric-figure-values> | <numeric-spacing-values> | <numeric-fraction-values> | ordinal & <keyw> | slashed\-zero & <keyw> ]**1..5 ] ])> }
 
     # - font-variant-position: normal | sub | super
-    rule decl:sym<font-variant-position> {:i (font\-variant\-position) ':'  [ [ normal | sub | super ] & <keyw> || <misc> ] }
+    rule decl:sym<font-variant-position> {:i (font\-variant\-position) ':'  <val(rx:i:s[ [ normal | sub | super ] & <keyw> ])> }
 
     # - font-weight: normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
     token font-weight {:i [ normal | bold | bolder | lighter ] & <keyw> | [ 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 ] & <number> }
-    rule decl:sym<font-weight> {:i (font\-weight) ':'  [ <ref=.font-weight> || <misc> ] }
+    rule decl:sym<font-weight> {:i (font\-weight) ':'  <val(rx:i:s[ <ref=.font-weight> ])> }
 
     # - line-height: normal | <number> | <length> | <percentage> | inherit
     token line-height {:i normal & <keyw> | <number> | <length> | <percentage> }
-    rule decl:sym<line-height> {:i (line\-height) ':' [ <ref=.line-height> || <misc> ]}
+    rule decl:sym<line-height> {:i (line\-height) ':' <val(rx:i:s[ <ref=.line-height> ])> }
 }
 
 # ----------------------------------------------------------------------
@@ -124,93 +120,93 @@ class CSS::Language::CSS3::Fonts::Actions
     # ---- Properties ----
 
     method decl:sym<font>($/) {
-        $._make_decl($/, q{[ [ <‘font-style’> || <font-variant-css21> || <‘font-weight’> || <‘font-stretch’> ]? <‘font-size’> [ / <‘line-height’> ]? <‘font-family’> ] | caption | icon | menu | message-box | small-caption | status-bar});
+        make $._decl($0, $<val>, q{[ [ <‘font-style’> || <font-variant-css21> || <‘font-weight’> || <‘font-stretch’> ]? <‘font-size’> [ / <‘line-height’> ]? <‘font-family’> ] | caption | icon | menu | message-box | small-caption | status-bar});
     }
 
     method font-family($/) { make $.list($/) }
     method decl:sym<font-family>($/) {
-        $._make_decl($/, '[[<family-name> | <generic-family>],]* [<family-name> | <generic-family>]');
+        make $._decl($0, $<val>, '[[<family-name> | <generic-family>],]* [<family-name> | <generic-family>]');
     }
 
     method decl:sym<font-feature-settings>($/) {
-        $._make_decl($/, q{normal | <feature-tag-value>#});
+        make $._decl($0, $<val>, q{normal | <feature-tag-value>#});
     }
 
     method decl:sym<font-kerning>($/) {
-        $._make_decl($/, q{auto | normal | none});
+        make $._decl($0, $<val>, q{auto | normal | none});
     }
 
     method decl:sym<font-language-override>($/) {
-        $._make_decl($/, q{normal | <string>});
+        make $._decl($0, $<val>, q{normal | <string>});
     }
 
     method absolute-size($/) { make $.token($<keyw>.ast) }
     method relative-size($/) { make $.token($<keyw>.ast) }
     method font-size($/) { make $.list($/) }
     method decl:sym<font-size>($/) {
-        $._make_decl($/, q{<absolute-size> | <relative-size> | <length> | <percentage>});
+        make $._decl($0, $<val>, q{<absolute-size> | <relative-size> | <length> | <percentage>});
     }
 
     method decl:sym<font-size-adjust>($/) {
-        $._make_decl($/, '<none> | <auto> | <number>');
+        make $._decl($0, $<val>, '<none> | <auto> | <number>');
     }
 
     method font-stretch($/) { make $.list($/) }
     method decl:sym<font-stretch>($/) {
-        $._make_decl($/, q{normal | ultra-condensed | extra-condensed | condensed | semi-condensed | semi-expanded | expanded | extra-expanded | ultra-expanded});
+        make $._decl($0, $<val>, q{normal | ultra-condensed | extra-condensed | condensed | semi-condensed | semi-expanded | expanded | extra-expanded | ultra-expanded});
     }
 
     method font-style($/) { make $.token($<keyw>.ast) }
     method decl:sym<font-style>($/) {
-        $._make_decl($/, q{normal | italic | oblique});
+        make $._decl($0, $<val>, q{normal | italic | oblique});
     }
 
     method decl:sym<font-synthesis>($/) {
-        make $._make_decl($/, '<none> | [ weight || style ]');
+        make make $._decl($0, $<val>, '<none> | [ weight || style ]');
     }
 
     method font-variant-css21($/) { make $.token($<keyw>.ast) }
     method decl:sym<font-variant>($/) {
-        $._make_decl($/, q{normal | none | [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> || stylistic(<feature-value-name>) || historical-forms || styleset(<feature-value-name>#) || character-variant(<feature-value-name>#) || swash(<feature-value-name>) || ornaments(<feature-value-name>) || annotation(<feature-value-name>) || [ small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps ] || <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero || <east-asian-variant-values> || <east-asian-width-values> || ruby ]});
+        make $._decl($0, $<val>, q{normal | none | [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> || stylistic(<feature-value-name>) || historical-forms || styleset(<feature-value-name>#) || character-variant(<feature-value-name>#) || swash(<feature-value-name>) || ornaments(<feature-value-name>) || annotation(<feature-value-name>) || [ small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps ] || <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero || <east-asian-variant-values> || <east-asian-width-values> || ruby ]});
     }
 
     method decl:sym<font-variant-alternates>($/) {
-        $._make_decl($/, q{normal | [ stylistic(<feature-value-name>) || historical-forms || styleset(<feature-value-name>#) || character-variant(<feature-value-name>#) || swash(<feature-value-name>) || ornaments(<feature-value-name>) || annotation(<feature-value-name>) ]});
+        make $._decl($0, $<val>, q{normal | [ stylistic(<feature-value-name>) || historical-forms || styleset(<feature-value-name>#) || character-variant(<feature-value-name>#) || swash(<feature-value-name>) || ornaments(<feature-value-name>) || annotation(<feature-value-name>) ]});
     }
 
     method decl:sym<font-variant-caps>($/) {
-        $._make_decl($/, q{normal | small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps});
+        make $._decl($0, $<val>, q{normal | small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps});
     }
 
     method decl:sym<font-variant-east-asian>($/) {
-        $._make_decl($/, q{normal | [ <east-asian-variant-values> || <east-asian-width-values> || ruby ]});
+        make $._decl($0, $<val>, q{normal | [ <east-asian-variant-values> || <east-asian-width-values> || ruby ]});
     }
 
     method decl:sym<font-variant-ligatures>($/) {
-        $._make_decl($/, q{normal | none | [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> ]});
+        make $._decl($0, $<val>, q{normal | none | [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> ]});
     }
 
     method decl:sym<font-variant-numeric>($/) {
-        $._make_decl($/, q{normal | [ <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero ]});
+        make $._decl($0, $<val>, q{normal | [ <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero ]});
     }
 
     method decl:sym<font-variant-position>($/) {
-        $._make_decl($/, q{normal | sub | super});
+        make $._decl($0, $<val>, q{normal | sub | super});
     }
 
     method font-weight($/) { make $.list($/) }
     method decl:sym<font-weight>($/) {
-        $._make_decl($/, q{normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900});
+        make $._decl($0, $<val>, q{normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900});
     }
 
     method line-height($/) { make $.list($/); }
     method decl:sym<line-height>($/) {
-        $._make_decl($/, 'normal | <number> | <length> | <percentage>');
+        make $._decl($0, $<val>, 'normal | <number> | <length> | <percentage>');
     }
 
     method src($/) { make $.node($/) }
     method decl:sym<src>($/) {
-        make $._make_decl($/, '<uri> [format(<string>#)]? | <font-face-name>');
+        make $._decl($0, $<val>, '<uri> [format(<string>#)]? | <font-face-name>');
     }
 
 }

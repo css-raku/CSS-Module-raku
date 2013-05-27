@@ -81,7 +81,7 @@ grammar CSS::Language::CSS3::Colors:ver<20110607.000>
 
     # color: <color> -- inherited from CSS21
 
-    rule decl:sym<opacity> {:i (opacity) ':' [ <alphavalue=.color-alpha> || <proforma> ] }
+    rule decl:sym<opacity> {:i (opacity) ':' <val(rx:s:i[ <alphavalue=.color-alpha> ])> }
 
 }
 
@@ -277,7 +277,7 @@ class CSS::Language::CSS3::Colors::Actions
     }
 
     method decl:sym<opacity>($/) {
-        $._make_decl($/, q{<alphavalue> | inherit});
+        make $._decl($0, $<val>, q{<alphavalue> | inherit});
     }
 
 }

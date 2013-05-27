@@ -33,6 +33,8 @@ grammar CSS::Language::CSS3::_Base
     proto token resolution {<...>}
     token resolution:sym<dim> {<num>(<.resolution-units>)}
     token dimension:sym<resolution> {<resolution>}
+    # <val(..)> - rule for processing right hand side of property declarations
+    rule val($expr)   { <proforma> | $<expr>=$expr:i:s || <any-arg>* }
 }
 
 class CSS::Language::CSS3::_Base::Actions 
