@@ -7,7 +7,7 @@ use CSS::Language::CSS3::_Base;
 
 grammar CSS::Language::CSS3::Colors::Syntax {
 
-# extensions and at rules for CSS3 Color Module
+# extensions for CSS3 Color Module
 
 # http://www.w3.org/TR/2011/REC-css3-color-20110607
 # @color-profile is in the process of being dropped
@@ -237,8 +237,6 @@ class CSS::Language::CSS3::Colors::Actions
         yellow		=> [ 255,255,0 ],
         yellowgreen	=> [ 154,205,50 ],
     };
-
-##    method at-rule:sym<color-profile>($/) { make $.at-rule($/) }
 
     method color-angle($/) {
         my $angle = %<num>.ast;

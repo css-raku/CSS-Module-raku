@@ -9,7 +9,7 @@ class CSS::Language::Actions
 
     # ---- CSS::Grammar overrides ----
 
-    method declaration:sym<core>($/)        {
+    method declaration:sym<base>($/)        {
         $.warning('unknown property', $<property>.ast, 'declaration dropped');
     }
 
