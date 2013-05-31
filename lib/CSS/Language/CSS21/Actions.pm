@@ -45,46 +45,46 @@ class CSS::Language::CSS21::Actions
    # --- Properties --- #
 
     # - azimuth: <angle> | [[ left-side | far-left | left | center-left | center | center-right | right | far-right | right-side ] || behind ] | leftwards | rightwards | inherit
-    method decl:sym<azimuth>($/) {
-        # see http://www.w3.org/TR/2011/REC-CSS2-20110607/aural.html
+    method azimuth($/) {
+        my %ast = $.node($/);
 
-        my $ast = $._decl($0, $<val>, 'usage azimuth: <angle> | [[ left-side | far-left | left | center-left | center | center-right | right | far-right | right-side ] || behind ] | leftwards | rightwards | inherit');
+        # compute implied angles
+        my $implied;
+        my $direction = %ast<direction> || %ast<behind>;
 
-        if $ast && $ast<expr> {
-            my %expr = %(@($ast<expr>));
-            # compute implied angles
-            my $implied;
+        if $direction {
 
-            if %expr<keyw> || %expr<behind> {
+            state %angles = (
+                'left-side'    => [270, 270],
+                'far-left'     => [300, 240],
+                'left'         => [320, 220],
+                'center-left'  => [340, 200],
+                'center'       => [0,   180],
+                'center-right' => [20,  160],
+                'right'        => [40,  140],
+                'far-right'    => [60,  120],
+                'right-side'   => [90,  90],
+                'behind'       => [180, 180],
+                );
 
-                state %angles = (
-                    'left-side'    => [270, 270],
-                    'far-left'     => [300, 240],
-                    'left'         => [320, 220],
-                    'center-left'  => [340, 200],
-                    'center'       => [0,   180],
-                    'center-right' => [20,  160],
-                    'right'        => [40,  140],
-                    'far-right'    => [60,  120],
-                    'right-side'   => [90,  90],
-                    'behind'       => [180, 180],
-                    );
+            my $bh = %ast<behind> ?? 1 !! 0;
 
-                my $keyw = %expr<keyw> || %expr<behind>;
-                my $bh = %expr<behind> ?? 1 !! 0;
-
-                $implied = (angle => $.token(%angles{$keyw}[$bh], :type<angle>, :units<degrees> ));
+            $implied = (angle => $.token(%angles{$direction}[$bh], :type<angle>, :units<degrees> ));
             }
-            elsif %expr<delta> {
-                my $delta_angle = %expr<delta> eq 'leftwards' ?? -20 !! 20;
-                $implied = (delta => $.token($delta_angle, :type<angle>, :units<degrees> ));
-            }
-
-            $ast<_implied> = $implied
-                if $implied;
+        elsif %ast<delta> {
+            my $delta_angle = %ast<delta> eq 'leftwards' ?? -20 !! 20;
+            $implied = (delta => $.token($delta_angle, :type<angle>, :units<degrees> ));
         }
 
-        make $ast;
+        %ast<_implied> = $implied
+            if $implied;
+
+        make %ast;
+    }
+
+    method decl:sym<azimuth>($/) {
+        # see http://www.w3.org/TR/2011/REC-CSS2-20110607/aural.html
+        make $._decl($0, $<val>, 'usage azimuth: <angle> | [[ left-side | far-left | left | center-left | center | center-right | right | far-right | right-side ] || behind ] | leftwards | rightwards | inherit');
     }
 
     # - background-attachment: scroll | fixed | inherit
@@ -241,37 +241,38 @@ class CSS::Language::CSS21::Actions
         make $._decl($0, $<val>, q{inline | block | list-item | inline-block | table | inline-table | table-row-group | table-header-group | table-footer-group | table-row | table-column-group | table-column | table-cell | table-caption | none | inherit});
     }
 
+    method elevation($/) {
+        my %ast = $.node($/);
+
+        my $direction = %ast<direction>;
+        my $implied;
+
+        if $direction {
+
+            state %angles = (
+                'below'    => -90,
+                'level'    =>   0,
+                'above'    =>  90,
+                );
+
+            $implied = (angle => $.token(%angles{$direction}, :type<angle>, :units<degrees> ));
+        }
+        elsif %ast<tilt> {
+            my $delta_angle = %ast<tilt> eq 'lower' ?? -10 !! 10;
+            $implied = (delta => $.token($delta_angle, :type<angle>, :units<degrees> ));
+        }
+
+        %ast<_implied> = $implied
+            if $implied;
+
+        make %ast;
+    }
+
     # - elevation: <angle> | below | level | above | higher | lower | inherit
     method decl:sym<elevation>($/) {
         # see http://www.w3.org/TR/2011/REC-CSS2-20110607/aural.html
-        my $ast = $._decl($0, $<val>, '<angle> | below | level | above | higher | lower | inherit');
+        make $._decl($0, $<val>, '<angle> | below | level | above | higher | lower | inherit');
 
-        if $ast && $ast<expr> {
-            my %expr = %(@($ast<expr>));
- 
-            my $implied;
-
-            if %expr<keyw> {
-
-                state %angles = (
-                    'below'    => -90,
-                    'level'    =>   0,
-                    'above'    =>  90,
-                    );
-
-                my $keyw = %expr<keyw>;
-                $implied = (angle => $.token(%angles{$keyw}, :type<angle>, :units<degrees> ));
-            }
-            elsif %expr<tilt> {
-                my $delta_angle = %expr<tilt> eq 'lower' ?? -10 !! 10;
-                $implied = (delta => $.token($delta_angle, :type<angle>, :units<degrees> ));
-            }
-
-            $ast<_implied> = $implied
-                if $implied;
-         }
-
-        make $ast;
     }
 
     # - empty-cells: show | hide | inherit
@@ -299,19 +300,19 @@ class CSS::Language::CSS21::Actions
     }
 
     # - font-style: normal | italic | oblique | inherit
-    method font-style($/) { make $.token($<keyw>.ast) }
+    method font-style($/) { make $.node($/) }
     method decl:sym<font-style>($/) {
         make $._decl($0, $<val>, 'normal | italic | oblique');
     }
 
     # - font-variant: normal | small-caps | inherit
-    method font-variant($/) { make $.token($<keyw>.ast) }
+    method font-variant($/) { make $.node($/) }
     method decl:sym<font-variant>($/) {
         make $._decl($0, $<val>, 'normal | small-caps');
     }
 
     # - font-weight: normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | inherit
-    method font-weight($/) { make $.token( ($<keyw> || $<number>).ast ) }
+    method font-weight($/) { make $.node($/) }
     method decl:sym<font-weight>($/) {
         make $._decl($0, $<val>, 'normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900'); 
     }

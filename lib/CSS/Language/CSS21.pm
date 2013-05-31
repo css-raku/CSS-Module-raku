@@ -49,10 +49,11 @@ grammar CSS::Extensions::CSS21 {
     # --- Properties --- #
 
     # - azimuth: <angle> | [[ left-side | far-left | left | center-left | center | center-right | right | far-right | right-side ] || behind ] | leftwards | rightwards | inherit
-     rule decl:sym<azimuth> {:i (azimuth) ':' <val(rx:s:i{ <angle>
-                                                | [ leftwards | rightwards]  & <delta=.keyw>
-                                                | [ [ left[\-side]? | far\-[left|right] | center[\-[left|right]]? | right[\-side]? ] & <keyw>
-                                                | behind & <behind=.keyw> ]**1..2 })> }
+    rule azimuth {:i <angle>
+                       | [ leftwards | rightwards]  & <delta=.keyw>
+                       | [ [ left[\-side]? | far\-[left|right] | center[\-[left|right]]? | right[\-side]? ] & <direction=.keyw>
+                           | behind & <behind=.keyw> ]**1..2 }
+    rule decl:sym<azimuth> {:i (azimuth) ':' <val(rx:s:i{ <ref=.azimuth> })> }
 
     # - background-attachment: scroll | fixed | inherit
     token background-attachment {:i [ scroll | fixed ] & <keyw> }
@@ -154,9 +155,10 @@ grammar CSS::Extensions::CSS21 {
     rule decl:sym<display> {:i (display) ':' <val(rx:s:i[ [ block | inline[\-[block|table]]? | list\-item | table[\-[cell|caption|[header|footer]\-group|[row|column][\-group]?]]? | none ] & <keyw> ])> }
 
     # - elavation: <angle> | below | level | above | higher | lower | inherit
-    rule decl:sym<elevation> {:i (elevation) ':' <val(rx:s:i{<angle>
-                                                               | [below | level | above ] & <keyw>
-                                                               | [ higher | lower ] & <tilt=.keyw> })> }
+    rule elevation {:i <angle>
+                   | [below | level | above ] & <direction=.keyw>
+                   | [ higher | lower ] & <tilt=.keyw> }
+    rule decl:sym<elevation> {:i (elevation) ':' <val(rx:s:i{ <ref=.elevation> })> }
 
     # - empty-cells: show | hide | inherit
     rule decl:sym<empty-cells> {:i (empty\-cells) ':' <val(rx:s:i[ [ show | hide ] & <keyw> ])> }
@@ -179,7 +181,7 @@ grammar CSS::Extensions::CSS21 {
     rule decl:sym<font-style> {:i (font\-style) ':' <val(rx[<ref=.font-style>])> }
 
     # - font-variant: normal | small-caps | inherit
-    token font-variant {:i [ normal | small\-caps ] & <keyw>}
+    token font-variant {:i [ normal | small\-caps ] & <keyw> }
     rule decl:sym<font-variant> {:i (font\-variant) ':' <val(rx:s:i[ <ref=.font-variant> ])> }
 
     # - font-weight: normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | inherit

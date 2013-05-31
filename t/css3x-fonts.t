@@ -3,13 +3,15 @@
 use Test;
 
 use CSS::Language::CSS3::Fonts;
+use CSS::Language::CSS3::CSS21_Imported;
 
 # prepare our own composite class with font extensions
 
 use lib '.';
 use t::AST;
 
-my $css_actions = CSS::Language::CSS3::Fonts::Actions.new;
+my $font_actions = CSS::Language::CSS3::Fonts::Actions.new;
+my $css21_actions = CSS::Language::CSS3::CSS21_Imported::Actions.new;
 
 for (
     at-rule   => {input => q:to 'END_INPUT',
@@ -23,6 +25,7 @@ for (
                                                  "src" => {"expr" => ["src" => {"local" => "Gentium"},
                                                                       "src" => {"uri" => "gentium.ttf", "format" => "truetype"}]}},
                           "\@" => "font-face"},
+                   css21 => {parse => '', ast => Mu},
     },
     decl     => {input => 'font-family: 21st Century, fantasy',
                  ast => {"property" => "font-family",
@@ -44,6 +47,7 @@ for (
     decl     => {input => 'font-stretch: extra-expanded',
                  ast => {"property" => "font-stretch",
                          "expr" => ["keyw" => "extra-expanded"]},
+                 css21 => {parse => '', ast => Mu},
     },
     decl     => {input => 'font-style: oblique',
                  ast => {"property" => "font-style", 
@@ -51,8 +55,8 @@ for (
     },
     decl     => {input => 'font-size-adjust: .7',
                  ast => {"property" => "font-size-adjust",
-                         "expr" => ["number" => 0.7]}
-
+                         "expr" => ["number" => 0.7]},
+                 css21 => {parse => '', ast => Mu},
     },
     decl     => {input => 'font: x-large/110% "new century schoolbook", serif',
                  ast => {"property" => "font",
@@ -68,6 +72,13 @@ for (
     decl     => {input => 'font-variant: annotation(circled)',
                  ast => {"property" => "font-variant",
                          "expr" => ["annotation" => {"feature-value-name" => "circled"}]},
+                 css21 => {ast => Mu, warnings => rx{^usage}},
+    },
+    decl     => {input => 'font-synthesis: weight',
+                 ast => {"property" => "font-synthesis",
+                         "expr" => ["keyw" => "weight"],
+                 },
+                 css21 => {parse => '', ast => Mu},
     },
     decl     => {input => 'font-variant: discretionary-ligatures, character-variant(leo-B, leo-M, leo-N, leo-T, leo-U)',
                  ast => {"property" => "font-variant",
@@ -79,21 +90,31 @@ for (
                                                                  "feature-value-name" => "leo-T",
                                                                  "feature-value-name" => "leo-U"]}]
                  },
+                 css21 => {ast => Mu, warnings => rx{^usage}},
+
+    },
     decl     => {input => 'line-height: 1.2em',
                  ast => {"property" => "line-height",
                          "expr" => ["length" => 1.2]},
     },
-     },
     ) {
     my $rule = $_.key;
     my %test = $_.value;
+
     my $input = %test<input>;
 
-    $css_actions.reset;
-    my $p3 = CSS::Language::CSS3::Fonts.parse( $input, :rule($rule), :actions($css_actions));
-    t::AST::parse_tests($input, $p3, :rule($rule), :suite('css3-fonts'),
-                         :warnings($css_actions.warnings),
+    $font_actions.reset;
+    my $p-font = CSS::Language::CSS3::Fonts.parse( $input, :rule($rule), :actions($font_actions));
+    t::AST::parse_tests($input, $p-font, :rule($rule), :suite('css3x-fonts'),
+                         :warnings($font_actions.warnings),
                          :expected(%test) );
+
+    $css21_actions.reset;
+    my $css21 = %test<css21> // {};
+    my $p-css21 = CSS::Language::CSS3::CSS21_Imported::Grammar.parse( $input, :rule($rule), :actions($css21_actions));
+    t::AST::parse_tests($input, $p-css21, :rule($rule), :suite('css21'),
+                         :warnings($css21_actions.warnings),
+                         :expected(%(%test, %$css21)) );
 }
 
 done;

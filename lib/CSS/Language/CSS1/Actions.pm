@@ -73,19 +73,19 @@ class CSS::Language::CSS1::Actions
     }
 
     # - font-style: normal | italic | oblique
-    method font-style($/) { make $.token($<keyw>.ast) }
+    method font-style($/) { make $.node($/) }
     method decl:sym<font-style>($/) {
         $._make_decl($/, 'normal | italic | oblique');
     }
 
     # - font-variant: normal | small-caps
-    method font-variant($/)  { make $.token($<keyw>.ast) }
+    method font-variant($/)  { make $.node($/) }
     method decl:sym<font-variant>($/) {
         $._make_decl($/, 'normal | small-caps');
     }
 
     # - font-weight: normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
-    method font-weight($/) { make $.token( ($<keyw> || $<number>).ast ) }
+    method font-weight($/) { make $.node($/) }
     method decl:sym<font-weight>($/) {
         $._make_decl($/, 'normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900'); 
     }

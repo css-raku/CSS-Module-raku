@@ -120,7 +120,7 @@ class CSS::Language::CSS3::Fonts::Actions
     # ---- Properties ----
 
     method decl:sym<font>($/) {
-        make $._decl($0, $<val>, q{[ [ <‘font-style’> || <font-variant-css21> || <‘font-weight’> || <‘font-stretch’> ]? <‘font-size’> [ / <‘line-height’> ]? <‘font-family’> ] | caption | icon | menu | message-box | small-caption | status-bar});
+        make $._decl($0, $<val>, q{[ [ <‘font-style’> || <font-variant=.font-variant-css21> || <‘font-weight’> || <‘font-stretch’> ]? <‘font-size’> [ / <‘line-height’> ]? <‘font-family’> ] | caption | icon | menu | message-box | small-caption | status-bar});
     }
 
     method font-family($/) { make $.list($/) }
@@ -156,7 +156,7 @@ class CSS::Language::CSS3::Fonts::Actions
         make $._decl($0, $<val>, q{normal | ultra-condensed | extra-condensed | condensed | semi-condensed | semi-expanded | expanded | extra-expanded | ultra-expanded});
     }
 
-    method font-style($/) { make $.token($<keyw>.ast) }
+    method font-style($/) { make $.node($/) }
     method decl:sym<font-style>($/) {
         make $._decl($0, $<val>, q{normal | italic | oblique});
     }
@@ -165,7 +165,7 @@ class CSS::Language::CSS3::Fonts::Actions
         make make $._decl($0, $<val>, '<none> | [ weight || style ]');
     }
 
-    method font-variant-css21($/) { make $.token($<keyw>.ast) }
+    method font-variant-css21($/) { make $.node($/) }
     method decl:sym<font-variant>($/) {
         make $._decl($0, $<val>, q{normal | none | [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> || stylistic(<feature-value-name>) || historical-forms || styleset(<feature-value-name>#) || character-variant(<feature-value-name>#) || swash(<feature-value-name>) || ornaments(<feature-value-name>) || annotation(<feature-value-name>) || [ small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps ] || <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero || <east-asian-variant-values> || <east-asian-width-values> || ruby ]});
     }

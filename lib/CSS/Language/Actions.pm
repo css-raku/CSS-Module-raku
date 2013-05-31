@@ -66,10 +66,10 @@ class CSS::Language::Actions
         }
         else {
             my $m = $<expr> // $/;
-            # automatic dereference
-            $m = $m<ref> while $m<ref>;
             @expr = @( $.list($m) );
-        }
+            # automatic dereferencing of <ref> elems
+            @expr = @expr.map({$_.key eq 'ref' ?? $_.value !! $_});
+         }
 
         my %ast;
 
