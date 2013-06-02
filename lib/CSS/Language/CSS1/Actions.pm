@@ -230,10 +230,10 @@ class CSS::Language::CSS1::Actions
         $._make_decl($/, '<color>{1,4}', :expand<box>);
     }
 
-    # - border-style: none | dotted | dashed | solid | double | groove | ridge | inset | outset
+    # - border-style: [ none | dotted | dashed | solid | double | groove | ridge | inset | outset ]{1,4}
     method border-style($/) { make $.list($/) }
     method decl:sym<border-style>($/) {
-        $._make_decl($/, 'none | dotted | dashed | solid | double | groove | ridge | inset | outset', :expand<box>);
+        $._make_decl($/, '[ none | dotted | dashed | solid | double | groove | ridge | inset | outset ]{1,4}', :expand<box>);
     }
 
     # - border-top: <border-width> || <border-style> || <color>
