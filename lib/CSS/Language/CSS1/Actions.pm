@@ -233,7 +233,7 @@ class CSS::Language::CSS1::Actions
     # - border-style: none | dotted | dashed | solid | double | groove | ridge | inset | outset
     method border-style($/) { make $.list($/) }
     method decl:sym<border-style>($/) {
-        $._make_decl($/, 'none | dotted | dashed | solid | double | groove | ridge | inset | outset');
+        $._make_decl($/, 'none | dotted | dashed | solid | double | groove | ridge | inset | outset', :expand<box>);
     }
 
     # - border-top: <border-width> || <border-style> || <color>

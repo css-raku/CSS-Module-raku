@@ -168,7 +168,7 @@ grammar CSS::Language::CSS1:ver<20080411.000>
 
     # - border-style: none | dotted | dashed | solid | double | groove | ridge | inset | outset
     rule border-style {:i [ none | dotted | dashed | solid | double | groove | ridge | inset | outset ] & <keyw> }
-    rule decl:sym<border-style> {:i (border\-style) ':' [ <ref=.border-style> || <misc> ]}
+    rule decl:sym<border-style> {:i (border\-style) ':' [ <ref=.border-style> **1..4 || <misc> ]}
 
     # - border-top: <border-width> || <border-style> || <color>
     # - border-right: <border-width> || <border-style> || <color>

@@ -155,10 +155,10 @@ class CSS::Language::CSS21::Actions
         make $._decl($0, $<val>, q{<border-style> | inherit});
     }
 
-    # - border-style: none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset
+    # - border-style: [ none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset ]{1,4}
     method border-style($/) { make $.list($/) }
     method decl:sym<border-style>($/) {
-        make $._decl($0, $<val>, 'none | dotted | dashed | solid | double | groove | ridge | inset | outset | inherit');
+        make $._decl($0, $<val>, 'none | dotted | dashed | solid | double | groove | ridge | inset | outset | inherit', :expand<box>);
     }
 
     # - border-top-width|border-right-width|border-bottom-width|border-left-width: <border-width> | inherit

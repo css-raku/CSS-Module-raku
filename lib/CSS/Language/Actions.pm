@@ -68,7 +68,7 @@ class CSS::Language::Actions
             my $m = $<expr> // $/;
             @expr = @( $.list($m) );
             # automatic dereferencing of <ref> elems
-            @expr = @expr.map({$_.key eq 'ref' ?? $_.value !! $_});
+            @expr = @expr.map({$_.key eq 'ref' ?? @( $_.value ) !! $_});
          }
 
         my %ast;
