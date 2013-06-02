@@ -10,7 +10,7 @@ use CSS::Language::CSS3::CSS21_Imported;
 use lib '.';
 use t::AST;
 
-my $font_actions = CSS::Language::CSS3::Fonts::Actions.new;
+my $css3x_actions = CSS::Language::CSS3::Fonts::Actions.new;
 my $css21_actions = CSS::Language::CSS3::CSS21_Imported::Actions.new;
 
 for (
@@ -103,10 +103,10 @@ for (
 
     my $input = %test<input>;
 
-    $font_actions.reset;
-    my $p-font = CSS::Language::CSS3::Fonts.parse( $input, :rule($rule), :actions($font_actions));
+    $css3x_actions.reset;
+    my $p-font = CSS::Language::CSS3::Fonts.parse( $input, :rule($rule), :actions($css3x_actions));
     t::AST::parse_tests($input, $p-font, :rule($rule), :suite('css3x-fonts'),
-                         :warnings($font_actions.warnings),
+                         :warnings($css3x_actions.warnings),
                          :expected(%test) );
 
     $css21_actions.reset;

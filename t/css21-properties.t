@@ -58,6 +58,8 @@ for (
     },
     {prop => 'border-right-color', decl => 'green', expr => [color => {r => 0, g => 128, b => 0}],
     },
+    {prop => 'border-style', decl => 'dotted dashed', expr => [keyw => 'dotted', keyw => 'dashed'],
+    },
     {prop => 'border-bottom-style', decl => 'outset',  expr => [keyw => 'outset'],
     },
     {prop => 'bottom', decl => '5%', expr => [percentage => 5],

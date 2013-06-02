@@ -90,7 +90,7 @@ grammar CSS::Extensions::CSS21 {
     rule decl:sym<border-spacing> {:i (border\-spacing) ':' <val(rx:s[ <length> <length>? ])> }
 
     # - border-style: none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset
-    token border-style {:i [ none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset ] & <keyw> }
+    rule border-style {:i [ none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset ] & <keyw> }
     rule decl:sym<border-style> {:i (border\-style) ':' <val(rx:s[ <ref=.border-style> ** 1..4 ])> }
 
     # - border-top|border-right|border-bottom|border-left: [ <border-width> || <border-style> || 'border-top-color' ] | inherit
