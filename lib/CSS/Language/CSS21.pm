@@ -56,15 +56,15 @@ grammar CSS::Extensions::CSS21 {
     rule decl:sym<azimuth> {:i (azimuth) ':' <val(rx:s:i{ <ref=.azimuth> })> }
 
     # - background-attachment: scroll | fixed | inherit
-    token background-attachment {:i [ scroll | fixed ] & <keyw> }
+    rule background-attachment {:i [ scroll | fixed ] & <keyw> }
     rule decl:sym<background-attachment> {:i (background\-attachment) ':' <val(rx[<ref=.background-attachment>])> }
 
     # - background-color: <color> | transparent | inherit
-    token background-color {:i <color> | transparent & <keyw> }
+    rule background-color {:i <color> | transparent & <keyw> }
     rule decl:sym<background-color> {:i (background\-color) ':' <val(rx[ <ref=.background-color> ])> }
 
     # - background-image: <url> | none | inherit
-    token background-image {:i <url> | none & <keyw> }
+    rule background-image {:i <url> | none & <keyw> }
     rule decl:sym<background-image> {:i (background\-image) ':' <val(rx[ <ref=.background-image> ])> }
 
     # - background-position: [ [ <percentage> | <length> | left | center | right ] [ <percentage> | <length> | top | center | bottom ]? ] | [ [ left | center | right ] || [ top | center | bottom ] ] | inherit
@@ -73,7 +73,7 @@ grammar CSS::Extensions::CSS21 {
     rule decl:sym<background-position> {:i (background\-position) ':' <val(rx[ <ref=.position> ])> }
 
     # - background-repeat: repeat | repeat-x | repeat-y | no-repeat
-    token background-repeat {:i [ repeat[\-[x|y]]? | no\-repeat ] & <keyw> }
+    rule background-repeat {:i [ repeat[\-[x|y]]? | no\-repeat ] & <keyw> }
     rule decl:sym<background-repeat> {:i (background\-repeat) ':' <val(rx[ <ref=.background-repeat> ])> }
 
     # - background: <background-color> || <background-image> || <background-repeat> || <background-attachment> || <background-position> | inherit
@@ -137,7 +137,7 @@ grammar CSS::Extensions::CSS21 {
 
     # - cue-before: <uri> | none | inherit
     # - cue-after: <uri> | none | inherit
-    token cue {:i <uri> | none & <keyw> }
+    rule cue {:i <uri> | none & <keyw> }
     rule decl:sym<cue-[before|after]> {:i (cue\-[before|after]) ':'  <val(rx:s:i[ <ref=.cue> ])> }
 
     # - cue: [ 'cue-before' || 'cue-after' ] | inherit
@@ -171,21 +171,21 @@ grammar CSS::Extensions::CSS21 {
     rule decl:sym<font-family> {:i (font\-family) ':' <val(rx:s:i[ <ref=.font-family> +% [ ',' ] ])> }
 
     # - font-size: <absolute-size> | <relative-size> | <length> | <percentage> | inherit
-    token absolute-size {:i [ [[xx|x]\-]?small | medium | [[xx|x]\-]?large ] & <keyw> }
-    token relative-size {:i [ larger | smaller ] & <keyw> }
-    token font-size {:i <absolute-size> | <relative-size> | <length> | <percentage> }
+    rule absolute-size {:i [ [[xx|x]\-]?[small|large] | medium ] & <keyw> }
+    rule relative-size {:i [ larger | smaller ] & <keyw> }
+    rule font-size {:i <absolute-size> | <relative-size> | <length> | <percentage> }
     rule decl:sym<font-size> {:i (font\-size) ':' <val(rx:s:i[ <ref=.font-size> ])> }
 
     # - font-style: normal | italic | oblique | inherit
-    token font-style {:i [ normal | italic | oblique ] & <keyw> }
+    rule font-style {:i [ normal | italic | oblique ] & <keyw> }
     rule decl:sym<font-style> {:i (font\-style) ':' <val(rx[<ref=.font-style>])> }
 
     # - font-variant: normal | small-caps | inherit
-    token font-variant {:i [ normal | small\-caps ] & <keyw> }
+    rule font-variant {:i [ normal | small\-caps ] & <keyw> }
     rule decl:sym<font-variant> {:i (font\-variant) ':' <val(rx:s:i[ <ref=.font-variant> ])> }
 
     # - font-weight: normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | inherit
-    token font-weight {:i [ normal | bold | bolder | lighter ] & <keyw>
+    rule font-weight {:i [ normal | bold | bolder | lighter ] & <keyw>
                            | [ 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 ] & <number> }
     rule decl:sym<font-weight> {:i (font\-weight) ':' <val(rx:s:i[ <ref=.font-weight> ])> }
 
@@ -206,19 +206,19 @@ grammar CSS::Extensions::CSS21 {
     rule decl:sym<*-spacing> {:i ([letter|word]\-spacing) ':' <val(rx:s:i[ normal & <keyw> | <length> ])> }
 
     # - line-height: normal | <number> | <length> | <percentage> | inherit
-    token line-height {:i normal & <keyw> | <number> | <length> | <percentage> }
+    rule line-height {:i normal & <keyw> | <number> | <length> | <percentage> }
     rule decl:sym<line-height> {:i (line\-height) ':' <val(rx:s:i[ <ref=.line-height> ])>}
 
     # - list-style-image: <uri> | none | inherit
-    token list-style-image {:i  <uri> | none & <keyw> }
+    rule list-style-image {:i  <uri> | none & <keyw> }
     rule decl:sym<list-style-image> {:i (list\-style\-image) ':' <val(rx:s:i[ <ref=.list-style-image> ])> }
 
     # - list-style-position: inside | outside | inherit
-    token list-style-position {:i  [ inside | outside ] & <keyw> }
+    rule list-style-position {:i  [ inside | outside ] & <keyw> }
     rule decl:sym<list-style-position> {:i (list\-style\-position) ':' <val(rx:s:i[ <ref=.list-style-position> ])> }
 
     # - list-style-type: disc | circle | square | decimal | decimal-leading-zero | lower-roman | upper-roman | lower-greek | lower-latin | upper-latin | armenian | georgian | lower-alpha | upper-alpha | none | inherit
-    token list-style-type {:i [ disc | circle | square | decimal | decimal\-leading\-zero | lower\-roman | upper\-roman | lower\-greek | lower\-latin | upper\-latin | armenian | georgian | lower\-alpha | upper\-alpha | none ] & <keyw> }
+    rule list-style-type {:i [ disc | circle | square | decimal | decimal\-leading\-zero | lower\-roman | upper\-roman | lower\-greek | lower\-latin | upper\-latin | armenian | georgian | lower\-alpha | upper\-alpha | none ] & <keyw> }
     rule decl:sym<list-style-type> {:i (list\-style\-type) ':' <val(rx[<ref=.list-style-type>])> }
 
     # - list-style: [ 'list-style-type' || 'list-style-position' || 'list-style-image' ] | inherit
@@ -244,7 +244,7 @@ grammar CSS::Extensions::CSS21 {
     rule decl:sym<orphans> {:i (orphans) ':' <val(rx:s:i[ <integer> ])> }
 
     # - outline-color: <color> | invert | inherit
-    token outline-color {:i <color> | invert & <keyw> }
+    rule outline-color {:i <color> | invert & <keyw> }
     rule decl:sym<outline-color> {:i (outline\-color) ':'  <val(rx:s:i[ <ref=.outline-color> ])> }
 
     # - outline-style: <border-style> | inherit
@@ -263,7 +263,7 @@ grammar CSS::Extensions::CSS21 {
     rule decl:sym<padding-*> {:i (padding\-[top|right|bottom|left]) ':' <val(rx:s:i[ <ref=.padding-width> ])> }
 
     # - padding: <padding-width>{1,4} | inherit
-    token padding-width {:i <length> | <percentage> }
+    rule padding-width {:i <length> | <percentage> }
     rule decl:sym<padding> {:i (padding) ':' <val(rx:s:i[ <ref=.padding-width>**1..4 ])> }
 
     # - page-break-after: auto | always | avoid | left | right | inherit
@@ -275,7 +275,7 @@ grammar CSS::Extensions::CSS21 {
 
     # - pause-after: <time> | <percentage> | inherit
     # - pause-before: <time> | <percentage> | inherit
-    token pause {:i <time> | <percentage> }
+    rule pause {:i <time> | <percentage> }
     rule decl:sym<pause-[before|after]> {:i (pause\-[before|after]) ':' <val(rx:s:i[ <ref=.pause> ])> }
 
     # - pause: [ [<time> | <percentage>]{1,2} ] | inherit
@@ -351,8 +351,8 @@ grammar CSS::Extensions::CSS21 {
     rule decl:sym<visibility> {:i (visibility) ':' <val(rx:s:i[ [ visible | hidden | collapse ] & <keyw> ])> }
 
     # - voice-family: [[<specific-voice> | <generic-voice> ],]* [<specific-voice> | <generic-voice> ] | inherit
-    token generic-voice {:i [ male | female | child ] & <keyw> }
-    token specific-voice {:i <identifier> | <string> }
+    rule generic-voice {:i [ male | female | child ] & <keyw> }
+    rule specific-voice {:i <identifier> | <string> }
     rule decl:sym<voice-family> {:i (voice\-family) ':' <val(rx:s:i[ [ <generic-voice> || <specific-voice> ] +% [ ',' ] ])> }
 
     # - volume: <number> | <percentage> | silent | x-soft | soft | medium | loud | x-loud | inherit

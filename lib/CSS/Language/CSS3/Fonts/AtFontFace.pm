@@ -37,7 +37,7 @@ grammar CSS::Language::CSS3::Fonts::AtFontFace
     rule decl:sym<font-weight> {:i (font\-weight) ':'  <val(rx:i:s[ [ normal | bold ] & <keyw> | [ 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 ] & <number> ])> }
 
     # - src: [ <uri> [format(<string>#)]? | <font-face-name> ]#
-    token src { <uri> <format>? | <local> <format>? | <font-face-name=.identifiers> }
+    rule src { <uri> <format>? | <local> <format>? | <font-face-name=.identifiers> }
     rule decl:sym<src> {:i (src) ':' <val(rx:i:s[ <src> +% [ ',' ] ])> }
 
     # - unicode-range: <urange>#

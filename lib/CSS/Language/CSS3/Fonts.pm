@@ -24,7 +24,7 @@ grammar CSS::Language::CSS3::Fonts:ver<20130212.000>
     # Initial generation:
     # % etc/gen-properties.pl gen grammar etc/css3x-font-properties.txt
     # - font: [ [ <‘font-style’> || <font-variant-css21> || <‘font-weight’> || <‘font-stretch’> ]? <‘font-size’> [ / <‘line-height’> ]? <‘font-family’> ] | caption | icon | menu | message-box | small-caption | status-bar
-    token font-variant-css21 {:i [ normal | small\-caps ] & <keyw>}
+    rule font-variant-css21 {:i [ normal | small\-caps ] & <keyw> }
     rule  decl:sym<font> {:i (font) ':'
                                <val(rx:i:s[ [ <font-style> | <font-variant=.font-variant-css21> | <font-weight> | <font-stretch> ]**0..4 <font-size> [ '/' <line-height> ]? <font-family> +% [ ',' ]
                                | [ caption | icon | menu | message\-box | small\-caption | status\-bar ] & <keyw>
@@ -44,20 +44,20 @@ grammar CSS::Language::CSS3::Fonts:ver<20130212.000>
     rule decl:sym<font-language-override> {:i (font\-language\-override) ':'  <val(rx:i:s[ normal & <keyw> | <string> ])> }
 
     # - font-size: <absolute-size> | <relative-size> | <length> | <percentage>
-    token absolute-size {:i [ [[xx|x]\-]?small | medium | [[xx|x]\-]?large ] & <keyw> }
-    token relative-size {:i [ larger | smaller ] & <keyw> }
-    token font-size {:i <absolute-size> | <relative-size> | <length> | <percentage> }
+    rule absolute-size {:i [ [[xx|x]\-]?small | medium | [[xx|x]\-]?large ] & <keyw> }
+    rule relative-size {:i [ larger | smaller ] & <keyw> }
+    rule font-size {:i <absolute-size> | <relative-size> | <length> | <percentage> }
     rule decl:sym<font-size> {:i (font\-size) ':'  <val(rx:i:s[ <ref=.font-size> ])> }
 
     # - font-size-adjust: none | auto | <number>
     rule decl:sym<font-size-adjust> {:i (font\-size\-adjust) ':'  <val(rx:i:s[ [ none | auto ] & <keyw> | <number> ])> }
 
     # - font-stretch: normal | ultra-condensed | extra-condensed | condensed | semi-condensed | semi-expanded | expanded | extra-expanded | ultra-expanded
-    token font-stretch {:i [ normal | ultra\-condensed | extra\-condensed | condensed | semi\-condensed | semi\-expanded | expanded | extra\-expanded | ultra\-expanded ] & <keyw> }
+    rule font-stretch {:i [ normal | ultra\-condensed | extra\-condensed | condensed | semi\-condensed | semi\-expanded | expanded | extra\-expanded | ultra\-expanded ] & <keyw> }
     rule decl:sym<font-stretch> {:i (font\-stretch) ':'  <val(rx:i:s[ <ref=.font-stretch> ])> }
 
     # - font-style: normal | italic | oblique
-    token font-style {:i [ normal | italic | oblique ] & <keyw> }
+    rule font-style {:i [ normal | italic | oblique ] & <keyw> }
     rule decl:sym<font-style> {:i (font\-style) ':'  <val(rx:i:s[ <ref=.font-style> ])> }
 
     # - font-synthesis: none | [ weight || style ]
@@ -85,11 +85,11 @@ grammar CSS::Language::CSS3::Fonts:ver<20130212.000>
     rule decl:sym<font-variant-position> {:i (font\-variant\-position) ':'  <val(rx:i:s[ [ normal | sub | super ] & <keyw> ])> }
 
     # - font-weight: normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
-    token font-weight {:i [ normal | bold | bolder | lighter ] & <keyw> | [ 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 ] & <number> }
+    rule font-weight {:i [ normal | bold | bolder | lighter ] & <keyw> | [ 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 ] & <number> }
     rule decl:sym<font-weight> {:i (font\-weight) ':'  <val(rx:i:s[ <ref=.font-weight> ])> }
 
     # - line-height: normal | <number> | <length> | <percentage> | inherit
-    token line-height {:i normal & <keyw> | <number> | <length> | <percentage> }
+    rule line-height {:i normal & <keyw> | <number> | <length> | <percentage> }
     rule decl:sym<line-height> {:i (line\-height) ':' <val(rx:i:s[ <ref=.line-height> ])> }
 }
 
