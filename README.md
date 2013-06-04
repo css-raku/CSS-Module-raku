@@ -67,6 +67,22 @@ Example usage:
 
     % etc/gen-properties.pl gen grammar etc/css21-properties.txt
 
+Installation
+------------
+This module works with Rakudo Star 2013.02 [download from http://rakudo.org/downloads/star/ - don't forget the final `make install`]:
+
+Ensure that `perl6` and `panda` are available on your path, e.g. :
+
+    % export PATH=~/src/rakudo-star-2013.02/install/bin:$PATH
+
+You can then use `panda` to test and install `CSS::Language`:
+
+    % panda install CSS::Language
+
+To try parsing some content:
+
+    % perl6 -MCSS::Language::CSS21 -e"say CSS::Language::CSS21.parse('h1 {margin:2pt; color: blue}')"
+
 See Also
 ========
 - [CSS::Grammar](https://github.com/p6-css/perl6-CSS-Grammar) - base grammars
