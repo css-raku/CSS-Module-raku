@@ -2,12 +2,7 @@
 
 use Test;
 
-use CSS::Grammar;
-use CSS::Grammar::CSS3;
-use CSS::Grammar::Actions;
 use CSS::Language::CSS3::Namespaces;
-
-# prepare our own composite class with namespace extensions
 
 use lib '.';
 use t::AST;

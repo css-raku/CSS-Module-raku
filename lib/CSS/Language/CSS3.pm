@@ -29,6 +29,6 @@ grammar CSS::Language::CSS3
     is CSS::Language::CSS3::Namespaces
     is CSS::Language::CSS3::PagedMedia
     is CSS::Language::CSS3::Selectors
-    is CSS::Language::CSS3::CSS21_Imported::Grammar
+    is CSS::Language::CSS3::CSS21_Imported
 {};
 

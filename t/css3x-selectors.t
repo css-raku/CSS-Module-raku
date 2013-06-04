@@ -2,26 +2,12 @@
 
 use Test;
 
-use CSS::Grammar::CSS3;
 use CSS::Language::CSS3::Selectors;
-use CSS::Grammar::Actions;
-
-# prepare our own composite class with paged selector extensions
-
-grammar t::CSS3::SelectorsGrammar
-    is CSS::Language::CSS3::Selectors
-    is CSS::Grammar::CSS3
-    {};
-
-class t::CSS3::SelectorsActions
-    is CSS::Language::CSS3::Selectors::Actions
-    is CSS::Grammar::Actions
-    {};
 
 use lib '.';
 use t::AST;
 
-my $css_actions = t::CSS3::SelectorsActions.new;
+my $css_actions = CSS::Language::CSS3::Selectors::Actions.new;
 
 for (
     term => {input => 'U+2??a', ast => {unicode-range => [0x200A, 0x2FFA]}},
@@ -152,7 +138,7 @@ for (
     my $input = %test<input>;
 
     $css_actions.reset;
-    my $p3 = t::CSS3::SelectorsGrammar.parse( $input, :rule($rule), :actions($css_actions));
+    my $p3 = CSS::Language::CSS3::Selectors.parse( $input, :rule($rule), :actions($css_actions));
     t::AST::parse_tests($input, $p3, :rule($rule), :suite('css3-selector'),
                          :warnings($css_actions.warnings),
                          :expected(%test) );

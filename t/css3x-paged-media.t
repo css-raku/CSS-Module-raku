@@ -2,8 +2,6 @@
 
 use Test;
 
-use CSS::Grammar::CSS3;
-use CSS::Grammar::Actions;
 use CSS::Language::CSS3;
 
 # prepare our own composite class with paged media extensions

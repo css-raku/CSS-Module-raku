@@ -6,6 +6,10 @@ use v6;
 # -- have relaxed negation rule to take a list of arguments - in common use
 #    and supported  by major browsers.
 
+class CSS::Language::CSS3::Selectors::Actions {...}
+
+use CSS::Language::CSS3::_Base;
+
 grammar CSS::Language::CSS3::Selectors::Syntax {
     # extensions:
     # ----------
@@ -56,10 +60,12 @@ grammar CSS::Language::CSS3::Selectors::Syntax {
 }
 
 grammar CSS::Language::CSS3::Selectors:ver<20110929.000>
-    is  CSS::Language::CSS3::Selectors::Syntax {
+    is  CSS::Language::CSS3::Selectors::Syntax
+    is CSS::Language::CSS3::_Base {
 }
 
-class CSS::Language::CSS3::Selectors::Actions {
+class CSS::Language::CSS3::Selectors::Actions
+    is CSS::Language::CSS3::_Base::Actions {
 
     method combinator:sym<sibling>($/)  { make $.token('~') }
 
