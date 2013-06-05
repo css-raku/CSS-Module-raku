@@ -35,20 +35,20 @@ grammar CSS::Language::Specification {
     token occurs:sym<maybe>       {'?'}
     token occurs:sym<once_plus>   {'+'}
     token occurs:sym<zero_plus>   {'*'}
-    token occurs:sym<range>       {'{'<min=.digits>','<max=.digits>'}'}
+    token occurs:sym<range>       {'{'~'}' [<min=.digits>','<max=.digits>] }
     token occurs:sym<list>        {'#'}
 
     proto rule value {<...>}
-    rule value:sym<func>          { <id>'(' <.terms> ')' }
+    rule value:sym<func>          { <id>'(' ~ ')' <.terms> }
     rule value:sym<keywords>      { <keyw>   +% '|' }
     rule value:sym<numbers>       { <digits> +% '|' }
-    rule value:sym<group>         { '[' <terms> ']' }
-    rule value:sym<rule>          { '<'<id>'>' }
+    rule value:sym<group>         { '[' ~ ']' <terms> }
+    rule value:sym<rule>          { '<'~'>' <id> }
     rule value:sym<punc>          { ',' | '/' }
 
     proto token property-ref      { <...> }
     token property-ref:sym<css21> { <id=.id-quoted> }
-    token property-ref:sym<css3>  { '<' <id=.id-quoted> '>' }
+    token property-ref:sym<css3>  { '<' ~ '>' <id=.id-quoted> }
     rule value:sym<prop-ref>      { <property-ref> }
     rule value:sym<literal>       { <.quote>(<- quote>*)<.quote> }
 
