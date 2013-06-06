@@ -2,25 +2,21 @@ use v6;
 
 # specification: http://www.w3.org/TR/2011/REC-CSS2-20110607/propidx.html
 
+use CSS::Language::_Base;
 use CSS::Grammar::CSS21;
 
 grammar CSS::Extensions::CSS21 {...}
 
 grammar CSS::Language::CSS21:ver<20110607.000>
     is CSS::Extensions::CSS21 
+    is CSS::Language::_Base
     is CSS::Grammar::CSS21 {};
 
 grammar CSS::Extensions::CSS21 {
 
-    rule declaration:sym<validated> { <decl> <prio>**0..1 <any-arg>* <end-decl> }
-
     # For handling undimensioned quantities
-    token length:sym<num>       {<number>}
-    token angle:sym<num>        {<number>}
-    token frequency:sym<num>    {<number>}
     proto token proforma        { <...> }
     token proforma:sym<inherit> {:i inherit}
-    rule misc                   {<proforma>**0..1 <any-arg>*}
 
     # allow color names and define our vocabulary
     rule color:sym<named> {:i [ aqua | black | blue | fuchsia | gray | green | lime | maroon | navy | olive | orange | purple | red | silver | teal | white | yellow ] & <keyw> }

@@ -48,8 +48,8 @@ grammar CSS::Language::Specification {
 
     proto token property-ref      { <...> }
     token property-ref:sym<css21> { <id=.id-quoted> }
-    token property-ref:sym<css3>  { '<' ~ '>' <id=.id-quoted> }
+    token property-ref:sym<css3>  { '<'~'>' <id=.id-quoted> }
     rule value:sym<prop-ref>      { <property-ref> }
-    rule value:sym<literal>       { <.quote>(<- quote>*)<.quote> }
+    rule value:sym<literal>       { <.quote> ~ <.quote> (<- quote>*) }
 
 }

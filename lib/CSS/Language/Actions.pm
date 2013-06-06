@@ -33,13 +33,6 @@ class CSS::Language::Actions
     method proforma:sym<inherit>($/) { make {inherit => True } }
     method proforma:sym<initial>($/) { make {initial => True } }
 
-    method misc($/) {
-        # miscellaneous and fallback handling, including 'inherit' (css2) and
-        # 'initial' css3
-        make $<proforma>[0].ast
-            if $<proforma> && !$<any-args>;
-    }
-
     #---- AST construction methods ----#
 
     method _decl($prop, $/, $synopsis, :$expand?) {
@@ -50,8 +43,7 @@ class CSS::Language::Actions
 
         my $property = $prop.Str.trim.lc;
 
-        if ($<misc> && !$<misc>.ast) 
-            || ($<proforma> && !$<proforma>.ast) 
+        if ($<proforma> && !$<proforma>.ast) 
             || $<any> || $<any-arg> || $<any-args> {
                 $.warning('usage ' ~ $property ~ ': ' ~ $synopsis);
                 return Any;
@@ -59,7 +51,7 @@ class CSS::Language::Actions
 
         my @expr;
 
-        my $proforma = $<misc> || $<proforma>;
+        my $proforma = $<proforma>;
         if $proforma {
             my %proforma = $proforma.ast;
             @expr = %proforma;
