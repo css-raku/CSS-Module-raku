@@ -6,7 +6,7 @@ class CSS::Language::Specification::Actions {
     # rules or actions.
     has %.prop-refs is rw;
 
-    method TOP($/) { make $<property-spec>.map({$_.ast}) };
+    method TOP($/) { make $<property-spec>.map({ .ast }) };
 
     # condensation eg: 'border-top-style' ... 'border-left-style' 
     # ==> pfx='border' props=<top right bottom left> sfx='-style'
@@ -19,14 +19,14 @@ class CSS::Language::Specification::Actions {
         my $pfx-len;
         for 1..@props[0].chars -> $try-len {
             my $try-pfx = @props[0].substr(0, $try-len);
-            last if @props.grep({$_.substr(0, $try-len) ne $try-pfx});
+            last if @props.grep({ .substr(0, $try-len) ne $try-pfx });
             $pfx = $try-pfx;
             $pfx-len = $try-len;
         }
         return ('', @props)
             unless $pfx-len;
 
-        my @remainder = @props.map({$_.substr($pfx-len)});
+        my @remainder = @props.map({ .substr($pfx-len) });
         return $pfx, @remainder;
     }
 
@@ -38,7 +38,7 @@ class CSS::Language::Specification::Actions {
         my $sfx-len;
         for 1..@props[0].chars -> $try-len {
             my $try-sfx = @props[0].substr(* - $try-len);
-            last if @props.grep({$_.substr(* - $try-len) ne $try-sfx});
+            last if @props.grep({ .substr(* - $try-len) ne $try-sfx });
 
             $sfx = $try-sfx;
             $sfx-len = $try-len;
@@ -49,7 +49,7 @@ class CSS::Language::Specification::Actions {
         return ('', @props)
             unless $sfx-len;
 
-        my @remainder = @props.map({$_.substr(0, * - $sfx-len)});
+        my @remainder = @props.map({ .substr(0, * - $sfx-len) });
         return $sfx, @remainder;
     }
 
@@ -76,7 +76,7 @@ class CSS::Language::Specification::Actions {
     }
 
     method prop-names($/) {
-        my @prop_names = $<id>.map({$_.ast});
+        my @prop_names = $<id>.map({ .ast });
         make @prop_names;
     }
 
@@ -86,7 +86,7 @@ class CSS::Language::Specification::Actions {
     method digits($/)    { make $/.Int }
 
     method values($/) {
-        make $<value-inst>.map({$_.ast}).join(' ');
+        make $<value-inst>.map({ .ast }).join(' ');
     }
     method value-inst($/) {
         my $value = $<value>.ast;
@@ -103,11 +103,11 @@ class CSS::Language::Specification::Actions {
     }
 
     method terms($/) {
-        make $<options>.map({$_.ast}).join(' ');
+        make $<options>.map({ .ast }).join(' ');
     }
 
     method options($/) {
-        my @choices = @$<combo>.map({$_.ast});
+        my @choices = @$<combo>.map({ .ast });
         return make @choices[0]
             unless @choices > 1;
         
@@ -115,14 +115,14 @@ class CSS::Language::Specification::Actions {
     }
 
     method combo($/) {
-        my @choices = @$<required>.map({$_.ast});
+        my @choices = @$<required>.map({ .ast });
         return make @choices[0]
             unless @choices > 1;
         make '[ ' ~ @choices.join(' | ') ~ ' ]**1..' ~ @choices.Int;
     }
 
     method required($/) {
-        my @choices = $<values>.map({$_.ast});
+        my @choices = $<values>.map({ .ast });
         return make @choices[0]
             unless @choices > 1;
         make '[ ' ~ @choices.join(' | ') ~ ' ]**' ~ @choices.Int
@@ -143,7 +143,7 @@ class CSS::Language::Specification::Actions {
 
     method value:sym<keywords>($/) {
         my $keywords = @$<keyw> > 1
-            ?? '[ ' ~ $<keyw>.map({$_.ast}).join(' | ') ~ ' ]'
+            ?? '[ ' ~ $<keyw>.map({ .ast }).join(' | ') ~ ' ]'
             !! $<keyw>[0].ast;
 
         make $keywords ~ ' & <keyw>';
@@ -151,7 +151,7 @@ class CSS::Language::Specification::Actions {
 
     method value:sym<numbers>($/) {
         my $keywords = @$<digits> > 1
-            ?? '[ ' ~ $<digits>.map({$_.ast}).join(' | ') ~ ' ]'
+            ?? '[ ' ~ $<digits>.map({ .ast }).join(' | ') ~ ' ]'
             !! $<digits>[0].ast;
 
         make $keywords ~ ' & <number>';

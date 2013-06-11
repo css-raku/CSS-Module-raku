@@ -60,7 +60,7 @@ class CSS::Language::Actions
             my $m = $<expr> // $/;
             @expr = @( $.list($m) );
             # automatic dereferencing of <ref> elems
-            @expr = @expr.map({$_.key eq 'ref' ?? @( $_.value ) !! $_});
+            @expr = @expr.map({ .key eq 'ref' ?? @( .value ) !! $_});
          }
 
         my %ast;
@@ -162,5 +162,5 @@ class CSS::Language::Actions
     # case sensitive identifiers
     method identifier($/)  { make $<name>.ast }
     # identifiers strung-together, e.g New Century Schoolbook
-    method identifiers($/) { make $<identifier>.map({$_.ast }).join(' ') }
+    method identifiers($/) { make $<identifier>.map({ .ast }).join(' ') }
 }
