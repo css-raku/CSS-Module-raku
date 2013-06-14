@@ -5,12 +5,17 @@ use CSS::Grammar::Actions;
 class CSS::Language::Actions
     is CSS::Grammar::Actions {
 
+    has $._proforma-usage = '';
     has Bool $.strict is rw = True;
 
     # ---- CSS::Grammar overrides ----
 
     method declaration:sym<base>($/)        {
         $.warning('unknown property', $<property>.ast, 'declaration dropped');
+    }
+
+    method any-function($/)             {
+        $.warning('ignoring function', $<ident>.ast.lc);
     }
 
     method declaration:sym<validated>($/)  {
@@ -45,7 +50,7 @@ class CSS::Language::Actions
 
         if ($<proforma> && !$<proforma>.ast) 
             || $<any> || $<any-arg> || $<any-args> {
-                $.warning('usage ' ~ $property ~ ': ' ~ $synopsis);
+                $.warning('usage ' ~ $property ~ ': ' ~ $synopsis ~ $._proforma-usage);
                 return Any;
         }
 

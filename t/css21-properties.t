@@ -128,6 +128,8 @@ for (
     },
     {prop => 'max-width', decl => '30%', expr => [percentage => "30"],
     },
+    {prop => 'opacity', decl => '.3', expr => [number => .3],
+    },
     {prop => 'orphans', decl => '3', expr => [integer => 3],
     },
     {prop => 'outline-color', decl => 'olive',

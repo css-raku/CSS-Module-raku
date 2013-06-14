@@ -15,4 +15,5 @@ grammar CSS::Language::_Base {
     token keyw        {<ident>}             # keywords (case insensitive)
     token identifier  {<name>}              # identifiers (case sensitive)
     rule identifiers  {[ <identifier> ]+}   # sequences of identifiers
+
 }

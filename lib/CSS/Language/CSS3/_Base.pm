@@ -32,6 +32,8 @@ grammar CSS::Language::CSS3::_Base
 class CSS::Language::CSS3::_Base::Actions 
     is CSS::Language::Actions {
 
+    has $._proforma-usage = ' | inherit | initial';
+
     method resolution:sym<dim>($/)        { make $.token($<num>.ast, :units($0.Str.lc), :type('resolution')) }
     method dimension:sym<resolution>($/)  { make $<resolution>.ast }
 

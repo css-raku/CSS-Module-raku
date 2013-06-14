@@ -29,7 +29,7 @@ for (
                            "expr" => ["length" => 25]},
     },
     media-expr => {input => 'max-width: foo',
-                   warnings => 'usage max-width: <length>',
+                   warnings => 'usage max-width: <length> | inherit | initial',
     },
     media-expr => {input => 'width: -em',
                    warnings => 'width: length cannot be negative',
