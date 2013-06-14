@@ -197,7 +197,7 @@ for (
 
     if %test<box> {
         for @(%test<box>) {
-            my ($edge, $val) = $_.kv;
+            my ($edge, $val) = .kv;
             %declarations{$prop.lc ~ '-' ~ $edge} = {expr => $val}
         }
     }

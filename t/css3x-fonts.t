@@ -98,8 +98,8 @@ for (
                          "expr" => ["length" => 1.2]},
     },
     ) {
-    my $rule = $_.key;
-    my %test = $_.value;
+    my $rule = .key;
+    my %test = .value;
 
     my $input = %test<input>;
 

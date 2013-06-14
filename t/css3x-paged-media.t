@@ -49,8 +49,8 @@ for (
     },
     at-rule => {input => $top_center, ast => $top_center_ast},
     ) {
-    my $rule = $_.key;
-    my %test = $_.value;
+    my $rule = .key;
+    my %test = .value;
     my $input = %test<input>;
 note $input;
     $css_actions.reset;

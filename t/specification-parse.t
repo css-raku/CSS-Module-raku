@@ -33,8 +33,8 @@ for (
     },
     ) {
 
-    my $rule = $_.key;
-    my %test = $_.value;
+    my $rule = .key;
+    my %test = .value;
     my $input = %test<input>;
 
      my $p = CSS::Language::Specification.parse( $input, :rule($rule), :actions($spec_actions));

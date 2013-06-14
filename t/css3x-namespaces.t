@@ -26,8 +26,8 @@ for (
                 ast => [at-rule => {"prefix" => "toto", "url" => "http://toto.example.org", '@' => "namespace"}],
     },
     ) {
-    my $rule = $_.key;
-    my %test = $_.value;
+    my $rule = .key;
+    my %test = .value;
     my $input = %test<input>;
 
     $css_actions.reset;

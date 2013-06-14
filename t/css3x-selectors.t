@@ -133,8 +133,8 @@ for (
                  ast => Mu,
     },
     ) {
-    my $rule = $_.key;
-    my %test = $_.value;
+    my $rule = .key;
+    my %test = .value;
     my $input = %test<input>;
 
     $css_actions.reset;

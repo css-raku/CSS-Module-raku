@@ -14,7 +14,6 @@ grammar CSS::Language::CSS21:ver<20110607.000>
 
 grammar CSS::Extensions::CSS21 {
 
-    # For handling undimensioned quantities
     proto token proforma        { <...> }
     token proforma:sym<inherit> {:i inherit}
 
@@ -24,15 +23,8 @@ grammar CSS::Extensions::CSS21 {
     # system colors are a css2 anachronism
     rule color:sym<system> {:i [ ActiveBorder | ActiveCaption | AppWorkspace | Background | ButtonFace | ButtonHighlight | ButtonShadow | ButtonText | CaptionText | GrayText | Highlight | HighlightText | InactiveBorder | InactiveCaption | InactiveCaptionText | InfoBackground | InfoText | Menu | MenuText | Scrollbar | ThreeDDarkShadow | ThreeDFace | ThreeDHighlight | ThreeDLightShadow | ThreeDShadow | Window | WindowFrame | WindowText ] & <system=.keyw> }
  
-    # nomenclature
-    token integer     {[\+|\-]?\d+ <!before ['%'|\w|'.']>}
-    token number      {<num> <!before ['%'|\w]>}
-    token uri         {<url>}
-    token keyw        {<ident>}           # keywords (case insensitive)
-    token identifier  {<name>}            # identifiers (case sensitive)
-    rule identifiers  {[ <identifier> ]+} # sequence of identifiers
     # <val(..)> - rule for processing right hand side of property declarations
-    rule val($expr)   { <proforma> | $<expr>=$expr:i:s || <any-arg>* }
+    rule val($expr)   { <proforma> | $<expr>=$expr || <any-arg>* }
 
     # --- Functions --- #
 
