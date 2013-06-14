@@ -43,9 +43,10 @@ grammar CSS::Language::CSS3::Colors::Syntax {
          ] & <keyw> }
 
     rule color:sym<current> {:i currentColor & <keyw> }
+    rule color:sym<transparent> {:i transparent & <keyw> }
 
-    rule color-angle{<num>$<percentage>=[\%]?}
-    rule color-alpha{<num>$<percentage>=[\%]?}
+    rule color-angle{<number>}
+    rule color-alpha{<number>}
 
     # <rgb> and <hex> are defined in CSS core grammar
     rule color:sym<rgba> {:i'rgba('
@@ -58,15 +59,15 @@ grammar CSS::Language::CSS3::Colors::Syntax {
 
     rule color:sym<hsl> {:i'hsl('
                              [ <h=.color-angle> ','
-                               <s=.color-alpha> ','
-                               <l=.color-alpha> || <any-args> ]
+                               <s=.percentage> ','
+                               <l=.percentage> || <any-args> ]
                     ')'
     }
 
     rule color:sym<hsla> {:i'hsla('
                               [ <h=.color-angle> ','
-                                <s=.color-alpha> ','
-                                <l=.color-alpha> ','
+                                <s=.percentage> ','
+                                <l=.percentage> ','
                                 <a=.color-alpha> || <any-args> ]
                    ')'
     }
@@ -76,13 +77,6 @@ grammar CSS::Language::CSS3::Colors::Syntax {
 grammar CSS::Language::CSS3::Colors:ver<20110607.000>
     is CSS::Language::CSS3::Colors::Syntax
     is CSS::Language::CSS3::_Base {
-
-    # ---- Properties ---- #
-
-    # color: <color> -- inherited from CSS21
-
-    rule decl:sym<opacity> {:i (opacity) ':' <val(rx:s:i[ <alphavalue=.color-alpha> ])> }
-
 }
 
 class CSS::Language::CSS3::Colors::Actions 
@@ -239,16 +233,12 @@ class CSS::Language::CSS3::Colors::Actions
     };
 
     method color-angle($/) {
-        my $angle = %<num>.ast;
-        $angle = ($angle * 3.6).round
-            if $<percentage>.Str;
+        my $angle = $<number>.ast;
         make $.token($angle, :type('num'), :units('degrees'));
     }
 
     method color-alpha($/) {
-        my $alpha = %<num>.ast;
-        $alpha = ($alpha / 100)
-            if $<percentage>.Str;
+        my $alpha = $<number>.ast;
         make $.token($alpha, :type('num'), :units('alpha'));
     }
 
@@ -274,8 +264,8 @@ class CSS::Language::CSS3::Colors::Actions
         make $.token($<keyw>.ast, :type<color>, :units<current>);
     }
 
-    method decl:sym<opacity>($/) {
-        make $._decl($0, $<val>, q{<alphavalue> | inherit});
+    method color:sym<transparent>($/) {
+        make $.token($<keyw>.ast, :type<color>, :units<transparent>);
     }
 
 }
