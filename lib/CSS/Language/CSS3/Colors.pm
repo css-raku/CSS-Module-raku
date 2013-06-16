@@ -57,17 +57,19 @@ grammar CSS::Language::CSS3::Colors::Syntax {
                    ')'
     }
 
+    rule percentage-range {<percentage>}
+
     rule color:sym<hsl> {:i'hsl('
                              [ <h=.color-angle> ','
-                               <s=.percentage> ','
-                               <l=.percentage> || <any-args> ]
+                               <s=.percentage-range> ','
+                               <l=.percentage-range> || <any-args> ]
                     ')'
     }
 
     rule color:sym<hsla> {:i'hsla('
                               [ <h=.color-angle> ','
-                                <s=.percentage> ','
-                                <l=.percentage> ','
+                                <s=.percentage-range> ','
+                                <l=.percentage-range> ','
                                 <a=.color-alpha> || <any-args> ]
                    ')'
     }
@@ -239,7 +241,16 @@ class CSS::Language::CSS3::Colors::Actions
 
     method color-alpha($/) {
         my $alpha = $<number>.ast;
+        $alpha = 0.0 if $alpha < 0.0;
+        $alpha = 1.0 if $alpha > 1.0;
         make $.token($alpha, :type('num'), :units('alpha'));
+    }
+
+    method percentage-range($/) {
+        my $percentage = $<percentage>.ast;
+        $percentage = 0 if $percentage < 0;
+        $percentage = 100 if $percentage > 100;
+        make $.token($percentage, :units('%'), :type('percentage'))
     }
 
     method color:sym<rgba>($/) {
@@ -249,7 +260,7 @@ class CSS::Language::CSS3::Colors::Actions
     }
 
     method color:sym<hsl>($/)  {
-        return $.warning('usage: hsl(h,s,l) where h is 0..360  and s,l are 0-1 or 0%-100%')
+        return $.warning('usage: hsl(h,s,l) where h is 0..360  and s,l are 0-1 or00 0%-100%')
             if $<any-args>;
         make $.token($.node($/), :type<color>, :units<hsl>);
     }

@@ -25,7 +25,7 @@ module t::AST {
         }
         else {
             if %expected<warnings>.isa('Regex') {
-                my @matched = @warnings.grep({ .match(%expected<warnings>) });
+                my @matched = ([~] @warnings).match(%expected<warnings>);
                 ok( @matched, "{$suite} warnings")
                     or diag @warnings;
             }
