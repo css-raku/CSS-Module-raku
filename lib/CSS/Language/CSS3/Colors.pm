@@ -260,7 +260,7 @@ class CSS::Language::CSS3::Colors::Actions
     }
 
     method color:sym<hsl>($/)  {
-        return $.warning('usage: hsl(h,s,l) where h is 0..360  and s,l are 0-1 or00 0%-100%')
+        return $.warning('usage: hsl(h,s,l) where h is 0..360  and s,l are 0-1 or 0%-100%')
             if $<any-args>;
         make $.token($.node($/), :type<color>, :units<hsl>);
     }
