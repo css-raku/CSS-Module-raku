@@ -54,6 +54,12 @@ class CSS::Language::Actions
                 return Any;
         }
 
+        if $<expr> &&
+            (!$<expr>.caps || $<expr>.caps.grep({! .value.ast.defined})) {
+            $.warning('dropping declaration', $property);
+            return Any;
+        }
+
         my @expr;
 
         my $proforma = $<proforma>;

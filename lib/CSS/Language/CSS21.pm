@@ -24,7 +24,7 @@ grammar CSS::Extensions::CSS21 {
     rule color:sym<system> {:i [ ActiveBorder | ActiveCaption | AppWorkspace | Background | ButtonFace | ButtonHighlight | ButtonShadow | ButtonText | CaptionText | GrayText | Highlight | HighlightText | InactiveBorder | InactiveCaption | InactiveCaptionText | InfoBackground | InfoText | Menu | MenuText | Scrollbar | ThreeDDarkShadow | ThreeDFace | ThreeDHighlight | ThreeDLightShadow | ThreeDShadow | Window | WindowFrame | WindowText ] & <system=.keyw> }
  
     # <val(..)> - rule for processing right hand side of property declarations
-    rule val($expr)   { <proforma> | $<expr>=$expr || <any-arg>* }
+    rule val($expr)   { <proforma> | $<expr>=$expr || <any-args> }
 
     # --- Functions --- #
 
