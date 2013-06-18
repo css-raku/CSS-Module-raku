@@ -13,6 +13,20 @@ use CSS::Language::CSS3;
 use lib '.';
 use t::AST;
 
+for ("\\012AF", "\\012AFc") {
+    # css21+ unicode is up to 6 digits
+    nok($_ ~~ /^<CSS::Language::CSS1::unicode>$/, "not css1 unicode: $_");
+    ok($_ ~~ /^<CSS::Language::CSS21::unicode>$/, "css21 unicode: $_");
+    ok($_ ~~ /^<CSS::Language::CSS3::unicode>$/, "css3 unicode: $_");
+}
+
+# css1 and css21 only recognise latin chars as non-ascii (\o240-\o377)
+for ('') {
+    nok($_ ~~ /^<CSS::Language::CSS1::nonascii>$/, "not non-ascii css1: $_");
+    nok($_ ~~ /^<CSS::Language::CSS21::nonascii>$/, "not non-ascii css21: $_");
+    ok($_ ~~ /^<CSS::Language::CSS3::nonascii>$/, "non-ascii css3: $_");
+}
+
 my $css1_actions  = CSS::Language::CSS1::Actions.new;
 my $css21_actions = CSS::Language::CSS21::Actions.new;
 my $css3_actions  = CSS::Language::CSS3::Actions.new;
@@ -26,6 +40,14 @@ for (
                     warnings => rx{^usage\ background\-attachment\:\ scroll\ \|\ fixed},
     },
     declaration => {input => 'background-attachment: FiXed',   ast => {property => 'background-attachment', expr => [keyw => 'fixed']},
+    },
+    declaration => {input => 'font-family: "unclosed-string',
+                    ast => Any,
+                    warnings => rx{^usage},
+    },
+    # recheck comments and whitespace
+    declaration => {input => '/*aa*/COLOR/*bb*/:<!--cc-->BLUE /*dd*/;',
+                    ast => {"property" => "color", "expr" => ["color" => {"r" => 0, "g" => 0, "b" => 255}]},
     },
     # boxed properties should be expanded
     declaration-list => {input => 'margin: 2em 3em',  
