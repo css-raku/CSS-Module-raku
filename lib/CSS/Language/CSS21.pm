@@ -8,8 +8,8 @@ use CSS::Grammar::CSS21;
 grammar CSS::Extensions::CSS21 {...}
 
 grammar CSS::Language::CSS21:ver<20110607.000>
-    is CSS::Extensions::CSS21 
     is CSS::Language::_Base
+    is CSS::Extensions::CSS21 
     is CSS::Grammar::CSS21 {};
 
 grammar CSS::Extensions::CSS21 {
@@ -173,8 +173,7 @@ grammar CSS::Extensions::CSS21 {
     rule decl:sym<font-variant> {:i (font\-variant) ':' <val(rx:s:i[ <ref=.font-variant> ])> }
 
     # - font-weight: normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
-    rule font-weight {:i [ normal | bold | bolder | lighter ] & <keyw>
-                           | [ 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 ] & <number> }
+    rule font-weight {:i [ normal | bold | bolder | lighter ] & <keyw> | <[1..9]>00 & <number> }
     rule decl:sym<font-weight> {:i (font\-weight) ':' <val(rx:s:i[ <ref=.font-weight> ])> }
 
     # - font: [ [ 'font-style' || 'font-variant' || 'font-weight' ]? 'font-size' [ / 'line-height' ]? 'font-family' ] | caption | icon | menu | message-box | small-caption | status-bar

@@ -26,8 +26,7 @@ grammar CSS::Language::CSS1:ver<20080411.000>
     rule font-variant {:i [ normal | small\-caps ] & <keyw> }
     rule decl:sym<font-variant> {:i (font\-variant) ':' [ <ref=.font-variant> || <any-args> ] }
     # - font-weight: normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
-    rule font-weight {:i [ normal | bold | bolder | lighter ] & <keyw>
-                           | [ 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 ] & <number> }
+    rule font-weight {:i [ normal | bold | bolder | lighter ] & <keyw> | <[1..9]>00 & <number> }
     rule decl:sym<font-weight> {:i (font\-weight) ':' [ <ref=.font-weight> || <any-args> ] }
 
     # - font-size: <absolute-size> | <relative-size> | <length> | <percentage>
