@@ -22,7 +22,7 @@ grammar CSS::Language::CSS3::MediaQueries::Syntax {
     rule media-list  {<media-query> [',' <media-query>]*}
     rule media-query {[<media-op>? <media=.ident> | '(' <media-expr> ')']
                       [:i'and' '(' <media-expr> ')' ]*}
-    rule media-op    {:i['only'|'not']}
+    rule media-op    {:i'only'|'not'}
 
     proto rule media-expr {<...>}
 
@@ -42,9 +42,9 @@ grammar CSS::Language::CSS3::MediaQueries::Syntax {
 
     rule media-expr:sym<grid> {:i (grid) ':' <val(rx:i:s[ [0 | 1 ] & <integer> ])> }
 
-    rule media-expr:sym<any>  { '(' <media-feature=.ident> [ ':' <expr> ]? ')' }
-
     rule media-expr:sym<bool> {:i (height|color[\-index]?|[device\-]?[width|height]|[device\-]?aspect\-ratio|monochrome|resolution|grid|none) }
+
+    rule media-expr:sym<any>  { <media-feature=.ident> [ ':' <expr> ]? }
 
 }
 
@@ -56,7 +56,7 @@ grammar CSS::Language::CSS3::MediaQueries:ver<20120619.000>
 class CSS::Language::CSS3::MediaQueries::Actions
     is CSS::Language::CSS3::_Base::Actions {
 
-    # media-rules, media-list, media-query, media see core actions
+    # media-rules, media-list, media-query, media see core grammar actions
     method media-op($/)              { make $/.Str.lc }
 
     method media-expr:sym<width|height>($/) {
@@ -99,6 +99,5 @@ class CSS::Language::CSS3::MediaQueries::Actions
 
     method media-expr:sym<any>($/)   {
         $.warning('unknown media-feature', $<media-feature>.ast);
-        # todo - treat as 'not all'
     }
 }

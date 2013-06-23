@@ -19,7 +19,7 @@ grammar CSS::Language::CSS3::Selectors::Syntax {
     # allow '::' element selectors
     rule pseudo:sym<::element> {'::'<element=.ident>}
  
-    rule no-namespace {''}
+    rule no-namespace {<?>}
     rule wildcard {'*'}
     rule namespace-prefix {[<namespace=.ident>|<any-namespace=.wildcard>|<no-namespace>]'|'}
 

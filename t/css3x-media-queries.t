@@ -65,6 +65,12 @@ for (
     at-rule => {input => 'media ONLY all And (none) { }',
                 ast => {"media-list" => ["media-query" => ["media-op" => "only", "media" => "all", "media-expr" => {"property" => "none"}]], "media-rules" => [], "\@" => "media"},
     },
+    # error handling unknown media features; treated as not all:
+    # http://www.w3.org/TR/2012/REC-css3-mediaqueries-20120619/#error-handling
+    # all the following should equate to 'not all'
+    at-rule => {input => 'media not all {}',
+                ast => {"media-list" => ["media-query" => ["media-op" => "not", "media" => "all"]], "media-rules" => [], "\@" => "media"},
+    },
     # we should also have extended the import at-rule
     import => {input => '@import url(example.css) screen and (color), projection and (color);',
                ast => {"url" => "example.css", "media-list" => ["media-query" => ["media" => "screen", "media-expr" => {"property" => "color"}], "media-query" => ["media" => "projection", "media-expr" => {"property" => "color"}]]},

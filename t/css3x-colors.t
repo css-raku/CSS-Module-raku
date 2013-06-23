@@ -30,7 +30,7 @@ for (
     },
     # clipping of out-of-range values
     term   => {input => 'rgba(101%, 50%, -5%, +1.1)',
-               ast => {r => 255, g => 127, b => 0, a=> 1},
+               ast => {r => 255, g => 127, b => 0, a => 1},
                token => {type => 'color', units => 'rgba'},
     },
     term   => {input => 'hsl(120, 110%, -50%)',
