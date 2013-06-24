@@ -40,7 +40,7 @@ class CSS::Language::Actions
 
     #---- AST construction methods ----#
 
-    method _decl($prop, $/, $synopsis, :$expand?) {
+    method _decl($prop, $/, $synopsis, :$expand?, :$proforma-usage?) {
         # used by prop:sym<*> methods
 
         die "doesn't look like a property: " ~ $/.Str
@@ -50,7 +50,8 @@ class CSS::Language::Actions
 
         if ($<proforma> && !$<proforma>.ast) 
             || $<any> || $<any-arg> || $<any-args> {
-                $.warning('usage ' ~ $property ~ ': ' ~ $synopsis ~ $._proforma-usage);
+                $.warning([~] ('usage ', $property, ': ', $synopsis,
+                               ($proforma-usage // $._proforma-usage)));
                 return Any;
         }
 
