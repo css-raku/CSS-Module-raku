@@ -174,5 +174,5 @@ class CSS::Language::Actions
     # case sensitive identifiers
     method identifier($/)  { make $<name>.ast }
     # identifiers strung-together, e.g New Century Schoolbook
-    method identifiers($/) { make $<identifier>.map({ .ast }).join(' ') }
+    method identifiers($/) { make $<identifier>>>.ast.join(' ') }
 }

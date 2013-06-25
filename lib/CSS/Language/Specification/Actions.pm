@@ -6,7 +6,7 @@ class CSS::Language::Specification::Actions {
     # rules or actions.
     has %.prop-refs is rw;
 
-    method TOP($/) { make $<property-spec>.map({ .ast }) };
+    method TOP($/) { make $<property-spec>>>.ast };
 
     # condensation eg: 'border-top-style' ... 'border-left-style' 
     # ==> pfx='border' props=<top right bottom left> sfx='-style'
@@ -26,7 +26,7 @@ class CSS::Language::Specification::Actions {
         return ('', @props)
             unless $pfx-len;
 
-        my @remainder = @props.map({ .substr($pfx-len) });
+        my @remainder = @props>>.substr($pfx-len);
         return $pfx, @remainder;
     }
 
@@ -49,7 +49,7 @@ class CSS::Language::Specification::Actions {
         return ('', @props)
             unless $sfx-len;
 
-        my @remainder = @props.map({ .substr(0, * - $sfx-len) });
+        my @remainder = @props>>.substr(0, * - $sfx-len);
         return $sfx, @remainder;
     }
 
@@ -76,7 +76,7 @@ class CSS::Language::Specification::Actions {
     }
 
     method prop-names($/) {
-        my @prop_names = $<id>.map({ .ast });
+        my @prop_names = $<id>>>.ast;
         make @prop_names;
     }
 
@@ -86,7 +86,7 @@ class CSS::Language::Specification::Actions {
     method digits($/)    { make $/.Int }
 
     method values($/) {
-        make $<value-inst>.map({ .ast }).join(' ');
+        make $<value-inst>>>.ast.join(' ');
     }
     method value-inst($/) {
         my $value = $<value>.ast;
@@ -103,11 +103,11 @@ class CSS::Language::Specification::Actions {
     }
 
     method terms($/) {
-        make $<options>.map({ .ast }).join(' ');
+        make $<options>>>.ast.join(' ');
     }
 
     method options($/) {
-        my @choices = @$<combo>.map({ .ast });
+        my @choices = @$<combo>>>.ast;
         return make @choices[0]
             unless @choices > 1;
         
@@ -115,14 +115,14 @@ class CSS::Language::Specification::Actions {
     }
 
     method combo($/) {
-        my @choices = @$<required>.map({ .ast });
+        my @choices = @$<required>>>.ast;
         return make @choices[0]
             unless @choices > 1;
         make '[ ' ~ @choices.join(' | ') ~ ' ]**1..' ~ @choices.Int;
     }
 
     method required($/) {
-        my @choices = $<values>.map({ .ast });
+        my @choices = $<values>>>.ast;
         return make @choices[0]
             unless @choices > 1;
         make '[ ' ~ @choices.join(' | ') ~ ' ]**' ~ @choices.Int
@@ -143,7 +143,7 @@ class CSS::Language::Specification::Actions {
 
     method value:sym<keywords>($/) {
         my $keywords = @$<keyw> > 1
-            ?? '[ ' ~ $<keyw>.map({ .ast }).join(' | ') ~ ' ]'
+            ?? '[ ' ~ $<keyw>>>.ast.join(' | ') ~ ' ]'
             !! $<keyw>[0].ast;
 
         make $keywords ~ ' & <keyw>';
@@ -151,7 +151,7 @@ class CSS::Language::Specification::Actions {
 
     method value:sym<numbers>($/) {
         my $keywords = @$<digits> > 1
-            ?? '[ ' ~ $<digits>.map({ .ast }).join(' | ') ~ ' ]'
+            ?? '[ ' ~ $<digits>>>.ast.join(' | ') ~ ' ]'
             !! $<digits>[0].ast;
 
         make $keywords ~ ' & <number>';
