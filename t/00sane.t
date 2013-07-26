@@ -45,9 +45,10 @@ for (
                     ast => Any,
                     warnings => rx{^usage},
     },
-    # recheck comments and whitespace
-    declaration => {input => '/*aa*/COLOR/*bb*/:<!--cc-->BLUE /*dd*/;',
-                    ast => {"property" => "color", "expr" => ["color" => {"r" => 0, "g" => 0, "b" => 255}]},
+    # recheck comments, whitespace,escapes
+    declaration => {input => '/*aa*/C\OL\6fR/*bb*/:<!--cc-->BLUE /*dd*/;',
+                      warnings-todo => "implement escape parsing",
+##                    ast => {"property" => "color", "expr" => ["color" => {"r" => 0, "g" => 0, "b" => 255}]},
     },
     # boxed properties should be expanded
     declaration-list => {input => 'margin: 2em 3em',  

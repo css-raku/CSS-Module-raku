@@ -24,6 +24,8 @@ module t::AST {
                 if @warnings;
         }
         else {
+            todo( %expected<warnings-todo> )
+                if %expected<warnings-todo>;
             if %expected<warnings>.isa('Regex') {
                 my @matched = ([~] @warnings).match(%expected<warnings>);
                 ok( @matched, "{$suite} warnings")
