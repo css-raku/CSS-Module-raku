@@ -13,7 +13,7 @@ use CSS::Language::CSS3;
 use lib '.';
 use t::AST;
 
-for ("\\012AF", "\\012AFc") {
+for ("012AF", "012AFc") {
     # css21+ unicode is up to 6 digits
     nok($_ ~~ /^<CSS::Language::CSS1::unicode>$/, "not css1 unicode: $_");
     ok($_ ~~ /^<CSS::Language::CSS21::unicode>$/, "css21 unicode: $_");
@@ -46,9 +46,8 @@ for (
                     warnings => rx{^usage},
     },
     # recheck comments, whitespace,escapes
-    declaration => {input => '/*aa*/C\OL\6fR/*bb*/:<!--cc-->BLUE /*dd*/;',
-                      warnings-todo => "implement escape parsing",
-##                    ast => {"property" => "color", "expr" => ["color" => {"r" => 0, "g" => 0, "b" => 255}]},
+    declaration => {input => '/*aa*/COLoR/*bb*/:<!--cc-->BLUE /*dd*/;',
+                    ast => {"property" => "color", "expr" => ["color" => {"r" => 0, "g" => 0, "b" => 255}]},
     },
     # boxed properties should be expanded
     declaration-list => {input => 'margin: 2em 3em',  
