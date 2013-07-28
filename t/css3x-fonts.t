@@ -8,7 +8,7 @@ use CSS::Language::CSS3::CSS21_Imported;
 # prepare our own composite class with font extensions
 
 use lib '.';
-use t::AST;
+use CSS::Grammar::Test;
 
 my $css3x_actions = CSS::Language::CSS3::Fonts::Actions.new;
 my $css21_actions = CSS::Language::CSS3::CSS21_Imported::Actions.new;
@@ -105,14 +105,14 @@ for (
 
     $css3x_actions.reset;
     my $p-font = CSS::Language::CSS3::Fonts.parse( $input, :rule($rule), :actions($css3x_actions));
-    t::AST::parse_tests($input, $p-font, :rule($rule), :suite('css3x-fonts'),
+    CSS::Grammar::Test::parse_tests($input, $p-font, :rule($rule), :suite('css3x-fonts'),
                          :warnings($css3x_actions.warnings),
                          :expected(%test) );
 
     $css21_actions.reset;
     my $css21 = %test<css21> // {};
     my $p-css21 = CSS::Language::CSS3::CSS21_Imported.parse( $input, :rule($rule), :actions($css21_actions));
-    t::AST::parse_tests($input, $p-css21, :rule($rule), :suite('css21'),
+    CSS::Grammar::Test::parse_tests($input, $p-css21, :rule($rule), :suite('css21'),
                          :warnings($css21_actions.warnings),
                          :expected(%(%test, %$css21)) );
 }

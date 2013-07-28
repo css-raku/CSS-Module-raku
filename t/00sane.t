@@ -11,7 +11,7 @@ use CSS::Language::CSS21;
 use CSS::Language::CSS3;
 
 use lib '.';
-use t::AST;
+use CSS::Grammar::Test;
 
 for ("012AF", "012AFc") {
     # css21+ unicode is up to 6 digits
@@ -81,18 +81,18 @@ for (
 
     $css1_actions.reset;
     my $p1 = CSS::Language::CSS1.parse( $input, :rule($rule), :actions($css1_actions));
-    t::AST::parse_tests($input, $p1, :rule($rule), :suite('css1'),
+    CSS::Grammar::Test::parse_tests($input, $p1, :rule($rule), :suite('css1'),
                          :warnings($css1_actions.warnings),
                          :expected(%test) );
 
     $css21_actions.reset;
     my $p21 = CSS::Language::CSS21.parse( $input, :rule($rule), :actions($css21_actions));
-    t::AST::parse_tests($input, $p21, :rule($rule), :suite('css21'),
+    CSS::Grammar::Test::parse_tests($input, $p21, :rule($rule), :suite('css21'),
                          :warnings($css21_actions.warnings),
                          :expected(%test) );
     $css3_actions.reset;
     my $p3 = CSS::Language::CSS3.parse( $input, :rule($rule), :actions($css3_actions));
-    t::AST::parse_tests($input, $p3, :rule($rule), :suite('css3'),
+    CSS::Grammar::Test::parse_tests($input, $p3, :rule($rule), :suite('css3'),
                          :warnings($css3_actions.warnings),
                          :expected(%test) );
 

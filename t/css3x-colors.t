@@ -7,7 +7,7 @@ use CSS::Language::CSS3::Colors;
 # prepare our own composite class with color extensions
 
 use lib '.';
-use t::AST;
+use CSS::Grammar::Test;
 
 my $css_actions = CSS::Language::CSS3::Colors::Actions.new;
 
@@ -73,7 +73,7 @@ for (
 
     $css_actions.reset;
     my $p3 = CSS::Language::CSS3::Colors.parse( $input, :rule($rule), :actions($css_actions));
-    t::AST::parse_tests($input, $p3, :rule($rule), :suite('css3-color'),
+    CSS::Grammar::Test::parse_tests($input, $p3, :rule($rule), :suite('css3-color'),
                          :warnings($css_actions.warnings),
                          :expected(%test) );
 }

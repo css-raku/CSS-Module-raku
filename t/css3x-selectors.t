@@ -5,7 +5,7 @@ use Test;
 use CSS::Language::CSS3::Selectors;
 
 use lib '.';
-use t::AST;
+use CSS::Grammar::Test;
 
 my $css_actions = CSS::Language::CSS3::Selectors::Actions.new;
 
@@ -139,7 +139,7 @@ for (
 
     $css_actions.reset;
     my $p3 = CSS::Language::CSS3::Selectors.parse( $input, :rule($rule), :actions($css_actions));
-    t::AST::parse_tests($input, $p3, :rule($rule), :suite('css3-selector'),
+    CSS::Grammar::Test::parse_tests($input, $p3, :rule($rule), :suite('css3-selector'),
                          :warnings($css_actions.warnings),
                          :expected(%test) );
 }

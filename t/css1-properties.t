@@ -12,7 +12,7 @@ use CSS::Language::CSS21;
 use CSS::Language::CSS3;
 
 use lib '.';
-use t::AST;
+use CSS::Grammar::Test;
 
 my $css1_actions = CSS::Language::CSS1::Actions.new;
 my $css21_actions = CSS::Language::CSS21::Actions.new;
@@ -50,19 +50,19 @@ for ( $fh.lines ) {
 
     $css1_actions.reset;
     my $p1 = CSS::Language::CSS1.parse( $input, :rule('declaration-list'), :actions($css1_actions));
-    t::AST::parse_tests($input, $p1, :rule('decl'), :suite('css1'),
+    CSS::Grammar::Test::parse_tests($input, $p1, :rule('decl'), :suite('css1'),
                          :warnings($css1_actions.warnings),
                          :expected(%test) );
 
     $css21_actions.reset;
     my $p21 = CSS::Language::CSS21.parse( $input, :rule('declaration-list'), :actions($css21_actions));
-    t::AST::parse_tests($input, $p21, :rule('decl'), :suite('css21'),
+    CSS::Grammar::Test::parse_tests($input, $p21, :rule('decl'), :suite('css21'),
                          :warnings($css21_actions.warnings),
                          :expected(%test) );
 
     $css3_actions.reset;
     my $p3 = CSS::Language::CSS3.parse( $input, :rule('declaration-list'), :actions($css3_actions));
-    t::AST::parse_tests($input, $p3, :rule('decl'), :suite('css3'),
+    CSS::Grammar::Test::parse_tests($input, $p3, :rule('decl'), :suite('css3'),
                          :warnings($css3_actions.warnings),
                          :expected(%test) );
 
@@ -100,7 +100,7 @@ for ( $fh.lines ) {
                 $css21_actions.reset;
                 $p21 = CSS::Language::CSS21.parse( $decl, :rule('declaration-list'), :actions($css21_actions));
 
-                t::AST::parse_tests($decl, $p21, :rule('declaration-list'), :suite('css21'),
+                CSS::Grammar::Test::parse_tests($decl, $p21, :rule('declaration-list'), :suite('css21'),
                                     :warnings($css21_actions.warnings),
                                     :expected({ast => %ast}) );
 
@@ -109,7 +109,7 @@ for ( $fh.lines ) {
             $css3_actions.reset;
             $p3 = CSS::Language::CSS3.parse( $decl, :rule('declaration-list'), :actions($css3_actions));
 
-            t::AST::parse_tests($decl, $p3, :rule('decl'), :suite('css3'),
+            CSS::Grammar::Test::parse_tests($decl, $p3, :rule('decl'), :suite('css3'),
                                 :warnings($css3_actions.warnings),
                                 :expected({ast => %ast}) );
         }

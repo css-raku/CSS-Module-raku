@@ -5,7 +5,7 @@ use Test;
 use CSS::Language::Specification;
 use CSS::Language::Specification::Actions;
 use lib '.';
-use t::AST;
+use CSS::Grammar::Test;
 
 my $spec_actions = CSS::Language::Specification::Actions.new;
 
@@ -38,7 +38,7 @@ for (
     my $input = %test<input>;
 
      my $p = CSS::Language::Specification.parse( $input, :rule($rule), :actions($spec_actions));
-    t::AST::parse_tests($input, $p, :rule($rule), :suite('spec'),
+    CSS::Grammar::Test::parse_tests($input, $p, :rule($rule), :suite('spec'),
                          :expected(%test) );
 }
 
