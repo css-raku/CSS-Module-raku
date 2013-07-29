@@ -61,7 +61,7 @@ for (
     color => {input => 'transparent', ast => 'transparent'},
 # http://www.w3.org/TR/2011/REC-css3-color-20110607
 # @color-profile is in the process of being dropped
-##    at-rule => {input => 'color-profile { name: acmAe_cmyk; src: url(http://printers.example.com/acmecorp/model1234); }',
+##    at-rule => {input => 'color-profile { name: acme_cmyk; src: url(http://printers.example.com/acmecorp/model1234); }',
 ##                ast => {"declarations" => {"name" => {"expr" => ["term" => "acme_cmyk"]},
 ##                                           "src" => {"expr" => ["term" => "http://printers.example.com/acmecorp/model1234"]}},
 ##                        '@' => "color-profile"},

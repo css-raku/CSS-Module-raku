@@ -6,8 +6,6 @@ use JSON::Tiny;
 use CSS::Language::CSS21;
 use CSS::Language::CSS21::Actions;
 use CSS::Language::CSS3;
-
-use lib '.';
 use CSS::Grammar::Test;
 
 my $css21_actions = CSS::Language::CSS21::Actions.new;

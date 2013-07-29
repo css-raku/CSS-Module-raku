@@ -10,7 +10,6 @@ use CSS::Language::CSS21;
 
 use CSS::Language::CSS3;
 
-use lib '.';
 use CSS::Grammar::Test;
 
 for ("012AF", "012AFc") {

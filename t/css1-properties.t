@@ -11,7 +11,6 @@ use CSS::Language::CSS21;
 
 use CSS::Language::CSS3;
 
-use lib '.';
 use CSS::Grammar::Test;
 
 my $css1_actions = CSS::Language::CSS1::Actions.new;

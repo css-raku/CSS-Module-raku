@@ -3,8 +3,6 @@
 use Test;
 
 use CSS::Language::CSS3::Selectors;
-
-use lib '.';
 use CSS::Grammar::Test;
 
 my $css_actions = CSS::Language::CSS3::Selectors::Actions.new;

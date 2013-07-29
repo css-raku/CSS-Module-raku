@@ -4,7 +4,6 @@ use Test;
 
 use CSS::Language::Specification;
 use CSS::Language::Specification::Actions;
-use lib '.';
 use CSS::Grammar::Test;
 
 my $spec_actions = CSS::Language::Specification::Actions.new;

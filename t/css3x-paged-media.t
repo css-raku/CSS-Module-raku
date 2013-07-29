@@ -3,10 +3,6 @@
 use Test;
 
 use CSS::Language::CSS3;
-
-# prepare our own composite class with paged media extensions
-
-use lib '.';
 use CSS::Grammar::Test;
 
 my $css_actions = CSS::Language::CSS3::Actions.new;

@@ -4,12 +4,10 @@
 # http://www.w3.org/TR/2011/REC-CSS2-20110607/syndata.html#parsing-errors
 
 use Test;
-
-use CSS::Language::CSS3;
 use JSON::Tiny;
 
-use lib '.';
 use CSS::Grammar::Test;
+use CSS::Language::CSS3;
 
 my $css_actions = CSS::Language::CSS3::Actions.new;
 
