@@ -12,7 +12,7 @@
 { "prop" : "color", "decl" : "#3377aa", "expr" : [ { "color" : { "r" : 51, "g" : 119, "b" : 170 } } ] }
 { "prop" : "display", "decl" : "list-item", "expr" : [ { "keyw" : "list-item" } ] }
 { "prop" : "float", "decl" : "left", "expr" : [ { "keyw" : "left" } ] }
-{ "prop" : "font-family", "decl" : "Gill, \"Helvetica\", sans-serif", "expr" : [ { "family-name" : "Gill" }, { "family-name" : "Helvetica" }, { "generic-family" : "sans-serif" } ] }
+{ "prop" : "font-family", "decl" : "Gill, 'Helvetica', sans-serif", "expr" : [ { "family-name" : "Gill" }, { "family-name" : "Helvetica" }, { "generic-family" : "sans-serif" } ] }
 { "prop" : "font-family", "decl" : "New Century Schoolbook", "expr" : [ { "family-name" : "New Century Schoolbook" } ] }
 { "prop" : "font-style", "decl" : "italic", "expr" : [ { "keyw" : "italic" } ] }
 { "prop" : "font-variant", "decl" : "small-caps", "expr" : [ { "keyw" : "small-caps" } ] }

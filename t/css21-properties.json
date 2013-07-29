@@ -20,14 +20,14 @@
 { "prop" : "bottom", "decl" : "5%", "expr" : [ { "percentage" : 5 } ] }
 { "prop" : "caption-side", "decl" : "top", "expr" : [ { "keyw" : "top" } ] }
 { "prop" : "clip", "decl" : "rect(5px, 40px, auto, 5px)", "expr" : [ { "shape" : { "top" : { "length" : 5 }, "right" : { "length" : 40 }, "bottom" : { "keyw" : "auto" }, "left" : { "length" : 5 } } } ] }
-{ "prop" : "content", "decl" : "\"Section \" counter(Section) \". \"", "expr" : [ { "string" : "Section " }, { "counter" : [ { "identifier" : "Section" } ] }, { "string" : ". " } ] }
-{ "prop" : "content", "decl" : "\"Section \" counters(Section)", "expr" : [ { "string" : "Section " }, { "counters" : [ { "identifier" : "Section" } ] } ] }
+{ "prop" : "content", "decl" : "'Section ' counter(Section) '. '", "expr" : [ { "string" : "Section " }, { "counter" : [ { "identifier" : "Section" } ] }, { "string" : ". " } ] }
+{ "prop" : "content", "decl" : "'Section ' counters(Section)", "expr" : [ { "string" : "Section " }, { "counters" : [ { "identifier" : "Section" } ] } ] }
 { "prop" : "counter-increment", "decl" : "section 5", "expr" : [ { "identifier" : "section" }, { "integer" : 5 } ] }
 { "prop" : "counter-increment", "decl" : "None", "expr" : [ { "keyw" : "none" } ] }
 { "prop" : "counter-reset", "decl" : "section 10", "expr" : [ { "identifier" : "section" }, { "integer" : 10 } ] }
-{ "prop" : "cue-before", "decl" : "url(\"quack.wav\")", "expr" : [ { "uri" : "quack.wav" } ] }
-{ "prop" : "cue-after", "decl" : "url(\"woof.wav\")", "expr" : [ { "uri" : "woof.wav" } ] }
-{ "prop" : "cue", "decl" : "none url(\"woof.wav\")", "expr" : [ { "cue-before" : [ { "keyw" : "none" } ] }, { "cue-after" : [ { "uri" : "woof.wav" } ] } ] }
+{ "prop" : "cue-before", "decl" : "url('quack.wav')", "expr" : [ { "uri" : "quack.wav" } ] }
+{ "prop" : "cue-after", "decl" : "url('woof.wav')", "expr" : [ { "uri" : "woof.wav" } ] }
+{ "prop" : "cue", "decl" : "none url('woof.wav')", "expr" : [ { "cue-before" : [ { "keyw" : "none" } ] }, { "cue-after" : [ { "uri" : "woof.wav" } ] } ] }
 { "prop" : "cursor", "decl" : "e-resize", "expr" : [ { "keyw" : "e-resize" } ] }
 { "prop" : "direction", "decl" : "LTR", "expr" : [ { "keyw" : "ltr" } ] }
 { "prop" : "display", "decl" : "inline-table", "expr" : [ { "keyw" : "inline-table" } ] }
@@ -49,7 +49,7 @@
 { "prop" : "pause", "decl" : "2s 5s", "expr" : [ { "pause-before" : [ { "time" : 2 } ] }, { "pause-after" : [ { "time" : 5 } ] } ] }
 { "prop" : "pitch-range", "decl" : "10", "expr" : [ { "number" : "10" } ] }
 { "prop" : "play-during", "decl" : "url(test.wav) mix", "expr" : [ { "uri" : "test.wav" }, { "keyw" : "mix" } ] }
-{ "prop" : "quotes", "decl" : "\"<\" \">\"", "expr" : [ { "string" : "<" }, { "string" : ">" } ] }
+{ "prop" : "quotes", "decl" : "'<' '>'", "expr" : [ { "string" : "<" }, { "string" : ">" } ] }
 { "prop" : "richness", "decl" : "10", "expr" : [ { "number" : "10" } ] }
 { "prop" : "right", "decl" : "15%", "expr" : [ { "percentage" : "15" } ] }
 { "prop" : "size", "decl" : "3ex", "expr" : [ { "length" : 3 } ] }

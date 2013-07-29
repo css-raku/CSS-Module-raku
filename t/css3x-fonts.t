@@ -4,10 +4,6 @@ use Test;
 
 use CSS::Language::CSS3::Fonts;
 use CSS::Language::CSS3::CSS21_Imported;
-
-# prepare our own composite class with font extensions
-
-use lib '.';
 use CSS::Grammar::Test;
 
 my $css3x_actions = CSS::Language::CSS3::Fonts::Actions.new;

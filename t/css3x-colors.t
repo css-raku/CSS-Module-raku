@@ -3,10 +3,6 @@
 use Test;
 
 use CSS::Language::CSS3::Colors;
-
-# prepare our own composite class with color extensions
-
-use lib '.';
 use CSS::Grammar::Test;
 
 my $css_actions = CSS::Language::CSS3::Colors::Actions.new;
