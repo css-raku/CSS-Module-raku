@@ -1,6 +1,7 @@
 #!/usr/bin/env perl6
 
 use Test;
+use JSON::Tiny;
 
 use CSS::Language::CSS3::Selectors;
 use CSS::Grammar::Test;
