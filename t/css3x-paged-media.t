@@ -1,52 +1,22 @@
 #!/usr/bin/env perl6
 
 use Test;
+use JSON::Tiny;
 
 use CSS::Language::CSS3;
 use CSS::Grammar::Test;
 
 my $css_actions = CSS::Language::CSS3::Actions.new;
 
-my $top_center = 'page { color: red;
-        @top-center {
-           content: "Page " counters(page,".");
-       }
-}';
+my $fh = open 't/css3x-paged-media.json', :r;
 
-my $top_center_ast = {"declarations" => {"color" => {"expr" => ["color" => {"r" => 255, "g" => 0, "b" => 0}]},
-                                         "\@top-center" => {"margin-box" => {"box-vpos" => "top", "box-center" => "center"},
-                                                            "declarations" => {"content" => {"expr" => ["string" => "Page ", "counters" => {"identifier" => "page", "string" => "."}]}}}},
-                      "\@" => "page"};
+for ( $fh.lines ) {
 
-for (
-    at-rule   => {input => 'page :left { margin-left: 4cm; size: a4 }',
-                  ast => {"page" => "left",
-                          "declarations" => {"margin-left" => {"expr" => ["length" => 4]},
-                                             "size" => {"expr" => ["page-size" => "a4"]},
-                          },
-                          "\@" => "page"},
-    },
-    at-rule   => {input => 'page :junk { margin-right: 2cm }',
-                  ast => {"declarations" => {"margin-right" => {"expr" => ["length" => 2]}}, "\@" => "page"},
-                  warnings => 'ignoring page pseudo: junk',
-    },
-    at-rule   => {input => 'page : { margin-right: 2cm }',
-                  ast => Mu,
-                  warnings => "':' should be followed by one of: left right first",
-    },
-    'page-declarations' => {input => '{@bottom-right-CorNeR {color:blue}}',
-                 ast => {"\@bottom-right-corner" => {"margin-box" => {"box-vpos" => "bottom",
-                                                                      "box-hpos" => "right"},
-                                                     "declarations" => {"color" => {"expr" => ["color" => {"r" => 0, "g" => 0, "b" => 255}]}}}},
-    },
-    'page-declarations' => {input => '{ @Top-CENTER {content: "Page " counters(page);} }',
-                            ast => {"\@top-center" => {"margin-box" => {"box-vpos" => "top", "box-center" => "center"},
-                                           "declarations" => {"content" => {"expr" => ["string" => "Page ", "counters" => {"identifier" => "page"}]}}}},
-    },
-    at-rule => {input => $top_center, ast => $top_center_ast},
-    ) {
-    my $rule = .key;
-    my %test = .value;
+    if .substr(0,2) eq '//' {
+##        note '[' ~ .substr(2) ~ ']';
+        next;
+    }
+    my ($rule, %test) = @( from-json($_) );
     my $input = %test<input>;
 note $input;
     $css_actions.reset;
