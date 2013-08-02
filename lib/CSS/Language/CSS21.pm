@@ -5,12 +5,7 @@ use v6;
 use CSS::Language::_Base;
 use CSS::Grammar::CSS21;
 
-grammar CSS::Extensions::CSS21 {...}
-
-grammar CSS::Language::CSS21:ver<20110607.000>
-    is CSS::Language::_Base
-    is CSS::Extensions::CSS21 
-    is CSS::Grammar::CSS21 {};
+grammar  CSS::Language::CSS21:ver<20110607.000> {...}
 
 grammar CSS::Extensions::CSS21 {
 
@@ -166,7 +161,7 @@ grammar CSS::Extensions::CSS21 {
 
     # - font-style: normal | italic | oblique
     rule font-style {:i [ normal | italic | oblique ] & <keyw> }
-    rule decl:sym<font-style> {:i (font\-style) ':' <val(rx[<ref=.font-style>])> }
+    rule decl:sym<font-style> {:i (font\-style) ':' <val(rx[ <ref=.font-style> ])> }
 
     # - font-variant: normal | small-caps
     rule font-variant {:i [ normal | small\-caps ] & <keyw> }
@@ -206,7 +201,7 @@ grammar CSS::Extensions::CSS21 {
 
     # - list-style-type: disc | circle | square | decimal | decimal-leading-zero | lower-roman | upper-roman | lower-greek | lower-latin | upper-latin | armenian | georgian | lower-alpha | upper-alpha | none
     rule list-style-type {:i [ disc | circle | square | decimal | decimal\-leading\-zero | lower\-roman | upper\-roman | lower\-greek | lower\-latin | upper\-latin | armenian | georgian | lower\-alpha | upper\-alpha | none ] & <keyw> }
-    rule decl:sym<list-style-type> {:i (list\-style\-type) ':' <val(rx[<ref=.list-style-type>])> }
+    rule decl:sym<list-style-type> {:i (list\-style\-type) ':' <val(rx:s:i[ <ref=.list-style-type> ])> }
 
     # - list-style: [ 'list-style-type' || 'list-style-position' || 'list-style-image' ]
     rule decl:sym<list-style> {:i (list\-style) ':' <val(rx:s:i[ [ <list-style-type> | <list-style-position> | <list-style-image> ]**1..3 ])> }
@@ -358,3 +353,9 @@ grammar CSS::Extensions::CSS21 {
     rule decl:sym<z-index> {:i (z\-index) ':' <val(rx:s:i[ auto & <keyw> | <integer> ])> }
 
 }
+
+grammar CSS::Language::CSS21:ver<20110607.000>
+    is CSS::Language::_Base
+    is CSS::Extensions::CSS21 
+    is CSS::Grammar::CSS21 {};
+
