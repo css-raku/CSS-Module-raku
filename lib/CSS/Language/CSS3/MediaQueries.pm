@@ -24,23 +24,23 @@ grammar CSS::Language::CSS3::MediaQueries::Syntax {
                       [:i'and' '(' <media-expr> ')' ]*}
     rule media-op    {:i'only'|'not'}
 
-    rule media-range {:i [$<prefix>=[min|max]\-]}
+    my rule _range {:i [$<prefix>=[min|max]\-]}
     rule media-expr  { <expr=.media-feature> || <expr=.media-feature-unknown> }
 
     proto rule media-feature  {<...>}
 
-    rule media-feature:sym<width|height> {:i (<.media-range>?[device\-]?[width|height]) ':' <val(rx:i:s[ <length> ])> }
+    rule media-feature:sym<width|height> {:i (<._range>?[device\-]?[width|height]) ':' <val(rx:i:s[ <length> ])> }
 
     rule media-feature:sym<orientation> {:i (orientation) [ ':' <val(rx:i:s[ [ portrait | landscape ] & <keyw> ])> ]? }
 
-    rule media-feature:sym<aspect-ratio> {:i (<.media-range>?[device\-]?aspect\-ratio) ':' <val(rx:i:s[ <horizontal=.integer> '/' <vertical=.integer> ])> }
+    rule media-feature:sym<aspect-ratio> {:i (<._range>?[device\-]?aspect\-ratio) ':' <val(rx:i:s[ <horizontal=.integer> '/' <vertical=.integer> ])> }
 
-    rule media-feature:sym<color> {:i (<.media-range>?color[\-index]?) [ ':' <val(rx:i:s[ <integer> ])> ] }
+    rule media-feature:sym<color> {:i (<._range>?color[\-index]?) [ ':' <val(rx:i:s[ <integer> ])> ] }
     rule media-feature:sym<color-bool> {:i (color[\-index]?) }
 
-    rule media-feature:sym<monochrome> {:i (<.media-range>?monochrome) ':' <val(rx:i:s[ <integer> ])> }
+    rule media-feature:sym<monochrome> {:i (<._range>?monochrome) ':' <val(rx:i:s[ <integer> ])> }
 
-    rule media-feature:sym<resolution> {:i (<.media-range>?resolution) ':' <val(rx:i:s[ <resolution> ])> }
+    rule media-feature:sym<resolution> {:i (<._range>?resolution) ':' <val(rx:i:s[ <resolution> ])> }
 
     rule media-feature:sym<scan> {:i (scan) [ ':' <val(rx:i:s[ [ progressive | interlace] & <keyw> ])> ]? }
 
