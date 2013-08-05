@@ -38,13 +38,13 @@ for (
     declaration => {input => 'background-attachment: crud',
                     warnings => rx{^usage\ background\-attachment\:\ scroll\ \|\ fixed},
     },
-    declaration => {input => 'background-attachment: FiXed',   ast => {property => 'background-attachment', expr => [keyw => 'fixed']},
+    declaration => {input => 'background-attachment: FiXed', ast => {property => 'background-attachment', expr => [keyw => 'fixed']},
     },
     declaration => {input => 'font-family: "unclosed-string',
                     ast => Any,
                     warnings => rx{^usage},
     },
-    # recheck comments, whitespace,escapes
+    # recheck comments and whitespace
     declaration => {input => '/*aa*/COLoR/*bb*/:<!--cc-->BLUE /*dd*/;',
                     ast => {"property" => "color", "expr" => ["color" => {"r" => 0, "g" => 0, "b" => 255}]},
     },
