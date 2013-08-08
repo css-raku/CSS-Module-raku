@@ -8,7 +8,7 @@
 { "prop" : "background-color", "decl" : "#37a", "expr" : [ { "color" : { "r" : 51, "g" : 119, "b" : 170 } } ] }
 { "prop" : "background-image", "decl" : "url(images/ok.png)", "expr" : [ { "url" : "images/ok.png" } ] }
 { "prop" : "background-repeat", "decl" : "Repeat-x", "expr" : [ { "keyw" : "repeat-x" } ] }
-{ "prop" : "background-position", "decl" : "100% 90%", "expr" : [ [ { "percentage" : 100 }, { "percentage" : 90 } ] ] }
+{ "prop" : "background-position", "decl" : "100% 90%", "expr" : [ { "percentage" : 100 }, { "percentage" : 90 } ] }
 { "prop" : "border-collapse", "decl" : "separate", "expr" : [ { "keyw" : "separate" } ] }
 { "prop" : "border-spacing", "decl" : "3em", "expr" : [ { "length" : 3 } ] }
 { "prop" : "border-bottom", "decl" : "thick dotted red", "expr" : [ { "border-width" : [ { "keyw" : "thick" } ] }, { "border-style" : [ { "keyw" : "dotted" } ] }, { "border-color" : [ { "color" : { "r" : 255, "g" : 0, "b" : 0 } } ] } ] }
@@ -21,7 +21,7 @@
 { "prop" : "caption-side", "decl" : "top", "expr" : [ { "keyw" : "top" } ] }
 { "prop" : "clip", "decl" : "rect(5px, 40px, auto, 5px)", "expr" : [ { "shape" : { "top" : { "length" : 5 }, "right" : { "length" : 40 }, "bottom" : { "keyw" : "auto" }, "left" : { "length" : 5 } } } ] }
 { "prop" : "content", "decl" : "'Section ' counter(Section) '. '", "expr" : [ { "string" : "Section " }, { "counter" : [ { "identifier" : "Section" } ] }, { "string" : ". " } ] }
-{ "prop" : "content", "decl" : "'Section ' counters(Section)", "expr" : [ { "string" : "Section " }, { "counters" : [ { "identifier" : "Section" } ] } ] }
+{ "prop" : "content", "decl" : "'Section ' counters(Section)", "expr" : [ { "string" : "Section " }, { "counters" : { "identifier" : "Section" } } ] }
 { "prop" : "counter-increment", "decl" : "section 5", "expr" : [ { "identifier" : "section" }, { "integer" : 5 } ] }
 { "prop" : "counter-increment", "decl" : "None", "expr" : [ { "keyw" : "none" } ] }
 { "prop" : "counter-reset", "decl" : "section 10", "expr" : [ { "identifier" : "section" }, { "integer" : 10 } ] }
@@ -36,7 +36,7 @@
 { "prop" : "elevation", "decl" : "LOWER", "expr" : [ { "tilt" : "lower" }, { "_implied" : { "delta" : -10 } } ] }
 { "prop" : "empty-cells", "decl" : "show", "expr" : [ { "keyw" : "show" } ] }
 { "prop" : "margin", "decl" : "inherit", "box" : [ { "top" : [ { "inherit" : true } ] }, { "right" : [ { "inherit" : true } ] }, { "bottom" : [ { "inherit" : true } ] }, { "left" : [ { "inherit" : true } ] } ] }
-{ "prop" : "max-width", "decl" : "30%", "expr" : [ { "percentage" : "30" } ] }
+{ "prop" : "max-width", "decl" : "30%", "expr" : [ { "percentage" : 30 } ] }
 { "prop" : "opacity", "decl" : ".3", "expr" : [ { "number" : 0.3 } ] }
 { "prop" : "orphans", "decl" : "3", "expr" : [ { "integer" : 3 } ] }
 { "prop" : "outline-color", "decl" : "olive", "expr" : [ { "color" : { "r" : 128, "g" : 128, "b" : 0 } } ] }
@@ -45,13 +45,13 @@
 { "prop" : "outline", "decl" : "#00FF00 dotted thick", "expr" : [ { "outline-color" : [ { "color" : { "r" : 0, "g" : 255, "b" : 0 } } ] }, { "outline-style" : [ { "keyw" : "dotted" } ] }, { "outline-width" : [ { "keyw" : "thick" } ] } ] }
 { "prop" : "page-break-after", "decl" : "auto", "expr" : [ { "keyw" : "auto" } ] }
 { "prop" : "page-break-inside", "decl" : "avoid", "expr" : [ { "keyw" : "avoid" } ] }
-{ "prop" : "pause-before", "decl" : "10s", "expr" : [ { "time" : "10" } ] }
+{ "prop" : "pause-before", "decl" : "10s", "expr" : [ { "time" : 10 } ] }
 { "prop" : "pause", "decl" : "2s 5s", "expr" : [ { "pause-before" : [ { "time" : 2 } ] }, { "pause-after" : [ { "time" : 5 } ] } ] }
-{ "prop" : "pitch-range", "decl" : "10", "expr" : [ { "number" : "10" } ] }
+{ "prop" : "pitch-range", "decl" : "10", "expr" : [ { "number" : 10 } ] }
 { "prop" : "play-during", "decl" : "url(test.wav) mix", "expr" : [ { "uri" : "test.wav" }, { "keyw" : "mix" } ] }
 { "prop" : "quotes", "decl" : "'<' '>'", "expr" : [ { "string" : "<" }, { "string" : ">" } ] }
-{ "prop" : "richness", "decl" : "10", "expr" : [ { "number" : "10" } ] }
-{ "prop" : "right", "decl" : "15%", "expr" : [ { "percentage" : "15" } ] }
+{ "prop" : "richness", "decl" : "10", "expr" : [ { "number" : 10 } ] }
+{ "prop" : "right", "decl" : "15%", "expr" : [ { "percentage" : 15 } ] }
 { "prop" : "size", "decl" : "3ex", "expr" : [ { "length" : 3 } ] }
 { "prop" : "speak-header", "decl" : "always", "expr" : [ { "keyw" : "always" } ] }
 { "prop" : "speak-punctuation", "decl" : "code", "expr" : [ { "keyw" : "code" } ] }

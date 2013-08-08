@@ -7,7 +7,7 @@
 { "prop" : "border-top-width", "decl" : "thick", "expr" : [ { "keyw" : "thick" } ] }
 { "prop" : "border-width", "decl" : "2ex 1.5em 3ex 2em", "box" : [ { "top" : [ { "length" : 2 } ] }, { "right" : [ { "length" : 1.5 } ] }, { "bottom" : [ { "length" : 3 } ] }, { "left" : [ { "length" : 2 } ] } ] }
 { "prop" : "border-color", "decl" : "#a7f #aa77ff rgb(100,150,20) aqua", "box" : [ { "top" : [ { "color" : { "r" : 170, "g" : 119, "b" : 255 } } ] }, { "right" : [ { "color" : { "r" : 170, "g" : 119, "b" : 255 } } ] }, { "bottom" : [ { "color" : { "r" : 100, "g" : 150, "b" : 20 } } ] }, { "left" : [ { "color" : { "r" : 0, "g" : 255, "b" : 255 } } ] } ] }
-{ "prop" : "border-style", "decl" : "groove", "box" : [ { "top" : { "keyw" : "groove" } }, { "right" : { "keyw" : "groove" } }, { "bottom" : { "keyw" : "groove" } }, { "left" : { "keyw" : "groove" } } ] }
+{ "prop" : "border-style", "decl" : "groove", "box" : [ { "top" : [ { "keyw" : "groove" } ] }, { "right" : [ { "keyw" : "groove" } ] }, { "bottom" : [ { "keyw" : "groove" } ] }, { "left" : [ { "keyw" : "groove" } ] } ] }
 { "prop" : "clear", "decl" : "both", "expr" : [ { "keyw" : "both" } ] }
 { "prop" : "color", "decl" : "#3377aa", "expr" : [ { "color" : { "r" : 51, "g" : 119, "b" : 170 } } ] }
 { "prop" : "display", "decl" : "list-item", "expr" : [ { "keyw" : "list-item" } ] }
@@ -17,12 +17,12 @@
 { "prop" : "font-style", "decl" : "italic", "expr" : [ { "keyw" : "italic" } ] }
 { "prop" : "font-variant", "decl" : "small-caps", "expr" : [ { "keyw" : "small-caps" } ] }
 { "prop" : "font-weight", "decl" : "bolder", "expr" : [ { "keyw" : "bolder" } ] }
-{ "prop" : "font-weight", "decl" : "800", "expr" : [ { "number" : "800" } ] }
-{ "prop" : "font-size", "decl" : "12pt", "expr" : [ { "length" : "12" } ] }
-{ "prop" : "font-size", "decl" : "150%", "expr" : [ { "percentage" : "150" } ] }
+{ "prop" : "font-weight", "decl" : "800", "expr" : [ { "number" : 800 } ] }
+{ "prop" : "font-size", "decl" : "12pt", "expr" : [ { "length" : 12 } ] }
+{ "prop" : "font-size", "decl" : "150%", "expr" : [ { "percentage" : 150 } ] }
 { "prop" : "font-size", "decl" : "Larger", "expr" : [ { "relative-size" : "larger" } ] }
 { "prop" : "font", "decl" : "12pt/14pt sans-serif", "expr" : [ { "font-size" : [ { "length" : 12 } ] }, { "line-height" : [ { "length" : 14 } ] }, { "font-family" : [ { "generic-family" : "sans-serif" } ] } ] }
-{ "prop" : "font", "decl" : "normal small-caps 120%/120% fantasy", "expr" : [ { "font-style" : [ { "keyw" : "normal" } ] }, { "font-variant" : [ { "keyw" : "small-caps" } ] }, { "font-size" : [ { "percentage" : 120 } ] }, { "line-height" : [ { "percentage" : 120 } ] }, { "font-family" : [ { "generic-family" : "fantasy" } ] } ] }
+{ "prop" : "font", "decl" : "normal small-caps 120%/120% fantasy", "expr" : [ { "font-style" : { "keyw" : "normal" } }, { "font-variant" : { "keyw" : "small-caps" } }, { "font-size" : [ { "percentage" : 120 } ] }, { "line-height" : [ { "percentage" : 120 } ] }, { "font-family" : [ { "generic-family" : "fantasy" } ] } ] }
 { "prop" : "letter-spacing", "decl" : "normal", "expr" : [ { "keyw" : "normal" } ] }
 { "prop" : "line-height", "decl" : "120%", "expr" : [ { "percentage" : 120 } ] }
 { "prop" : "list-style-type", "decl" : "square", "expr" : [ { "keyw" : "square" } ] }

@@ -92,8 +92,8 @@ for ( $fh.lines ) {
 
             my @_expr = ($misc => True);
             my %ast = %test<box>
-                ?? <top right bottom left>.map({($prop.lc ~ '-' ~ $_) => [expr => @_expr]})
-                !! ($prop.lc => [expr => @_expr]);
+                ?? <top right bottom left>.map({($prop.lc ~ '-' ~ $_) => {expr => @_expr}})
+                !! ($prop.lc => {expr => @_expr});
 
             unless $misc eq 'initial' { # applicable to css3 only
                 $css21_actions.reset;
