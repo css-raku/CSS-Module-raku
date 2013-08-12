@@ -47,10 +47,9 @@ class CSS::Language::CSS21::Actions
         my %ast = $.node($/);
 
         # compute implied angles
-        my $implied;
-        my $direction = %ast<direction> || %ast<behind>;
+        my $angle;
 
-        if $direction {
+        if my $direction = %ast<direction> || %ast<behind> {
 
             state %angles = (
                 'left-side'    => [270, 270],
@@ -67,17 +66,14 @@ class CSS::Language::CSS21::Actions
 
             my $bh = %ast<behind> ?? 1 !! 0;
 
-            $implied = (angle => $.token(%angles{$direction}[$bh], :type<angle>, :units<degrees> ));
+            $angle = (angle => $.token(%angles{$direction}[$bh], :type<angle>, :units<degrees> ));
             }
         elsif %ast<delta> {
             my $delta_angle = %ast<delta> eq 'leftwards' ?? -20 !! 20;
-            $implied = (delta => $.token($delta_angle, :type<angle>, :units<degrees> ));
+            $angle = (turn => $.token($delta_angle, :type<angle>, :units<degrees> ));
         }
 
-        %ast<_implied> = $implied
-            if $implied;
-
-        make %ast;
+        make $angle // %ast;
     }
 
     method decl:sym<azimuth>($/) {
@@ -242,10 +238,9 @@ class CSS::Language::CSS21::Actions
     method elevation($/) {
         my %ast = $.node($/);
 
-        my $direction = %ast<direction>;
-        my $implied;
+        my $angle;
 
-        if $direction {
+        if my $direction = %ast<direction> {
 
             state %angles = (
                 'below'    => -90,
@@ -253,17 +248,14 @@ class CSS::Language::CSS21::Actions
                 'above'    =>  90,
                 );
 
-            $implied = (angle => $.token(%angles{$direction}, :type<angle>, :units<degrees> ));
+            $angle = (angle => $.token(%angles{$direction}, :type<angle>, :units<degrees> ));
         }
         elsif %ast<tilt> {
             my $delta_angle = %ast<tilt> eq 'lower' ?? -10 !! 10;
-            $implied = (delta => $.token($delta_angle, :type<angle>, :units<degrees> ));
+            $angle = (tilt => $.token($delta_angle, :type<angle>, :units<degrees> ));
         }
 
-        %ast<_implied> = $implied
-            if $implied;
-
-        make %ast;
+        make $angle // %ast;
     }
 
     # - elevation: <angle> | below | level | above | higher | lower
