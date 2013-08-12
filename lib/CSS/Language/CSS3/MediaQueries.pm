@@ -36,7 +36,7 @@ grammar CSS::Language::CSS3::MediaQueries::Syntax {
     rule media-feature:sym<aspect-ratio> {:i (<._range>?[device\-]?aspect\-ratio) ':' <val(rx:i:s[ <horizontal=.integer> '/' <vertical=.integer> ])> }
 
     rule media-feature:sym<color> {:i (<._range>?color[\-index]?) [ ':' <val(rx:i:s[ <integer> ])> ] }
-    rule media-feature:sym<color-bool> {:i (color[\-index]?) }
+    rule media-feature:sym<color-bool> {:i (color[\-index]?) <!before ':'> }
 
     rule media-feature:sym<monochrome> {:i (<._range>?monochrome) ':' <val(rx:i:s[ <integer> ])> }
 
@@ -60,6 +60,7 @@ class CSS::Language::CSS3::MediaQueries::Actions
 
     # media-rules, media-list, media see core grammar actions
     method unknown-media-list($/) {
+	$.warning("discarding media list");
         make ["media-query" => ["media-op" => "not", "media" => "all"]];
     }
 
