@@ -9,11 +9,11 @@ my $css_actions = CSS::Language::CSS3::Colors::Actions.new;
 
 for (
     term   => {input => 'rgb(70%, 50%, 10%)',
-               ast => {r => 179, g => 127, b => 26},
+               ast => {r => 179, g => 128, b => 26},
                token => {type => 'color', units => 'rgb'},
     },
     term   => {input => 'rgba(100%, 50%, 0%, 0.1)',
-               ast => {r => 255, g => 127, b => 0, a=> .1},
+               ast => {r => 255, g => 128, b => 0, a=> .1},
                token => {type => 'color', units => 'rgba'},
     },
     term   => {input => 'hsl(120, 100%, 50%)',
@@ -26,7 +26,7 @@ for (
     },
     # clipping of out-of-range values
     term   => {input => 'rgba(101%, 50%, -5%, +1.1)',
-               ast => {r => 255, g => 127, b => 0, a => 1},
+               ast => {r => 255, g => 128, b => 0, a => 1},
                token => {type => 'color', units => 'rgba'},
     },
     term   => {input => 'hsl(120, 110%, -50%)',
