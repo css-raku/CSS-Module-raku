@@ -79,21 +79,22 @@ class CSS::Language::Actions
 
         if $expand {
             if $expand eq 'box' {
-                my @properties;
                 #  expand to a list of properties. eg: margin => margin-top,
                 #      margin-right margin-bottom margin-left
                 warn "too many arguments: @expr"
                     if @expr > 4;
-                my %box;
-                %box<top right bottom left> = @expr;
+		constant @Edges = <top right bottom left>;
+                my %box = @Edges Z=> @expr;
                 %box<right>  //= %box<top>;
                 %box<bottom> //= %box<top>;
                 %box<left>   //= %box<right>;
 
-                for %box.kv -> $edge, $val {
+		my @properties;
+                for @Edges -> $edge {
                     my $prop = $property ~ '-' ~ $edge;
+		    my $val = %box{$edge};
                     @properties.push( {property => $prop, expr => [$val]} );
-                }
+		}
                 %ast<property-list> = @properties;
             }
             else {
