@@ -18,7 +18,7 @@ for ( $fh.lines ) {
     }
     my ($rule, %test) = @( from-json($_) );
     my $input = %test<input>;
-note $input;
+
     $css_actions.reset;
     my $p3 = CSS::Language::CSS3.parse( $input, :rule($rule), :actions($css_actions));
     CSS::Grammar::Test::parse_tests($input, $p3, :rule($rule), :suite('css3 @page'),
