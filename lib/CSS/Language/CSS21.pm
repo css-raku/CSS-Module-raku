@@ -9,7 +9,7 @@ grammar  CSS::Language::CSS21:ver<20110607.000> {...}
 
 grammar CSS::Extensions::CSS21 {
 
-    proto token proforma        { <...> }
+    proto token proforma        {*}
     token proforma:sym<inherit> {:i inherit}
 
     # allow color names and define our vocabulary

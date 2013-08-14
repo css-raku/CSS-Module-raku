@@ -12,7 +12,7 @@ grammar CSS::Language::CSS3::_Base
  
     # http://www.w3.org/TR/2013/CR-css3-values-20130404/ 3.1.1
     # - all properties accept the 'initial' and 'inherit' keywords
-    proto token proforma        { <...> }
+    proto token proforma        {*}
     token proforma:sym<inherit> {:i inherit}
     token proforma:sym<initial> {:i initial}
 
@@ -22,7 +22,7 @@ grammar CSS::Language::CSS3::_Base
     # base resolution units, used by Media Queries module. May be extended
     # by Units and Values module
     token resolution-units {:i[dpi|dpcm]}
-    proto token resolution {<...>}
+    proto token resolution {*}
     token resolution:sym<dim> {<num>(<.resolution-units>)}
     token dimension:sym<resolution> {<resolution>}
     # <val(..)> - rule for processing right hand side of property declarations

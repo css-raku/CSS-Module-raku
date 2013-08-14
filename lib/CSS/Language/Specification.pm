@@ -31,14 +31,14 @@ grammar CSS::Language::Specification {
     rule values      { <value-inst>+ }
     rule value-inst  { <value><occurs>**0..1 }
 
-    proto token occurs {<...>}
+    proto token occurs {*}
     token occurs:sym<maybe>       {'?'}
     token occurs:sym<once_plus>   {'+'}
     token occurs:sym<zero_plus>   {'*'}
     token occurs:sym<range>       {'{'~'}' [<min=.digits>','<max=.digits>] }
     token occurs:sym<list>        {'#'}
 
-    proto rule value {<...>}
+    proto rule value {*}
     rule value:sym<func>          { <id>'(' ~ ')' <.terms> }
     rule value:sym<keywords>      { <keyw>   +% '|' }
     rule value:sym<numbers>       { <digits> +% '|' }
@@ -46,7 +46,7 @@ grammar CSS::Language::Specification {
     rule value:sym<rule>          { '<'~'>' <id> }
     rule value:sym<punc>          { ',' | '/' }
 
-    proto token property-ref      { <...> }
+    proto token property-ref      {*}
     token property-ref:sym<css21> { <id=.id-quoted> }
     token property-ref:sym<css3>  { '<'~'>' <id=.id-quoted> }
     rule value:sym<prop-ref>      { <property-ref> }

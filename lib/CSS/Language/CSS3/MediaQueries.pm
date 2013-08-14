@@ -27,7 +27,7 @@ grammar CSS::Language::CSS3::MediaQueries::Syntax {
     my rule _range {:i [$<prefix>=[min|max]\-]}
     rule media-expr  { <expr=.media-feature> || <expr=.media-feature-unknown> }
 
-    proto rule media-feature  {<...>}
+    proto rule media-feature  {*}
 
     rule media-feature:sym<width|height> {:i (<._range>?[device\-]?[width|height]) ':' <val(rx:i:s[ <length> ])> }
 
