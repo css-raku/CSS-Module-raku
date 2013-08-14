@@ -32,21 +32,22 @@ my $css3_actions  = CSS::Language::CSS3::Actions.new;
 
 for (
     declaration-list => {input => 'bad-prop: badval',
-                    warnings => 'unknown property: bad-prop - declaration dropped',
-                    ast => Mu,
+			 warnings => 'unknown property: bad-prop - declaration dropped',
+			 ast => {},
     },
     declaration-list => {input => 'background-attachment: crud',
-                    warnings => rx{^usage\ background\-attachment\:\ scroll\ \|\ fixed},
+			 warnings => rx{^usage\ background\-attachment\:\ scroll\ \|\ fixed},
+			 ast => {},
     },
     declaration-list => {input => 'background-attachment: FiXed', ast => {'background-attachment' => {expr => [keyw => 'fixed']}},
     },
     declaration-list => {input => 'font-family: "unclosed-string',
-                    ast => Any,
-                    warnings => rx{^usage},
+			 ast => {},
+			 warnings => rx{^usage},
     },
     # recheck comments and whitespace
     declaration-list => {input => '/*aa*/COLoR/*bb*/:<!--cc-->BLUE /*dd*/;',
-                    ast => {"color" => {"expr" => ["color" => {"r" => 0, "g" => 0, "b" => 255}]}},
+			 ast => {"color" => {"expr" => ["color" => {"r" => 0, "g" => 0, "b" => 255}]}},
     },
     # boxed properties should be expanded
     declaration-list => {input => 'margin: 2em 3em',  
