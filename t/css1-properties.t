@@ -47,73 +47,50 @@ for ( $fh.lines ) {
 
     my $input = $prop ~ ':' ~ %test<decl>;
 
-    $css1_actions.reset;
-    my $p1 = CSS::Language::CSS1.parse( $input, :rule('declaration-list'), :actions($css1_actions));
-    CSS::Grammar::Test::parse_tests($input, $p1, :rule('decl'), :suite('css1'),
-                         :warnings($css1_actions.warnings),
-                         :expected(%test) );
+    for css1  => (CSS::Language::CSS1, $css1_actions, qw<>),
+       	css21 => (CSS::Language::CSS21, $css21_actions, qw<inherit>),	
+       	css3  => (CSS::Language::CSS3, $css3_actions, qw<inherit initial>) {
 
-    $css21_actions.reset;
-    my $p21 = CSS::Language::CSS21.parse( $input, :rule('declaration-list'), :actions($css21_actions));
-    CSS::Grammar::Test::parse_tests($input, $p21, :rule('decl'), :suite('css21'),
-                         :warnings($css21_actions.warnings),
-                         :expected(%test) );
+	my ($level, $class, $actions, @proforma) = (.key, @(.value));
 
-    $css3_actions.reset;
-    my $p3 = CSS::Language::CSS3.parse( $input, :rule('declaration-list'), :actions($css3_actions));
-    CSS::Grammar::Test::parse_tests($input, $p3, :rule('decl'), :suite('css3'),
-                         :warnings($css3_actions.warnings),
-                         :expected(%test) );
+	$actions.reset;
+	my $p = $class.parse( $input, :rule('declaration-list'), :actions($actions));
+	CSS::Grammar::Test::parse_tests($input, $p, :rule('decl'),
+					:suite($level),
+					:warnings($actions.warnings),
+					:expected(%test) );
 
-    unless %seen{$prop.lc}++ {
-        # usage and inheritence  tests
-        my $junk = $prop ~ ': junk +-42';
+	unless %seen{$prop.lc}{$level}++ {
+	    # usage and inheritence  tests
+	    my $junk = $prop ~ ': junk +-42';
 
-        $css1_actions.reset;
-        $p1 = CSS::Language::CSS1.parse( $junk, :rule('declaration-list'), :actions($css1_actions));
-        is($p1.Str, $junk, "$prop: able to parse unexpected input");
+	    $actions.reset;
+	    $p = $class.parse( $junk, :rule('declaration-list'), :actions($actions));
+	    is($p.Str, $junk, "$level $prop: able to parse unexpected input");
 
-        ok($css1_actions.warnings.grep({/^usage:/}), "css1 $prop : unexpected input produces warning")
-            or diag $css1_actions.warnings;
+	    ok($actions.warnings, "$level $prop : unexpected input produces warning")
+		or diag $actions.warnings;
 
-        $css21_actions.reset;
-        $p21 = CSS::Language::CSS21.parse( $junk, :rule('declaration-list'), :actions($css21_actions));
-        is($p21.Str, $junk, "css21 $prop: able to parse unexpected input");
+	    for @proforma -> $misc {
+		my $decl = $prop ~ ': ' ~ $misc;
 
-        $css3_actions.reset;
-        $p3 = CSS::Language::CSS3.parse( $junk, :rule('declaration-list'), :actions($css3_actions));
-        is($p3.Str, $junk, "css3 $prop: able to parse unexpected input");
+		my @_expr = ($misc => True);
+		my %ast = %test<box>
+		    ?? <top right bottom left>.map({($prop.lc ~ '-' ~ $_) => {expr => @_expr}})
+		    !! ($prop.lc => {expr => @_expr});
 
-       ok($css3_actions.warnings, "$prop : unexpected input produces warning")
-            or diag $css3_actions.warnings;
+                $actions.reset;
+                $p = $class.parse( $decl, :rule('declaration-list'), :actions($css21_actions));
 
-        for <inherit initial> -> $misc {
-            my $decl = $prop ~ ': ' ~ $misc;
-
-            my @_expr = ($misc => True);
-            my %ast = %test<box>
-                ?? <top right bottom left>.map({($prop.lc ~ '-' ~ $_) => {expr => @_expr}})
-                !! ($prop.lc => {expr => @_expr});
-
-            unless $misc eq 'initial' { # applicable to css3 only
-                $css21_actions.reset;
-                $p21 = CSS::Language::CSS21.parse( $decl, :rule('declaration-list'), :actions($css21_actions));
-
-                CSS::Grammar::Test::parse_tests($decl, $p21, :rule('declaration-list'), :suite('css21'),
-                                    :warnings($css21_actions.warnings),
-                                    :expected({ast => %ast}) );
+                CSS::Grammar::Test::parse_tests($decl, $p,
+						:rule('declaration-list'),
+						:suite($level),
+						:warnings($actions.warnings),
+						:expected({ast => %ast}) );
 
             }
-
-            $css3_actions.reset;
-            $p3 = CSS::Language::CSS3.parse( $decl, :rule('declaration-list'), :actions($css3_actions));
-
-            CSS::Grammar::Test::parse_tests($decl, $p3, :rule('decl'), :suite('css3'),
-                                :warnings($css3_actions.warnings),
-                                :expected({ast => %ast}) );
         }
     }
-
 }
 
 done;

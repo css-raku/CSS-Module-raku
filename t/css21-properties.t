@@ -3,9 +3,11 @@
 use Test;
 use JSON::Tiny;
 
-use CSS::Language::CSS21;
 use CSS::Language::CSS21::Actions;
+use CSS::Language::CSS21;
+
 use CSS::Language::CSS3;
+
 use CSS::Grammar::Test;
 
 my $css21_actions = CSS::Language::CSS21::Actions.new;
@@ -37,60 +39,53 @@ for ( $fh.lines ) {
         %declarations{ $prop.lc } = {expr => %test<expr>};
     }
 
-    %declarations<_implied> = %test<_implied> if %test<_implied>;
     %test<ast> = %declarations;
 
     my $input = $prop ~ ':' ~ %test<decl>;
 
-    $css21_actions.reset;
-    my $p21 = CSS::Language::CSS21.parse( $input, :rule('declaration-list'), :actions($css21_actions));
-    CSS::Grammar::Test::parse_tests($input, $p21, :rule('decl'), :suite('css21'),
-                         :warnings($css21_actions.warnings),
-                         :expected(%test) );
+    for css21 => (CSS::Language::CSS21, $css21_actions, qw<inherit>),	
+       	css3  => (CSS::Language::CSS3, $css3_actions, qw<inherit initial>) {
 
-    $css3_actions.reset;
-    my $p3 = CSS::Language::CSS3.parse( $input, :rule('declaration-list'), :actions($css3_actions));
-    CSS::Grammar::Test::parse_tests($input, $p3, :rule('decl'), :suite('css3'),
-                         :warnings($css3_actions.warnings),
-                         :expected(%test) );
+	my ($level, $class, $actions, @proforma) = (.key, @(.value));
 
-   unless %seen{$prop.lc}++ {
-        # usage and inheritence  tests
-        my $junk = $prop ~ ': junk "x" 42';
+	$actions.reset;
+	my $p = $class.parse( $input, :rule('declaration-list'), :actions($actions));
+	CSS::Grammar::Test::parse_tests($input, $p, :rule('decl'),
+					:suite($level),
+					:warnings($actions.warnings),
+					:expected(%test) );
 
-        $css21_actions.reset;
-        $p21 = CSS::Language::CSS21.parse( $junk, :rule('declaration-list'), :actions($css21_actions));
-        is($p21.Str, $junk, "$prop: able to parse unexpected input");
+	unless %seen{$prop.lc}{$level}++ {
+	    # usage and inheritence  tests
+	    my $junk = $prop ~ ': junk +-42';
 
-        ok($css21_actions.warnings, "$prop : unexpected input produces warning")
-            or diag $css21_actions.warnings;
+	    $actions.reset;
+	    $p = $class.parse( $junk, :rule('declaration-list'), :actions($actions));
+	    is($p.Str, $junk, "$level $prop: able to parse unexpected input");
 
-        for <inherit initial> -> $misc {
-            my $decl = $prop ~ ': ' ~ $misc;
+	    ok($actions.warnings, "$level $prop : unexpected input produces warning")
+		or diag $actions.warnings;
 
-            my @_expr = ($misc => True);
+	    for @proforma -> $misc {
+		my $decl = $prop ~ ': ' ~ $misc;
 
-            my %ast = %test<box>
-                ?? <top right bottom left>.map({($prop.lc ~ '-' ~ $_) => {expr => @_expr}})
-                !! ($prop.lc => {expr => @_expr});
+		my @_expr = ($misc => True);
+		my %ast = %test<box>
+		    ?? <top right bottom left>.map({($prop.lc ~ '-' ~ $_) => {expr => @_expr}})
+		    !! ($prop.lc => {expr => @_expr});
 
-            unless $misc eq 'initial' { # applicable to css3 only
-                $css21_actions.reset;
-                $p21 = CSS::Language::CSS21.parse( $decl, :rule('declaration-list'), :actions($css21_actions));
+                $actions.reset;
+                $p = $class.parse( $decl, :rule('declaration-list'), :actions($css21_actions));
 
-                CSS::Grammar::Test::parse_tests($decl, $p21, :rule('decl'), :suite('css21'),
-                                    :warnings($css21_actions.warnings),
-                                    :expected({ast => %ast}) );
+                CSS::Grammar::Test::parse_tests($decl, $p,
+						:rule('declaration-list'),
+						:suite($level),
+						:warnings($actions.warnings),
+						:expected({ast => %ast}) );
+
             }
-
-            $css3_actions.reset;
-            $p3 = CSS::Language::CSS3.parse( $decl, :rule('declaration-list'), :actions($css3_actions));
-
-            CSS::Grammar::Test::parse_tests($decl, $p3, :rule('decl'), :suite('css3'),
-                                :warnings($css3_actions.warnings),
-                                :expected({ast => %ast}) );
         }
-   }
+    }
 }
 
 done;
