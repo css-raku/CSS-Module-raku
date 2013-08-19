@@ -2,13 +2,13 @@ use v6;
 
 use CSS::Grammar::Actions;
 
-class CSS::Language::Actions
+class CSS::Language::_Base::Actions
     is CSS::Grammar::Actions {
 
     has $._proforma-usage = '';
     has Bool $.strict is rw = True;
 
-    # ---- CSS::Grammar overrides ----
+    # ---- CSS::Grammar overrides ---- #
 
     method declaration:sym<base>($/)        {
         $.warning('unknown property', $<property>.ast, 'declaration dropped');

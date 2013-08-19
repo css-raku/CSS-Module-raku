@@ -1,9 +1,9 @@
 use v6;
 
-use CSS::Language::Actions;
+use CSS::Language::_Base::Actions;
 
 class CSS::Language::CSS1::Actions
-    is CSS::Language::Actions {
+    is CSS::Language::_Base::Actions {
 
     # - font-family: [[<family-name> | <generic-family>],]* [<family-name> | <generic-family>]
     method font-family($/) { make $.list($/) }

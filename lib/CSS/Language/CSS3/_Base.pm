@@ -2,7 +2,7 @@ use v6;
 
 use CSS::Grammar::CSS3;
 use CSS::Language::_Base;
-use CSS::Language::Actions;
+use CSS::Language::_Base::Actions;
 
 class CSS::Language::CSS3::_Base::Actions {...}
 
@@ -30,7 +30,7 @@ grammar CSS::Language::CSS3::_Base
 }
 
 class CSS::Language::CSS3::_Base::Actions 
-    is CSS::Language::Actions {
+    is CSS::Language::_Base::Actions {
 
     has $._proforma-usage = ' | inherit | initial';
 

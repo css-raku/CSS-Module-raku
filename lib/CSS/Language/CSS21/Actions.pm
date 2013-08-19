@@ -1,10 +1,9 @@
 use v6;
 
-use CSS::Language::Actions;
-use CSS::Grammar::Actions;
+use CSS::Language::_Base::Actions;
 
 class CSS::Language::CSS21::Actions
-    is CSS::Language::Actions {
+    is CSS::Language::_Base::Actions {
 
     has $._proforma-usage = ' | inherit';
 
