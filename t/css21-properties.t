@@ -10,8 +10,8 @@ use CSS::Language::CSS3;
 
 use CSS::Grammar::Test;
 
-my $css21_actions = CSS::Language::CSS21::Actions.new;
-my $css3_actions = CSS::Language::CSS3::Actions.new;
+my $css21-actions = CSS::Language::CSS21::Actions.new;
+my $css3x-actions = CSS::Language::CSS3::Actions.new;
 
 my %seen;
 
@@ -43,16 +43,15 @@ for ( $fh.lines ) {
 
     my $input = $prop ~ ':' ~ %test<decl>;
 
-    for css21 => (CSS::Language::CSS21, $css21_actions, qw<inherit>),	
-       	css3  => (CSS::Language::CSS3, $css3_actions, qw<inherit initial>) {
+    for css21 => (CSS::Language::CSS21, $css21-actions, qw<inherit>),	
+       	css3  => (CSS::Language::CSS3, $css3x-actions, qw<inherit initial>) {
 
 	my ($level, $class, $actions, @proforma) = (.key, @(.value));
 
-	$actions.reset;
-	my $p = $class.parse( $input, :rule('declaration-list'), :actions($actions));
-	CSS::Grammar::Test::parse_tests($input, $p, :rule('decl'),
+	CSS::Grammar::Test::parse-tests($class, $input,
+					:rule<declaration-list>,
+					:actions($actions),
 					:suite($level),
-					:warnings($actions.warnings),
 					:expected(%test) );
 
 	unless %seen{$prop.lc}{$level}++ {
@@ -60,7 +59,7 @@ for ( $fh.lines ) {
 	    my $junk = $prop ~ ': junk +-42';
 
 	    $actions.reset;
-	    $p = $class.parse( $junk, :rule('declaration-list'), :actions($actions));
+	    my $p = $class.parse( $junk, :rule('declaration-list'), :actions($actions));
 	    is($p.Str, $junk, "$level $prop: able to parse unexpected input");
 
 	    ok($actions.warnings, "$level $prop : unexpected input produces warning")
@@ -74,13 +73,10 @@ for ( $fh.lines ) {
 		    ?? <top right bottom left>.map({($prop.lc ~ '-' ~ $_) => {expr => @_expr}})
 		    !! ($prop.lc => {expr => @_expr});
 
-                $actions.reset;
-                $p = $class.parse( $decl, :rule('declaration-list'), :actions($css21_actions));
-
-                CSS::Grammar::Test::parse_tests($decl, $p,
+                CSS::Grammar::Test::parse-tests($class, $decl,
 						:rule('declaration-list'),
+						:actions($actions),
 						:suite($level),
-						:warnings($actions.warnings),
 						:expected({ast => %ast}) );
 
             }

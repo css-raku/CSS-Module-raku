@@ -5,7 +5,7 @@ use Test;
 use CSS::Language::CSS3::Namespaces;
 use CSS::Grammar::Test;
 
-my $css_actions = CSS::Language::CSS3::Namespaces::Actions.new;
+my $actions = CSS::Language::CSS3::Namespaces::Actions.new;
 
 for (
     at-decl => {input => 'namespace empty "";',
@@ -28,11 +28,11 @@ for (
     my %test = .value;
     my $input = %test<input>;
 
-    $css_actions.reset;
-    my $p3 = CSS::Language::CSS3::Namespaces.parse( $input, :rule($rule), :actions($css_actions));
-    CSS::Grammar::Test::parse_tests($input, $p3, :rule($rule), :suite('css3-namespaces'),
-                         :warnings($css_actions.warnings),
-                         :expected(%test) );
+    CSS::Grammar::Test::parse-tests(CSS::Language::CSS3::Namespaces, $input,
+				    :rule($rule),
+				    :actions($actions),
+				    :suite('css3-namespaces'),
+				    :expected(%test) );
 }
 
 done;

@@ -6,7 +6,7 @@ use JSON::Tiny;
 use CSS::Language::CSS3::Selectors;
 use CSS::Grammar::Test;
 
-my $css_actions = CSS::Language::CSS3::Selectors::Actions.new;
+my $actions = CSS::Language::CSS3::Selectors::Actions.new;
 
 my $fh = open 't/css3x-selectors.json', :r;
 
@@ -19,11 +19,11 @@ for ( $fh.lines ) {
     my ($rule, %test) = @( from-json($_) );
     my $input = %test<input>;
 
-    $css_actions.reset;
-    my $p3 = CSS::Language::CSS3::Selectors.parse( $input, :rule($rule), :actions($css_actions));
-    CSS::Grammar::Test::parse_tests($input, $p3, :rule($rule), :suite('css3-selector'),
-                         :warnings($css_actions.warnings),
-                         :expected(%test) );
+    CSS::Grammar::Test::parse-tests(CSS::Language::CSS3::Selectors, $input,
+				    :rule($rule),
+				    :actions($actions),
+				    :suite('css3-selector'),
+				    :expected(%test) );
 }
 
 done;

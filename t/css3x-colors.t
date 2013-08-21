@@ -5,7 +5,7 @@ use Test;
 use CSS::Language::CSS3::Colors;
 use CSS::Grammar::Test;
 
-my $css_actions = CSS::Language::CSS3::Colors::Actions.new;
+my $actions = CSS::Language::CSS3::Colors::Actions.new;
 
 for (
     term   => {input => 'rgb(70%, 50%, 10%)',
@@ -67,11 +67,11 @@ for (
     my %test = .value;
     my $input = %test<input>;
 
-    $css_actions.reset;
-    my $p3 = CSS::Language::CSS3::Colors.parse( $input, :rule($rule), :actions($css_actions));
-    CSS::Grammar::Test::parse_tests($input, $p3, :rule($rule), :suite('css3-color'),
-                         :warnings($css_actions.warnings),
-                         :expected(%test) );
+    CSS::Grammar::Test::parse-tests(CSS::Language::CSS3::Colors, $input,
+				    :rule($rule),
+				    :actions($actions),
+				    :suite<css3-color>,
+				    :expected(%test) );
 }
 
 done;

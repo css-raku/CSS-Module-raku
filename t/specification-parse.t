@@ -6,7 +6,7 @@ use CSS::Language::Specification;
 use CSS::Language::Specification::Actions;
 use CSS::Grammar::Test;
 
-my $spec_actions = CSS::Language::Specification::Actions.new;
+my $actions = CSS::Language::Specification::Actions.new;
 
 for (
     'terms' => {'input' => "<single-animation-direction> [ ‘,’ <'single-animation-direction'> ]*",
@@ -36,9 +36,11 @@ for (
     my %test = .value;
     my $input = %test<input>;
 
-     my $p = CSS::Language::Specification.parse( $input, :rule($rule), :actions($spec_actions));
-    CSS::Grammar::Test::parse_tests($input, $p, :rule($rule), :suite('spec'),
-                         :expected(%test) );
+    CSS::Grammar::Test::parse-tests( CSS::Language::Specification, $input,
+				     :rule($rule),
+				     :actions($actions),
+				     :suite('spec'),
+				     :expected(%test) );
 }
 
 done;

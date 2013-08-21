@@ -26,9 +26,9 @@ for ('') {
     ok($_ ~~ /^<CSS::Language::CSS3::nonascii>$/, "non-ascii css3: $_");
 }
 
-my $css1_actions  = CSS::Language::CSS1::Actions.new;
-my $css21_actions = CSS::Language::CSS21::Actions.new;
-my $css3_actions  = CSS::Language::CSS3::Actions.new;
+my $css1-actions  = CSS::Language::CSS1::Actions.new;
+my $css21-actions = CSS::Language::CSS21::Actions.new;
+my $css3-actions  = CSS::Language::CSS3::Actions.new;
 
 for (
     declaration-list => {input => 'bad-prop: badval',
@@ -79,22 +79,18 @@ for (
     my %test = .value;
     my $input = %test<input>;
 
-    $css1_actions.reset;
-    my $p1 = CSS::Language::CSS1.parse( $input, :rule($rule), :actions($css1_actions));
-    CSS::Grammar::Test::parse_tests($input, $p1, :rule($rule), :suite('css1'),
-                         :warnings($css1_actions.warnings),
-                         :expected(%test) );
+    for css1  => (CSS::Language::CSS1, $css1-actions),
+       	css21 => (CSS::Language::CSS21, $css21-actions),	
+       	css3  => (CSS::Language::CSS3, $css3-actions) {
 
-    $css21_actions.reset;
-    my $p21 = CSS::Language::CSS21.parse( $input, :rule($rule), :actions($css21_actions));
-    CSS::Grammar::Test::parse_tests($input, $p21, :rule($rule), :suite('css21'),
-                         :warnings($css21_actions.warnings),
-                         :expected(%test) );
-    $css3_actions.reset;
-    my $p3 = CSS::Language::CSS3.parse( $input, :rule($rule), :actions($css3_actions));
-    CSS::Grammar::Test::parse_tests($input, $p3, :rule($rule), :suite('css3'),
-                         :warnings($css3_actions.warnings),
-                         :expected(%test) );
+	    my ($level, $class, $actions) = (.key, @(.value));
+
+	    CSS::Grammar::Test::parse-tests($class, $input,
+					    :rule($rule),
+					    :suite($level),
+					    :actions($actions),
+					    :expected(%test) );
+	}
 
 }
 
