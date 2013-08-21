@@ -39,7 +39,7 @@ for (
     CSS::Grammar::Test::parse-tests( CSS::Language::Specification, $input,
 				     :rule($rule),
 				     :actions($actions),
-				     :suite('spec'),
+				     :suite<spec>,
 				     :expected(%test) );
 }
 

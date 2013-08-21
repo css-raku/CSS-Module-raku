@@ -25,7 +25,7 @@ for ( $fh.lines ) {
     CSS::Grammar::Test::parse-tests(CSS::Language::CSS3, $input,
 				    :rule($rule),
 				    :actions($actions),
-				    :suite('css3 errors'),
+				    :suite<css3>,
 				    :expected(%test) );
 }
 

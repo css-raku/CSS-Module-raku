@@ -22,7 +22,7 @@ for ( $fh.lines ) {
     CSS::Grammar::Test::parse-tests(CSS::Language::CSS3, $input,
 				    :rule($rule),
 				    :actions($actions),
-				    :suite('css3 @media'),
+				    :suite<css3 @media>,
 				    :expected(%test) );
 }
 

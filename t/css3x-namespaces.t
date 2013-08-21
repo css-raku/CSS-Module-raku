@@ -31,7 +31,7 @@ for (
     CSS::Grammar::Test::parse-tests(CSS::Language::CSS3::Namespaces, $input,
 				    :rule($rule),
 				    :actions($actions),
-				    :suite('css3-namespaces'),
+				    :suite<css3-namespaces>,
 				    :expected(%test) );
 }
 
