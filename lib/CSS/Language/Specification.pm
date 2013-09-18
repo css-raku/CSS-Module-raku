@@ -29,12 +29,12 @@ grammar CSS::Language::Specification {
     rule combo       { <required> +% '||' }
     rule required    { <values>   +% '&&' }
     rule values      { <value-inst>+ }
-    rule value-inst  { <value><occurs>**0..1 }
+    rule value-inst  { <value><occurs>? }
 
     proto token occurs {*}
     token occurs:sym<maybe>       {'?'}
-    token occurs:sym<once_plus>   {'+'}
-    token occurs:sym<zero_plus>   {'*'}
+    token occurs:sym<once-plus>   {'+'}
+    token occurs:sym<zero-plus>   {'*'}
     token occurs:sym<range>       {'{'~'}' [<min=.digits>','<max=.digits>] }
     token occurs:sym<list>        {'#'}
 

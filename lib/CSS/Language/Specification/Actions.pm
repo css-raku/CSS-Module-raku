@@ -11,7 +11,7 @@ class CSS::Language::Specification::Actions {
     # condensation eg: 'border-top-style' ... 'border-left-style' 
     # ==> pfx='border' props=<top right bottom left> sfx='-style'
 
-    sub _right_condense( @props ) {
+    sub _right-condense( @props ) {
         return ('', @props)
             unless @props > 1;
 
@@ -30,7 +30,7 @@ class CSS::Language::Specification::Actions {
         return $pfx, @remainder;
     }
 
-    sub _left_condense( @props ) {
+    sub _left-condense( @props ) {
         return ('', @props)
             unless @props > 1;
 
@@ -55,8 +55,8 @@ class CSS::Language::Specification::Actions {
 
     method property-spec($/) {
         my @props = @($<prop-names>.ast);
-        my ($pfx, @props-condensed) = _right_condense( @props );
-        (my $sfx, @props-condensed) = _left_condense( @props-condensed );
+        my ($pfx, @props-condensed) = _right-condense( @props );
+        (my $sfx, @props-condensed) = _left-condense( @props-condensed );
 
         my $sym = @props-condensed.join('|');
         $sym = $pfx ~ '[' ~ $sym ~ ']' ~ $sfx
@@ -65,12 +65,13 @@ class CSS::Language::Specification::Actions {
         my $match = $sym.subst(/\-/, '\-'):g;
         my $grammar = $<synopsis>.ast;
 
-        my %prop-def;
-        %prop-def<sym> = $sym;
-        %prop-def<props> = @props;
-        %prop-def<match> = $match;
-        %prop-def<defn> = $grammar;
-        %prop-def<synopsis> = $<synopsis>.Str;
+        my %prop-def = (
+            sym      => $sym,
+            props    => @props,
+            match    => $match,
+            defn     => $grammar,
+            synopsis => $<synopsis>.Str,
+            );
 
         make %prop-def;
     }
@@ -91,12 +92,12 @@ class CSS::Language::Specification::Actions {
     method value-inst($/) {
         my $value = $<value>.ast;
         if $<occurs> {
-            my $occurs = $<occurs>[0].ast;
+            my $occurs = $<occurs>.ast;
             if $occurs eq '#' {         # a list
                 $value = "$value +% ','";
             }
             else {
-                $value ~= $occurs;
+                $value ~= $occurs;      # quantifier
             }
         }
         make $value;
@@ -129,8 +130,8 @@ class CSS::Language::Specification::Actions {
     }
 
     method occurs:sym<maybe>($/)     { make '?' }
-    method occurs:sym<once_plus>($/) { make '+' }
-    method occurs:sym<zero_plus>($/) { make '*' }
+    method occurs:sym<once-plus>($/) { make '+' }
+    method occurs:sym<zero-plus>($/) { make '*' }
     method occurs:sym<list>($/)      { make '#' }
     method occurs:sym<range>($/) {
         make '**' ~ $<min>.ast ~ '..' ~ $<max>.ast;
