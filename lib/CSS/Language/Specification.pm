@@ -24,12 +24,12 @@ grammar CSS::Language::Specification {
     rule keyw        { <id> }
     rule digits      { \d+ }
 
-    rule terms       { <options>* }
-    rule options     { <combo>    +% '|'  }
-    rule combo       { <required> +% '||' }
-    rule required    { <values>   +% '&&' }
-    rule values      { <value-inst>+ }
-    rule value-inst  { <value><occurs>? }
+    rule terms       { <term=.options>* }
+    rule options     { <term=.combo>    +% '|'  }
+    rule combo       { <term=.required> +% '||' }
+    rule required    { <term=.values>   +% '&&' }
+    rule values      { <term>+ }
+    rule term        { <value><occurs>? }
 
     proto token occurs {*}
     token occurs:sym<maybe>       {'?'}

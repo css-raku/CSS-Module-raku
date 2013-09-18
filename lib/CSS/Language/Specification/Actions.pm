@@ -87,9 +87,9 @@ class CSS::Language::Specification::Actions {
     method digits($/)    { make $/.Int }
 
     method values($/) {
-        make $<value-inst>>>.ast.join(' ');
+        make $<term>>>.ast.join(' ');
     }
-    method value-inst($/) {
+    method term($/) {
         my $value = $<value>.ast;
         if $<occurs> {
             my $occurs = $<occurs>.ast;
@@ -104,11 +104,11 @@ class CSS::Language::Specification::Actions {
     }
 
     method terms($/) {
-        make $<options>>>.ast.join(' ');
+        make $<term>>>.ast.join(' ');
     }
 
     method options($/) {
-        my @choices = @$<combo>>>.ast;
+        my @choices = @$<term>>>.ast;
         return make @choices[0]
             unless @choices > 1;
         
@@ -116,14 +116,14 @@ class CSS::Language::Specification::Actions {
     }
 
     method combo($/) {
-        my @choices = @$<required>>>.ast;
+        my @choices = @$<term>>>.ast;
         return make @choices[0]
             unless @choices > 1;
         make '[ ' ~ @choices.join(' | ') ~ ' ]**1..' ~ @choices.Int;
     }
 
     method required($/) {
-        my @choices = $<values>>>.ast;
+        my @choices = $<term>>>.ast;
         return make @choices[0]
             unless @choices > 1;
         make '[ ' ~ @choices.join(' | ') ~ ' ]**' ~ @choices.Int
