@@ -53,19 +53,19 @@ class CSS::Language::CSS3::PagedMedia::Actions
     method page-pseudo:sym<left>($/)  {make 'left'}
     method page-pseudo:sym<right>($/) {make 'right'}
     method page-pseudo:sym<first>($/) {make 'first'}
-    method page-pseudo:sym<other>($/) {$.warning('ignoring page pseudo', $/.Str)}
+    method page-pseudo:sym<other>($/) {$.warning('ignoring page pseudo', ~$/)}
     method page-pseudo:sym<missing>($/) {$.warning("':' should be followed by one of: left right first")}
 
     method page-declarations($/) { make $.declaration-list($/) }
 
-    method box-hpos($/)   { make $/.Str.lc }
-    method box-vpos($/)   { make $/.Str.lc }
+    method box-hpos($/)   { make (~$/).lc }
+    method box-vpos($/)   { make (~$/).lc }
     method box-center($/) { make 'center' }
     method margin-box($/) { make $.node($/) }
 
     method margin-declaration($/) {
         my %ast = $.node($/);
-        %ast<property> = '@' ~ $<margin-box>.Str.lc;
+        %ast<property> = '@' ~ (~$<margin-box>).lc;
         make %ast;
     }
 

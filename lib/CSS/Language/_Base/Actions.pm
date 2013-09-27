@@ -25,7 +25,7 @@ class CSS::Language::_Base::Actions
 
         if $<any-arg> {
             return $.warning("extra terms following '{%ast<property>}' declaration",
-                             $<any-arg>.Str, 'dropped');
+                             ~$<any-arg>, 'dropped');
         }
 
         if (my $prio = $<prio> && $<prio>[0].ast) {
@@ -43,10 +43,10 @@ class CSS::Language::_Base::Actions
     method _decl($prop, $/, $synopsis, :$expand?, :$proforma-usage?) {
         # used by prop:sym<*> methods
 
-        die "doesn't look like a property: " ~ $/.Str
+        die "doesn't look like a property: " ~ ~$/
             unless $prop;
 
-        my $property = $prop.Str.trim.lc;
+        my $property = (~$prop).trim.lc;
 
         if ($<proforma> && !$<proforma>.ast) 
             || $<any> || $<any-arg> || $<any-args> {
@@ -115,7 +115,7 @@ class CSS::Language::_Base::Actions
     method length:sym<num>($/) {
         my $num = $<number>.ast;
 
-        return $.warning('number not followed by a length unit', $<number>.Str)
+        return $.warning('number not followed by a length unit', ~$<number>)
             if $num && $.strict;
 
         make $.token($num, :type<length>, :units<px>)
@@ -124,7 +124,7 @@ class CSS::Language::_Base::Actions
     method angle:sym<num>($/) {
         my $num = $<number>.ast;
 
-        return $.warning('angle not followed by "deg", "rad" or "grad"', $<number>.Str)
+        return $.warning('angle not followed by "deg", "rad" or "grad"', ~$<number>)
             if $num && $.strict;
 
         make $.token($num, :type<angle>, :units<deg>)
@@ -133,7 +133,7 @@ class CSS::Language::_Base::Actions
     method frequency:sym<num>($/) {
         my $num = $<number>.ast;
 
-        return $.warning('non-zero frequency not followed by "Hz" or "KHz"', $<number>.Str)
+        return $.warning('non-zero frequency not followed by "Hz" or "KHz"', ~$<number>)
             if $num && $.strict;
 
         make $.token($num, :type<frequency>, :units<hz>)

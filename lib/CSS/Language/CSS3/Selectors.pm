@@ -73,14 +73,14 @@ class CSS::Language::CSS3::Selectors::Actions
 
     method no-namespace($/)     { make True }
     method namespace-prefix($/) { make $.node($/) }
-    method wildcard($/)         { make $/.Str }
+    method wildcard($/)         { make ~$/ }
     method type-selector($/)    { make $.node($/) }
     method qname($/)            { make $.node($/) }
     method universal($/)        { make $.node($/) }
 
-    method attribute-selector:sym<prefix>($/)    { make $/.Str }
-    method attribute-selector:sym<suffix>($/)    { make $/.Str }
-    method attribute-selector:sym<substring>($/) { make $/.Str }
+    method attribute-selector:sym<prefix>($/)    { make ~$/ }
+    method attribute-selector:sym<suffix>($/)    { make ~$/ }
+    method attribute-selector:sym<substring>($/) { make ~$/ }
 
     method term:sym<unicode-range>($/) { make $.node($/) }
     method pseudo-function:sym<nth-selector>($/)  {
@@ -97,29 +97,29 @@ class CSS::Language::CSS3::Selectors::Actions
 
         if $<a-sign> {
             %node<a> //= 1;
-            %node<a> = -%node<a> if $<a-sign>.Str eq '-';
+            %node<a> = -%node<a> if ~$<a-sign> eq '-';
         }
 
         %node<b> //= 0;
         if $<b-sign> {
-            %node<b> = -%node<b> if $<b-sign>.Str eq '-';
+            %node<b> = -%node<b> if ~$<b-sign> eq '-';
         }
 
         make %node;
     }
-    method nth-functor($/)                   { make $/.Str.lc  }
+    method nth-functor($/)                   { make (~$/).lc  }
     method pseudo:sym<nth-child>($/)         { make $.node($/) }
 
     method negation_args($/) {
-        return $.warning('bad :not() argument', $<any-arg>.Str)
+        return $.warning('bad :not() argument', ~$<any-arg>)
             if $<any-arg>;
-        return $.warning('illegal nested negation', $<nested>.Str)
+        return $.warning('illegal nested negation', ~$<nested>)
             if $<nested>;
         make $.list($/);
     }
 
     method pseudo-function:sym<negation>($/) {
-        return $.warning('missing/incorrect arguments to :not()', $<any-args>.Str)
+        return $.warning('missing/incorrect arguments to :not()', ~$<any-args>)
             if $<any-args>;
         return unless $<negation_args>.ast;
         make {ident => 'not', args => $<negation_args>.ast}

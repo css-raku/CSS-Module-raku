@@ -64,7 +64,7 @@ for ( $fh.lines ) {
 
 	    $actions.reset;
 	    my $p = $class.parse( $junk, :rule<declaration-list>, :actions($actions));
-	    is($p.Str, $junk, "$level $prop: able to parse unexpected input");
+	    is( ~$p, $junk, "$level $prop: able to parse unexpected input");
 
 	    ok($actions.warnings, "$level $prop : unexpected input produces warning")
 		or diag $actions.warnings;

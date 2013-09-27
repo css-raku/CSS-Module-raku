@@ -70,7 +70,7 @@ class CSS::Language::Specification::Actions {
             props    => @props,
             match    => $match,
             defn     => $grammar,
-            synopsis => $<synopsis>.Str,
+            synopsis => ~$<synopsis>,
             );
 
         make %prop-def;
@@ -81,7 +81,7 @@ class CSS::Language::Specification::Actions {
         make @prop_names;
     }
 
-    method id($/)        { make $/.Str }
+    method id($/)        { make ~$/ }
     method id-quoted($/) { make $<id>.ast }
     method keyw($/)      { make $<id>.subst(/\-/, '\-'):g }
     method digits($/)    { make $/.Int }
@@ -165,7 +165,7 @@ class CSS::Language::Specification::Actions {
 
     method value:sym<rule>($/)     { make '<' ~ $<id>.ast ~ '>' }
 
-    method value:sym<punc>($/)     { make "'" ~ $/.Str.trim ~ "'" }
+    method value:sym<punc>($/)     { make "'" ~ (~$/).trim ~ "'" }
 
     method property-ref:sym<css21>($/) { make $<id>.ast }
     method property-ref:sym<css3>($/)  { make $<id>.ast }
@@ -175,9 +175,9 @@ class CSS::Language::Specification::Actions {
         make '<' ~ $prop-ref ~ '>';
     }
 
-    method value:sym<literal>($/)  { make "'" ~ $0.Str ~ "'"}
+    method value:sym<literal>($/)  { make "'" ~ ~$0 ~ "'"}
             
-    method value:sym<num>($/)      { make $/.Str }
+    method value:sym<num>($/)      { make ~$/ }
 
-    method value:sym<keyw>($/)     { make $/.Str }
+    method value:sym<keyw>($/)     { make ~$/ }
 }
