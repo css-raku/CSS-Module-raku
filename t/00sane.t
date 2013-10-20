@@ -36,7 +36,7 @@ for (
 			 ast => {},
     },
     declaration-list => {input => 'background-attachment: crud',
-			 warnings => rx{^usage\ background\-attachment\:\ scroll\ \|\ fixed},
+			 warnings => rx{^'usage background-attachment: scroll | fixed'},
 			 ast => {},
     },
     declaration-list => {input => 'background-attachment: FiXed', ast => {'background-attachment' => {expr => [keyw => 'fixed']}},
