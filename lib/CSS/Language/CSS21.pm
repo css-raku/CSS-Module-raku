@@ -116,7 +116,7 @@ grammar CSS::Extensions::CSS21 {
 
     # - counter-increment: [ <identifier> <integer>? ]+ | none
     # - counter-reset: [ <identifier> <integer>? ]+ | none
-    rule decl:sym<counter-[increment|reset]> {:i (counter\-[increment|reset]) ':' <val(rx:s:i[ none & <keyw> | [ <identifier> <integer>? ]+ ])> }
+    rule decl:sym<counter-[increment|reset]> {:i (counter\-[increment|reset]) ':' <val(rx:s:i[ none & <keyw> || [ <identifier> <integer>? ]+ ])> }
 
     # - cue-before: <uri> | none
     # - cue-after: <uri> | none
