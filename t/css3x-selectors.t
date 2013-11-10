@@ -11,7 +11,6 @@ my $actions = CSS::Language::CSS3::Selectors::Actions.new;
 my $fh = open 't/css3x-selectors.json', :r;
 
 for ( $fh.lines ) {
-
     if .substr(0,2) eq '//' {
 ##        note '[' ~ .substr(2) ~ ']';
         next;

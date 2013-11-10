@@ -21,13 +21,13 @@ grammar CSS::Language::CSS3::Selectors::Syntax {
  
     rule no-namespace {<?>}
     rule wildcard {'*'}
-    rule namespace-prefix {[<namespace=.ident>|<any-namespace=.wildcard>|<no-namespace>]'|'}
+    rule namespace-prefix {[<namespace=.ident>|<namespace=.wildcard>|<namespace=.no-namespace>]'|'}
 
     # use <qname> in preference to <type_selector>
     # - see http://www.w3.org/TR/2008/CR-css3-namespace-20080523/#css-qnames
     rule qname      {<namespace-prefix>? <element-name>}
     rule universal  {<namespace-prefix>? <element-name=.wildcard>}
-    rule simple-selector { [<qname>|<universal>][<id>|<class>|<attrib>|<pseudo>]*
+    rule simple-selector { [<qname><!before '|'>|<universal>][<id>|<class>|<attrib>|<pseudo>]*
                                | [<id>|<class>|<attrib>|<pseudo>]+ }
 
     rule type-selector {<namespace-prefix>? <element-name>}
@@ -60,7 +60,7 @@ grammar CSS::Language::CSS3::Selectors::Syntax {
 }
 
 grammar CSS::Language::CSS3::Selectors:ver<20110929.000>
-    is  CSS::Language::CSS3::Selectors::Syntax
+    is CSS::Language::CSS3::Selectors::Syntax
     is CSS::Language::CSS3::_Base {
 }
 
@@ -71,7 +71,7 @@ class CSS::Language::CSS3::Selectors::Actions
 
     method pseudo:sym<::element>($/) { make $.node($/) }
 
-    method no-namespace($/)     { make True }
+    method no-namespace($/)     { make '' }
     method namespace-prefix($/) { make $.node($/) }
     method wildcard($/)         { make ~$/ }
     method type-selector($/)    { make $.node($/) }

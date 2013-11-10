@@ -14,8 +14,9 @@
 [ "selector", { "input" : "*", "ast" : [ { "simple-selector" : [ { "universal" : { "element-name" : "*" } } ] } ] } ]
 [ "selector", { "input" : "foo|h1", "ast" : [ { "simple-selector" : [ { "qname" : { "namespace-prefix" : { "namespace" : "foo" }, "element-name" : "h1" } } ] } ] } ]
 [ "selector", { "input" : "foo|*", "ast" : [ { "simple-selector" : [ { "universal" : { "namespace-prefix" : { "namespace" : "foo" }, "element-name" : "*" } } ] } ] } ]
-[ "selector", { "input" : "|h1", "ast" : [ { "simple-selector" : [ { "qname" : { "namespace-prefix" : { "no-namespace" : true }, "element-name" : "h1" } } ] } ] } ]
-[ "selector", { "input" : "*|h1", "ast" : [ { "simple-selector" : [ { "qname" : { "namespace-prefix" : { "any-namespace" : "*" }, "element-name" : "h1" } } ] } ] } ]
+[ "selector", { "input" : "*|*", "ast" : [ { "simple-selector" : [ { "universal" : { "namespace-prefix" : { "namespace" : "*" }, "element-name" : "*" } } ] } ] } ]
+[ "selector", { "input" : "|h1", "ast" : [ { "simple-selector" : [ { "qname" : { "namespace-prefix" : { "namespace" : "" }, "element-name" : "h1" } } ] } ] } ]
+[ "selector", { "input" : "*|h1", "ast" : [ { "simple-selector" : [ { "qname" : { "namespace-prefix" : { "namespace" : "*" }, "element-name" : "h1" } } ] } ] } ]
 // attributes
 [ "selector", { "input" : "span[hello='Cleveland'][goodbye='Columbus']", "ast" : [ { "simple-selector" : [ { "qname" : { "element-name" : "span" } }, { "attrib" : [ { "ident" : "hello" }, { "attribute-selector" : "=" }, { "string" : "Cleveland" } ] }, { "attrib" : [ { "ident" : "goodbye" }, { "attribute-selector" : "=" }, { "string" : "Columbus" } ] } ] } ] } ]
 [ "selector", { "input" : "object[type^='image/']", "ast" : [ { "simple-selector" : [ { "qname" : { "element-name" : "object" } }, { "attrib" : [ { "ident" : "type" }, { "attribute-selector" : "^=" }, { "string" : "image/" } ] } ] } ] } ]

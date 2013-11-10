@@ -62,7 +62,7 @@ for ( $fh.lines ) {
 	    my $p = $class.parse( $junk, :rule<declaration-list>, :actions($actions));
 	    is(~$p, $junk, "$level $prop: able to parse unexpected input");
 
-	    ok($actions.warnings, "$level $prop : unexpected input produces warning")
+	    ok($actions.warnings, "$level $prop: unexpected input produces warning")
 		or diag $actions.warnings;
 
 	    for @proforma -> $misc {

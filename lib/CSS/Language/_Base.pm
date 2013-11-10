@@ -2,7 +2,7 @@ use v6;
 
 grammar CSS::Language::_Base {
     # definitions common to CSS1, CSS21 and CSS3 Languages
-    rule declaration:sym<validated> { <decl> <prio>**0..1 <any-arg>* <end-decl> }
+    rule declaration:sym<validated> { <.ws>? <decl> <prio>**0..1 <any-arg>* <end-decl> }
     proto rule decl {*}
 
     # For handling undimensioned numbers and angles
