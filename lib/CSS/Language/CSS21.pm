@@ -94,7 +94,7 @@ grammar CSS::Extensions::CSS21 {
 
     # - border: [ <border-width> || <border-style> || 'border-top-color' ]
     # - refactored: border: [ <border-width> || <border-style> || <border-color> ]
-    rule decl:sym<border> {:i (border) ':' <val(rx:s[ [ <border-width> | <border-style> | <border-color> ]**1..3 ])> }
+    rule decl:sym<border> {:i (border) ':' <val(rx:s[ [ <border-width> | <border-style> | <ref=.border-color> ]**1..3 ])> }
 
     # - bottom: <length> | <percentage> | auto
     rule decl:sym<bottom> {:i (bottom) ':' <val(rx:s:i[ <length> | <percentage> | auto & <keyw> ])> }

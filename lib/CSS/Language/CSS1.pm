@@ -168,6 +168,11 @@ grammar CSS::Language::CSS1:ver<20080411.000>
                                   :my @*SEEN; [ <border-width> <!seen(0)> | <border-style> <!seen(1)> | <color> <!seen(2)> ]+
                                   || <any-args> )}
 
+    # - border: [ <border-width> || <border-style> || 'color' ]
+    rule decl:sym<border> {:i (border) ':' (
+                                  :my @*SEEN; [ <border-width> <!seen(0)> | <border-style> <!seen(1)> | <color> <!seen(2)> ]+
+                                  || <any-args> )}
+
     # Positioning etc
     # - width: <length> | <percentage> | auto
     # - height: <length> | <percentage> | auto

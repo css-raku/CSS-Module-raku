@@ -8,6 +8,7 @@
 { "prop" : "border-width", "decl" : "2ex 1.5em 3ex 2em", "box" : [ { "top" : [ { "length" : 2 } ] }, { "right" : [ { "length" : 1.5 } ] }, { "bottom" : [ { "length" : 3 } ] }, { "left" : [ { "length" : 2 } ] } ] }
 { "prop" : "border-color", "decl" : "#a7f #aa77ff rgb(100,150,20) aqua", "box" : [ { "top" : [ { "color" : { "r" : 170, "g" : 119, "b" : 255 } } ] }, { "right" : [ { "color" : { "r" : 170, "g" : 119, "b" : 255 } } ] }, { "bottom" : [ { "color" : { "r" : 100, "g" : 150, "b" : 20 } } ] }, { "left" : [ { "color" : { "r" : 0, "g" : 255, "b" : 255 } } ] } ] }
 { "prop" : "border-style", "decl" : "groove", "box" : [ { "top" : [ { "keyw" : "groove" } ] }, { "right" : [ { "keyw" : "groove" } ] }, { "bottom" : [ { "keyw" : "groove" } ] }, { "left" : [ { "keyw" : "groove" } ] } ] }
+{ "prop" : "border", "decl" : "1px solid red", "expr" : [ { "border-width" : [ { "length" : 1 } ] }, { "border-style" : [ { "keyw" : "solid" } ] }, { "color" : { "r" : 255, "g" : 0, "b" : 0 } } ] }
 { "prop" : "clear", "decl" : "both", "expr" : [ { "keyw" : "both" } ] }
 { "prop" : "color", "decl" : "#3377aa", "expr" : [ { "color" : { "r" : 51, "g" : 119, "b" : 170 } } ] }
 { "prop" : "display", "decl" : "list-item", "expr" : [ { "keyw" : "list-item" } ] }

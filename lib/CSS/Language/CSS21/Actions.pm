@@ -166,7 +166,7 @@ class CSS::Language::CSS21::Actions
                      :expand<box>);
     }
 
-    # border_width: thin | medium | thick | <length>
+    # border: <border-width> || <border-style> || 'border-top-color'
     method decl:sym<border>($/) {
         make $._decl($0, $<val>, q{[ <border-width> || <border-style> || 'border-top-color' ]});
     }

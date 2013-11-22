@@ -184,6 +184,11 @@ class CSS::Language::CSS1::Actions
         make $._decl($0, $1, '<border-width> || <border-style> || <color>');
     }
 
+    # border: <border-width> || <border-style> || <color>
+    method decl:sym<border>($/) {
+        make $._decl($0, $1, q{[ <border-width> || <border-style> || <color> ]});
+    }
+
     # - width: <length> | <percentage> | auto
     # - height: <length> | <percentage> | auto
     # - left: <length> | <percentage> | auto
