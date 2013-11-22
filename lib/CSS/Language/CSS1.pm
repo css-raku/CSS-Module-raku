@@ -36,7 +36,7 @@ grammar CSS::Language::CSS1:ver<20080411.000>
     rule decl:sym<font-size> {:i (font\-size) ':' ( <ref=.font-size> || <any-args> )}
     # - font: [ <font-style> || <font-variant> || <font-weight> ]? <font-size> [ / <line-height> ]? <font-family>
     rule decl:sym<font> {:i (font) ':' (
-                              [ <font-style> | <font-variant> | <font-weight> ]**0..3 <font-size> [ '/' <line-height> ]? <font-family> +% ','
+                              [:my @*SEEN;[ <font-style> <!seen(0)> | <font-variant> <!seen(1)> | <font-weight> <!seen(2)> ]*] <font-size> [ '/' <line-height> ]? <font-family> +% ','
                               || <any-args> )}
 
     # 5.3 Color and background properties
@@ -64,16 +64,18 @@ grammar CSS::Language::CSS1:ver<20080411.000>
 
     # - background-position: [<percentage> | <length>]{1,2} | [top | center | bottom] || [left | center | right]
     rule background-position {:i [ <percentage> | <length> ]**1..2
-                                 | [ [ top | center | bottom ] & <keyw>  
-                                     | [ left | center | right ] & <keyw> ]+ }
+                                 | [:my @*SEEN;
+                                     [ [ top | center | bottom ] & <keyw> <!seen(0)>
+                                     | [ left | center | right ] & <keyw> <!seen(1)> ]+ ] }
 
     rule decl:sym<background-position> {:i (background\-position) ':' ( <ref=.background-position>
                                                                         || <any-args> )}
 
     # - background: <background-color> || <background-image> || <background-repeat> || <background-attachment> || <background-position>
     rule decl:sym<background> {:i (background) ':' (
-                                    [ <background-color> | <background-image> | <background-repeat> | <background-attachment> | <background-position> ]**1..5
-                                    || <any-args> )}
+                                    [:my @*SEEN;
+				      [ <background-color> <!seen(0)> | <background-image> <!seen(1)> | <background-repeat> <!seen(2)> | <background-attachment> <!seen(3)> | <background-position> <!seen(4)> ]+
+                                    ] || <any-args> )}
 
 
     # 5.4 Text properties
@@ -85,7 +87,7 @@ grammar CSS::Language::CSS1:ver<20080411.000>
 
     # - text-decoration: none | [ underline || overline || line-through || blink ]
     rule decl:sym<text-decoration> {:i (text\-decoration) ':' ( none & <keyw>
-                                                                | [[ underline | overline | line\-through | blink ] & <keyw> ]**1..4
+                                                                | :my @*SEEN;[[ underline <!seen(0)> | overline <!seen(1)> | line\-through <!seen(2)> | blink <!seen(3)> ] & <keyw> ]+
                                                                 || <any-args> )}
     # - vertical-align: baseline | sub | super | top | text-top | middle | bottom | text-bottom | <percentage>
     rule decl:sym<vertical-align> {:i (vertical\-align) ':' (
@@ -163,7 +165,7 @@ grammar CSS::Language::CSS1:ver<20080411.000>
     # - border-left: <border-width> || <border-style> || <color>   
     # - border: <border-width> || <border-style> || <color>
     rule decl:sym<border-*> {:i (border[\-[top|right|bottom|left]]?) ':' (
-                                  [ <border-width> | <border-style> | <color> ]+
+                                  :my @*SEEN; [ <border-width> <!seen(0)> | <border-style> <!seen(1)> | <color> <!seen(2)> ]+
                                   || <any-args> )}
 
     # Positioning etc
