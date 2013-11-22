@@ -119,7 +119,9 @@ class CSS::Language::Specification::Actions {
         my @choices = @$<term>>>.ast;
         return make @choices[0]
             unless @choices > 1;
-        make '[ ' ~ @choices.join(' | ') ~ ' ]**1..' ~ @choices.Int;
+
+	my $n = 0;
+        make '[:my @*SEEN; [ ' ~ @choices.map({[~] ($_, ' <!seen(', $n++, ')>')}).join(' | ') ~ ']+ ]';
     }
 
     method required($/) {
