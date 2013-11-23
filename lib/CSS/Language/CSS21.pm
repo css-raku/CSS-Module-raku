@@ -34,8 +34,9 @@ grammar CSS::Extensions::CSS21 {
     # - azimuth: <angle> | [[ left-side | far-left | left | center-left | center | center-right | right | far-right | right-side ] || behind ] | leftwards | rightwards
     rule azimuth {:i <angle>
                        | [ leftwards | rightwards]  & <delta=.keyw>
-                       | [ [ [left|right][\-side]? | far\-[left|right] | center[\-[left|right]]? ] & <direction=.keyw>
-                           | behind & <behind=.keyw> ]**1..2 }
+                       | [:my @*SEEN;
+                           [ [left|right][\-side]? | far\-[left|right] | center[\-[left|right]]? ] & <direction=.keyw> <!seen(0)>
+                           | behind & <behind=.keyw> <!seen(1)> ]+ }
     rule decl:sym<azimuth> {:i (azimuth) ':' <val(rx:s:i{ <ref=.azimuth> })> }
 
     # - background-attachment: scroll | fixed
@@ -52,7 +53,7 @@ grammar CSS::Extensions::CSS21 {
 
     # - background-position: [ [ <percentage> | <length> | left | center | right ] [ <percentage> | <length> | top | center | bottom ]? ] | [ [ left | center | right ] || [ top | center | bottom ] ]
     # simplification of http://www.w3.org/TR/2012/CR-css3-background-20120724/#ltpositiongt
-    rule position {:i [ <percentage> | <length> | [ [ left | center | right | top | bottom ] & <keyw> ] [ <percentage> | <length> ] ? ] ** 1..2 }
+    rule position {:i [ [ [ <percentage> | <length> | [ left | center | right ] & <keyw> ] ] [ [ <percentage> | <length> | [ top | center | bottom ] & <keyw> ] ]? ] | [:my @*SEEN; [ [ [ left | center | right ] & <keyw> ] <!seen(0)> | [ [ top | center | bottom ] & <keyw> ] <!seen(1)>]+ ] }
     rule decl:sym<background-position> {:i (background\-position) ':' <val(rx[ <ref=.position> ])> }
 
     # - background-repeat: repeat | repeat-x | repeat-y | no-repeat
@@ -60,7 +61,7 @@ grammar CSS::Extensions::CSS21 {
     rule decl:sym<background-repeat> {:i (background\-repeat) ':' <val(rx[ <ref=.background-repeat> ])> }
 
     # - background: <background-color> || <background-image> || <background-repeat> || <background-attachment> || <background-position>
-    rule decl:sym<background> {:i (background) ':' <val(rx:s[ [ <background-color> | <background-image> | <background-repeat> | <background-attachment> | <background-position=.position> ]**1..5 ])> }
+    rule decl:sym<background> {:i (background) ':' <val(rx:s[:my @*SEEN; [ <background-color> <!seen(0)> | <background-image> <!seen(1)> | <background-repeat> <!seen(2)> | <background-attachment> <!seen(3)> | <background-position=.position> <!seen(4)> ]+ ])> }
 
     # - border-collapse: collapse | separate
     rule decl:sym<border-collapse> {:i (border\-collapse) ':' <val(rx:s:i[ [ collapse | separate ] & <keyw> ])> }
@@ -172,8 +173,8 @@ grammar CSS::Extensions::CSS21 {
     rule decl:sym<font-weight> {:i (font\-weight) ':' <val(rx:s:i[ <ref=.font-weight> ])> }
 
     # - font: [ [ 'font-style' || 'font-variant' || 'font-weight' ]? 'font-size' [ / 'line-height' ]? 'font-family' ] | caption | icon | menu | message-box | small-caption | status-bar
-    rule decl:sym<font> {:i (font) ':' <val(rx:s:i[
-                              [ <font-style> | <font-variant> | <font-weight> ]**0..3 <font-size> [ '/' <line-height> ]? [ <font-family> +% [ ',' ] ]
+    rule decl:sym<font> {:i (font) ':' <val(rx:i:s[
+                              [:my @*SEEN; [ <font-style> <!seen(0)> | <font-variant> <!seen(1)> | <font-weight> <!seen(2)> ]*] <font-size> [ '/' <line-height> ]? [ <font-family> +% [ ',' ] ]
                               | [ caption | icon | menu | message\-box | small\-caption | status\-bar ] & <keyw>
                               ])> }
 
@@ -204,7 +205,7 @@ grammar CSS::Extensions::CSS21 {
     rule decl:sym<list-style-type> {:i (list\-style\-type) ':' <val(rx:s:i[ <ref=.list-style-type> ])> }
 
     # - list-style: [ 'list-style-type' || 'list-style-position' || 'list-style-image' ]
-    rule decl:sym<list-style> {:i (list\-style) ':' <val(rx:s:i[ [ <list-style-type> | <list-style-position> | <list-style-image> ]**1..3 ])> }
+    rule decl:sym<list-style> {:i (list\-style) ':' <val(rx:s:i[:my @*SEEN; [ <list-style-type> <!seen(0)> | <list-style-position> <!seen(1)> | <list-style-image> <!seen(2)> ]+ ])> }
 
     # - margin-right|margin-left: <margin-width>
     # - margin-top|margin-bottom: <margin-width>
@@ -239,7 +240,7 @@ grammar CSS::Extensions::CSS21 {
     rule decl:sym<outline-width> {:i (outline\-width) ':'  <val(rx:s:i[ <ref=.border-width> ])> }
 
    # - outline: [ 'outline-color' || 'outline-style' || 'outline-width' ]
-    rule decl:sym<outline> {:i (outline) ':' <val(rx:s:i[ [ <outline-color> | <outline-style=.border-style> | <outline-width=.border-width> ]**1..3 ])> }
+    rule decl:sym<outline> {:i (outline) ':' <val(rx:s:i[:my @*SEEN; [ <outline-color> <!seen(0)> | <outline-style=.border-style> <!seen(1)> | <outline-width=.border-width> <!seen(2)> ]+ ])> }
 
     # - overflow: visible | hidden | scroll | auto
     rule decl:sym<overflow> {:i (overflow) ':' <val(rx:s:i[ [ visible | hidden | scroll | auto ] & <keyw> ])> }
@@ -273,7 +274,7 @@ grammar CSS::Extensions::CSS21 {
     rule decl:sym<pitch> {:i (pitch) ':' <val(rx:s:i[ <frequency> | [ x\-low | low | medium | high | x\-high ] & <keyw> ])> }
 
     # - play-during: <uri> [ mix || repeat ]? | auto | none
-    rule decl:sym<play-during> {:i (play\-during) ':' <val(rx:s:i[ <uri> [ [ mix | repeat ] & <keyw> ]**0..2 | [ auto | none ] & <keyw> ])> }
+    rule decl:sym<play-during> {:i (play\-during) ':' <val(rx:s:i[ <uri> [:my @*SEEN; [ mix <!seen(0)> | repeat <!seen(1)> ] & <keyw> ]* | [ auto | none ] & <keyw> ])> }
 
     # - position: static | relative | absolute | fixed
     rule decl:sym<position> {:i (position) ':' <val(rx:s:i[ [ static | relative | absolute | fixed ] & <keyw> ])> }
@@ -315,7 +316,7 @@ grammar CSS::Extensions::CSS21 {
     rule decl:sym<text-align> {:i (text\-align) ':' <val(rx:s:i[ [ left | right | center | justify ] & <keyw> ])> }
 
     # - text-decoration: none | [ underline || overline || line-through || blink ]
-    rule decl:sym<text-decoration> {:i (text\-decoration) ':' <val(rx:s:i[ none | [ [ underline | overline | line\-through | blink ] & <keyw> ]**1..4 ])> }
+    rule decl:sym<text-decoration> {:i (text\-decoration) ':' <val(rx:s:i[ none | [:my @*SEEN; [ underline <!seen(0)> | overline <!seen(1)> | line\-through <!seen(2)> | blink <!seen(3)> ] & <keyw> ]+ ])> }
 
     # - text-indent: <length> | <percentage>
     rule decl:sym<text-indent> {:i (text\-indent) ':' <val(rx:s:i[ <length> | <percentage> ])> }

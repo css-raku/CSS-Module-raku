@@ -26,7 +26,7 @@ grammar CSS::Language::CSS3::Fonts:ver<20130212.000>
     # - font: [ [ <‘font-style’> || <font-variant-css21> || <‘font-weight’> || <‘font-stretch’> ]? <‘font-size’> [ / <‘line-height’> ]? <‘font-family’> ] | caption | icon | menu | message-box | small-caption | status-bar
     rule font-variant-css21 {:i [ normal | small\-caps ] & <keyw> }
     rule  decl:sym<font> {:i (font) ':'
-                               <val(rx:i:s[ [ <font-style> | <font-variant=.font-variant-css21> | <font-weight> | <font-stretch> ]**0..4 <font-size> [ '/' <line-height> ]? <font-family> +% [ ',' ]
+                               <val(rx:i:s[:my @*SEEN; [ <font-style> <!seen(0)> | <font-variant=.font-variant-css21> <!seen(1)> | <font-weight> <!seen(2)> | <font-stretch> <!seen(3)> ]* <font-size> [ '/' <line-height> ]? <font-family> +% [ ',' ]
                                | [ caption | icon | menu | message\-box | small\-caption | status\-bar ] & <keyw>
                                ])> }
 
@@ -61,25 +61,25 @@ grammar CSS::Language::CSS3::Fonts:ver<20130212.000>
     rule decl:sym<font-style> {:i (font\-style) ':'  <val(rx:i:s[ <ref=.font-style> ])> }
 
     # - font-synthesis: none | [ weight || style ]
-    rule decl:sym<font-synthesis> {:i (font\-synthesis) ':'  <val(rx:i:s[ none & <keyw> | [ [ [ weight | style ] & <keyw> ]**1..2 ] ])> }
+    rule decl:sym<font-synthesis> {:i (font\-synthesis) ':'  <val(rx:i:s[ none & <keyw> | [:my @*SEEN; [ [ weight <!seen(0)> | style <!seen(1)> ] & <keyw> ]+ ] ])> }
 
     # - font-variant: normal | none | [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> || stylistic(<feature-value-name>) || historical-forms || styleset(<feature-value-name>#) || character-variant(<feature-value-name>#) || swash(<feature-value-name>) || ornaments(<feature-value-name>) || annotation(<feature-value-name>) || [ small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps ] || <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero || <east-asian-variant-values> || <east-asian-width-values> || ruby ]
-    rule decl:sym<font-variant> {:i (font\-variant) ':'  <val(rx:i:s[ [ [ normal | none ] & <keyw> | [ [ <common-lig-values> | <discretionary-lig-values> | <historical-lig-values> | <contextual-alt-values> | <stylistic> | historical\-forms & <keyw> | <styleset> | <character-variant> | <swash> | <ornaments> | <annotation> | [ [ small\-caps | all\-small\-caps | petite\-caps | all\-petite\-caps | unicase | titling\-caps ] & <keyw> ] | <numeric-figure-values> | <numeric-spacing-values> | <numeric-fraction-values> | ordinal & <keyw> | slashed\-zero & <keyw> | <east-asian-variant-values> | <east-asian-width-values> | ruby & <keyw> ] [ ',' ]? ]**1..20 ] ])> }
+    rule decl:sym<font-variant> {:i (font\-variant) ':'  <val(rx:i:s[ [ [ normal | none ] & <keyw> | [:my @*SEEN; [ [ <common-lig-values> <!seen(0)> | <discretionary-lig-values> <!seen(1)> | <historical-lig-values> <!seen(2)> | <contextual-alt-values> <!seen(3)> | <stylistic> <!seen(4)> | historical\-forms & <keyw> <!seen(5)> | <styleset> <!seen(6)> | <character-variant> <!seen(7)> | <swash> <!seen(8)> | <ornaments> <!seen(9)> | <annotation> <!seen(10)> | [ [ small\-caps <!seen(11)> | all\-small\-caps <!seen(12)> | petite\-caps <!seen(13)> | all\-petite\-caps <!seen(14)> | unicase <!seen(15)> | titling\-caps ] & <keyw> ] <!seen(16)> | <numeric-figure-values> <!seen(17)> | <numeric-spacing-values> <!seen(18)> | <numeric-fraction-values> <!seen(19)> | ordinal & <keyw> <!seen(20)> | slashed\-zero & <keyw> <!seen(21)> | <east-asian-variant-values> <!seen(22)> | <east-asian-width-values> <!seen(23)> | ruby & <keyw> <!seen(24)> ] [ ',' ]? ]+ ]] ])> }
 
     # - font-variant-alternates: normal | [ stylistic(<feature-value-name>) || historical-forms || styleset(<feature-value-name>#) || character-variant(<feature-value-name>#) || swash(<feature-value-name>) || ornaments(<feature-value-name>) || annotation(<feature-value-name>) ]
-    rule decl:sym<font-variant-alternates> {:i (font\-variant\-alternates) ':'  <val(rx:i:s[ normal & <keyw> | [ [ <stylistic> | historical\-forms & <keyw> | <styleset> | <character-variant> | <swash> | <ornaments> | <annotation> ]**1..7 ] ])> }
+    rule decl:sym<font-variant-alternates> {:i (font\-variant\-alternates) ':'  <val(rx:i:s[ normal & <keyw> | [:my @*SEEN;[ [ <stylistic> <!seen(0)> | historical\-forms & <keyw> <!seen(0)> | <styleset> <!seen(1)> | <character-variant> <!seen(2)> | <swash> <!seen(3)> | <ornaments> <!seen(4)> | <annotation> <!seen(5)> ]+ ]] ])> }
 
     # - font-variant-caps: normal | small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps
     rule decl:sym<font-variant-caps> {:i (font\-variant\-caps) ':'  <val(rx:i:s[ [ normal | small\-caps | all\-small\-caps | petite\-caps | all\-petite\-caps | unicase | titling\-caps ] & <keyw> ])> }
 
     # - font-variant-east-asian: normal | [ <east-asian-variant-values> || <east-asian-width-values> || ruby ]
-    rule decl:sym<font-variant-east-asian> {:i (font\-variant\-east\-asian) ':'  <val(rx:i:s[ normal & <keyw> | [ [ <east-asian-variant-values> | <east-asian-width-values> | ruby & <keyw> ]**1..3 ] ])> }
+    rule decl:sym<font-variant-east-asian> {:i (font\-variant\-east\-asian) ':'  <val(rx:i:s[ normal & <keyw> | [:my @*SEEN; [ <east-asian-variant-values> <!seen(0)> | <east-asian-width-values> <!seen(1)> | ruby & <keyw> <!seen(2)> ]+ ] ])> }
 
     # - font-variant-ligatures: normal | none | [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> ]
     rule decl:sym<font-variant-ligatures> {:i (font\-variant\-ligatures) ':'  <val(rx:i:s[ [ normal | none ] & <keyw> | [ [ <common-lig-values> | <discretionary-lig-values> | <historical-lig-values> | <contextual-alt-values> ]**1..4 ] ])> }
 
     # - font-variant-numeric: normal | [ <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero ]
-    rule decl:sym<font-variant-numeric> {:i (font\-variant\-numeric) ':'  <val(rx:i:s[ normal & <keyw> | [ [ <numeric-figure-values> | <numeric-spacing-values> | <numeric-fraction-values> | ordinal & <keyw> | slashed\-zero & <keyw> ]**1..5 ] ])> }
+    rule decl:sym<font-variant-numeric> {:i (font\-variant\-numeric) ':'  <val(rx:i:s[ normal & <keyw> | [:my @*SEEN; [ <numeric-figure-values> <!seen(0)> | <numeric-spacing-values> <!seen(1)> | <numeric-fraction-values> <!seen(2)> | ordinal & <keyw> <!seen(3)> | slashed\-zero & <keyw> <!seen(4)> ]+ ] ])> }
 
     # - font-variant-position: normal | sub | super
     rule decl:sym<font-variant-position> {:i (font\-variant\-position) ':'  <val(rx:i:s[ [ normal | sub | super ] & <keyw> ])> }

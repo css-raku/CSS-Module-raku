@@ -42,8 +42,7 @@ grammar CSS::Language::CSS3::PagedMedia:ver<20061010.000>
         # - size: <length>{1,2} | auto | [ <page-size> || [ portrait | landscape] ]
         token page-size {:i [ a[3|4|5] | b[4|5] | letter | legal | ledger ] & <keyw> }
         rule decl:sym<size> {:i (size) ':' <val(rx:i:s[ <length> ** 1..2 | auto & <keyw>
-                                             | [ <page-size> | [ portrait | landscape ] & <keyw> ]**1..2 ])> }
-
+                                             | [:my @*SEEN;[ <page-size> <!seen(0)> | [ portrait | landscape ] & <keyw> <!seen(1)> ]+ ]])> }
 
 }
 

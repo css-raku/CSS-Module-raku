@@ -53,9 +53,10 @@ grammar CSS::Language::CSS3::Selectors::Syntax {
         ]
     }
 
-    rule pseudo-function:sym<nth-selector> {<ident=.nth-functor>'(' [<args=.nth-args> || <any-args> ] ')'} 
-    rule negation_args {[<type-selector> | <universal> | <id> | <class> | <attrib> | $<nested>=[<?before [:i':not(']><pseudo>] | <pseudo> | <any-arg> ]+}
-    rule pseudo-function:sym<negation>  {:i'not(' [ <negation_args> || <any-args> ] ')'}
+    rule nth-selector {<ident=.nth-functor>'(' [ <args=.nth-args> || <any-args> ] ')'}
+    rule pseudo-function:sym<nth-selector> {<nth-selector>}
+    rule negation-args {[<type-selector> | <universal> | <id> | <class> | <attrib> | $<nested>=[<?before [:i':not(']><pseudo>] | <pseudo> | <any-arg> ]+}
+    rule pseudo-function:sym<negation>  {:i'not(' [ <negation-args> || <any-args> ] ')'}
 
 }
 
@@ -83,11 +84,12 @@ class CSS::Language::CSS3::Selectors::Actions
     method attribute-selector:sym<substring>($/) { make ~$/ }
 
     method term:sym<unicode-range>($/) { make $.node($/) }
-    method pseudo-function:sym<nth-selector>($/)  {
+    method nth-selector($/)  {
         return $.warning('usage '~$<ident>~'(an+b) e.g "4" "3n+1"')
             if $<any-args>;
         make $.node($/)
     }
+    method pseudo-function:sym<nth-selector>($/)  { make $<nth-selector>.ast }
 
     method nth-args:sym<odd>($/)     { make {a => 2, b=> 1} }
     method nth-args:sym<even>($/)    { make {a => 2, b=> 0} }
@@ -110,7 +112,7 @@ class CSS::Language::CSS3::Selectors::Actions
     method nth-functor($/)                   { make (~$/).lc  }
     method pseudo:sym<nth-child>($/)         { make $.node($/) }
 
-    method negation_args($/) {
+    method negation-args($/) {
         return $.warning('bad :not() argument', ~$<any-arg>)
             if $<any-arg>;
         return $.warning('illegal nested negation', ~$<nested>)
@@ -121,8 +123,8 @@ class CSS::Language::CSS3::Selectors::Actions
     method pseudo-function:sym<negation>($/) {
         return $.warning('missing/incorrect arguments to :not()', ~$<any-args>)
             if $<any-args>;
-        return unless $<negation_args>.ast;
-        make {ident => 'not', args => $<negation_args>.ast}
+        return unless $<negation-args>.ast;
+        make {ident => 'not', args => $<negation-args>.ast}
     }
 }
 

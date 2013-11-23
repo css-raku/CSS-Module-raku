@@ -71,7 +71,7 @@ sub load-props ($properties-spec, $actions?) {
 
     for $fh.lines {
         # handle full line comments
-        next if /^\#/;
+        next if /^'#'/;
         my @cols = $_.split(/\t/);
         my $spec = "@cols[0] : @cols[1]";
         # '| inherit' and '| initial' are implied anyway; get rid of them

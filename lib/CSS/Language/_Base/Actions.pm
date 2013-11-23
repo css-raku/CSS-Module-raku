@@ -28,7 +28,7 @@ class CSS::Language::_Base::Actions
                              ~$<any-arg>, 'dropped');
         }
 
-        if (my $prio = $<prio> && $<prio>[0].ast) {
+        if (my $prio = $<prio> && $<prio>.ast) {
             %ast<prio> = $prio;
         }
 
