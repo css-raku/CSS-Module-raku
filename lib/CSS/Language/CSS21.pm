@@ -78,7 +78,7 @@ grammar CSS::Extensions::CSS21 {
     rule decl:sym<border-style> {:i (border\-style) ':' <val(rx:s[ <ref=.border-style> ** 1..4 ])> }
 
     # - border-top|border-right|border-bottom|border-left: [ <border-width> || <border-style> || 'border-top-color' ]
-    rule decl:sym<border-*> {:i (border\-[top|right|bottom|left]) ':' <val(rx:s[ [ <border-width> | <border-style> | <border-color> ]**1..3 ])> }
+    rule decl:sym<border-*> {:i (border\-[top|right|bottom|left]) ':' <val(rx:s[:my @*SEEN; [ <border-width> <!seen(0)> | <border-style> <!seen(1)> | <border-color> <!seen(2)> ]+ ])> }
 
    # - border-top-color|border-right-color|border-bottom-color|border-left-color: <color> | transparent
     rule decl:sym<border-*-color> {:i (border\-[top|right|bottom|left]\-color) ':' <val(rx:s[ <ref=.border-color> ])> }
@@ -95,7 +95,7 @@ grammar CSS::Extensions::CSS21 {
 
     # - border: [ <border-width> || <border-style> || 'border-top-color' ]
     # - refactored: border: [ <border-width> || <border-style> || <border-color> ]
-    rule decl:sym<border> {:i (border) ':' <val(rx:s[ [ <border-width> | <border-style> | <ref=.border-color> ]**1..3 ])> }
+    rule decl:sym<border> {:i (border) ':' <val(rx:s[:my @*SEEN; [ <border-width> <!seen(0)>| <border-style> <!seen(1)> | <ref=.border-color> <!seen(2)> ]+ ])> }
 
     # - bottom: <length> | <percentage> | auto
     rule decl:sym<bottom> {:i (bottom) ':' <val(rx:s:i[ <length> | <percentage> | auto & <keyw> ])> }

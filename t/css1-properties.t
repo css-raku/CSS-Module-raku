@@ -40,17 +40,19 @@ for ( $fh.lines ) {
             %declarations{$prop.lc ~ '-' ~ $edge} = {expr => $val}
         }
     }
-    else {
+    elsif %test<expr> {
         %declarations{ $prop.lc } = {expr => %test<expr>};
     }
 
-    %test<ast> = %declarations;
+    %test<ast> = %declarations
+        if %declarations.keys;
 
-    for css1  => (CSS::Language::CSS1, $css1-actions, qw<>),
+    for css1  => (CSS::Language::CSS1,  $css1-actions,  qw<>),
        	css21 => (CSS::Language::CSS21, $css21-actions, qw<inherit>),	
-       	css3  => (CSS::Language::CSS3, $css3-actions, qw<inherit initial>) {
+       	css3  => (CSS::Language::CSS3,  $css3-actions,  qw<inherit initial>) {
 
-	my ($level, $class, $actions, @proforma) = (.key, @(.value));
+	my $level = .key;
+	my ($class, $actions, @proforma) = @(.value);
 
 	CSS::Grammar::Test::parse-tests($class, $input,
 					:rule<declaration-list>,

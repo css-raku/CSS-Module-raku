@@ -46,7 +46,8 @@ for ( $fh.lines ) {
     for css21 => (CSS::Language::CSS21, $css21-actions, qw<inherit>),	
        	css3  => (CSS::Language::CSS3, $css3x-actions, qw<inherit initial>) {
 
-	my ($level, $class, $actions, @proforma) = (.key, @(.value));
+	my $level = .key;
+	my ($level, $class, $actions, @proforma) = @(.value);
 
 	CSS::Grammar::Test::parse-tests($class, $input,
 					:rule<declaration-list>,
