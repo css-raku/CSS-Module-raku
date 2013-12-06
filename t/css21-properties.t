@@ -47,7 +47,7 @@ for ( $fh.lines ) {
        	css3  => (CSS::Language::CSS3, $css3x-actions, qw<inherit initial>) {
 
 	my $level = .key;
-	my ($level, $class, $actions, @proforma) = @(.value);
+	my ($class, $actions, @proforma) = @(.value);
 
 	CSS::Grammar::Test::parse-tests($class, $input,
 					:rule<declaration-list>,
