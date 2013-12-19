@@ -25,18 +25,18 @@ for ( $fh.lines ) {
     }
 
     my %test = %( from-json($_) );
-    my $prop = %test<prop>;
+    my $prop = %test<prop>.lc;
 
     my %declarations;
 
     if %test<box> {
         for @(%test<box>) {
             my ($edge, $val) = .kv;
-            %declarations{$prop.lc ~ '-' ~ $edge} = {expr => $val}
+            %declarations{$prop ~ '-' ~ $edge} = {expr => $val}
         }
     }
     else {
-        %declarations{ $prop.lc } = {expr => %test<expr>};
+        %declarations{ $prop } = {expr => %test<expr>};
     }
 
     %test<ast> = %declarations;
@@ -55,7 +55,7 @@ for ( $fh.lines ) {
 					:suite($level),
 					:expected(%test) );
 
-	unless %seen{$prop.lc}{$level}++ {
+	unless %seen{$prop}{$level}++ {
 	    # usage and inheritence  tests
 	    my $junk = $prop ~ ': junk +-42';
 
@@ -71,8 +71,8 @@ for ( $fh.lines ) {
 
 		my @_expr = ($misc => True);
 		my %ast = %test<box>
-		    ?? <top right bottom left>.map({($prop.lc ~ '-' ~ $_) => {expr => @_expr}})
-		    !! ($prop.lc => {expr => @_expr});
+		    ?? <top right bottom left>.map({($prop ~ '-' ~ $_) => {expr => @_expr}})
+		    !! ($prop => {expr => @_expr});
 
                 CSS::Grammar::Test::parse-tests($class, $decl,
 						:rule<declaration-list>,
