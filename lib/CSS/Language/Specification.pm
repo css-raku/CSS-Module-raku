@@ -45,11 +45,11 @@ grammar CSS::Language::Specification {
     rule value:sym<group>         { '[' ~ ']' <terms> }
     rule value:sym<rule>          { '<'~'>' <id> }
     rule value:sym<punc>          { ',' | '/' }
+    rule value:sym<prop-ref>      { <property-ref> }
+    rule value:sym<literal>       { <.quote> ~ <.quote> (<- quote>*) }
 
     proto token property-ref      {*}
     token property-ref:sym<css21> { <id=.id-quoted> }
     token property-ref:sym<css3>  { '<'~'>' <id=.id-quoted> }
-    rule value:sym<prop-ref>      { <property-ref> }
-    rule value:sym<literal>       { <.quote> ~ <.quote> (<- quote>*) }
 
 }
