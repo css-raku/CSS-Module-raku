@@ -9,7 +9,8 @@ grammar CSS::Language::_Base {
     token length:sym<num> {<number>}
     token angle:sym<num>  {<number>}
 
-    token integer     {[\+|\-]?\d+ <!before ['%'|\w|'.']>}
+    token integer     {[\+|\-]?<uint>}
+    token uint        {\d+ <!before ['%'|\w|'.']>}
     token number      {<num> <!before ['%'|\w]>}
     token uri         {<url>}
     token keyw        {<ident>}             # keyword (case insensitive)

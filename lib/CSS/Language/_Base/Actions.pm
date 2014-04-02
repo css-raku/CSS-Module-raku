@@ -168,7 +168,8 @@ class CSS::Language::_Base::Actions
         make $.token(%rgb, :type<color>, :units<rgb>);
     }
 
-    method integer($/)     { make $.token($/.Int, :type<integer>) }
+    method integer($/)     { make $<uint>.ast }
+    method uint($/)        { make $.token($/.Int, :type<integer>) }
     method number($/)      { make $.token($<num>.ast, :type<number>) }
     method uri($/)         { make $<url>.ast }
     method keyw($/)        { make $<ident>.ast }

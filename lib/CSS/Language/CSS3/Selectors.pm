@@ -48,8 +48,8 @@ grammar CSS::Language::CSS3::Selectors::Syntax {
     rule nth-args:sym<odd>   {:i odd }
     rule nth-args:sym<even>  {:i even }
     rule nth-args:sym<expr> {
-        [$<a-sign>=[\+|\-]?<a=.posint>?$<n>=<[Nn]> [$<b-sign>=[\+|\-] <b=.posint>]?
-        |$<b-sign>=[\+|\-]?<b=.posint>
+        [$<a-sign>=[\+|\-]?<a=.uint>?$<n>=<[Nn]> [$<b-sign>=[\+|\-] <b=.uint>]?
+        |$<b-sign>=[\+|\-]?<b=.uint>
         ]
     }
 
