@@ -39,7 +39,7 @@ for (
 			 warnings => rx{^'usage background-attachment: scroll | fixed'},
 			 ast => {},
     },
-    declaration-list => {input => 'background-attachment: FiXed', ast => {'background-attachment' => {expr => [keyw => 'fixed']}},
+    declaration-list => {input => 'background-attachment: FiXed', ast => {'background-attachment' => {expr => [{keyw => 'fixed'}]}},
     },
     declaration-list => {input => 'font-family: "unclosed-string',
 			 ast => {},
@@ -47,30 +47,30 @@ for (
     },
     # recheck comments and whitespace
     declaration-list => {input => '/*aa*/COLoR/*bb*/:<!--cc-->BLUE /*dd*/;',
-			 ast => {"color" => {"expr" => ["color" => {"r" => 0, "g" => 0, "b" => 255}]}},
+			 ast => {"color" => {"expr" => [{"color" => {"r" => 0, "g" => 0, "b" => 255}}]}},
     },
     # boxed properties should be expanded
     declaration-list => {input => 'margin: 2em 3em',  
-                         ast => {"margin-top" => {expr => ["length" => 2]},
-                                 "margin-right" => {expr => ["length" => 3]},
-                                 "margin-bottom" => {expr => ["length" => 2]},
-                                 "margin-left" => {expr => ["length" => 3]}
+                         ast => {"margin-top" => {expr => [{"length" => 2}]},
+                                 "margin-right" => {expr => [{"length" => 3}]},
+                                 "margin-bottom" => {expr => [{"length" => 2}]},
+                                 "margin-left" => {expr => [{"length" => 3}]}
                                  },
     },
     # check override rules
     declaration-list => {input => 'margin-right: 5em; margin-top: 10em !IMPORTANT; margin: 2em 3em; margin-bottom: 1em',  
-                         ast => {"margin-right" => {expr => ["length" => 3]},
-                                 "margin-top" => {expr => ["length" => 10], prio => "important"},
-                                 "margin-bottom" => {expr => ["length" => 1]},
-                                 "margin-left" => {expr => ["length" => 3]}
+                         ast => {"margin-right" => {expr => [{"length" => 3}]},
+                                 "margin-top" => {expr => [{"length" => 10}], {prio => "important"}},
+                                 "margin-bottom" => {expr => [{"length" => 1}]},
+                                 "margin-left" => {expr => [{"length" => 3}]}
                                  },
     },
     # also check !important
     declaration-list => {input => 'margin: em -ex !IMPORTANT',
-             ast => {"margin-top" => {expr => ["length" => 1], "prio" => "important"},
-                     "margin-right" => {expr => ["length" => -1], "prio" => "important"},
-                     "margin-bottom" => {expr => ["length" => 1], "prio" => "important"},
-                     "margin-left" => {expr => ["length" => -1], "prio" => "important"},
+             ast => {"margin-top" => {expr => [{"length" => 1}], {"prio" => "important"}},
+                     "margin-right" => {expr => [{"length" => -1}], {"prio" => "important"}},
+                     "margin-bottom" => {expr => [{"length" => 1}], {"prio" => "important"}},
+                     "margin-left" => {expr => [{"length" => -1}], {"prio" => "important"}},
                      },
     },
   ) {

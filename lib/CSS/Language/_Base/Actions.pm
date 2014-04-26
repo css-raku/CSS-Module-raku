@@ -35,8 +35,8 @@ class CSS::Language::_Base::Actions
         make %ast;
     }
 
-    method proforma:sym<inherit>($/) { make {inherit => True } }
-    method proforma:sym<initial>($/) { make {initial => True } }
+    method proforma:sym<inherit>($/) { make { inherit => True } }
+    method proforma:sym<initial>($/) { make { initial => True } }
 
     #---- AST construction methods ----#
 
@@ -63,16 +63,14 @@ class CSS::Language::_Base::Actions
 
         my @expr;
 
-        my $proforma = $<proforma>;
-        if $proforma {
-            my %proforma = $proforma.ast;
-            @expr = %proforma;
+        if $<proforma> {
+            @expr = ($<proforma>.ast);
         }
         else {
             my $m = $<expr> // $/;
             @expr = @( $.list($m) );
             # automatic dereferencing of <ref> elems
-            @expr = @expr.map({ .key eq 'ref' ?? @( .value ) !! $_});
+            @expr = @expr.map({ .keys[0] eq 'ref' ?? @( .values[0] ) !! $_});
          }
 
         my %ast;

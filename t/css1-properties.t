@@ -76,7 +76,7 @@ for ( $fh.lines ) {
 	    for @proforma -> $misc {
 		my $decl = $prop ~ ': ' ~ $misc;
 
-		my @_expr = ($misc => True);
+		my @_expr = ({$misc => True});
 		my %ast = %test<box>
 		    ?? <top right bottom left>.map({($prop ~ '-' ~ $_) => {expr => @_expr}})
 		    !! ($prop => {expr => @_expr});

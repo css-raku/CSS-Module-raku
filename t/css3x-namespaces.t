@@ -21,7 +21,7 @@ for (
                 ast => {"prefix" => "svg", "url" => "http://www.w3.org/2000/svg", '@' => "namespace"},
     },
     stylesheet => {input => '@namespace toto url(http://toto.example.org);',
-                ast => [at-rule => {"prefix" => "toto", "url" => "http://toto.example.org", '@' => "namespace"}],
+                ast => [{at-rule => {"prefix" => "toto", "url" => "http://toto.example.org", '@' => "namespace"}}],
     },
     ) {
     my $rule = .key;

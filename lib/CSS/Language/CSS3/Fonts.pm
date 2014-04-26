@@ -156,7 +156,7 @@ class CSS::Language::CSS3::Fonts::Actions
         make $._decl($0, $<val>, q{normal | ultra-condensed | extra-condensed | condensed | semi-condensed | semi-expanded | expanded | extra-expanded | ultra-expanded});
     }
 
-    method font-style($/) { make $.node($/) }
+    method font-style($/) { make $.list($/) }
     method decl:sym<font-style>($/) {
         make $._decl($0, $<val>, q{normal | italic | oblique});
     }

@@ -61,14 +61,14 @@ class CSS::Language::CSS3::MediaQueries::Actions
     # media-rules, media-list, media see core grammar actions
     method unknown-media-list($/) {
 	$.warning("discarding media list");
-        make ["media-query" => ["media-op" => "not", "media" => "all"]];
+        make [{"media-query" => [{"media-op" => "not"}, {"media" => "all"}]}];
     }
 
     method media-query($/) {
-        return make ["media-op" => "not", "media" => "all"]
-            if $<media-expr> && $<media-expr>.grep({! .ast.defined});
+        return make [{"media-op" => "not"}, {"media" => "all"}]
+            if @<media-expr> && @<media-expr>.grep({! .ast.defined});
 
-        make $.list($/);
+	make $.list($/);
     }
 
     method media-op($/)              { make $/.Str.lc }

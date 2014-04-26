@@ -14,7 +14,7 @@ class CSS::Language::CSS21::Actions
     method attr($/)             {
         return $.warning('usage: attr( attribute-name <type-or-unit>? )')
             if $<any-args>;
-        make $.node($/);
+        make $.list($/);
     }
 
     method counter($/) {
@@ -26,14 +26,14 @@ class CSS::Language::CSS21::Actions
     method counters($/) {
         return $.warning('usage: counters(ident [, "string"])')
             if $<any-args>;
-        make $.node($/);
+        make $.list($/);
     }
 
-    method shape-arg($/) { make $.node($/) }
+    method shape-arg($/) { make $.list($/) }
     method shape($/)     {
         return $.warning('usage: rect(<top>, <right>, <botom>, <left>)')
             if $<any-args>;
-        make $.node($/);
+        make $.list($/);
     }
 
     # experimental rule
@@ -43,12 +43,12 @@ class CSS::Language::CSS21::Actions
 
     # - azimuth: <angle> | [[ left-side | far-left | left | center-left | center | center-right | right | far-right | right-side ] || behind ] | leftwards | rightwards
     method azimuth($/) {
-        my %ast = $.node($/);
+        my $ast = $.node($/);
 
         # compute implied angles
         my $angle;
 
-        if my $direction = %ast<direction> || %ast<behind> {
+        if my $direction = $ast<direction> || $ast<behind> {
 
             state %angles = (
                 'left-side'    => [270, 270],
@@ -63,16 +63,19 @@ class CSS::Language::CSS21::Actions
                 'behind'       => [180, 180],
                 );
 
-            my $bh = %ast<behind> ?? 1 !! 0;
+            my $bh = $ast<behind> ?? 1 !! 0;
 
-            $angle = (angle => $.token(%angles{$direction}[$bh], :type<angle>, :units<degrees> ));
-            }
-        elsif %ast<delta> {
-            my $delta_angle = %ast<delta> eq 'leftwards' ?? -20 !! 20;
-            $angle = (turn => $.token($delta_angle, :type<angle>, :units<degrees> ));
+            $angle = {angle => $.token(%angles{$direction}[$bh], :type<angle>, :units<degrees> )};
+	}
+        elsif $ast<delta> {
+            my $delta_angle = $ast<delta> eq 'leftwards' ?? -20 !! 20;
+            $angle = {turn => $.token($delta_angle, :type<angle>, :units<degrees> )};
         }
+	else {
+	    $angle = $ast;
+	}
 
-        make $angle // %ast;
+        make [$angle];
     }
 
     method decl:sym<azimuth>($/) {
@@ -289,19 +292,19 @@ class CSS::Language::CSS21::Actions
     }
 
     # - font-style: normal | italic | oblique
-    method font-style($/) { make $.node($/) }
+    method font-style($/) { make $.list($/) }
     method decl:sym<font-style>($/) {
         make $._decl($0, $<val>, 'normal | italic | oblique');
     }
 
     # - font-variant: normal | small-caps
-    method font-variant($/) { make $.node($/) }
+    method font-variant($/) { make $.list($/) }
     method decl:sym<font-variant>($/) {
         make $._decl($0, $<val>, 'normal | small-caps');
     }
 
     # - font-weight: normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
-    method font-weight($/) { make $.node($/) }
+    method font-weight($/) { make $.list($/) }
     method decl:sym<font-weight>($/) {
         make $._decl($0, $<val>, 'normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900'); 
     }
