@@ -10,7 +10,7 @@ grammar CSS::Language::_Base {
     token angle:sym<num>  {<number>}
 
     token integer     {[\+|\-]?<uint>}
-    token uint        {\d+ <!before ['%'|\w|'.']>}
+    token uint        {\d+}
     token number      {<num> <!before ['%'|\w]>}
     token uri         {<url>}
     token keyw        {<ident>}             # keyword (case insensitive)

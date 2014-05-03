@@ -55,7 +55,7 @@ grammar CSS::Language::CSS3::Selectors::Syntax {
 
     rule nth-selector {<ident=.nth-functor>'(' [ <args=.nth-args> || <any-args> ] ')'}
     rule pseudo-function:sym<nth-selector> {<nth-selector>}
-    rule negation-args {[<type-selector> | <universal> | <id> | <class> | <attrib> | $<nested>=[<?before [:i':not(']><pseudo>] | <pseudo> | <any-arg> ]+}
+    rule negation-args {[<type-selector> | <universal> | <id> | <class> | <attrib> | [$<nested>=<?before [:i':not(']> || <?>] <pseudo> | <any-arg> ]+}
     rule pseudo-function:sym<negation>  {:i'not(' [ <negation-args> || <any-args> ] ')'}
 
 }
@@ -110,12 +110,11 @@ class CSS::Language::CSS3::Selectors::Actions
         make %node;
     }
     method nth-functor($/)                   { make (~$/).lc  }
-    method pseudo:sym<nth-child>($/)         { make $.node($/) }
 
     method negation-args($/) {
         return $.warning('bad :not() argument', ~$<any-arg>)
             if $<any-arg>;
-        return $.warning('illegal nested negation', ~$<nested>)
+        return $.warning('illegal nested negation', ~$<pseudo>)
             if $<nested>;
         make $.list($/);
     }

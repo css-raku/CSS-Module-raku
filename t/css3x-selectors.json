@@ -23,6 +23,7 @@
 // regular functions
 [ "selector", { "input" : "foo:lang(en)", "ast" : [ { "simple-selector" : [ { "qname" : { "element-name" : "foo" } }, { "pseudo" : { "function" : { "ident" : "lang", "args" : [ { "ident" : "en" } ] } } } ] } ] } ]
 // nth-... selectors
+[ "nth-args", { "input" : "3n+1", "ast" : { "a" : 3, "b" : 1 } } ]
 [ "nth-selector", { "input" : "nth-child(3n+1)", "ast" : { "ident" : "nth-child", "args" : { "a" : 3, "b" : 1 } } } ]
 [ "selector", { "input" : "bar:nth-child(3n+1)", "ast" : [ { "simple-selector" : [ { "qname" : { "element-name" : "bar" } }, { "pseudo" : { "function" : { "ident" : "nth-child", "args" : { "a" : 3, "b" : 1 } } } } ] } ] } ]
 [ "selector", { "input" : "bar:nth-last-child(odd)", "ast" : [ { "simple-selector" : [ { "qname" : { "element-name" : "bar" } }, { "pseudo" : { "function" : { "ident" : "nth-last-child", "args" : { "a" : 2, "b" : 1 } } } } ] } ] } ]
