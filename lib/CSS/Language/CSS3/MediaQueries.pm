@@ -19,7 +19,7 @@ grammar CSS::Language::CSS3::MediaQueries::Syntax {
         '{' [ '@'<at-rule> | <ruleset> ]* <.end-block>
     }
 
-    rule unknown-media-list  { <CSS::Grammar::Scan::_any>* }
+    rule unknown-media-list  { <CSS::Grammar::Core::_any>* }
     rule media-query {[<media-op>? <media=.ident> | '(' <media-expr> ')']
                       [:i'and' '(' <media-expr> ')' ]*}
     rule media-op    {:i'only'|'not'}
