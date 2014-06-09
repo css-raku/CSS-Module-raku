@@ -81,12 +81,10 @@ sub load-props ($properties-spec, $actions?) {
         die "unable to parse: $spec"
             unless $/.ast;
         my %prop_details = $/.ast;
-        my $prop_names = %prop_details.<props>;
+        my $prop_names = %prop_details.<props>.join(', ');
 
-        for @$prop_names -> $prop_name {
-            note "prop $prop_name";
-            %props{ $prop_name } = %prop_details;
-        }
+	note "props $prop_names";
+	%props{ $prop_names } = %prop_details;
     }
 
     return %props;
@@ -94,13 +92,9 @@ sub load-props ($properties-spec, $actions?) {
 
 sub generate-perl6-rules(%gen-props, %prop-refs) {
 
-    my %seen;
-
     for %gen-props.kv -> $prop, $def {
 
-        my $sym = $def<sym>;
-        next if %seen{$sym}++;
-
+	my $sym = $def<sym>;
         my $synopsis = $def<synopsis>;
         my $match = $def<match>;
         my $defn = $def<defn>;
@@ -113,7 +107,7 @@ sub generate-perl6-rules(%gen-props, %prop-refs) {
         }
 
         say;
-        say "    # - $sym: $synopsis";
+        say "    #= {$props.join(', ')}: $synopsis";
 
         if @$props == 1 && %prop-refs{ $props[0] } {
             # property is referenced by other definitions; factor out body
@@ -139,7 +133,7 @@ sub generate-perl6-actions(%gen-props, %prop-refs) {
         my $props = $def<props>;
 
         say;
-        say "    # - $sym: $synopsis";
+        say "    #= {$props.join(', ')}: $synopsis";
 
         if @$props == 1 && %prop-refs{ $props[0] } {
             # property is referenced by other definitions; factor out body

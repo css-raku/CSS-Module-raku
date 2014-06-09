@@ -40,18 +40,20 @@ class CSS::Language::_Base::Actions
 
     #---- AST construction methods ----#
 
-    method _decl($prop, $/, $synopsis, :$expand?, :$proforma-usage?) {
-        # used by prop:sym<*> methods
+    method _decl($prop, $/, $synopsis is copy, :$expand?, :$proforma-usage?) {
 
         die "doesn't look like a property: " ~ ~$/
             unless $prop;
 
-        my $property = (~$prop).trim.lc;
+	my $property = (~$prop).trim.lc;
+	$synopsis = $synopsis.content.join(' ')
+	    if $synopsis.can('content');
 
         if ($<proforma> && !$<proforma>.ast) 
             || $<any> || $<any-arg> || $<any-args> {
-                $.warning([~] ('usage ', $property, ': ', $synopsis,
-                               ($proforma-usage // $._proforma-usage)));
+                $.warning([~] ('usage ',
+			       $synopsis.subst(/^ .*? ':' || <?>/, $property ~ ':'), 
+                               $proforma-usage // $._proforma-usage));
                 return Any;
         }
 

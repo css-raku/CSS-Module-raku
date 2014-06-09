@@ -29,19 +29,23 @@ class CSS::Language::CSS21::Actions
         make $.list($/);
     }
 
-    method shape-arg($/) { make $.list($/) }
     method shape($/)     {
         return $.warning('usage: rect(<top>, <right>, <botom>, <left>)')
             if $<any-args>;
         make $.list($/);
     }
+    method shape-arg($/) { make $.list($/) }
 
     # experimental rule
     method val($/) { make $.list($<expr> // $/) }
 
    # --- Properties --- #
 
-    # - azimuth: <angle> | [[ left-side | far-left | left | center-left | center | center-right | right | far-right | right-side ] || behind ] | leftwards | rightwards
+    #= azimuth: <angle> | [[ left-side | far-left | left | center-left | center | center-right | right | far-right | right-side ] || behind ] | leftwards | rightwards'
+    method decl:sym<azimuth>($/) {
+        # see http://www.w3.org/TR/2011/REC-CSS2-20110607/aural.html
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
+    }
     method azimuth($/) {
         my $ast = $.node($/);
 
@@ -78,171 +82,169 @@ class CSS::Language::CSS21::Actions
         make [$angle];
     }
 
-    method decl:sym<azimuth>($/) {
-        # see http://www.w3.org/TR/2011/REC-CSS2-20110607/aural.html
-        make $._decl($0, $<val>, 'usage azimuth: <angle> | [[ left-side | far-left | left | center-left | center | center-right | right | far-right | right-side ] || behind ] | leftwards | rightwards');
-    }
 
-    # - background-attachment: scroll | fixed
-    method background-attachment($/) { make $.list($/) }
+    #= background-attachment: scroll | fixed
     method decl:sym<background-attachment>($/) {
-        make $._decl($0, $<val>, 'scroll | fixed');
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     };
+    method background-attachment($/) { make $.list($/) }
 
-    # - background-color: <color> | transparent
-    method background-color($/) { make $.list($/) }
+    #= background-color: <color> | transparent
     method decl:sym<background-color>($/) {
-        make $._decl($0, $<val>, '<color> | transparent')
+        make $._decl($0, $<val>, &?ROUTINE.WHY)
     };
+    method background-color($/) { make $.list($/) }
 
-    # - background-image: <url> | none
-    method background-image($/) { make $.list($/) }
+    #= background-image: <url> | none
     method decl:sym<background-image>($/) {
-        make $._decl($0, $<val>, '<uri> | none')
+        make $._decl($0, $<val>, &?ROUTINE.WHY)
     };
+    method background-image($/) { make $.list($/) }
 
     # - background-position: [ [ <percentage> | <length> | left | center | right ] [ <percentage> | <length> | top | center | bottom ]? ] | [ [ left | center | right ] || [ top | center | bottom ] ]
-    # refactored as [ <percentage> | <length> | left | center | right ] || [ <percentage> | <length> | top | center | bottom ]
-    method position($/) { make $.list($/) }
+    # refactored as
+    #= background-position:[ <percentage> | <length> | left | center | right ] || [ <percentage> | <length> | top | center | bottom ]
     method decl:sym<background-position>($/) {
-        make $._decl($0, $<val>, q{[ <percentage> | <length> | left | center | right ] || [ <percentage> | <length> | top | center | bottom ]});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
+    method position($/) { make $.list($/) }
 
-    # - background-repeat: repeat | repeat-x | repeat-y | no-repeat
-    method background-repeat($/) { make $.list($/) }
+    #= background-repeat: repeat | repeat-x | repeat-y | no-repeat
     method decl:sym<background-repeat>($/) {
-        make $._decl($0, $<val>, 'repeat | repeat-x | repeat-y | no-repeat')
+        make $._decl($0, $<val>, &?ROUTINE.WHY)
     };
+    method background-repeat($/) { make $.list($/) }
 
-    # - background: <background-color> || <background-image> || <background-repeat> || <background-attachment> || <background-position>
-     method decl:sym<background>($/) {
-        make $._decl($0, $<val>, q{['background-color' || 'background-image' || 'background-repeat' || 'background-attachment' || 'background-position']});
+    #= background: <background-color> || <background-image> || <background-repeat> || <background-attachment> || <background-position>
+    method decl:sym<background>($/) {
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - border-collapse: collapse | separate
+    #= border-collapse: collapse | separate
     method decl:sym<border-collapse>($/) {
-        make $._decl($0, $<val>, q{collapse | separate});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - border-color: [ <color> | transparent ]{1,4}
-    method border-color($/) { make $.list($/) }
+    #= border-color: [ <color> | transparent ]{1,4}
     method decl:sym<border-color>($/) {
-        make $._decl($0, $<val>, q{[ <color> | transparent ]{1,4}},
-                     :expand<box>);
+        make $._decl($0, $<val>, &?ROUTINE.WHY, :expand<box>);
     }
+    method border-color($/) { make $.list($/) }
     
-    # - border-spacing: <length> <length>?
+    #= border-spacing: <length> <length>?
     method decl:sym<border-spacing>($/) {
-        make $._decl($0, $<val>, q{<length> <length>?});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - border-top|border-right|border-bottom|border-left: [ <border-width> || <border-style> || 'border-top-color' ]
+    #= border-top|border-right|border-bottom|border-left: [ <border-width> || <border-style> || 'border-top-color' ]
     method decl:sym<border-*>($/) {
-        make $._decl($0, $<val>, q{[ <border-width> || <border-style> || 'border-color' ]});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - border-top-color|border-right-color|border-bottom-color|border-left-color: <color> | transparent
+    #= border-top-color|border-right-color|border-bottom-color|border-left-color: <color> | transparent
     method decl:sym<border-*-color>($/) {
-        make $._decl($0, $<val>, q{<color> | transparent});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - border-top-style|border-right-style|border-bottom-style|border-left-style: <border-style>
+    #= border-top-style|border-right-style|border-bottom-style|border-left-style: <border-style>
     method decl:sym<border-*-style>($/) {
-        make $._decl($0, $<val>, q{<border-style>});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - border-style: [ none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset ]{1,4}
-    method border-style($/) { make $.list($/) }
+    #= border-style: [ none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset ]{1,4}
     method decl:sym<border-style>($/) {
-        make $._decl($0, $<val>, '[ none | dotted | dashed | solid | double | groove | ridge | inset | outset ]{1,4}', :expand<box>);
+        make $._decl($0, $<val>, &?ROUTINE.WHY, :expand<box>);
     }
+    method border-style($/) { make $.list($/) }
 
-    # - border-top-width|border-right-width|border-bottom-width|border-left-width: <border-width>
+    #= border-top-width|border-right-width|border-bottom-width|border-left-width: <border-width>
     method decl:sym<border-*-width>($/) {
-        make $._decl($0, $<val>, q{<border-width>});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - border-width: <border-width>{1,4}
-    method border-width($/) { make $.list($/) }
+    #= border-width: <border-width>{1,4}
     method decl:sym<border-width>($/) {
-        make $._decl($0, $<val>, q{<border-width>{1,4}},
-                     :expand<box>);
+        make $._decl($0, $<val>, &?ROUTINE.WHY, :expand<box>);
     }
+    method border-width($/) { make $.list($/) }
 
-    # border: <border-width> || <border-style> || 'border-top-color'
+    #= border: <border-width> || <border-style> || 'border-top-color'
     method decl:sym<border>($/) {
-        make $._decl($0, $<val>, q{[ <border-width> || <border-style> || 'border-top-color' ]});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - bottom: <length> | <percentage> | auto
+    #= bottom: <length> | <percentage> | auto
     method decl:sym<bottom>($/) {
-        make $._decl($0, $<val>, q{<length> | <percentage> | auto});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - caption-side: top | bottom
+    #= caption-side: top | bottom
     method decl:sym<caption-side>($/) {
-        make $._decl($0, $<val>, q{top | bottom});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - clear: none | left | right | both
+    #= clear: none | left | right | both
     method decl:sym<clear>($/) {
-        make $._decl($0, $<val>, 'none | left | right | none');
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - clip: <shape> | auto
+    #= clip: <shape> | auto
     method decl:sym<clip>($/) {
-        make $._decl($0, $<val>, ' <shape> | auto | inehrit');
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - color: <color>
+    #= color: <color>
     method decl:sym<color>($/) {
-        make $._decl($0, $<val>, '<color>');
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - content: normal | none | [ <string> | <uri> | <counter> | attr(<identifier>) | open-quote | close-quote | no-open-quote | no-close-quote ]+
+    #= content: normal | none | [ <string> | <uri> | <counter> | attr(<identifier>) | open-quote | close-quote | no-open-quote | no-close-quote ]+
     method decl:sym<content>($/) {
-        make $._decl($0, $<val>, q{normal | none | [ <string> | <uri> | <counter> | attr(<identifier>) | open-quote | close-quote | no-open-quote | no-close-quote ]+});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - counter-increment: [ <identifier> <integer>? ]+ | none
-    # - counter-reset: [ <identifier> <integer>? ]+ | none
+    #= couunter-increment, counter-reset: [ <identifier> <integer>? ]+ | none
     method decl:sym<counter-[increment|reset]>($/) {
-        make $._decl($0, $<val>, q{[ <identifier> <integer>? ]+ | none});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
     method cue($/) { make $.list($/) }
-    # - cue-before: <uri> | none
-    # - cue-after: <uri> | none
+    #= cue-before, cue-after: <uri> | none
     method decl:sym<cue-[before|after]>($/) {
-        make $._decl($0, $<val>, q{<uri> | none});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - cue: [ 'cue-before' || 'cue-after' ]
+    #= cue: [ 'cue-before' || 'cue-after' ]
     method decl:sym<cue>($/) {
-        make $._decl($0, $<val>, q{[ 'cue-before' || 'cue-after' ]});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - cursor: [ [<uri> ,]* [ auto | crosshair | default | pointer | move | e-resize | ne-resize | nw-resize | n-resize | se-resize | sw-resize | s-resize | w-resize | text | wait | help | progress ] ]
+    #= cursor: [ [<uri> ,]* [ auto | crosshair | default | pointer | move | e-resize | ne-resize | nw-resize | n-resize | se-resize | sw-resize | s-resize | w-resize | text | wait | help | progress ] ]
     method decl:sym<cursor>($/) {
-        make $._decl($0, $<val>, q{[ [<uri> ,]* [ auto | crosshair | default | pointer | move | e-resize | ne-resize | nw-resize | n-resize | se-resize | sw-resize | s-resize | w-resize | text | wait | help | progress ] ]});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - direction: ltr | rtl
+    #= direction: ltr | rtl
     method decl:sym<direction>($/) {
-        make $._decl($0, $<val>, q{ltr | rtl});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - display: inline | block | list-item | inline-block | table | inline-table | table-row-group | table-header-group | table-footer-group | table-row | table-column-group | table-column | table-cell | table-caption | none
+    #= display: inline | block | list-item | inline-block | table | inline-table | table-row-group | table-header-group | table-footer-group | table-row | table-column-group | table-column | table-cell | table-caption | none
     method decl:sym<display>($/) {
-        make $._decl($0, $<val>, q{inline | block | list-item | inline-block | table | inline-table | table-row-group | table-header-group | table-footer-group | table-row | table-column-group | table-column | table-cell | table-caption | none});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
+    #= elevation: <angle> | below | level | above | higher | lower
+    method decl:sym<elevation>($/) {
+        # see http://www.w3.org/TR/2011/REC-CSS2-20110607/aural.html
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
+    }
     method elevation($/) {
-        my %ast = $.node($/);
+        my $ast = $.node($/);
 
         my $angle;
 
-        if my $direction = %ast<direction> {
+        if my $direction = $ast<direction> {
 
             state %angles = (
                 'below'    => -90,
@@ -250,344 +252,329 @@ class CSS::Language::CSS21::Actions
                 'above'    =>  90,
                 );
 
-            $angle = (angle => $.token(%angles{$direction}, :type<angle>, :units<degrees> ));
+            $angle = {angle => $.token(%angles{$direction}, :type<angle>, :units<degrees> )};
         }
-        elsif %ast<tilt> {
-            my $delta_angle = %ast<tilt> eq 'lower' ?? -10 !! 10;
-            $angle = (tilt => $.token($delta_angle, :type<angle>, :units<degrees> ));
+        elsif $ast<tilt> {
+            my $delta_angle = $ast<tilt> eq 'lower' ?? -10 !! 10;
+            $angle = {tilt => $.token($delta_angle, :type<angle>, :units<degrees> )};
         }
+	else {
+	    $angle = $ast;
+	}
 
-        make $angle // %ast;
+        make [$angle];
     }
 
-    # - elevation: <angle> | below | level | above | higher | lower
-    method decl:sym<elevation>($/) {
-        # see http://www.w3.org/TR/2011/REC-CSS2-20110607/aural.html
-        make $._decl($0, $<val>, '<angle> | below | level | above | higher | lower');
-
-    }
-
-    # - empty-cells: show | hide
+    #= empty-cells: show | hide
     method decl:sym<empty-cells>($/) {
-        make $._decl($0, $<val>, q{show | hide});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - float: left | right | none
+    #= float: left | right | none
     method decl:sym<float>($/) {
-        make $._decl($0, $<val>, 'left | right | none');
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - font-family: [[ <family-name> | <generic-family> ] [, <family-name> | <generic-family> ]* ]
-    method font-family($/) { make $.list($/) }
+    #= font-family: [[ <family-name> | <generic-family> ] [, <family-name> | <generic-family> ]* ]
     method decl:sym<font-family>($/) {
-        make $._decl($0, $<val>, '[[<family-name> | <generic-family>],]* [<family-name> | <generic-family>]');
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
+    method font-family($/) { make $.list($/) }
 
-    # - font-size: <absolute-size> | <relative-size> | <length> | <percentage>
+    #= font-size: <absolute-size> | <relative-size> | <length> | <percentage>
+    method decl:sym<font-size>($/) {
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
+    }
     method absolute-size($/) { make $.token($<keyw>.ast) }
     method relative-size($/) { make $.token($<keyw>.ast) }
     method font-size($/)     { make $.list($/) }
-    method decl:sym<font-size>($/) {
-        make $._decl($0, $<val>, '[[x]x-]small | medium | [[x]x\-]large | larger | smaller | <length> | <percentage>');
-    }
 
-    # - font-style: normal | italic | oblique
-    method font-style($/) { make $.list($/) }
+    #= font-style: normal | italic | oblique
     method decl:sym<font-style>($/) {
-        make $._decl($0, $<val>, 'normal | italic | oblique');
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
+    method font-style($/) { make $.list($/) }
 
-    # - font-variant: normal | small-caps
-    method font-variant($/) { make $.list($/) }
+    #= font-variant: normal | small-caps
     method decl:sym<font-variant>($/) {
-        make $._decl($0, $<val>, 'normal | small-caps');
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
+    method font-variant($/) { make $.list($/) }
 
-    # - font-weight: normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
-    method font-weight($/) { make $.list($/) }
+    #= font-weight: normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
     method decl:sym<font-weight>($/) {
-        make $._decl($0, $<val>, 'normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900'); 
+        make $._decl($0, $<val>, &?ROUTINE.WHY); 
     }
+    method font-weight($/) { make $.list($/) }
 
-    # - font: [ [ 'font-style' || 'font-variant' || 'font-weight' ]? 'font-size' [ / 'line-height' ]? 'font-family' ] | caption | icon | menu | message-box | small-caption | status-bar
+    #= font: [ [ 'font-style' || 'font-variant' || 'font-weight' ]? 'font-size' [ / 'line-height' ]? 'font-family' ] | caption | icon | menu | message-box | small-caption | status-bar
     method decl:sym<font>($/) {
-        make $._decl($0, $<val>, q{[ [ 'font-style' || 'font-variant' || 'font-weight' ]? 'font-size' [ / 'line-height' ]? 'font-family' ] | caption | icon | menu | message-box | small-caption | status-bar});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - width: <length> | <percentage> | auto
-    # - height: <length> | <percentage> | auto
-    # - left: <length> | <percentage> | auto
-    # - right: <length> | <percentage> | auto
+    #= width, height, left, right: <length> | <percentage> | auto
     method decl:sym<width|height|left|top>($/) {
-        make $._decl($0, $<val>, '<length> | <percentage> | auto');
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - letter-spacing: normal | <length>
-    # - word-spacing: normal | <length>
+    #= letter-spacing, word-spacing: normal | <length>
     method decl:sym<*-spacing>($/) {
-        make $._decl($0, $<val>, 'normal | <length>');
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - line-height: normal | <number> | <length> | <percentage>
-    method line-height($/) { make $.list($/); }
+    #= line-height: normal | <number> | <length> | <percentage>
     method decl:sym<line-height>($/) {
-        make $._decl($0, $<val>, 'normal | <number> | <length> | <percentage>');
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
+    method line-height($/) { make $.list($/); }
 
-    # - list-style-image: <uri> | none
-    method list-style-image($/) { make $.list($/) }
+    #= list-style-image: <uri> | none
     method decl:sym<list-style-image>($/) {
-        make $._decl($0, $<val>, q{<uri> | none});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
+    method list-style-image($/) { make $.list($/) }
 
-    # - list-style-position: inside | outside
-    method list-style-position($/) { make $.list($/) }
+    #= list-style-position: inside | outside
     method decl:sym<list-style-position>($/) {
-        make $._decl($0, $<val>, 'inside | outsideed');
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
+    method list-style-position($/) { make $.list($/) }
 
-    # - list-style-type: disc | circle | square | decimal | decimal-leading-zero | lower-roman | upper-roman | lower-greek | lower-latin | upper-latin | armenian | georgian | lower-alpha | upper-alpha | none
-    method list-style-type($/) { make $.list($/) }
+    #= list-style-type: disc | circle | square | decimal | decimal-leading-zero | lower-roman | upper-roman | lower-greek | lower-latin | upper-latin | armenian | georgian | lower-alpha | upper-alpha | none
     method decl:sym<list-style-type>($/) {
-        make $._decl($0, $<val>, q{disc | circle | square | decimal | decimal-leading-zero | lower-roman | upper-roman | lower-greek | lower-latin | upper-latin | armenian | georgian | lower-alpha | upper-alpha | none});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
+    method list-style-type($/) { make $.list($/) }
 
-    # - list-style: [ 'list-style-type' || 'list-style-position' || 'list-style-image' ]
+    #= list-style: [ 'list-style-type' || 'list-style-position' || 'list-style-image' ]
     method decl:sym<list-style>($/) {
-        make $._decl($0, $<val>, q{[ 'list-style-type' || 'list-style-position' || 'list-style-image' ]});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - margin-right|margin-left: <margin-width>
-    # - margin-top|margin-bottom: <margin-width>
-    method margin-width($/) { make $.list($/) }
+    #= margin-right, margin-left, margin-top, margin-bottom: <margin-width>
     method decl:sym<margin-*>($/) {
-        make $._decl($0, $<val>, q{<margin-width>});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
+    method margin-width($/) { make $.list($/) }
 
-    # - margin: <margin-width>{1,4}
+    #= margin: <margin-width>{1,4}
     method decl:sym<margin>($/) {
-        make $._decl($0, $<val>, q{<margin-width>{1,4}},
-                     :expand<box>);
+        make $._decl($0, $<val>, &?ROUTINE.WHY, :expand<box>);
     }
 
-    # - max-height: <length> | <percentage> | none
-    # - max-width: <length> | <percentage> | none
+    #= max-height, max-width: <length> | <percentage> | none
     method decl:sym<max-[width|height]>($/) {
-        make $._decl($0, $<val>, q{<length> | <percentage> | none});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - min-height: <length> | <percentage>
-    # - min-width: <length> | <percentage>
+    #= min-height, min-width: <length> | <percentage>
     method decl:sym<min-[width|height]>($/) {
-        make $._decl($0, $<val>, q{<length> | <percentage>});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - opacity: <number>
+    #= opacity: <number>
     method decl:sym<opacity>($/) {
-        make $._decl($0, $<val>, q{<number>});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - orphans: <integer>
+    #= orphans: <integer>
     method decl:sym<orphans>($/) {
-        make $._decl($0, $<val>, q{<integer>});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - outline-color: <color> | invert
-    method outline-color($/) { make $.list($/) }
+    #= outline-color: <color> | invert
     method decl:sym<outline-color>($/) {
-        make $._decl($0, $<val>, q{<color> | invert});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
+    method outline-color($/) { make $.list($/) }
 
-    # - outline-style: <border-style>
+    #= outline-style: <border-style>
     method decl:sym<outline-style>($/) {
-        make $._decl($0, $<val>, q{<border-style>});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - outline-width: <border-width>
+    #= outline-width: <border-width>
     method decl:sym<outline-width>($/) {
-        make $._decl($0, $<val>, q{<border-width>});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - outline: [ 'outline-color' || 'outline-style' || 'outline-width' ]
+    #= outline: [ 'outline-color' || 'outline-style' || 'outline-width' ]
     method decl:sym<outline>($/) {
-        make $._decl($0, $<val>, q{[ 'outline-color' || 'outline-style' || 'outline-width' ]});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - overflow: visible | hidden | scroll | auto
+    #= overflow: visible | hidden | scroll | auto
     method decl:sym<overflow>($/) {
-        make $._decl($0, $<val>, q{visible | hidden | scroll | auto});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    method padding-width($/) { make $.list($/) }
-    # - padding-top|padding-right|padding-bottom|padding-left: <padding-width>
+    #= padding-top|padding-right|padding-bottom|padding-left: <padding-width>
     method decl:sym<padding-*>($/) {
-        make $._decl($0, $<val>, q{<padding-width>});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
+    }
+    method padding-width($/) { make $.list($/) }
+
+    #= padding: <padding-width>{1,4}
+    method decl:sym<padding>($/) {
+        make $._decl($0, $<val>, &?ROUTINE.WHY, :expand(<box>));
     }
 
-    # - padding: <padding-width>{1,4}
-     method decl:sym<padding>($/) {
-        make $._decl($0, $<val>, q{<padding-width>{1,4}},
-                     :expand(<box>));
-    }
-
-    # - page-break-after: auto | always | avoid | left | right
-    # - page-break-before: auto | always | avoid | left | right
+    #= page-break-after, page-break-before: auto | always | avoid | left | right
     method decl:sym<page-break-[before|after]>($/) {
-        make $._decl($0, $<val>, q{auto | always | avoid | left | right});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - page-break-inside: avoid | auto
+    #= page-break-inside: avoid | auto
     method decl:sym<page-break-inside>($/) {
-        make $._decl($0, $<val>, q{avoid | auto});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    method pause($/) { make $.list($/) }
-    # - pause-after: <time> | <percentage>
-    # - pause-before: <time> | <percentage>
+    #= pause-after, pause-before: <time> | <percentage>
     method decl:sym<pause-[before|after]>($/) {
-        make $._decl($0, $<val>, q{<time> | <percentage>});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
+    method pause($/) { make $.list($/) }
 
-    # - pause: [ [<time> | <percentage>]{1,2} ]
+    #= pause: [ [<time> | <percentage>]{1,2} ]
     method decl:sym<pause>($/) {
-        make $._decl($0, $<val>, q{[ [<time> | <percentage>]{1,2} ]});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - pitch-range: <number>
+    #= pitch-range: <number>
     method decl:sym<pitch-range>($/) {
-        make $._decl($0, $<val>, q{<number>});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - pitch: <frequency> | x-low | low | medium | high | x-high
+    #= pitch: <frequency> | x-low | low | medium | high | x-high
     method decl:sym<pitch>($/) {
-        make $._decl($0, $<val>, q{<frequency> | x-low | low | medium | high | x-high});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - play-during: <uri> [ mix || repeat ]? | auto | none
+    #= play-during: <uri> [ mix || repeat ]? | auto | none
     method decl:sym<play-during>($/) {
-        make $._decl($0, $<val>, q{<uri> [ mix || repeat ]? | auto | none});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - position: static | relative | absolute | fixed
+    #= position: static | relative | absolute | fixed
     method decl:sym<position>($/) {
-        make $._decl($0, $<val>, q{static | relative | absolute | fixed});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - quotes: [<string> <string>]+ | none
+    #= quotes: [<string> <string>]+ | none
     method decl:sym<quotes>($/) {
-        make $._decl($0, $<val>, q{[<string> <string>]+ | none});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - richness: <number>
+    #= richness: <number>
     method decl:sym<richness>($/) {
-        make $._decl($0, $<val>, q{<number>});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - right: <length> | <percentage> | auto
+    #= right: <length> | <percentage> | auto
     method decl:sym<right>($/) {
-        make $._decl($0, $<val>, q{<length> | <percentage> | auto});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - size: <length>{1,2} | auto | portrait | landscape
+    #= size: <length>{1,2} | auto | portrait | landscape
     method decl:sym<size>($/) {
-        make $._decl($0, $<val>, '<length>{1,2} | auto | portrait | landscape');
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - speak-header: once | always
+    #= speak-header: once | always
     method decl:sym<speak-header>($/) {
-        make $._decl($0, $<val>, q{once | always});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - speak-numeral: digits | continuous
+    #= speak-numeral: digits | continuous
     method decl:sym<speak-numeral>($/) {
-        make $._decl($0, $<val>, q{digits | continuous});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - speak-punctuation: code | none
+    #= speak-punctuation: code | none
      method decl:sym<speak-punctuation>($/) {
-        make $._decl($0, $<val>, q{code | none});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - speak: normal | none | spell-out
+    #= speak: normal | none | spell-out
     method decl:sym<speak>($/) {
-        make $._decl($0, $<val>, q{normal | none | spell-out});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - speech-rate: <number> | x-slow | slow | medium | fast | x-fast | faster | slower
+    #= speech-rate: <number> | x-slow | slow | medium | fast | x-fast | faster | slower
     method decl:sym<speech-rate>($/) {
-        make $._decl($0, $<val>, q{<number> | x-slow | slow | medium | fast | x-fast | faster | slower});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - stress: <number>
+    #= stress: <number>
     method decl:sym<stress>($/) {
-        make $._decl($0, $<val>, q{<number>});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - table-layout: auto | fixed
+    #= table-layout: auto | fixed
     method decl:sym<table-layout>($/) {
-        make $._decl($0, $<val>, q{auto | fixed});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - text-align: left | right | center | justify
+    #= text-align: left | right | center | justify
     method decl:sym<text-align>($/) {
-        make $._decl($0, $<val>, 'left | right | center | justify');
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - text-decoration: none | [ underline || overline || line-through || blink ]
+    #= text-decoration: none | [ underline || overline || line-through || blink ]
     method decl:sym<text-decoration>($/) {
-        make $._decl($0, $<val>, 'none | [ underline || overline || line-through || blink ]');
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - text-indent: <length> | <percentage>
+    #= text-indent: <length> | <percentage>
     method decl:sym<text-indent>($/) {
-        make $._decl($0, $<val>, '<length> | <percentage>');
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - text-transform: capitalize | uppercase | lowercase | none
+    #= text-transform: capitalize | uppercase | lowercase | none
     method decl:sym<text-transform>($/) {
-        make $._decl($0, $<val>, 'capitalize | uppercase | lowercase | none');
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - unicode-bidi: normal | embed | bidi-override
+    #= unicode-bidi: normal | embed | bidi-override
     method decl:sym<unicode-bidi>($/) {
-        make $._decl($0, $<val>, q{normal | embed | bidi-override});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - vertical-align: baseline | sub | super | top | text-top | middle | bottom | text-bottom | <percentage> | <length>
+    #= vertical-align: baseline | sub | super | top | text-top | middle | bottom | text-bottom | <percentage> | <length>
     method decl:sym<vertical-align>($/) {
-        make $._decl($0, $<val>, q{baseline | sub | super | top | text-top | middle | bottom | text-bottom | <percentage> | <length>});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - visibility: visible | hidden | collapse
+    #= visibility: visible | hidden | collapse
     method decl:sym<visibility>($/) {
-        make $._decl($0, $<val>, q{visible | hidden | collapse});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - voice-family: [[<specific-voice> | <generic-voice> ],]* [<specific-voice> | <generic-voice> ]
+    #= voice-family: [[<specific-voice> | <generic-voice> ],]* [<specific-voice> | <generic-voice> ]
+    method decl:sym<voice-family>($/) {
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
+    }
     method generic-voice($/) { make $.list($/) }
     method specific-voice($/) { make $.list($/) }
-    method decl:sym<voice-family>($/) {
-        make $._decl($0, $<val>, q{[[<specific-voice> | <generic-voice> ],]* [<specific-voice> | <generic-voice> ]});
-    }
 
-    # - volume: <number> | <percentage> | silent | x-soft | soft | medium | loud | x-loud
+    #= volume: <number> | <percentage> | silent | x-soft | soft | medium | loud | x-loud
     method decl:sym<volume>($/) {
-        make $._decl($0, $<val>, q{<number> | <percentage> | silent | x-soft | soft | medium | loud | x-loud});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - white-space: normal | pre | nowrap | pre-wrap | pre-line
+    #= white-space: normal | pre | nowrap | pre-wrap | pre-line
     method decl:sym<white-space>($/) {
-        make $._decl($0, $<val>, q{normal | pre | nowrap | pre-wrap | pre-line});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - widows: <integer>
+    #= widows: <integer>
     method decl:sym<widows>($/) {
-        make $._decl($0, $<val>, q{<integer>});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    # - z-index: auto | <integer>
+    #= z-index: auto | <integer>
     method decl:sym<z-index>($/) {
-        make $._decl($0, $<val>, 'auto | <integer>');
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
 }

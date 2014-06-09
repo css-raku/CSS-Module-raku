@@ -6,12 +6,12 @@ use JSON::Tiny;
 use CSS::Language::CSS21::Actions;
 use CSS::Language::CSS21;
 
-use CSS::Language::CSS3;
+use CSS::Language::CSS3::CSS21_Imported;
 
 use CSS::Grammar::Test;
 
 my $css21-actions = CSS::Language::CSS21::Actions.new;
-my $css3x-actions = CSS::Language::CSS3::Actions.new;
+my $css3x-actions = CSS::Language::CSS3::CSS21_Imported::Actions.new;
 
 my %seen;
 
@@ -44,7 +44,7 @@ for ( $fh.lines ) {
     my $input = $prop ~ ':' ~ %test<decl>;
 
     for css21 => (CSS::Language::CSS21, $css21-actions, qw<inherit>),	
-       	css3  => (CSS::Language::CSS3, $css3x-actions, qw<inherit initial>) {
+       	css3  => (CSS::Language::CSS3::CSS21_Imported, $css3x-actions, qw<inherit initial>) {
 
 	my $level = .key;
 	my ($class, $actions, @proforma) = @(.value);
@@ -61,7 +61,8 @@ for ( $fh.lines ) {
 
 	    $actions.reset;
 	    my $p = $class.parse( $junk, :rule<declaration-list>, :actions($actions));
-	    is(~$p, $junk, "$level $prop: able to parse unexpected input");
+	    ok($p.defined && ~$p eq $junk, "$level $prop: able to parse unexpected input")
+	        or note "unable to parse declaration list: $junk";
 
 	    ok($actions.warnings, "$level $prop: unexpected input produces warning")
 		or diag $actions.warnings;

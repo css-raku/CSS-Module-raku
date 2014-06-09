@@ -24,7 +24,7 @@
 { "prop" : "font-size", "decl" : "150%", "expr" : [ { "percentage" : 150 } ] }
 { "prop" : "font-size", "decl" : "Larger", "expr" : [ { "relative-size" : "larger" } ] }
 { "prop" : "font", "decl" : "12pt/14pt sans-serif", "expr" : [ { "font-size" : [ { "length" : 12 } ] }, { "line-height" : [ { "length" : 14 } ] }, { "font-family" : [ { "generic-family" : "sans-serif" } ] } ] }
-{ "prop" : "font", "decl" : "normal small-caps 120%/120% fantasy", "expr" : [ { "font-style" : { "keyw" : "normal" } }, { "font-variant" : { "keyw" : "small-caps" } }, { "font-size" : [ { "percentage" : 120 } ] }, { "line-height" : [ { "percentage" : 120 } ] }, { "font-family" : [ { "generic-family" : "fantasy" } ] } ] }
+{ "prop" : "font", "decl" : "normal small-caps 120%/120% fantasy", "expr" : [ { "font-style" : [{ "keyw" : "normal" }] }, { "font-variant" : [{ "keyw" : "small-caps" }] }, { "font-size" : [ { "percentage" : 120 } ] }, { "line-height" : [ { "percentage" : 120 } ] }, { "font-family" : [ { "generic-family" : "fantasy" } ] } ] }
 { "prop" : "letter-spacing", "decl" : "normal", "expr" : [ { "keyw" : "normal" } ] }
 { "prop" : "line-height", "decl" : "120%", "expr" : [ { "percentage" : 120 } ] }
 { "prop" : "list-style-type", "decl" : "square", "expr" : [ { "keyw" : "square" } ] }

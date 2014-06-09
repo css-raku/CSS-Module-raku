@@ -138,7 +138,7 @@ grammar CSS::Extensions::CSS21 {
     # - display: inline | block | list-item | inline-block | table | inline-table | table-row-group | table-header-group | table-footer-group | table-row | table-column-group | table-column | table-cell | table-caption | none
     rule decl:sym<display> {:i (display) ':' <val(rx:s:i[ [ block | inline[\-[block|table]]? | list\-item | table[\-[cell|caption|[header|footer]\-group|[row|column][\-group]?]]? | none ] & <keyw> ])> }
 
-    # - elavation: <angle> | below | level | above | higher | lower
+    # - elevation: <angle> | below | level | above | higher | lower
     rule elevation {:i <angle>
                    | [below | level | above ] & <direction=.keyw>
                    | [ higher | lower ] & <tilt=.keyw> }
