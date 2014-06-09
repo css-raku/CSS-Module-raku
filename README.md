@@ -1,8 +1,8 @@
 CSS::Language
 =============
 
-CSS::Language is under construction as a Perl 6 validating parser for CSS
-Levels 1 and 2.1 and stable/complete Level 3 modules.
+CSS::Language is experimental and under construction as a Perl 6 validating parser
+for CSS Levels 1 and 2.1 and stable/complete Level 3 modules.
 
 CSS::Language extends [CSS::Grammar](https://github.com/p6-css/perl6-CSS-Grammar). 
 It performs property-specific parsing and validation of declarations.
