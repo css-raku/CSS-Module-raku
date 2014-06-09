@@ -119,95 +119,114 @@ class CSS::Language::CSS3::Fonts::Actions
 
     # ---- Properties ----
 
+    #= font: [ <‘font-style’> || <font-variant=.font-variant-css21> || <‘font-weight’> || <‘font-stretch’> ]? <‘font-size’> [ / <‘line-height’> ]? <‘font-family’> ] | caption | icon | menu | message-box | small-caption | status-bar
     method decl:sym<font>($/) {
-        make $._decl($0, $<val>, q{[ [ <‘font-style’> || <font-variant=.font-variant-css21> || <‘font-weight’> || <‘font-stretch’> ]? <‘font-size’> [ / <‘line-height’> ]? <‘font-family’> ] | caption | icon | menu | message-box | small-caption | status-bar});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    method font-family($/) { make $.list($/) }
+    #= font-family: [[<family-name> | <generic-family>],]* [<family-name> | <generic-family>]
     method decl:sym<font-family>($/) {
-        make $._decl($0, $<val>, '[[<family-name> | <generic-family>],]* [<family-name> | <generic-family>]');
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
+    method font-family($/) { make $.list($/) }
 
+    #= font-feature-settings: normal | <feature-tag-value>#
     method decl:sym<font-feature-settings>($/) {
-        make $._decl($0, $<val>, q{normal | <feature-tag-value>#});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
+    #= font-kerning: auto | normal | none
     method decl:sym<font-kerning>($/) {
-        make $._decl($0, $<val>, q{auto | normal | none});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
+    #= font-language-override: normal | <string>
     method decl:sym<font-language-override>($/) {
-        make $._decl($0, $<val>, q{normal | <string>});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
+    #= font-size: <absolute-size> | <relative-size> | <length> | <percentage>
+    method decl:sym<font-size>($/) {
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
+    }
     method absolute-size($/) { make $.token($<keyw>.ast) }
     method relative-size($/) { make $.token($<keyw>.ast) }
     method font-size($/) { make $.list($/) }
-    method decl:sym<font-size>($/) {
-        make $._decl($0, $<val>, q{<absolute-size> | <relative-size> | <length> | <percentage>});
-    }
 
+    #= font-size-adjust: <none> | <auto> | <number>
     method decl:sym<font-size-adjust>($/) {
-        make $._decl($0, $<val>, '<none> | <auto> | <number>');
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    method font-stretch($/) { make $.list($/) }
+    #= font-stretch: normal | ultra-condensed | extra-condensed | condensed | semi-condensed | semi-expanded | expanded | extra-expanded | ultra-expanded
     method decl:sym<font-stretch>($/) {
-        make $._decl($0, $<val>, q{normal | ultra-condensed | extra-condensed | condensed | semi-condensed | semi-expanded | expanded | extra-expanded | ultra-expanded});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
+    method font-stretch($/) { make $.list($/) }
 
-    method font-style($/) { make $.list($/) }
+    #= font-style: normal | italic | oblique
     method decl:sym<font-style>($/) {
-        make $._decl($0, $<val>, q{normal | italic | oblique});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
+    method font-style($/) { make $.list($/) }
 
     method decl:sym<font-synthesis>($/) {
         make make $._decl($0, $<val>, '<none> | [ weight || style ]');
     }
 
-    method font-variant-css21($/) { make $.node($/) }
+    #= font-variant: normal | none | [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> || stylistic(<feature-value-name>) || historical-forms || styleset(<feature-value-name>#) || character-variant(<feature-value-name>#) || swash(<feature-value-name>) || ornaments(<feature-value-name>) || annotation(<feature-value-name>) || [ small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps ] || <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero || <east-asian-variant-values> || <east-asian-width-values> || ruby ]
     method decl:sym<font-variant>($/) {
-        make $._decl($0, $<val>, q{normal | none | [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> || stylistic(<feature-value-name>) || historical-forms || styleset(<feature-value-name>#) || character-variant(<feature-value-name>#) || swash(<feature-value-name>) || ornaments(<feature-value-name>) || annotation(<feature-value-name>) || [ small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps ] || <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero || <east-asian-variant-values> || <east-asian-width-values> || ruby ]});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
+    method font-variant-css21($/) { make $.node($/) }
 
+    #= font-variant-alternates: normal | [ stylistic(<feature-value-name>) || historical-forms || styleset(<feature-value-name>#) || character-variant(<feature-value-name>#) || swash(<feature-value-name>) || ornaments(<feature-value-name>) || annotation(<feature-value-name>) ]
     method decl:sym<font-variant-alternates>($/) {
-        make $._decl($0, $<val>, q{normal | [ stylistic(<feature-value-name>) || historical-forms || styleset(<feature-value-name>#) || character-variant(<feature-value-name>#) || swash(<feature-value-name>) || ornaments(<feature-value-name>) || annotation(<feature-value-name>) ]});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
+    #= font-variant-caps: normal | small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps
     method decl:sym<font-variant-caps>($/) {
-        make $._decl($0, $<val>, q{normal | small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
+    #= font-variant-east-asian: normal | [ <east-asian-variant-values> || <east-asian-width-values> || ruby ]
     method decl:sym<font-variant-east-asian>($/) {
-        make $._decl($0, $<val>, q{normal | [ <east-asian-variant-values> || <east-asian-width-values> || ruby ]});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
+    #= font-variant-ligatures: normal | none | [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> ]
     method decl:sym<font-variant-ligatures>($/) {
-        make $._decl($0, $<val>, q{normal | none | [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> ]});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
+    #= font-variant-numeric: normal | [ <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero ]
     method decl:sym<font-variant-numeric>($/) {
-        make $._decl($0, $<val>, q{normal | [ <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero ]});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
+    #= font-variant-position: normal | sub | super
     method decl:sym<font-variant-position>($/) {
-        make $._decl($0, $<val>, q{normal | sub | super});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
 
-    method font-weight($/) { make $.list($/) }
+    #= font-weight: normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
     method decl:sym<font-weight>($/) {
-        make $._decl($0, $<val>, q{normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900});
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
+    method font-weight($/) { make $.list($/) }
 
-    method line-height($/) { make $.list($/); }
+    #= line-height: normal | <number> | <length> | <percentage>
     method decl:sym<line-height>($/) {
-        make $._decl($0, $<val>, 'normal | <number> | <length> | <percentage>');
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
+    method line-height($/) { make $.list($/); }
 
-    method src($/) { make $.node($/) }
+    #= src: <uri> [format(<string>#)]? | <font-face-name>
     method decl:sym<src>($/) {
-        make $._decl($0, $<val>, '<uri> [format(<string>#)]? | <font-face-name>');
+        make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
+    method src($/) { make $.node($/) }
 
 }
 

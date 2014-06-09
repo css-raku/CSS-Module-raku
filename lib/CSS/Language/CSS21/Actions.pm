@@ -115,7 +115,7 @@ class CSS::Language::CSS21::Actions
     };
     method background-repeat($/) { make $.list($/) }
 
-    #= background: <background-color> || <background-image> || <background-repeat> || <background-attachment> || <background-position>
+    #= background: [<background-color> || <background-image> || <background-repeat> || <background-attachment> || <background-position>]
     method decl:sym<background>($/) {
         make $._decl($0, $<val>, &?ROUTINE.WHY);
     }

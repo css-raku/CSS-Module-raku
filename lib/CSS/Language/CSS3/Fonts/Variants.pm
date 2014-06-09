@@ -5,12 +5,12 @@ grammar CSS::Language::CSS3::Fonts::Variants {
     rule feature-value-name  {<identifier>}
     rule feature-value-list  {<feature-value-name> [',' <feature-value-name>]*}
 
-        rule annotation               {:i 'annotation('        [<feature-value-name>  || <any-args>] ')'}
-        rule character-variant        {:i 'character-variant(' [<feature-value-list>  || <any-args>] ')'}
-        rule ornaments                {:i 'ornaments('         [<feature-value-name>  || <any-args>] ')'}
-        rule stylistic                {:i 'stylistic('         [<feature-value-name>  || <any-args>] ')'}
-        rule styleset                 {:i 'styleset('          [<feature-value-list>  || <any-args>] ')'}
-        rule swash                    {:i 'swash('             [<feature-value-name>  || <any-args>] ')'}
+        rule annotation                {:i 'annotation('        [<feature-value-name>  || <any-args>] ')'}
+        rule character-variant         {:i 'character-variant(' [<feature-value-list>  || <any-args>] ')'}
+        rule ornaments                 {:i 'ornaments('         [<feature-value-name>  || <any-args>] ')'}
+        rule stylistic                 {:i 'stylistic('         [<feature-value-name>  || <any-args>] ')'}
+        rule styleset                  {:i 'styleset('          [<feature-value-list>  || <any-args>] ')'}
+        rule swash                     {:i 'swash('             [<feature-value-name>  || <any-args>] ')'}
 
         rule common-lig-values         {:i [ common\-ligatures | no\-common\-ligatures ] & <keyw> }
         rule discretionary-lig-values  {:i [ discretionary\-ligatures | no\-discretionary\-ligatures ] & <keyw> }
@@ -46,6 +46,6 @@ class CSS::Language::CSS3::Fonts::Variants::Actions {
     method numeric-spacing-values($/) { make $<keyw>.ast }
     method numeric-fraction-values($/) { make $<keyw>.ast }
     method east-asian-variant-values($/) { make $<keyw>.ast }
-    method  east-asian-width-values($/) { make $<keyw>.ast }
+    method east-asian-width-values($/) { make $<keyw>.ast }
 
 }

@@ -81,42 +81,51 @@ class CSS::Language::CSS3::MediaQueries::Actions
 	make $<expr>.ast;
     }
 
+    #= width|height: <length>
     method media-feature:sym<width|height>($/) {
         return $.warning($0.Str.lc ~ ': length cannot be negative')
             if $<val> && $<val>.match(/\-/);
-        make $._media-decl($0, $<val>, '<length>');
+        make $._media-decl($0, $<val>, &?ROUTINE.WHY);
     }
 
+    #= orientation: [portrait | landscape]?
     method media-feature:sym<orientation>($/) {
-        make $._media-decl($0, $<val>, '[portrait | landscape]?');
+        make $._media-decl($0, $<val>, &?ROUTINE.WHY);
     }
 
+    #= aspect-ratio: <horizontal> "/" <vertical>   (e.g. "16/9")
     method media-feature:sym<aspect-ratio>($/) {
-        make $._media-decl($0, $<val>, '<horizontal> "/" <vertical>   (e.g. "16/9")');
+        make $._media-decl($0, $<val>, &?ROUTINE.WHY);
     }
 
+    #= color: <integer>
     method media-feature:sym<color>($/) {
-        make $._media-decl($0, $<val>, '<integer>');
+        make $._media-decl($0, $<val>, &?ROUTINE.WHY);
     }
 
+    #= color-bool: 
     method media-feature:sym<color-bool>($/) {
         make $._media-decl($0, $<val>, '');
     }
 
+    #= monochrome: <integer>
     method media-feature:sym<monochrome>($/) {
-        make $._media-decl($0, $<val>, '<integer>');
+        make $._media-decl($0, $<val>, &?ROUTINE.WHY);
     }
 
+    #= resolution: <resolution>
     method media-feature:sym<resolution>($/) {
-        make $._media-decl($0, $<val>, '<resolution>');
+        make $._media-decl($0, $<val>, &?ROUTINE.WHY);
     }
 
+    #= scan: [progressive | interlace]?
     method media-feature:sym<scan>($/) {
-        make $._media-decl($0, $<val>, '[progressive | interlace]?');
+        make $._media-decl($0, $<val>, &?ROUTINE.WHY);
     }
 
+    #= grid: [<integer>]?
     method media-feature:sym<grid>($/) {
-        make $._media-decl($0, $<val>, '[<integer>]?');
+        make $._media-decl($0, $<val>, &?ROUTINE.WHY);
     }
 
     method media-feature-unknown($/)   {

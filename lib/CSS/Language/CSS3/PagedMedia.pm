@@ -68,8 +68,9 @@ class CSS::Language::CSS3::PagedMedia::Actions
         make %ast;
     }
 
-    method page-size($/) { make $.token($<keyw>.ast) }
+    #= size: <length>{1,2} | auto | [ <page-size> || [ portrait | landscape] ]
     method decl:sym<size>($/) {
-        make $._decl($0, $<val>, '<length>{1,2} | auto | [ <page-size> || [ portrait | landscape] ]')
+        make $._decl($0, $<val>, &?ROUTINE.WHY)
     }
+    method page-size($/) { make $.token($<keyw>.ast) }
 }
