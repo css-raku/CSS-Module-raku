@@ -11,32 +11,35 @@ class CSS::Language::CSS21::Actions
 
     # --- Functions --- #
 
+    #= usage: attr( attribute-name <type-or-unit>? )
     method attr($/)             {
-        return $.warning('usage: attr( attribute-name <type-or-unit>? )')
+        return $.warning(&?ROUTINE.WHY)
             if $<any-args>;
         make $.list($/);
     }
 
+    #= usage: counter(ident [, ident [,...] ])
     method counter($/) {
-        return $.warning('usage: counter(ident [, ident [,...] ])')
+        return $.warning(&?ROUTINE.WHY)
             if $<any-args>;
         make $.list($/);
     }
 
+    #= usage: counters(ident [, "string"])
     method counters($/) {
-        return $.warning('usage: counters(ident [, "string"])')
+        return $.warning(&?ROUTINE.WHY)
             if $<any-args>;
         make $.list($/);
     }
 
+    #= usage: rect(<top>, <right>, <botom>, <left>)
     method shape($/)     {
-        return $.warning('usage: rect(<top>, <right>, <botom>, <left>)')
+        return $.warning(&?ROUTINE.WHY)
             if $<any-args>;
         make $.list($/);
     }
     method shape-arg($/) { make $.list($/) }
 
-    # experimental rule
     method val($/) { make $.list($<expr> // $/) }
 
    # --- Properties --- #
