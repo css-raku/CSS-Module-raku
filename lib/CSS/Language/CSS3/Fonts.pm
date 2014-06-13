@@ -178,7 +178,7 @@ class CSS::Language::CSS3::Fonts::Actions
     method decl:sym<font-variant>($/) {
         make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
-    method font-variant-css21($/) { make $.node($/) }
+    method font-variant-css21($/) { make $.list($/) }
 
     #= font-variant-alternates: normal | [ stylistic(<feature-value-name>) || historical-forms || styleset(<feature-value-name>#) || character-variant(<feature-value-name>#) || swash(<feature-value-name>) || ornaments(<feature-value-name>) || annotation(<feature-value-name>) ]
     method decl:sym<font-variant-alternates>($/) {
