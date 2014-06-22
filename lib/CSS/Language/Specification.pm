@@ -14,7 +14,7 @@
 grammar CSS::Language::Specification {
     rule TOP {^ <property-spec>* $}
 
-    rule property-spec {<prop-names>[\t| \: ]<synopsis=.terms>}
+    rule property-spec {<prop-names>[\t| \: ]<terms>}
 
     rule prop-sep    {<[\x20 \, \*]>+}
     token prop-names { [ <id=.id-quoted> | <id> ] +%% <.prop-sep> }

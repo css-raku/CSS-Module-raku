@@ -11,66 +11,15 @@ class CSS::Language::Specification::Actions {
     # condensation eg: 'border-top-style' ... 'border-left-style' 
     # ==> pfx='border' props=<top right bottom left> sfx='-style'
 
-    sub _right-condense( @props ) {
-        return ('', @props)
-            unless @props > 1;
-
-        my $pfx;
-        my $pfx-len;
-        for 1..@props[0].chars -> $try-len {
-            my $try-pfx = @props[0].substr(0, $try-len);
-            last if @props.grep({ .substr(0, $try-len) ne $try-pfx });
-            $pfx = $try-pfx;
-            $pfx-len = $try-len;
-        }
-        return ('', @props)
-            unless $pfx-len;
-
-        my @remainder = @props>>.substr($pfx-len);
-        return $pfx, @remainder;
-    }
-
-    sub _left-condense( @props ) {
-        return ('', @props)
-            unless @props > 1;
-
-        my $sfx;
-        my $sfx-len;
-        for 1..@props[0].chars -> $try-len {
-            my $try-sfx = @props[0].substr(* - $try-len);
-            last if @props.grep({ .substr(* - $try-len) ne $try-sfx });
-
-            $sfx = $try-sfx;
-            $sfx-len = $try-len;
-
-            # stop on a '-'
-            last if $try-sfx.substr(0,1) eq '-';
-        }
-        return ('', @props)
-            unless $sfx-len;
-
-        my @remainder = @props>>.substr(0, * - $sfx-len);
-        return $sfx, @remainder;
-    }
-
     method property-spec($/) {
         my @props = @($<prop-names>.ast);
-        my ($pfx, @props-condensed) = _right-condense( @props );
-        (my $sfx, @props-condensed) = _left-condense( @props-condensed );
 
-        my $sym = @props-condensed.join('|');
-        $sym = $pfx ~ '[' ~ $sym ~ ']' ~ $sfx
-            unless $pfx eq '' && $sfx eq '';
-
-        my $match = $sym.subst(/\-/, '\-'):g;
-        my $grammar = $<synopsis>.ast;
+        my $terms = $<terms>.ast;
 
         my %prop-def = (
-            sym      => $sym,
             props    => @props,
-            match    => $match,
-            defn     => $grammar,
-            synopsis => ~$<synopsis>,
+            terms    => $terms,
+            synopsis => ~$<terms>,
             );
 
         make %prop-def;
