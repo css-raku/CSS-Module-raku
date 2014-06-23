@@ -90,6 +90,7 @@ class CSS::Language::Specification::Actions {
 
     method value:sym<func>($/)     {
         # todo - save function prototype
+        %.prop-refs{ $<id>.lc }++;
         make '<' ~ $<id>.ast ~ '>';
     }
 
@@ -114,7 +115,10 @@ class CSS::Language::Specification::Actions {
         make '[ ' ~ $val ~ ' ]';
     }
 
-    method value:sym<rule>($/)     { make '<' ~ $<id>.ast ~ '>' }
+    method value:sym<rule>($/)     {
+        %.prop-refs{ $<id>.lc }++;
+        make '<' ~ $<id>.ast ~ '>'
+    }
 
     method value:sym<punc>($/)     { make "'" ~ (~$/).trim ~ "'" }
 
@@ -122,7 +126,7 @@ class CSS::Language::Specification::Actions {
     method property-ref:sym<css3>($/)  { make $<id>.ast }
     method value:sym<prop-ref>($/)        {
         my $prop-ref = $<property-ref>.ast;
-        %.prop-refs{ $prop-ref }++;
+        %.prop-refs{ $prop-ref.lc }++;
         make '<' ~ $prop-ref ~ '>';
     }
 
