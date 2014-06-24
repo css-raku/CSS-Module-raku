@@ -14,9 +14,11 @@
 grammar CSS::Language::Specification {
     rule TOP {^ <property-spec>* $}
 
-    rule property-spec {<prop-names>[\t| \: ]<terms>}
+    rule property-spec { <prop-names>[ \t | \: ] <terms> }
+    # assume tab delimited, one spec per line
+    token ws {<!ww>' '*}
 
-    rule prop-sep    {<[\x20 \, \*]>+}
+    token prop-sep    {<[\x20 \, \*]>+}
     token prop-names { [ <id=.id-quoted> | <id> ] +%% <.prop-sep> }
     token id         { <[a..z]>[\w|\-]* }
     token quote      {<[\' \‘ \’]>}

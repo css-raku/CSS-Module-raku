@@ -67,13 +67,11 @@ sub load-props ($properties-spec, $actions?) {
 
     my @props;
 
-    for $fh.lines {
+    for $fh.lines -> $prop-spec {
         # handle full line comments
-        next if /^'#'/;
-        my @cols = .split(/\t/);
-        my $prop-spec = "@cols[0] : @cols[1]";
+        next if $prop-spec ~~ /^'#'/;
 
-        my $/ = CSS::Language::Specification.parse($prop-spec, :rule('property-spec'), :actions($actions) );
+        my $/ = CSS::Language::Specification.subparse($prop-spec, :rule('property-spec'), :actions($actions) );
         die "unable to parse: $prop-spec"
             unless $/.ast;
         my $prop-defn = $/.ast;

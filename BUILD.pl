@@ -5,6 +5,7 @@ multi MAIN( Bool :$interfaces=True, Bool :$grammars=True, Bool :$actions=True ) 
          'etc/css21-properties.txt' => <CSS21>,
          'etc/css3x-font-properties.txt' => <CSS3 Fonts>,
          'etc/css3x-font-\@fontface-properties.txt' => <CSS3 Fonts AtFontFace>,
+         'etc/css3x-paged-media.txt' => <CSS3 PagedMedia>,
         ) {
         my ($spec, $class-isa) = .kv;
 
