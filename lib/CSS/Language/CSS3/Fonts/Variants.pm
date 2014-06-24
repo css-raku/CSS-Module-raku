@@ -41,7 +41,7 @@ class CSS::Language::CSS3::Fonts::Variants::Actions {
     method common-lig-values($/) { make $<keyw>.ast }
     method discretionary-lig-values($/) { make $<keyw>.ast }
     method historical-lig-values($/) { make $<keyw>.ast }
-    method contextul-alt-values($/) { make $<keyw>.ast }
+    method contextual-alt-values($/) { make $<keyw>.ast }
     method numeric-figure-values($/) { make $<keyw>.ast }
     method numeric-spacing-values($/) { make $<keyw>.ast }
     method numeric-fraction-values($/) { make $<keyw>.ast }

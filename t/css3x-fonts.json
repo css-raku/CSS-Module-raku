@@ -1,5 +1,6 @@
 [ "at-rule", { "input" : "font-face { font-family: MainText; src: url(gentium.eot); /* for use with older user agents */ src: local('Gentium'), url(gentium.ttf) format('truetype');  /* Overrides src definition */ }", "ast" : { "font-description" : { "font-family" : { "expr" : [ { "family-name" : "MainText" } ] }, "src" : { "expr" : [ { "src" : { "local" : "Gentium" } }, { "src" : { "uri" : "gentium.ttf", "format" : "truetype" } } ] } }, "@" : "font-face" }, "css21" : { "parse" : "", "ast" : null } } ]
 [ "decl", { "input" : "font-family: 21st Century, fantasy", "ast" : { "property" : "font-family", "expr" : [ { "family-name" : "21st Century" }, { "generic-family" : "fantasy" } ] } } ]
+[ "decl", { "input" : "font-feature-settings: \"smcp\", \"swsh\" 2", "ast" : { "property" : "font-feature-settings", "expr" : [ { "feature-tag-value" : { "string" : "smcp" } }, { "feature-tag-value" : { "string" : "swsh", "integer" : 2 } } ] }, "css21" : { "parse" : "", "ast" : null } } ]
 [ "decl", { "input" : "font-weight: lighter", "ast" : { "property" : "font-weight", "expr" : [ { "keyw" : "lighter" } ] } } ]
 [ "decl", { "input" : "font-weight: initial", "ast" : { "property" : "font-weight", "expr" : [ { "initial" : true } ] } } ]
 [ "decl", { "input" : "font-weight: inherit", "ast" : { "property" : "font-weight", "expr" : [ { "inherit" : true } ] } } ]

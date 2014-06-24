@@ -9,6 +9,7 @@ use v6;
 use CSS::Language::CSS3::Fonts::AtFontFace;
 use CSS::Language::CSS3::Fonts::Variants;
 use CSS::Language::CSS3::_Base;
+use CSS::Language::CSS3::Fonts::_Interface;
 
 grammar CSS::Language::CSS3::Fonts::Syntax {
     rule font-description {<declarations=.CSS::Language::CSS3::Fonts::AtFontFace::declarations>}
@@ -18,7 +19,8 @@ grammar CSS::Language::CSS3::Fonts::Syntax {
 grammar CSS::Language::CSS3::Fonts:ver<20130212.000> 
     is CSS::Language::CSS3::Fonts::Syntax
     is CSS::Language::CSS3::Fonts::Variants
-    is CSS::Language::CSS3::_Base {
+    is CSS::Language::CSS3::_Base
+    does CSS::Language::CSS3::Fonts::_Interface {
 
     # ---- Properties ----
     # Initial generation:
@@ -31,11 +33,14 @@ grammar CSS::Language::CSS3::Fonts:ver<20130212.000>
                                ])> }
 
     # - font-family: [ <family-name> | <generic-family> ]#
-    rule font-family {:i [ serif | sans\-serif | cursive | fantasy | monospace ] & <generic-family=.keyw> || <family-name=.identifiers> | <family-name=.string> }
     rule decl:sym<font-family> {:i (font\-family) ':' <val(rx:i:s[ <ref=.font-family> +% [ ',' ] ])> }
+    rule font-family    {:i  [ <generic-family> || <family-name> ] }
+    rule family-name    { <family-name=.identifiers> || <family-name=.string> }
+    rule generic-family {:i [ serif | sans\-serif | cursive | fantasy | monospace ] & <generic-family=.identifier> }
 
     # - font-feature-settings: normal | <feature-tag-value>#
     rule decl:sym<font-feature-settings> {:i (font\-feature\-settings) ':'  <val(rx:i:s[ normal & <keyw> | <feature-tag-value> +% [ ',' ] ])> }
+    rule feature-tag-value {:i <string> [ <integer> | [ on | off ] & <keyw> ]? }
 
     # - font-kerning: auto | normal | none
     rule decl:sym<font-kerning> {:i (font\-kerning) ':'  <val(rx:i:s[ [ auto | normal | none ] & <keyw> ])> }
@@ -97,7 +102,8 @@ grammar CSS::Language::CSS3::Fonts:ver<20130212.000>
 
 class CSS::Language::CSS3::Fonts::Actions
     is CSS::Language::CSS3::Fonts::Variants::Actions
-    is CSS::Language::CSS3::_Base::Actions {
+    is CSS::Language::CSS3::_Base::Actions
+    does CSS::Language::CSS3::Fonts::_Interface {
 
     method at-rule:sym<font-face>($/) { make $.at-rule($/) }
 
@@ -129,11 +135,14 @@ class CSS::Language::CSS3::Fonts::Actions
         make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
     method font-family($/) { make $.list($/) }
+    method family-name($/) { make $<family-name>.ast }
+    method generic-family($/) { make $<generic-family>.ast }
 
     #= font-feature-settings: normal | <feature-tag-value>#
     method decl:sym<font-feature-settings>($/) {
         make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
+    method feature-tag-value($/) { make $.node($/) }
 
     #= font-kerning: auto | normal | none
     method decl:sym<font-kerning>($/) {
