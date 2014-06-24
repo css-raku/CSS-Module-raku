@@ -1,6 +1,6 @@
 use v6;
 
-multi MAIN( Bool :$interfaces=True, Bool :$grammars?, Bool :$actions? ) {
+multi MAIN( Bool :$interfaces=True, Bool :$grammars=True, Bool :$actions=True ) {
     for ('etc/css1-properties.txt' => <CSS1>,
          'etc/css21-properties.txt' => <CSS21>,
          'etc/css3x-font-properties.txt' => <CSS3 Fonts>,
@@ -10,19 +10,19 @@ multi MAIN( Bool :$interfaces=True, Bool :$grammars?, Bool :$actions? ) {
 
         my @productions;
 
-        @productions.push: 'role'    => '_Interface'
+        @productions.push: 'role'    => 'Interface'
             if $interfaces;
 
-        @productions.push: 'class'   => '_Actions'
+        @productions.push: 'class'   => 'Actions'
             if $actions;
 
-        @productions.push: 'grammar' => '_Grammar'
+        @productions.push: 'grammar' => 'Grammar'
             if $grammars;
 
         for @productions {
             my ($opt, $subclass) = .kv;
-            my $class-name = (<CSS Language>, @$class-isa, $subclass).join('::');
-            my $class-path = (<lib CSS Language>, @$class-isa, $subclass).join('/');
+            my $class-name = (<CSS Language>, @$class-isa, <Spec>,  $subclass).join('::');
+            my $class-path = (<lib CSS Language>, @$class-isa, <Spec>, $subclass).join('/');
             my $perl6 = $*EXECUTABLE_NAME;
             my $cmd = "$perl6 -Iblib/lib -Ilib etc/gen-properties.pl --{$opt}={$class-name} $spec > {$class-path}.pm";
             say $cmd;

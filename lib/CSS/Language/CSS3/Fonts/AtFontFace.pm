@@ -4,12 +4,12 @@ grammar CSS::Language::CSS3::Fonts::AtFontFace {...}
 
 use CSS::Language::CSS3::Fonts::Variants;
 use CSS::Language::CSS3::_Base;
-use CSS::Language::CSS3::Fonts::AtFontFace::_Interface;
+use CSS::Language::CSS3::Fonts::AtFontFace::Spec::Interface;
 
 grammar CSS::Language::CSS3::Fonts::AtFontFace
     is CSS::Language::CSS3::Fonts::Variants
     is CSS::Language::CSS3::_Base
-    does CSS::Language::CSS3::Fonts::AtFontFace::_Interface {
+    does CSS::Language::CSS3::Fonts::AtFontFace::Spec::Interface {
 
     # @font-face declarations
 

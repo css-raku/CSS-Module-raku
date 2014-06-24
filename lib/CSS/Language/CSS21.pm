@@ -4,7 +4,7 @@ use v6;
 
 use CSS::Language::_Base;
 use CSS::Grammar::CSS21;
-use CSS::Language::CSS21::_Interface;
+use CSS::Language::CSS21::Spec::Interface;
 
 grammar CSS::Language::CSS21:ver<20110607.000> {...}
 
@@ -362,4 +362,4 @@ grammar CSS::Language::CSS21:ver<20110607.000>
     is CSS::Language::_Base
     is CSS::Extensions::CSS21 
     is CSS::Grammar::CSS21
-    does CSS::Language::CSS21::_Interface {};
+    does CSS::Language::CSS21::Spec::Interface {};

@@ -9,8 +9,8 @@ use v6;
 use CSS::Language::CSS3::Fonts::AtFontFace;
 use CSS::Language::CSS3::Fonts::Variants;
 use CSS::Language::CSS3::_Base;
-use CSS::Language::CSS3::Fonts::_Interface;
-use CSS::Language::CSS3::Fonts::AtFontFace::_Interface;
+use CSS::Language::CSS3::Fonts::Spec::Interface;
+use CSS::Language::CSS3::Fonts::AtFontFace::Spec::Interface;
 
 grammar CSS::Language::CSS3::Fonts::Syntax {
     rule font-description {<declarations=.CSS::Language::CSS3::Fonts::AtFontFace::declarations>}
@@ -21,7 +21,7 @@ grammar CSS::Language::CSS3::Fonts:ver<20130212.000>
     is CSS::Language::CSS3::Fonts::Syntax
     is CSS::Language::CSS3::Fonts::Variants
     is CSS::Language::CSS3::_Base
-    does CSS::Language::CSS3::Fonts::_Interface {
+    does CSS::Language::CSS3::Fonts::Spec::Interface {
 
     # ---- Properties ----
     # Initial generation:
@@ -103,8 +103,8 @@ grammar CSS::Language::CSS3::Fonts:ver<20130212.000>
 class CSS::Language::CSS3::Fonts::Actions
     is CSS::Language::CSS3::Fonts::Variants::Actions
     is CSS::Language::CSS3::_Base::Actions
-    does CSS::Language::CSS3::Fonts::_Interface
-    does CSS::Language::CSS3::Fonts::AtFontFace::_Interface {
+    does CSS::Language::CSS3::Fonts::Spec::Interface
+    does CSS::Language::CSS3::Fonts::AtFontFace::Spec::Interface {
 
     method at-rule:sym<font-face>($/) { make $.at-rule($/) }
 

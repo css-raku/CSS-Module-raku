@@ -6,12 +6,12 @@ use v6;
 
 use CSS::Language::_Base;
 use CSS::Grammar::CSS1;
-use CSS::Language::CSS1::_Interface;
+use CSS::Language::CSS1::Spec::Interface;
 
 grammar CSS::Language::CSS1:ver<20080411.000>
     is CSS::Language::_Base
     is CSS::Grammar::CSS1
-    does CSS::Language::CSS1::_Interface {
+    does CSS::Language::CSS1::Spec::Interface {
 
     # allow color names and define our vocabulary
     rule color:sym<named>  {:i [aqua | black | blue | fuchsia | gray | green | lime | maroon | navy | olive | purple | red | silver | teal | white | yellow] & <keyw> }

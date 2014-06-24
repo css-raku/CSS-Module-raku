@@ -1,11 +1,11 @@
 use v6;
 
 use CSS::Language::_Base::Actions;
-use CSS::Language::CSS1::_Interface;
+use CSS::Language::CSS1::Spec::Interface;
 
 class CSS::Language::CSS1::Actions
     is CSS::Language::_Base::Actions
-    does CSS::Language::CSS1::_Interface {
+    does CSS::Language::CSS1::Spec::Interface {
 
     #= font-family: [[<family-name> | <generic-family>],]* [<family-name> | <generic-family>]
     method decl:sym<font-family>($/) {

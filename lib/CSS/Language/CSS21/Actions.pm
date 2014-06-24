@@ -1,11 +1,11 @@
 use v6;
 
 use CSS::Language::_Base::Actions;
-use CSS::Language::CSS21::_Interface;
+use CSS::Language::CSS21::Spec::Interface;
 
 class CSS::Language::CSS21::Actions
     is CSS::Language::_Base::Actions 
-    does CSS::Language::CSS21::_Interface {
+    does CSS::Language::CSS21::Spec::Interface {
 
     has $._proforma-usage = ' | inherit';
 

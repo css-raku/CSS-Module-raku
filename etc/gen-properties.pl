@@ -97,11 +97,14 @@ sub generate-perl6-rules(%synopsis-props) {
         my $def = $defs[0];
         my $terms = $def<terms>;
 
-        say;
-        say "    rule $sym \{ <terms(q\{ $synopsis \}, state \$rx)> \}";
         for @props -> $prop {
             my $match = $prop.subst(/\-/, '\-'):g;
+
+            say;
             say "    rule decl:sym<{$prop}> \{:i ($match) ':'  <terms=.$sym> \}";
+            say $prop eq $sym
+                ?? "    rule $sym \{ <terms(q\{ $synopsis \}, state \$rx)> \}"
+                !! "    rule $prop \{ <{$prop}=.{$sym}> \}";
         }
     }
 }
@@ -112,16 +115,12 @@ sub generate-perl6-actions(%synopsis-props) {
 
         my @props = (@$defs).map({my %def = %$_; @( %def<props>)});
         my $sym = @props[0];
-        my $match = $sym.subst(/\-/, '\-'):g;
 
-        say;
-        say "    method {$sym}(\$/) \{ make \$.list(\$/) \}";
         for @props -> $prop {
-            my $match = $prop.subst(/\-/, '\-'):g;
+            say;
             say "    #= {$prop}: $synopsis";
-            say "    method decl:sym<{$sym}>(\$/) \{";
-            say "        make \$._decl(\$0, \$<val>, \&\*ROUTINE.WHY );";
-            say "    \}";
+            say "    method decl:sym<{$prop}>(\$/) \{ make \$._decl(\$0, \$<val>, \&\*ROUTINE.WHY) \}";
+            say "    method {$prop}(\$/) \{ make \$<{$prop}>.ast) \}";
         }
     }
 }
