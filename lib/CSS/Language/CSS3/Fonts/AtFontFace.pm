@@ -4,22 +4,26 @@ grammar CSS::Language::CSS3::Fonts::AtFontFace {...}
 
 use CSS::Language::CSS3::Fonts::Variants;
 use CSS::Language::CSS3::_Base;
+use CSS::Language::CSS3::Fonts::AtFontFace::_Interface;
 
 grammar CSS::Language::CSS3::Fonts::AtFontFace
     is CSS::Language::CSS3::Fonts::Variants
-    is CSS::Language::CSS3::_Base {
+    is CSS::Language::CSS3::_Base
+    does CSS::Language::CSS3::Fonts::AtFontFace::_Interface {
 
     # @font-face declarations
 
     # ---- Functions ----
     rule format {:i'format(' [ <format=.string> | <format=.keyw> || <any-args> ] ')'}
-    rule local  {:i'local(' [ <font-face-name=.identifiers> | <font-face-name=.string> || <any-args> ] ')'}
+    rule local  {:i'local(' [ <font-face-name> || <any-args> ] ')'}
+    rule font-face-name { <font-face-name=.identifiers> | <font-face-name=.string> }
 
     # ---- Properties ----
     # Initial generation:
     # % etc/gen-properties.pl gen grammar etc/css3x-font-@fontface-properties.txt
     # - font-family: <family-name>
-    rule decl:sym<font-family> {:i (font\-family) ':'  <val(rx:i:s[ <proforma> || <family-name=.identifiers> | <family-name=.string> ])> }
+    rule decl:sym<font-family> {:i (font\-family) ':'  <val(rx:i:s[ <family-name> ])> }
+    rule family-name    { <family-name=.identifiers> || <family-name=.string> }
 
     # - font-feature-settings: normal | <feature-tag-value>#
     rule decl:sym<font-feature-settings> {:i (font\-feature\-settings) ':'  <val(rx:i:s[ normal & <keyw> | [ <feature-tag-value> [ ',' <feature-tag-value> ]* ] ])> }

@@ -10,6 +10,7 @@ use CSS::Language::CSS3::Fonts::AtFontFace;
 use CSS::Language::CSS3::Fonts::Variants;
 use CSS::Language::CSS3::_Base;
 use CSS::Language::CSS3::Fonts::_Interface;
+use CSS::Language::CSS3::Fonts::AtFontFace::_Interface;
 
 grammar CSS::Language::CSS3::Fonts::Syntax {
     rule font-description {<declarations=.CSS::Language::CSS3::Fonts::AtFontFace::declarations>}
@@ -40,7 +41,6 @@ grammar CSS::Language::CSS3::Fonts:ver<20130212.000>
 
     # - font-feature-settings: normal | <feature-tag-value>#
     rule decl:sym<font-feature-settings> {:i (font\-feature\-settings) ':'  <val(rx:i:s[ normal & <keyw> | <feature-tag-value> +% [ ',' ] ])> }
-    rule feature-tag-value {:i <string> [ <integer> | [ on | off ] & <keyw> ]? }
 
     # - font-kerning: auto | normal | none
     rule decl:sym<font-kerning> {:i (font\-kerning) ':'  <val(rx:i:s[ [ auto | normal | none ] & <keyw> ])> }
@@ -103,7 +103,8 @@ grammar CSS::Language::CSS3::Fonts:ver<20130212.000>
 class CSS::Language::CSS3::Fonts::Actions
     is CSS::Language::CSS3::Fonts::Variants::Actions
     is CSS::Language::CSS3::_Base::Actions
-    does CSS::Language::CSS3::Fonts::_Interface {
+    does CSS::Language::CSS3::Fonts::_Interface
+    does CSS::Language::CSS3::Fonts::AtFontFace::_Interface {
 
     method at-rule:sym<font-face>($/) { make $.at-rule($/) }
 
@@ -120,6 +121,8 @@ class CSS::Language::CSS3::Fonts::Actions
 
         make $<font-face-name>.ast;
     }
+
+    method font-face-name { make $<font-face-name>.ast }
 
     method font-description($/) { make $<declarations>.ast }
 
@@ -142,7 +145,6 @@ class CSS::Language::CSS3::Fonts::Actions
     method decl:sym<font-feature-settings>($/) {
         make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
-    method feature-tag-value($/) { make $.node($/) }
 
     #= font-kerning: auto | normal | none
     method decl:sym<font-kerning>($/) {

@@ -93,7 +93,6 @@ sub generate-perl6-rules(%synopsis-props) {
 
         my @props = (@$defs).map({my %def = %$_; @( %def<props>)});
         my $sym = @props[0];
-        my $match = $sym.subst(/\-/, '\-'):g;
 
         my $def = $defs[0];
         my $terms = $def<terms>;
@@ -101,7 +100,8 @@ sub generate-perl6-rules(%synopsis-props) {
         say;
         say "    rule $sym \{ <terms(q\{ $synopsis \}, state \$rx)> \}";
         for @props -> $prop {
-            say "    rule decl:sym<{$prop}> \{:i (<sym>) ':'  <terms=.$sym> \}";
+            my $match = $prop.subst(/\-/, '\-'):g;
+            say "    rule decl:sym<{$prop}> \{:i ($match) ':'  <terms=.$sym> \}";
         }
     }
 }
@@ -115,11 +115,14 @@ sub generate-perl6-actions(%synopsis-props) {
         my $match = $sym.subst(/\-/, '\-'):g;
 
         say;
-        say "    #= {@props.join(', ')}: $synopsis";
-        say "    method decl:sym<{$sym}>(\$/) \{";
-        say "        make \$._decl(\$0, \$<val>, \&\*ROUTINE.WHY );";
-        say "    \}";
         say "    method {$sym}(\$/) \{ make \$.list(\$/) \}";
+        for @props -> $prop {
+            my $match = $prop.subst(/\-/, '\-'):g;
+            say "    #= {$prop}: $synopsis";
+            say "    method decl:sym<{$sym}>(\$/) \{";
+            say "        make \$._decl(\$0, \$<val>, \&\*ROUTINE.WHY );";
+            say "    \}";
+        }
     }
 }
 
