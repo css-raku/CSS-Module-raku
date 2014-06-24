@@ -1,9 +1,11 @@
 use v6;
 
 use CSS::Language::_Base::Actions;
+use CSS::Language::CSS21::_Interface;
 
 class CSS::Language::CSS21::Actions
-    is CSS::Language::_Base::Actions {
+    is CSS::Language::_Base::Actions 
+    does CSS::Language::CSS21::_Interface {
 
     has $._proforma-usage = ' | inherit';
 
@@ -283,6 +285,8 @@ class CSS::Language::CSS21::Actions
         make $._decl($0, $<val>, &?ROUTINE.WHY);
     }
     method font-family($/) { make $.list($/) }
+    method family-name($/) { make $<family-name>.ast }
+    method generic-family($/) { make $<generic-family>.ast }
 
     #= font-size: <absolute-size> | <relative-size> | <length> | <percentage>
     method decl:sym<font-size>($/) {

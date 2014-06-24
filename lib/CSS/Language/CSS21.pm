@@ -4,8 +4,9 @@ use v6;
 
 use CSS::Language::_Base;
 use CSS::Grammar::CSS21;
+use CSS::Language::CSS21::_Interface;
 
-grammar  CSS::Language::CSS21:ver<20110607.000> {...}
+grammar CSS::Language::CSS21:ver<20110607.000> {...}
 
 grammar CSS::Extensions::CSS21 {
 
@@ -151,8 +152,10 @@ grammar CSS::Extensions::CSS21 {
     rule decl:sym<float> {:i (float) ':' <val(rx:s:i[ [ left | right | none ] & <keyw> ])> }
 
     # - font-family: [[ <family-name> | <generic-family> ] [, <family-name> | <generic-family> ]* ]
-    rule font-family {:i [ serif | sans\-serif | cursive | fantasy | monospace ] & <generic-family=.keyw> || <family-name=.identifiers> | <family-name=.string> }
     rule decl:sym<font-family> {:i (font\-family) ':' <val(rx:s:i[ <ref=.font-family> +% [ ',' ] ])> }
+    rule font-family    {:i  [ <generic-family> || <family-name> ] }
+    rule family-name    { <family-name=.identifiers> || <family-name=.string> }
+    rule generic-family {:i [ serif | sans\-serif | cursive | fantasy | monospace ] & <generic-family=.identifier> }
 
     # - font-size: <absolute-size> | <relative-size> | <length> | <percentage>
     rule absolute-size {:i [ [[xx|x]\-]?[small|large] | medium ] & <keyw> }
@@ -358,5 +361,5 @@ grammar CSS::Extensions::CSS21 {
 grammar CSS::Language::CSS21:ver<20110607.000>
     is CSS::Language::_Base
     is CSS::Extensions::CSS21 
-    is CSS::Grammar::CSS21 {};
-
+    is CSS::Grammar::CSS21
+    does CSS::Language::CSS21::_Interface {};

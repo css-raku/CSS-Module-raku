@@ -20,9 +20,9 @@ grammar CSS::Language::CSS1:ver<20080411.000>
     # -------------------
     # - font-family: [[<family-name> | <generic-family>],]* [<family-name> | <generic-family>]
     rule decl:sym<font-family> {:i (font\-family) ':' ( <ref=.font-family> +% [ ',' ] <any>* || <any-args> ) }
-    rule font-family {:i  [ <generic-family> || <family-name> ] }
-    rule family-name { <family-name=.identifiers> || <family-name=.string> }
-    rule generic-family { [ serif | sans\-serif | cursive | fantasy | monospace ] & <generic-family=.identifier> }
+    rule font-family    {:i  [ <generic-family> || <family-name> ] }
+    rule family-name    { <family-name=.identifiers> || <family-name=.string> }
+    rule generic-family {:i [ serif | sans\-serif | cursive | fantasy | monospace ] & <generic-family=.identifier> }
 
     # - font-style: normal | italic | oblique
     rule font-style {:i [ normal | italic | oblique ] & <keyw> }

@@ -14,9 +14,9 @@ class CSS::Language::CSS3::CSS21_Imported::Actions {...}
 grammar CSS::Language::CSS3::CSS21_Imported
     is CSS::Language::CSS3::_Base
     is CSS::Extensions::CSS21
-{};
+    does CSS::Language::CSS21::_Interface {};
 
 class CSS::Language::CSS3::CSS21_Imported::Actions
     is CSS::Language::CSS21::Actions
-{};
+    does CSS::Language::CSS21::_Interface {};
 
