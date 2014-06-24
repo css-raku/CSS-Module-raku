@@ -15,7 +15,7 @@ use CSS::Language::Specification::Actions;
 # actions to generate actions stub. You'll need to pipe stdout somewhere
 
 #= generate parsing grammar
-multi MAIN($properties-spec, :$grammar) {
+multi MAIN(Str $properties-spec, Str :$grammar) {
 
     my $actions = CSS::Language::Specification::Actions.new;
     my %props = load-props($properties-spec, $actions);
@@ -31,7 +31,7 @@ multi MAIN($properties-spec, :$grammar) {
 }
 
 #= generate actions class
-multi MAIN($properties-spec, :$class) {
+multi MAIN(Str $properties-spec, Str :$class) {
 
     my $actions = CSS::Language::Specification::Actions.new;
     my %props = load-props($properties-spec, $actions);
@@ -46,8 +46,8 @@ multi MAIN($properties-spec, :$class) {
     say '}';
 }
 
-#- generate interface roles. unresolved terms only.
-multi MAIN($properties-spec, :$role) {
+#= generate interface roles.
+multi MAIN(Str $properties-spec, Str :$role) {
 
     my $actions = CSS::Language::Specification::Actions.new;
     my %props = load-props($properties-spec, $actions);
@@ -138,6 +138,6 @@ sub generate-perl6-interface(%synopsis-props, %references) {
     }
 
     for %unresolved.keys.sort -> $sym {
-        say "    method decl:sym<{$sym}>(\$/) \{ ... \}";
+        say "    method {$sym}(\$/) \{ ... \}";
     }
 }

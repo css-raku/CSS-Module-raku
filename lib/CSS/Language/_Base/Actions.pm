@@ -112,6 +112,7 @@ class CSS::Language::_Base::Actions
 
     #---- Language Extensions ----#
 
+    proto method length {*}
     method length:sym<num>($/) {
         my $num = $<number>.ast;
 

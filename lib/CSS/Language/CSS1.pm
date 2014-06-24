@@ -1,13 +1,17 @@
 use v6;
 
-# reference: http://www.w3.org/TR/2008/REC-CSS1-20080411/#css1-properties
+# references:
+# -- http://www.w3.org/TR/2008/REC-CSS1-20080411/#css1-properties
+# -- http://129.69.59.141/css1pqre.htm
 
 use CSS::Language::_Base;
 use CSS::Grammar::CSS1;
+use CSS::Language::CSS1::_Interface;
 
 grammar CSS::Language::CSS1:ver<20080411.000>
- is CSS::Language::_Base
- is CSS::Grammar::CSS1 {
+    is CSS::Language::_Base
+    is CSS::Grammar::CSS1
+    does CSS::Language::CSS1::_Interface {
 
     # allow color names and define our vocabulary
     rule color:sym<named>  {:i [aqua | black | blue | fuchsia | gray | green | lime | maroon | navy | olive | purple | red | silver | teal | white | yellow] & <keyw> }
@@ -15,8 +19,10 @@ grammar CSS::Language::CSS1:ver<20080411.000>
     # 5.2 Font Properties
     # -------------------
     # - font-family: [[<family-name> | <generic-family>],]* [<family-name> | <generic-family>]
-    rule font-family {:i [ serif | sans\-serif | cursive | fantasy | monospace ] & <generic-family=.identifier> || <family-name=.identifiers> | <family-name=.string> }
     rule decl:sym<font-family> {:i (font\-family) ':' ( <ref=.font-family> +% [ ',' ] <any>* || <any-args> ) }
+    rule font-family {:i  [ <generic-family> || <family-name> ] }
+    rule family-name { <family-name=.identifiers> || <family-name=.string> }
+    rule generic-family { [ serif | sans\-serif | cursive | fantasy | monospace ] & <generic-family=.identifier> }
 
     # - font-style: normal | italic | oblique
     rule font-style {:i [ normal | italic | oblique ] & <keyw> }

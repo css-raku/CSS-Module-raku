@@ -1,15 +1,19 @@
 use v6;
 
 use CSS::Language::_Base::Actions;
+use CSS::Language::CSS1::_Interface;
 
 class CSS::Language::CSS1::Actions
-    is CSS::Language::_Base::Actions {
+    is CSS::Language::_Base::Actions
+    does CSS::Language::CSS1::_Interface {
 
     #= font-family: [[<family-name> | <generic-family>],]* [<family-name> | <generic-family>]
     method decl:sym<font-family>($/) {
         make $._decl($0, $1, &?ROUTINE.WHY);
     }
     method font-family($/) { make $.list($/) }
+    method family-name($/) { make $<family-name>.ast }
+    method generic-family($/) { make $<generic-family>.ast }
 
     #= font-style: normal | italic | oblique
     method decl:sym<font-style>($/) {

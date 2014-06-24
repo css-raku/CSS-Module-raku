@@ -1,5 +1,8 @@
 use v6;
 
+use CSS::Language::Specification;
+use CSS::Language::Specification::Actions;
+
 grammar CSS::Language::_Base {
     # definitions common to CSS1, CSS21 and CSS3 Languages
     rule declaration:sym<validated> { <.ws>? <decl> <prio>? <any-arg>* <end-decl> }
@@ -9,7 +12,7 @@ grammar CSS::Language::_Base {
     token length:sym<num> {<number>}
     token angle:sym<num>  {<number>}
 
-    token integer     {[\+|\-]?<uint>}
+    token integer     {< + - >?<uint>}
     token uint        {\d+}
     token number      {<num> <!before ['%'|\w]>}
     token uri         {<url>}
@@ -19,5 +22,22 @@ grammar CSS::Language::_Base {
 
     token seen($opt) {
 	<?{@*SEEN[$opt]++}>
+    }
+
+    # rule to compile css property specifications to perl6 regexs
+    method css-prop($css-prop-spec, $rx is rw) {
+        $rx //= do {
+
+            state $spec-actions //= CSS::Language::Specification::Actions.new;
+            my $p = CSS::Language::Specification.parse($css-prop-spec.trim, :rule('terms'), :actions($spec-actions) );
+            note {parse => $p};
+            die "unable to parse: $css-prop-spec"
+                unless $p.defined && $p.ast;
+            my $terms = $/.ast;
+
+            my $rx-str = "rx:s:i\{ $terms \}";
+            say "rx: $rx-str";
+            EVAL $rx-str;
+        };
     }
 }

@@ -51,13 +51,13 @@ white-space	normal | pre | nowrap	normal	block-level elements	yes	N/A	5.6.2
 list-style-type	disc | circle | square | decimal | lower-roman | upper-roman | lower-alpha | upper-alpha | none	disc	elements with 'display' value 'list-item'	yes	N/A	5.6.3
 list-style-image	<url> | none	none	elements with 'display' value 'list-item'	yes	N/A	5.6.4
 list-style-position	inside | outside	outside	elements with 'display' value 'list-item'	yes	N/A	5.6.5
-list-style	<keyword> || <position> || <url>	not defined for shorthand properties	elements with 'display' value 'list-item'	yes	N/A	5.6.6
+list-style	<list-style-type> || <list-style-image> || <list-style-position>	not defined for shorthand properties	elements with 'display' value 'list-item'	yes	N/A	5.6.6
 position	absolute | relative | static	static	all elements	no	N/A	WD-positioning
 left	<length> | <percentage> | auto	auto	elements with the 'position' property of type 'absolute' or 'relative'	no	refer to parent element's width. If parent's height is set to 'auto', percentage is undefined.	WD-positioning
 top	<length> | <percentage> | auto	auto	elements with the 'position' property of type 'absolute' or 'relative'	no	refer to parent element's height. If parent's height is set to 'auto', percentage is undefined.	WD-positioning
 width *	<length> | <percentage> | auto	auto	block-level and replaced elements, elements with 'position' property of type 'absolute'	no	refer to parent element's width.	WD-positioning
 height *	<length> | <percentage> | auto	auto	block-level and replaced elements, elements with 'position' property of type 'absolute'	no	refer to parent element's height. If parent's height is 'auto', percentage of height is undefined.	WD-positioning
-clip	<shape> | auto	auto	elements with the 'position' property of type 'absolute'	no	N/A	WD-positioning
+##clip	<shape> | auto	auto	elements with the 'position' property of type 'absolute'	no	N/A	WD-positioning
 overflow	none | clip | scroll	none	elements with the 'position' property of type 'absolute' or 'relative'	no	N/A	WD-positioning
 z-index	auto | <integer>	auto	elements with the 'position' property of type 'absolute' or 'relative'	no	N/A	WD-positioning
 visibility	inherit | visible | hidden	inherit	all elements	if value is 'inherit'	N/A	WD-positioning
