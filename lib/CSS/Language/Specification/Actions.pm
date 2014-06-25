@@ -69,8 +69,8 @@ class CSS::Language::Specification::Actions {
         return make @choices[0]
             unless @choices > 1;
 
-	my $n = 0;
-        make '[:my @*SEEN; [ ' ~ @choices.map({[~] ($_, ' <!seen(', $n++, ')>')}).join(' | ') ~ ']+ ]';
+        my $n = 0;
+        make '[:my @*SEEN; ' ~ @choices.map({[~] ($_, ' <!seen(', $n++, ')>')}).join(' | ') ~ ']+';
     }
 
     method required($/) {

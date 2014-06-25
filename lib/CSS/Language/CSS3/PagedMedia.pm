@@ -34,45 +34,45 @@ grammar CSS::Language::CSS3::PagedMedia::Syntax {
 
 grammar CSS::Language::CSS3::PagedMedia:ver<20061010.000>
     is CSS::Language::CSS3::PagedMedia::Syntax
-    is CSS::Language::CSS3::_Base
-    does CSS::Language::CSS3::PagedMedia::Spec::Interface {
+    is CSS::Language::CSS3::_Base {
 
         # ---- Properties ----#
 
-        # override for css21 size rule
-        # - size: <length>{1,2} | auto | [ <page-size> || [ portrait | landscape] ]
-        token page-size {:i [ a[3|4|5] | b[4|5] | letter | legal | ledger ] & <keyw> }
-        rule decl:sym<size> {:i (size) ':' <val(rx:i:s[ <length> ** 1..2 | auto & <keyw>
-                                             | [:my @*SEEN;[ <page-size> <!seen(0)> | [ portrait | landscape ] & <keyw> <!seen(1)> ]+ ]])> }
+        #++ BUILD.pl generated rules
+        use CSS::Language::CSS3::PagedMedia::Spec::Grammar;
+        also is CSS::Language::CSS3::PagedMedia::Spec::Grammar;
+        #-- BUILD.pl generated rules
 
+        token page-size {:i [ a[3|4|5] | b[4|5] | letter | legal | ledger ] & <keyw> }
 }
 
 class CSS::Language::CSS3::PagedMedia::Actions
-    is CSS::Language::CSS3::_Base::Actions
-    does CSS::Language::CSS3::PagedMedia::Spec::Interface {
+    is CSS::Language::CSS3::_Base::Actions {
 
-    method page-pseudo:sym<left>($/)  {make 'left'}
-    method page-pseudo:sym<right>($/) {make 'right'}
-    method page-pseudo:sym<first>($/) {make 'first'}
-    method page-pseudo:sym<other>($/) {$.warning('ignoring page pseudo', ~$/)}
-    method page-pseudo:sym<missing>($/) {$.warning("':' should be followed by one of: left right first")}
+        #++ BUILD.pl generated actions
+        use CSS::Language::CSS3::PagedMedia::Spec::Actions;
+        also is CSS::Language::CSS3::PagedMedia::Spec::Actions;
+        also does CSS::Language::CSS3::PagedMedia::Spec::Interface;
+        #-- BUILD.pl generated actions
 
-    method page-declarations($/) { make $.declaration-list($/) }
+        method page-pseudo:sym<left>($/)  {make 'left'}
+        method page-pseudo:sym<right>($/) {make 'right'}
+        method page-pseudo:sym<first>($/) {make 'first'}
+        method page-pseudo:sym<other>($/) {$.warning('ignoring page pseudo', ~$/)}
+        method page-pseudo:sym<missing>($/) {$.warning("':' should be followed by one of: left right first")}
 
-    method box-hpos($/)   { make (~$/).lc }
-    method box-vpos($/)   { make (~$/).lc }
-    method box-center($/) { make 'center' }
-    method margin-box($/) { make $.node($/) }
+        method page-declarations($/) { make $.declaration-list($/) }
 
-    method margin-declaration($/) {
-        my %ast = $.node($/);
-        %ast<property> = '@' ~ (~$<margin-box>).lc;
-        make %ast;
-    }
+        method box-hpos($/)   { make (~$/).lc }
+        method box-vpos($/)   { make (~$/).lc }
+        method box-center($/) { make 'center' }
+        method margin-box($/) { make $.node($/) }
 
-    #= size: <length>{1,2} | auto | [ <page-size> || [ portrait | landscape] ]
-    method decl:sym<size>($/) {
-        make $._decl($0, $<val>, &?ROUTINE.WHY)
-    }
-    method page-size($/) { make $.token($<keyw>.ast) }
+        method margin-declaration($/) {
+            my %ast = $.node($/);
+            %ast<property> = '@' ~ (~$<margin-box>).lc;
+            make %ast;
+        }
+
+        method page-size($/) { make $.token($<keyw>.ast) }
 }

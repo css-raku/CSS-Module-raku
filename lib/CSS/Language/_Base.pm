@@ -24,20 +24,4 @@ grammar CSS::Language::_Base {
 	<?{@*SEEN[$opt]++}>
     }
 
-    # rule to compile css property specifications to perl6 regexs
-    method css-prop($css-prop-spec, $rx is rw) {
-        $rx //= do {
-
-            state $spec-actions //= CSS::Language::Specification::Actions.new;
-            my $p = CSS::Language::Specification.parse($css-prop-spec.trim, :rule('terms'), :actions($spec-actions) );
-            note {parse => $p};
-            die "unable to parse: $css-prop-spec"
-                unless $p.defined && $p.ast;
-            my $terms = $/.ast;
-
-            my $rx-str = "rx:s:i\{ $terms \}";
-            say "rx: $rx-str";
-            EVAL $rx-str;
-        };
-    }
 }
