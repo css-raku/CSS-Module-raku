@@ -17,17 +17,15 @@ for (
                 ast => "[ bold \& <keyw> thin \& <keyw> | <length> ]**2",
     },
     'terms' => {input => 'bold || thin && <length>',
-                ast => "[:my @*SEEN; [ bold & <keyw> <!seen(0)> | [ thin & <keyw> | <length> ]**2 <!seen(1)>]+ ]",
+                ast => "[:my @*SEEN; bold & <keyw> <!seen(0)> | [ thin & <keyw> | <length> ]**2 <!seen(1)> ]+",
     },
     'property-spec' => {'input' => "'content'\tnormal | none | [ <string> | <uri> | <counter> | attr(<identifier>) | open-quote | close-quote | no-open-quote | no-close-quote ]+ | inherit",
-                        ast => {"sym" => "content",
-                                "props" => ["content"],
-                                "match" => "content",
-                                "defn" => "[ [ normal | none ] \& <keyw> | [ [ <string> | <uri> | <counter> | <attr> | [ open\\-quote | close\\-quote | no\\-open\\-quote | no\\-close\\-quote ] \& <keyw> ] ]+ | inherit & <keyw> ]",
+                        ast => {"props" => ["content"],
+                                "terms" => "[ [ normal | none ] \& <keyw> | [ [ <string> | <uri> | <counter> | <attr> | [ open\\-quote | close\\-quote | no\\-open\\-quote | no\\-close\\-quote ] \& <keyw> ] ]+ | inherit & <keyw> ]",
                                 "synopsis" => "normal | none | [ <string> | <uri> | <counter> | attr(<identifier>) | open-quote | close-quote | no-open-quote | no-close-quote ]+ | inherit"},
     },
-    # css1 spec with unquoted property name and '*' junk
-    property-spec => {input => "width *\t<length> | <percentage> | auto",
+    # css1 spec with property name and '*' junk
+    property-spec => {input => "'width' *\t<length> | <percentage> | auto",
                       ast => Mu,
     },
     ) {

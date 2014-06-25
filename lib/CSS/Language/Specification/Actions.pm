@@ -70,7 +70,7 @@ class CSS::Language::Specification::Actions {
             unless @choices > 1;
 
         my $n = 0;
-        make '[:my @*SEEN; ' ~ @choices.map({[~] ($_, ' <!seen(', $n++, ')>')}).join(' | ') ~ ']+';
+        make '[:my @*SEEN; ' ~ @choices.map({[~] ($_, ' <!seen(', $n++, ')>')}).join(' | ') ~ ' ]+';
     }
 
     method required($/) {
@@ -90,7 +90,6 @@ class CSS::Language::Specification::Actions {
 
     method value:sym<func>($/)     {
         # todo - save function prototype
-        %.prop-refs{ $<id>.lc }++;
         make '<' ~ $<id>.ast ~ '>';
     }
 
@@ -126,8 +125,8 @@ class CSS::Language::Specification::Actions {
     method property-ref:sym<css3>($/)  { make $<id>.ast }
     method value:sym<prop-ref>($/)        {
         my $prop-ref = $<property-ref>.ast;
-        %.prop-refs{ $prop-ref.lc }++;
-        make '<' ~ $prop-ref ~ '>';
+        %.prop-refs{ $prop-ref }++;
+        make '<expr-' ~ $prop-ref ~ '>';
     }
 
     method value:sym<literal>($/)  { make "'" ~ ~$0 ~ "'"}

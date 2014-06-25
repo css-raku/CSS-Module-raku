@@ -10,5 +10,5 @@ role CSS::Language::CSS1::Spec::Interface {
     method number($/) { ... }
     method percentage($/) { ... }
     method relative-size($/) { ... }
-    method url($/) { ... }
+    method uri($/) { ... }
 }

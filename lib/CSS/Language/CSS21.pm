@@ -48,8 +48,8 @@ grammar CSS::Extensions::CSS21 {
     rule background-color {:i <color> | transparent & <keyw> }
     rule decl:sym<background-color> {:i (background\-color) ':' <val(rx[ <ref=.background-color> ])> }
 
-    # - background-image: <url> | none
-    rule background-image {:i <url> | none & <keyw> }
+    # - background-image: <uri> | none
+    rule background-image {:i <uri> | none & <keyw> }
     rule decl:sym<background-image> {:i (background\-image) ':' <val(rx[ <ref=.background-image> ])> }
 
     # - background-position: [ [ <percentage> | <length> | left | center | right ] [ <percentage> | <length> | top | center | bottom ]? ] | [ [ left | center | right ] || [ top | center | bottom ] ]

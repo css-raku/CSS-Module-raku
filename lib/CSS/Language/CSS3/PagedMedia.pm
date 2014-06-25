@@ -1,13 +1,20 @@
 use v6;
 
 class CSS::Language::CSS3::PagedMedia::Actions {...}
-use CSS::Language::CSS3::PagedMedia::Spec::Interface;
 use CSS::Language::CSS3::_Base;
 # CSS3 Paged Media Module Extensions
 # - reference: http://www.w3.org/TR/2006/WD-css3-page-20061010/
 #
 
-grammar CSS::Language::CSS3::PagedMedia::Syntax {
+# BUILD.pl targets
+use CSS::Language::CSS3::PagedMedia::Spec::Interface;
+use CSS::Language::CSS3::PagedMedia::Spec::Grammar;
+use CSS::Language::CSS3::PagedMedia::Spec::Actions;
+
+grammar CSS::Language::CSS3::PagedMedia:ver<20061010.000>
+    is CSS::Language::CSS3::PagedMedia::Spec::Grammar
+    is CSS::Language::CSS3::_Base
+    does CSS::Language::CSS3::PagedMedia::Spec::Interface {
 
     proto rule page-pseudo {*}
     rule page-pseudo:sym<left>    {:i'left'}
@@ -30,30 +37,13 @@ grammar CSS::Language::CSS3::PagedMedia::Syntax {
                       |<box-vpos>'-'[<box-hpos>['-corner']?|<box-center>]]}
     rule margin-declaration { <margin-box> <declarations> }
 
-}
-
-grammar CSS::Language::CSS3::PagedMedia:ver<20061010.000>
-    is CSS::Language::CSS3::PagedMedia::Syntax
-    is CSS::Language::CSS3::_Base {
-
-        # ---- Properties ----#
-
-        #++ BUILD.pl generated rules
-        use CSS::Language::CSS3::PagedMedia::Spec::Grammar;
-        also is CSS::Language::CSS3::PagedMedia::Spec::Grammar;
-        #-- BUILD.pl generated rules
-
-        token page-size {:i [ a[3|4|5] | b[4|5] | letter | legal | ledger ] & <keyw> }
+    token page-size {:i [ a[3|4|5] | b[4|5] | letter | legal | ledger ] & <keyw> }
 }
 
 class CSS::Language::CSS3::PagedMedia::Actions
-    is CSS::Language::CSS3::_Base::Actions {
-
-        #++ BUILD.pl generated actions
-        use CSS::Language::CSS3::PagedMedia::Spec::Actions;
-        also is CSS::Language::CSS3::PagedMedia::Spec::Actions;
-        also does CSS::Language::CSS3::PagedMedia::Spec::Interface;
-        #-- BUILD.pl generated actions
+    is CSS::Language::CSS3::PagedMedia::Spec::Actions
+    is CSS::Language::CSS3::_Base::Actions 
+    does CSS::Language::CSS3::PagedMedia::Spec::Interface {
 
         method page-pseudo:sym<left>($/)  {make 'left'}
         method page-pseudo:sym<right>($/) {make 'right'}

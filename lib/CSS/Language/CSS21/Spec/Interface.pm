@@ -4,7 +4,6 @@ use v6;
 role CSS::Language::CSS21::Spec::Interface {
     method absolute-size($/) { ... }
     method angle($/) { ... }
-    method attr($/) { ... }
     method counter($/) { ... }
     method family-name($/) { ... }
     method frequency($/) { ... }

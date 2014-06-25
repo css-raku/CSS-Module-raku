@@ -13,7 +13,7 @@ use CSS::Language::Specification;
 use CSS::Language::Specification::Actions;
 
 #= generate parsing grammar
-multi MAIN(Str $properties-spec, Str :$grammar) {
+multi MAIN(Str $properties-spec, Str :$grammar, Bool :$proforma?) {
 
     my $actions = CSS::Language::Specification::Actions.new;
     my @defs = load-props($properties-spec, $actions);
@@ -24,7 +24,7 @@ multi MAIN(Str $properties-spec, Str :$grammar) {
 
     say "grammar {$grammar} \{";
 
-    generate-perl6-rules(@defs);
+    generate-perl6-rules(@defs, :$proforma);
 
     say '}';
 }
@@ -58,9 +58,7 @@ multi MAIN(Str $properties-spec, Str :$role) {
 
     say "role {$role} \{";
 
-    my %prop-refs = $actions.prop-refs;
-
-    generate-perl6-interface(@defs, %prop-refs);
+    generate-perl6-interface(@defs);
 
     say '}';
 }
@@ -85,44 +83,49 @@ sub load-props ($properties-spec, $actions?) {
     return @props;
 }
 
-sub generate-perl6-rules(@defs) {
+sub generate-perl6-rules(@defs, :$proforma) {
 
     my %seen;
+
+    my $proforma-str = $proforma ?? ' | <proforma> ' !! '';
 
     for @defs -> $def {
 
         my @props = @( $def<props> );
         my $terms = $def<terms>;
         my $synopsis = $def<synopsis>;
+        my $is-rule = $synopsis ~~ /^ <CSS::Language::Specification::property-ref> $/;
 
         for @props -> $prop {
+            next if %seen{$prop}++;
             my $match = $prop.subst(/\-/, '\-'):g;
 
             say;
             say "#= $prop: $synopsis";
-            say "    rule decl:sym<{$prop}> \{:i ($match) ':'  [ <expr=.{$prop}> | <proforma> || <any-args> ] \}";
-            my $alias = %seen{$synopsis};
-            %seen{$synopsis} //= $prop;
-
-            say $alias
-                ?? "    rule $prop \{ <{$prop}=.{$alias}> \}"
-                !! "    rule $prop \{ $terms \}";
+            say "    rule decl:sym<{$prop}> \{:i ($match) ':'  [ <expr=.expr-{$prop}>{$proforma-str} || <any-args> ] \}";
+            say "    rule expr-$prop \{:i $terms \}";
         }
     }
 }
 
 sub generate-perl6-actions(@defs) {
 
+    my %seen;
+
     for @defs -> $def {
 
         my @props = @( $def<props> );
         my $synopsis = $def<synopsis>;
 
+        # automagical detection of 'boxed' properties, eg: margin: [ <length> | <percentage> | auto ]{1,4} 
+        my $boxed = $synopsis ~~ / '{1,4}' $/;
+
         for @props -> $prop {
+            next if %seen{$prop}++;
             say;
             say "    #= {$prop}: $synopsis";
-            say "    method decl:sym<{$prop}>(\$/) \{ make \$.decl(\$/, \&\?ROUTINE.WHY) \}";
-            say "    method {$prop}(\$/) \{ make \$.node(\$/) \}";
+            say "    method decl:sym<{$prop}>(\$/) \{ make \$.decl(\$/, \&\?ROUTINE.WHY{ $boxed ?? ', :boxed' !! ''}) \}";
+            say "    method expr-{$prop}(\$/) \{ make \$.list(\$/) \}";
         }
     }
 }

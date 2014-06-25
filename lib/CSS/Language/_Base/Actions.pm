@@ -110,8 +110,7 @@ class CSS::Language::_Base::Actions
         return %ast;
     }
 
-
-    method decl($/, $synopsis is copy, :$expand?) {
+    method decl($/, $synopsis is copy, Bool :$boxed?) {
 
 	my $property = (~$0).trim.lc;
 	$synopsis = $synopsis.content.join(' ')
@@ -127,40 +126,35 @@ class CSS::Language::_Base::Actions
             @expr = ($<proforma>.ast);
         }
         else {
-            if !$<expr> || !$<expr>.caps || $<expr>.caps.grep({! .value.ast.defined}) {
+            my $m = $<expr> // $/;
+            if !$m.caps || $m.caps.grep({! .value.ast.defined}) {
                 $.warning('dropping declaration', $property);
                 return Any;
             }
 
-            my $m = $<expr> // $/;
             @expr = @( $.list($m) );
          }
 
         my %ast;
 
-        if $expand {
-            if $expand eq 'box' {
-                #  expand to a list of properties. eg: margin => margin-top,
-                #      margin-right margin-bottom margin-left
-                warn "too many arguments: @expr"
-                    if @expr > 4;
-		constant @Edges = <top right bottom left>;
-                my %box = @Edges Z=> @expr;
-                %box<right>  //= %box<top>;
-                %box<bottom> //= %box<top>;
-                %box<left>   //= %box<right>;
+        if $boxed {
+            #  expand to a list of properties. eg: margin => margin-top,
+            #      margin-right margin-bottom margin-left
+            warn "too many arguments: @expr"
+                if @expr > 4;
+            constant @Edges = <top right bottom left>;
+            my %box = @Edges Z=> @expr;
+            %box<right>  //= %box<top>;
+            %box<bottom> //= %box<top>;
+            %box<left>   //= %box<right>;
 
-		my @properties;
-                for @Edges -> $edge {
-                    my $prop = $property ~ '-' ~ $edge;
-		    my $val = %box{$edge};
-                    @properties.push( {property => $prop, expr => [$val]} );
-		}
-                %ast<property-list> = @properties;
+            my @properties;
+            for @Edges -> $edge {
+                my $prop = $property ~ '-' ~ $edge;
+                my $val = %box{$edge};
+                @properties.push( {property => $prop, expr => [$val]} );
             }
-            else {
-                die "bad :expand option: " ~ $expand;
-            }
+            %ast<property-list> = @properties;
         }
         else {
             %ast<property> = $property;
