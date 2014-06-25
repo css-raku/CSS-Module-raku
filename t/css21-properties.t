@@ -12,8 +12,8 @@ use CSS::Language::CSS3;
 use CSS::Grammar::Test;
 
 my $css21-actions = CSS::Language::CSS21::Actions.new;
-my $css3i-actions = CSS::Language::CSS3::Actions.new;
-my $css3x-actions = CSS::Language::CSS3::CSS21_Imported::Actions.new;
+my $css3i-actions = CSS::Language::CSS3::CSS21_Imported::Actions.new;
+my $css3x-actions = CSS::Language::CSS3::Actions.new;
 
 my %seen;
 
