@@ -30,6 +30,6 @@
         "CSS::Language::CSS3::Selectors" : "lib/CSS/Language/CSS3/Selectors.pm",
         "CSS::Language::CSS3::Selectors::Actions" : "lib/CSS/Language/CSS3/Selectors.pm",
         "CSS::Language::Specification" : "lib/CSS/Language/Specification.pm",
-        "CSS::Language::Specification::Actions" : "lib/CSS/Language/Specification.pm"
+        "CSS::Language::Specification::Actions" : "lib/CSS/Language/Specification/Actions.pm"
      }
 }
