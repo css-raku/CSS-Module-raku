@@ -125,7 +125,7 @@ class CSS::Language::Specification::Actions {
     method property-ref:sym<css3>($/)  { make $<id>.ast }
     method value:sym<prop-ref>($/)        {
         my $prop-ref = $<property-ref>.ast;
-        %.prop-refs{ $prop-ref }++;
+        %.prop-refs{ 'expr-' ~ $prop-ref }++;
         make '<expr-' ~ $prop-ref ~ '>';
     }
 

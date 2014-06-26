@@ -7,7 +7,7 @@
 [ "decl", { "input" : "font-stretch: extra-expanded", "ast" : { "property" : "font-stretch", "expr" : [ { "keyw" : "extra-expanded" } ] }, "css21" : { "parse" : "", "ast" : null } } ]
 [ "decl", { "input" : "font-style: oblique", "ast" : { "property" : "font-style", "expr" : [ { "keyw" : "oblique" } ] } } ]
 [ "decl", { "input" : "font-size-adjust: .7", "ast" : { "property" : "font-size-adjust", "expr" : [ { "number" : 0.7 } ] }, "css21" : { "parse" : "", "ast" : null } } ]
-[ "decl", { "input" : "font: x-large/110% 'new century schoolbook', serif", "ast" : { "property" : "font", "expr" : [ { "font-size" : [ { "absolute-size" : "x-large" } ] }, { "line-height" : [ { "percentage" : 110 } ] }, { "font-family" : [ { "family-name" : "new century schoolbook" } ] }, { "font-family" : [ { "generic-family" : "serif" } ] } ] } } ]
+[ "decl", { "input" : "font: x-large/110% 'new century schoolbook', serif", "ast" : { "property" : "font", "expr" : [ { "font-size" : [ { "absolute-size" : "x-large" } ] }, { "line-height" : [ { "percentage" : 110 } ] }, { "font-family" : [ { "family-name" : "new century schoolbook" }, { "generic-family" : "serif" } ] } ] } } ]
 [ "decl", { "input" : "font-variant: small-caps", "ast" : { "property" : "font-variant", "expr" : [ { "keyw" : "small-caps" } ] } } ]
 [ "decl", { "input" : "font-variant: annotation(circled)", "ast" : { "property" : "font-variant", "expr" : [ { "annotation" : { "feature-value-name" : "circled" } } ] }, "css21" : { "ast" : null, "warnings" : "usage font-variant: normal | small-caps | inherit | initial" } } ]
 [ "decl", { "input" : "font-synthesis: weight", "ast" : { "property" : "font-synthesis", "expr" : [ { "keyw" : "weight" } ] }, "css21" : { "parse" : "", "ast" : null } } ]

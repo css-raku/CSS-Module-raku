@@ -8,6 +8,12 @@ role CSS::Language::CSS3::Fonts::Spec::Interface {
     method discretionary-lig-values($/) { ... }
     method east-asian-variant-values($/) { ... }
     method east-asian-width-values($/) { ... }
+    method expr-font-family($/) { ... }
+    method expr-font-size($/) { ... }
+    method expr-font-stretch($/) { ... }
+    method expr-font-style($/) { ... }
+    method expr-font-weight($/) { ... }
+    method expr-line-height($/) { ... }
     method family-name($/) { ... }
     method feature-tag-value($/) { ... }
     method feature-value-name($/) { ... }
@@ -15,7 +21,6 @@ role CSS::Language::CSS3::Fonts::Spec::Interface {
     method generic-family($/) { ... }
     method historical-lig-values($/) { ... }
     method length($/) { ... }
-    method line-height($/) { ... }
     method number($/) { ... }
     method numeric-figure-values($/) { ... }
     method numeric-fraction-values($/) { ... }
