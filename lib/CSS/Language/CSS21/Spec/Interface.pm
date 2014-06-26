@@ -5,6 +5,7 @@ role CSS::Language::CSS21::Spec::Interface {
     method absolute-size($/) { ... }
     method angle($/) { ... }
     method counter($/) { ... }
+    method counters($/) { ... }
     method family-name($/) { ... }
     method frequency($/) { ... }
     method generic-family($/) { ... }
@@ -12,9 +13,7 @@ role CSS::Language::CSS21::Spec::Interface {
     method identifier($/) { ... }
     method integer($/) { ... }
     method length($/) { ... }
-    method margin-width($/) { ... }
     method number($/) { ... }
-    method padding-width($/) { ... }
     method percentage($/) { ... }
     method relative-size($/) { ... }
     method shape($/) { ... }

@@ -12,16 +12,13 @@ use CSS::Language::CSS3::_Base;
 use CSS::Language::CSS3::Fonts::Spec::Interface;
 use CSS::Language::CSS3::Fonts::AtFontFace::Spec::Interface;
 
-grammar CSS::Language::CSS3::Fonts::Syntax {
-    rule font-description {<declarations=.CSS::Language::CSS3::Fonts::AtFontFace::declarations>}
-    rule at-rule:sym<font-face> {(:i'font-face') <font-description> }
-}
-
 grammar CSS::Language::CSS3::Fonts:ver<20130212.000> 
-    is CSS::Language::CSS3::Fonts::Syntax
     is CSS::Language::CSS3::Fonts::Variants
     is CSS::Language::CSS3::_Base
     does CSS::Language::CSS3::Fonts::Spec::Interface {
+
+    rule font-description {<declarations=.CSS::Language::CSS3::Fonts::AtFontFace::declarations>}
+    rule at-rule:sym<font-face> {(:i'font-face') <font-description> }
 
     # ---- Properties ----
     # Initial generation:

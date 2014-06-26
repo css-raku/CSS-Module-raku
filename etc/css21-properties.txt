@@ -10,18 +10,18 @@
 'border-color'	[ <color> | transparent ]{1,4} | inherit	see individual properties	 	no	 	visual
 'border-spacing'	<length> <length>? | inherit	0	'table' and 'inline-table' elements 	yes	 	visual
 'border-style'	<border-style>{1,4} | inherit	see individual properties	 	no	 	visual
-'border-top' 'border-right' 'border-bottom' 'border-left'	[ <border-width> || <border-style> || 'border-top-color' ] | inherit	see individual properties	 	no	 	visual
+'border-top' 'border-right' 'border-bottom' 'border-left'	[ 'border-width' || <border-style> || 'border-color' ] | inherit	see individual properties	 	no	 	visual
 'border-top-color' 'border-right-color' 'border-bottom-color' 'border-left-color'	<color> | transparent | inherit	the value of the 'color' property	 	no	 	visual
 'border-top-style' 'border-right-style' 'border-bottom-style' 'border-left-style'	<border-style> | inherit	none	 	no	 	visual
-'border-top-width' 'border-right-width' 'border-bottom-width' 'border-left-width'	<border-width> | inherit	medium	 	no	 	visual
-'border-width'	<border-width>{1,4} | inherit	see individual properties	 	no	 	visual
-'border'	[ <border-width> || <border-style> || 'border-top-color' ] | inherit	see individual properties	 	no	 	visual
+'border-top-width' 'border-right-width' 'border-bottom-width' 'border-left-width'	thin | medium | thick | <length> | inherit	medium	 	no	 	visual
+'border-width'	thin | medium | thick | <length>{1,4} | inherit	see individual properties	 	no	 	visual
+'border'	[ 'border-width' || <border-style> || 'border-color' ] | inherit	see individual properties	 	no	 	visual
 'bottom'	<length> | <percentage> | auto | inherit	auto	positioned elements	no	refer to height of containing block	visual
 'caption-side'	top | bottom | inherit	top	'table-caption' elements	yes	 	visual
 'clear'	none | left | right | both | inherit	none	block-level elements	no	 	visual
 'clip'	<shape> | auto | inherit	auto	absolutely positioned elements	no	 	visual
 'color'	<color> | inherit	depends on user agent	 	yes	 	visual
-'content'	normal | none | [ <string> | <uri> | <counter> | attr(<identifier>) | open-quote | close-quote | no-open-quote | no-close-quote ]+ | inherit	normal	:before and :after pseudo-elements	no	 	all
+'content'	normal | none | [ <string> | <uri> | <counter> | <counters> | attr(<identifier>) | open-quote | close-quote | no-open-quote | no-close-quote ]+ | inherit	normal	:before and :after pseudo-elements	no	 	all
 'counter-increment'	[ <identifier> <integer>? ]+ | none | inherit	none	 	no	 	all
 'counter-reset'	[ <identifier> <integer>? ]+ | none | inherit	none	 	no	 	all
 'cue-after'	<uri> | none | inherit	none	 	no	 	aural
@@ -47,21 +47,22 @@
 'list-style-position'	inside | outside | inherit	outside	elements with 'display: list-item'	yes	 	visual
 'list-style-type'	disc | circle | square | decimal | decimal-leading-zero | lower-roman | upper-roman | lower-greek | lower-latin | upper-latin | armenian | georgian | lower-alpha | upper-alpha | none | inherit	disc	elements with 'display: list-item'	yes	 	visual
 'list-style'	[ 'list-style-type' || 'list-style-position' || 'list-style-image' ] | inherit	see individual properties	elements with 'display: list-item'	yes	 	visual
-'margin-right' 'margin-left'	<margin-width> | inherit	0	all elements except elements with table display types other than table-caption, table and inline-table	no	refer to width of containing block	visual
-'margin-top' 'margin-bottom'	<margin-width> | inherit	0	all elements except elements with table display types other than table-caption, table and inline-table	no	refer to width of containing block	visual
-'margin'	<margin-width>{1,4} | inherit	see individual properties	all elements except elements with table display types other than table-caption, table and inline-table	no	refer to width of containing block	visual
+'margin-right' 'margin-left'	<length> | <percentage> | inherit	0	all elements except elements with table display types other than table-caption, table and inline-table	no	refer to width of containing block	visual
+'margin-top' 'margin-bottom'	<length> | <percentage> | inherit	0	all elements except elements with table display types other than table-caption, table and inline-table	no	refer to width of containing block	visual
+'margin'	[<length> | <percentage>]{1,4} | inherit	see individual properties	all elements except elements with table display types other than table-caption, table and inline-table	no	refer to width of containing block	visual
 'max-height'	<length> | <percentage> | none | inherit	none	all elements but non-replaced inline elements, table columns, and column groups	no	see prose	visual
 'max-width'	<length> | <percentage> | none | inherit	none	all elements but non-replaced inline elements, table rows, and row groups	no	refer to width of containing block	visual
 'min-height'	<length> | <percentage> | inherit	0	all elements but non-replaced inline elements, table columns, and column groups	no	see prose	visual
 'min-width'	<length> | <percentage> | inherit	0	all elements but non-replaced inline elements, table rows, and row groups	no	refer to width of containing block	visual
+'opacity'	<number> | inherit
 'orphans'	<integer> | inherit	2	block container elements	yes	 	visual, paged
 'outline-color'	<color> | invert | inherit	invert	 	no	 	visual, interactive
-'outline-style'	<border-style> | inherit	none	 	no	 	visual, interactive
-'outline-width'	<border-width> | inherit	medium	 	no	 	visual, interactive
+'outline-style'	<outline-style> | inherit	none	 	no	 	visual, interactive
+'outline-width'	thin | medium | thick | <length> | inherit	medium	 	no	 	visual, interactive
 'outline'	[ 'outline-color' || 'outline-style' || 'outline-width' ] | inherit	see individual properties	 	no	 	visual, interactive
 'overflow'	visible | hidden | scroll | auto | inherit	visible	block containers	no	 	visual
-'padding-top' 'padding-right' 'padding-bottom' 'padding-left'	<padding-width> | inherit	0	all elements except table-row-group, table-header-group, table-footer-group, table-row, table-column-group and table-column	no	refer to width of containing block	visual
-'padding'	<padding-width>{1,4} | inherit	see individual properties	all elements except table-row-group, table-header-group, table-footer-group, table-row, table-column-group and table-column	no	refer to width of containing block	visual
+'padding-top' 'padding-right' 'padding-bottom' 'padding-left'	<length> | <percentage> | inherit	0	all elements except table-row-group, table-header-group, table-footer-group, table-row, table-column-group and table-column	no	refer to width of containing block	visual
+'padding'	[<length> | <percentage>]{1,4} | inherit	see individual properties	all elements except table-row-group, table-header-group, table-footer-group, table-row, table-column-group and table-column	no	refer to width of containing block	visual
 'page-break-after'	auto | always | avoid | left | right | inherit	auto	block-level elements (but see text)	no	 	visual, paged
 'page-break-before'	auto | always | avoid | left | right | inherit	auto	block-level elements (but see text)	no	 	visual, paged
 'page-break-inside'	avoid | auto | inherit	auto	block-level elements (but see text)	no	 	visual, paged
@@ -75,6 +76,7 @@
 'quotes'	[<string> <string>]+ | none | inherit	depends on user agent	 	yes	 	visual
 'richness'	<number> | inherit	50	 	yes	 	aural
 'right'	<length> | <percentage> | auto | inherit	auto	positioned elements	no	refer to width of containing block	visual
+'size'	<length>{1,2} | auto | portrait | landscape	auto	page context	N/A	N/A	WD-print
 'speak-header'	once | always | inherit	once	elements that have table header information	yes	 	aural
 'speak-numeral'	digits | continuous | inherit	continuous	 	yes	 	aural
 'speak-punctuation'	code | none | inherit	none	 	yes	 	aural

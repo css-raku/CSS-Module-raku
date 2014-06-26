@@ -16,7 +16,7 @@
 { "prop" : "border-spacing", "decl" : "2px .1cm", "expr" : [ { "length" : 2 }, { "length" : 0.1 } ] }
 { "prop" : "border-right-color", "decl" : "green", "expr" : [ { "color" : { "r" : 0, "g" : 128, "b" : 0 } } ] }
 { "prop" : "border-style", "decl" : "dotted dashed", "box" : [ { "top" : [ { "keyw" : "dotted" } ] }, { "right" : [ { "keyw" : "dashed" } ] }, { "bottom" : [ { "keyw" : "dotted" } ] }, { "left" : [ { "keyw" : "dashed" } ] } ] }
-{ "prop" : "border-bottom-style", "decl" : "outset", "expr" : [ { "keyw" : "outset" } ] }
+{ "prop" : "border-bottom-style", "decl" : "outset", "expr" : [ { "border-style" : [ { "keyw" : "outset" } ] } ] }
 { "prop" : "bottom", "decl" : "5%", "expr" : [ { "percentage" : 5 } ] }
 { "prop" : "caption-side", "decl" : "top", "expr" : [ { "keyw" : "top" } ] }
 { "prop" : "clip", "decl" : "rect(5px, 40px, auto, 5px)", "expr" : [ { "shape" : [ { "top" : [ { "length" : 5 } ] }, { "right" : [ { "length" : 40 } ] }, { "bottom" : [ { "keyw" : "auto" } ] }, { "left" : [ { "length" : 5 } ] } ] } ] }
@@ -40,13 +40,13 @@
 { "prop" : "opacity", "decl" : ".3", "expr" : [ { "number" : 0.3 } ] }
 { "prop" : "orphans", "decl" : "3", "expr" : [ { "integer" : 3 } ] }
 { "prop" : "outline-color", "decl" : "olive", "expr" : [ { "color" : { "r" : 128, "g" : 128, "b" : 0 } } ] }
-{ "prop" : "outline-style", "decl" : "groove", "expr" : [ { "keyw" : "groove" } ] }
+{ "prop" : "outline-style", "decl" : "groove", "expr" : [ { "border-style" : [ { "keyw" : "groove" } ] } ] }
 { "prop" : "outline-width", "decl" : "2em", "expr" : [ { "length" : 2 } ] }
 { "prop" : "outline", "decl" : "#00FF00 dotted thick", "expr" : [ { "outline-color" : [ { "color" : { "r" : 0, "g" : 255, "b" : 0 } } ] }, { "outline-style" : [ { "keyw" : "dotted" } ] }, { "outline-width" : [ { "keyw" : "thick" } ] } ] }
 { "prop" : "page-break-after", "decl" : "auto", "expr" : [ { "keyw" : "auto" } ] }
 { "prop" : "page-break-inside", "decl" : "avoid", "expr" : [ { "keyw" : "avoid" } ] }
 { "prop" : "pause-before", "decl" : "10s", "expr" : [ { "time" : 10 } ] }
-{ "prop" : "pause", "decl" : "2s 5s", "expr" : [ { "pause-before" : [ { "time" : 2 } ] }, { "pause-after" : [ { "time" : 5 } ] } ] }
+{ "prop" : "pause", "decl" : "2s 5s", "expr" : [ { "time" : 2 }, { "time" : 5 } ] }
 { "prop" : "pitch-range", "decl" : "10", "expr" : [ { "number" : 10 } ] }
 { "prop" : "play-during", "decl" : "url(test.wav) mix", "expr" : [ { "uri" : "test.wav" }, { "keyw" : "mix" } ] }
 { "prop" : "quotes", "decl" : "'<' '>'", "expr" : [ { "string" : "<" }, { "string" : ">" } ] }

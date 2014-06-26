@@ -171,7 +171,7 @@ class CSS::Language::CSS1::Spec::Actions {
     method decl:sym<border-left>($/) { make $.decl($/, &?ROUTINE.WHY) }
     method expr-border-left($/) { make $.list($/) }
 
-    #= border: 'border-width' || 'border-style' || <color>
+    #= border: 'border-width' || 'border-style' || <border-color>
     method decl:sym<border>($/) { make $.decl($/, &?ROUTINE.WHY) }
     method expr-border($/) { make $.list($/) }
 

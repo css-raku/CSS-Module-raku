@@ -58,7 +58,8 @@ multi MAIN(Str $properties-spec, Str :$role) {
 
     say "role {$role} \{";
 
-    generate-perl6-interface(@defs);
+    my %prop-refs = $actions.prop-refs;
+    generate-perl6-interface(@defs, %prop-refs);
 
     say '}';
 }
@@ -71,9 +72,11 @@ sub load-props ($properties-spec, $actions?) {
     for $fh.lines -> $prop-spec {
         # handle full line comments
         next if $prop-spec ~~ /^'#'/;
+        # '| inherit' and '| initial' are implied anyway; get rid of them
+        my $spec = $prop-spec.subst(/\s* '|' \s* [inherit|initial]/, ''):g;
 
-        my $/ = CSS::Language::Specification.subparse($prop-spec, :rule('property-spec'), :actions($actions) );
-        die "unable to parse: $prop-spec"
+        my $/ = CSS::Language::Specification.subparse($spec, :rule('property-spec'), :actions($actions) );
+        die "unable to parse: $spec"
             unless $/.ast;
         my $prop-defn = $/.ast;
 
@@ -87,14 +90,21 @@ sub generate-perl6-rules(@defs, :$proforma) {
 
     my %seen;
 
-    my $proforma-str = $proforma ?? ' | <proforma> ' !! '';
+    my $proforma-str = $proforma ?? '<proforma> || ' !! '';
 
     for @defs -> $def {
 
         my @props = @( $def<props> );
         my $terms = $def<terms>;
         my $synopsis = $def<synopsis>;
-        my $is-rule = $synopsis ~~ /^ <CSS::Language::Specification::property-ref> $/;
+
+        # boxed repeating property. repeat the expr
+        my $boxed = $synopsis ~~ / '{1,4}' $/;
+        my $repeats = '';
+        if $boxed {
+            $terms ~~ s/('**1..4') $//;
+            $repeats = '**1..4';
+        }
 
         for @props -> $prop {
             next if %seen{$prop}++;
@@ -102,7 +112,7 @@ sub generate-perl6-rules(@defs, :$proforma) {
 
             say;
             say "#= $prop: $synopsis";
-            say "    rule decl:sym<{$prop}> \{:i ($match) ':'  [ <expr=.expr-{$prop}>{$proforma-str} || <any-args> ] \}";
+            say "    rule decl:sym<{$prop}> \{:i ($match) ':'  [ {$proforma-str}<expr=.expr-{$prop}>$repeats || <any-args> ] \}";
             say "    rule expr-$prop \{:i $terms \}";
         }
     }

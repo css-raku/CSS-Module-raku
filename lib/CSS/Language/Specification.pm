@@ -19,7 +19,7 @@ grammar CSS::Language::Specification {
     token ws {<!ww>' '*}
 
     token prop-sep    {<[\x20 \, \*]>+}
-    token prop-names { [ <id=.id-quoted> ] +%% <.prop-sep> }
+    token prop-names { [ <id=.id-quoted> | <id> ] +%% <.prop-sep> }
     token id         { <[a..z]>[\w|\-]* }
     token quote      {<[\' \‘ \’]>}
     token id-quoted  { <.quote> <id> <.quote> }

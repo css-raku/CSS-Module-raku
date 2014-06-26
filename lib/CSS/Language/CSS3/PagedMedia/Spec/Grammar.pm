@@ -4,6 +4,6 @@ use v6;
 grammar CSS::Language::CSS3::PagedMedia::Spec::Grammar {
 
 #= size: <length>{1,2} | auto | [ <page-size> || [ portrait | landscape] ]
-    rule decl:sym<size> {:i (size) ':'  [ <expr=.expr-size> | <proforma>  || <any-args> ] }
-    rule expr-size {:i [ [ <length> ]**1..2 | auto & <keyw> | [ [:my @*SEEN; <page-size> <!seen(0)> | [ [ portrait | landscape ] & <keyw> ] <!seen(1)> ]+ ] ] }
+    rule decl:sym<size> {:i (size) ':'  [ <proforma> || <expr=.expr-size> || <any-args> ] }
+    rule expr-size {:i [ <length>**1..2 | auto & <keyw> | [ [:my @*SEEN; <page-size> <!seen(0)> | [ [ portrait | landscape ] & <keyw> ] <!seen(1)> ]+ ] ] }
 }

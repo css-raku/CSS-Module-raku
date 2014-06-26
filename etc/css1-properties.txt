@@ -42,7 +42,7 @@
 'border-right'	'border-right-width' || 'border-style' || <color>	not defined for shorthand properties	all elements	no	N/A	5.5.19
 'border-bottom'	'border-bottom-width' || 'border-style' || <color>	not defined for shorthand properties	all elements	no	N/A	5.5.20
 'border-left'	'border-left-width' || 'border-style' || <color>	not defined for shorthand properties	all elements	no	N/A	5.5.21
-'border'	'border-width' || 'border-style' || <color>	not defined for shorthand properties	all elements	no	N/A	5.5.22
+'border'	'border-width' || 'border-style' || <border-color>	not defined for shorthand properties	all elements	no	N/A	5.5.22
 'width' *	<length> | <percentage> | auto	auto	block-level and replaced elements	no	refer to parent element's width	5.5.23
 'height' *	<length> | auto	auto	block-level and replaced elements	no	N/A	5.5.24
 'float'	left | right | none	none	all elements	no	N/A	5.5.25

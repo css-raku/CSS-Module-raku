@@ -104,8 +104,8 @@ grammar CSS::Language::CSS1::Spec::Grammar {
     rule expr-margin-left {:i [ <length> | <percentage> | auto & <keyw> ] }
 
 #= margin: [ <length> | <percentage> | auto ]{1,4}
-    rule decl:sym<margin> {:i (margin) ':'  [ <expr=.expr-margin> || <any-args> ] }
-    rule expr-margin {:i [ [ <length> | <percentage> | auto & <keyw> ] ]**1..4 }
+    rule decl:sym<margin> {:i (margin) ':'  [ <expr=.expr-margin>**1..4 || <any-args> ] }
+    rule expr-margin {:i [ [ <length> | <percentage> | auto & <keyw> ] ] }
 
 #= padding-top: <length> | <percentage>
     rule decl:sym<padding-top> {:i (padding\-top) ':'  [ <expr=.expr-padding-top> || <any-args> ] }
@@ -124,8 +124,8 @@ grammar CSS::Language::CSS1::Spec::Grammar {
     rule expr-padding-left {:i [ <length> | <percentage> ] }
 
 #= padding: [ <length> | <percentage> ]{1,4}
-    rule decl:sym<padding> {:i (padding) ':'  [ <expr=.expr-padding> || <any-args> ] }
-    rule expr-padding {:i [ [ <length> | <percentage> ] ]**1..4 }
+    rule decl:sym<padding> {:i (padding) ':'  [ <expr=.expr-padding>**1..4 || <any-args> ] }
+    rule expr-padding {:i [ [ <length> | <percentage> ] ] }
 
 #= border-top-width: thin | medium | thick | <length>
     rule decl:sym<border-top-width> {:i (border\-top\-width) ':'  [ <expr=.expr-border-top-width> || <any-args> ] }
@@ -144,16 +144,16 @@ grammar CSS::Language::CSS1::Spec::Grammar {
     rule expr-border-left-width {:i [ [ thin | medium | thick ] & <keyw> | <length> ] }
 
 #= border-width: [thin | medium | thick | <length>]{1,4}
-    rule decl:sym<border-width> {:i (border\-width) ':'  [ <expr=.expr-border-width> || <any-args> ] }
-    rule expr-border-width {:i [ [ [ thin | medium | thick ] & <keyw> | <length> ] ]**1..4 }
+    rule decl:sym<border-width> {:i (border\-width) ':'  [ <expr=.expr-border-width>**1..4 || <any-args> ] }
+    rule expr-border-width {:i [ [ [ thin | medium | thick ] & <keyw> | <length> ] ] }
 
 #= border-color: <color>{1,4}
-    rule decl:sym<border-color> {:i (border\-color) ':'  [ <expr=.expr-border-color> || <any-args> ] }
-    rule expr-border-color {:i <color>**1..4 }
+    rule decl:sym<border-color> {:i (border\-color) ':'  [ <expr=.expr-border-color>**1..4 || <any-args> ] }
+    rule expr-border-color {:i <color> }
 
 #= border-style: [ none | dotted | dashed | solid | double | groove | ridge | inset | outset ]{1,4}
-    rule decl:sym<border-style> {:i (border\-style) ':'  [ <expr=.expr-border-style> || <any-args> ] }
-    rule expr-border-style {:i [ [ none | dotted | dashed | solid | double | groove | ridge | inset | outset ] & <keyw> ]**1..4 }
+    rule decl:sym<border-style> {:i (border\-style) ':'  [ <expr=.expr-border-style>**1..4 || <any-args> ] }
+    rule expr-border-style {:i [ [ none | dotted | dashed | solid | double | groove | ridge | inset | outset ] & <keyw> ] }
 
 #= border-top: 'border-top-width' || 'border-style' || <color>
     rule decl:sym<border-top> {:i (border\-top) ':'  [ <expr=.expr-border-top> || <any-args> ] }
@@ -171,9 +171,9 @@ grammar CSS::Language::CSS1::Spec::Grammar {
     rule decl:sym<border-left> {:i (border\-left) ':'  [ <expr=.expr-border-left> || <any-args> ] }
     rule expr-border-left {:i [:my @*SEEN; <expr-border-left-width> <!seen(0)> | <expr-border-style> <!seen(1)> | <color> <!seen(2)> ]+ }
 
-#= border: 'border-width' || 'border-style' || <color>
+#= border: 'border-width' || 'border-style' || <border-color>
     rule decl:sym<border> {:i (border) ':'  [ <expr=.expr-border> || <any-args> ] }
-    rule expr-border {:i [:my @*SEEN; <expr-border-width> <!seen(0)> | <expr-border-style> <!seen(1)> | <color> <!seen(2)> ]+ }
+    rule expr-border {:i [:my @*SEEN; <expr-border-width> <!seen(0)> | <expr-border-style> <!seen(1)> | <border-color> <!seen(2)> ]+ }
 
 #= width: <length> | <percentage> | auto
     rule decl:sym<width> {:i (width) ':'  [ <expr=.expr-width> || <any-args> ] }

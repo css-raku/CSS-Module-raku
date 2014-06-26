@@ -45,14 +45,14 @@ class CSS::Language::_Base::Actions
         die "doesn't look like a property: " ~ ~$/
             unless $prop;
 
-	my $property = (~$prop).trim.lc;
-	$synopsis = $synopsis.content.join(' ')
-	    if $synopsis.can('content');
+       my $property = (~$prop).trim.lc;
+       $synopsis = $synopsis.content.join(' ')
+           if $synopsis.can('content');
 
         if ($<proforma> && !$<proforma>.ast) 
             || $<any> || $<any-arg> || $<any-args> {
                 $.warning([~] ('usage ',
-			       $synopsis.subst(/^ .*? ':' || <?>/, $property ~ ':'), 
+                              $synopsis.subst(/^ .*? ':' || <?>/, $property ~ ':'), 
                                $proforma-usage // $._proforma-usage));
                 return Any;
         }
@@ -83,18 +83,18 @@ class CSS::Language::_Base::Actions
                 #      margin-right margin-bottom margin-left
                 warn "too many arguments: @expr"
                     if @expr > 4;
-		constant @Edges = <top right bottom left>;
+                constant @Edges = <top right bottom left>;
                 my %box = @Edges Z=> @expr;
                 %box<right>  //= %box<top>;
                 %box<bottom> //= %box<top>;
                 %box<left>   //= %box<right>;
 
-		my @properties;
+               my @properties;
                 for @Edges -> $edge {
                     my $prop = $property ~ '-' ~ $edge;
-		    my $val = %box{$edge};
+                    my $val = %box{$edge};
                     @properties.push( {property => $prop, expr => [$val]} );
-		}
+               }
                 %ast<property-list> = @properties;
             }
             else {
@@ -119,7 +119,7 @@ class CSS::Language::_Base::Actions
         my @expr;
 
         if $<any-args> {
-                $.warning([~] ('usage ', $synopsis));
+                $.warning([~] ('usage ', $synopsis, $._proforma-usage));
                 return Any;
         }
         elsif $<proforma> {
