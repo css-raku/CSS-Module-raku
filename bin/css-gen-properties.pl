@@ -1,13 +1,6 @@
 #!/usr/bin/env perl6
 
-# quick script to translate w3c property definitions to draft
-# Perl 6 grammars and actions.
-#
-# it was used to generate the initial grammar and actions for
-# CSS::Language:CSS1 and CSS::Language:CSS21 and many of the extension modules.
-#
-# Example: perl6 etc/gen-properties.pl grammar etc/css21-properties.txt
-#
+#= translates w3c property definitions to basic Perl 6 roles, grammars or actions.
 
 use CSS::Language::Specification;
 use CSS::Language::Specification::Actions;
