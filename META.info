@@ -2,7 +2,7 @@
     "name"        : "CSS::Language",
     "version"     : "*",
     "description" : "Perl 6 CSS extended and property-specific grammars",
-    "depends"     : [ "CSS::Grammar", "JSON::Tiny"  ],
+    "depends"     : [ "CSS::Grammar", "CSS::Specification", "JSON::Tiny"  ],
     "source-url"  : "git://github.com/p6-css/perl6-CSS-Language.git",
     "provides"    : {
         "CSS::Language::CSS1" : "lib/CSS/Language/CSS1.pm",
@@ -28,8 +28,6 @@
         "CSS::Language::CSS3::PagedMedia" : "lib/CSS/Language/CSS3/PagedMedia.pm",
         "CSS::Language::CSS3::PagedMedia::Actions" : "lib/CSS/Language/CSS3/PagedMedia.pm",
         "CSS::Language::CSS3::Selectors" : "lib/CSS/Language/CSS3/Selectors.pm",
-        "CSS::Language::CSS3::Selectors::Actions" : "lib/CSS/Language/CSS3/Selectors.pm",
-        "CSS::Language::Specification" : "lib/CSS/Language/Specification.pm",
-        "CSS::Language::Specification::Actions" : "lib/CSS/Language/Specification/Actions.pm"
+        "CSS::Language::CSS3::Selectors::Actions" : "lib/CSS/Language/CSS3/Selectors.pm"
      }
 }
