@@ -62,6 +62,7 @@ class CSS::Language::CSS3::Fonts::Actions
         make $<font-face-name>.ast;
     }
 
+    method font-description($/) { make $<declarations>.ast }
     method font-face-name($/) { make $<font-face-name>.ast }
     method expr-font-family($/) { make $.list($/) }
     method family-name($/) { make $<family-name>.ast }
