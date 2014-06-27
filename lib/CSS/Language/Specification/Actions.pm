@@ -36,28 +36,22 @@ class CSS::Language::Specification::Actions {
     method digits($/)    { make $/.Int }
 
     method values($/) {
-        make $<term>>>.ast.join(' ');
+        make @<term>>>.ast.join(' ');
     }
     method term($/) {
         my $value = $<value>.ast;
-        if $<occurs> {
-            my $occurs = $<occurs>.ast;
-            if $occurs eq '#' {         # a list
-                $value = "$value +% ','";
-            }
-            else {
-                $value ~= $occurs;      # quantifier
-            }
-        }
+        $value ~= $<occurs>.ast
+            if $<occurs>;
+
         make $value;
     }
 
     method terms($/) {
-        make $<term>>>.ast.join(' ');
+        make @<term>>>.ast.join(' ');
     }
 
     method options($/) {
-        my @choices = @$<term>>>.ast;
+        my @choices = @<term>>>.ast;
         return make @choices[0]
             unless @choices > 1;
         
@@ -65,7 +59,7 @@ class CSS::Language::Specification::Actions {
     }
 
     method combo($/) {
-        my @choices = @$<term>>>.ast;
+        my @choices = @<term>>>.ast;
         return make @choices[0]
             unless @choices > 1;
 
@@ -83,7 +77,7 @@ class CSS::Language::Specification::Actions {
     method occurs:sym<maybe>($/)     { make '?' }
     method occurs:sym<once-plus>($/) { make '+' }
     method occurs:sym<zero-plus>($/) { make '*' }
-    method occurs:sym<list>($/)      { make '#' }
+    method occurs:sym<list>($/)      { make " +% ','" }
     method occurs:sym<range>($/) {
         make '**' ~ $<min>.ast ~ '..' ~ $<max>.ast;
     }
@@ -94,17 +88,17 @@ class CSS::Language::Specification::Actions {
     }
 
     method value:sym<keywords>($/) {
-        my $keywords = @$<keyw> > 1
-            ?? '[ ' ~ $<keyw>>>.ast.join(' | ') ~ ' ]'
-            !! $<keyw>[0].ast;
+        my $keywords = @<keyw> > 1
+            ?? '[ ' ~ @<keyw>>>.ast.join(' | ') ~ ' ]'
+            !! @<keyw>[0].ast;
 
         make $keywords ~ ' & <keyw>';
     }
 
     method value:sym<numbers>($/) {
-        my $keywords = @$<digits> > 1
-            ?? '[ ' ~ $<digits>>>.ast.join(' | ') ~ ' ]'
-            !! $<digits>[0].ast;
+        my $keywords = @<digits> > 1
+            ?? '[ ' ~ @<digits>>>.ast.join(' | ') ~ ' ]'
+            !! @<digits>[0].ast;
 
         make $keywords ~ ' & <number>';
     }
