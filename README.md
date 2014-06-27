@@ -1,11 +1,7 @@
 CSS::Language
 =============
 
-CSS::Language is experimental and under construction as a Perl 6 validating parser
-for CSS Levels 1 and 2.1 and stable/complete Level 3 modules.
-
-CSS::Language extends [CSS::Grammar](https://github.com/p6-css/perl6-CSS-Grammar). 
-It performs property-specific parsing and validation of declarations.
+CSS::Language is a property-specific validator and parser for CSS Levels 1, 2.1 and  3.
 
 This module implements the following grammars and actions:
 
@@ -13,11 +9,8 @@ This module implements the following grammars and actions:
 - `CSS::Language::CSS21` + `CSS::Language::CSS21::Actions`
 - `CSS::Language::CSS3` + `CSS::Language::CSS3::Actions`
 
-Parser Actions
---------------
-`CSS::Language::CSS1::Actions`, `CSS::Language::CSS21::Actions` or `CSS::Language::CSS3::Actions`
-perform validation and abstract syntax tree (AST) construction. Warnings are
-produced for any unexpected input.
+Example
+-------
 
     use v6;
     use CSS::Language::CSS21;
@@ -36,14 +29,7 @@ produced for any unexpected input.
 
 CSS3 Extension Modules
 ----------------------
-CSS Level 3 inherits all CSS2.1 properties and definitions. These are then
-extended via CSS3 Extension Modules that are at
-various levels of maturity. Furthermore, modules may be domain
-or media specific - see http://www.css3.info/modules/
-
-`CSS::Langauge::CSS3` mirrors, this structure, inheriting from CSS2.1, then
-extending the language through a number of loosely coupled extension
-modules.
+`CSS::Langauge::CSS3` is composed from a number of loosely coupled extension modules.
 
 - `CSS::Langauge::CSS3::CSS21_Imported` - the full set of CSS21 properties
 - `CSS::Language::CSS3::Colors`     - CSS 3.0 Colors (@color-profile)
@@ -62,10 +48,7 @@ properties and functions. For example, the specification for `border-color` is:
 
     'border-color' [ <color> | transparent ]{1,4} | inherit
 
-It was used to generate the initial grammars and actions in this module.
-Example usage:
-
-    % etc/gen-properties.pl gen grammar etc/css21-properties.txt
+    % css-gen-properties.pl etc/css21-properties.txt --grammar=My::CSS > lib/My/CSS.pm
 
 Installation
 ------------
