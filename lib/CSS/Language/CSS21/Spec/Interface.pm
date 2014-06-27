@@ -12,6 +12,7 @@ role CSS::Language::CSS21::Spec::Interface {
     method expr-background-position($/) { ... }
     method expr-background-repeat($/) { ... }
     method expr-border-color($/) { ... }
+    method expr-border-style($/) { ... }
     method expr-border-width($/) { ... }
     method expr-cue-after($/) { ... }
     method expr-cue-before($/) { ... }

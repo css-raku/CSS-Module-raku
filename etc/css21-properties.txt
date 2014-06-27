@@ -9,13 +9,13 @@
 'border-collapse'	collapse | separate | inherit	separate	'table' and 'inline-table' elements	yes	 	visual
 'border-color'	[ <color> | transparent ]{1,4} | inherit	see individual properties	 	no	 	visual
 'border-spacing'	<length> <length>? | inherit	0	'table' and 'inline-table' elements 	yes	 	visual
-'border-style'	<border-style>{1,4} | inherit	see individual properties	 	no	 	visual
-'border-top' 'border-right' 'border-bottom' 'border-left'	[ 'border-width' || <border-style> || 'border-color' ] | inherit	see individual properties	 	no	 	visual
+'border-style'	[ none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset ]{1,4} | inherit	see individual properties	 	no	 	visual
+'border-top' 'border-right' 'border-bottom' 'border-left'	[ 'border-width' || 'border-style' || 'border-color' ] | inherit	see individual properties	 	no	 	visual
 'border-top-color' 'border-right-color' 'border-bottom-color' 'border-left-color'	<color> | transparent | inherit	the value of the 'color' property	 	no	 	visual
-'border-top-style' 'border-right-style' 'border-bottom-style' 'border-left-style'	<border-style> | inherit	none	 	no	 	visual
+'border-top-style' 'border-right-style' 'border-bottom-style' 'border-left-style'	[ none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset ] | inherit	none	 	no	 	visual
 'border-top-width' 'border-right-width' 'border-bottom-width' 'border-left-width'	thin | medium | thick | <length> | inherit	medium	 	no	 	visual
 'border-width'	thin | medium | thick | <length>{1,4} | inherit	see individual properties	 	no	 	visual
-'border'	[ 'border-width' || <border-style> || 'border-color' ] | inherit	see individual properties	 	no	 	visual
+'border'	[ 'border-width' || 'border-style' || 'border-color' ] | inherit	see individual properties	 	no	 	visual
 'bottom'	<length> | <percentage> | auto | inherit	auto	positioned elements	no	refer to height of containing block	visual
 'caption-side'	top | bottom | inherit	top	'table-caption' elements	yes	 	visual
 'clear'	none | left | right | both | inherit	none	block-level elements	no	 	visual
@@ -57,7 +57,7 @@
 'opacity'	<number> | inherit
 'orphans'	<integer> | inherit	2	block container elements	yes	 	visual, paged
 'outline-color'	<color> | invert | inherit	invert	 	no	 	visual, interactive
-'outline-style'	<outline-style> | inherit	none	 	no	 	visual, interactive
+'outline-style'	[ none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset ] | inherit	none	 	no	 	visual, interactive
 'outline-width'	thin | medium | thick | <length> | inherit	medium	 	no	 	visual, interactive
 'outline'	[ 'outline-color' || 'outline-style' || 'outline-width' ] | inherit	see individual properties	 	no	 	visual, interactive
 'overflow'	visible | hidden | scroll | auto | inherit	visible	block containers	no	 	visual

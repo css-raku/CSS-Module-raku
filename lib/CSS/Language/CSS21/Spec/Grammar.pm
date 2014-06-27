@@ -43,25 +43,25 @@ grammar CSS::Language::CSS21::Spec::Grammar {
     rule decl:sym<border-spacing> {:i (border\-spacing) ':'  [ <proforma> || <expr=.expr-border-spacing> || <any-args> ] }
     rule expr-border-spacing {:i <length> <length>? }
 
-#= border-style: <border-style>{1,4}
+#= border-style: [ none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset ]{1,4}
     rule decl:sym<border-style> {:i (border\-style) ':'  [ <proforma> || <expr=.expr-border-style>**1..4 || <any-args> ] }
-    rule expr-border-style {:i <border-style> }
+    rule expr-border-style {:i [ [ none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset ] & <keyw> ] }
 
-#= border-top: [ 'border-width' || <border-style> || 'border-color' ]
+#= border-top: [ 'border-width' || 'border-style' || 'border-color' ]
     rule decl:sym<border-top> {:i (border\-top) ':'  [ <proforma> || <expr=.expr-border-top> || <any-args> ] }
-    rule expr-border-top {:i [ [:my @*SEEN; <expr-border-width> <!seen(0)> | <border-style> <!seen(1)> | <expr-border-color> <!seen(2)> ]+ ] }
+    rule expr-border-top {:i [ [:my @*SEEN; <expr-border-width> <!seen(0)> | <expr-border-style> <!seen(1)> | <expr-border-color> <!seen(2)> ]+ ] }
 
-#= border-right: [ 'border-width' || <border-style> || 'border-color' ]
+#= border-right: [ 'border-width' || 'border-style' || 'border-color' ]
     rule decl:sym<border-right> {:i (border\-right) ':'  [ <proforma> || <expr=.expr-border-right> || <any-args> ] }
-    rule expr-border-right {:i [ [:my @*SEEN; <expr-border-width> <!seen(0)> | <border-style> <!seen(1)> | <expr-border-color> <!seen(2)> ]+ ] }
+    rule expr-border-right {:i [ [:my @*SEEN; <expr-border-width> <!seen(0)> | <expr-border-style> <!seen(1)> | <expr-border-color> <!seen(2)> ]+ ] }
 
-#= border-bottom: [ 'border-width' || <border-style> || 'border-color' ]
+#= border-bottom: [ 'border-width' || 'border-style' || 'border-color' ]
     rule decl:sym<border-bottom> {:i (border\-bottom) ':'  [ <proforma> || <expr=.expr-border-bottom> || <any-args> ] }
-    rule expr-border-bottom {:i [ [:my @*SEEN; <expr-border-width> <!seen(0)> | <border-style> <!seen(1)> | <expr-border-color> <!seen(2)> ]+ ] }
+    rule expr-border-bottom {:i [ [:my @*SEEN; <expr-border-width> <!seen(0)> | <expr-border-style> <!seen(1)> | <expr-border-color> <!seen(2)> ]+ ] }
 
-#= border-left: [ 'border-width' || <border-style> || 'border-color' ]
+#= border-left: [ 'border-width' || 'border-style' || 'border-color' ]
     rule decl:sym<border-left> {:i (border\-left) ':'  [ <proforma> || <expr=.expr-border-left> || <any-args> ] }
-    rule expr-border-left {:i [ [:my @*SEEN; <expr-border-width> <!seen(0)> | <border-style> <!seen(1)> | <expr-border-color> <!seen(2)> ]+ ] }
+    rule expr-border-left {:i [ [:my @*SEEN; <expr-border-width> <!seen(0)> | <expr-border-style> <!seen(1)> | <expr-border-color> <!seen(2)> ]+ ] }
 
 #= border-top-color: <color> | transparent
     rule decl:sym<border-top-color> {:i (border\-top\-color) ':'  [ <proforma> || <expr=.expr-border-top-color> || <any-args> ] }
@@ -79,21 +79,21 @@ grammar CSS::Language::CSS21::Spec::Grammar {
     rule decl:sym<border-left-color> {:i (border\-left\-color) ':'  [ <proforma> || <expr=.expr-border-left-color> || <any-args> ] }
     rule expr-border-left-color {:i [ <color> | transparent & <keyw> ] }
 
-#= border-top-style: <border-style>
+#= border-top-style: [ none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset ]
     rule decl:sym<border-top-style> {:i (border\-top\-style) ':'  [ <proforma> || <expr=.expr-border-top-style> || <any-args> ] }
-    rule expr-border-top-style {:i <border-style> }
+    rule expr-border-top-style {:i [ [ none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset ] & <keyw> ] }
 
-#= border-right-style: <border-style>
+#= border-right-style: [ none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset ]
     rule decl:sym<border-right-style> {:i (border\-right\-style) ':'  [ <proforma> || <expr=.expr-border-right-style> || <any-args> ] }
-    rule expr-border-right-style {:i <border-style> }
+    rule expr-border-right-style {:i [ [ none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset ] & <keyw> ] }
 
-#= border-bottom-style: <border-style>
+#= border-bottom-style: [ none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset ]
     rule decl:sym<border-bottom-style> {:i (border\-bottom\-style) ':'  [ <proforma> || <expr=.expr-border-bottom-style> || <any-args> ] }
-    rule expr-border-bottom-style {:i <border-style> }
+    rule expr-border-bottom-style {:i [ [ none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset ] & <keyw> ] }
 
-#= border-left-style: <border-style>
+#= border-left-style: [ none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset ]
     rule decl:sym<border-left-style> {:i (border\-left\-style) ':'  [ <proforma> || <expr=.expr-border-left-style> || <any-args> ] }
-    rule expr-border-left-style {:i <border-style> }
+    rule expr-border-left-style {:i [ [ none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset ] & <keyw> ] }
 
 #= border-top-width: thin | medium | thick | <length>
     rule decl:sym<border-top-width> {:i (border\-top\-width) ':'  [ <proforma> || <expr=.expr-border-top-width> || <any-args> ] }
@@ -115,9 +115,9 @@ grammar CSS::Language::CSS21::Spec::Grammar {
     rule decl:sym<border-width> {:i (border\-width) ':'  [ <proforma> || <expr=.expr-border-width>**1..4 || <any-args> ] }
     rule expr-border-width {:i [ [ thin | medium | thick ] & <keyw> | <length>**1..4 ] }
 
-#= border: [ 'border-width' || <border-style> || 'border-color' ]
+#= border: [ 'border-width' || 'border-style' || 'border-color' ]
     rule decl:sym<border> {:i (border) ':'  [ <proforma> || <expr=.expr-border> || <any-args> ] }
-    rule expr-border {:i [ [:my @*SEEN; <expr-border-width> <!seen(0)> | <border-style> <!seen(1)> | <expr-border-color> <!seen(2)> ]+ ] }
+    rule expr-border {:i [ [:my @*SEEN; <expr-border-width> <!seen(0)> | <expr-border-style> <!seen(1)> | <expr-border-color> <!seen(2)> ]+ ] }
 
 #= bottom: <length> | <percentage> | auto
     rule decl:sym<bottom> {:i (bottom) ':'  [ <proforma> || <expr=.expr-bottom> || <any-args> ] }
@@ -291,9 +291,9 @@ grammar CSS::Language::CSS21::Spec::Grammar {
     rule decl:sym<outline-color> {:i (outline\-color) ':'  [ <proforma> || <expr=.expr-outline-color> || <any-args> ] }
     rule expr-outline-color {:i [ <color> | invert & <keyw> ] }
 
-#= outline-style: <outline-style>
+#= outline-style: [ none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset ]
     rule decl:sym<outline-style> {:i (outline\-style) ':'  [ <proforma> || <expr=.expr-outline-style> || <any-args> ] }
-    rule expr-outline-style {:i <outline-style> }
+    rule expr-outline-style {:i [ [ none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset ] & <keyw> ] }
 
 #= outline-width: thin | medium | thick | <length>
     rule decl:sym<outline-width> {:i (outline\-width) ':'  [ <proforma> || <expr=.expr-outline-width> || <any-args> ] }

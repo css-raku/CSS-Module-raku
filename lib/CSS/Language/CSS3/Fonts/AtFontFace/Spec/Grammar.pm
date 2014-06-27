@@ -27,9 +27,9 @@ grammar CSS::Language::CSS3::Fonts::AtFontFace::Spec::Grammar {
     rule decl:sym<font-weight> {:i (font\-weight) ':'  [ <proforma> || <expr=.expr-font-weight> || <any-args> ] }
     rule expr-font-weight {:i [ [ normal | bold ] & <keyw> | [ 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 ] & <number> ] }
 
-#= src: [ <uri> [format(<string>#)]? | <font-face-name> ]#
+#= src: [ [<uri>|local(<string>)] [format(<string>#)]? | <font-face-name> ]#
     rule decl:sym<src> {:i (src) ':'  [ <proforma> || <expr=.expr-src> || <any-args> ] }
-    rule expr-src {:i [ [ <uri> [ <format> ]? | <font-face-name> ] ] +% ',' }
+    rule expr-src {:i [ [ [ [ <uri> | <local> ] ] [ <format> ]? | <font-face-name> ] ] +% ',' }
 
 #= unicode-range: <urange>#
     rule decl:sym<unicode-range> {:i (unicode\-range) ':'  [ <proforma> || <expr=.expr-unicode-range> || <any-args> ] }

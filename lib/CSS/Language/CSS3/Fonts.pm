@@ -47,22 +47,22 @@ class CSS::Language::CSS3::Fonts::Actions
     does CSS::Language::CSS3::Fonts::AtFontFace::Spec::Interface {
 
     method at-rule:sym<font-face>($/) { make $.at-rule($/) }
-##
-##    method format($/) {
-##        return $.warning("usage: format(type)")
-##            if $<any-args>;
-##
-##        make $<format>.ast;
-##    }
-##
-##    method local($/) {
-##        return $.warning("usage: local(font-face-name)")
-##            if $<any-args>;
-##
-##        make $<font-face-name>.ast;
-##    }
-##
-    method font-face-name { make $<font-face-name>.ast }
+
+    method format($/) {
+        return $.warning("usage: format(type)")
+            if $<any-args>;
+
+        make $<format>.ast;
+    }
+
+    method local($/) {
+        return $.warning("usage: local(font-face-name)")
+            if $<any-args>;
+
+        make $<font-face-name>.ast;
+    }
+
+    method font-face-name($/) { make $<font-face-name>.ast }
     method expr-font-family($/) { make $.list($/) }
     method family-name($/) { make $<family-name>.ast }
     method generic-family($/) { make $<generic-family>.ast }
@@ -70,7 +70,7 @@ class CSS::Language::CSS3::Fonts::Actions
     method relative-size($/) { make $.token($<keyw>.ast) }
     method expr-font-size($/) { make $.list($/) }
     method font-variant-css21($/) { make $.list($/) }
-##    method src($/) { make $.node($/) }
+    method src($/) { make $.node($/) }
 
 }
 

@@ -27,7 +27,7 @@ class CSS::Language::CSS3::Fonts::AtFontFace::Spec::Actions {
     method decl:sym<font-weight>($/) { make $.decl($/, &?ROUTINE.WHY) }
     method expr-font-weight($/) { make $.list($/) }
 
-    #= src: [ <uri> [format(<string>#)]? | <font-face-name> ]#
+    #= src: [ [<uri>|local(<string>)] [format(<string>#)]? | <font-face-name> ]#
     method decl:sym<src>($/) { make $.decl($/, &?ROUTINE.WHY) }
     method expr-src($/) { make $.list($/) }
 

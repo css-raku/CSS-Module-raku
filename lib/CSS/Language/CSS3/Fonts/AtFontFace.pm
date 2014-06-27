@@ -11,7 +11,8 @@ use CSS::Language::CSS3::Fonts::AtFontFace::Spec::Actions;
 grammar CSS::Language::CSS3::Fonts::AtFontFace
     is CSS::Language::CSS3::Fonts::Variants
     is CSS::Language::CSS3::Fonts::AtFontFace::Spec::Grammar
-    is CSS::Language::CSS3::_Base {
+    is CSS::Language::CSS3::_Base
+    does CSS::Language::CSS3::Fonts::AtFontFace::Spec::Interface {
 
     # @font-face declarations
 
@@ -19,6 +20,5 @@ grammar CSS::Language::CSS3::Fonts::AtFontFace
     rule format {:i'format(' [ <format=.string> | <format=.keyw> || <any-args> ] ')'}
     rule local  {:i'local(' [ <font-face-name> || <any-args> ] ')'}
     rule font-face-name { <font-face-name=.identifiers> | <font-face-name=.string> }
-
-    rule src { <uri> <format>? | <local> <format>? | <font-face-name=.identifiers> }
+    rule family-name    { <family-name=.identifiers> || <family-name=.string> }
 }

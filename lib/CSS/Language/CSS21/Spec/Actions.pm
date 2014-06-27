@@ -43,23 +43,23 @@ class CSS::Language::CSS21::Spec::Actions {
     method decl:sym<border-spacing>($/) { make $.decl($/, &?ROUTINE.WHY) }
     method expr-border-spacing($/) { make $.list($/) }
 
-    #= border-style: <border-style>{1,4}
+    #= border-style: [ none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset ]{1,4}
     method decl:sym<border-style>($/) { make $.decl($/, &?ROUTINE.WHY, :boxed) }
     method expr-border-style($/) { make $.list($/) }
 
-    #= border-top: [ 'border-width' || <border-style> || 'border-color' ]
+    #= border-top: [ 'border-width' || 'border-style' || 'border-color' ]
     method decl:sym<border-top>($/) { make $.decl($/, &?ROUTINE.WHY) }
     method expr-border-top($/) { make $.list($/) }
 
-    #= border-right: [ 'border-width' || <border-style> || 'border-color' ]
+    #= border-right: [ 'border-width' || 'border-style' || 'border-color' ]
     method decl:sym<border-right>($/) { make $.decl($/, &?ROUTINE.WHY) }
     method expr-border-right($/) { make $.list($/) }
 
-    #= border-bottom: [ 'border-width' || <border-style> || 'border-color' ]
+    #= border-bottom: [ 'border-width' || 'border-style' || 'border-color' ]
     method decl:sym<border-bottom>($/) { make $.decl($/, &?ROUTINE.WHY) }
     method expr-border-bottom($/) { make $.list($/) }
 
-    #= border-left: [ 'border-width' || <border-style> || 'border-color' ]
+    #= border-left: [ 'border-width' || 'border-style' || 'border-color' ]
     method decl:sym<border-left>($/) { make $.decl($/, &?ROUTINE.WHY) }
     method expr-border-left($/) { make $.list($/) }
 
@@ -79,19 +79,19 @@ class CSS::Language::CSS21::Spec::Actions {
     method decl:sym<border-left-color>($/) { make $.decl($/, &?ROUTINE.WHY) }
     method expr-border-left-color($/) { make $.list($/) }
 
-    #= border-top-style: <border-style>
+    #= border-top-style: [ none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset ]
     method decl:sym<border-top-style>($/) { make $.decl($/, &?ROUTINE.WHY) }
     method expr-border-top-style($/) { make $.list($/) }
 
-    #= border-right-style: <border-style>
+    #= border-right-style: [ none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset ]
     method decl:sym<border-right-style>($/) { make $.decl($/, &?ROUTINE.WHY) }
     method expr-border-right-style($/) { make $.list($/) }
 
-    #= border-bottom-style: <border-style>
+    #= border-bottom-style: [ none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset ]
     method decl:sym<border-bottom-style>($/) { make $.decl($/, &?ROUTINE.WHY) }
     method expr-border-bottom-style($/) { make $.list($/) }
 
-    #= border-left-style: <border-style>
+    #= border-left-style: [ none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset ]
     method decl:sym<border-left-style>($/) { make $.decl($/, &?ROUTINE.WHY) }
     method expr-border-left-style($/) { make $.list($/) }
 
@@ -115,7 +115,7 @@ class CSS::Language::CSS21::Spec::Actions {
     method decl:sym<border-width>($/) { make $.decl($/, &?ROUTINE.WHY, :boxed) }
     method expr-border-width($/) { make $.list($/) }
 
-    #= border: [ 'border-width' || <border-style> || 'border-color' ]
+    #= border: [ 'border-width' || 'border-style' || 'border-color' ]
     method decl:sym<border>($/) { make $.decl($/, &?ROUTINE.WHY) }
     method expr-border($/) { make $.list($/) }
 
@@ -291,7 +291,7 @@ class CSS::Language::CSS21::Spec::Actions {
     method decl:sym<outline-color>($/) { make $.decl($/, &?ROUTINE.WHY) }
     method expr-outline-color($/) { make $.list($/) }
 
-    #= outline-style: <outline-style>
+    #= outline-style: [ none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset ]
     method decl:sym<outline-style>($/) { make $.decl($/, &?ROUTINE.WHY) }
     method expr-outline-style($/) { make $.list($/) }
 

@@ -126,12 +126,12 @@ class CSS::Language::_Base::Actions
             @expr = ($<proforma>.ast);
         }
         else {
-            my $m = $<expr> // $/;
-            if !$m.caps || $m.caps.grep({! .value.ast.defined}) {
-                $.warning('dropping declaration', $property);
-                return Any;
+            my $m = $<expr>;
+            if !$m ||
+                ($m.can('caps') && (!$m.caps || $m.caps.grep({! .value.ast.defined}))) {
+                    $.warning('dropping declaration', $property);
+                    return Any;
             }
-
             @expr = @( $.list($m) );
          }
 

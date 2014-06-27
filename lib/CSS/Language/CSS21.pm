@@ -38,7 +38,6 @@ grammar CSS::Extensions::CSS21
                               | behind & <behind=.keyw> <!seen(1)> ]+ }
 
     rule border-style {:i [ none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset ] & <keyw> }
-    rule outline-style {:i <border-style> }
     rule border-width {:i [ thin | medium | thick ] & <keyw> | <length> }
     rule expr-counter-increment {:i [ none & <keyw> || [ <identifier> <integer>? ]+ ] }
     rule expr-counter-reset {:i [ none & <keyw> || [ <identifier> <integer>? ]+ ] }
