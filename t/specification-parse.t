@@ -9,8 +9,8 @@ use CSS::Grammar::Test;
 my $actions = CSS::Language::Specification::Actions.new;
 
 for (
-    'terms' => {'input' => "<single-animation-direction> [ ‘,’ <'single-animation-direction'> ]*",
-                ast => "<single-animation-direction> [ ',' <single-animation-direction> ]*",
+    'terms' => {'input' => "<single-animation-direction> [, <'single-animation-direction'> ]*",
+                ast => "<single-animation-direction> [ ',' <expr-single-animation-direction> ]*",
     },
     # precedence tests taken from: https://developer.mozilla.org/en-US/docs/CSS/Value_definition_syntax
     'terms' => {input => 'bold thin && <length>',
