@@ -1,9 +1,9 @@
 use v6;
 
-use CSS::Language::Specification;
-use CSS::Language::Specification::Actions;
+use CSS::Specification::_Base;
 
-grammar CSS::Language::_Base {
+grammar CSS::Language::_Base 
+    is CSS::Specification::_Base {
     # definitions common to CSS1, CSS21 and CSS3 Languages
     rule declaration:sym<validated> { <.ws>? <decl> <prio>? <any-arg>* <end-decl> }
     proto rule decl {*}
@@ -19,9 +19,5 @@ grammar CSS::Language::_Base {
     token keyw        {<ident>}             # keyword (case insensitive)
     token identifier  {<name>}              # identifier (case sensitive)
     rule identifiers  {[ <identifier> ]+}   # E.g. font name: Times New Roman
-
-    token seen($opt) {
-	<?{@*SEEN[$opt]++}>
-    }
 
 }
