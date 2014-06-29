@@ -9,6 +9,8 @@ This module implements the following grammars and actions:
 - `CSS::Language::CSS21` + `CSS::Language::CSS21::Actions`
 - `CSS::Language::CSS3` + `CSS::Language::CSS3::Actions`
 
+See [CSS Snapshot 2010](http://www.w3.org/TR/2011/NOTE-css-2010-20110512/).
+
 Example
 -------
 
@@ -39,8 +41,6 @@ CSS3 Extension Modules
 - `CSS::Language::CSS3::Media`      - CSS 3.0 Media (@media)
 - `CSS::Language::CSS3::PagedMedia` - CSS 3.0 Paged Media (@page)
 
-See [CSS Snapshot 2010](http://www.w3.org/TR/2011/NOTE-css-2010-20110512/).
-
 Installation
 ------------
 This module works with Rakudo Star 2013.02 [download from http://rakudo.org/downloads/star/ - don't forget the final `make install`]:
@@ -61,9 +61,9 @@ Property Definitions
 --------------------
 Property definitions are compiled from the sources in the (etc) directory.
 
-For example `CSS::Language:CSS1::Spec::Grammar`, `CSS::Language:CSS1::Spec::Actions` and `CSS::Language:CSS1::Spec::Interface` are generated from (etc/css1-properties.txt).
+For example `CSS::Language:CSS1::Spec::Grammar`, `CSS::Language:CSS1::Spec::Actions` and `CSS::Language:CSS1::Spec::Interface` are generated from [etc/css1-properties.txt](etc/css1-properties.txt).
 
-See (BUILD.pl).
+See [BUILD.pl](BUILD.pl).
 
 See Also
 ========
