@@ -61,7 +61,7 @@ Property Definitions
 --------------------
 Property definitions are compiled from the sources in the (etc) directory.
 
-For example `CSS::Language:CSS1::Spec::Grammar`, `CSS::Language:CSS1::Spec::Actions` and `CSS::Language:CSS1::Spec::Interface` are generated from [etc/css1-properties.txt](etc/css1-properties.txt).
+For example [CSS::Language:CSS1::Spec::Grammar](blob/master/lib/CSS/Language/CSS1/Spec/Grammar.pm), [CSS::Language:CSS1::Spec::Actions](blob/master/lib/CSS/Language/CSS1/Spec/Actions.pm) and [CSS::Language:CSS1::Spec::Interface](blob/master/lib/CSS/Language/CSS1/Spec/Interface.pm) are generated from [etc/css1-properties.txt](etc/css1-properties.txt).
 
 See [BUILD.pl](BUILD.pl).
 
