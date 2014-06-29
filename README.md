@@ -39,7 +39,7 @@ CSS3 Extension Modules
 - `CSS::Language::CSS3::Media`      - CSS 3.0 Media (@media)
 - `CSS::Language::CSS3::PagedMedia` - CSS 3.0 Paged Media (@page)
 
-See (CSS Snapshot 2010)[http://www.w3.org/TR/2011/NOTE-css-2010-20110512/].
+See [CSS Snapshot 2010](http://www.w3.org/TR/2011/NOTE-css-2010-20110512/).
 
 Installation
 ------------
