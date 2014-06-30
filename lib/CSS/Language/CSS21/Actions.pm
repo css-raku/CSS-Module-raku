@@ -9,7 +9,7 @@ class CSS::Language::CSS21::Actions
     is CSS::Language::_Base::Actions 
     does CSS::Language::CSS21::Spec::Interface {
 
-    has $._proforma-usage = ' | inherit';
+    has @._proforma = 'inherit';
 
     method color:sym<system>($/) { make $.node($/) }
 

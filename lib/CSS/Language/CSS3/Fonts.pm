@@ -17,9 +17,9 @@ use CSS::Language::CSS3::Fonts::AtFontFace::Spec::Interface;
 use CSS::Language::CSS3::Fonts::AtFontFace::Spec::Actions;
 
 grammar CSS::Language::CSS3::Fonts:ver<20130212.000> 
+    is CSS::Language::CSS3::_Base
     is CSS::Language::CSS3::Fonts::Variants
     is CSS::Language::CSS3::Fonts::Spec::Grammar
-    is CSS::Language::CSS3::_Base
     does CSS::Language::CSS3::Fonts::Spec::Interface {
 
     rule font-description {<declarations=.CSS::Language::CSS3::Fonts::AtFontFace::declarations>}
@@ -39,10 +39,10 @@ grammar CSS::Language::CSS3::Fonts:ver<20130212.000>
 # ----------------------------------------------------------------------
 
 class CSS::Language::CSS3::Fonts::Actions
+    is CSS::Language::CSS3::_Base::Actions
     is CSS::Language::CSS3::Fonts::Variants::Actions
     is CSS::Language::CSS3::Fonts::Spec::Actions
     is CSS::Language::CSS3::Fonts::AtFontFace::Spec::Actions
-    is CSS::Language::CSS3::_Base::Actions
     does CSS::Language::CSS3::Fonts::Spec::Interface
     does CSS::Language::CSS3::Fonts::AtFontFace::Spec::Interface {
 

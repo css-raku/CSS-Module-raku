@@ -12,8 +12,8 @@ use CSS::Language::CSS3::PagedMedia::Spec::Grammar;
 use CSS::Language::CSS3::PagedMedia::Spec::Actions;
 
 grammar CSS::Language::CSS3::PagedMedia:ver<20061010.000>
-    is CSS::Language::CSS3::PagedMedia::Spec::Grammar
     is CSS::Language::CSS3::_Base
+    is CSS::Language::CSS3::PagedMedia::Spec::Grammar
     does CSS::Language::CSS3::PagedMedia::Spec::Interface {
 
     proto rule page-pseudo {*}
@@ -41,8 +41,8 @@ grammar CSS::Language::CSS3::PagedMedia:ver<20061010.000>
 }
 
 class CSS::Language::CSS3::PagedMedia::Actions
-    is CSS::Language::CSS3::PagedMedia::Spec::Actions
     is CSS::Language::CSS3::_Base::Actions 
+    is CSS::Language::CSS3::PagedMedia::Spec::Actions
     does CSS::Language::CSS3::PagedMedia::Spec::Interface {
 
         method page-pseudo:sym<left>($/)  {make 'left'}

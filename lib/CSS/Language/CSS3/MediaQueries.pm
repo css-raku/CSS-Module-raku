@@ -58,6 +58,8 @@ grammar CSS::Language::CSS3::MediaQueries:ver<20120619.000>
 class CSS::Language::CSS3::MediaQueries::Actions
     is CSS::Language::CSS3::_Base::Actions {
 
+    has @._proforma;
+
     # media-rules, media-list, media see core grammar actions
     method unknown-media-list($/) {
 	$.warning("discarding media list");
@@ -74,7 +76,7 @@ class CSS::Language::CSS3::MediaQueries::Actions
     method media-op($/)              { make $/.Str.lc }
 
     method _media-decl($prop, $/, $synopsis) {
-        return $._decl($prop, $/, $synopsis, :proforma-usage(''));
+        return $._decl($prop, $/, $synopsis);
     }
 
     method media-expr($/) {

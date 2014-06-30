@@ -7,7 +7,6 @@ class CSS::Language::_Base::Actions
     is CSS::Specification::_Base::Actions
     is CSS::Grammar::Actions {
 
-    has $._proforma-usage = '';
     has Bool $.strict is rw = True;
 
     # ---- CSS::Grammar overrides ---- #
@@ -42,7 +41,7 @@ class CSS::Language::_Base::Actions
 
     #---- AST construction methods ----#
 
-    method _decl($prop, $/, $synopsis is copy, :$expand?, :$proforma-usage?) {
+    method _decl($prop, $/, $synopsis is copy, :$expand?) {
         ## OBSOLETE ## use .decl() instead
         die "doesn't look like a property: " ~ ~$/
             unless $prop;
@@ -51,11 +50,11 @@ class CSS::Language::_Base::Actions
        $synopsis = $synopsis.content.join(' ')
            if $synopsis.can('content');
 
-        if ($<proforma> && !$<proforma>.ast) 
+        if ($<proforma> && !$<proforma>.ast)
             || $<any> || $<any-arg> || $<any-args> {
-                $.warning([~] ('usage ',
-                              $synopsis.subst(/^ .*? ':' || <?>/, $property ~ ':'), 
-                               $proforma-usage // $._proforma-usage));
+                $.warning( 'usage '
+                           ~ ($synopsis.subst(/^ .*? ':' || <?>/, $property ~ ':'), 
+                              @._proforma).join(' | ') );
                 return Any;
         }
 
