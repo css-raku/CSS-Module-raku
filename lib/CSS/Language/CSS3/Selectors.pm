@@ -10,7 +10,8 @@ class CSS::Language::CSS3::Selectors::Actions {...}
 
 use CSS::Language::CSS3::_Base;
 
-grammar CSS::Language::CSS3::Selectors::Syntax {
+grammar CSS::Language::CSS3::Selectors:ver<20110929.000>
+    is CSS::Language::CSS3::_Base {
     # extensions:
     # ----------
     # inherited combinators: '+' (adjacent), '>' (child)
@@ -58,11 +59,6 @@ grammar CSS::Language::CSS3::Selectors::Syntax {
     rule negation-args {[<type-selector> | <universal> | <id> | <class> | <attrib> | [$<nested>=<?before [:i':not(']> || <?>] <pseudo> | <any-arg> ]+}
     rule pseudo-function:sym<negation>  {:i'not(' [ <negation-args> || <any-args> ] ')'}
 
-}
-
-grammar CSS::Language::CSS3::Selectors:ver<20110929.000>
-    is CSS::Language::CSS3::Selectors::Syntax
-    is CSS::Language::CSS3::_Base {
 }
 
 class CSS::Language::CSS3::Selectors::Actions

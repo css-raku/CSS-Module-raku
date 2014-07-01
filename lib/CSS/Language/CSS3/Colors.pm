@@ -5,7 +5,8 @@ use v6;
 
 use CSS::Language::CSS3::_Base;
 
-grammar CSS::Language::CSS3::Colors::Syntax {
+grammar CSS::Language::CSS3::Colors:ver<20110607.000>
+    is CSS::Language::CSS3::_Base {
 
 # extensions for CSS3 Color Module
 
@@ -74,11 +75,6 @@ grammar CSS::Language::CSS3::Colors::Syntax {
                    ')'
     }
 
-}
-
-grammar CSS::Language::CSS3::Colors:ver<20110607.000>
-    is CSS::Language::CSS3::Colors::Syntax
-    is CSS::Language::CSS3::_Base {
 }
 
 class CSS::Language::CSS3::Colors::Actions 

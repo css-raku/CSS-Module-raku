@@ -12,7 +12,9 @@ class CSS::Language::CSS3::MediaQueries::Actions {...}
 
 use CSS::Language::CSS3::_Base;
 
-grammar CSS::Language::CSS3::MediaQueries::Syntax {
+grammar CSS::Language::CSS3::MediaQueries:ver<20120619.000>
+    is CSS::Language::CSS3::_Base {
+
     rule at-rule:sym<media> {(:i'media') [<media-list>||<media-list=.unknown-media-list>] <media-rules> }
 
     rule media-rules {
@@ -29,30 +31,32 @@ grammar CSS::Language::CSS3::MediaQueries::Syntax {
 
     proto rule media-feature  {*}
 
-    rule media-feature:sym<width|height> {:i (<._range>?[device\-]?[width|height]) ':' <val(rx:i:s[ <length> ])> }
+    rule media-feature:sym<width|height> {:i (<._range>?[device\-]?[width|height]) ':' [ <expr=.media-expr-length> || <any-args> ] }
+    rule media-expr-length { <length> }
 
-    rule media-feature:sym<orientation> {:i (orientation) [ ':' <val(rx:i:s[ [ portrait | landscape ] & <keyw> ])> ]? }
+    rule media-feature:sym<orientation> {:i (orientation) [ ':' <expr=.media-expr-orientation> || <any-args> ]? }
+    rule media-expr-orientation {:i [ portrait | landscape ] & <keyw> }
 
-    rule media-feature:sym<aspect-ratio> {:i (<._range>?[device\-]?aspect\-ratio) ':' <val(rx:i:s[ <horizontal=.integer> '/' <vertical=.integer> ])> }
+    rule media-feature:sym<aspect-ratio> {:i (<._range>?[device\-]?aspect\-ratio) ':' [ <expr=.media-expr-aspect> || <any-args> ] }
+    rule media-expr-aspect {:i <horizontal=.integer> '/' <vertical=.integer> }
 
-    rule media-feature:sym<color> {:i (<._range>?color[\-index]?) [ ':' <val(rx:i:s[ <integer> ])> ] }
+    rule media-feature:sym<color> {:i (<._range>?color[\-index]?) ':' [ <expr=.media-expr-color> || <any-args> ] }
+    rule media-feature:sym<monochrome> {:i (<._range>?monochrome) ':' [ <expr=.media-expr-color> || <any-args> ] }
+    rule media-expr-color {:i <integer> }
+
     rule media-feature:sym<color-bool> {:i (color[\-index]?) <!before ':'> }
 
-    rule media-feature:sym<monochrome> {:i (<._range>?monochrome) ':' <val(rx:i:s[ <integer> ])> }
+    rule media-feature:sym<resolution> {:i (<._range>?resolution) ':' [ <expr=.media-expr-resolution> || <any-args> ] }
+    rule media-expr-resolution { <resolution> }
 
-    rule media-feature:sym<resolution> {:i (<._range>?resolution) ':' <val(rx:i:s[ <resolution> ])> }
+    rule media-feature:sym<scan> {:i (scan) [ ':' [ <expr=.media-expr-scan> || <any-args> ] ]? }
+    rule media-expr-scan {:i [ progressive | interlace ] & <keyw> }
 
-    rule media-feature:sym<scan> {:i (scan) [ ':' <val(rx:i:s[ [ progressive | interlace] & <keyw> ])> ]? }
-
-    rule media-feature:sym<grid> {:i (grid) [ ':' <val(rx:i:s[ [0 | 1 ] & <integer> ])> ]? }
+    rule media-feature:sym<grid> {:i (grid) [ ':' [ <expr=.media-expr-grid> || <any-args> ] ]? }
+    rule media-expr-grid {:i [0 | 1 ] & <integer> }
 
     rule media-feature-unknown  { <media-feature=.ident> [ ':' <any>* ]? }
 
-}
-
-grammar CSS::Language::CSS3::MediaQueries:ver<20120619.000>
-    is CSS::Language::CSS3::MediaQueries::Syntax
-    is CSS::Language::CSS3::_Base {
 }
 
 class CSS::Language::CSS3::MediaQueries::Actions
@@ -75,10 +79,6 @@ class CSS::Language::CSS3::MediaQueries::Actions
 
     method media-op($/)              { make $/.Str.lc }
 
-    method _media-decl($prop, $/, $synopsis) {
-        return $._decl($prop, $/, $synopsis);
-    }
-
     method media-expr($/) {
 	make $<expr>.ast;
     }
@@ -86,51 +86,51 @@ class CSS::Language::CSS3::MediaQueries::Actions
     #= width|height: <length>
     method media-feature:sym<width|height>($/) {
         return $.warning($0.Str.lc ~ ': length cannot be negative')
-            if $<val> && $<val>.match(/\-/);
-        make $._media-decl($0, $<val>, &?ROUTINE.WHY);
+            if $<expr> && $<expr>.match(/\-/);
+        make $.decl($/, &?ROUTINE.WHY);
     }
 
     #= orientation: [portrait | landscape]?
     method media-feature:sym<orientation>($/) {
-        make $._media-decl($0, $<val>, &?ROUTINE.WHY);
+        make $.decl($/, &?ROUTINE.WHY);
     }
 
     #= aspect-ratio: <horizontal> "/" <vertical>   (e.g. "16/9")
     method media-feature:sym<aspect-ratio>($/) {
-        make $._media-decl($0, $<val>, &?ROUTINE.WHY);
+        make $.decl($/, &?ROUTINE.WHY);
     }
 
     #= color: <integer>
     method media-feature:sym<color>($/) {
-        make $._media-decl($0, $<val>, &?ROUTINE.WHY);
+        make $.decl($/, &?ROUTINE.WHY);
     }
 
-    #= color-bool: 
+    #= color-bool 
     method media-feature:sym<color-bool>($/) {
-        make $._media-decl($0, $<val>, '');
+        make $.decl($/, &?ROUTINE.WHY);
     }
 
     #= monochrome: <integer>
     method media-feature:sym<monochrome>($/) {
-        make $._media-decl($0, $<val>, &?ROUTINE.WHY);
+        make $.decl($/, &?ROUTINE.WHY);
     }
 
     #= resolution: <resolution>
     method media-feature:sym<resolution>($/) {
-        make $._media-decl($0, $<val>, &?ROUTINE.WHY);
+        make $.decl($/, &?ROUTINE.WHY);
     }
 
     #= scan: [progressive | interlace]?
     method media-feature:sym<scan>($/) {
-        make $._media-decl($0, $<val>, &?ROUTINE.WHY);
+        make $._decl($/, &?ROUTINE.WHY);
     }
 
     #= grid: [<integer>]?
     method media-feature:sym<grid>($/) {
-        make $._media-decl($0, $<val>, &?ROUTINE.WHY);
+        make $.decl($/, &?ROUTINE.WHY);
     }
 
     method media-feature-unknown($/)   {
-        $.warning('unknown media-feature', $<media-feature>.ast);
+        $.warning('unknown media-feature', $<media-feature>);
     }
 }

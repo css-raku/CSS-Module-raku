@@ -7,15 +7,11 @@ class CSS::Language::CSS3::Namespaces::Actions {...}
 
 use CSS::Language::CSS3::_Base;
 
-grammar CSS::Language::CSS3::Namespaces::Syntax {
+grammar CSS::Language::CSS3::Namespaces:ver<20110929.000>
+    is CSS::Language::CSS3::_Base {
 
     rule at-decl:sym<namespace> {(:i'namespace') <prefix=.ident>? [<url=.string>|<url>] ';' }
 
-}
-
-grammar CSS::Language::CSS3::Namespaces:ver<20110929.000>
-    is CSS::Language::CSS3::Namespaces::Syntax
-    is CSS::Language::CSS3::_Base {
 }
 
 class CSS::Language::CSS3::Namespaces::Actions
