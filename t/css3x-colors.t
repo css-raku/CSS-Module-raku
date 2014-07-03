@@ -64,7 +64,7 @@ for (
 ##    },
     ) {
     my $rule = .key;
-    my %test = .value;
+    my %test = @( .value );
     my $input = %test<input>;
 
     CSS::Grammar::Test::parse-tests(CSS::Language::CSS3::Colors, $input,

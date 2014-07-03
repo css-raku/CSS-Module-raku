@@ -19,7 +19,8 @@ for ( $fh.lines ) {
         next;
     }
 
-    my ($rule, %test) = @( from-json($_) );
+    my ($rule, $t) = @( from-json($_) );
+    my %test = @$t;
     my $input = %test<input>;
 
     CSS::Grammar::Test::parse-tests(CSS::Language::CSS3, $input,

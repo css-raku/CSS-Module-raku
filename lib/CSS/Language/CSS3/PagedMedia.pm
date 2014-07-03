@@ -59,7 +59,7 @@ class CSS::Language::CSS3::PagedMedia::Actions
         method margin-box($/) { make $.node($/) }
 
         method margin-declaration($/) {
-            my %ast = $.node($/);
+            my %ast = @( $.node($/) );
             %ast<property> = '@' ~ (~$<margin-box>).lc;
             make %ast;
         }

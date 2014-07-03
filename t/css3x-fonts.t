@@ -18,7 +18,8 @@ for ( $fh.lines ) {
 ##        note '[' ~ .substr(2) ~ ']';
         next;
     }
-    my ($rule, %test) = @( from-json($_) );
+    my ($rule, $t) = @( from-json($_) );
+    my %test = @$t;
 
     my $input = %test<input>;
 
@@ -33,7 +34,7 @@ for ( $fh.lines ) {
 				    :rule($rule),
 				    :actions($css21-actions),
 				    :suite<css21>,
-				    :expected(%(%test, %$css21)) );
+				    :expected(%(%test, @$css21)) );
 }
 
 done;

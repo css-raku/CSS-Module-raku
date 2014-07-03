@@ -30,7 +30,7 @@ for ( $fh.lines ) {
         next;
     }
 
-    my %test = %( from-json($_) );
+    my %test = @( from-json($_) );
     my $prop = %test<prop>.lc;
     my $input = $prop ~ ':' ~ %test<decl>;
 

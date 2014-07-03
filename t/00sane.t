@@ -58,25 +58,27 @@ for (
                                  },
     },
     # check override rules
-    declaration-list => {input => 'margin-right: 5em; margin-top: 10em !IMPORTANT; margin: 2em 3em; margin-bottom: 1em',  
+    declaration-list => {input => 'margin-right: 5em; margin-top: 10em !IMPORTANT; margin: 2em 3em; margin-bottom: 1em',
+                         ast => 42,
                          ast => {"margin-right" => {expr => [{"length" => 3}]},
-                                 "margin-top" => {expr => [{"length" => 10}], {prio => "important"}},
+                                 "margin-top" => {expr => [{"length" => 10}], prio => "important"},
                                  "margin-bottom" => {expr => [{"length" => 1}]},
                                  "margin-left" => {expr => [{"length" => 3}]}
                                  },
     },
     # also check !important
     declaration-list => {input => 'margin: em -ex !IMPORTANT',
-             ast => {"margin-top" => {expr => [{"length" => 1}], {"prio" => "important"}},
-                     "margin-right" => {expr => [{"length" => -1}], {"prio" => "important"}},
-                     "margin-bottom" => {expr => [{"length" => 1}], {"prio" => "important"}},
-                     "margin-left" => {expr => [{"length" => -1}], {"prio" => "important"}},
+             ast => {"margin-top"    => {expr => [{"length" => 1}],  "prio" => "important"},
+                     "margin-right"  => {expr => [{"length" => -1}], "prio" => "important"},
+                     "margin-bottom" => {expr => [{"length" => 1}],  "prio" => "important"},
+                     "margin-left"   => {expr => [{"length" => -1}], "prio" => "important"},
                      },
     },
   ) {
 
+    note {t => $_.kv}.perl;
     my $rule = .key;
-    my %test = .value;
+    my %test = @( .value );
     my $input = %test<input>;
 
     for css1  => (CSS::Language::CSS1, $css1-actions),
