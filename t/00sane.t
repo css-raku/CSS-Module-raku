@@ -75,10 +75,8 @@ for (
                      },
     },
   ) {
-
-    note {t => $_.kv}.perl;
     my $rule = .key;
-    my %test = @( .value );
+    my %test = %( .value );
     my $input = %test<input>;
 
     for css1  => (CSS::Language::CSS1, $css1-actions),

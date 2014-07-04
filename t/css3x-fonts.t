@@ -19,7 +19,7 @@ for ( $fh.lines ) {
         next;
     }
     my ($rule, $t) = @( from-json($_) );
-    my %test = @$t;
+    my %test = %$t;
 
     my $input = %test<input>;
 

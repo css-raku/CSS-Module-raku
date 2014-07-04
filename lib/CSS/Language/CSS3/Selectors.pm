@@ -91,7 +91,7 @@ class CSS::Language::CSS3::Selectors::Actions
     method nth-args:sym<even>($/)    { make {a => 2, b=> 0} }
     method nth-args:sym<expr>($/)    {
 
-        my %node = @( $.node($/) );
+        my %node = %( $.node($/) );
 
         if $<a-sign> {
             %node<a> //= 1;

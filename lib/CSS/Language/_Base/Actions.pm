@@ -22,7 +22,7 @@ class CSS::Language::_Base::Actions
     method declaration:sym<validated>($/)  {
         return unless $<decl>.ast;
         
-        my %ast = @( $<decl>.ast );
+        my %ast = %( $<decl>.ast );
 
         if $<any-arg> {
             return $.warning("extra terms following '{%ast<property>}' declaration",
