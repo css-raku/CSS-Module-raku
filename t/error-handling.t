@@ -6,11 +6,11 @@
 use Test;
 use JSON::Tiny;
 
-use CSS::Language::CSS3;
+use CSS::Module::CSS3;
 use CSS::Grammar::Test;
 
-my $c = CSS::Language::CSS3; # moarbug workaround
-my $actions = CSS::Language::CSS3::Actions.new;
+my $c = CSS::Module::CSS3; # moarbug workaround
+my $actions = CSS::Module::CSS3::Actions.new;
 
 my $fh = open 't/error-handling.json', :r;
 
@@ -24,7 +24,7 @@ for ( $fh.lines ) {
     my %test = %$t;
     my $input = %test<input>;
 
-    CSS::Grammar::Test::parse-tests(CSS::Language::CSS3, $input,
+    CSS::Grammar::Test::parse-tests(CSS::Module::CSS3, $input,
 				    :rule($rule),
 				    :actions($actions),
 				    :suite<css3>,

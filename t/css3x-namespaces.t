@@ -2,10 +2,10 @@
 
 use Test;
 
-use CSS::Language::CSS3::Namespaces;
+use CSS::Module::CSS3::Namespaces;
 use CSS::Grammar::Test;
 
-my $actions = CSS::Language::CSS3::Namespaces::Actions.new;
+my $actions = CSS::Module::CSS3::Namespaces::Actions.new;
 
 for (
     at-decl => {input => 'namespace empty "";',
@@ -28,7 +28,7 @@ for (
     my %test = @( .value );
     my $input = %test<input>;
 
-    CSS::Grammar::Test::parse-tests(CSS::Language::CSS3::Namespaces, $input,
+    CSS::Grammar::Test::parse-tests(CSS::Module::CSS3::Namespaces, $input,
 				    :rule($rule),
 				    :actions($actions),
 				    :suite<css3-namespaces>,

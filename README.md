@@ -1,13 +1,13 @@
-CSS::Language
+CSS::Module
 =============
 
-CSS::Language is a property-specific validator and parser for CSS Levels 1, 2.1 and  3.
+CSS::Module is a property-specific validator and parser for CSS Levels 1, 2.1 and  3.
 
 This module implements the following grammars and actions:
 
-- `CSS::Language::CSS1` + `CSS::Language::CSS1::Actions`
-- `CSS::Language::CSS21` + `CSS::Language::CSS21::Actions`
-- `CSS::Language::CSS3` + `CSS::Language::CSS3::Actions`
+- `CSS::Module::CSS1` + `CSS::Module::CSS1::Actions`
+- `CSS::Module::CSS21` + `CSS::Module::CSS21::Actions`
+- `CSS::Module::CSS3` + `CSS::Module::CSS3::Actions`
 
 See [CSS Snapshot 2010](http://www.w3.org/TR/2011/NOTE-css-2010-20110512/).
 
@@ -15,13 +15,13 @@ Example
 -------
 
     use v6;
-    use CSS::Language::CSS21;
-    use CSS::Language::CSS21::Actions;
+    use CSS::Module::CSS21;
+    use CSS::Module::CSS21::Actions;
 
     my $css = 'H1 { color: blue; foo: bar; background-color: zzz }';
 
-    my $actions =  CSS::Language::CSS21::Actions.new;
-    my $p = CSS::Language::CSS21.parse($css, :actions($actions));
+    my $actions =  CSS::Module::CSS21::Actions.new;
+    my $p = CSS::Module::CSS21.parse($css, :actions($actions));
     note $_ for $actions.warnings;
     say "declaration: " ~ $p.ast[0]<ruleset><declarations>.perl;
     # output:
@@ -34,12 +34,12 @@ CSS3 Extension Modules
 `CSS::Langauge::CSS3` is composed from a number of loosely coupled extension modules.
 
 - `CSS::Langauge::CSS3::CSS21_Imported` - the full set of CSS21 properties
-- `CSS::Language::CSS3::Colors`     - CSS 3.0 Colors (@color-profile)
-- `CSS::Language::CSS3::Fonts`      - CSS 3.0 Fonts (@font-face)
-- `CSS::Language::CSS3::Selectors`  - CSS 3.0 Selectors
-- `CSS::Language::CSS3::Namespaces` - CSS 3.0 Namespace (@namespace)
-- `CSS::Language::CSS3::Media`      - CSS 3.0 Media (@media)
-- `CSS::Language::CSS3::PagedMedia` - CSS 3.0 Paged Media (@page)
+- `CSS::Module::CSS3::Colors`     - CSS 3.0 Colors (@color-profile)
+- `CSS::Module::CSS3::Fonts`      - CSS 3.0 Fonts (@font-face)
+- `CSS::Module::CSS3::Selectors`  - CSS 3.0 Selectors
+- `CSS::Module::CSS3::Namespaces` - CSS 3.0 Namespace (@namespace)
+- `CSS::Module::CSS3::Media`      - CSS 3.0 Media (@media)
+- `CSS::Module::CSS3::PagedMedia` - CSS 3.0 Paged Media (@page)
 
 Installation
 ------------
@@ -49,19 +49,19 @@ Ensure that `perl6` and `panda` are available on your path, e.g. :
 
     % export PATH=~/src/rakudo-star-2013.02/install/bin:$PATH
 
-You can then use `panda` to test and install `CSS::Language`:
+You can then use `panda` to test and install `CSS::Module`:
 
-    % panda install CSS::Language
+    % panda install CSS::Module
 
 To try parsing some content:
 
-    % perl6 -MCSS::Language::CSS21 -e"say CSS::Language::CSS21.parse('h1 {margin:2pt; color: blue}')"
+    % perl6 -MCSS::Module::CSS21 -e"say CSS::Module::CSS21.parse('h1 {margin:2pt; color: blue}')"
 
 Property Definitions
 --------------------
 Property definitions are compiled from the sources in the (etc) directory.
 
-For example [CSS::Language:CSS1::Spec::Grammar](lib/CSS/Language/CSS1/Spec/Grammar.pm), [CSS::Language:CSS1::Spec::Actions](lib/CSS/Language/CSS1/Spec/Actions.pm) and [CSS::Language:CSS1::Spec::Interface](lib/CSS/Language/CSS1/Spec/Interface.pm) are generated from [etc/css1-properties.txt](etc/css1-properties.txt).
+For example [CSS::Module:CSS1::Spec::Grammar](lib/CSS/Module/CSS1/Spec/Grammar.pm), [CSS::Module:CSS1::Spec::Actions](lib/CSS/Module/CSS1/Spec/Actions.pm) and [CSS::Module:CSS1::Spec::Interface](lib/CSS/Module/CSS1/Spec/Interface.pm) are generated from [etc/css1-properties.txt](etc/css1-properties.txt).
 
 See [BUILD.pl](BUILD.pl).
 

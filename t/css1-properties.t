@@ -3,19 +3,19 @@
 use Test;
 use JSON::Tiny;
 
-use CSS::Language::CSS1::Actions;
-use CSS::Language::CSS1;
+use CSS::Module::CSS1::Actions;
+use CSS::Module::CSS1;
 
-use CSS::Language::CSS21::Actions;
-use CSS::Language::CSS21;
+use CSS::Module::CSS21::Actions;
+use CSS::Module::CSS21;
 
-use CSS::Language::CSS3;
+use CSS::Module::CSS3;
 
 use CSS::Grammar::Test;
 
-my $css1-actions  = CSS::Language::CSS1::Actions.new;
-my $css21-actions = CSS::Language::CSS21::Actions.new;
-my $css3x-actions = CSS::Language::CSS3::Actions.new;
+my $css1-actions  = CSS::Module::CSS1::Actions.new;
+my $css21-actions = CSS::Module::CSS21::Actions.new;
+my $css3x-actions = CSS::Module::CSS3::Actions.new;
 
 my %seen;
 
@@ -49,9 +49,9 @@ for ( $fh.lines ) {
 
     %test<ast> //= {};
 
-    for css1  => (CSS::Language::CSS1,  $css1-actions,  qw<>),
-       	css21 => (CSS::Language::CSS21, $css21-actions, qw<inherit>),	
-       	css3x  => (CSS::Language::CSS3,                 $css3x-actions,  qw<inherit initial>) {
+    for css1  => (CSS::Module::CSS1,  $css1-actions,  qw<>),
+       	css21 => (CSS::Module::CSS21, $css21-actions, qw<inherit>),	
+       	css3x  => (CSS::Module::CSS3,                 $css3x-actions,  qw<inherit initial>) {
 
 	my $level = .key;
 	my ($class, $actions, @proforma) = @(.value);
