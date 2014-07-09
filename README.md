@@ -31,15 +31,17 @@ Example
 
 CSS3 Extension Modules
 ----------------------
-`CSS::Langauge::CSS3` is composed from a number of loosely coupled extension modules.
+`CSS::Module::CSS3` is composed from the following loosely coupled extension modules.
 
-- `CSS::Langauge::CSS3::CSS21_Imported` - the full set of CSS21 properties
 - `CSS::Module::CSS3::Colors`     - CSS 3.0 Colors (@color-profile)
 - `CSS::Module::CSS3::Fonts`      - CSS 3.0 Fonts (@font-face)
 - `CSS::Module::CSS3::Selectors`  - CSS 3.0 Selectors
 - `CSS::Module::CSS3::Namespaces` - CSS 3.0 Namespace (@namespace)
 - `CSS::Module::CSS3::Media`      - CSS 3.0 Media (@media)
 - `CSS::Module::CSS3::PagedMedia` - CSS 3.0 Paged Media (@page)
+- `CSS::Module::CSS21`            - the full set of CSS21 properties
+
+See [CSS Snapshot 2010](http://www.w3.org/TR/2011/NOTE-css-2010-20110512/).
 
 Installation
 ------------
