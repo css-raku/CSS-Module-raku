@@ -6,9 +6,10 @@
 use Test;
 use JSON::Tiny;
 
-use CSS::Grammar::Test;
 use CSS::Language::CSS3;
+use CSS::Grammar::Test;
 
+my $c = CSS::Language::CSS3; # moarbug workaround
 my $actions = CSS::Language::CSS3::Actions.new;
 
 my $fh = open 't/error-handling.json', :r;

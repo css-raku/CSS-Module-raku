@@ -6,6 +6,7 @@ use JSON::Tiny;
 use CSS::Language::CSS3;
 use CSS::Grammar::Test;
 
+my $c = CSS::Language::CSS3; # moar bug work-around
 my $actions = CSS::Language::CSS3::Actions.new;
 
 my $fh = open 't/css3x-paged-media.json', :r;

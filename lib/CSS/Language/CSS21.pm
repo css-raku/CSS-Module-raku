@@ -7,10 +7,11 @@ use CSS::Grammar::CSS21;
 use CSS::Language::CSS21::Spec::Interface;
 use CSS::Language::CSS21::Spec::Grammar;
 
-grammar CSS::Language::CSS21:ver<20110607.000> {...}
-
-grammar CSS::Module::CSS21
-    is CSS::Language::CSS21::Spec::Grammar {
+grammar CSS::Language::CSS21:ver<20110607.000>
+    is CSS::Language::CSS21::Spec::Grammar
+    is CSS::Language::_Base
+    is CSS::Grammar::CSS21
+    does CSS::Language::CSS21::Spec::Interface {
 
     proto token proforma        {*}
     token proforma:sym<inherit> {:i inherit}
@@ -56,8 +57,3 @@ grammar CSS::Module::CSS21
     rule expr-voice-family { [ <generic-voice> || <specific-voice> ] +% ',' }
 }
 
-grammar CSS::Language::CSS21:ver<20110607.000>
-    is CSS::Module::CSS21 
-    is CSS::Language::_Base
-    is CSS::Grammar::CSS21
-    does CSS::Language::CSS21::Spec::Interface {}

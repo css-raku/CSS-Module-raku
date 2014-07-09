@@ -1,13 +1,15 @@
 use v6;
 
+class CSS::Language::CSS21::Actions { ... }
+
 use CSS::Language::_Base::Actions;
 use CSS::Language::CSS21::Spec::Interface;
 use CSS::Language::CSS21::Spec::Actions;
 
-class CSS::Language::CSS21::Actions {...};
-
-class CSS::Module::CSS21::Actions
-    is CSS::Language::CSS21::Spec::Actions {
+class CSS::Language::CSS21::Actions
+    is CSS::Language::CSS21::Spec::Actions
+    is CSS::Language::_Base::Actions 
+    does CSS::Language::CSS21::Spec::Interface {
 
     has @._proforma = 'inherit';
 
@@ -59,8 +61,3 @@ class CSS::Module::CSS21::Actions
     method generic-voice($/) { make $.list($/) }
     method specific-voice($/) { make $.list($/) }
 }
-
-class CSS::Language::CSS21::Actions
-    is CSS::Language::_Base::Actions 
-    is CSS::Module::CSS21::Actions
-    does CSS::Language::CSS21::Spec::Interface { }

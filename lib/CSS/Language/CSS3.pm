@@ -4,13 +4,16 @@ use v6;
 grammar CSS::Language::CSS3 {...};
 class   CSS::Language::CSS3::Actions {...};
 
+use CSS::Language::CSS21::Actions;
+use CSS::Language::CSS21;
+
 use CSS::Language::CSS3::Colors;
 use CSS::Language::CSS3::Fonts;
 use CSS::Language::CSS3::MediaQueries;
 use CSS::Language::CSS3::Namespaces;
 use CSS::Language::CSS3::PagedMedia;
 use CSS::Language::CSS3::Selectors;
-use CSS::Language::CSS3::CSS21_Imported;
+use CSS::Language::CSS3::_Base;
 
 class CSS::Language::CSS3::Actions
     is CSS::Language::CSS3::Colors::Actions
@@ -19,7 +22,8 @@ class CSS::Language::CSS3::Actions
     is CSS::Language::CSS3::Namespaces::Actions
     is CSS::Language::CSS3::PagedMedia::Actions
     is CSS::Language::CSS3::Selectors::Actions
-    is CSS::Language::CSS3::CSS21_Imported::Actions
+    is CSS::Language::CSS3::_Base::Actions
+    is CSS::Language::CSS21::Actions
 {};
 
 grammar CSS::Language::CSS3
@@ -29,6 +33,7 @@ grammar CSS::Language::CSS3
     is CSS::Language::CSS3::Namespaces
     is CSS::Language::CSS3::PagedMedia
     is CSS::Language::CSS3::Selectors
-    is CSS::Language::CSS3::CSS21_Imported
+    is CSS::Language::CSS3::_Base
+    is CSS::Language::CSS21
 {};
 
