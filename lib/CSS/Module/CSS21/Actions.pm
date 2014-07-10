@@ -6,12 +6,8 @@ use CSS::Module::_Base::Actions;
 use CSS::Module::CSS21::Spec::Interface;
 use CSS::Module::CSS21::Spec::Actions;
 
-class CSS::Module::CSS21::Actions
-    is CSS::Module::CSS21::Spec::Actions
-    is CSS::Module::_Base::Actions 
-    does CSS::Module::CSS21::Spec::Interface {
-
-    has @._proforma = 'inherit';
+class CSS::Extension::CSS21::Actions
+    is CSS::Module::CSS21::Spec::Actions {
 
     method color:sym<system>($/) { make $.node($/) }
 
@@ -60,4 +56,13 @@ class CSS::Module::CSS21::Actions
     method padding-width($/) { make $.list($/) }
     method generic-voice($/) { make $.list($/) }
     method specific-voice($/) { make $.list($/) }
+}
+
+class CSS::Module::CSS21::Actions
+    is CSS::Extension::CSS21::Actions
+    is CSS::Module::_Base::Actions 
+    does CSS::Module::CSS21::Spec::Interface {
+
+    has @._proforma = 'inherit';
+
 }

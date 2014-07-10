@@ -22,8 +22,8 @@ class CSS::Module::CSS3::Actions
     is CSS::Module::CSS3::Namespaces::Actions
     is CSS::Module::CSS3::PagedMedia::Actions
     is CSS::Module::CSS3::Selectors::Actions
+    is CSS::Extension::CSS21::Actions
     is CSS::Module::CSS3::_Base::Actions
-    is CSS::Module::CSS21::Actions
 {};
 
 grammar CSS::Module::CSS3
@@ -33,7 +33,7 @@ grammar CSS::Module::CSS3
     is CSS::Module::CSS3::Namespaces
     is CSS::Module::CSS3::PagedMedia
     is CSS::Module::CSS3::Selectors
+    is CSS::Extension::CSS21
     is CSS::Module::CSS3::_Base
-    is CSS::Module::CSS21
 {};
 

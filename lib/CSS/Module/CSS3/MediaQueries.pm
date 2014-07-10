@@ -62,8 +62,6 @@ grammar CSS::Module::CSS3::MediaQueries:ver<20120619.000>
 class CSS::Module::CSS3::MediaQueries::Actions
     is CSS::Module::CSS3::_Base::Actions {
 
-    has @._proforma;
-
     # media-rules, media-list, media see core grammar actions
     method unknown-media-list($/) {
 	$.warning("discarding media list");
