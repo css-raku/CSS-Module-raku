@@ -9,7 +9,7 @@ use CSS::Module::CSS21::Spec::Grammar;
 
 grammar CSS::Module::CSS21:ver<20110607.000> { ... }
 
-grammar CSS::Extension::CSS21:ver<20110607.000>
+grammar CSS::ModuleX::CSS21:ver<20110607.000>
     is CSS::Module::CSS21::Spec::Grammar {
 
     proto token proforma        {*}
@@ -57,7 +57,7 @@ grammar CSS::Extension::CSS21:ver<20110607.000>
 }
 
 grammar CSS::Module::CSS21:ver<20110607.000>
-    is CSS::Extension::CSS21
+    is CSS::ModuleX::CSS21
     is CSS::Module::_Base
     is CSS::Grammar::CSS21
     does CSS::Module::CSS21::Spec::Interface {}

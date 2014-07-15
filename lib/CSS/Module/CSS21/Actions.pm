@@ -6,7 +6,7 @@ use CSS::Module::_Base::Actions;
 use CSS::Module::CSS21::Spec::Interface;
 use CSS::Module::CSS21::Spec::Actions;
 
-class CSS::Extension::CSS21::Actions
+class CSS::ModuleX::CSS21::Actions
     is CSS::Module::CSS21::Spec::Actions {
 
     method color:sym<system>($/) { make $.node($/) }
@@ -59,7 +59,7 @@ class CSS::Extension::CSS21::Actions
 }
 
 class CSS::Module::CSS21::Actions
-    is CSS::Extension::CSS21::Actions
+    is CSS::ModuleX::CSS21::Actions
     is CSS::Module::_Base::Actions 
     does CSS::Module::CSS21::Spec::Interface {
 
