@@ -81,51 +81,55 @@ class CSS::Module::CSS3::MediaQueries::Actions
 	make $<expr>.ast;
     }
 
+    method media-decl($m, $usage) {
+        $.decl($m, $usage, () );
+    }
+
     #= width|height: <length>
     method media-feature:sym<width|height>($/) {
         return $.warning($0.Str.lc ~ ': length cannot be negative')
             if $<expr> && $<expr>.match(/\-/);
-        make $.decl($/, &?ROUTINE.WHY);
+        make $.media-decl($/, &?ROUTINE.WHY);
     }
 
     #= orientation: [portrait | landscape]?
     method media-feature:sym<orientation>($/) {
-        make $.decl($/, &?ROUTINE.WHY);
+        make $.media-decl($/, &?ROUTINE.WHY);
     }
 
     #= aspect-ratio: <horizontal> "/" <vertical>   (e.g. "16/9")
     method media-feature:sym<aspect-ratio>($/) {
-        make $.decl($/, &?ROUTINE.WHY);
+        make $.media-decl($/, &?ROUTINE.WHY);
     }
 
     #= color: <integer>
     method media-feature:sym<color>($/) {
-        make $.decl($/, &?ROUTINE.WHY);
+        make $.media-decl($/, &?ROUTINE.WHY);
     }
 
     #= color-bool 
     method media-feature:sym<color-bool>($/) {
-        make $.decl($/, &?ROUTINE.WHY);
+        make $.media-decl($/, &?ROUTINE.WHY);
     }
 
     #= monochrome: <integer>
     method media-feature:sym<monochrome>($/) {
-        make $.decl($/, &?ROUTINE.WHY);
+        make $.media-decl($/, &?ROUTINE.WHY);
     }
 
     #= resolution: <resolution>
     method media-feature:sym<resolution>($/) {
-        make $.decl($/, &?ROUTINE.WHY);
+        make $.media-decl($/, &?ROUTINE.WHY);
     }
 
     #= scan: [progressive | interlace]?
     method media-feature:sym<scan>($/) {
-        make $._decl($/, &?ROUTINE.WHY);
+        make $.decl($/, &?ROUTINE.WHY);
     }
 
     #= grid: [<integer>]?
     method media-feature:sym<grid>($/) {
-        make $.decl($/, &?ROUTINE.WHY);
+        make $.media-decl($/, &?ROUTINE.WHY);
     }
 
     method media-feature-unknown($/)   {
