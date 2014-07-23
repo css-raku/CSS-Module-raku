@@ -43,19 +43,18 @@ grammar CSS::Module::CSS3::Selectors:ver<20110929.000>
     rule attribute-selector:sym<suffix>    {'$='}
     rule attribute-selector:sym<substring> {'*='}
 
-    token nth-functor {:i [nth|first|last|nth\-last]\-[child|of\-type] }
     # to compute a.n + b
-    proto rule nth-args {*}
-    rule nth-args:sym<odd>   {:i odd }
-    rule nth-args:sym<even>  {:i even }
-    rule nth-args:sym<expr> {
-        [$<a-sign>=< + - >?<a=.uint>?$<n>=<[Nn]> [$<b-sign>=< + - > <b=.uint>]?
-        |$<b-sign>=< + - >?<b=.uint>
+    proto rule structural-args {*}
+    rule structural-args:sym<odd>   {:i odd }
+    rule structural-args:sym<even>  {:i even }
+    rule structural-args:sym<expr> {
+        [  $<a-sign>=< + - >?<a=.uint>?$<n>=<[Nn]> [$<b-sign>=< + - > <b=.uint>]?
+        || $<b-sign>=< + - >?<b=.uint>
         ]
     }
 
-    rule nth-selector {<ident=.nth-functor>'(' [ <args=.nth-args> || <any-args> ] ')'}
-    rule pseudo-function:sym<nth-selector> {<nth-selector>}
+    rule structural-selector {:i $<ident>=[[nth|first|last|nth\-last]\-[child|of\-type]]'(' [ <args=.structural-args> || <any-args> ] ')'}
+    rule pseudo-function:sym<structural-selector> {<structural-selector>}
     rule negation-args {[<type-selector> | <universal> | <id> | <class> | <attrib> | [$<nested>=<?before [:i':not(']> || <?>] <pseudo> | <any-arg> ]+}
     rule pseudo-function:sym<negation>  {:i'not(' [ <negation-args> || <any-args> ] ')'}
 
@@ -80,16 +79,21 @@ class CSS::Module::CSS3::Selectors::Actions
     method attribute-selector:sym<substring>($/) { make ~$/ }
 
     method term:sym<unicode-range>($/) { make $.node($/) }
-    method nth-selector($/)  {
-        return $.warning('usage '~$<ident>~'(an+b) e.g "4" "3n+1"')
+    method structural-selector($/)  {
+        my $ident = $<ident>.lc;
+        return $.warning('usage '~$ident~'(an+b) e.g. "4" "3n+1"')
             if $<any-args>;
-        make $.node($/)
-    }
-    method pseudo-function:sym<nth-selector>($/)  { make $<nth-selector>.ast }
 
-    method nth-args:sym<odd>($/)     { make {a => 2, b=> 1} }
-    method nth-args:sym<even>($/)    { make {a => 2, b=> 0} }
-    method nth-args:sym<expr>($/)    {
+        my %node = %( $.node($/) );
+        %node<ident> = $ident;
+
+        make %node;
+    }
+    method pseudo-function:sym<structural-selector>($/)  { make $<structural-selector>.ast }
+
+    method structural-args:sym<odd>($/)     { make {a => 2, b=> 1} }
+    method structural-args:sym<even>($/)    { make {a => 2, b=> 0} }
+    method structural-args:sym<expr>($/)    {
 
         my %node = %( $.node($/) );
 
