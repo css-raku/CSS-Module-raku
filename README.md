@@ -3,35 +3,15 @@ CSS::Module
 
 CSS::Module is a property-specific validator and parser for CSS Levels 1, 2.1 and  3.
 
-This module implements the following grammars and actions:
+This module aims to be reference implementation of [CSS Snapshot 2010](http://www.w3.org/TR/2011/NOTE-css-2010-20110512/).
+
+It implements the following grammars and actions:
 
 - `CSS::Module::CSS1` + `CSS::Module::CSS1::Actions`
 - `CSS::Module::CSS21` + `CSS::Module::CSS21::Actions`
 - `CSS::Module::CSS3` + `CSS::Module::CSS3::Actions`
 
-See [CSS Snapshot 2010](http://www.w3.org/TR/2011/NOTE-css-2010-20110512/).
-
-Example
--------
-
-    use v6;
-    use CSS::Module::CSS21;
-    use CSS::Module::CSS21::Actions;
-
-    my $css = 'H1 { color: blue; foo: bar; background-color: zzz }';
-
-    my $actions =  CSS::Module::CSS21::Actions.new;
-    my $p = CSS::Module::CSS21.parse($css, :actions($actions));
-    note $_ for $actions.warnings;
-    say "declaration: " ~ $p.ast[0]<ruleset><declarations>.perl;
-    # output:
-    # unknown property: foo - declaration dropped
-    # usage background-color: <color> | transparent | inherit
-    # declaration: {"color" => {"expr" => ["color" => {"r" => 0, "g" => 0, "b" => 255}]}}
-
-CSS3 Extension Modules
-----------------------
-`CSS::Module::CSS3` is composed from the following loosely coupled extension modules.
+`CSS::Module::CSS3` is composed from the following extension modules.
 
 - `CSS::Module::CSS3::Colors`     - CSS 3.0 Colors (@color-profile)
 - `CSS::Module::CSS3::Fonts`      - CSS 3.0 Fonts (@font-face)
@@ -39,9 +19,7 @@ CSS3 Extension Modules
 - `CSS::Module::CSS3::Namespaces` - CSS 3.0 Namespace (@namespace)
 - `CSS::Module::CSS3::Media`      - CSS 3.0 Media (@media)
 - `CSS::Module::CSS3::PagedMedia` - CSS 3.0 Paged Media (@page)
-- `CSS::Module::CSS21`            - the full set of CSS21 properties
-
-See [CSS Snapshot 2010](http://www.w3.org/TR/2011/NOTE-css-2010-20110512/).
+- `CSS::ModuleX::CSS21`           - the full set of CSS21 properties
 
 Installation
 ------------
@@ -59,9 +37,58 @@ To try parsing some content:
 
     % perl6 -MCSS::Module::CSS21 -e"say CSS::Module::CSS21.parse('h1 {margin:2pt; color: blue}')"
 
+Examples
+--------
+
+- parse CSS2.1:
+
+    ```
+    use v6;
+    use CSS::Module::CSS21;
+    use CSS::Module::CSS21::Actions;
+
+    my $css = 'H1 { color: blue; foo: bar; background-color: zzz }';
+
+    my $actions =  CSS::Module::CSS21::Actions.new;
+    my $p = CSS::Module::CSS21.parse($css, :actions($actions));
+    note $_ for $actions.warnings;
+    say "declaration: " ~ $p.ast[0]<ruleset><declarations>.perl;
+    # output:
+    # unknown property: foo - declaration dropped
+    # usage background-color: <color> | transparent | inherit
+    # declaration: {"color" => {"expr" => ["color" => {"r" => 0, "g" => 0, "b" => 255}]}}
+    ```
+
+- It's possible to compose custom classes for diffrent feature sets. This example creates MyCSS3Subset and class MyCSS3Subset::Actions comprising CSS2.1 properties + CSS3 Selectors + CSS3 Colors:
+
+    ```
+    use v6;
+
+    use CSS::Module::CSS21::Actions;
+    use CSS::Module::CSS21;
+
+    use CSS::Module::CSS3::Colors;
+    use CSS::Module::CSS3::Selectors;
+    use CSS::Module::CSS3::_Base;
+
+    class MyCSS3Subset::Actions
+        is CSS::Module::CSS3::Colors::Actions
+        is CSS::Module::CSS3::Fonts::Actions
+        is CSS::ModuleX::CSS21::Actions
+        is CSS::Module::CSS3::_Base::Actions
+    {};
+
+    grammar CSS::Module::CSS3
+        is MyCSS3Subset::Colors
+        is CSS::Module::CSS3::Fonts
+        is CSS::ModuleX::CSS21
+        is CSS::Module::CSS3::_Base
+    {};
+    ```
+
 Property Definitions
 --------------------
-Property definitions are compiled from the sources in the (etc) directory.
+Property definitions are compiled from the sources in the (etc) directory using the CSS::Specification tools. These implement the [W3C Property Definition Syntax](https://developer.mozilla.org/en-US/docs/Web/CSS/Value_definition_syntax).
 
 For example [CSS::Module:CSS1::Spec::Grammar](lib/CSS/Module/CSS1/Spec/Grammar.pm), [CSS::Module:CSS1::Spec::Actions](lib/CSS/Module/CSS1/Spec/Actions.pm) and [CSS::Module:CSS1::Spec::Interface](lib/CSS/Module/CSS1/Spec/Interface.pm) are generated from [etc/css1-properties.txt](etc/css1-properties.txt).
 
@@ -75,10 +102,10 @@ See Also
 
 References
 ==========
+- CSS Snapshot 2010 - http://www.w3.org/TR/2011/NOTE-css-2010-20110512/
 - CSS1 - http://www.w3.org/TR/2008/REC-CSS1-20080411/#css1-properties
 - CSS21 - http://www.w3.org/TR/2011/REC-CSS2-20110607/propidx.html
 - CSS3
-  - CSS Snapshot 2010 - http://www.w3.org/TR/2011/NOTE-css-2010-20110512/
   - CSS Color Module Level 3 - http://www.w3.org/TR/2011/REC-css3-color-20110607/
   - CSS Fonts Module Level 3 - http://www.w3.org/TR/2013/WD-css3-fonts-20130212/
   - CSS3 Namespaces Module - http://www.w3.org/TR/2011/REC-css3-namespace-20110929/

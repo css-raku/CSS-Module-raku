@@ -1,7 +1,8 @@
 use v6;
 
 # css3 - css21 base properties + css3 extensions
-grammar CSS::Module::CSS3 {...};
+# link: http://www.w3.org/TR/2011/NOTE-css-2010-20110512/#css3
+grammar CSS::Module::CSS3:ver<2010-20110512.000> {...};
 class   CSS::Module::CSS3::Actions {...};
 
 use CSS::Module::CSS21::Actions;
