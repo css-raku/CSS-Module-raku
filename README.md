@@ -71,18 +71,18 @@ Examples
     use CSS::Module::CSS3::Selectors;
     use CSS::Module::CSS3::_Base;
 
+    grammar MyCSS3Subset::CSS3
+        is MyCSS3Subset::Colors
+        is CSS::Module::CSS3::Fonts
+        is CSS::ModuleX::CSS21
+        is CSS::Module::CSS3::_Base
+    {};
+
     class MyCSS3Subset::Actions
         is CSS::Module::CSS3::Colors::Actions
         is CSS::Module::CSS3::Fonts::Actions
         is CSS::ModuleX::CSS21::Actions
         is CSS::Module::CSS3::_Base::Actions
-    {};
-
-    grammar CSS::Module::CSS3
-        is MyCSS3Subset::Colors
-        is CSS::Module::CSS3::Fonts
-        is CSS::ModuleX::CSS21
-        is CSS::Module::CSS3::_Base
     {};
     ```
 
@@ -96,7 +96,7 @@ See [BUILD.pl](BUILD.pl).
 
 See Also
 ========
-- [CSS::Specification](https://github.com/p6-css/perl6-CSS-Specification) - 
+- [CSS::Specification](https://github.com/p6-css/perl6-CSS-Specification) - property definition syntax
 - [CSS::Grammar](https://github.com/p6-css/perl6-CSS-Grammar) - base grammars
 - [CSS::Drafts](https://github.com/p6-css/perl6-CSS-Drafts) - CSS draft extension modules
 
