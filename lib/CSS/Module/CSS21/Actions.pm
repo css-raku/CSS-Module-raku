@@ -13,28 +13,28 @@ class CSS::ModuleX::CSS21::Actions
 
     # --- Functions --- #
 
-    #= usage: attr( attribute-name <type-or-unit>? )
+    #| usage: attr( attribute-name <type-or-unit>? )
     method attr($/)             {
         return $.warning(&?ROUTINE.WHY)
             if $<any-args>;
         make $.list($/);
     }
 
-    #= usage: counter(ident [, ident [,...] ])
+    #| usage: counter(ident [, ident [,...] ])
     method counter($/) {
         return $.warning(&?ROUTINE.WHY)
             if $<any-args>;
         make $.list($/);
     }
 
-    #= usage: counters(ident [, "string"])
+    #| usage: counters(ident [, "string"])
     method counters($/) {
         return $.warning(&?ROUTINE.WHY)
             if $<any-args>;
         make $.list($/);
     }
 
-    #= usage: rect(<top>, <right>, <botom>, <left>)
+    #| usage: rect(<top>, <right>, <botom>, <left>)
     method shape($/)     {
         return $.warning(&?ROUTINE.WHY)
             if $<any-args>;

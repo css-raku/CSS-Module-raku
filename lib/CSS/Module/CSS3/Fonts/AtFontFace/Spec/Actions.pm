@@ -4,27 +4,27 @@ use v6;
 
 class CSS::Module::CSS3::Fonts::AtFontFace::Spec::Actions {
 
-    #= font-family: <family-name>
+    #| font-family: <family-name>
     method decl:sym<font-family>($/) { make $.decl($/, &?ROUTINE.WHY) }
 
-    #= font-feature-settings: normal | <feature-tag-value>#
+    #| font-feature-settings: normal | <feature-tag-value>#
     method decl:sym<font-feature-settings>($/) { make $.decl($/, &?ROUTINE.WHY) }
 
-    #= font-stretch: normal | ultra-condensed | extra-condensed | condensed | semi-condensed | semi-expanded | expanded | extra-expanded | ultra-expanded
+    #| font-stretch: normal | ultra-condensed | extra-condensed | condensed | semi-condensed | semi-expanded | expanded | extra-expanded | ultra-expanded
     method decl:sym<font-stretch>($/) { make $.decl($/, &?ROUTINE.WHY) }
 
-    #= font-style: normal | italic | oblique
+    #| font-style: normal | italic | oblique
     method decl:sym<font-style>($/) { make $.decl($/, &?ROUTINE.WHY) }
 
-    #= font-variant: normal | [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> || stylistic(<feature-value-name>) || historical-forms || styleset(<feature-value-name>#) || character-variant(<feature-value-name>#) || swash(<feature-value-name>) || ornaments(<feature-value-name>) || annotation(<feature-value-name>) || [ small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps ] || <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero || <east-asian-variant-values> || <east-asian-width-values> || ruby ]
+    #| font-variant: normal | [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> || stylistic(<feature-value-name>) || historical-forms || styleset(<feature-value-name>#) || character-variant(<feature-value-name>#) || swash(<feature-value-name>) || ornaments(<feature-value-name>) || annotation(<feature-value-name>) || [ small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps ] || <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero || <east-asian-variant-values> || <east-asian-width-values> || ruby ]
     method decl:sym<font-variant>($/) { make $.decl($/, &?ROUTINE.WHY) }
 
-    #= font-weight: normal | bold | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
+    #| font-weight: normal | bold | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
     method decl:sym<font-weight>($/) { make $.decl($/, &?ROUTINE.WHY) }
 
-    #= src: [ [<uri>|local(<string>)] [format(<string>#)]? | <font-face-name> ]#
+    #| src: [ [<uri>|local(<string>)] [format(<string>#)]? | <font-face-name> ]#
     method decl:sym<src>($/) { make $.decl($/, &?ROUTINE.WHY) }
 
-    #= unicode-range: <urange>#
+    #| unicode-range: <urange>#
     method decl:sym<unicode-range>($/) { make $.decl($/, &?ROUTINE.WHY) }
 }

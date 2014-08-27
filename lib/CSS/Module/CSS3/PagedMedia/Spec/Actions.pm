@@ -4,6 +4,6 @@ use v6;
 
 class CSS::Module::CSS3::PagedMedia::Spec::Actions {
 
-    #= size: <length>{1,2} | auto | [ <page-size> || [ portrait | landscape] ]
+    #| size: <length>{1,2} | auto | [ <page-size> || [ portrait | landscape] ]
     method decl:sym<size>($/) { make $.decl($/, &?ROUTINE.WHY) }
 }

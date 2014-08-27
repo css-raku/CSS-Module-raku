@@ -249,21 +249,21 @@ class CSS::Module::CSS3::Colors::Actions
         make $.token($percentage, :units('%'), :type('percentage'))
     }
 
-    #= usage: rgba(c,c,c,a) where c is 0..255 or 0%-100% and a is 0-1 or 0%-100%
+    #| usage: rgba(c,c,c,a) where c is 0..255 or 0%-100% and a is 0-1 or 0%-100%
     method color:sym<rgba>($/) {
         return $.warning(&?ROUTINE.WHY)
             if $<any-args>;
         make $.token($.node($/), :type<color>, :units<rgba>);
     }
 
-    #= usage: hsl(h,s,l) where h is 0..360  and s,l are 0-1 or 0%-100%
+    #| usage: hsl(h,s,l) where h is 0..360  and s,l are 0-1 or 0%-100%
     method color:sym<hsl>($/)  {
         return $.warning(&?ROUTINE.WHY)
             if $<any-args>;
         make $.token($.node($/), :type<color>, :units<hsl>);
     }
 
-    #= usage: hsla(h,s,l,a) where h is 0..360  and s,l,a are 0-1 or 0%-100%
+    #| usage: hsla(h,s,l,a) where h is 0..360  and s,l,a are 0-1 or 0%-100%
     method color:sym<hsla>($/) {
         return $.warning(&?ROUTINE.WHY)
             if $<any-args>;
