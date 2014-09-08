@@ -7,7 +7,6 @@ use Panda::Common;
 class Build is Panda::Builder {
 
     method build($where, Bool :$interfaces=True, Bool :$grammars=True, Bool :$actions=True ) {
-        say "Building: {$where}/";
 
         indir $where, {
             for ('etc/css1-properties.txt' => <CSS1>,
@@ -41,7 +40,7 @@ class Build is Panda::Builder {
                     my %opts = proforma  =>  $class-isa !=== <CSS1>
                         if $type eq 'grammar';
 
-                    say "Building $input-spec => $type: $name";
+                    say "Building $input-spec => $name";
                     temp $*IN  = open $input-spec, :r;
                     temp $*OUT = open $class-path, :w;
 
@@ -52,7 +51,7 @@ class Build is Panda::Builder {
     }
 }
 
-# this Build.pm can also be run standalone    
+# Build.pm can also be run standalone 
 sub MAIN(Str $working-directory = '.', Bool :$interfaces=True, Bool :$grammars=True, Bool :$actions=True ) {
     Build.new.build($working-directory, :$interfaces, :$grammars, :$actions);
 }
