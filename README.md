@@ -27,11 +27,21 @@ This module works with Rakudo Star 2014.09 or better [download from http://rakud
 
 Ensure that `perl6` and `panda` are available on your path, e.g. :
 
-    % export PATH=~/src/rakudo-star-2013.02/install/bin:$PATH
+    % export PATH=~/src/rakudo-star-2014.09/install/bin:$PATH
 
 You can then use `panda` to test and install `CSS::Module`:
 
     % panda install CSS::Module
+
+Or to install from github:
+
+    % git clone https://github.com/p6-css/perl6-CSS-Module.git
+    % cd perl6-CSS-Module
+    % perl6 Build.pm
+    % panda install ufo
+    % ufo
+    % make test
+    % make install
 
 To try parsing some content:
 
