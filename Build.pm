@@ -41,10 +41,12 @@ class Build is Panda::Builder {
                         if $type eq 'grammar';
 
                     say "Building $input-spec => $name";
-                    temp $*IN  = open $input-spec, :r;
-                    temp $*OUT = open $class-path, :w;
+                    {
+                        my $*IN = open $input-spec, :r;
+                        my $*OUT = open $class-path, :w;
 
-                    CSS::Specification::Build::generate( $type, $name, |%opts );
+                        CSS::Specification::Build::generate( $type, $name, |%opts );
+                    }
                 }
             }
         }
