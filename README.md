@@ -69,7 +69,7 @@ Examples
     # declaration: {"color" => {"expr" => ["color" => {"r" => 0, "g" => 0, "b" => 255}]}}
     ```
 
-- It's possible to compose custom classes for diffrent feature sets. This example creates MyCSS3Subset and class MyCSS3Subset::Actions comprising CSS2.1 properties + CSS3 Selectors + CSS3 Colors:
+- Composition: A secondary aim is composible subset and extension classes. For example to create MyCSS3Subset and class MyCSS3Subset::Actions comprising CSS2.1 properties + CSS3 Selectors + CSS3 Colors:
 
     ```
     use v6;
@@ -82,7 +82,7 @@ Examples
     use CSS::Module::CSS3::_Base;
 
     grammar MyCSS3Subset::CSS3
-        is MyCSS3Subset::Colors
+        is CSS::Module::CSS3::Colors
         is CSS::Module::CSS3::Fonts
         is CSS::ModuleX::CSS21
         is CSS::Module::CSS3::_Base
