@@ -11,7 +11,7 @@ class CSS::Module::_Base::Actions
 
     # ---- CSS::Grammar overrides ---- #
 
-    method declaration:sym<base>($/)        {
+    method declaration($/)        {
         $.warning('unknown property', $<property>.ast, 'declaration dropped');
     }
 

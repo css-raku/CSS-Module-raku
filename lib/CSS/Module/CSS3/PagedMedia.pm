@@ -27,7 +27,7 @@ grammar CSS::Module::CSS3::PagedMedia:ver<20061010.000>
     rule at-rule:sym<page>  {(:i'page') [\:<page=.page-pseudo>]? <declarations=.page-declarations> }
 
     rule page-declarations {
-        '{' [ '@'<declaration=.margin-declaration> | <declaration> || <dropped-decl> ]* <.end-block>
+        '{' [ '@'<declaration=.margin-declaration> || <declaration=.module-declaration> || <declaration> || <dropped-decl> ]* <.end-block>
     }
 
     token box-hpos   {:i[left|right]}
