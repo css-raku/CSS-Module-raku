@@ -5,7 +5,7 @@ use CSS::Specification::_Base;
 grammar CSS::Module::_Base 
     is CSS::Specification::_Base {
     # definitions common to CSS1, CSS21 and CSS3 Languages
-    rule declaration:sym<validated> { <.ws>? <decl> <prio>? <any-arg>* <end-decl> }
+    rule module-declaration:sym<validated> { <.ws>? <decl> <prio>? <any-arg>* <end-decl> }
     proto rule decl {*}
 
     # For handling undimensioned numbers and angles

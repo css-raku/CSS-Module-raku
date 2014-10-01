@@ -19,7 +19,7 @@ class CSS::Module::_Base::Actions
         $.warning('ignoring function', $<ident>.ast.lc);
     }
 
-    method declaration:sym<validated>($/)  {
+    method module-declaration:sym<validated>($/)  {
         return unless $<decl>.ast;
         
         my %ast = %( $<decl>.ast );
