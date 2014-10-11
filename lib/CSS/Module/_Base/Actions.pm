@@ -7,8 +7,6 @@ class CSS::Module::_Base::Actions
     is CSS::Specification::_Base::Actions
     is CSS::Grammar::Actions {
 
-    has Bool $.strict is rw = True;
-
     # ---- CSS::Grammar overrides ---- #
 
     method declaration($/)        {
@@ -20,9 +18,8 @@ class CSS::Module::_Base::Actions
     }
 
     method module-declaration:sym<validated>($/)  {
-        return unless $<decl>.ast;
         
-        my %ast = %( $<decl>.ast );
+        my %ast = %( $.decl( $<decl> ) );
 
         if $<any-arg> {
             return $.warning("extra terms following '{%ast<property>}' declaration",
@@ -41,31 +38,12 @@ class CSS::Module::_Base::Actions
 
     #---- Language Extensions ----#
 
-    method length:sym<num>($/) {
-        my $num = $<number>.ast;
-
-        return $.warning('number not followed by a length unit', ~$<number>)
-            if $num && $.strict;
-
-        make $.token($num, :type<length>, :units<px>)
+    method length:sym<zero>($/) {
+        make $.token(0, :type<length>, :units<px>)
     }
 
-    method angle:sym<num>($/) {
-        my $num = $<number>.ast;
-
-        return $.warning('angle not followed by "deg", "rad" or "grad"', ~$<number>)
-            if $num && $.strict;
-
-        make $.token($num, :type<angle>, :units<deg>)
-    }
-
-    method frequency:sym<num>($/) {
-        my $num = $<number>.ast;
-
-        return $.warning('non-zero frequency not followed by "Hz" or "KHz"', ~$<number>)
-            if $num && $.strict;
-
-        make $.token($num, :type<frequency>, :units<hz>)
+    method angle:sym<zero>($/) {
+        make $.token(0, :type<angle>, :units<deg>)
     }
 
     has Hash $.colors = {

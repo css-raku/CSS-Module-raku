@@ -1,7 +1,6 @@
 [ "resolution", { "input" : "300dpi", "ast" : 300, "token" : { "type" : "resolution", "units" : "dpi" } } ]
 [ "media-expr", { "input" : "min-width: 25cm", "ast" : { "property" : "min-width", "expr" : [ { "length" : 25 } ] } } ]
 [ "media-expr", { "input" : "max-width: foo", "warnings" : "usage max-width: <length>" } ]
-[ "media-expr", { "input" : "width: -em", "warnings" : "width: length cannot be negative" } ]
 [ "at-rule", { "input" : "media all { body { background:lime } }", "ast" : { "media-list" : [ { "media-query" : [ { "media" : "all" } ] } ], "media-rules" : [ { "ruleset" : { "selectors" : [ { "selector" : [ { "simple-selector" : [ { "qname" : { "element-name" : "body" } } ] } ] } ], "declarations" : { "background" : { "expr" : [ { "background-color" : [ { "color" : { "r" : 0, "g" : 255, "b" : 0 } } ] } ] } } } } ], "@" : "media" } } ]
 [ "at-rule", { "input" : "media all and (color) { }", "ast" : { "media-list" : [ { "media-query" : [ { "media" : "all" }, { "media-expr" : { "property" : "color" } } ] } ], "media-rules" : [  ], "@" : "media" } } ]
 [ "at-rule", { "input" : "media all and (color) { }", "ast" : { "media-list" : [ { "media-query" : [ { "media" : "all" }, { "media-expr" : { "property" : "color" } } ] } ], "media-rules" : [  ], "@" : "media" } } ]
