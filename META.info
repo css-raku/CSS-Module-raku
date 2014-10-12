@@ -13,8 +13,6 @@
         "CSS::Module::CSS3::Actions" : "lib/CSS/Module/CSS3.pm",
         "CSS::Module::CSS3::Colors" : "lib/CSS/Module/CSS3/Colors.pm",
         "CSS::Module::CSS3::Colors::Actions" : "lib/CSS/Module/CSS3/Colors.pm",
-        "CSS::Module::CSS3::CSS21_Imported" : "lib/CSS/Module/CSS3/CSS21_Imported.pm",
-        "CSS::Module::CSS3::CSS21_Imported::Actions" : "lib/CSS/Module/CSS3/CSS21_Imported.pm",
         "CSS::Module::CSS3::Fonts::AtFontFace" : "lib/CSS/Module/CSS3/Fonts/AtFontFace.pm",
         "CSS::Module::CSS3::Fonts::AtFontFace::Actions" : "lib/CSS/Module/CSS3/Fonts/AtFontFace.pm",
         "CSS::Module::CSS3::Fonts" : "lib/CSS/Module/CSS3/Fonts.pm",
