@@ -9,15 +9,11 @@ class CSS::Module::_Base::Actions
 
     # ---- CSS::Grammar overrides ---- #
 
-    method declaration($/)        {
-        $.warning('unknown property', $<property>.ast, 'declaration dropped');
-    }
-
     method any-function($/)             {
         $.warning('ignoring function', $<ident>.ast.lc);
     }
 
-    method module-declaration:sym<validated>($/)  {
+    method declaration($/)  {
         
         my %ast = %( $.decl( $<decl> ) );
 

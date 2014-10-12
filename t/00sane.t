@@ -32,7 +32,7 @@ my $css3-actions  = CSS::Module::CSS3::Actions.new;
 
 for (
     declaration-list => {input => 'bad-prop: badval',
-			 warnings => 'unknown property: bad-prop - declaration dropped',
+			 warnings => 'dropping declaration: bad-prop',
 			 ast => {},
     },
     declaration-list => {input => 'background-attachment: crud',
