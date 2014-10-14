@@ -55,7 +55,7 @@ grammar CSS::Module::CSS3::Colors:ver<20110607.000>
                               [ <r=.color-range> ','
                                 <g=.color-range> ','
                                 <b=.color-range> ','
-                                <a=.color-alpha> || :my $*USAGE; <usage(&?ROUTINE.WHY)> ]
+                                <a=.color-alpha> || <usage(&?ROUTINE.WHY)> ]
                    ')'
     }
 
@@ -65,7 +65,7 @@ grammar CSS::Module::CSS3::Colors:ver<20110607.000>
     rule color:sym<hsl> {:i'hsl('
                              [ <h=.color-angle> ','
                                <s=.percentage-range> ','
-                               <l=.percentage-range> || :my $*USAGE; <usage(&?ROUTINE.WHY)> ]
+                               <l=.percentage-range> || <usage(&?ROUTINE.WHY)> ]
                     ')'
     }
 
@@ -74,7 +74,7 @@ grammar CSS::Module::CSS3::Colors:ver<20110607.000>
                               [ <h=.color-angle> ','
                                 <s=.percentage-range> ','
                                 <l=.percentage-range> ','
-                                <a=.color-alpha> || :my $*USAGE; <usage(&?ROUTINE.WHY)> ]
+                                <a=.color-alpha> || <usage(&?ROUTINE.WHY)> ]
                    ')'
     }
 
