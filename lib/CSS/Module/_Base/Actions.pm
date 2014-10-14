@@ -14,6 +14,8 @@ class CSS::Module::_Base::Actions
     }
 
     method declaration($/)  {
+
+        return if $<dropped-decl>;
         
         my %ast = %( $.decl( $<decl> ) );
 
