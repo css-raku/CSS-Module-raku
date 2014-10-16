@@ -12,7 +12,6 @@ grammar CSS::Module::CSS3::_Base
  
     # http://www.w3.org/TR/2013/CR-css3-values-20130404/ 3.1.1
     # - all properties accept the 'initial' and 'inherit' keywords
-    proto token proforma        {*}
     token proforma:sym<inherit> {:i inherit}
     token proforma:sym<initial> {:i initial}
 

@@ -12,7 +12,6 @@ grammar CSS::Module::CSS21:ver<20110607.000> { ... }
 grammar CSS::ModuleX::CSS21:ver<20110607.000>
     is CSS::Module::CSS21::Spec::Grammar {
 
-    proto token proforma        {*}
     token proforma:sym<inherit> {:i inherit}
 
     # allow color names and define our vocabulary

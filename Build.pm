@@ -37,15 +37,12 @@ class Build is Panda::Builder {
 
                     my $class-path = $class-dir ~ '/' ~ $subclass ~ '.pm';
 
-                    my %opts = proforma  =>  $class-isa !=== <CSS1>
-                        if $type eq 'grammar';
-
                     say "Building $input-spec => $name";
                     {
                         my $*IN = open $input-spec, :r;
                         my $*OUT = open $class-path, :w;
 
-                        CSS::Specification::Build::generate( $type, $name, |%opts );
+                        CSS::Specification::Build::generate( $type, $name );
                     }
                 }
             }
