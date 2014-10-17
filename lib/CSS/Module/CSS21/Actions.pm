@@ -42,8 +42,6 @@ class CSS::ModuleX::CSS21::Actions
     }
     method shape-arg($/) { make $.list($/) }
 
-    method val($/) { make $.list($<expr> // $/) }
-
    # --- Expressions --- #
 
     method border-style($/) { make $.list($/) }
