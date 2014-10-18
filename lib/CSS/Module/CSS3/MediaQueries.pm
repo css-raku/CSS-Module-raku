@@ -92,7 +92,7 @@ class CSS::Module::CSS3::MediaQueries::Actions
     }
 
     method media-expr($/) {
-	make $.decl($<expr>, () )
+	make $.decl($<expr>, :proforma() )
             if $<expr>;
     }
 
