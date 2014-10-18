@@ -31,10 +31,10 @@ grammar CSS::Module::CSS3::MediaQueries:ver<20120619.000>
 
     proto rule media-feature  {*}
 
-    #| width: <length>
+    #| [min-|max-]?[device-]?width: <length>
     rule media-feature:sym<width> {:i (<._range>?[device\-]?width) ':' <val( rx{ <expr=.media-expr-length> }, &?ROUTINE.WHY)> }
 
-    #| height: <length>
+    #| [min-|max-]?[device-]?height: <length>
     rule media-feature:sym<height> {:i (<._range>?[device\-]?height) ':' <val( rx{ <expr=.media-expr-length> }, &?ROUTINE.WHY)> }
     rule media-expr-length { <length> }
 
@@ -42,20 +42,20 @@ grammar CSS::Module::CSS3::MediaQueries:ver<20120619.000>
     rule media-feature:sym<orientation> {:i (orientation) [ ':' <val( rx{ <expr=.media-expr-orientation> }, &?ROUTINE.WHY)> ]? }
     rule media-expr-orientation {:i [ portrait | landscape ] & <keyw> }
 
-    #| aspect-ratio: <horizontal> "/" <vertical>   (e.g. "16/9")
+    #| [min-|max-]?[device-]?aspect-ratio: <horizontal> "/" <vertical>   (e.g. "16/9")
     rule media-feature:sym<aspect-ratio> {:i (<._range>?[device\-]?aspect\-ratio) ':' <val( rx{ <expr=.media-expr-aspect> },  &?ROUTINE.WHY)> }
     rule media-expr-aspect {:i <horizontal=.integer> '/' <vertical=.integer> }
 
-    #| color: <integer>
+    #| [min-|max-]?color[-index]?: <integer>
     rule media-feature:sym<color> {:i (<._range>?color[\-index]?) ':' <val( rx{ <expr=.media-expr-color> }, &?ROUTINE.WHY)> }
-    #| color
+    #| color[-index]?
     rule media-feature:sym<color-bool> {:i (color[\-index]?) <!before ':'> }
 
-    #| monochrome: <integer>
+    #| [min-|max-]?monochrome: <integer>
     rule media-feature:sym<monochrome> {:i (<._range>?monochrome) ':' <val( rx{  <expr=.media-expr-color> }, &?ROUTINE.WHY)> }
     rule media-expr-color {:i <integer> }
 
-    #| resolution: <resolution>
+    #| [min-|max-]?resolution: <resolution>
     rule media-feature:sym<resolution> {:i (<._range>?resolution) ':' <val( rx{ <expr=.media-expr-resolution> }, &?ROUTINE.WHY)> }
     rule media-expr-resolution { <resolution> }
 
@@ -63,7 +63,7 @@ grammar CSS::Module::CSS3::MediaQueries:ver<20120619.000>
     rule media-feature:sym<scan> {:i (scan) [ ':' <val( rx{ <expr=.media-expr-scan> }, &?ROUTINE.WHY)> ]? }
     rule media-expr-scan {:i [ progressive | interlace ] & <keyw> }
 
-    #| grid: [<integer>]?
+    #| grid [: <integer>]?
     rule media-feature:sym<grid> {:i (grid) [ ':' <val( rx{  <expr=.media-expr-grid> }, &?ROUTINE.WHY)> ]? }
     rule media-expr-grid {:i [0 | 1 ] & <integer> }
 

@@ -1,6 +1,6 @@
 [ "resolution", { "input" : "300dpi", "ast" : 300, "token" : { "type" : "resolution", "units" : "dpi" } } ]
 [ "media-expr", { "input" : "min-width: 25cm", "ast" : { "property" : "min-width", "expr" : [ { "length" : 25 } ] } } ]
-[ "media-expr", { "input" : "max-width: foo", "warnings" : "usage max-width: <length>" } ]
+[ "media-expr", { "input" : "max-width: foo", "warnings" : "usage [min-|max-]?[device-]?width: <length>" } ]
 [ "at-rule", { "input" : "media all { body { background:lime } }", "ast" : { "media-list" : [ { "media-query" : [ { "media" : "all" } ] } ], "media-rules" : [ { "ruleset" : { "selectors" : [ { "selector" : [ { "simple-selector" : [ { "qname" : { "element-name" : "body" } } ] } ] } ], "declarations" : { "background" : { "expr" : [ { "background-color" : [ { "color" : { "r" : 0, "g" : 255, "b" : 0 } } ] } ] } } } } ], "@" : "media" } } ]
 [ "at-rule", { "input" : "media all and (color) { }", "ast" : { "media-list" : [ { "media-query" : [ { "media" : "all" }, { "media-expr" : { "property" : "color" } } ] } ], "media-rules" : [  ], "@" : "media" } } ]
 [ "at-rule", { "input" : "media all and (color) { }", "ast" : { "media-list" : [ { "media-query" : [ { "media" : "all" }, { "media-expr" : { "property" : "color" } } ] } ], "media-rules" : [  ], "@" : "media" } } ]
@@ -14,7 +14,7 @@
 // all the following should equate to 'not all'
 [ "at-rule", { "input" : "media not all {}", "ast" : { "media-list" : [ { "media-query" : [ { "media-op" : "not" }, { "media" : "all" } ] } ], "media-rules" : [  ], "@" : "media" } } ]
 [ "at-rule", { "input" : "media (min-orientation:portrait) {}", "warnings" : "unknown media-feature: min-orientation", "ast" : { "media-list" : [ { "media-query" : [ { "media-op" : "not" }, { "media" : "all" } ] } ], "media-rules" : [  ], "@" : "media" } } ]
-[ "at-rule", { "input" : "media (color:20example) {}", "warnings" : "usage color: <integer>", "ast" : { "media-list" : [ { "media-query" : [ { "media-op" : "not" }, { "media" : "all" } ] } ], "media-rules" : [  ], "@" : "media" } } ]
+[ "at-rule", { "input" : "media (color:20example) {}", "warnings" : "usage [min-|max-]?color[-index]?: <integer>", "ast" : { "media-list" : [ { "media-query" : [ { "media-op" : "not" }, { "media" : "all" } ] } ], "media-rules" : [  ], "@" : "media" } } ]
 [ "at-rule", { "input" : "media (example, all,), speech {}", "warnings" : [ "unknown media-feature: example", "discarding media list" ], "ast" : { "media-list" : [ { "media-query" : [ { "media-op" : "not" }, { "media" : "all" } ] } ], "media-rules" : [  ], "@" : "media" } } ]
 [ "at-rule", { "input" : "media &test, screen {}", "ast" : { "media-list" : [ { "media-query" : [ { "media-op" : "not" }, { "media" : "all" } ] } ], "media-rules" : [  ], "@" : "media" }, "warnings" : "discarding media list" } ]
 //  we should also have extended the import at-rule
