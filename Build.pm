@@ -6,7 +6,7 @@ use Panda::Common;
 
 class Build is Panda::Builder {
 
-    method build($where, Bool :$interfaces=True, Bool :$grammars=True, Bool :$actions=True ) {
+    method build($where) {
 
         indir $where, {
             for ('etc/css1-properties.txt' => <CSS1>,
@@ -17,20 +17,11 @@ class Build is Panda::Builder {
                 ) {
                 my ($input-spec, $class-isa) = .kv;
 
-                my @productions;
-
-                @productions.push: 'interface'    => 'Interface'
-                    if $interfaces;
-
-                @productions.push: 'actions'   => 'Actions'
-                    if $actions;
-
-                @productions.push: 'grammar' => 'Grammar'
-                    if $grammars;
-
-                for @productions {
+                for interface => 'Interface',
+                    actions => 'Actions' ,
+                    grammar => 'Grammar' {
                     my ($type, $subclass) = .kv;
-                    my $name = (<CSS Module>, @$class-isa, <Spec>,  $subclass).join('::');
+                    my $name = (<CSS Module>, @$class-isa, <Spec>, $subclass).join('::');
 
                     my $class-dir = (<lib CSS Module>, @$class-isa, <Spec>).join('/');
                     mkdir $class-dir;
@@ -51,6 +42,6 @@ class Build is Panda::Builder {
 }
 
 # Build.pm can also be run standalone 
-sub MAIN(Str $working-directory = '.', Bool :$interfaces=True, Bool :$grammars=True, Bool :$actions=True ) {
-    Build.new.build($working-directory, :$interfaces, :$grammars, :$actions);
+sub MAIN(Str $working-directory = '.' ) {
+    Build.new.build($working-directory);
 }
