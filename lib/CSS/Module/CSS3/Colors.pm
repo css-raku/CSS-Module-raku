@@ -4,6 +4,7 @@ use v6;
 # specification: http://www.w3.org/TR/2011/REC-css3-color-20110607/
 
 use CSS::Module::CSS3::_Base;
+use CSS::Grammar::AST :CSSValue;
 
 grammar CSS::Module::CSS3::Colors:ver<20110607.000>
     is CSS::Module::CSS3::_Base {
@@ -235,44 +236,44 @@ class CSS::Module::CSS3::Colors::Actions
 
     method color-angle($/) {
         my $angle = $<number>.ast;
-        make $.token($angle, :type('num'), :units('degrees'));
+        make $.token($angle, :type(CSSValue::AngleComponent), :units('deg'));
     }
 
     method color-alpha($/) {
         my $alpha = $<number>.ast;
         $alpha = 0.0 if $alpha < 0.0;
         $alpha = 1.0 if $alpha > 1.0;
-        make $.token($alpha, :type('num'), :units('alpha'));
+        make $.token($alpha, :type(CSSValue::NumberComponent), :units('alpha'));
     }
 
     method percentage-range($/) {
         my $percentage = $<percentage>.ast;
         $percentage = 0 if $percentage < 0;
         $percentage = 100 if $percentage > 100;
-        make $.token($percentage, :units('%'), :type('percentage'))
+        make $.token($percentage, :units('%'), :type(CSSValue::PercentageComponent))
     }
 
     method color:sym<rgba>($/) {
         return $.warning( $<usage>.ast ) if $<usage>;
-        make $.token($.node($/), :type<color>, :units<rgba>);
+        make $.token($.node($/), :type(CSSValue::ColorComponent), :units<rgba>);
     }
 
     method color:sym<hsl>($/)  {
         return $.warning( $<usage>.ast ) if $<usage>;
-        make $.token($.node($/), :type<color>, :units<hsl>);
+        make $.token($.node($/), :type(CSSValue::ColorComponent), :units<hsl>);
     }
 
     method color:sym<hsla>($/) {
         return $.warning( $<usage>.ast ) if $<usage>;
-        make $.token($.node($/), :type<color>, :units<hsla>);
+        make $.token($.node($/), :type(CSSValue::ColorComponent), :units<hsla>);
     }
 
     method color:sym<current>($/) {
-        make $.token($<keyw>.ast, :type<color>, :units<current>);
+        make $.token($<keyw>.ast, :type(CSSValue::ColorComponent), :units<current>);
     }
 
     method color:sym<transparent>($/) {
-        make $.token($<keyw>.ast, :type<color>, :units<transparent>);
+        make $.token($<keyw>.ast, :type(CSSValue::ColorComponent), :units<transparent>);
     }
 
 }

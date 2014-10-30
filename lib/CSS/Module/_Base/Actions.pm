@@ -1,6 +1,7 @@
 use v6;
 
 use CSS::Grammar::Actions;
+use CSS::Grammar::AST :CSSValue;
 use CSS::Specification::_Base::Actions;
 
 class CSS::Module::_Base::Actions
@@ -37,11 +38,11 @@ class CSS::Module::_Base::Actions
     #---- Language Extensions ----#
 
     method length:sym<zero>($/) {
-        make $.token(0, :type<length>, :units<px>)
+        make $.token(0, :type(CSSValue::LengthComponent), :units<px>)
     }
 
     method angle:sym<zero>($/) {
-        make $.token(0, :type<angle>, :units<deg>)
+        make $.token(0, :type(CSSValue::AngleComponent), :units<deg>)
     }
 
     has Hash $.colors = {
@@ -73,13 +74,13 @@ class CSS::Module::_Base::Actions
         make $.token(%rgb, :type<color>, :units<rgb>);
     }
 
-    method integer($/)     { make $<uint>.ast }
-    method uint($/)        { make $.token($/.Int, :type<integer>) }
-    method number($/)      { make $.token($<num>.ast, :type<number>) }
+    method integer($/)     { make $.token($<uint>.ast, :type(CSSValue::NumberComponent)) }
+    method uint($/)        { make $/.Int }
+    method number($/)      { make $.token($<num>.ast, :type(CSSValue::NumberComponent)) }
     method uri($/)         { make $<url>.ast }
-    method keyw($/)        { make $<ident>.ast }
+    method keyw($/)        { make $.token($<ident>.ast, :type(CSSValue::KeywordComponent)) }
     # case sensitive identifiers
-    method identifier($/)  { make $<name>.ast }
+    method identifier($/)  { make $.token($<name>.ast, :type(CSSValue::IdentifierComponent)) }
     # identifiers strung-together, e.g New Century Schoolbook
-    method identifiers($/) { make $<identifier>>>.ast.join(' ') }
+    method identifiers($/) { make $.token( $<identifier>>>.ast.join(' '), :type(CSSValue::IdentifierComponent)) }
 }

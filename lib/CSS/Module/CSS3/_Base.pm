@@ -1,6 +1,7 @@
 use v6;
 
 use CSS::Grammar::CSS3;
+use CSS::Grammar::AST :CSSValue;
 use CSS::Module::_Base;
 use CSS::Module::_Base::Actions;
 
@@ -31,7 +32,7 @@ class CSS::Module::CSS3::_Base::Actions
 
     has @._proforma = 'inherit', 'initial';
 
-    method resolution:sym<dim>($/)        { make $.token($<num>.ast, :units($0.Str.lc), :type('resolution')) }
+    method resolution:sym<dim>($/)        { make $.token($<num>.ast, :units($0.lc), :type(CSSValue::ResolutionComponent)) }
     method dimension:sym<resolution>($/)  { make $<resolution>.ast }
 
 }
