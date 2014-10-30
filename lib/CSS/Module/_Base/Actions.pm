@@ -74,7 +74,7 @@ class CSS::Module::_Base::Actions
         make $.token(%rgb, :type<color>, :units<rgb>);
     }
 
-    method integer($/)     { make $.token($<uint>.ast, :type(CSSValue::NumberComponent)) }
+    method integer($/)     { make $.token($<uint>.ast, :type(CSSValue::IntegerComponent)) }
     method uint($/)        { make $/.Int }
     method number($/)      { make $.token($<num>.ast, :type(CSSValue::NumberComponent)) }
     method uri($/)         { make $<url>.ast }
