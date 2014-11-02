@@ -250,7 +250,7 @@ class CSS::Module::CSS3::Colors::Actions
         my $percentage = $<percentage>.ast;
         $percentage = 0 if $percentage < 0;
         $percentage = 100 if $percentage > 100;
-        make $.token($percentage, :units('%'), :type(CSSValue::PercentageComponent))
+        make $.token($percentage, :type(CSSValue::PercentageComponent))
     }
 
     method color:sym<rgba>($/) {
