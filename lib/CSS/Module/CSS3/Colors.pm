@@ -243,7 +243,7 @@ class CSS::Module::CSS3::Colors::Actions
         my $alpha = $<number>.ast;
         $alpha = 0.0 if $alpha < 0.0;
         $alpha = 1.0 if $alpha > 1.0;
-        make $.token($alpha, :type(CSSValue::NumberComponent), :units('alpha'));
+        make $.token($alpha, :type(CSSValue::NumberComponent));
     }
 
     method percentage-range($/) {
@@ -269,11 +269,11 @@ class CSS::Module::CSS3::Colors::Actions
     }
 
     method color:sym<current>($/) {
-        make $.token($<keyw>.ast, :type(CSSValue::ColorComponent), :units<current>);
+        make $.token($<keyw>.ast, :type(CSSValue::ColorComponent) );
     }
 
     method color:sym<transparent>($/) {
-        make $.token($<keyw>.ast, :type(CSSValue::ColorComponent), :units<transparent>);
+        make $.token($<keyw>.ast, :type(CSSValue::ColorComponent) );
     }
 
 }
