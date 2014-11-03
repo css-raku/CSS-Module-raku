@@ -8,23 +8,20 @@ use CSS::Grammar::Test;
 
 my $actions = CSS::Module::CSS3::Actions.new;
 
-my $fh = open 't/css3x-media-queries.json', :r;
-
-for ( $fh.lines ) {
+for 't/css3x-media-queries.json'.IO.lines {
 
     if .substr(0,2) eq '//' {
 ##        note '[' ~ .substr(2) ~ ']';
         next;
     }
-    my ($rule, $t) = @( from-json($_) );
-    my %test = %$t;
-    my $input = %test<input>;
+    my ($rule, $expected) = @( from-json($_) );
+    my $input = $expected<input>;
 
     CSS::Grammar::Test::parse-tests(CSS::Module::CSS3, $input,
-				    :rule($rule),
-				    :actions($actions),
+				    :$rule,
+				    :$actions,
 				    :suite<css3 @media>,
-				    :expected(%test) );
+				    :$expected );
 }
 
 done;

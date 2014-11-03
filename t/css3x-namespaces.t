@@ -25,14 +25,14 @@ for (
     },
     ) {
     my $rule = .key;
-    my %test = @( .value );
-    my $input = %test<input>;
+    my $expected = .value;
+    my $input = $expected<input>;
 
     CSS::Grammar::Test::parse-tests(CSS::Module::CSS3::Namespaces, $input,
-				    :rule($rule),
-				    :actions($actions),
+				    :$rule,
+				    :$actions,
 				    :suite<css3-namespaces>,
-				    :expected(%test) );
+				    :$expected );
 }
 
 done;

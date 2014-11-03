@@ -76,8 +76,8 @@ for (
     },
   ) {
     my $rule = .key;
-    my %test = %( .value );
-    my $input = %test<input>;
+    my %expected = %( .value );
+    my $input = %expected<input>;
 
     for css1  => (CSS::Module::CSS1, $css1-actions),
        	css21 => (CSS::Module::CSS21, $css21-actions),	
@@ -86,10 +86,10 @@ for (
 	    my ($level, $class, $actions) = (.key, @(.value));
 
 	    CSS::Grammar::Test::parse-tests($class, $input,
-					    :rule($rule),
+					    :$rule,
 					    :suite($level),
-					    :actions($actions),
-					    :expected(%test) );
+					    :$actions,
+					    :%expected );
 	}
 
 }

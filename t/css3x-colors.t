@@ -64,14 +64,14 @@ for (
 ##    },
     ) {
     my $rule = .key;
-    my %test = @( .value );
-    my $input = %test<input>;
+    my %expected = @( .value );
+    my $input = %expected<input>;
 
     CSS::Grammar::Test::parse-tests(CSS::Module::CSS3::Colors, $input,
-				    :rule($rule),
-				    :actions($actions),
+				    :$rule,
+				    :$actions,
 				    :suite<css3-color>,
-				    :expected(%test) );
+				    :%expected );
 }
 
 done;
