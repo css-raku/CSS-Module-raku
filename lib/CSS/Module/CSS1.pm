@@ -28,7 +28,7 @@ grammar CSS::Module::CSS1:ver<20080411.000>
         rule family-name    { <family-name=.identifiers> || <family-name=.string> }
         rule generic-family {:i [ serif | sans\-serif | cursive | fantasy | monospace ] & <generic-family=.identifier> }
 
-        rule absolute-size {:i [ [[xx|x]\-]?small | medium | [[xx|x]\-]?large ] & <keyw> }
+        rule absolute-size {:i [ [x[x]?\-]?[small|large] | medium ] & <keyw> }
         rule relative-size {:i [ larger | smaller ] & <keyw> }
 
         rule padding-width {:i <length> | <percentage> }

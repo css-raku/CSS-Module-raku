@@ -46,11 +46,11 @@ grammar CSS::ModuleX::CSS21:ver<20110607.000>
     rule expr-font-family    {:i  [ <generic-family> || <family-name> ] +% ',' }
     rule family-name    { <family-name=.identifiers> || <family-name=.string> }
     rule generic-family {:i [ serif | sans\-serif | cursive | fantasy | monospace ] & <generic-family=.identifier> }
-    rule absolute-size {:i [ [[xx|x]\-]?[small|large] | medium ] & <keyw> }
-    rule relative-size {:i [ larger | smaller ] & <keyw> }
-    rule margin-width {:i <length> | <percentage> | auto & <keyw> }
-    rule padding-width {:i <length> | <percentage> }
-    rule generic-voice {:i [ male | female | child ] & <keyw> }
+    rule absolute-size  {:i [ [x[x]?\-]?[small|large] | medium ] & <keyw> }
+    rule relative-size  {:i [ larger | smaller ] & <keyw> }
+    rule margin-width   {:i <length> | <percentage> | auto & <keyw> }
+    rule padding-width  {:i <length> | <percentage> }
+    rule generic-voice  {:i [ male | female | child ] & <keyw> }
     rule specific-voice {:i <identifier> | <string> }
     rule expr-voice-family { [ <generic-voice> || <specific-voice> ] +% ',' }
 }

@@ -32,7 +32,7 @@ class CSS::Module::CSS3::_Base::Actions
 
     has @._proforma = 'inherit', 'initial';
 
-    method resolution:sym<dim>($/)        { make $.token($<num>.ast, :units($0.lc), :type(CSSValue::ResolutionComponent)) }
+    method resolution:sym<dim>($/)        { make $.token($<num>.ast, :units($0.lc) ) }
     method dimension:sym<resolution>($/)  { make $<resolution>.ast }
 
 }
