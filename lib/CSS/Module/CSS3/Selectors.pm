@@ -18,11 +18,11 @@ grammar CSS::Module::CSS3::Selectors:ver<20110929.000>
     rule combinator:sym<sibling> { '~' }
 
     # allow '::' element selectors
-    rule pseudo:sym<::element> {'::'<element=.ident>}
+    rule pseudo:sym<::element> {'::'<element=.Ident>}
  
     rule no-namespace {<?>}
     rule wildcard {'*'}
-    rule namespace-prefix {[<namespace=.ident>|<namespace=.wildcard>|<namespace=.no-namespace>]'|'}
+    rule namespace-prefix {[<namespace=.Ident>|<namespace=.wildcard>|<namespace=.no-namespace>]'|'}
 
     # use <qname> in preference to <type_selector>
     # - see http://www.w3.org/TR/2008/CR-css3-namespace-20080523/#css-qnames
@@ -33,7 +33,7 @@ grammar CSS::Module::CSS3::Selectors:ver<20110929.000>
 
     rule type-selector {<namespace-prefix>? <element-name>}
     
-    rule attrib        {'[' <ident> [ <attribute-selector> [<ident>|<string>] ]? ']'}
+    rule attrib        {'[' <Ident> [ <attribute-selector> [<Ident>|<string>] ]? ']'}
 
     rule term:sym<unicode-range> {:i'U+'<unicode-range>}
 
@@ -52,7 +52,7 @@ grammar CSS::Module::CSS3::Selectors:ver<20110929.000>
         ]
     }
 
-    rule structural-selector {:i $<ident>=[[nth|first|last|nth\-last]\-[child|of\-type]]'(' [ <args=.structural-args> || <any-args> ] ')'}
+    rule structural-selector {:i $<Ident>=[[nth|first|last|nth\-last]\-[child|of\-type]]'(' [ <args=.structural-args> || <any-args> ] ')'}
     rule pseudo-function:sym<structural-selector> {<structural-selector>}
     rule negation-args {[<type-selector> | <universal> | <id> | <class> | <attrib> | [$<nested>=<?before [:i':not(']> || <?>] <pseudo> | <any-arg> ]+}
     rule pseudo-function:sym<negation>  {:i'not(' [ <negation-args> || <any-args> ] ')'}
@@ -79,7 +79,7 @@ class CSS::Module::CSS3::Selectors::Actions
 
     method term:sym<unicode-range>($/) { make $.node($/) }
     method structural-selector($/)  {
-        my $ident = $<ident>.lc;
+        my $ident = $<Ident>.lc;
         return $.warning('usage '~$ident~'(an+b) e.g. "4" "3n+1"')
             if $<any-args>;
 

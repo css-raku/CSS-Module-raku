@@ -20,7 +20,7 @@ grammar CSS::Module::CSS3::PagedMedia:ver<20061010.000>
     rule page-pseudo:sym<left>    {:i'left'}
     rule page-pseudo:sym<right>   {:i'right'}
     rule page-pseudo:sym<first>   {:i'first'}
-    rule page-pseudo:sym<other>   {<ident>}
+    rule page-pseudo:sym<other>   {<Ident>}
     rule page-pseudo:sym<missing> {''}
 
     # @page declarations

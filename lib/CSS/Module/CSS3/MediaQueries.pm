@@ -22,7 +22,7 @@ grammar CSS::Module::CSS3::MediaQueries:ver<20120619.000>
     }
 
     rule unknown-media-list  { <CSS::Grammar::Core::_any>* }
-    rule media-query {[<media-op>? <media=.ident> | '(' <media-expr> ')']
+    rule media-query {[<media-op>? <media=.Ident> | '(' <media-expr> ')']
                       [:i'and' '(' <media-expr> ')' ]*}
     rule media-op    {:i'only'|'not'}
 
@@ -67,7 +67,7 @@ grammar CSS::Module::CSS3::MediaQueries:ver<20120619.000>
     rule media-feature:sym<grid> {:i (grid) [ ':' <val( rx{  <expr=.media-expr-grid> }, &?ROUTINE.WHY)> ]? }
     rule media-expr-grid {:i [0 | 1 ] & <integer> }
 
-    rule media-feature-unknown  { (<.ident>) [ ':' <any>* ]? }
+    rule media-feature-unknown  { (<.Ident>) [ ':' <any>* ]? }
 
 }
 

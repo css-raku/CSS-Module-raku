@@ -10,7 +10,7 @@ use CSS::Module::CSS3::_Base;
 grammar CSS::Module::CSS3::Namespaces:ver<20110929.000>
     is CSS::Module::CSS3::_Base {
 
-    rule at-decl:sym<namespace> {(:i'namespace') <prefix=.ident>? [<url=.string>|<url>] ';' }
+    rule at-decl:sym<namespace> {(:i'namespace') <prefix=.Ident>? [<url=.string>|<url>] ';' }
 
 }
 
