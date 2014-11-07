@@ -29,7 +29,7 @@ class CSS::Module::_Base::Actions
             %ast<prio> = $prio;
         }
 
-        make %ast;
+        make $.token( %ast, :type(CSSValue::Property));
     }
 
     method proforma:sym<inherit>($/) { make { inherit => True } }

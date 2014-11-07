@@ -4,7 +4,7 @@ use CSS::Specification::_Base;
 
 grammar CSS::Module::_Base 
     is CSS::Specification::_Base {
-    # definitions common to CSS1, CSS21 and CSS3 Languages
+    # definitions common to CSS1, CSS21 and CSS3 Modules
     rule declaration { <.ws>? <decl> <prio>? <any-arg>* <end-decl> || <dropped-decl> }
     proto rule decl {*}
 
