@@ -22,6 +22,8 @@
 { "prop" : "clip", "decl" : "rect(5px, 40px, auto, 5px)", "expr" : [ { "shape" : [ { "top" : [ { "length" : 5 } ] }, { "right" : [ { "length" : 40 } ] }, { "bottom" : [ { "keyw" : "auto" } ] }, { "left" : [ { "length" : 5 } ] } ] } ] }
 { "prop" : "content", "decl" : "'Section ' counter(Section) '. '", "expr" : [ { "string" : "Section " }, { "counter" : [ { "identifier" : "Section" } ] }, { "string" : ". " } ] }
 { "prop" : "content", "decl" : "'Section ' counters(Section)", "expr" : [ { "string" : "Section " }, { "counters" : [ { "identifier" : "Section" } ] } ] }
+{ "prop" : "content", "decl" : "counters(item, \".\") \" \"", "expr" : [ { "counters" : [ { "identifier" : "item" }, { "string" : "." } ] }, { "string" : " " } ] }
+{ "prop" : "content", "decl" : " counter(section, upper-roman) \" - \"", "expr" : [ { "counter" : [ { "identifier" : "section" }, { "list-style-type" : [ { "keyw" : "upper-roman" } ] } ] }, { "string" : " - " } ] }
 { "prop" : "counter-increment", "decl" : "section 5", "expr" : [ { "identifier" : "section" }, { "integer" : 5 } ] }
 { "prop" : "counter-increment", "decl" : "None", "expr" : [ { "keyw" : "none" } ] }
 { "prop" : "counter-reset", "decl" : "section 10", "expr" : [ { "identifier" : "section" }, { "integer" : 10 } ] }

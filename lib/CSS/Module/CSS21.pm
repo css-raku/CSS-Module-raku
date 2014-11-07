@@ -23,8 +23,9 @@ grammar CSS::ModuleX::CSS21:ver<20110607.000>
     # --- Functions --- #
 
     rule attr     {:i'attr(' [ <attribute_name=.qname> || <any-args>] ')'}
-    rule counter  {:i'counter(' [ <identifier> [ ',' <list-style-type> ]* || <any-args> ] ')'}
-    rule counters {:i'counters(' [ <identifier> [ ',' <string> ]? || <any-args> ] ')' }
+
+    rule counter  {:i'counter(' [ <identifier> [ ',' <expr-list-style-type> ]* || <any-args> ] ')'}
+    rule counters {:i'counters(' [ <identifier> [ ',' <string> [ ',' <expr-list-style-type> ]* ]? || <any-args> ] ')' }
     rule shape-arg {:i <length> | auto & <keyw> }
     rule shape    {:i'rect(' [ <top=.shape-arg> ',' <right=.shape-arg> ',' <bottom=.shape-arg> ',' <left=.shape-arg> || <any-args> ] ')' }
 
