@@ -19,6 +19,8 @@ class CSS::Module::_Base::Actions
         return if $<dropped-decl>;
         
         my %ast = %( $.decl( $<decl> ) );
+        return Any
+            unless +%ast;
 
         if $<any-arg> {
             return $.warning("extra terms following '{%ast<property>}' declaration",
@@ -28,8 +30,9 @@ class CSS::Module::_Base::Actions
         if (my $prio = $<prio> && $<prio>.ast) {
             %ast<prio> = $prio;
         }
+        
 
-        make $.token( %ast, :type(CSSValue::Property));
+        make $.token( %ast, :type(CSSValue::Property) );
     }
 
     method proforma:sym<inherit>($/) { make { inherit => True } }

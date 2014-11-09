@@ -59,9 +59,8 @@ class CSS::Module::CSS3::PagedMedia::Actions
         method margin-box($/) { make $.node($/) }
 
         method margin-declaration($/) {
-            my %ast = %( $.node($/) );
-            %ast<property> = '@' ~ (~$<margin-box>).lc;
-            make %ast;
+            make {expr => $.node($/),
+                  property => '@' ~ $<margin-box>.lc};
         }
 
         method page-size($/) { make $.token($<keyw>.ast) }

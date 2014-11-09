@@ -13,10 +13,8 @@ my $css21-actions = CSS::Module::CSS21::Actions.new;
 
 for 't/css3x-fonts.json'.IO.lines {
 
-    if .substr(0,2) eq '//' {
-##        note '[' ~ .substr(2) ~ ']';
-        next;
-    }
+    next if .substr(0,2) eq '//';
+
     my ($rule, $expected) = @( from-json($_) );
 
     my $input = $expected<input>;

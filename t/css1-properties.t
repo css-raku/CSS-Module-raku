@@ -21,31 +21,14 @@ my %seen;
 
 for 't/css1-properties.json'.IO.lines {
 
-    if .substr(0,2) eq '//' {
-##        note '[' ~ .substr(2) ~ ']';
-        next;
-    }
+    next if .substr(0,2) eq '//';
 
     my %expected = %( from-json($_) );
     my $prop = %expected<prop>.lc;
     my $input = $prop ~ ':' ~ %expected<decl>;
+    my $expr = %expected<expr>;
 
-    my %declarations;
-
-    if %expected<box> {
-        for @(%expected<box>) {
-            my ($edge, $val) = .kv;
-            %declarations{$prop ~ '-' ~ $edge} = {expr => $val}
-        }
-    }
-    elsif %expected<expr> {
-        %declarations{ $prop } = {expr => %expected<expr>};
-    }
-
-    %expected<ast> = %declarations
-        if %declarations.keys;
-
-    %expected<ast> //= {};
+    %expected<ast> = $expr ?? [{ property => $prop, expr => $expr }] !! Any;
 
     for css1  => (CSS::Module::CSS1,  $css1-actions,  qw<>),
        	css21 => (CSS::Module::CSS21, $css21-actions, qw<inherit>),	
@@ -76,15 +59,13 @@ for 't/css1-properties.json'.IO.lines {
 		my $decl = $prop ~ ': ' ~ $misc;
 
 		my @_expr = ({$misc => True});
-		my %ast = %expected<box>
-		    ?? <top right bottom left>.map({($prop ~ '-' ~ $_) => {expr => @_expr}})
-		    !! ($prop => {expr => @_expr});
+		my $ast = [{ property => $prop, expr => @_expr }];
 
                 CSS::Grammar::Test::parse-tests($class, $decl,
 						:rule<declaration-list>,
 						:$actions,
 						:suite($level),
-						:expected({ast => %ast}) );
+						:expected({ast => $ast}) );
 
             }
         }
