@@ -12,7 +12,7 @@ for (
                ast => {r => 179, g => 128, b => 26},
                token => {type => 'color', units => 'rgb'},
     },
-    term   => {input => 'rgba(100%, 50%, 0%, 0.1)',
+    term   => {input => 'rgba(100%, 128, 0%, 0.1)',
                ast => {r => 255, g => 128, b => 0, a=> .1},
                token => {type => 'color', units => 'rgba'},
     },

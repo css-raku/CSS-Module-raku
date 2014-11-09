@@ -48,7 +48,7 @@ grammar CSS::Module::CSS3::Colors:ver<20110607.000>
     rule color:sym<transparent> {:i transparent & <keyw> }
 
     rule color-angle{<number>}
-    rule color-alpha{<number>}
+    rule color-alpha{<number><!before '%'>}
 
     # <rgb> and <hex> are defined in CSS core grammar
     #| usage: rgba(c,c,c,a) where c is 0..255 or 0%-100% and a is 0-1 or 0%-100%
@@ -60,7 +60,7 @@ grammar CSS::Module::CSS3::Colors:ver<20110607.000>
                    ')'
     }
 
-    rule percentage-range {<percentage>}
+    rule percentage-range {<percentage>|<color-alpha>}
 
     #| usage: hsl(h,s,l) where h is 0..360  and s,l are 0-1 or 0%-100%
     rule color:sym<hsl> {:i'hsl('
@@ -75,7 +75,7 @@ grammar CSS::Module::CSS3::Colors:ver<20110607.000>
                               [ <h=.color-angle> ','
                                 <s=.percentage-range> ','
                                 <l=.percentage-range> ','
-                                <a=.color-alpha> || <usage(&?ROUTINE.WHY)> ]
+                                <a=.percentage-range> || <usage(&?ROUTINE.WHY)> ]
                    ')'
     }
 
@@ -247,6 +247,8 @@ class CSS::Module::CSS3::Colors::Actions
     }
 
     method percentage-range($/) {
+        return make $<color-alpha>.ast
+            if $<color-alpha>;
         my $percentage = $<percentage>.ast;
         $percentage = 0 if $percentage < 0;
         $percentage = 100 if $percentage > 100;

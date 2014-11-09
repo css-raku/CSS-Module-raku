@@ -73,7 +73,7 @@ class CSS::Module::_Base::Actions
         my $color = $.colors{$color_name}
         or die  "unknown color: " ~ $color_name;
 
-        my %rgb; %rgb<r g b> = @$color;
+        my %rgb; %rgb<r g b> = $color.map: { $.token( $_, :type(CSSValue::NumberComponent)) };
         make $.token(%rgb, :type<color>, :units<rgb>);
     }
 
