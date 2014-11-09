@@ -45,4 +45,4 @@
 { "prop" : "width", "decl" : "55mm", "expr" : [ { "length" : 55 } ] }
 { "prop" : "word-spacing", "decl" : "1.5em", "expr" : [ { "length" : 1.5 } ] }
 { "prop" : "white-space", "decl" : "nowrap", "expr" : [ { "keyw" : "nowrap" } ] }
-{ "prop" : "z-index", "decl" : "3", "expr" : [ { "integer" : 3 } ] }
+{ "prop" : "z-index", "decl" : "-3", "expr" : [ { "integer" : -3 } ] }

@@ -11,7 +11,7 @@ grammar CSS::Module::_Base
     token length:sym<zero> {<number> <?{ +$<number> == 0 }> }
     token angle:sym<zero>  {<number> <?{ +$<number> == 0 }> }
 
-    token integer     {< + - >?<uint>}
+    token integer     {$<sign>=< + - >?<uint>}
     token uint        {\d+}
     token number      {<num> <!before ['%'|\w]>}
     token uri         {<url>}
