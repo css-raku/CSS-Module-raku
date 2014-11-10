@@ -35,8 +35,8 @@ class CSS::Module::_Base::Actions
         make $.token( %ast, :type(CSSValue::Property) );
     }
 
-    method proforma:sym<inherit>($/) { make { inherit => True } }
-    method proforma:sym<initial>($/) { make { initial => True } }
+    method proforma:sym<inherit>($/) { make {keyw => $.token('inherit', :type(CSSValue::KeywordComponent))} } 
+    method proforma:sym<initial>($/) { make {keyw => $.token('initial', :type(CSSValue::KeywordComponent))} } 
 
     #---- Language Extensions ----#
 

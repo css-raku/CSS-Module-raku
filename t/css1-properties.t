@@ -58,8 +58,7 @@ for 't/css1-properties.json'.IO.lines {
 	    for @proforma -> $misc {
 		my $decl = $prop ~ ': ' ~ $misc;
 
-		my @_expr = ({$misc => True});
-		my $ast = [{ property => $prop, expr => @_expr }];
+		my $ast = [{ property => $prop, expr => [ {keyw => $misc} ] }];
 
                 CSS::Grammar::Test::parse-tests($class, $decl,
 						:rule<declaration-list>,
