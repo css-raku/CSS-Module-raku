@@ -12,6 +12,7 @@ use CSS::Module::CSS3::_Base;
 
 grammar CSS::Module::CSS3::Selectors:ver<20110929.000>
     is CSS::Module::CSS3::_Base {
+
     # extensions:
     # ----------
     # inherited combinators: '+' (adjacent), '>' (child)
@@ -62,6 +63,8 @@ grammar CSS::Module::CSS3::Selectors:ver<20110929.000>
 class CSS::Module::CSS3::Selectors::Actions
     is CSS::Module::CSS3::_Base::Actions {
 
+    use CSS::Grammar::AST :CSSValue;
+
     method combinator:sym<sibling>($/)  { make $.token('~') }
 
     method pseudo:sym<::element>($/) { make $.node($/) }
@@ -70,7 +73,7 @@ class CSS::Module::CSS3::Selectors::Actions
     method namespace-prefix($/) { make $.node($/) }
     method wildcard($/)         { make ~$/ }
     method type-selector($/)    { make $.node($/) }
-    method qname($/)            { make $.node($/) }
+    method qname($/)            { make $.token( $.node($/), :type(CSSValue::QnameComponent)) }
     method universal($/)        { make $.node($/) }
 
     method attribute-selector:sym<prefix>($/)    { make ~$/ }

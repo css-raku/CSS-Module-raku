@@ -17,30 +17,30 @@ class CSS::ModuleX::CSS21::Actions
     method attr($/)             {
         return $.warning(&?ROUTINE.WHY)
             if $<any-args>;
-        make $.list($/);
+        make $.func( 'attr', $.list($/) );
     }
 
     #| usage: counter(ident [, ident [,...] ])
     method counter($/) {
         return $.warning(&?ROUTINE.WHY)
             if $<any-args>;
-        make $.list($/);
+        make $.func( 'counter', $.list($/) );
     }
 
     #| usage: counters(ident [, "string"])
     method counters($/) {
         return $.warning(&?ROUTINE.WHY)
             if $<any-args>;
-        make $.list($/);
+        make $.func( 'counters', $.list($/) );
     }
 
     #| usage: rect(<top>, <right>, <botom>, <left>)
     method shape($/)     {
         return $.warning(&?ROUTINE.WHY)
             if $<any-args>;
-        make $.list($/);
+        make $.func( 'rect', $.list($/) );
     }
-    method shape-arg($/) { make $.list($/) }
+    method shape-arg($/) { make $.node($/) }
 
    # --- Expressions --- #
 
