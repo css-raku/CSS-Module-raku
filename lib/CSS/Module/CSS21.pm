@@ -46,7 +46,7 @@ grammar CSS::ModuleX::CSS21:ver<20110607.000>
                              | [ higher | lower ] & <tilt=.keyw> }
     rule expr-font-family    {:i  [ <generic-family> || <family-name> ] +% ',' }
     rule family-name    { <family-name=.identifiers> || <family-name=.string> }
-    rule generic-family {:i [ serif | sans\-serif | cursive | fantasy | monospace ] & <generic-family=.identifier> }
+    rule generic-family {:i [ serif | sans\-serif | cursive | fantasy | monospace ] & <keyw> }
     rule absolute-size  {:i [ [x[x]?\-]?[small|large] | medium ] & <keyw> }
     rule relative-size  {:i [ larger | smaller ] & <keyw> }
     rule margin-width   {:i <length> | <percentage> | auto & <keyw> }

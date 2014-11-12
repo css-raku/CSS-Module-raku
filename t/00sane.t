@@ -48,25 +48,18 @@ for (
     },
     # recheck comments and whitespace
     declaration-list => {input => '/*aa*/COLoR/*bb*/:<!--cc-->BLUE /*dd*/;',
-			 ast => [{property => "color", "expr" => [{"color" => {"r" => 0, "g" => 0, "b" => 255}}]}],
+			 ast => [{property => "color", "expr" => [{"rgb" => {"r" => 0, "g" => 0, "b" => 255}}]}],
     },
     # boxed properties should be expanded
     declaration-list => {input => 'margin: 2em 3em',
-                         :verbose,  
-                         ast => {"type" => "property-list",
-                                 "val" => [{"val" => {"expr" => {"val" => [{"length" => {"type" => "length", "val" => 2, "units" => "em"}},
-                                                                           {"length" => {"type" => "length", "val" => 3, "units" => "em"}}],
-                                                                 "trait" => "box"},
-                                                      "property" => "margin"},
-                                            "type" => "property"}]},
+                         ast => [{property => "margin",
+                                 "expr" => [{"em" => 2}, {"em" => 3}]}],
     },
     # check override rules
     declaration-list => {input => 'background-attachment: fixed !Important;',
-                         :verbose,  
-                         ast => {"val" => [{"type" => "property",
-                                            "val" => {"expr" => {"val" => [{"keyw" => {"val" => "fixed", "type" => "keyword"}}]},
-                                                      "prio" => "important", "property" => "background-attachment"}}],
-                                 "type" => "property-list"},
+                         ast => [ { property => "background-attachment",
+                                    expr => [ { keyw => "fixed" } ],
+                                    prio => "important" } ],
     },
   ) {
     my $rule = .key;

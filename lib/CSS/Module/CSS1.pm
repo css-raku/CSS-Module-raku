@@ -26,7 +26,7 @@ grammar CSS::Module::CSS1:ver<20080411.000>
         rule border-color {:i <color> | [ transparent ] & <keyw> }
 
         rule family-name    { <family-name=.identifiers> || <family-name=.string> }
-        rule generic-family {:i [ serif | sans\-serif | cursive | fantasy | monospace ] & <generic-family=.identifier> }
+        rule generic-family {:i [ serif | sans\-serif | cursive | fantasy | monospace ] & <keyw> }
 
         rule absolute-size {:i [ [x[x]?\-]?[small|large] | medium ] & <keyw> }
         rule relative-size {:i [ larger | smaller ] & <keyw> }

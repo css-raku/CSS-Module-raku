@@ -41,11 +41,11 @@ class CSS::Module::_Base::Actions
     #---- Language Extensions ----#
 
     method length:sym<zero>($/) {
-        make $.token(0, :type(CSSValue::LengthComponent), :units<px>)
+        make $.token(0, :type(CSSValue::LengthComponent))
     }
 
     method angle:sym<zero>($/) {
-        make $.token(0, :type(CSSValue::AngleComponent), :units<deg>)
+        make $.token(0, :type(CSSValue::AngleComponent))
     }
 
     has Hash $.colors = {

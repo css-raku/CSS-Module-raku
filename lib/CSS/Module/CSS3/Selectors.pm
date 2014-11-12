@@ -89,7 +89,7 @@ class CSS::Module::CSS3::Selectors::Actions
         my %node = %( $.node($/) );
         %node<ident> = $ident;
 
-        make %node;
+        make $.token( %node, :type(CSS::Grammar::AST::CSSSelector::PseudoFunction));
     }
     method pseudo-function:sym<structural-selector>($/)  { make $<structural-selector>.ast }
 
@@ -125,7 +125,7 @@ class CSS::Module::CSS3::Selectors::Actions
         return $.warning('missing/incorrect arguments to :not()', ~$<any-args>)
             if $<any-args>;
         return unless $<negation-args>.ast;
-        make {ident => 'not', args => $<negation-args>.ast}
+        make $.token( {ident => 'not', args => $<negation-args>.ast}, :type(CSS::Grammar::AST::CSSSelector::PseudoFunction));
     }
 }
 

@@ -257,17 +257,17 @@ class CSS::Module::CSS3::Colors::Actions
 
     method color:sym<rgba>($/) {
         return $.warning( $<usage>.ast ) if $<usage>;
-        make $.token($.node($/), :units<rgba>);
+        make $.token($.node($/, :!map), :units<rgba>);
     }
 
     method color:sym<hsl>($/)  {
         return $.warning( $<usage>.ast ) if $<usage>;
-        make $.token($.node($/), :units<hsl>);
+        make $.token($.node($/, :!map), :units<hsl>);
     }
 
     method color:sym<hsla>($/) {
         return $.warning( $<usage>.ast ) if $<usage>;
-        make $.token($.node($/), :units<hsla>);
+        make $.token($.node($/, :!map), :units<hsla>);
     }
 
     method color:sym<current>($/) {

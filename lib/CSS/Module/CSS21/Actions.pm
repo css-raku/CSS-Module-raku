@@ -44,15 +44,15 @@ class CSS::ModuleX::CSS21::Actions
 
    # --- Expressions --- #
 
-    method border-style($/) { make $.list($/) }
-    method border-width($/) { make $.list($/) }
-    method family-name($/) { make $<family-name>.ast }
-    method generic-family($/) { make $<generic-family>.ast }
-    method absolute-size($/) { make $.token($<keyw>.ast) }
-    method relative-size($/) { make $.token($<keyw>.ast) }
-    method margin-width($/) { make $.list($/) }
-    method padding-width($/) { make $.list($/) }
-    method generic-voice($/) { make $.list($/) }
+    method border-style($/)   { make $.list($/) }
+    method border-width($/)   { make $.list($/) }
+    method family-name($/)    { make $<family-name>.ast }
+    method generic-family($/) { make $<keyw>.ast }
+    method absolute-size($/)  { make $<keyw>.ast }
+    method relative-size($/)  { make $<keyw>.ast }
+    method margin-width($/)   { make $.list($/) }
+    method padding-width($/)  { make $.list($/) }
+    method generic-voice($/)  { make $.list($/) }
     method specific-voice($/) { make $.list($/) }
 }
 

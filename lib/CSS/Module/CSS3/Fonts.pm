@@ -30,7 +30,7 @@ grammar CSS::Module::CSS3::Fonts:ver<20130212.000>
     rule font-variant-css21 {:i [ normal | small\-caps ] & <keyw> }
     rule expr-font-family    {:i  [ <generic-family> || <family-name> ] +% ',' }
     rule family-name    { <family-name=.identifiers> || <family-name=.string> }
-    rule generic-family {:i [ serif | sans\-serif | cursive | fantasy | monospace ] & <generic-family=.identifier> }
+    rule generic-family {:i [ serif | sans\-serif | cursive | fantasy | monospace ] & <keyw> }
     rule absolute-size {:i [ [[xx|x]\-]?small | medium | [[xx|x]\-]?large ] & <keyw> }
     rule relative-size {:i [ larger | smaller ] & <keyw> }
     rule expr-font-size {:i <absolute-size> | <relative-size> | <length> | <percentage> }
@@ -62,16 +62,16 @@ class CSS::Module::CSS3::Fonts::Actions
         make $<font-face-name>.ast;
     }
 
-    method font-description($/) { make $<declarations>.ast }
-    method font-face-name($/) { make $<font-face-name>.ast }
-    method expr-font-family($/) { make $.list($/) }
-    method family-name($/) { make $<family-name>.ast }
-    method generic-family($/) { make $<generic-family>.ast }
-    method absolute-size($/) { make $.token($<keyw>.ast) }
-    method relative-size($/) { make $.token($<keyw>.ast) }
-    method expr-font-size($/) { make $.list($/) }
+    method font-description($/)   { make $<declarations>.ast }
+    method font-face-name($/)     { make $<font-face-name>.ast }
+    method expr-font-family($/)   { make $.list($/) }
+    method family-name($/)        { make $<family-name>.ast }
+    method generic-family($/)     { make $<keyw>.ast }
+    method absolute-size($/)      { make $<keyw>.ast }
+    method relative-size($/)      { make $<keyw>.ast }
+    method expr-font-size($/)     { make $.list($/) }
     method font-variant-css21($/) { make $.list($/) }
-    method src($/) { make $.node($/) }
+    method src($/)                { make $.node($/) }
 
 }
 
