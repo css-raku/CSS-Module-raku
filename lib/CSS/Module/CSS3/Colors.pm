@@ -53,10 +53,10 @@ grammar CSS::Module::CSS3::Colors:ver<20110607.000>
     # <rgb> and <hex> are defined in CSS core grammar
     #| usage: rgba(c,c,c,a) where c is 0..255 or 0%-100% and a is 0-1 or 0%-100%
     rule color:sym<rgba> {:i'rgba('
-                              [ <r=.color-range> ','
-                                <g=.color-range> ','
-                                <b=.color-range> ','
-                                <a=.color-alpha> || <usage(&?ROUTINE.WHY)> ]
+                              [ <c=.color-range> ','
+                                <c=.color-range> ','
+                                <c=.color-range> ','
+                                <c=.color-alpha> || <usage(&?ROUTINE.WHY)> ]
                    ')'
     }
 
@@ -64,18 +64,18 @@ grammar CSS::Module::CSS3::Colors:ver<20110607.000>
 
     #| usage: hsl(h,s,l) where h is 0..360  and s,l are 0-1 or 0%-100%
     rule color:sym<hsl> {:i'hsl('
-                             [ <h=.color-angle> ','
-                               <s=.percentage-range> ','
-                               <l=.percentage-range> || <usage(&?ROUTINE.WHY)> ]
+                             [ <c=.color-angle> ','
+                               <c=.percentage-range> ','
+                               <c=.percentage-range> || <usage(&?ROUTINE.WHY)> ]
                     ')'
     }
 
     #| usage: hsla(h,s,l,a) where h is 0..360  and s,l,a are 0-1 or 0%-100%
     rule color:sym<hsla> {:i'hsla('
-                              [ <h=.color-angle> ','
-                                <s=.percentage-range> ','
-                                <l=.percentage-range> ','
-                                <a=.percentage-range> || <usage(&?ROUTINE.WHY)> ]
+                              [ <c=.color-angle> ','
+                                <c=.percentage-range> ','
+                                <c=.percentage-range> ','
+                                <c=.percentage-range> || <usage(&?ROUTINE.WHY)> ]
                    ')'
     }
 
@@ -257,17 +257,17 @@ class CSS::Module::CSS3::Colors::Actions
 
     method color:sym<rgba>($/) {
         return $.warning( $<usage>.ast ) if $<usage>;
-        make $.token($.node($/, :!map), :units<rgba>);
+        make $.token([ $<c>>>.ast ], :units<rgba>);
     }
 
     method color:sym<hsl>($/)  {
         return $.warning( $<usage>.ast ) if $<usage>;
-        make $.token($.node($/, :!map), :units<hsl>);
+        make $.token([ $<c>>>.ast ], :units<hsl>);
     }
 
     method color:sym<hsla>($/) {
         return $.warning( $<usage>.ast ) if $<usage>;
-        make $.token($.node($/, :!map), :units<hsla>);
+        make $.token([ $<c>>>.ast ], :units<hsla>);
     }
 
     method color:sym<current>($/) {

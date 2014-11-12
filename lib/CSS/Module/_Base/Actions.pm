@@ -69,12 +69,11 @@ class CSS::Module::_Base::Actions
             };
 
    method color:sym<named>($/) {
-        my $color_name = $<keyw>.ast;
-        my $color = $.colors{$color_name}
-        or die  "unknown color: " ~ $color_name;
-
-        my %rgb; %rgb<r g b> = $color.map: { $.token( $_, :type(CSSValue::NumberComponent)) };
-        make $.token(%rgb, :type<color>, :units<rgb>);
+        my $color-name = $<keyw>.ast;
+        my @rgb = @( $.colors{$color-name} )
+            or die "unknown color: " ~ $color-name;
+        my @color = @rgb.map: { $.token( $_, :type(CSSValue::NumberComponent)) }
+        make $.token(@color, :type<color>, :units<rgb>);
     }
 
     method integer($/)     {
