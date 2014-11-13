@@ -23,7 +23,7 @@ for 't/css21-properties.json'.IO.lines {
     my $prop = %expected<prop>.lc;
     my $expr = %expected<expr>;
 
-    %expected<ast> = $expr ?? [{ property => $prop, expr => $expr }] !! Any;
+    %expected<ast> = $expr ?? [{ ident => $prop, expr => $expr }] !! Any;
 
     my $input = $prop ~ ':' ~ %expected<decl>;
 
@@ -54,7 +54,7 @@ for 't/css21-properties.json'.IO.lines {
 	    for @proforma -> $misc {
 		my $decl = $prop ~ ': ' ~ $misc;
 
-                my $ast = [{ property => $prop, expr => [ {keyw => $misc} ] }];
+                my $ast = [{ ident => $prop, expr => [ {keyw => $misc} ] }];
 
                 CSS::Grammar::Test::parse-tests($class, $decl,
 						:rule<declaration-list>,

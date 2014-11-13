@@ -40,7 +40,7 @@ for (
 			 ast => [],
     },
     declaration-list => {input => 'background-attachment: FiXed',
-                         ast => [{property => 'background-attachment', expr => [{keyw => 'fixed'}]}],
+                         ast => [{ident => 'background-attachment', expr => [{keyw => 'fixed'}]}],
     },
     declaration-list => {input => 'font-family: "unclosed-string',
 			 ast => [],
@@ -48,16 +48,16 @@ for (
     },
     # recheck comments and whitespace
     declaration-list => {input => '/*aa*/COLoR/*bb*/:<!--cc-->BLUE /*dd*/;',
-			 ast => [{property => "color", "expr" => [{"rgb" => [ {num => 0}, {num => 0}, {num => 255} ]}]}],
+			 ast => [{ident => "color", "expr" => [{"rgb" => [ {num => 0}, {num => 0}, {num => 255} ]}]}],
     },
     # boxed properties should be expanded
     declaration-list => {input => 'margin: 2em 3em',
-                         ast => [{property => "margin",
+                         ast => [{ident => "margin",
                                  "expr" => [{"em" => 2}, {"em" => 3}]}],
     },
     # check override rules
     declaration-list => {input => 'background-attachment: fixed !Important;',
-                         ast => [ { property => "background-attachment",
+                         ast => [ { ident => "background-attachment",
                                     expr => [ { keyw => "fixed" } ],
                                     prio => "important" } ],
     },

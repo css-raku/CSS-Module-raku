@@ -23,7 +23,7 @@ class CSS::Module::_Base::Actions
             unless +%ast;
 
         if $<any-arg> {
-            return $.warning("extra terms following '{%ast<property>}' declaration",
+            return $.warning("extra terms following '{%ast<ident>}' declaration",
                              ~$<any-arg>, 'dropped');
         }
 
