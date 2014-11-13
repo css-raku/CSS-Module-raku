@@ -72,8 +72,11 @@ class CSS::Module::_Base::Actions
         my $color-name = $<keyw>.ast;
         my @rgb = @( $.colors{$color-name} )
             or die "unknown color: " ~ $color-name;
-        my @color = @rgb.map: { $.token( $_, :type(CSSValue::NumberComponent)) }
-        make $.token(@color, :type<color>, :units<rgb>);
+
+        my $num-type = CSSValue::NumberComponent;
+        my @color = @rgb.map: { %( $num-type.Str => $.token( $_, :type($num-type)) ).item };
+
+        make $.token(@color, :units<rgb>);
     }
 
     method integer($/)     {
@@ -82,6 +85,7 @@ class CSS::Module::_Base::Actions
             if $<sign> && $<sign> eq '-';
         make $.token($val, :type(CSSValue::IntegerComponent))
     }
+
     method uint($/)        { make $/.Int }
     method number($/)      { make $.token($<num>.ast, :type(CSSValue::NumberComponent)) }
     method uri($/)         { make $<url>.ast }

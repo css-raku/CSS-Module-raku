@@ -48,7 +48,7 @@ for (
     },
     # recheck comments and whitespace
     declaration-list => {input => '/*aa*/COLoR/*bb*/:<!--cc-->BLUE /*dd*/;',
-			 ast => [{property => "color", "expr" => [{"rgb" => [ 0, 0, 255]}]}],
+			 ast => [{property => "color", "expr" => [{"rgb" => [ {num => 0}, {num => 0}, {num => 255} ]}]}],
     },
     # boxed properties should be expanded
     declaration-list => {input => 'margin: 2em 3em',

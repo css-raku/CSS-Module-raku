@@ -235,8 +235,7 @@ class CSS::Module::CSS3::Colors::Actions
     };
 
     method color-angle($/) {
-        my $angle = $<number>.ast;
-        make $.token($angle, :units('deg'));
+        make $<number>.ast;
     }
 
     method color-alpha($/) {
@@ -257,17 +256,17 @@ class CSS::Module::CSS3::Colors::Actions
 
     method color:sym<rgba>($/) {
         return $.warning( $<usage>.ast ) if $<usage>;
-        make $.token([ $<c>>>.ast ], :units<rgba>);
+        make $.token( $.list($/), :units<rgba>);
     }
 
     method color:sym<hsl>($/)  {
         return $.warning( $<usage>.ast ) if $<usage>;
-        make $.token([ $<c>>>.ast ], :units<hsl>);
+        make $.token( $.list($/), :units<hsl>);
     }
 
     method color:sym<hsla>($/) {
         return $.warning( $<usage>.ast ) if $<usage>;
-        make $.token([ $<c>>>.ast ], :units<hsla>);
+        make $.token( $.list($/), :units<hsla>);
     }
 
     method color:sym<current>($/) {
