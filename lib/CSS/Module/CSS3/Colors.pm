@@ -256,17 +256,17 @@ class CSS::Module::CSS3::Colors::Actions
 
     method color:sym<rgba>($/) {
         return $.warning( $<usage>.ast ) if $<usage>;
-        make $.token( $.list($/), :units<rgba>);
+        make $.token( $.list($/), :type<rgba>);
     }
 
     method color:sym<hsl>($/)  {
         return $.warning( $<usage>.ast ) if $<usage>;
-        make $.token( $.list($/), :units<hsl>);
+        make $.token( $.list($/), :type<hsl>);
     }
 
     method color:sym<hsla>($/) {
         return $.warning( $<usage>.ast ) if $<usage>;
-        make $.token( $.list($/), :units<hsla>);
+        make $.token( $.list($/), :type<hsla>);
     }
 
     method color:sym<current>($/) {

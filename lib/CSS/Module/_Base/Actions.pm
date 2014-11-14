@@ -76,7 +76,7 @@ class CSS::Module::_Base::Actions
         my $num-type = CSSValue::NumberComponent;
         my @color = @rgb.map: { %( $num-type.Str => $.token( $_, :type($num-type)) ).item };
 
-        make $.token(@color, :units<rgb>);
+        make $.token(@color, :type<rgb>);
     }
 
     method integer($/)     {
