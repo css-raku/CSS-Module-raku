@@ -23,12 +23,12 @@ grammar CSS::Module::CSS3::Selectors:ver<20110929.000>
  
     rule no-namespace {<?>}
     rule wildcard {'*'}
-    rule namespace-prefix {[<Ident>|<wildcard>|<no-namespace>]'|'}
+    rule namespace-prefix {[<prefix=.Ident>|<prefix=.wildcard>|<prefix=.no-namespace>]'|'}
 
     # use <qname> in preference to <type_selector>
     # - see http://www.w3.org/TR/2008/CR-css3-namespace-20080523/#css-qnames
     rule qname      {<namespace-prefix>? <element-name>}
-    rule universal  {<namespace-prefix>? <wildcard>}
+    rule universal  {<namespace-prefix>? <element-name=.wildcard>}
     rule simple-selector { [<qname><!before '|'>|<universal>][<id>|<class>|<attrib>|<pseudo>]*
                                | [<id>|<class>|<attrib>|<pseudo>]+ }
 
@@ -70,8 +70,8 @@ class CSS::Module::CSS3::Selectors::Actions
     method pseudo:sym<::element>($/) { make $.node($/) }
 
     method no-namespace($/)     { make $.token('', :type(CSSValue::ElementNameComponent)) }
-    method namespace-prefix($/) { make $.token( $.node($/), :type(CSSValue::NamespacePrefixComponent)) }
-    method wildcard($/)         { make $.token(~$/, :type(CSSValue::ElementNameComponent)) }
+    method namespace-prefix($/) { make $.token( $<prefix>.ast, :type(CSSValue::NamespacePrefixComponent)) }
+    method wildcard($/)         { make ~$/ }
     method type-selector($/)    { make $.node($/) }
     method qname($/)            { make $.token( $.node($/), :type(CSSValue::QnameComponent)) }
     method universal($/)        { make $.token( $.node($/), :type(CSSValue::QnameComponent)) }
