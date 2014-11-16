@@ -3,12 +3,12 @@
 { "prop" : "background-repeat", "decl" : "Repeat-x", "expr" : [ { "keyw" : "repeat-x" } ] }
 { "prop" : "background-attachment", "decl" : "FiXed", "expr" : [ { "keyw" : "fixed" } ] }
 { "prop" : "background-position", "decl" : "100% 90%", "expr" : [ { "percent" : 100 }, { "percent" : 90 } ] }
-{ "prop" : "background", "decl" : "url(chess.png) gray 50% repeat scroll", "expr" : [ { "background-image" : [ { "url" : "chess.png" } ] }, { "background-color" : [ { "rgb" : [ { "num" : 128 }, { "num" : 128 }, { "num" : 128 } ] } ] }, { "background-position" : [ { "percent" : 50 } ] }, { "background-repeat" : [ { "keyw" : "repeat" } ] }, { "background-attachment" : [ { "keyw" : "scroll" } ] } ] }
+{ "prop" : "background", "decl" : "url(chess.png) gray 50% repeat scroll", "expr" : [ { "expr:background-image" : [ { "url" : "chess.png" } ] }, { "expr:background-color" : [ { "rgb" : [ { "num" : 128 }, { "num" : 128 }, { "num" : 128 } ] } ] }, { "expr:background-position" : [ { "percent" : 50 } ] }, { "expr:background-repeat" : [ { "keyw" : "repeat" } ] }, { "expr:background-attachment" : [ { "keyw" : "scroll" } ] } ] }
 { "prop" : "border-top-width", "decl" : "thick", "expr" : [ { "keyw" : "thick" } ] }
 { "prop" : "border-width", "decl" : "2ex 1.5em 3ex 2em", "expr" : [ { "ex" : 2 }, { "em" : 1.5 }, { "ex" : 3 }, { "em" : 2 } ] }
 { "prop" : "border-color", "decl" : "#a7f #aa77ff rgb(100,150,20) aqua", "expr" : [ { "rgb" : [ { "num" : 170 }, { "num" : 119 }, { "num" : 255 } ] }, { "rgb" : [ { "num" : 170 }, { "num" : 119 }, { "num" : 255 } ] }, { "rgb" : [ { "num" : 100 }, { "num" : 150 }, { "num" : 20 } ] }, { "rgb" : [ { "num" : 0 }, { "num" : 255 }, { "num" : 255 } ] } ] }
 { "prop" : "border-style", "decl" : "groove", "expr" : [ { "keyw" : "groove" } ] }
-{ "prop" : "border", "decl" : "1px solid red", "expr" : [ { "border-width" : [ { "px" : 1 } ] }, { "border-style" : [ { "keyw" : "solid" } ] }, { "border-color" : [ { "rgb" : [ { "num" : 255 }, { "num" : 0 }, { "num" : 0 } ] } ] } ] }
+{ "prop" : "border", "decl" : "1px solid red", "expr" : [ { "expr:border-width" : [ { "px" : 1 } ] }, { "expr:border-style" : [ { "keyw" : "solid" } ] }, { "expr:border-color" : [ { "rgb" : [ { "num" : 255 }, { "num" : 0 }, { "num" : 0 } ] } ] } ] }
 { "prop" : "border", "decl" : "1px red blue", "warnings" : "extra terms following 'border' declaration: blue - dropped" }
 { "prop" : "clear", "decl" : "both", "expr" : [ { "keyw" : "both" } ] }
 { "prop" : "color", "decl" : "#3377aa", "expr" : [ { "rgb" : [ { "num" : 51 }, { "num" : 119 }, { "num" : 170 } ] } ] }
@@ -23,14 +23,14 @@
 { "prop" : "font-size", "decl" : "12pt", "expr" : [ { "pt" : 12 } ] }
 { "prop" : "font-size", "decl" : "150%", "expr" : [ { "percent" : 150 } ] }
 { "prop" : "font-size", "decl" : "Larger", "expr" : [ { "keyw" : "larger" } ] }
-{ "prop" : "font", "decl" : "12pt/14pt sans-serif", "expr" : [ { "font-size" : [ { "pt" : 12 } ] }, { "line-height" : [ { "pt" : 14 } ] }, { "font-family" : [ { "keyw" : "sans-serif" } ] } ] }
-{ "prop" : "font", "decl" : "normal small-caps 120%/120% fantasy", "expr" : [ { "font-style" : [{ "keyw" : "normal" }] }, { "font-variant" : [{ "keyw" : "small-caps" }] }, { "font-size" : [ { "percent" : 120 } ] }, { "line-height" : [ { "percent" : 120 } ] }, { "font-family" : [ { "keyw" : "fantasy" } ] } ] }
+{ "prop" : "font", "decl" : "12pt/14pt sans-serif", "expr" : [ { "expr:font-size" : [ { "pt" : 12 } ] }, { "expr:line-height" : [ { "pt" : 14 } ] }, { "expr:font-family" : [ { "keyw" : "sans-serif" } ] } ] }
+{ "prop" : "font", "decl" : "normal small-caps 120%/120% fantasy", "expr" : [ { "expr:font-style" : [{ "keyw" : "normal" }] }, { "expr:font-variant" : [{ "keyw" : "small-caps" }] }, { "expr:font-size" : [ { "percent" : 120 } ] }, { "expr:line-height" : [ { "percent" : 120 } ] }, { "expr:font-family" : [ { "keyw" : "fantasy" } ] } ] }
 { "prop" : "letter-spacing", "decl" : "normal", "expr" : [ { "keyw" : "normal" } ] }
 { "prop" : "line-height", "decl" : "120%", "expr" : [ { "percent" : 120 } ] }
 { "prop" : "list-style-type", "decl" : "square", "expr" : [ { "keyw" : "square" } ] }
 { "prop" : "list-style-image", "decl" : "url(snoopy.png)", "expr" : [ { "url" : "snoopy.png" } ] }
 { "prop" : "list-style-position", "decl" : "outside", "expr" : [ { "keyw" : "outside" } ] }
-{ "prop" : "list-style", "decl" : "url(http://png.com/ellipse.png) disc outside", "expr" : [ { "list-style-image" : [ { "url" : "http://png.com/ellipse.png" } ] }, { "list-style-type" : [ { "keyw" : "disc" } ] }, { "list-style-position" : [ { "keyw" : "outside" } ] } ] }
+{ "prop" : "list-style", "decl" : "url(http://png.com/ellipse.png) disc outside", "expr" : [ { "expr:list-style-image" : [ { "url" : "http://png.com/ellipse.png" } ] }, { "expr:list-style-type" : [ { "keyw" : "disc" } ] }, { "expr:list-style-position" : [ { "keyw" : "outside" } ] } ] }
 { "prop" : "overflow", "decl" : "scroll", "expr" : [ { "keyw" : "scroll" } ] }
 { "prop" : "padding-bottom", "decl" : "2em", "expr" : [ { "em" : 2 } ] }
 { "prop" : "position", "decl" : "absolute", "expr" : [ { "keyw" : "absolute" } ] }
