@@ -17,7 +17,7 @@ grammar CSS::Module::CSS1:ver<20080411.000>
     does CSS::Module::CSS1::Spec::Interface {
 
         # tweak generated font-family expression.
-        rule expr-font-family    {:i  [ <generic-family> || <family-name> ] +% ',' }
+        rule expr-font-family    {:i  [ <generic-family> || <family-name> ] +% <op(',')> }
 
         # allow color names and define our vocabulary
         rule color:sym<named>  {:i [aqua | black | blue | fuchsia | gray | green | lime | maroon | navy | olive | purple | red | silver | teal | white | yellow] & <keyw> }

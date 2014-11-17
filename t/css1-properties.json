@@ -14,7 +14,7 @@
 { "prop" : "color", "decl" : "#3377aa", "expr" : [ { "rgb" : [ { "num" : 51 }, { "num" : 119 }, { "num" : 170 } ] } ] }
 { "prop" : "display", "decl" : "list-item", "expr" : [ { "keyw" : "list-item" } ] }
 { "prop" : "float", "decl" : "left", "expr" : [ { "keyw" : "left" } ] }
-{ "prop" : "font-family", "decl" : "Gill, 'Helvetica', sans-serif", "expr" : [ { "ident" : "Gill" }, { "string" : "Helvetica" }, { "keyw" : "sans-serif" } ] }
+{ "prop" : "font-family", "decl" : "Gill, 'Helvetica', sans-serif", "expr" : [ { "ident" : "Gill" }, { "op" : "," }, { "string" : "Helvetica" }, { "op" : "," }, { "keyw" : "sans-serif" } ] }
 { "prop" : "font-family", "decl" : "New Century Schoolbook", "expr" : [ { "ident" : "New Century Schoolbook" } ] }
 { "prop" : "font-style", "decl" : "italic", "expr" : [ { "keyw" : "italic" } ] }
 { "prop" : "font-variant", "decl" : "small-caps", "expr" : [ { "keyw" : "small-caps" } ] }
@@ -23,8 +23,8 @@
 { "prop" : "font-size", "decl" : "12pt", "expr" : [ { "pt" : 12 } ] }
 { "prop" : "font-size", "decl" : "150%", "expr" : [ { "percent" : 150 } ] }
 { "prop" : "font-size", "decl" : "Larger", "expr" : [ { "keyw" : "larger" } ] }
-{ "prop" : "font", "decl" : "12pt/14pt sans-serif", "expr" : [ { "expr:font-size" : [ { "pt" : 12 } ] }, { "expr:line-height" : [ { "pt" : 14 } ] }, { "expr:font-family" : [ { "keyw" : "sans-serif" } ] } ] }
-{ "prop" : "font", "decl" : "normal small-caps 120%/120% fantasy", "expr" : [ { "expr:font-style" : [{ "keyw" : "normal" }] }, { "expr:font-variant" : [{ "keyw" : "small-caps" }] }, { "expr:font-size" : [ { "percent" : 120 } ] }, { "expr:line-height" : [ { "percent" : 120 } ] }, { "expr:font-family" : [ { "keyw" : "fantasy" } ] } ] }
+{ "prop" : "font", "decl" : "12pt/14pt sans-serif", "expr" : [ { "expr:font-size" : [ { "pt" : 12 } ] }, { "op" : "/" }, { "expr:line-height" : [ { "pt" : 14 } ] }, { "expr:font-family" : [ { "keyw" : "sans-serif" } ] } ] }
+{ "prop" : "font", "decl" : "normal small-caps 120%/120% fantasy", "expr" : [ { "expr:font-style" : [{ "keyw" : "normal" }] }, { "expr:font-variant" : [{ "keyw" : "small-caps" }] }, { "expr:font-size" : [ { "percent" : 120 } ] }, { "op" : "/" }, { "expr:line-height" : [ { "percent" : 120 } ] }, { "expr:font-family" : [ { "keyw" : "fantasy" } ] } ] }
 { "prop" : "letter-spacing", "decl" : "normal", "expr" : [ { "keyw" : "normal" } ] }
 { "prop" : "line-height", "decl" : "120%", "expr" : [ { "percent" : 120 } ] }
 { "prop" : "list-style-type", "decl" : "square", "expr" : [ { "keyw" : "square" } ] }

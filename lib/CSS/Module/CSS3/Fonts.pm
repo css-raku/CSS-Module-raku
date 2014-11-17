@@ -26,9 +26,9 @@ grammar CSS::Module::CSS3::Fonts:ver<20130212.000>
     rule at-rule:sym<font-face> {(:i'font-face') <font-description> }
 
     # ---- Expressions ----
-    rule expr-font {:i [ [ [ [:my @*SEEN; <expr-font-style> <!seen(0)> | <expr-font-variant=.font-variant-css21> <!seen(1)> | <expr-font-weight> <!seen(2)> | <expr-font-stretch> <!seen(3)> ]+ ]? <expr-font-size> [ '/' <expr-line-height> ]? <expr-font-family> ] | [ caption | icon | menu | message\-box | small\-caption | status\-bar ] & <keyw> ] }
+    rule expr-font {:i [ [ [ [:my @*SEEN; <expr-font-style> <!seen(0)> | <expr-font-variant=.font-variant-css21> <!seen(1)> | <expr-font-weight> <!seen(2)> | <expr-font-stretch> <!seen(3)> ]+ ]? <expr-font-size> [ <op('/')> <expr-line-height> ]? <expr-font-family> ] | [ caption | icon | menu | message\-box | small\-caption | status\-bar ] & <keyw> ] }
     rule font-variant-css21 {:i [ normal | small\-caps ] & <keyw> }
-    rule expr-font-family    {:i  [ <generic-family> || <family-name> ] +% ',' }
+    rule expr-font-family    {:i  [ <generic-family> || <family-name> ] +% <op(',')> }
     rule family-name    { <family-name=.identifiers> || <family-name=.string> }
     rule generic-family {:i [ serif | sans\-serif | cursive | fantasy | monospace ] & <keyw> }
     rule absolute-size {:i [ [[xx|x]\-]?small | medium | [[xx|x]\-]?large ] & <keyw> }

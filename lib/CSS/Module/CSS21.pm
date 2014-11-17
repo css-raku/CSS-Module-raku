@@ -44,7 +44,7 @@ grammar CSS::ModuleX::CSS21:ver<20110607.000>
     rule expr-elevation {:i <angle>
                              | [below | level | above ] & <direction=.keyw>
                              | [ higher | lower ] & <tilt=.keyw> }
-    rule expr-font-family    {:i  [ <generic-family> || <family-name> ] +% ',' }
+    rule expr-font-family    {:i  [ <generic-family> || <family-name> ] +% <op(',')> }
     rule family-name    { <family-name=.identifiers> || <family-name=.string> }
     rule generic-family {:i [ serif | sans\-serif | cursive | fantasy | monospace ] & <keyw> }
     rule absolute-size  {:i [ [x[x]?\-]?[small|large] | medium ] & <keyw> }
@@ -53,7 +53,7 @@ grammar CSS::ModuleX::CSS21:ver<20110607.000>
     rule padding-width  {:i <length> | <percentage> }
     rule generic-voice  {:i [ male | female | child ] & <keyw> }
     rule specific-voice {:i <identifier> | <string> }
-    rule expr-voice-family { [ <generic-voice> || <specific-voice> ] +% ',' }
+    rule expr-voice-family { [ <generic-voice> || <specific-voice> ] +% <op(',')> }
 }
 
 grammar CSS::Module::CSS21:ver<20110607.000>

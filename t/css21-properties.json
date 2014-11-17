@@ -64,6 +64,6 @@
 { "prop" : "table-layout", "decl" : "fixed", "expr" : [ { "keyw" : "fixed" } ] }
 { "prop" : "unicode-bidi", "decl" : "embed", "expr" : [ { "keyw" : "embed" } ] }
 { "prop" : "visibility", "decl" : "hidden", "expr" : [ { "keyw" : "hidden" } ] }
-{ "prop" : "voice-family", "decl" : "juliet, female", "expr" : [ { "specific-voice" : [ { "ident" : "juliet" } ] }, { "generic-voice" : [ { "keyw" : "female" } ] } ] }
+{ "prop" : "voice-family", "decl" : "juliet, female", "expr" : [ { "specific-voice" : [ { "ident" : "juliet" } ] }, { "op" : "," }, { "generic-voice" : [ { "keyw" : "female" } ] } ] }
 { "prop" : "VOLUME", "decl" : "LOUD", "expr" : [ { "keyw" : "loud" } ] }
 { "prop" : "widows", "decl" : "3", "expr" : [ { "int" : 3 } ] }

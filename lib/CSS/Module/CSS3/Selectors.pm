@@ -125,7 +125,7 @@ class CSS::Module::CSS3::Selectors::Actions
         return $.warning('missing/incorrect arguments to :not()', ~$<any-args>)
             if $<any-args>;
         return unless $<negation-args>.ast;
-        make $.token( {ident => 'not', args => $<negation-args>.ast}, :type(CSS::Grammar::AST::CSSSelector::PseudoFunction));
+        make $.pseudo-func('not', $<negation-args>.ast);
     }
 }
 
