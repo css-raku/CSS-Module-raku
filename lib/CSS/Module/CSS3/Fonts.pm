@@ -52,14 +52,14 @@ class CSS::Module::CSS3::Fonts::Actions
         return $.warning("usage: format(type)")
             if $<any-args>;
 
-        make $<format>.ast;
+        make $.func( $0.lc, $<format>.ast );
     }
 
     method local($/) {
         return $.warning("usage: local(font-face-name)")
             if $<any-args>;
 
-        make $<font-face-name>.ast;
+        make $.func( $0.lc, $<font-face-name>.ast );
     }
 
     method font-description($/)   { make $<declarations>.ast }

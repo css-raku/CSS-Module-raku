@@ -17,8 +17,8 @@ grammar CSS::Module::CSS3::Fonts::AtFontFace
     # @font-face declarations
 
     # ---- Functions ----
-    rule format {:i'format(' [ <format=.string> | <format=.keyw> || <any-args> ] ')'}
-    rule local  {:i'local(' [ <font-face-name> || <any-args> ] ')'}
+    rule format {:i('format')'(' [ <format=.string> | <format=.keyw> || <any-args> ] ')'}
+    rule local  {:i('local')'(' [ <font-face-name> || <any-args> ] ')'}
     rule font-face-name { <font-face-name=.identifiers> | <font-face-name=.string> }
     rule family-name    { <family-name=.identifiers> || <family-name=.string> }
 }
