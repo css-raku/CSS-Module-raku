@@ -26,8 +26,7 @@ grammar CSS::ModuleX::CSS21:ver<20110607.000>
 
     rule counter  {:i'counter(' [ <identifier> [ ',' <expr-list-style-type> ]* || <any-args> ] ')'}
     rule counters {:i'counters(' [ <identifier> [ ',' <string> [ ',' <expr-list-style-type> ]* ]? || <any-args> ] ')' }
-    rule shape-arg {:i <length> | auto & <keyw> }
-    rule shape    {:i'rect(' [ <top=.shape-arg> ',' <right=.shape-arg> ',' <bottom=.shape-arg> ',' <left=.shape-arg> || <any-args> ] ')' }
+    rule shape    {:i'rect(' [ [ <length> | auto & <keyw> ]**4 %',' || <any-args> ] ')' }
 
     # --- Expressions --- #
 
@@ -52,8 +51,8 @@ grammar CSS::ModuleX::CSS21:ver<20110607.000>
     rule margin-width   {:i <length> | <percentage> | auto & <keyw> }
     rule padding-width  {:i <length> | <percentage> }
     rule generic-voice  {:i [ male | female | child ] & <keyw> }
-    rule specific-voice {:i <identifier> | <string> }
-    rule expr-voice-family { [ <generic-voice> || <specific-voice> ] +% <op(',')> }
+    rule specific-voice {:i <value=.identifier> | <value=.string> }
+    rule expr-voice-family { [ <value=.generic-voice> || <value=.specific-voice> ] +% <op(',')> }
 }
 
 grammar CSS::Module::CSS21:ver<20110607.000>

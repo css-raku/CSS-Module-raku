@@ -40,7 +40,6 @@ class CSS::ModuleX::CSS21::Actions
             if $<any-args>;
         make $.func( 'rect', $.list($/) );
     }
-    method shape-arg($/) { make $.node($/) }
 
    # --- Expressions --- #
 
@@ -50,10 +49,10 @@ class CSS::ModuleX::CSS21::Actions
     method generic-family($/) { make $<keyw>.ast }
     method absolute-size($/)  { make $<keyw>.ast }
     method relative-size($/)  { make $<keyw>.ast }
-    method margin-width($/)   { make $.list($/) }
-    method padding-width($/)  { make $.list($/) }
-    method generic-voice($/)  { make $.list($/) }
-    method specific-voice($/) { make $.list($/) }
+    method margin-width($/)   { make $.node($/) }
+    method padding-width($/)  { make $.node($/) }
+    method generic-voice($/)  { make $<keyw>.ast }
+    method specific-voice($/) { make $<value>.ast }
 }
 
 class CSS::Module::CSS21::Actions

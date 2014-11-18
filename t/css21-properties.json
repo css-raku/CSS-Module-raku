@@ -19,7 +19,7 @@
 { "prop" : "border-bottom-style", "decl" : "outset", "expr" : [ { "keyw" : "outset" } ] }
 { "prop" : "bottom", "decl" : "5%", "expr" : [ { "percent" : 5 } ] }
 { "prop" : "caption-side", "decl" : "top", "expr" : [ { "keyw" : "top" } ] }
-{ "prop" : "clip", "decl" : "rect(5px, 40px, auto, 5px)", "expr" : [ { "func" : { "ident" : "rect", "args" : [ { "top" : { "px" : 5 } }, { "right" : { "px" : 40 } }, { "bottom" : { "keyw" : "auto" } }, { "left" : { "px" : 5 } } ] } } ] }
+{ "prop" : "clip", "decl" : "rect(5px, 40px, auto, 5px)", "expr" : [ { "func" : { "ident" : "rect", "args" : [ { "px" : 5 }, { "px" : 40 }, { "keyw" : "auto" }, { "px" : 5 } ] } } ] }
 { "prop" : "content", "decl" : "attr(foo) \" \"", "expr" : [ { "func" : { "ident" : "attr", "args" : [ { "qname" : { "element-name" : "foo" } } ] } }, { "string" : " " } ] }
 { "prop" : "content", "decl" : "'Section ' counter(Section) '. '", "expr" : [ { "string" : "Section " }, { "func" : { "ident" : "counter", "args" : [ { "ident" : "Section" } ] } }, { "string" : ". " } ] }
 { "prop" : "content", "decl" : "'Section ' counters(Section)", "expr" : [ { "string" : "Section " }, { "func" : { "ident" : "counters", "args" : [ { "ident" : "Section" } ] } } ] }
@@ -64,6 +64,6 @@
 { "prop" : "table-layout", "decl" : "fixed", "expr" : [ { "keyw" : "fixed" } ] }
 { "prop" : "unicode-bidi", "decl" : "embed", "expr" : [ { "keyw" : "embed" } ] }
 { "prop" : "visibility", "decl" : "hidden", "expr" : [ { "keyw" : "hidden" } ] }
-{ "prop" : "voice-family", "decl" : "juliet, female", "expr" : [ { "specific-voice" : [ { "ident" : "juliet" } ] }, { "op" : "," }, { "generic-voice" : [ { "keyw" : "female" } ] } ] }
+{ "prop" : "voice-family", "decl" : "juliet, female", "expr" : [ { "ident" : "juliet" }, { "op" : "," }, { "keyw" : "female" } ] }
 { "prop" : "VOLUME", "decl" : "LOUD", "expr" : [ { "keyw" : "loud" } ] }
 { "prop" : "widows", "decl" : "3", "expr" : [ { "int" : 3 } ] }
