@@ -44,19 +44,19 @@ grammar CSS::Module::CSS3::Selectors:ver<20110929.000>
     rule attribute-selector:sym<substring> {'*='}
 
     # to compute a.n + b
-    proto rule structural-args {*}
-    rule structural-args:sym<odd>   {:i odd }
-    rule structural-args:sym<even>  {:i even }
-    rule structural-args:sym<expr> {
-        [  $<a-sign>=< + - >?<a=.uint>?$<n>=<[Nn]> [$<b-sign>=< + - > <b=.uint>]?
-        || $<b-sign>=< + - >?<b=.uint>
+    proto rule structural-expr {*}
+    rule structural-expr:sym<keyw> {:i [ odd | even ] & <keyw> }
+    token sign { <[ \+ \- ]> }
+    rule structural-expr:sym<expr> {
+        [:i <op=.sign>?$<int:a>=<.uint>?<op(rx:i/n/)> [<op=.sign> $<int:b>=<.uint>]?
+        ||  <op=.sign>?$<int:b>=<.uint>
         ]
     }
 
-    rule structural-selector {:i $<Ident>=[[nth|first|last|nth\-last]\-[child|of\-type]]'(' [ <args=.structural-args> || <any-args> ] ')'}
+    rule structural-selector {:i $<Ident>=[[nth|first|last|nth\-last]\-[child|of\-type]]'(' [ <expr=.structural-expr> || <any-args> ] ')'}
     rule pseudo-function:sym<structural-selector> {<structural-selector>}
-    rule negation-args {[<type-selector> | <universal> | <id> | <class> | <attrib> | [$<nested>=<?before [:i':not(']> || <?>] <pseudo> | <any-arg> ]+}
-    rule pseudo-function:sym<negation>  {:i'not(' [ <negation-args> || <any-args> ] ')'}
+    rule negation-expr {[<type-selector> | <universal> | <id> | <class> | <attrib> | [$<nested>=<?before [:i':not(']> || <?>] <pseudo> | <any-arg> ]+}
+    rule pseudo-function:sym<negation>  {:i'not(' [ <negation-expr> || <any-args> ] ')'}
 
 }
 
@@ -83,7 +83,7 @@ class CSS::Module::CSS3::Selectors::Actions
     method term:sym<unicode-range>($/) { make $.node($/) }
     method structural-selector($/)  {
         my $ident = $<Ident>.lc;
-        return $.warning('usage '~$ident~'(an+b) e.g. "4" "3n+1"')
+        return $.warning('usage '~$ident~'(an[+/-b]|odd|even) e.g. "4" "3n+1"')
             if $<any-args>;
 
         my %node = %( $.node($/) );
@@ -93,27 +93,12 @@ class CSS::Module::CSS3::Selectors::Actions
     }
     method pseudo-function:sym<structural-selector>($/)  { make $<structural-selector>.ast }
 
-    method structural-args:sym<odd>($/)     { make {a => 2, b=> 1} }
-    method structural-args:sym<even>($/)    { make {a => 2, b=> 0} }
-    method structural-args:sym<expr>($/)    {
+    method sign($/) {make ~$/ }
+    method structural-expr:sym<keyw>($/) { make $.list($/) }
+    method structural-expr:sym<expr>($/) { make $.list($/) }
+    method nth-functor($/)               { make $/.lc  }
 
-        my %node = %( $.node($/) );
-
-        if $<a-sign> {
-            %node<a> //= 1;
-            %node<a> = -%node<a> if ~$<a-sign> eq '-';
-        }
-
-        %node<b> //= 0;
-        if $<b-sign> {
-            %node<b> = -%node<b> if ~$<b-sign> eq '-';
-        }
-
-        make %node;
-    }
-    method nth-functor($/)                   { make (~$/).lc  }
-
-    method negation-args($/) {
+    method negation-expr($/) {
         return $.warning('bad :not() argument', ~$<any-arg>)
             if $<any-arg>;
         return $.warning('illegal nested negation', ~$<pseudo>)
@@ -124,8 +109,8 @@ class CSS::Module::CSS3::Selectors::Actions
     method pseudo-function:sym<negation>($/) {
         return $.warning('missing/incorrect arguments to :not()', ~$<any-args>)
             if $<any-args>;
-        return unless $<negation-args>.ast;
-        make $.pseudo-func('not', $<negation-args>.ast);
+        return unless $<negation-expr>.ast;
+        make $.pseudo-func('not', $<negation-expr>.ast);
     }
 }
 
