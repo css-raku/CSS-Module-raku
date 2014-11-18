@@ -26,7 +26,7 @@ grammar CSS::Module::CSS3::MediaQueries:ver<20120619.000>
                       [:i'and' '(' <media-expr> ')' ]*}
     rule media-op    {:i'only'|'not'}
 
-    my rule _range {:i [$<prefix>=[min|max]\-]}
+    rule _range {:i [$<prefix>=[min|max]\-]}
     rule media-expr  { <expr=.media-feature> || <media-feature-unknown> }
 
     proto rule media-feature  {*}
