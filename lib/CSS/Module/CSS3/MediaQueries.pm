@@ -22,7 +22,7 @@ grammar CSS::Module::CSS3::MediaQueries:ver<20120619.000>
     }
 
     rule unknown-media-list  { <CSS::Grammar::Core::_any>* }
-    rule media-query {[<media-op>? <media=.Ident> | '(' <media-expr> ')']
+    rule media-query {[<media-op>? <media-name> | '(' <media-expr> ')']
                       [:i'and' '(' <media-expr> ')' ]*}
     rule media-op    {:i'only'|'not'}
 
@@ -74,25 +74,27 @@ grammar CSS::Module::CSS3::MediaQueries:ver<20120619.000>
 class CSS::Module::CSS3::MediaQueries::Actions
     is CSS::Module::CSS3::_Base::Actions {
 
+        use CSS::Grammar::AST :CSSValue;
+
     # media-rules, media-list, media see core grammar actions
     method unknown-media-list($/) {
 	$.warning("discarding media list");
-        make [{"media-query" => [{"media-op" => "not"}, {"media" => "all"}]}];
+        make [{"media-query" => [{keyw => "not"}, {ident => "all"}]}];
     }
 
     method media-query($/) {
-        return make [{"media-op" => "not"}, {"media" => "all"}]
+        return make [{keyw => "not"}, {ident => "all"}]
             if @<media-expr> && @<media-expr>.grep({! .ast.defined});
 
 	make $.list($/);
     }
 
     method media-op($/) {
-        make $/.Str.lc
+        make $.token($/.lc, :type<keyw>);
     }
 
     method media-expr($/) {
-	make $.decl($<expr>, :proforma() )
+	make $.token( $.decl($<expr>, :proforma()), :type(CSSValue::Property) )
             if $<expr>;
     }
 

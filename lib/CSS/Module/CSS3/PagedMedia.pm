@@ -16,12 +16,10 @@ grammar CSS::Module::CSS3::PagedMedia:ver<20061010.000>
     is CSS::Module::CSS3::PagedMedia::Spec::Grammar
     does CSS::Module::CSS3::PagedMedia::Spec::Interface {
 
-    proto rule page-pseudo {*}
-    rule page-pseudo:sym<keyw>    {:i[left|right|first] && <keyw> || <Ident> }
-    rule page-pseudo:sym<missing> {''}
+    rule page-pseudo        {:i':'[ [left|right|first] && <keyw> || <Ident> ]? }
 
     # @page declarations
-    rule at-rule:sym<page>  {(:i'page') [\:<page=.page-pseudo>]? <declarations=.page-declarations> }
+    rule at-rule:sym<page>  {(:i'page') <page-pseudo>? <declarations=.page-declarations> }
 
     rule page-declarations {
         '{' [ '@'<declaration=.margin-declaration> || <declaration> || <dropped-decl> ]* <.end-block>
@@ -44,12 +42,17 @@ class CSS::Module::CSS3::PagedMedia::Actions
 
         use CSS::Grammar::AST :CSSValue;
 
-        method page-pseudo:sym<keyw>($/)    {
-            return $.warning('ignoring page pseudo', ~$<Ident>)
-                if $<Ident>;
-            make $<keyw>.ast
+        method page-pseudo($/)    {
+            if $<Ident> {
+                $.warning('ignoring page pseudo', ~$<Ident>)
+            }
+            elsif ! $<keyw> { 
+                $.warning("':' should be followed by one of: left right first")
+            }
+            else {
+                make $.token( $<keyw>.ast, :type(CSS::Grammar::AST::CSSSelector::PseudoElement))
+            }
         }
-        method page-pseudo:sym<missing>($/) {$.warning("':' should be followed by one of: left right first")}
 
         method page-declarations($/) { make $.declaration-list($/) }
 
