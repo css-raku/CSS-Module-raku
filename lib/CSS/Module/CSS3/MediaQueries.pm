@@ -15,9 +15,9 @@ use CSS::Module::CSS3::_Base;
 grammar CSS::Module::CSS3::MediaQueries:ver<20120619.000>
     is CSS::Module::CSS3::_Base {
 
-    rule at-rule:sym<media> {(:i'media') [<media-list>||<media-list=.unknown-media-list>] <media-rules> }
+    rule at-rule:sym<media> {(:i'media') [<media-list>||<media-list=.unknown-media-list>] <rule-list> }
 
-    rule media-rules {
+    rule rule-list {
         '{' [ '@'<at-rule> | <ruleset> ]* <.end-block>
     }
 
@@ -76,7 +76,7 @@ class CSS::Module::CSS3::MediaQueries::Actions
 
         use CSS::Grammar::AST :CSSValue;
 
-    # media-rules, media-list, media see core grammar actions
+    # rule-list, media-list, media see core grammar actions
     method unknown-media-list($/) {
 	$.warning("discarding media list");
         make [{"media-query" => [{keyw => "not"}, {ident => "all"}]}];
