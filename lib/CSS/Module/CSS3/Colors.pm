@@ -4,7 +4,7 @@ use v6;
 # specification: http://www.w3.org/TR/2011/REC-css3-color-20110607/
 
 use CSS::Module::CSS3::_Base;
-use CSS::Grammar::AST :CSSValue;
+use CSS::AST :CSSValue;
 
 grammar CSS::Module::CSS3::Colors:ver<20110607.000>
     is CSS::Module::CSS3::_Base {

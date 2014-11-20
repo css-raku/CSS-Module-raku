@@ -74,7 +74,7 @@ grammar CSS::Module::CSS3::MediaQueries:ver<20120619.000>
 class CSS::Module::CSS3::MediaQueries::Actions
     is CSS::Module::CSS3::_Base::Actions {
 
-        use CSS::Grammar::AST :CSSValue;
+        use CSS::AST :CSSValue;
 
     # rule-list, media-list, media see core grammar actions
     method unknown-media-list($/) {

@@ -16,7 +16,7 @@ grammar CSS::Module::CSS3::Namespaces:ver<20110929.000>
 
 class CSS::Module::CSS3::Namespaces::Actions
     is CSS::Module::CSS3::_Base::Actions {
-    use CSS::Grammar::AST :CSSObject;
+    use CSS::AST :CSSObject;
     method at-decl:sym<namespace>($/) { make $.at-rule($/, :type(CSSObject::NamespaceRule)) }
 }
 
