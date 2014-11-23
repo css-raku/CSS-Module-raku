@@ -5,6 +5,7 @@ use JSON::Tiny;
 
 use CSS::Module::CSS3::Selectors;
 use CSS::Grammar::Test;
+use CSS::Writer;
 
 my $actions = CSS::Module::CSS3::Selectors::Actions.new;
 
@@ -20,6 +21,7 @@ for ( 't/css3x-selectors.json'.IO.lines ) {
 				    :$rule,
 				    :$actions,
 				    :suite<css3x-selectors>,
+                                    :writer( CSS::Writer ),
 				    :$expected );
 }
 

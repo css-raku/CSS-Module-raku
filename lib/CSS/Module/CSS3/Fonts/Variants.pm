@@ -51,6 +51,6 @@ class CSS::Module::CSS3::Fonts::Variants::Actions {
     method east-asian-variant-values($/) { make $<keyw>.ast }
     method east-asian-width-values($/) { make $<keyw>.ast }
 
-    method feature-tag-value($/) { make $.node($/) }
+    method feature-tag-value($/) { make $.token( $.list($/), :type<expr:feature-tag-value>) }
     method urange($/) { make $<unicode-range>.ast }
 }
