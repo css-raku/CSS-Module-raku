@@ -4,13 +4,11 @@ use Test;
 
 use CSS::Module::CSS1::Actions;
 use CSS::Module::CSS1;
-
 use CSS::Module::CSS21::Actions;
 use CSS::Module::CSS21;
-
 use CSS::Module::CSS3;
-
 use CSS::Grammar::Test;
+use CSS::Writer;
 
 for ("012AF", "012AFc") {
     # css21+ unicode is up to 6 digits
@@ -31,32 +29,32 @@ my $css21-actions = CSS::Module::CSS21::Actions.new;
 my $css3-actions  = CSS::Module::CSS3::Actions.new;
 
 for (
-    declaration-list => {input => 'bad-prop: badval',
+    declarations => {input => '{bad-prop: badval}',
 			 warnings => 'dropping declaration: bad-prop',
 			 ast => [],
     },
-    declaration-list => {input => 'background-attachment: crud',
+    declarations => {input => '{background-attachment: crud}',
 			 warnings => rx{^'usage background-attachment: scroll | fixed'},
 			 ast => [],
     },
-    declaration-list => {input => 'background-attachment: FiXed',
+    declarations => {input => '{background-attachment: FiXed}',
                          ast => [{ident => 'background-attachment', expr => [{keyw => 'fixed'}]}],
     },
-    declaration-list => {input => 'font-family: "unclosed-string',
+    declarations => {input => '{font-family: "unclosed-string}',
 			 ast => [],
 			 warnings => rx{^usage},
     },
     # recheck comments and whitespace
-    declaration-list => {input => '/*aa*/COLoR/*bb*/:<!--cc-->BLUE /*dd*/;',
+    declarations => {input => '{/*aa*/COLoR/*bb*/:<!--cc-->BLUE /*dd*/;}',
 			 ast => [{ident => "color", "expr" => [{"rgb" => [ {num => 0}, {num => 0}, {num => 255} ]}]}],
     },
     # boxed properties should be expanded
-    declaration-list => {input => 'margin: 2em 3em',
+    declarations => {input => '{margin: 2em 3em}',
                          ast => [{ident => "margin",
                                  "expr" => [{"em" => 2}, {"em" => 3}]}],
     },
     # check override rules
-    declaration-list => {input => 'background-attachment: fixed !Important;',
+    declarations => {input => '{background-attachment: fixed !Important;}',
                          ast => [ { ident => "background-attachment",
                                     expr => [ { keyw => "fixed" } ],
                                     prio => "important" } ],
@@ -66,16 +64,20 @@ for (
     my %expected = %( .value );
     my $input = %expected<input>;
 
-    for css1  => (CSS::Module::CSS1, $css1-actions),
-       	css21 => (CSS::Module::CSS21, $css21-actions),	
-       	css3  => (CSS::Module::CSS3, $css3-actions) {
+    for css1  => {class => CSS::Module::CSS1,  actions => $css1-actions},
+       	css21 => {class => CSS::Module::CSS21, actions => $css21-actions},	
+       	css3  => {class => CSS::Module::CSS3,  actions => $css3-actions, writer => CSS::Writer} {
 
-	    my ($level, $class, $actions) = (.key, @(.value));
+	    my ($level, $opt) = .kv;
+            my $class = $opt<class>;
+            my $actions = $opt<actions>;
+            my $writer = $opt<writer>;
 
 	    CSS::Grammar::Test::parse-tests($class, $input,
 					    :$rule,
 					    :suite($level),
 					    :$actions,
+                                            :$writer,
 					    :%expected );
 	}
 

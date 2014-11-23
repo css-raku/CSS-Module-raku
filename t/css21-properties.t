@@ -5,10 +5,9 @@ use JSON::Tiny;
 
 use CSS::Module::CSS21::Actions;
 use CSS::Module::CSS21;
-
 use CSS::Module::CSS3;
-
 use CSS::Grammar::Test;
+use CSS::Writer;
 
 my $css21-actions = CSS::Module::CSS21::Actions.new;
 my $css3x-actions = CSS::Module::CSS3::Actions.new;
@@ -25,39 +24,43 @@ for 't/css21-properties.json'.IO.lines {
 
     %expected<ast> = $expr ?? [{ ident => $prop, expr => $expr }] !! Any;
 
-    my $input = $prop ~ ':' ~ %expected<decl>;
+    my $input = sprintf '{%s: %s}', $prop, %expected<decl>;
 
-    for css21 => (CSS::Module::CSS21, $css21-actions, qw<inherit>),
-       	css3x => (CSS::Module::CSS3,  $css3x-actions, qw<inherit initial>) {
+    for css21 => {class => CSS::Module::CSS21, actions => $css21-actions, proforma => qw<inherit>},
+       	css3x => {class => CSS::Module::CSS3,  actions => $css3x-actions, proforma => qw<inherit initial>, writer => CSS::Writer} {
 
-	my $level = .key;
-	my ($class, $actions, @proforma) = @(.value);
+        my ($level, $opt) = .kv;
+        my $class = $opt<class>;
+        my $actions = $opt<actions>;
+        my $proforma = $opt<proforma>;
+        my $writer = $opt<writer>;
 
 	CSS::Grammar::Test::parse-tests($class, $input,
-					:rule<declaration-list>,
+					:rule<declarations>,
 					:$actions,
 					:suite($level),
+                                        :$writer,
 					:%expected );
 
 	unless %seen{$prop}{$level}++ {
 	    # usage and inheritence  tests
-	    my $junk = $prop ~ ': junk +-42';
+	    my $junk = sprintf '{%s: %s}', $prop, 'junk +-42';
 
 	    $actions.reset;
-	    my $p = $class.parse( $junk, :rule<declaration-list>, :$actions);
+	    my $p = $class.parse( $junk, :rule<declarations>, :$actions);
 	    ok($p.defined && ~$p eq $junk, "$level $prop: able to parse unexpected input")
 	        or note "unable to parse declaration list: $junk";
 
 	    ok($actions.warnings, "$level $prop: unexpected input produces warning")
 		or diag $actions.warnings;
 
-	    for @proforma -> $misc {
-		my $decl = $prop ~ ': ' ~ $misc;
+	    for @$proforma -> $misc {
+		my $decl = sprintf '{%s: %s}', $prop, $misc;
 
                 my $ast = [{ ident => $prop, expr => [ {keyw => $misc} ] }];
 
                 CSS::Grammar::Test::parse-tests($class, $decl,
-						:rule<declaration-list>,
+						:rule<declarations>,
 						:$actions,
 						:suite($level),
 						:expected({ast => $ast}) );

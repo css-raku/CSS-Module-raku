@@ -18,9 +18,6 @@ grammar CSS::Module::CSS3::Selectors:ver<20110929.000>
     # inherited combinators: '+' (adjacent), '>' (child)
     rule combinator:sym<sibling> { '~' }
 
-    # allow '::' element selectors
-    rule pseudo:sym<::element> {'::'<element=.Ident>}
- 
     rule no-namespace {<?>}
     rule wildcard {'*'}
     rule namespace-prefix {[<prefix=.Ident>|<prefix=.wildcard>|<prefix=.no-namespace>]'|'}
@@ -66,8 +63,6 @@ class CSS::Module::CSS3::Selectors::Actions
     use CSS::AST :CSSValue;
 
     method combinator:sym<sibling>($/)  { make $.token('~') }
-
-    method pseudo:sym<::element>($/) { make $.node($/) }
 
     method no-namespace($/)     { make $.token('', :type(CSSValue::ElementNameComponent)) }
     method namespace-prefix($/) { make $.token( $<prefix>.ast, :type(CSSValue::NamespacePrefixComponent)) }
