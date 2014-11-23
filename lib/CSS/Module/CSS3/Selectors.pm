@@ -36,7 +36,7 @@ grammar CSS::Module::CSS3::Selectors:ver<20110929.000>
     
     rule attrib        {'[' <Ident> [ <attribute-selector> [<Ident>|<string>] ]? ']'}
 
-    rule term:sym<unicode-range> {:i'U+'<unicode-range>}
+    rule term:sym<unicode-range> {:i<unicode-range>}
 
     # inherited from base: = ~= |=
     rule attribute-selector:sym<prefix>    {'^='}
