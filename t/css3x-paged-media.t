@@ -5,6 +5,7 @@ use JSON::Tiny;
 
 use CSS::Module::CSS3;
 use CSS::Grammar::Test;
+use CSS::Writer;
 
 my $c = CSS::Module::CSS3; # moar bug work-around
 my $actions = CSS::Module::CSS3::Actions.new;
@@ -22,6 +23,7 @@ for ( 't/css3x-paged-media.json'.IO.lines ) {
 				    :$rule,
 				    :$actions,
 				    :suite<css3 @page>,
+                                    :writer(CSS::Writer),
 				    :$expected );
 }
 
