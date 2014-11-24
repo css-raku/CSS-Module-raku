@@ -15,7 +15,9 @@ grammar CSS::Module::_Base
     token uint        {\d+}
     token number      {<num> <!before ['%'|\w]>}
     token uri         {<url>}
-    token keyw        {<Ident>}             # keyword (case insensitive)
+    multi token keyw  {<id=.Ident>}         # keyword (case insensitive)
+    # work-around for RT#117955 - conjunctive '&&' capture"
+    multi token keyw($rx) {<id={$rx}>}          # keyword (case insensitive)
     token identifier  {<name>}              # identifier (case sensitive)
     rule identifiers  {[ <identifier> ]+}   # E.g. font name: Times New Roman
 

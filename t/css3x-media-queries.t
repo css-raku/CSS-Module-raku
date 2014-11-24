@@ -5,6 +5,7 @@ use JSON::Tiny;
 
 use CSS::Module::CSS3;
 use CSS::Grammar::Test;
+use CSS::Writer;
 
 my $actions = CSS::Module::CSS3::Actions.new;
 
@@ -21,6 +22,7 @@ for 't/css3x-media-queries.json'.IO.lines {
 				    :$rule,
 				    :$actions,
 				    :suite<css3 @media>,
+                                    :writer(CSS::Writer),
 				    :$expected );
 }
 
