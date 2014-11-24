@@ -7,6 +7,7 @@ use CSS::Module::CSS3::Fonts;
 use CSS::Module::CSS21::Actions;
 use CSS::Module::CSS21;
 use CSS::Grammar::Test;
+use CSS::Writer;
 
 my $css3x-actions = CSS::Module::CSS3::Fonts::Actions.new;
 my $css21-actions = CSS::Module::CSS21::Actions.new;
@@ -22,6 +23,7 @@ for 't/css3x-fonts.json'.IO.lines {
     CSS::Grammar::Test::parse-tests( CSS::Module::CSS3::Fonts, $input,
 				     :$rule,
 				     :actions($css3x-actions),
+                                    :writer( CSS::Writer ),
 				     :suite<css3x-fonts>,
 				     :$expected );
 
@@ -30,6 +32,7 @@ for 't/css3x-fonts.json'.IO.lines {
 				    :$rule,
 				    :actions($css21-actions),
 				    :suite<css21>,
+                                    :writer( CSS::Writer ),
 				    :expected(%(%$expected, %$css21)) );
 }
 
