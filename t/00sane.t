@@ -27,6 +27,7 @@ for ('') {
 my $css1-actions  = CSS::Module::CSS1::Actions.new;
 my $css21-actions = CSS::Module::CSS21::Actions.new;
 my $css3-actions  = CSS::Module::CSS3::Actions.new;
+my $css-writer = CSS::Writer.new;
 
 for (
     declarations => {input => '{bad-prop: badval}',
@@ -66,7 +67,7 @@ for (
 
     for css1  => {class => CSS::Module::CSS1,  actions => $css1-actions},
        	css21 => {class => CSS::Module::CSS21, actions => $css21-actions},	
-       	css3  => {class => CSS::Module::CSS3,  actions => $css3-actions, writer => CSS::Writer} {
+       	css3  => {class => CSS::Module::CSS3,  actions => $css3-actions, writer => $css-writer} {
 
 	    my ($level, $opt) = .kv;
             my $class = $opt<class>;

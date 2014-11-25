@@ -14,6 +14,7 @@ use CSS::Writer;
 my $css1-actions  = CSS::Module::CSS1::Actions.new;
 my $css21-actions = CSS::Module::CSS21::Actions.new;
 my $css3x-actions = CSS::Module::CSS3::Actions.new;
+my $css-writer = CSS::Writer.new;
 
 my %seen;
 
@@ -30,7 +31,7 @@ for 't/css1-properties.json'.IO.lines {
 
     for css1  => {class => CSS::Module::CSS1,  actions => $css1-actions,  proforma => qw<>},
        	css21 => {class => CSS::Module::CSS21, actions => $css21-actions, proforma => qw<inherit>},	
-       	css3x => {class => CSS::Module::CSS3,  actions => $css3x-actions, proforma => qw<inherit initial>, writer => CSS::Writer} {
+       	css3x => {class => CSS::Module::CSS3,  actions => $css3x-actions, proforma => qw<inherit initial>, writer => $css-writer} {
 
         my ($level, $opt) = .kv;
         my $class = $opt<class>;

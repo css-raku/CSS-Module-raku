@@ -7,6 +7,7 @@ use CSS::Grammar::Test;
 use CSS::Writer;
 
 my $actions = CSS::Module::CSS3::Namespaces::Actions.new;
+my $writer = CSS::Writer.new;
 
 for (
     at-decl => {input => '@namespace empty "";',
@@ -33,7 +34,7 @@ for (
 				    :$rule,
 				    :$actions,
 				    :suite<css3-namespaces>,
-                                    :writer( CSS::Writer ),
+                                    :$writer,
 				    :$expected );
 }
 

@@ -7,6 +7,7 @@ use CSS::Grammar::Test;
 use CSS::Writer;
 
 my $actions = CSS::Module::CSS3::Colors::Actions.new;
+my $writer = CSS::Writer.new;
 
 for (
     term   => {input => 'rgb(70%, 50%, 10%)',
@@ -77,7 +78,7 @@ for (
 				    :$rule,
 				    :$actions,
 				    :suite<css3-color>,
-                                    :writer(CSS::Writer),
+                                    :$writer,
 				    :%expected );
 }
 
