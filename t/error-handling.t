@@ -8,8 +8,9 @@ use JSON::Tiny;
 
 use CSS::Module::CSS3;
 use CSS::Grammar::Test;
+use CSS::Writer;
 
-my $c = CSS::Module::CSS3; # moarbug workaround
+my $c = CSS::Module::CSS3; # moar precomp bug workaround
 my $actions = CSS::Module::CSS3::Actions.new;
 
 for ( 't/error-handling.json'.IO.lines ) {
@@ -25,6 +26,7 @@ for ( 't/error-handling.json'.IO.lines ) {
 				    :$rule,
 				    :$actions,
 				    :suite<css3>,
+                                    :writer( CSS::Writer ),
 				    :$expected );
 }
 
