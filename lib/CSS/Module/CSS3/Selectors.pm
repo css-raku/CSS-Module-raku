@@ -72,7 +72,7 @@ class CSS::Module::CSS3::Selectors::Actions
     method attribute-selector:sym<suffix>($/)    { make ~$/ }
     method attribute-selector:sym<substring>($/) { make ~$/ }
 
-    method term:sym<unicode-range>($/) { make $.node($/) }
+    method term:sym<unicode-range>($/) { make $.node($/, :type(CSSValue::UnicodeRangeComponent)) }
     method structural-selector($/)  {
         my $ident = $<Ident>.lc;
         return $.warning('usage '~$ident~'(an[+/-b]|odd|even) e.g. "4" "3n+1"')

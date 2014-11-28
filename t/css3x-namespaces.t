@@ -11,19 +11,19 @@ my $writer = CSS::Writer.new;
 
 for (
     at-decl => {input => '@namespace empty "";',
-                ast => {"ns-prefix" => "empty", "url" => "", '@' => "namespace"},
+                ast => {ns-prefix => "empty", url => "", at-keyw => "namespace"},
     },
     at-decl => {input => '@NAMESPACE "";',
-                ast => {"url" => "", '@' => "namespace"},
+                ast => {url => "", at-keyw => "namespace"},
     },
     at-decl => {input => '@namespace "http://www.w3.org/1999/xhtml";',
-                ast => {"url" => "http://www.w3.org/1999/xhtml", '@' => "namespace"},
+                ast => {url => "http://www.w3.org/1999/xhtml", at-keyw => "namespace"},
     },
     at-decl => {input => '@namespace svg "http://www.w3.org/2000/svg";',
-                ast => {"ns-prefix" => "svg", "url" => "http://www.w3.org/2000/svg", '@' => "namespace"},
+                ast => {ns-prefix => "svg", url => "http://www.w3.org/2000/svg", at-keyw => "namespace"},
     },
     stylesheet => {input => '@namespace toto url(http://toto.example.org);',
-                ast => [{namespace-rule => {"ns-prefix" => "toto", "url" => "http://toto.example.org", '@' => "namespace"}}],
+                ast => [{namespace-rule => {ns-prefix => "toto", "url" => "http://toto.example.org", at-keyw => "namespace"}}],
     },
     ) {
     my $rule = .key;
