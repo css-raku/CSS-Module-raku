@@ -5,10 +5,10 @@
 [ "selector", { "input" : ":not(:not(p))", "warnings" : "illegal nested negation: :not(p)", "ast" : null } ]
 [ "selector", { "input" : ":not(.home)", "ast" : [ { "simple-selector" : [ { "pseudo-func" : { "ident" : "not", "expr" : [ { "class" : "home" } ] } } ] } ] } ]
 [ "selector", { "input" : "div *:not(p)", "ast" : [ { "simple-selector" : [ { "qname" : { "element-name" : "div" } } ] }, { "simple-selector" : [ { "qname" : { "element-name" : "*" } }, { "pseudo-func" : { "ident" : "not", "expr" : [ { "qname" : { "element-name" : "p" } } ] } } ] } ] } ]
-[ "selector", { "input" : "input:not([type='file'])", "ast" : [ { "simple-selector" : [ { "qname" : { "element-name" : "input" } }, { "pseudo-func" : { "ident" : "not", "expr" : [ { "attrib" : [ { "ident" : "type" }, { "attribute-selector" : "=" }, { "string" : "file" } ] } ] } } ] } ] } ]
+[ "selector", { "input" : "input:not([type='file'])", "ast" : [ { "simple-selector" : [ { "qname" : { "element-name" : "input" } }, { "pseudo-func" : { "ident" : "not", "expr" : [ { "attrib" : [ { "ident" : "type" }, { "op" : "=" }, { "string" : "file" } ] } ] } } ] } ] } ]
 // :first-child is a pseudo-class, :first-line is a pseudo-element
 [ "selector", { "input" : "li:not(.pingback) .comment-content p:first-child:first-line", "ast" : [ { "simple-selector" : [ { "qname" : { "element-name" : "li" } }, { "pseudo-func" : { "ident" : "not", "expr" : [ { "class" : "pingback" } ] } } ] }, { "simple-selector" : [ { "class" : "comment-content" } ] }, { "simple-selector" : [ { "qname" : { "element-name" : "p" } }, { "pseudo-class" : "first-child" }, { "pseudo-elem" : "first-line" } ] } ] } ]
-[ "selector", { "input" : "body:not(.home) h2 + p:first-letter", "ast" : [ { "simple-selector" : [ { "qname" : { "element-name" : "body" } }, { "pseudo-func" : { "ident" : "not", "expr" : [ { "class" : "home" } ] } } ] }, { "simple-selector" : [ { "qname" : { "element-name" : "h2" } } ] }, { "combinator" : "+" }, { "simple-selector" : [ { "qname" : { "element-name" : "p" } }, { "pseudo-elem" : "first-letter" } ] } ] } ]
+[ "selector", { "input" : "body:not(.home) h2 + p:first-letter", "ast" : [ { "simple-selector" : [ { "qname" : { "element-name" : "body" } }, { "pseudo-func" : { "ident" : "not", "expr" : [ { "class" : "home" } ] } } ] }, { "simple-selector" : [ { "qname" : { "element-name" : "h2" } } ] }, { "op" : "+" }, { "simple-selector" : [ { "qname" : { "element-name" : "p" } }, { "pseudo-elem" : "first-letter" } ] } ] } ]
 [ "selector", { "input" : "h2:not(:first-of-type):not(:last-of-type)", "ast" : [ { "simple-selector" : [ { "qname" : { "element-name" : "h2" } }, { "pseudo-func" : { "ident" : "not", "expr" : [ { "pseudo-class" : "first-of-type" } ] } }, { "pseudo-func" : { "ident" : "not", "expr" : [ { "pseudo-class" : "last-of-type" } ] } } ] } ] } ]
 // namespaces and element-names
 [ "selector", { "input" : "*", "ast" : [ { "simple-selector" : [ { "qname" : { "element-name" : "*" } } ] } ] } ]
@@ -18,8 +18,8 @@
 [ "selector", { "input" : "|h1", "ast" : [ { "simple-selector" : [ { "qname" : { "ns-prefix" : "", "element-name" : "h1" } } ] } ] } ]
 [ "selector", { "input" : "*|h1", "ast" : [ { "simple-selector" : [ { "qname" : { "ns-prefix" : "*", "element-name" : "h1" } } ] } ] } ]
 // attributes
-[ "selector", { "input" : "span[hello='Cleveland'][goodbye='Columbus']", "ast" : [ { "simple-selector" : [ { "qname" : { "element-name" : "span" } }, { "attrib" : [ { "ident" : "hello" }, { "attribute-selector" : "=" }, { "string" : "Cleveland" } ] }, { "attrib" : [ { "ident" : "goodbye" }, { "attribute-selector" : "=" }, { "string" : "Columbus" } ] } ] } ] } ]
-[ "selector", { "input" : "object[type^='image/']", "ast" : [ { "simple-selector" : [ { "qname" : { "element-name" : "object" } }, { "attrib" : [ { "ident" : "type" }, { "attribute-selector" : "^=" }, { "string" : "image/" } ] } ] } ] } ]
+[ "selector", { "input" : "span[hello='Cleveland'][goodbye='Columbus']", "ast" : [ { "simple-selector" : [ { "qname" : { "element-name" : "span" } }, { "attrib" : [ { "ident" : "hello" }, { "op" : "=" }, { "string" : "Cleveland" } ] }, { "attrib" : [ { "ident" : "goodbye" }, { "op" : "=" }, { "string" : "Columbus" } ] } ] } ] } ]
+[ "selector", { "input" : "object[type^='image/']", "ast" : [ { "simple-selector" : [ { "qname" : { "element-name" : "object" } }, { "attrib" : [ { "ident" : "type" }, { "op" : "^=" }, { "string" : "image/" } ] } ] } ] } ]
 // regular pseudo-funcs
 [ "selector", { "input" : "foo:lang(en)", "ast" : [ { "simple-selector" : [ { "qname" : { "element-name" : "foo" } }, { "pseudo-func" : { "ident" : "lang", "expr" : [ { "ident" : "en" } ] } } ] } ] } ]
 // nth-... selectors
