@@ -2,7 +2,7 @@
     "name"        : "CSS::Module",
     "version"     : "*",
     "description" : "Perl 6 CSS extended and property-specific grammars",
-    "depends"     : [ "CSS::Grammar", "CSS::Specification", "CSS::Writer", "JSON::Tiny" ],
+    "depends"     : [ "CSS::Grammar", "CSS::Specification", "JSON::Tiny"  ],
     "source-url"  : "git://github.com/p6-css/perl6-CSS-Module.git",
     "provides"    : {
         "CSS::Module::CSS1" : "lib/CSS/Module/CSS1.pm",
