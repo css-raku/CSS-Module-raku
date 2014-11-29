@@ -66,7 +66,7 @@ Examples
     # output:
     # unknown property: foo - declaration dropped
     # usage background-color: <color> | transparent | inherit
-    # declaration: {"color" => {"expr" => ["color" => {"r" => 0, "g" => 0, "b" => 255}]}}
+    # declaration: {"color" => {"expr" => [{"rgb" => [{"num" => 0}, {"num" => 0}, {"num" => 255}]}]}
     ```
 
 - Composition: A secondary aim is composible subset and extension classes. For example to create MyCSS3Subset and class MyCSS3Subset::Actions comprising CSS2.1 properties + CSS3 Selectors + CSS3 Colors:
@@ -108,6 +108,7 @@ See Also
 ========
 - [CSS::Specification](https://github.com/p6-css/perl6-CSS-Specification) - property definition syntax
 - [CSS::Grammar](https://github.com/p6-css/perl6-CSS-Grammar) - base grammars
+- [CSS::Writer](https://github.com/p6-css/perl6-CSS-Writer) - AST reserializer
 - [CSS::Drafts](https://github.com/p6-css/perl6-CSS-Drafts) - CSS draft extension modules
 
 References
