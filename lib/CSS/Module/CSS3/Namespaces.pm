@@ -10,13 +10,12 @@ use CSS::Module::CSS3::_Base;
 grammar CSS::Module::CSS3::Namespaces:ver<20110929.000>
     is CSS::Module::CSS3::_Base {
 
-    rule at-decl:sym<namespace> {(:i'namespace') <prefix=.Ident>? [<url-string>|<url>] ';' }
-
+    rule at-decl:sym<namespace> {'@'(:i'namespace') <ns-prefix=.Ident>? [<url=.url-string>|<url>] ';' }
 }
 
 class CSS::Module::CSS3::Namespaces::Actions
     is CSS::Module::CSS3::_Base::Actions {
-    use CSS::AST :CSSObject;
+    use CSS::Grammar::AST :CSSObject;
     method at-decl:sym<namespace>($/) { make $.at-rule($/, :type(CSSObject::NamespaceRule)) }
 }
 

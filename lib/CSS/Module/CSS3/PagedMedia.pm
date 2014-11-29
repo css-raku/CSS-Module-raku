@@ -19,7 +19,7 @@ grammar CSS::Module::CSS3::PagedMedia:ver<20061010.000>
     rule page-pseudo        {:i':'[ [left|right|first] && <keyw> || <Ident> ]? }
 
     # @page declarations
-    rule at-rule:sym<page>  {(:i'page') <page-pseudo>? <declarations=.page-declarations> }
+    rule at-rule:sym<page>  {'@'(:i'page') <page-pseudo>? <declarations=.page-declarations> }
 
     rule page-declarations {
         '{' [ '@'<declaration=.margin-declaration> || <declaration> || <dropped-decl> ]* <.end-block>
@@ -40,7 +40,7 @@ class CSS::Module::CSS3::PagedMedia::Actions
     is CSS::Module::CSS3::PagedMedia::Spec::Actions
     does CSS::Module::CSS3::PagedMedia::Spec::Interface {
 
-        use CSS::AST :CSSValue;
+        use CSS::Grammar::AST :CSSValue;
 
         method page-pseudo($/)    {
             if $<Ident> {
@@ -50,18 +50,17 @@ class CSS::Module::CSS3::PagedMedia::Actions
                 $.warning("':' should be followed by one of: left right first")
             }
             else {
-                make $.token( $<keyw>.ast, :type(CSS::AST::CSSSelector::PseudoElement))
+                make $.token( $<keyw>.ast, :type(CSS::Grammar::AST::CSSSelector::PseudoClass))
             }
         }
 
-        method page-declarations($/) { make $.declaration-list($/) }
+        method page-declarations($/) { make $.token( $.declaration-list($/), :type(CSSValue::PropertyList)) }
 
         method box-center($/) { make $.token( 'center', :type(CSSValue::KeywordComponent)) }
-        method margin-box($/) { make $.token( $/.lc, :type(CSSValue::KeywordComponent)) }
+        method margin-box($/) { make $.token( $/.lc, :type(CSSValue::AtKeywordComponent)) }
 
         method margin-declaration($/) {
-            make $.token({expr => $.node($/),
-                          '@' => $<margin-box>.lc}, :type(CSSValue::AtKeywordComponent));
+            make $.token($.node($/), :type(CSS::Grammar::AST::CSSObject::MarginRule));
         }
 
         method page-size($/) { make $<keyw>.ast }

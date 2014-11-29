@@ -23,7 +23,7 @@ grammar CSS::Module::CSS3::Fonts:ver<20130212.000>
     does CSS::Module::CSS3::Fonts::Spec::Interface {
 
     rule font-description {<declarations=.CSS::Module::CSS3::Fonts::AtFontFace::declarations>}
-    rule at-rule:sym<font-face> {(:i'font-face') <font-description> }
+    rule at-rule:sym<font-face> {\@(:i'font-face') <font-description> }
 
     # ---- Expressions ----
     rule expr-font {:i [ [ [ [:my @*SEEN; <expr-font-style> <!seen(0)> | <expr-font-variant=.font-variant-css21> <!seen(1)> | <expr-font-weight> <!seen(2)> | <expr-font-stretch> <!seen(3)> ]+ ]? <expr-font-size> [ <op('/')> <expr-line-height> ]? <expr-font-family> ] | [ caption | icon | menu | message\-box | small\-caption | status\-bar ] & <keyw> ] }
@@ -46,7 +46,7 @@ class CSS::Module::CSS3::Fonts::Actions
     does CSS::Module::CSS3::Fonts::Spec::Interface
     does CSS::Module::CSS3::Fonts::AtFontFace::Spec::Interface {
 
-    use CSS::AST :CSSObject;
+    use CSS::Grammar::AST :CSSObject;
 
     method at-rule:sym<font-face>($/) { make $.at-rule($/, :type(CSSObject::FontFaceRule)) }
 
@@ -54,14 +54,14 @@ class CSS::Module::CSS3::Fonts::Actions
         return $.warning("usage: format(type)")
             if $<any-args>;
 
-        make $.func( $0.lc, $<format>.ast );
+        make $.func( $0.lc, $.list($/) );
     }
 
     method local($/) {
         return $.warning("usage: local(font-face-name)")
             if $<any-args>;
 
-        make $.func( $0.lc, $<font-face-name>.ast );
+        make $.func( $0.lc, $.list($/) );
     }
 
     method font-description($/)   { make $<declarations>.ast }

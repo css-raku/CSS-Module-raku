@@ -2,15 +2,16 @@ use CSS::Grammar::CSS3;
 
 grammar CSS::Module::CSS3::Fonts::Variants {
 
-    rule feature-value-name  {<identifier>}
-    rule feature-value-list  {<feature-value-name> [',' <feature-value-name>]*}
+    rule feature-value-name  { <identifier> }
+    rule feature-value-item  { <feature-value-name> }
+    rule feature-value-list  { <feature-value-name> +% ',' }
 
-    rule annotation                {:i ('annotation')'('        [<args=.feature-value-name>  || <any-args>] ')'}
+    rule annotation                {:i ('annotation')'('        [<args=.feature-value-item>  || <any-args>] ')'}
     rule character-variant         {:i ('character-variant')'(' [<args=.feature-value-list>  || <any-args>] ')'}
-    rule ornaments                 {:i ('ornaments')'('         [<args=.feature-value-name>  || <any-args>] ')'}
-    rule stylistic                 {:i ('stylistic')'('         [<args=.feature-value-name>  || <any-args>] ')'}
+    rule ornaments                 {:i ('ornaments')'('         [<args=.feature-value-item>  || <any-args>] ')'}
+    rule stylistic                 {:i ('stylistic')'('         [<args=.feature-value-item>  || <any-args>] ')'}
     rule styleset                  {:i ('styleset')'('          [<args=.feature-value-list>  || <any-args>] ')'}
-    rule swash                     {:i ('swash')'('             [<args=.feature-value-name>  || <any-args>] ')'}
+    rule swash                     {:i ('swash')'('             [<args=.feature-value-item>  || <any-args>] ')'}
 
     rule common-lig-values         {:i [ common\-ligatures | no\-common\-ligatures ] & <keyw> }
     rule discretionary-lig-values  {:i [ discretionary\-ligatures | no\-discretionary\-ligatures ] & <keyw> }
@@ -32,6 +33,7 @@ grammar CSS::Module::CSS3::Fonts::Variants {
 class CSS::Module::CSS3::Fonts::Variants::Actions {
 
     method feature-value-name($/) { make $<identifier>.ast }
+    method feature-value-item($/) { make $.list($/) }
     method feature-value-list($/) { make $.list($/) }
 
     method annotation($/)        { make $.func( $0.lc, $<args>.ast ) }
@@ -51,6 +53,6 @@ class CSS::Module::CSS3::Fonts::Variants::Actions {
     method east-asian-variant-values($/) { make $<keyw>.ast }
     method east-asian-width-values($/) { make $<keyw>.ast }
 
-    method feature-tag-value($/) { make $.node($/) }
+    method feature-tag-value($/) { make $.token( $.list($/), :type<expr:feature-tag-value>) }
     method urange($/) { make $<unicode-range>.ast }
 }

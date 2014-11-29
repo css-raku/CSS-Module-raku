@@ -1,7 +1,7 @@
 use v6;
 
 use CSS::Grammar::Actions;
-use CSS::AST :CSSValue;
+use CSS::Grammar::AST :CSSValue;
 use CSS::Specification::_Base::Actions;
 
 class CSS::Module::_Base::Actions
@@ -89,7 +89,7 @@ class CSS::Module::_Base::Actions
     method uint($/)        { make $/.Int }
     method number($/)      { make $.token($<num>.ast, :type(CSSValue::NumberComponent)) }
     method uri($/)         { make $<url>.ast }
-    method keyw($/)        { make $.token($<Ident>.ast, :type(CSSValue::KeywordComponent)) }
+    method keyw($/)        { make $.token($<id>.lc, :type(CSSValue::KeywordComponent)) }
     # case sensitive identifiers
     method identifier($/)  { make $.token($<name>.ast, :type(CSSValue::IdentifierComponent)) }
     # identifiers strung-together, e.g New Century Schoolbook

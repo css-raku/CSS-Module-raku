@@ -4,24 +4,26 @@ use Test;
 
 use CSS::Module::CSS3::Namespaces;
 use CSS::Grammar::Test;
+use CSS::Writer;
 
 my $actions = CSS::Module::CSS3::Namespaces::Actions.new;
+my $writer = CSS::Writer.new;
 
 for (
-    at-decl => {input => 'namespace empty "";',
-                ast => {"prefix" => "empty", "url" => "", '@' => "namespace"},
+    at-decl => {input => '@namespace empty "";',
+                ast => {ns-prefix => "empty", url => "", at-keyw => "namespace"},
     },
-    at-decl => {input => 'NAMESPACE "";',
-                ast => {"url" => "", '@' => "namespace"},
+    at-decl => {input => '@NAMESPACE "";',
+                ast => {url => "", at-keyw => "namespace"},
     },
-    at-decl => {input => 'namespace "http://www.w3.org/1999/xhtml";',
-                ast => {"url" => "http://www.w3.org/1999/xhtml", '@' => "namespace"},
+    at-decl => {input => '@namespace "http://www.w3.org/1999/xhtml";',
+                ast => {url => "http://www.w3.org/1999/xhtml", at-keyw => "namespace"},
     },
-    at-decl => {input => 'namespace svg "http://www.w3.org/2000/svg";',
-                ast => {"prefix" => "svg", "url" => "http://www.w3.org/2000/svg", '@' => "namespace"},
+    at-decl => {input => '@namespace svg "http://www.w3.org/2000/svg";',
+                ast => {ns-prefix => "svg", url => "http://www.w3.org/2000/svg", at-keyw => "namespace"},
     },
     stylesheet => {input => '@namespace toto url(http://toto.example.org);',
-                ast => [{namespace-rule => {"prefix" => "toto", "url" => "http://toto.example.org", '@' => "namespace"}}],
+                ast => [{namespace-rule => {ns-prefix => "toto", "url" => "http://toto.example.org", at-keyw => "namespace"}}],
     },
     ) {
     my $rule = .key;
@@ -32,6 +34,7 @@ for (
 				    :$rule,
 				    :$actions,
 				    :suite<css3-namespaces>,
+                                    :$writer,
 				    :$expected );
 }
 

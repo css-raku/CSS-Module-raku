@@ -18,9 +18,6 @@ grammar CSS::Module::CSS3::Selectors:ver<20110929.000>
     # inherited combinators: '+' (adjacent), '>' (child)
     rule combinator:sym<sibling> { '~' }
 
-    # allow '::' element selectors
-    rule pseudo:sym<::element> {'::'<element=.Ident>}
- 
     rule no-namespace {<?>}
     rule wildcard {'*'}
     rule namespace-prefix {[<prefix=.Ident>|<prefix=.wildcard>|<prefix=.no-namespace>]'|'}
@@ -32,9 +29,7 @@ grammar CSS::Module::CSS3::Selectors:ver<20110929.000>
     rule simple-selector { [<qname><!before '|'>|<universal>][<id>|<class>|<attrib>|<pseudo>]*
                                | [<id>|<class>|<attrib>|<pseudo>]+ }
 
-    rule type-selector {<namespace-prefix>? <element-name>}
-    
-    rule attrib        {'[' <Ident> [ <attribute-selector> [<Ident>|<string>] ]? ']'}
+    rule attrib        {'[' <Ident> [ <op=.attribute-selector> [<Ident>|<string>] ]? ']'}
 
     rule term:sym<unicode-range> {:i<unicode-range>}
 
@@ -55,7 +50,7 @@ grammar CSS::Module::CSS3::Selectors:ver<20110929.000>
 
     rule structural-selector {:i $<Ident>=[[nth|first|last|nth\-last]\-[child|of\-type]]'(' [ <expr=.structural-expr> || <any-args> ] ')'}
     rule pseudo-function:sym<structural-selector> {<structural-selector>}
-    rule negation-expr {[<type-selector> | <universal> | <id> | <class> | <attrib> | [$<nested>=<?before [:i':not(']> || <?>] <pseudo> | <any-arg> ]+}
+    rule negation-expr {[<qname> | <universal> | <id> | <class> | <attrib> | [$<nested>=<?before [:i':not(']> || <?>] <pseudo> | <any-arg> ]+}
     rule pseudo-function:sym<negation>  {:i'not(' [ <negation-expr> || <any-args> ] ')'}
 
 }
@@ -63,16 +58,13 @@ grammar CSS::Module::CSS3::Selectors:ver<20110929.000>
 class CSS::Module::CSS3::Selectors::Actions
     is CSS::Module::CSS3::_Base::Actions {
 
-    use CSS::AST :CSSValue;
+    use CSS::Grammar::AST :CSSValue;
 
-    method combinator:sym<sibling>($/)  { make $.token('~') }
-
-    method pseudo:sym<::element>($/) { make $.node($/) }
+    method combinator:sym<sibling>($/)  { make '~' }
 
     method no-namespace($/)     { make $.token('', :type(CSSValue::ElementNameComponent)) }
     method namespace-prefix($/) { make $.token( $<prefix>.ast, :type(CSSValue::NamespacePrefixComponent)) }
     method wildcard($/)         { make ~$/ }
-    method type-selector($/)    { make $.node($/) }
     method qname($/)            { make $.token( $.node($/), :type(CSSValue::QnameComponent)) }
     method universal($/)        { make $.token( $.node($/), :type(CSSValue::QnameComponent)) }
 
@@ -80,7 +72,7 @@ class CSS::Module::CSS3::Selectors::Actions
     method attribute-selector:sym<suffix>($/)    { make ~$/ }
     method attribute-selector:sym<substring>($/) { make ~$/ }
 
-    method term:sym<unicode-range>($/) { make $.node($/) }
+    method term:sym<unicode-range>($/) { make $.node($/, :type(CSSValue::UnicodeRangeComponent)) }
     method structural-selector($/)  {
         my $ident = $<Ident>.lc;
         return $.warning('usage '~$ident~'(an[+/-b]|odd|even) e.g. "4" "3n+1"')
@@ -89,7 +81,7 @@ class CSS::Module::CSS3::Selectors::Actions
         my %node = %( $.node($/) );
         %node<ident> = $ident;
 
-        make $.token( %node, :type(CSS::AST::CSSSelector::PseudoFunction));
+        make $.token( %node, :type(CSS::Grammar::AST::CSSSelector::PseudoFunction));
     }
     method pseudo-function:sym<structural-selector>($/)  { make $<structural-selector>.ast }
 

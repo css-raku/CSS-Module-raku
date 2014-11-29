@@ -8,15 +8,15 @@ use JSON::Tiny;
 
 use CSS::Module::CSS3;
 use CSS::Grammar::Test;
+use CSS::Writer;
 
-my $c = CSS::Module::CSS3; # moarbug workaround
+my $c = CSS::Module::CSS3; # moar precomp bug workaround
 my $actions = CSS::Module::CSS3::Actions.new;
+my $writer = CSS::Writer.new;
 
 for ( 't/error-handling.json'.IO.lines ) {
-    if .substr(0,2) eq '//' {
-##        note '[' ~ .substr(2) ~ ']';
-        next;
-    }
+    next 
+        if .substr(0,2) eq '//';
 
     my ($rule, $expected) = @( from-json($_) );
     my $input = $expected<input>;
@@ -25,6 +25,7 @@ for ( 't/error-handling.json'.IO.lines ) {
 				    :$rule,
 				    :$actions,
 				    :suite<css3>,
+                                    :$writer,
 				    :$expected );
 }
 

@@ -15,15 +15,15 @@ use CSS::Module::CSS3::_Base;
 grammar CSS::Module::CSS3::MediaQueries:ver<20120619.000>
     is CSS::Module::CSS3::_Base {
 
-    rule at-rule:sym<media> {(:i'media') [<media-list>||<media-list=.unknown-media-list>] <rule-list> }
+    rule at-rule:sym<media> {'@'(:i'media') [<media-list>||<media-list=.unknown-media-list>] <rule-list> }
 
     rule rule-list {
-        '{' [ '@'<at-rule> | <ruleset> ]* <.end-block>
+        '{' [ <at-rule> | <ruleset> ]* <.end-block>
     }
 
     rule unknown-media-list  { <CSS::Grammar::Core::_any>* }
     rule media-query {[<media-op>? <media-name> | '(' <media-expr> ')']
-                      [:i'and' '(' <media-expr> ')' ]*}
+                      [ <keyw(/:i and/)> '(' <media-expr> ')' ]*}
     rule media-op    {:i'only'|'not'}
 
     rule _range {:i [$<prefix>=[min|max]\-]}
@@ -74,7 +74,7 @@ grammar CSS::Module::CSS3::MediaQueries:ver<20120619.000>
 class CSS::Module::CSS3::MediaQueries::Actions
     is CSS::Module::CSS3::_Base::Actions {
 
-        use CSS::AST :CSSValue;
+        use CSS::Grammar::AST :CSSValue;
 
     # rule-list, media-list, media see core grammar actions
     method unknown-media-list($/) {
