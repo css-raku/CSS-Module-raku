@@ -1,7 +1,7 @@
 use v6;
 
 use CSS::Grammar::CSS3;
-use CSS::AST :CSSValue;
+use CSS::Grammar::AST :CSSValue;
 use CSS::Module::_Base;
 use CSS::Module::_Base::Actions;
 

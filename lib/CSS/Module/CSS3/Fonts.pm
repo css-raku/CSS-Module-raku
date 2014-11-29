@@ -46,7 +46,7 @@ class CSS::Module::CSS3::Fonts::Actions
     does CSS::Module::CSS3::Fonts::Spec::Interface
     does CSS::Module::CSS3::Fonts::AtFontFace::Spec::Interface {
 
-    use CSS::AST :CSSObject;
+    use CSS::Grammar::AST :CSSObject;
 
     method at-rule:sym<font-face>($/) { make $.at-rule($/, :type(CSSObject::FontFaceRule)) }
 

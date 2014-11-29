@@ -58,7 +58,7 @@ grammar CSS::Module::CSS3::Selectors:ver<20110929.000>
 class CSS::Module::CSS3::Selectors::Actions
     is CSS::Module::CSS3::_Base::Actions {
 
-    use CSS::AST :CSSValue;
+    use CSS::Grammar::AST :CSSValue;
 
     method combinator:sym<sibling>($/)  { make '~' }
 
@@ -81,7 +81,7 @@ class CSS::Module::CSS3::Selectors::Actions
         my %node = %( $.node($/) );
         %node<ident> = $ident;
 
-        make $.token( %node, :type(CSS::AST::CSSSelector::PseudoFunction));
+        make $.token( %node, :type(CSS::Grammar::AST::CSSSelector::PseudoFunction));
     }
     method pseudo-function:sym<structural-selector>($/)  { make $<structural-selector>.ast }
 

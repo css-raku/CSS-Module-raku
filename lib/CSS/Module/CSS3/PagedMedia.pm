@@ -40,7 +40,7 @@ class CSS::Module::CSS3::PagedMedia::Actions
     is CSS::Module::CSS3::PagedMedia::Spec::Actions
     does CSS::Module::CSS3::PagedMedia::Spec::Interface {
 
-        use CSS::AST :CSSValue;
+        use CSS::Grammar::AST :CSSValue;
 
         method page-pseudo($/)    {
             if $<Ident> {
@@ -50,7 +50,7 @@ class CSS::Module::CSS3::PagedMedia::Actions
                 $.warning("':' should be followed by one of: left right first")
             }
             else {
-                make $.token( $<keyw>.ast, :type(CSS::AST::CSSSelector::PseudoClass))
+                make $.token( $<keyw>.ast, :type(CSS::Grammar::AST::CSSSelector::PseudoClass))
             }
         }
 
@@ -60,7 +60,7 @@ class CSS::Module::CSS3::PagedMedia::Actions
         method margin-box($/) { make $.token( $/.lc, :type(CSSValue::AtKeywordComponent)) }
 
         method margin-declaration($/) {
-            make $.token($.node($/), :type(CSS::AST::CSSObject::MarginRule));
+            make $.token($.node($/), :type(CSS::Grammar::AST::CSSObject::MarginRule));
         }
 
         method page-size($/) { make $<keyw>.ast }
