@@ -16,7 +16,13 @@ class CSS::Module::_Base::Actions
 
     method declaration($/)  {
 
-        return if $<dropped-decl>;
+        if $<any-declaration> {
+            my $ast = $<any-declaration>.ast;
+            $.warning('dropping unknown property',
+                      $ast<at-keyw> ?? '@'~$ast<at-keyw> !! $ast<ident>)
+                if $ast.defined;
+            return;
+        }
         
         my %ast = %( $.decl( $<decl> ) );
         return Any

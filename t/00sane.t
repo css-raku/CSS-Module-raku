@@ -31,34 +31,39 @@ my $css-writer = CSS::Writer.new;
 
 for (
     declarations => {input => '{bad-prop: badval}',
-			 warnings => 'dropping declaration: bad-prop',
-			 ast => [],
+                     warnings => 'dropping unknown property: bad-prop',
+                     ast => [],
+    },
+    declarations => {input => '{ @guff {color:red} }',
+                     warnings => 'dropping unknown property: @guff',
+                     css1 => {warnings => 'dropping term: @guff {color:red}'},
+                     ast => [],
     },
     declarations => {input => '{background-attachment: crud}',
-			 warnings => rx{^'usage background-attachment: scroll | fixed'},
-			 ast => [],
+                     warnings => rx{^'usage background-attachment: scroll | fixed'},
+                     ast => [],
     },
     declarations => {input => '{background-attachment: FiXed}',
-                         ast => [{ident => 'background-attachment', expr => [{keyw => 'fixed'}]}],
+                     ast => [{ident => 'background-attachment', expr => [{keyw => 'fixed'}]}],
     },
     declarations => {input => '{font-family: "unclosed-string}',
-			 ast => [],
-			 warnings => rx{^usage},
+                     ast => [],
+                     warnings => rx{^usage},
     },
     # recheck comments and whitespace
     declarations => {input => '{/*aa*/COLoR/*bb*/:<!--cc-->BLUE /*dd*/;}',
-			 ast => [{ident => "color", "expr" => [{"rgb" => [ {num => 0}, {num => 0}, {num => 255} ]}]}],
+                     ast => [{ident => "color", "expr" => [{"rgb" => [ {num => 0}, {num => 0}, {num => 255} ]}]}],
     },
     # boxed properties should be expanded
     declarations => {input => '{margin: 2em 3em}',
-                         ast => [{ident => "margin",
-                                 "expr" => [{"em" => 2}, {"em" => 3}]}],
+                     ast => [{ident => "margin",
+                              "expr" => [{"em" => 2}, {"em" => 3}]}],
     },
     # check override rules
     declarations => {input => '{background-attachment: fixed !Important;}',
-                         ast => [ { ident => "background-attachment",
-                                    expr => [ { keyw => "fixed" } ],
-                                    prio => "important" } ],
+                     ast => [ { ident => "background-attachment",
+                                expr => [ { keyw => "fixed" } ],
+                                prio => "important" } ],
     },
   ) {
     my $rule = .key;
@@ -73,13 +78,15 @@ for (
             my $class = $opt<class>;
             my $actions = $opt<actions>;
             my $writer = $opt<writer>;
+            my %level-tests = %( %expected{$level} // () );
+            my %level-expected = %expected, %level-tests;
 
 	    CSS::Grammar::Test::parse-tests($class, $input,
 					    :$rule,
 					    :suite($level),
 					    :$actions,
                                             :$writer,
-					    :%expected );
+					    :expected(%level-expected) );
 	}
 
 }
