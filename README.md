@@ -104,7 +104,7 @@ See [Build.pm](Build.pm).
 
 ## Actions Options
 
-=- **`:pass-unknown`** Don't warn about, or discard, unknown properties or sub-rules. Pass back the property with a classification
+- **`:pass-unknown`** Don't warn about, or discard, unknown properties or sub-rules. Pass back the property with a classification
 of unknown. E.g.
 
     my $actions =  CSS::Module::CSS21::Actions.new( :pass-unknown );
