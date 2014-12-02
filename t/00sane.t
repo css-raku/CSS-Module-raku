@@ -31,12 +31,23 @@ my $css3-actions_2  = CSS::Module::CSS3::Actions.new( :pass-unknown );
 my $css-writer = CSS::Writer.new( :terse, :color-names );
 
 for (
-    :declarations{ :input('{bad-prop: someval}'),
-                   :warnings('dropping unknown property: bad-prop'),
+    :declarations{ :input('{unknown-prop: someval}'),
+                   :warnings('dropping unknown property: unknown-prop'),
                    :ast[],
                    :pass-unknown{
                        :warnings[],
-                       :ast[{"property:unknown" => {:expr[{ :ident<someval> }], :ident<bad-prop>}}],
+                       :ast[{"property:unknown" => {:expr[{ :ident<someval> }], :ident<unknown-prop>}}],
+                   },
+    },
+    :declarations{ :input('{unknown-prop: unknown-func()}'),
+                   :warnings['ignoring function: unknown-func', 'dropping declaration: unknown-prop'],
+                   :ast[],
+                   :css1{
+                       :warnings['dropping term: unknown-func()', 'dropping declaration: unknown-prop'],
+                   },
+                   :pass-unknown{
+                       :warnings[],
+                       :ast[{"property:unknown" => {:expr[{ :func{ :ident<unknown-func> }}], :ident<unknown-prop>}}],
                    },
     },
     :declarations{ :input('{ @guff {color:red} }'),

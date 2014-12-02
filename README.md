@@ -112,7 +112,7 @@ of unknown. E.g.
     # output {"property:unknown" => {:expr[{ :ident<someval> }], :ident<bad-prop>}}
 
     say CSS::Writer.new( :terse ).write( :declarations($/.ast) }
-    #output: { bad-prop: some-val; }
+    #output: { bad-prop: someval; }
 
     say CSS::Module::CSS21.parse('{ @guff {color:red} }', :$actions, :rule<declarations>).ast.tson;
     # output: { "margin-rule:unknown" =>  { :declarations[ { :ident<color>,

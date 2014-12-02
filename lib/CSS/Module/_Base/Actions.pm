@@ -15,6 +15,7 @@ class CSS::Module::_Base::Actions
     # ---- CSS::Grammar overrides ---- #
 
     method any-function($/)             {
+        return callsame if $.pass-unknown;
         $.warning('ignoring function', $<Ident>.ast.lc);
     }
 
