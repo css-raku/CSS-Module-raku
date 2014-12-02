@@ -1,5 +1,4 @@
-CSS::Module
-=============
+# CSS::Module
 
 CSS::Module is a property-specific validator and parser for CSS Levels 1, 2.1 and  3.
 
@@ -21,8 +20,8 @@ It implements the following grammars and actions:
 - `CSS::Module::CSS3::PagedMedia` - CSS 3.0 Paged Media (@page)
 - `CSS::ModuleX::CSS21`           - the full set of CSS21 properties
 
-Installation
-------------
+## Installation
+
 This module works with Rakudo Star 2014.09 or better [download from http://rakudo.org/downloads/star/ - don't forget the final `make install`]:
 
 Ensure that `perl6` and `panda` are available on your path, e.g. :
@@ -47,8 +46,7 @@ To try parsing some content:
 
     % perl6 -MCSS::Module::CSS21 -e"say CSS::Module::CSS21.parse('h1 {margin:2pt; color: blue}')"
 
-Examples
---------
+## Examples
 
 - parse CSS2.1:
 
@@ -96,23 +94,39 @@ Examples
     {};
     ```
 
-Property Definitions
---------------------
+## Property Definitions
+
 Property definitions are built from the sources in the (etc) directory using the CSS::Specification tools. These implement the [W3C Property Definition Syntax](https://developer.mozilla.org/en-US/docs/Web/CSS/Value_definition_syntax).
 
 For example [CSS::Module:CSS1::Spec::Grammar](lib/CSS/Module/CSS1/Spec/Grammar.pm), [CSS::Module:CSS1::Spec::Actions](lib/CSS/Module/CSS1/Spec/Actions.pm) and [CSS::Module:CSS1::Spec::Interface](lib/CSS/Module/CSS1/Spec/Interface.pm) are generated from [etc/css1-properties.txt](etc/css1-properties.txt).
 
 See [Build.pm](Build.pm).
 
-See Also
-========
+## Actions Options
+
+=- **`:pass-unknown`** Don't warn about, or discard, unknown properties or sub-rules. Pass back the property with a classification
+of unknown. E.g.
+
+    my $actions =  CSS::Module::CSS21::Actions.new( :pass-unknown );
+    say CSS::Module::CSS21.parse('{bad-prop: someval}', :$actions, :rule<declarations>).ast.tson;
+    # output {"property:unknown" => {:expr[{ :ident<someval> }], :ident<bad-prop>}}
+    say CSS::Writer.new( :terse ).write( :declarations($/.ast) }
+    #output: { bad-prop: some-val; }
+
+    say CSS::Module::CSS21.parse('{ @guff {color:red} }', :$actions, :rule<declarations>).ast.tson;
+    # output: { "margin-rule:unknown" =>  { :declarations[ { :ident<color>,
+                                                             :expr[ { :rgb[ { :num(255) }, { :num(0) }, { :num(0) } ] } ] } ],
+                                            :at-keyw<guff> } }
+
+## See Also
+
 - [CSS::Specification](https://github.com/p6-css/perl6-CSS-Specification) - property definition syntax
 - [CSS::Grammar](https://github.com/p6-css/perl6-CSS-Grammar) - base grammars
 - [CSS::Writer](https://github.com/p6-css/perl6-CSS-Writer) - AST reserializer
 - [CSS::Drafts](https://github.com/p6-css/perl6-CSS-Drafts) - CSS draft extension modules
 
-References
-==========
+## References
+
 - CSS Snapshot 2010 - http://www.w3.org/TR/2011/NOTE-css-2010-20110512/
 - CSS1 - http://www.w3.org/TR/2008/REC-CSS1-20080411/#css1-properties
 - CSS21 - http://www.w3.org/TR/2011/REC-CSS2-20110607/propidx.html

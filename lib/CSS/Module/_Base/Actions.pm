@@ -8,6 +8,8 @@ class CSS::Module::_Base::Actions
     is CSS::Specification::_Base::Actions
     is CSS::Grammar::Actions {
 
+        has Bool $.pass-unknown is rw;
+
     use CSS::Grammar::AST;
 
     # ---- CSS::Grammar overrides ---- #
@@ -20,9 +22,15 @@ class CSS::Module::_Base::Actions
 
         if $<any-declaration> {
             my $ast = $<any-declaration>.ast;
-            $.warning('dropping unknown property',
-                      $ast<at-keyw> ?? '@'~$ast<at-keyw> !! $ast<ident>)
-                if $ast.defined;
+            if $ast.defined {
+                if $.pass-unknown {
+                    make {($ast.type ~ ':unknown') => $ast}
+                }
+                else {
+                    $.warning('dropping unknown property',
+                              $ast<at-keyw> ?? '@'~$ast<at-keyw> !! $ast<ident>);
+                }
+            }
             return;
         }
         

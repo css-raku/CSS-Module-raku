@@ -27,52 +27,63 @@ for ('') {
 my $css1-actions  = CSS::Module::CSS1::Actions.new;
 my $css21-actions = CSS::Module::CSS21::Actions.new;
 my $css3-actions  = CSS::Module::CSS3::Actions.new;
-my $css-writer = CSS::Writer.new;
+my $css3-actions_2  = CSS::Module::CSS3::Actions.new( :pass-unknown );
+my $css-writer = CSS::Writer.new( :terse, :color-names );
 
 for (
-    declarations => {input => '{bad-prop: badval}',
-                     warnings => 'dropping unknown property: bad-prop',
-                     ast => [],
+    :declarations{ :input('{bad-prop: someval}'),
+                   :warnings('dropping unknown property: bad-prop'),
+                   :ast[],
+                   :pass-unknown{
+                       :warnings[],
+                       :ast[{"property:unknown" => {:expr[{ :ident<someval> }], :ident<bad-prop>}}],
+                   },
     },
-    declarations => {input => '{ @guff {color:red} }',
-                     warnings => 'dropping unknown property: @guff',
-                     css1 => {warnings => 'dropping term: @guff {color:red}'},
-                     ast => [],
+    :declarations{ :input('{ @guff {color:red} }'),
+                   :warnings('dropping unknown property: @guff'),
+                   :css1{ :warnings('dropping term: @guff {color:red}') },
+                   :ast[],
+                   :pass-unknown{
+                       :warnings[],
+                       :ast[ { "margin-rule:unknown" =>  { :declarations[ { :ident<color>, :expr[ { :rgb[ { :num(255) }, { :num(0) }, { :num(0) } ] } ] } ],
+                                                           :at-keyw<guff> } } ]
+                   },
     },
-    declarations => {input => '{background-attachment: crud}',
-                     warnings => rx{^'usage background-attachment: scroll | fixed'},
-                     ast => [],
+    :declarations{ :input('{background-attachment: crud}'),
+                   :warnings(rx{^'usage background-attachment: scroll | fixed'}),
+                   :ast[],
     },
-    declarations => {input => '{background-attachment: FiXed}',
-                     ast => [{ident => 'background-attachment', expr => [{keyw => 'fixed'}]}],
+    :declarations{ :input('{background-attachment: FiXed}'),
+                   :ast[{ident => 'background-attachment', :expr[{ :keyw<fixed> }]}],
     },
-    declarations => {input => '{font-family: "unclosed-string}',
-                     ast => [],
-                     warnings => rx{^usage},
+    :declarations{ :input('{font-family: "unclosed-string}'),
+                   :ast[],
+                   :warnings(rx{^usage}),
     },
     # recheck comments and whitespace
-    declarations => {input => '{/*aa*/COLoR/*bb*/:<!--cc-->BLUE /*dd*/;}',
-                     ast => [{ident => "color", "expr" => [{"rgb" => [ {num => 0}, {num => 0}, {num => 255} ]}]}],
+    :declarations{ :input('{/*aa*/COLoR/*bb*/:<!--cc-->BLUE /*dd*/;}'),
+                   :ast[{ :ident<color>, :expr[{ :rgb[ { :num(0) }, { :num(0) }, { :num(255) } ]}]}],
     },
     # boxed properties should be expanded
-    declarations => {input => '{margin: 2em 3em}',
-                     ast => [{ident => "margin",
-                              "expr" => [{"em" => 2}, {"em" => 3}]}],
+    :declarations{ :input('{margin: 2em 3em}'),
+                   :ast[ { :ident<margin>,
+                           :expr[ { :em(2) }, { :em(3) } ]}],
     },
     # check override rules
-    declarations => {input => '{background-attachment: fixed !Important;}',
-                     ast => [ { ident => "background-attachment",
-                                expr => [ { keyw => "fixed" } ],
-                                prio => "important" } ],
+    :declarations{ :input('{background-attachment: fixed !Important;}'),
+                   :ast[ { :ident<background-attachment>,
+                           :expr[ { :keyw<fixed> } ],
+                           :prio<important> } ],
     },
   ) {
     my $rule = .key;
     my %expected = %( .value );
     my $input = %expected<input>;
 
-    for css1  => {class => CSS::Module::CSS1,  actions => $css1-actions},
-       	css21 => {class => CSS::Module::CSS21, actions => $css21-actions},	
-       	css3  => {class => CSS::Module::CSS3,  actions => $css3-actions, writer => $css-writer} {
+    for css1  => {class => CSS::Module::CSS1,  actions => $css1-actions, writer => $css-writer},
+       	css21 => {class => CSS::Module::CSS21, actions => $css21-actions, writer => $css-writer},	
+       	css3  => {class => CSS::Module::CSS3,  actions => $css3-actions, writer => $css-writer},
+       	pass-unknown  => {class => CSS::Module::CSS3,  actions => $css3-actions_2, writer => $css-writer} {
 
 	    my ($level, $opt) = .kv;
             my $class = $opt<class>;
