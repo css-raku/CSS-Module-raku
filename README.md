@@ -2,7 +2,7 @@
 
 CSS::Module is a property-specific validator and parser for CSS Levels 1, 2.1 and  3.
 
-This module aims to be reference implementation of [CSS Snapshot 2010](http://www.w3.org/TR/2011/NOTE-css-2010-20110512/).
+This module aims to be a reference implementation of [CSS Snapshot 2010](http://www.w3.org/TR/2011/NOTE-css-2010-20110512/).
 
 It implements the following grammars and actions:
 
@@ -110,6 +110,7 @@ of unknown. E.g.
     my $actions =  CSS::Module::CSS21::Actions.new( :pass-unknown );
     say CSS::Module::CSS21.parse('{bad-prop: someval}', :$actions, :rule<declarations>).ast.tson;
     # output {"property:unknown" => {:expr[{ :ident<someval> }], :ident<bad-prop>}}
+
     say CSS::Writer.new( :terse ).write( :declarations($/.ast) }
     #output: { bad-prop: some-val; }
 
