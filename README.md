@@ -106,7 +106,7 @@ See [Build.pm](Build.pm).
 
 - **`:pass-unknown`** Don't warn about, or discard, unknown properties or sub-rules. Pass back the property with a classification
 of unknown. E.g.
-
+```
     my $actions =  CSS::Module::CSS21::Actions.new( :pass-unknown );
     say CSS::Module::CSS21.parse('{bad-prop: someval}', :$actions, :rule<declarations>).ast.tson;
     # output {"property:unknown" => {:expr[{ :ident<someval> }], :ident<bad-prop>}}
@@ -117,6 +117,7 @@ of unknown. E.g.
     # output: { "margin-rule:unknown" =>  { :declarations[ { :ident<color>,
                                                              :expr[ { :rgb[ { :num(255) }, { :num(0) }, { :num(0) } ] } ] } ],
                                             :at-keyw<guff> } }
+```
 
 ## See Also
 
