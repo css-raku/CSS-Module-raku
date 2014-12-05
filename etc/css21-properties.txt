@@ -14,7 +14,7 @@
 'border-top-color' 'border-right-color' 'border-bottom-color' 'border-left-color'	<color> | transparent | inherit	the value of the 'color' property	 	no	 	visual
 'border-top-style' 'border-right-style' 'border-bottom-style' 'border-left-style'	[ none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset ] | inherit	none	 	no	 	visual
 'border-top-width' 'border-right-width' 'border-bottom-width' 'border-left-width'	thin | medium | thick | <length> | inherit	medium	 	no	 	visual
-'border-width'	thin | medium | thick | <length>{1,4} | inherit	see individual properties	 	no	 	visual
+'border-width'	[thin | medium | thick | <length>]{1,4} | inherit	see individual properties	 	no	 	visual
 'border'	[ 'border-width' || 'border-style' || 'border-color' ] | inherit	see individual properties	 	no	 	visual
 'bottom'	<length> | <percentage> | auto | inherit	auto	positioned elements	no	refer to height of containing block	visual
 'caption-side'	top | bottom | inherit	top	'table-caption' elements	yes	 	visual
