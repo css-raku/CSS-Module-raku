@@ -27,7 +27,7 @@ for 't/css1-properties.json'.IO.lines {
     my $input = sprintf '{%s: %s}', $prop, %expected<decl>;
     my $expr = %expected<expr>;
 
-    %expected<ast> = $expr ?? [{ ident => $prop, expr => $expr }] !! Any;
+    %expected<ast> = $expr ?? { :declarations[{ :property{ :ident($prop), :$expr } }] } !! Any;
 
     for css1  => {class => CSS::Module::CSS1,  actions => $css1-actions,  proforma => qw<>},
        	css21 => {class => CSS::Module::CSS21, actions => $css21-actions, proforma => qw<inherit>},	
@@ -61,7 +61,7 @@ for 't/css1-properties.json'.IO.lines {
 	    for @$proforma -> $misc {
 		my $decl = sprintf '{%s: %s}', $prop, $misc;
 
-		my $ast = [{ ident => $prop, expr => [ {keyw => $misc} ] }];
+		my $ast = { :declarations[{ :property{ :ident($prop), :expr[ { :keyw($misc)} ] } }] };
 
                 CSS::Grammar::Test::parse-tests($class, $decl,
 						:rule<declarations>,

@@ -24,12 +24,13 @@ class CSS::Module::_Base::Actions
         if $<any-declaration> {
             my $ast = $<any-declaration>.ast;
             if $ast.defined {
+                my ($key, $value) = $ast.kv;
                 if $.pass-unknown {
-                    make {($ast.type ~ ':unknown') => $ast}
+                    make {($key ~ ':unknown') => $value}
                 }
                 else {
                     $.warning('dropping unknown property',
-                              $ast<at-keyw> ?? '@'~$ast<at-keyw> !! $ast<ident>);
+                              $value<at-keyw> ?? '@'~$value<at-keyw> !! $value<ident>);
                 }
             }
             return;
@@ -52,8 +53,8 @@ class CSS::Module::_Base::Actions
         make $.token( %ast, :type(CSSValue::Property) );
     }
 
-    method proforma:sym<inherit>($/) { make {keyw => $.token('inherit', :type(CSSValue::KeywordComponent))} } 
-    method proforma:sym<initial>($/) { make {keyw => $.token('initial', :type(CSSValue::KeywordComponent))} } 
+    method proforma:sym<inherit>($/) { make (:keyw<inherit>) }
+    method proforma:sym<initial>($/) { make (:keyw<initial>) }
 
     #---- Language Extensions ----#
 
@@ -68,12 +69,12 @@ class CSS::Module::_Base::Actions
     has Hash $.colors = %CSS::Grammar::AST::CSS21-Colors;
 
    method color:sym<named>($/) {
-        my $color-name = $<keyw>.ast;
+        my $color-name = $<keyw>.ast.value;
         my @rgb = @( $.colors{$color-name} )
             or die "unknown color: " ~ $color-name;
 
         my $num-type = CSSValue::NumberComponent;
-        my @color = @rgb.map: { %( $num-type.Str => $.token( $_, :type($num-type)) ).item };
+        my @color = @rgb.map: { $num-type.Str => $_ };
 
         make $.token(@color, :type<rgb>);
     }
@@ -92,5 +93,5 @@ class CSS::Module::_Base::Actions
     # case sensitive identifiers
     method identifier($/)  { make $.token($<name>.ast, :type(CSSValue::IdentifierComponent)) }
     # identifiers strung-together, e.g New Century Schoolbook
-    method identifiers($/) { make $.token( $<identifier>>>.ast.join(' '), :type(CSSValue::IdentifierComponent)) }
+    method identifiers($/) { make $.token( $<identifier>.map({ .ast.value }).join(' '), :type(CSSValue::IdentifierComponent)) }
 }
