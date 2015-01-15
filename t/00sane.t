@@ -86,6 +86,15 @@ for (
                                          :expr[ { :keyw<fixed> } ],
                                          :prio<important> } } ]},
     },
+    # selector sanity
+    :simple-selector{ :input('H1:active'),
+                      :ast{ :simple-selector[ { :qname{ :element-name<h1> } }, { :pseudo-class<active> } ] },
+    },
+    :simple-selector{ :input('h1[id$=ess]'),
+                      :css1{ :parse<h1>, :ast{ :simple-selector[ :qname{ :element-name<h1> } ] } },
+                      :css21{ :parse<h1>, :ast{ :simple-selector[ :qname{ :element-name<h1> } ] } },
+                      :ast{ :simple-selector[ { :qname{ :element-name<h1> } }, { :attrib[ { :ident<id> }, { :op<$=> }, { :ident<ess> } ] } ] },
+    },
   ) {
     my $rule = .key;
     my %expected = %( .value );

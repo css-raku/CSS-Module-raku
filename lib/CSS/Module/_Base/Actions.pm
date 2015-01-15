@@ -86,7 +86,6 @@ class CSS::Module::_Base::Actions
         make $.token($val, :type(CSSValue::IntegerComponent))
     }
 
-    method uint($/)        { make $/.Int }
     method number($/)      { make $.token($<num>.ast, :type(CSSValue::NumberComponent)) }
     method uri($/)         { make $<url>.ast }
     method keyw($/)        { make $.token($<id>.lc, :type(CSSValue::KeywordComponent)) }

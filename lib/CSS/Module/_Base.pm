@@ -12,7 +12,6 @@ grammar CSS::Module::_Base
     token angle:sym<zero>  {<number> <?{ +$<number> == 0 }> }
 
     token integer     {$<sign>=< + - >?<uint>}
-    token uint        {\d+}
     token number      {<num> <!before ['%'|\w]>}
     token uri         {<url>}
     multi token keyw  {<id=.Ident>}         # keyword (case insensitive)

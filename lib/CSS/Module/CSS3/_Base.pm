@@ -1,6 +1,7 @@
 use v6;
 
-use CSS::Grammar::CSS3;
+use CSS3::Selectors;
+use CSS3::Selectors::Actions;
 use CSS::Grammar::AST :CSSValue;
 use CSS::Module::_Base;
 use CSS::Module::_Base::Actions;
@@ -9,7 +10,7 @@ class CSS::Module::CSS3::_Base::Actions {...}
 
 grammar CSS::Module::CSS3::_Base
     is CSS::Module::_Base
-    is CSS::Grammar::CSS3 {
+    is CSS3::Selectors {
  
     # http://www.w3.org/TR/2013/CR-css3-values-20130404/ 3.1.1
     # - all properties accept the 'initial' and 'inherit' keywords
@@ -28,7 +29,8 @@ grammar CSS::Module::CSS3::_Base
 }
 
 class CSS::Module::CSS3::_Base::Actions 
-    is CSS::Module::_Base::Actions {
+    is CSS::Module::_Base::Actions
+    is CSS3::Selectors::Actions {
 
     has @._proforma = 'inherit', 'initial';
 

@@ -13,7 +13,6 @@ use CSS::Module::CSS3::Fonts;
 use CSS::Module::CSS3::MediaQueries;
 use CSS::Module::CSS3::Namespaces;
 use CSS::Module::CSS3::PagedMedia;
-use CSS::Module::CSS3::Selectors;
 use CSS::Module::CSS3::_Base;
 
 class CSS::Module::CSS3::Actions
@@ -22,7 +21,6 @@ class CSS::Module::CSS3::Actions
     is CSS::Module::CSS3::MediaQueries::Actions
     is CSS::Module::CSS3::Namespaces::Actions
     is CSS::Module::CSS3::PagedMedia::Actions
-    is CSS::Module::CSS3::Selectors::Actions
     is CSS::ModuleX::CSS21::Actions
     is CSS::Module::CSS3::_Base::Actions
 {};
@@ -33,7 +31,6 @@ grammar CSS::Module::CSS3
     is CSS::Module::CSS3::MediaQueries
     is CSS::Module::CSS3::Namespaces
     is CSS::Module::CSS3::PagedMedia
-    is CSS::Module::CSS3::Selectors
     is CSS::ModuleX::CSS21
     is CSS::Module::CSS3::_Base
 {};
