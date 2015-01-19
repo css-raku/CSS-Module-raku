@@ -12,7 +12,7 @@ grammar CSS::Module::_Base
     token angle:sym<zero>  {<number> <?{ +$<number> == 0 }> }
 
     token integer     {$<sign>=< + - >?<uint>}
-    token number      {<num>}
+    token number      {<num><!before ['%'|\w]>}
     token uri         {<url>}
     multi token keyw  {<id=.Ident>}         # keyword (case insensitive)
     # work-around for RT#117955 - conjunctive '&&' capture"

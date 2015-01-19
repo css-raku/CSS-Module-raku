@@ -14,7 +14,7 @@ It implements the following grammars and actions:
 
 - `CSS::Module::CSS3::Colors`     - CSS 3.0 Colors (@color-profile)
 - `CSS::Module::CSS3::Fonts`      - CSS 3.0 Fonts (@font-face)
-- `CSS3::Selectors`  - CSS 3.0 Selectors
+- `CSS::Module::CSS3::Selectors`  - CSS 3.0 Selectors
 - `CSS::Module::CSS3::Namespaces` - CSS 3.0 Namespace (@namespace)
 - `CSS::Module::CSS3::Media`      - CSS 3.0 Media (@media)
 - `CSS::Module::CSS3::PagedMedia` - CSS 3.0 Paged Media (@page)
@@ -67,7 +67,7 @@ To try parsing some content:
     # declaration: {"color" => {"expr" => [{"rgb" => [{"num" => 0}, {"num" => 0}, {"num" => 255}]}]}
     ```
 
-- Composition: A secondary aim is composible subset and extension classes. For example to create MyCSS3Subset and class MyCSS3Subset::Actions comprising CSS2.1 properties + CSS3 Selectors + CSS3 Colors:
+- Composition: A secondary aim is mixin style composition from modules. For example to create MyCSS3Subset and class MyCSS3Subset::Actions comprising CSS2.1 properties + CSS3 Selectors + CSS3 Colors:
 
     ```
     use v6;
@@ -75,20 +75,20 @@ To try parsing some content:
     use CSS::Module::CSS21::Actions;
     use CSS::Module::CSS21;
 
+    use CSS::Module::CSS3::Selectors;
     use CSS::Module::CSS3::Colors;
-    use CSS3::Selectors;
     use CSS::Module::CSS3::_Base;
 
     grammar MyCSS3Subset::CSS3
+        is CSS::Module::CSS3::Selectors
         is CSS::Module::CSS3::Colors
-        is CSS::Module::CSS3::Fonts
         is CSS::ModuleX::CSS21
         is CSS::Module::CSS3::_Base
     {};
 
     class MyCSS3Subset::Actions
+        is CSS::Module::CSS3::Selectors::Actions
         is CSS::Module::CSS3::Colors::Actions
-        is CSS::Module::CSS3::Fonts::Actions
         is CSS::ModuleX::CSS21::Actions
         is CSS::Module::CSS3::_Base::Actions
     {};
