@@ -4,14 +4,14 @@ use v6;
 # -- http://www.w3.org/TR/2008/REC-CSS1-20080411/#css1-properties
 # -- http://129.69.59.141/css1pqre.htm
 
-use CSS::Module::_Base;
+use CSS::Specification::_Base;
 use CSS::Grammar::CSS1;
 # BUILD.pl targets
 use CSS::Module::CSS1::Spec::Interface;
 use CSS::Module::CSS1::Spec::Grammar;
 
 grammar CSS::Module::CSS1:ver<20080411.000>
-    is CSS::Module::_Base
+    is CSS::Specification::_Base
     is CSS::Grammar::CSS1
     is CSS::Module::CSS1::Spec::Grammar
     does CSS::Module::CSS1::Spec::Interface {

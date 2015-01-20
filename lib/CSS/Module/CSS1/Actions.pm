@@ -1,13 +1,15 @@
 use v6;
 
-use CSS::Module::_Base::Actions;
+use CSS::Specification::_Base::Actions;
+use CSS::Grammar::Actions;
 # BUILD.pl targets
 use CSS::Module::CSS1::Spec::Interface;
 use CSS::Module::CSS1::Spec::Actions;
 
 class CSS::Module::CSS1::Actions
-    is CSS::Module::_Base::Actions
+    is CSS::Specification::_Base::Actions
     is CSS::Module::CSS1::Spec::Actions
+    is CSS::Grammar::Actions
     does CSS::Module::CSS1::Spec::Interface {
 
         method padding-width($/) { make $.list($/) }

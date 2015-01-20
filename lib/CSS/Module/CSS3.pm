@@ -14,7 +14,9 @@ use CSS::Module::CSS3::MediaQueries;
 use CSS::Module::CSS3::Namespaces;
 use CSS::Module::CSS3::PagedMedia;
 use CSS::Module::CSS3::Selectors;
-use CSS::Module::CSS3::_Base;
+use CSS::Specification::_Base::CSS3;
+use CSS::Grammar::CSS3;
+use CSS::Grammar::Actions;
 
 class CSS::Module::CSS3::Actions
     is CSS::Module::CSS3::Colors::Actions
@@ -24,7 +26,8 @@ class CSS::Module::CSS3::Actions
     is CSS::Module::CSS3::PagedMedia::Actions
     is CSS::Module::CSS3::Selectors::Actions
     is CSS::ModuleX::CSS21::Actions
-    is CSS::Module::CSS3::_Base::Actions
+    is CSS::Specification::_Base::CSS3::Actions
+    is CSS::Grammar::Actions
 {};
 
 grammar CSS::Module::CSS3
@@ -35,6 +38,7 @@ grammar CSS::Module::CSS3
     is CSS::Module::CSS3::PagedMedia
     is CSS::Module::CSS3::Selectors
     is CSS::ModuleX::CSS21
-    is CSS::Module::CSS3::_Base
+    is CSS::Specification::_Base::CSS3
+    is CSS::Grammar::CSS3
 {};
 

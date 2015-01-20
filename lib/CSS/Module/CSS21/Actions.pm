@@ -2,9 +2,10 @@ use v6;
 
 class CSS::Module::CSS21::Actions { ... }
 
-use CSS::Module::_Base::Actions;
+use CSS::Specification::_Base::Actions;
 use CSS::Module::CSS21::Spec::Interface;
 use CSS::Module::CSS21::Spec::Actions;
+use CSS::Grammar::Actions;
 
 class CSS::ModuleX::CSS21::Actions
     is CSS::Module::CSS21::Spec::Actions {
@@ -57,7 +58,8 @@ class CSS::ModuleX::CSS21::Actions
 
 class CSS::Module::CSS21::Actions
     is CSS::ModuleX::CSS21::Actions
-    is CSS::Module::_Base::Actions 
+    is CSS::Specification::_Base::Actions 
+    is CSS::Grammar::Actions
     does CSS::Module::CSS21::Spec::Interface {
 
     has @._proforma = 'inherit';

@@ -3,15 +3,17 @@ use v6;
 grammar CSS::Module::CSS3::Fonts::AtFontFace {...}
 
 use CSS::Module::CSS3::Fonts::Variants;
-use CSS::Module::CSS3::_Base;
+use CSS::Specification::_Base::CSS3;
 use CSS::Module::CSS3::Fonts::AtFontFace::Spec::Interface;
 use CSS::Module::CSS3::Fonts::AtFontFace::Spec::Grammar;
 use CSS::Module::CSS3::Fonts::AtFontFace::Spec::Actions;
+use CSS::Grammar::CSS3;
 
 grammar CSS::Module::CSS3::Fonts::AtFontFace
     is CSS::Module::CSS3::Fonts::Variants
     is CSS::Module::CSS3::Fonts::AtFontFace::Spec::Grammar
-    is CSS::Module::CSS3::_Base
+    is CSS::Specification::_Base::CSS3
+    is CSS::Grammar::CSS3
     does CSS::Module::CSS3::Fonts::AtFontFace::Spec::Interface {
 
     # @font-face declarations

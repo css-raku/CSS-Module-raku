@@ -1,7 +1,8 @@
 use v6;
 
 class CSS::Module::CSS3::PagedMedia::Actions {...}
-use CSS::Module::CSS3::_Base;
+use CSS::Specification::_Base::CSS3;
+use CSS::Specification::_Base::CSS3::Actions;
 # CSS3 Paged Media Module Extensions
 # - reference: http://www.w3.org/TR/2006/WD-css3-page-20061010/
 #
@@ -10,9 +11,12 @@ use CSS::Module::CSS3::_Base;
 use CSS::Module::CSS3::PagedMedia::Spec::Interface;
 use CSS::Module::CSS3::PagedMedia::Spec::Grammar;
 use CSS::Module::CSS3::PagedMedia::Spec::Actions;
+use CSS::Grammar::CSS3;
+use CSS::Grammar::Actions;
 
 grammar CSS::Module::CSS3::PagedMedia:ver<20061010.000>
-    is CSS::Module::CSS3::_Base
+    is CSS::Specification::_Base::CSS3
+    is CSS::Grammar::CSS3
     is CSS::Module::CSS3::PagedMedia::Spec::Grammar
     does CSS::Module::CSS3::PagedMedia::Spec::Interface {
 
@@ -36,7 +40,8 @@ grammar CSS::Module::CSS3::PagedMedia:ver<20061010.000>
 }
 
 class CSS::Module::CSS3::PagedMedia::Actions
-    is CSS::Module::CSS3::_Base::Actions 
+    is CSS::Specification::_Base::CSS3::Actions 
+    is CSS::Grammar::Actions
     is CSS::Module::CSS3::PagedMedia::Spec::Actions
     does CSS::Module::CSS3::PagedMedia::Spec::Interface {
 
