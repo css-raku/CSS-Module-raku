@@ -8,8 +8,8 @@ use v6;
 
 use CSS::Module::CSS3::Fonts::AtFontFace;
 use CSS::Module::CSS3::Fonts::Variants;
-use CSS::Specification::_Base::CSS3;
-use CSS::Specification::_Base::CSS3::Actions;
+use CSS::Specification::Terms::CSS3;
+use CSS::Specification::Terms::CSS3::Actions;
 
 use CSS::Module::CSS3::Fonts::Spec::Interface;
 use CSS::Module::CSS3::Fonts::Spec::Grammar;
@@ -22,7 +22,7 @@ use CSS::Grammar::Actions;
 grammar CSS::Module::CSS3::Fonts:ver<20130212.000> 
     is CSS::Module::CSS3::Fonts::Variants
     is CSS::Module::CSS3::Fonts::Spec::Grammar
-    is CSS::Specification::_Base::CSS3
+    is CSS::Specification::Terms::CSS3
     is CSS::Grammar::CSS3
     does CSS::Module::CSS3::Fonts::Spec::Interface {
 
@@ -43,7 +43,7 @@ grammar CSS::Module::CSS3::Fonts:ver<20130212.000>
 # ----------------------------------------------------------------------
 
 class CSS::Module::CSS3::Fonts::Actions
-    is CSS::Specification::_Base::CSS3::Actions
+    is CSS::Specification::Terms::CSS3::Actions
     is CSS::Module::CSS3::Fonts::Variants::Actions
     is CSS::Module::CSS3::Fonts::Spec::Actions
     is CSS::Module::CSS3::Fonts::AtFontFace::Spec::Actions
