@@ -24,30 +24,6 @@ for ('') {
     ok($_ ~~ /^<CSS::Module::CSS3::nonascii>$/, "non-ascii css3: $_");
 }
 
-for '0%' {
-    nok($_ ~~ /^<CSS::Module::CSS3::number>/, "not number: $_");
-    ok($_ ~~ /^<CSS::Module::CSS3::percentage>/, "percentage: $_");
-    nok($_ ~~ /^<CSS::Module::CSS3::angle>/, "not angle: $_");
-}
-
-for '0deg' {
-    nok($_ ~~ /^<CSS::Module::CSS3::number>/, "not number: $_");
-    nok($_ ~~ /^<CSS::Module::CSS3::percentage>/, "not percentage: $_");
-    ok($_ ~~ /^<CSS::Module::CSS3::angle>/, "angle: $_");
-}
-
-for '0' {
-    ok($_ ~~ /^<CSS::Module::CSS3::number>/, "number: $_");
-    nok($_ ~~ /^<CSS::Module::CSS3::percentage>/, "not percentage: $_");
-    ok($_ ~~ /^<CSS::Module::CSS3::angle>/, "angle: $_");
-}
-
-for '1' {
-    ok($_ ~~ /^<CSS::Module::CSS3::number>/, "number: $_");
-    nok($_ ~~ /^<CSS::Module::CSS3::percentage>/, "not percentage: $_");
-    nok($_ ~~ /^<CSS::Module::CSS3::angle>/, "angle: $_");
-}
-
 my $css1-actions  = CSS::Module::CSS1::Actions.new;
 my $css21-actions = CSS::Module::CSS21::Actions.new;
 my $css3-actions  = CSS::Module::CSS3::Actions.new;
