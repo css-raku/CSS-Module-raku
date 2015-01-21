@@ -11,7 +11,6 @@ use CSS::Writer;
 
 my $css21-actions = CSS::Module::CSS21::Actions.new;
 my $css3x-actions = CSS::Module::CSS3::Actions.new;
-my $css-writer = CSS::Writer.new;
 
 my %seen;
 
@@ -26,6 +25,7 @@ for 't/css21-properties.json'.IO.lines {
     %expected<ast> = $expr ?? { :declarations[{ :property{ :ident($prop), :$expr } }] } !! Any;
 
     my $input = sprintf '{%s: %s}', $prop, %expected<decl>;
+    my $css-writer = CSS::Writer.new;
 
     for css21 => {class => CSS::Module::CSS21, actions => $css21-actions, proforma => qw<inherit>},
        	css3x => {class => CSS::Module::CSS3,  actions => $css3x-actions, proforma => qw<inherit initial>, writer => $css-writer} {
