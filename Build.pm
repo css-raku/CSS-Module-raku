@@ -9,7 +9,7 @@ class Build is Panda::Builder {
     method build($where) {
 
         indir $where, {
-            warn :$where.perl;
+
             for ('etc/css1-properties.txt' => <CSS1>,
                  'etc/css21-properties.txt' => <CSS21>,
                  'etc/css3x-font-properties.txt' => <CSS3 Fonts>,
