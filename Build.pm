@@ -9,6 +9,7 @@ class Build is Panda::Builder {
     method build($where) {
 
         indir $where, {
+            warn :$where.perl;
             for ('etc/css1-properties.txt' => <CSS1>,
                  'etc/css21-properties.txt' => <CSS21>,
                  'etc/css3x-font-properties.txt' => <CSS3 Fonts>,
@@ -21,12 +22,12 @@ class Build is Panda::Builder {
                     actions => 'Actions' ,
                     grammar => 'Grammar' {
                     my ($type, $subclass) = .kv;
-                    my $name = (<CSS Module>, @$class-isa, <Spec>, $subclass).join('::');
+                    my $name = (<CSS Module>, @$class-isa, <Spec>, $subclass).flat.join('::');
 
-                    my $class-dir = (<lib CSS Module>, @$class-isa, <Spec>).join('/');
+                    my $class-dir = $*SPEC.catdir(<lib CSS Module>, @$class-isa, <Spec>);
                     mkdir $class-dir;
 
-                    my $class-path = $class-dir ~ '/' ~ $subclass ~ '.pm';
+                    my $class-path = $*SPEC.catdir( $class-dir, $subclass~'.pm' );
 
                     say "Building $input-spec => $name";
                     {
