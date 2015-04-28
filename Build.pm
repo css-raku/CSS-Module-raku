@@ -27,7 +27,7 @@ class Build is Panda::Builder {
                     my $class-dir = $*SPEC.catdir(<lib CSS Module>, @$class-isa, <Spec>);
                     mkdir $class-dir;
 
-                    my $class-path = $*SPEC.catdir( $class-dir, $subclass~'.pm' );
+                    my $class-path = $*SPEC.catfile( $class-dir, $subclass~'.pm' );
 
                     say "Building $input-spec => $name";
                     {
