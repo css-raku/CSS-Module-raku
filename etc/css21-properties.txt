@@ -47,9 +47,9 @@
 'list-style-position'	inside | outside | inherit	outside	elements with 'display: list-item'	yes	 	visual
 'list-style-type'	disc | circle | square | decimal | decimal-leading-zero | lower-roman | upper-roman | lower-greek | lower-latin | upper-latin | armenian | georgian | lower-alpha | upper-alpha | none | inherit	disc	elements with 'display: list-item'	yes	 	visual
 'list-style'	[ 'list-style-type' || 'list-style-position' || 'list-style-image' ] | inherit	see individual properties	elements with 'display: list-item'	yes	 	visual
-'margin-right' 'margin-left'	<length> | <percentage> | inherit	0	all elements except elements with table display types other than table-caption, table and inline-table	no	refer to width of containing block	visual
-'margin-top' 'margin-bottom'	<length> | <percentage> | inherit	0	all elements except elements with table display types other than table-caption, table and inline-table	no	refer to width of containing block	visual
-'margin'	[<length> | <percentage>]{1,4} | inherit	see individual properties	all elements except elements with table display types other than table-caption, table and inline-table	no	refer to width of containing block	visual
+'margin-right' 'margin-left'	<length> | <percentage> | auto | inherit	0	all elements except elements with table display types other than table-caption, table and inline-table	no	refer to width of containing block	visual
+'margin-top' 'margin-bottom'	<length> | <percentage> | auto | inherit	0	all elements except elements with table display types other than table-caption, table and inline-table	no	refer to width of containing block	visual
+'margin'	[<length> | <percentage> | auto ]{1,4} | inherit	see individual properties	all elements except elements with table display types other than table-caption, table and inline-table	no	refer to width of containing block	visual
 'max-height'	<length> | <percentage> | none | inherit	none	all elements but non-replaced inline elements, table columns, and column groups	no	see prose	visual
 'max-width'	<length> | <percentage> | none | inherit	none	all elements but non-replaced inline elements, table rows, and row groups	no	refer to width of containing block	visual
 'min-height'	<length> | <percentage> | inherit	0	all elements but non-replaced inline elements, table columns, and column groups	no	see prose	visual
