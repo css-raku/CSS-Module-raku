@@ -10,17 +10,17 @@ class Build is Panda::Builder {
 
         indir $where, {
 
-            for ('etc/css1-properties.txt' => <CSS1>,
-                 'etc/css21-properties.txt' => <CSS21>,
-                 'etc/css3x-font-properties.txt' => <CSS3 Fonts>,
-                 'etc/css3x-font-@fontface-properties.txt' => <CSS3 Fonts AtFontFace>,
-                 'etc/css3x-paged-media.txt' => <CSS3 PagedMedia>,
+            for (<etc css1-properties.txt> => <CSS1>,
+                 <etc css21-properties.txt> => <CSS21>,
+                 <etc css3x-font-properties.txt> => <CSS3 Fonts>,
+                 <etc css3x-font-@fontface-properties.txt> => <CSS3 Fonts AtFontFace>,
+                 <etc css3x-paged-media.txt> => <CSS3 PagedMedia>,
                 ) {
                 my ($input-spec, $class-isa) = .kv;
 
-                for interface => 'Interface',
-                    actions => 'Actions' ,
-                    grammar => 'Grammar' {
+                for :interface<Interface>,
+                    :actions<Actions> ,
+                    :grammar<Grammar> {
                     my ($type, $subclass) = .kv;
                     my $name = (<CSS Module>, @$class-isa, <Spec>, $subclass).flat.join('::');
 
@@ -29,9 +29,10 @@ class Build is Panda::Builder {
 
                     my $class-path = $*SPEC.catfile( $class-dir, $subclass~'.pm' );
 
-                    say "Building $input-spec => $name";
+                    my $input-path = $*SPEC.catfile( |@$input-spec );
+                    say "Building $input-path => $name";
                     {
-                        my $*IN = open $input-spec, :r;
+                        my $*IN = open $input-path, :r;
                         my $*OUT = open $class-path, :w;
 
                         CSS::Specification::Build::generate( $type, $name );
