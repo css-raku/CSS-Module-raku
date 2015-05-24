@@ -49,7 +49,8 @@ class Build is Panda::Builder {
                     for @summary {
                         my %detail = %$_;
                         my $prop-name = %detail<name>:delete;
-                        $props{$prop-name} //= %detail;
+                        $props{$prop-name}{.key} = .value
+                            for %detail.pairs;
                         $props{$prop-name}<level> //= $level;
                     }
                 }

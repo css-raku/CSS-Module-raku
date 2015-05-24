@@ -54,7 +54,7 @@
 'max-width'	<length> | <percentage> | none | inherit	none	all elements but non-replaced inline elements, table rows, and row groups	no	refer to width of containing block	visual
 'min-height'	<length> | <percentage> | inherit	0	all elements but non-replaced inline elements, table columns, and column groups	no	see prose	visual
 'min-width'	<length> | <percentage> | inherit	0	all elements but non-replaced inline elements, table rows, and row groups	no	refer to width of containing block	visual
-'opacity'	<number> | inherit
+'opacity'	<number> | inherit	1.0		no
 'orphans'	<integer> | inherit	2	block container elements	yes	 	visual, paged
 'outline-color'	<color> | invert | inherit	invert	 	no	 	visual, interactive
 'outline-style'	[ none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset ] | inherit	none	 	no	 	visual, interactive

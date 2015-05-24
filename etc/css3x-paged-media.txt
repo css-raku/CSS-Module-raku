@@ -1,1 +1,1 @@
-size: <length>{1,2} | auto | [ <page-size> || [ portrait | landscape] ]
+size	<length>{1,2} | auto | [ <page-size> || [ portrait | landscape] ]	auto	page context	N/A	N/A	WD-print
