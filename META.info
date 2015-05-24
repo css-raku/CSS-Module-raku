@@ -48,6 +48,8 @@
         "CSS::Module::CSS3::PagedMedia::Actions" : "lib/CSS/Module/CSS3/PagedMedia.pm",
         "CSS::Module::CSS3::PagedMedia::Spec::Actions" : "lib/CSS/Module/CSS3/PagedMedia/Spec/Actions.pm",
         "CSS::Module::CSS3::PagedMedia::Spec::Grammar" : "lib/CSS/Module/CSS3/PagedMedia/Spec/Grammar.pm",
-        "CSS::Module::CSS3::PagedMedia::Spec::Interface" : "lib/CSS/Module/CSS3/PagedMedia/Spec/Interface.pm"
+        "CSS::Module::CSS3::PagedMedia::Spec::Interface" : "lib/CSS/Module/CSS3/PagedMedia/Spec/Interface.pm",
+
+        "CSS::Module::MetaData" : "lib/CSS/Module/MetaData.pm"
      }
 }
