@@ -24,6 +24,7 @@ It implements the following grammars and actions:
 ```
 % perl6 -M CSS::Module::CSS3::MetaData -e'say $CSS::Module::CSS3::MetaData::property<azimuth>.perl'
 {:default("center"), :inherit, :synopsis("<angle> | [[ left-side | far-left | left | center-left | center | center-right | right | far-right | right-side ] || behind ] | leftwards | rightwards")}
+```
 
 ## Installation
 
