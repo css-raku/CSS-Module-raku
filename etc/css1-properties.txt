@@ -31,10 +31,10 @@
 'padding-bottom'	<length> | <percentage>	0	all elements	no	refer to parent element's width	5.5.8
 'padding-left'	<length> | <percentage>	0	all elements	no	refer to parent element's width	5.5.9
 'padding'	[ <length> | <percentage> ]{1,4}	0	all elements	no	refer to parent element's width	5.5.10
-'border-top-width'	thin | medium | thick | <length>	'medium'	all elements	no	N/A	5.5.11
-'border-right-width'	thin | medium | thick | <length>	'medium'	all elements	no	N/A	5.5.12
-'border-bottom-width'	thin | medium | thick | <length>	'medium'	all elements	no	N/A	5.5.13
-'border-left-width'	thin | medium | thick | <length>	'medium'	all elements	no	N/A	5.5.14
+'border-top-width'	thin | medium | thick | <length>	medium	all elements	no	N/A	5.5.11
+'border-right-width'	thin | medium | thick | <length>	medium	all elements	no	N/A	5.5.12
+'border-bottom-width'	thin | medium | thick | <length>	medium	all elements	no	N/A	5.5.13
+'border-left-width'	thin | medium | thick | <length>	medium	all elements	no	N/A	5.5.14
 'border-width'	[thin | medium | thick | <length>]{1,4}	not defined for shorthand properties	all elements	no	N/A	5.5.15
 'border-color'	<color>{1,4}	the value of the 'color' property	all elements	no	N/A	5.5.16
 'border-style'	[ none | dotted | dashed | solid | double | groove | ridge | inset | outset ]{1,4}	none	all elements	no	N/A	5.5.17

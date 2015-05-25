@@ -20,6 +20,11 @@ It implements the following grammars and actions:
 - `CSS::Module::CSS3::PagedMedia` - CSS 3.0 Paged Media (@page)
 - `CSS::ModuleX::CSS21`           - the full set of CSS21 properties
 
+`CSS::Module::CSS3::MetaData` is a generated class that contains summary property information, e.g.: 
+```
+% perl6 -M CSS::Module::CSS3::MetaData -e'say $CSS::Module::CSS3::MetaData::property<azimuth>.perl'
+{:default("center"), :inherit, :synopsis("<angle> | [[ left-side | far-left | left | center-left | center | center-right | right | far-right | right-side ] || behind ] | leftwards | rightwards")}
+
 ## Installation
 
 This module works with Rakudo Star 2014.09 or better [download from http://rakudo.org/downloads/star/ - don't forget the final `make install`]:
