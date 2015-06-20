@@ -1,19 +1,15 @@
 use v6;
 use Test;
-use CSS::Grammar::CSS3;
-use CSS::Grammar::Actions;
 use CSS::Grammar::Test;
 
 use CSS::Module::CSS3::_Base;
 use CSS::Module::CSS3::_Base::Actions;
 
 class CSS3Terms
-    is CSS::Specification::Terms:CSS3
-    is CSS::Grammar::CSS3 {};
+    is CSS::Module::CSS3::_Base {};
 
 class CSS3Terms::Actions
-    is CSS::Module::CSS3::_Base::Actions
-    is CSS::Grammar::Actions {};
+    is CSS::Module::CSS3::_Base::Actions {};
 
 for '0%' {
     nok($_ ~~ /^<CSS3Terms::number>/, "not number: $_");

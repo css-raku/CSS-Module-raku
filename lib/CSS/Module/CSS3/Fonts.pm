@@ -16,14 +16,11 @@ use CSS::Module::CSS3::Fonts::Spec::Grammar;
 use CSS::Module::CSS3::Fonts::Spec::Actions;
 use CSS::Module::CSS3::Fonts::AtFontFace::Spec::Interface;
 use CSS::Module::CSS3::Fonts::AtFontFace::Spec::Actions;
-use CSS::Grammar::CSS3;
-use CSS::Grammar::Actions;
 
 grammar CSS::Module::CSS3::Fonts:ver<20130212.000> 
     is CSS::Module::CSS3::Fonts::Variants
     is CSS::Module::CSS3::Fonts::Spec::Grammar
     is CSS::Module::CSS3::_Base
-    is CSS::Grammar::CSS3
     does CSS::Module::CSS3::Fonts::Spec::Interface {
 
     rule font-description {<declarations=.CSS::Module::CSS3::Fonts::AtFontFace::declarations>}
@@ -47,7 +44,6 @@ class CSS::Module::CSS3::Fonts::Actions
     is CSS::Module::CSS3::Fonts::Variants::Actions
     is CSS::Module::CSS3::Fonts::Spec::Actions
     is CSS::Module::CSS3::Fonts::AtFontFace::Spec::Actions
-    is CSS::Grammar::Actions
     does CSS::Module::CSS3::Fonts::Spec::Interface
     does CSS::Module::CSS3::Fonts::AtFontFace::Spec::Interface {
 

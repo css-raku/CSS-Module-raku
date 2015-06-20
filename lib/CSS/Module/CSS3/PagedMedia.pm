@@ -11,12 +11,9 @@ use CSS::Module::CSS3::_Base::Actions;
 use CSS::Module::CSS3::PagedMedia::Spec::Interface;
 use CSS::Module::CSS3::PagedMedia::Spec::Grammar;
 use CSS::Module::CSS3::PagedMedia::Spec::Actions;
-use CSS::Grammar::CSS3;
-use CSS::Grammar::Actions;
 
 grammar CSS::Module::CSS3::PagedMedia:ver<20061010.000>
     is CSS::Module::CSS3::_Base
-    is CSS::Grammar::CSS3
     is CSS::Module::CSS3::PagedMedia::Spec::Grammar
     does CSS::Module::CSS3::PagedMedia::Spec::Interface {
 
@@ -41,7 +38,6 @@ grammar CSS::Module::CSS3::PagedMedia:ver<20061010.000>
 
 class CSS::Module::CSS3::PagedMedia::Actions
     is CSS::Module::CSS3::_Base::Actions 
-    is CSS::Grammar::Actions
     is CSS::Module::CSS3::PagedMedia::Spec::Actions
     does CSS::Module::CSS3::PagedMedia::Spec::Interface {
 

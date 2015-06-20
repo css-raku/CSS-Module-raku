@@ -6,13 +6,11 @@ use CSS::Module::CSS3::Fonts::Variants;
 use CSS::Module::CSS3::_Base;
 use CSS::Module::CSS3::Fonts::AtFontFace::Spec::Interface;
 use CSS::Module::CSS3::Fonts::AtFontFace::Spec::Grammar;
-use CSS::Grammar::CSS3;
 
 grammar CSS::Module::CSS3::Fonts::AtFontFace
     is CSS::Module::CSS3::Fonts::Variants
     is CSS::Module::CSS3::Fonts::AtFontFace::Spec::Grammar
     is CSS::Module::CSS3::_Base
-    is CSS::Grammar::CSS3
     does CSS::Module::CSS3::Fonts::AtFontFace::Spec::Interface {
 
     # @font-face declarations
