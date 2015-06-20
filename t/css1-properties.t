@@ -3,11 +3,11 @@
 use Test;
 use JSON::Tiny;
 
-use CSS::Module::CSS1::Actions;
-use CSS::Module::CSS1;
 use CSS::Module::CSS21::Actions;
 use CSS::Module::CSS21;
 use CSS::Module::CSS3;
+use CSS::Module::CSS1::Actions;
+use CSS::Module::CSS1;
 use CSS::Grammar::Test;
 use CSS::Writer;
 
