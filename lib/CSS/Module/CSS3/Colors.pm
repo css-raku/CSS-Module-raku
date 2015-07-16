@@ -83,14 +83,14 @@ class CSS::Module::CSS3::Colors::Actions {
 
     use CSS::Grammar::AST;
 
-    has $.colors = %CSS::Grammar::AST::CSS3-Colors;
+    has Hash $.colors = %CSS::Grammar::AST::CSS3-Colors;
 
     method color-angle($/) {
         make $<number>.ast;
     }
 
     method color-alpha($/) {
-        my $alpha = $<number>.ast.value;
+        my Numeric $alpha = $<number>.ast.value;
         $alpha = 0.0 if $alpha < 0.0;
         $alpha = 1.0 if $alpha > 1.0;
         make $.token($alpha, :type(CSSValue::NumberComponent));
@@ -99,7 +99,7 @@ class CSS::Module::CSS3::Colors::Actions {
     method percentage-range($/) {
         return make $<color-alpha>.ast
             if $<color-alpha>;
-        my $percentage = $<percentage>.ast.value;
+        my Numeric $percentage = $<percentage>.ast.value;
         $percentage = 0 if $percentage < 0;
         $percentage = 100 if $percentage > 100;
         make $.token($percentage, :type(CSSValue::PercentageComponent))
