@@ -74,4 +74,4 @@ for 't/css1-properties.json'.IO.lines {
     }
 }
 
-done;
+done-testing;

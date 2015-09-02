@@ -25,4 +25,4 @@ for ( 't/css3x-paged-media.json'.IO.lines ) {
 				    :$expected );
 }
 
-done;
+done-testing;

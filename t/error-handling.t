@@ -29,4 +29,4 @@ for ( 't/error-handling.json'.IO.lines ) {
 				    :$expected );
 }
 
-done;
+done-testing;

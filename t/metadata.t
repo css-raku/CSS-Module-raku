@@ -5,4 +5,4 @@ is-deeply $CSS::Module::CSS3::MetaData::property<azimuth>, {:default<center>, :i
 is-deeply $CSS::Module::CSS3::MetaData::property<border>, {:!inherit, :synopsis("[ 'border-width' || 'border-style' || 'border-color' ]")}, 'border';
 is-deeply $CSS::Module::CSS3::MetaData::property<border-style>, {:box, :default<none>, :!inherit, :synopsis("[ none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset ]\{1,4}") }, 'border-style';
 
-done;
+done-testing;

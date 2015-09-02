@@ -58,4 +58,4 @@ for 't/00basic.json'.IO.lines.map({ from-json($_).list }) {
 
 }
 
-done;
+done-testing;

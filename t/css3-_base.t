@@ -56,4 +56,4 @@ for :number<123.45>        => :num(123.45),
                                     :%expected);
 }
 
-done;
+done-testing;

@@ -71,4 +71,4 @@ for 't/css21-properties.json'.IO.lines {
     }
 }
 
-done;
+done-testing;

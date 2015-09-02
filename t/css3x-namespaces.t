@@ -38,4 +38,4 @@ for (
 				    :$expected );
 }
 
-done;
+done-testing;

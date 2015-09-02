@@ -37,4 +37,4 @@ for 't/css3x-fonts.json'.IO.lines {
 				    :expected(%(%$expected, %$css21)) );
 }
 
-done;
+done-testing;

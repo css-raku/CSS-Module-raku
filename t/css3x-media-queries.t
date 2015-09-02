@@ -26,4 +26,4 @@ for 't/css3x-media-queries.json'.IO.lines {
 				    :$expected );
 }
 
-done;
+done-testing;
