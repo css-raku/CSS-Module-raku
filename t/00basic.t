@@ -10,18 +10,18 @@ use CSS::Module::CSS1;
 use CSS::Grammar::Test;
 use CSS::Writer;
 
-for ("012AF", "012AFc") {
+for "012AF", "012AFc" {
     # css21+ unicode is up to 6 digits
-    nok($_ ~~ /^<CSS::Module::CSS1::unicode>$/, "not css1 unicode: $_");
-    ok($_ ~~ /^<CSS::Module::CSS21::unicode>$/, "css21 unicode: $_");
-    ok($_ ~~ /^<CSS::Module::CSS3::unicode>$/, "css3 unicode: $_");
+    nok $_ ~~ /^<CSS::Module::CSS1::unicode>$/, "not css1 unicode: $_";
+    ok  $_ ~~ /^<CSS::Module::CSS21::unicode>$/, "css21 unicode: $_";
+    ok  $_ ~~ /^<CSS::Module::CSS3::unicode>$/, "css3 unicode: $_";
 }
 
 # css1 and css21 only recognise latin chars as non-ascii (\o240-\o377)
-for ('') {
-    nok($_ ~~ /^<CSS::Module::CSS1::nonascii>$/, "not non-ascii css1: $_");
-    nok($_ ~~ /^<CSS::Module::CSS21::nonascii>$/, "not non-ascii css21: $_");
-    ok($_ ~~ /^<CSS::Module::CSS3::nonascii>$/, "non-ascii css3: $_");
+for '' {
+    nok $_ ~~ /^<CSS::Module::CSS1::nonascii>$/, "not non-ascii css1: $_";
+    nok $_ ~~ /^<CSS::Module::CSS21::nonascii>$/, "not non-ascii css21: $_";
+    ok  $_ ~~ /^<CSS::Module::CSS3::nonascii>$/, "non-ascii css3: $_";
 }
 
 my $css1-actions  = CSS::Module::CSS1::Actions.new;
@@ -30,7 +30,7 @@ my $css3-actions  = CSS::Module::CSS3::Actions.new;
 my $css3-actions_2  = CSS::Module::CSS3::Actions.new( :lax );
 my $css-writer = CSS::Writer.new( :terse, :color-names );
 
-for 't/00basic.json'.IO.lines.map({ from-json($_).list }) {
+for 't/00basic.json'.IO.lines.map({ from-json($_).pairs[0] }) {
 
     my $rule = .key;
     my %expected = %( .value );
