@@ -28,7 +28,7 @@ It implements the following grammars and actions:
 
 ## Installation
 
-This module works with Rakudo Star 2014.09 or better [download from http://rakudo.org/downloads/star/ - don't forget the final `make install`]:
+This module works with Rakudo Star 2015.09 or better [download from http://rakudo.org/downloads/star/ - don't forget the final `make install`]:
 
 Ensure that `perl6` and `panda` are available on your path, e.g. :
 
