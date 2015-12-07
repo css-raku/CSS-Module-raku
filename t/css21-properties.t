@@ -1,7 +1,7 @@
 #!/usr/bin/env perl6
 
 use Test;
-use JSON::Tiny;
+use JSON::Fast;
 
 use CSS::Module::CSS21::Actions;
 use CSS::Module::CSS21;

@@ -14,6 +14,7 @@ use CSS::Module::CSS3::MediaQueries;
 use CSS::Module::CSS3::Namespaces;
 use CSS::Module::CSS3::PagedMedia;
 use CSS::Module::CSS3::Selectors;
+use CSS::Module::CSS3::Selectors::Actions;
 use CSS::Module::CSS3::_Base;
 use CSS::Module::CSS3::_Base::Actions;
 
