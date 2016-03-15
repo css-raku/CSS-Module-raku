@@ -33,7 +33,7 @@ my $css-writer = CSS::Writer.new( :terse, :color-names );
 for 't/00basic.json'.IO.lines.map({ from-json($_).pairs[0] }) {
 
     my $rule = .key;
-    my %expected = %( .value );
+    my %expected = .value;
     my $input = %expected<input>;
 
     for css1  => {class => CSS::Module::CSS1,  actions => $css1-actions, writer => $css-writer},

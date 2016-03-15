@@ -3,8 +3,6 @@ use v6;
 # CSS3 Color Module Extensions
 # specification: http://www.w3.org/TR/2011/REC-css3-color-20110607/
 
-use CSS::Grammar::AST :CSSValue;
-
 grammar CSS::Module::CSS3::Colors:ver<20110607.000> {
 
 # extensions for CSS3 Color Module
@@ -13,6 +11,7 @@ grammar CSS::Module::CSS3::Colors:ver<20110607.000> {
 # @color-profile is in the process of being dropped
 ##    rule at-rule:sym<color-profile> {(:i'color-profile') <declarations> }
 
+    proto rule color {*}
     rule color:sym<named>
     {:i [aliceblue | antiquewhite | aqua |  aquamarine | azure | beige | bisque
          | black |  blanchedalmond |  blue | blueviolet  | brown |  burlywood |
@@ -81,7 +80,7 @@ grammar CSS::Module::CSS3::Colors:ver<20110607.000> {
 
 class CSS::Module::CSS3::Colors::Actions {
 
-    use CSS::Grammar::AST;
+    use CSS::Grammar::AST :CSSValue;
 
     has Hash $.colors = %CSS::Grammar::AST::CSS3-Colors;
 
