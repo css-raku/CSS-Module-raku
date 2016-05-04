@@ -1,7 +1,5 @@
 use v6;
 
-class CSS::Module::CSS21::Actions { ... }
-
 use CSS::Specification::Terms::Actions;
 use CSS::Module::CSS21::Spec::Interface;
 use CSS::Module::CSS21::Spec::Actions;

@@ -67,7 +67,7 @@ for 't/css1-properties.json'.IO.lines {
 						:rule<declarations>,
 						:$actions,
 						:suite($level),
-						:expected({ast => $ast}) );
+						:expected({ :$ast }) );
 
             }
         }
