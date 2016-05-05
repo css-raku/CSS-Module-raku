@@ -1,4 +1,4 @@
-{
+{   "perl"        : "6c",
     "name"        : "CSS::Module",
     "version"     : "0.02.2",
     "description" : "Perl 6 CSS extended and property-specific grammars",
@@ -18,7 +18,6 @@
         "CSS::Module::CSS21::Spec::Interface" : "lib/CSS/Module/CSS21/Spec/Interface.pm",
 
         "CSS::Module::CSS3" : "lib/CSS/Module/CSS3.pm",
-        "CSS::Module::CSS3::Actions" : "lib/CSS/Module/CSS3/Actions.pm",
 
         "CSS::Module::CSS3::_Base" : "lib/CSS/Module/CSS3/_Base.pm",
         "CSS::Module::CSS3::_Base::Actions" : "lib/CSS/Module/CSS3/_Base/Actions.pm",
