@@ -9,6 +9,7 @@ use CSS::Module::CSS1::Actions;
 use CSS::Module::CSS1;
 use CSS::Grammar::Test;
 use CSS::Writer;
+use JSON::Fast;
 
 for "012AF", "012AFc" {
     # css21+ unicode is up to 6 digits
