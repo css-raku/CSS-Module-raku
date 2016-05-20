@@ -2,9 +2,6 @@ use v6;
 
 # css3 - css21 base properties + css3 extensions
 # link: http://www.w3.org/TR/2011/NOTE-css-2010-20110512/#css3
-grammar CSS::Module::CSS3:ver<2010-20110512.000> {...};
-class   CSS::Module::CSS3::Actions {...};
-
 use CSS::Module::CSS21::Actions;
 use CSS::Module::CSS21;
 
@@ -29,7 +26,7 @@ class CSS::Module::CSS3::Actions
     is CSS::Module::CSS3::_Base::Actions
 {};
 
-grammar CSS::Module::CSS3
+grammar CSS::Module::CSS3:ver<2010-20110512.000>
     is CSS::Module::CSS3::Colors
     is CSS::Module::CSS3::Fonts
     is CSS::Module::CSS3::MediaQueries

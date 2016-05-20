@@ -1,6 +1,5 @@
 use v6;
 
-class CSS::Module::CSS3::PagedMedia::Actions {...}
 use CSS::Module::CSS3::_Base;
 use CSS::Module::CSS3::_Base::Actions;
 # CSS3 Paged Media Module Extensions

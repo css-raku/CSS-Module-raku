@@ -1,7 +1,5 @@
 use v6;
 
-grammar CSS::Module::CSS3::Fonts::AtFontFace {...}
-
 use CSS::Module::CSS3::Fonts::Variants;
 use CSS::Module::CSS3::_Base;
 use CSS::Module::CSS3::Fonts::AtFontFace::Spec::Interface;
