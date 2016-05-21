@@ -1,6 +1,8 @@
 use v6;
 
 use CSS::Specification::Build;
+use CSS::Module::CSS3;
+use CSS::Module::CSS3::Fonts::AtFontFace;
 use Panda::Builder;
 use Panda::Common;
 
@@ -19,7 +21,12 @@ class Build is Panda::Builder {
                  <etc css3x-paged-media.txt> => <CSS3 PagedMedia>,
                 ) {
                 my ($input-spec, $class-isa) = .kv;
-                my $scope = '@font-face' if $class-isa[*-1] eq 'AtFontFace';
+                my $scope;
+                my $grammar = CSS::Module::CSS3;
+                if $class-isa[*-1] eq 'AtFontFace' {
+                    $scope = '@font-face';
+                    $grammar = CSS::Module::CSS3::Fonts::AtFontFace;
+                }
 
                 for :interface<Interface>,
                     :actions<Actions> ,
@@ -41,12 +48,21 @@ class Build is Panda::Builder {
                         CSS::Specification::Build::generate( $type, $name );
                     }
 
+                    my $actions =  CSS::Module::CSS3::Actions.new;
+
                     my @summary = CSS::Specification::Build::summary( :$input-path );
                     for @summary {
                         my %detail = %$_;
                         my $prop-name = %detail<name>:delete;
+                        with %detail<default> -> $default {
+                            my @d = $default;
+                            # either a discription or concrete term
+                            with  $grammar.parse("$prop-name:$default", :$actions, :rule<declaration>) {
+                                @d.push: .ast<property><expr>
+                            }
+                            %detail<default> = @d;
+                        }
                         for %detail.pairs {
-
                             if $scope {
                                 # aka @font-face
                                 %props{$scope}{$prop-name}{.key} = .value
@@ -59,8 +75,8 @@ class Build is Panda::Builder {
                 }
             }
             my $class-dir = $*SPEC.catdir(<lib CSS Module CSS3>);
-            my $class-path = $*SPEC.catfile( $class-dir, 'MetaData.pm' );
-            my $class-name = 'CSS::Module::CSS3::MetaData';
+            my $class-path = $*SPEC.catfile( $class-dir, 'Metadata.pm' );
+            my $class-name = 'CSS::Module::CSS3::Metadata';
             say "Building $class-name";
             {
                 my $*OUT = open $class-path, :w;

@@ -52,6 +52,6 @@
         "CSS::Module::CSS3::PagedMedia::Spec::Grammar" : "lib/CSS/Module/CSS3/PagedMedia/Spec/Grammar.pm",
         "CSS::Module::CSS3::PagedMedia::Spec::Interface" : "lib/CSS/Module/CSS3/PagedMedia/Spec/Interface.pm",
 
-        "CSS::Module::CSS3::MetaData" : "lib/CSS/Module/CSS3/MetaData.pm"
+        "CSS::Module::CSS3::Metadata" : "lib/CSS/Module/CSS3/Metadata.pm"
      }
 }
