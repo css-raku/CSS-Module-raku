@@ -7,7 +7,9 @@
 { "prop" : "border-top-width", "decl" : "thick", "expr" : [ { "keyw" : "thick" } ] }
 { "prop" : "border-width", "decl" : "2ex 1.5em 3ex 2em", "expr" : [ { "ex" : 2 }, { "em" : 1.5 }, { "ex" : 3 }, { "em" : 2 } ] }
 { "prop" : "border-color", "decl" : "#a7f #aa77ff rgb(100,150,20) aqua", "expr" : [ { "rgb" : [ { "num" : 170 }, { "num" : 119 }, { "num" : 255 } ] }, { "rgb" : [ { "num" : 170 }, { "num" : 119 }, { "num" : 255 } ] }, { "rgb" : [ { "num" : 100 }, { "num" : 150 }, { "num" : 20 } ] }, { "rgb" : [ { "num" : 0 }, { "num" : 255 }, { "num" : 255 } ] } ] }
+{ "prop" : "border-top-color", "decl" : "#aaa", "expr" : [ { "rgb" : [ { "num" : 170 }, { "num" : 170 }, { "num" : 170 } ] } ] }
 { "prop" : "border-style", "decl" : "groove", "expr" : [ { "keyw" : "groove" } ] }
+{ "prop" : "border-top-style", "decl" : "ridge", "expr" : [ { "keyw" : "ridge" } ] }
 { "prop" : "border", "decl" : "1px solid red", "expr" : [ { "expr:border-width" : [ { "px" : 1 } ] }, { "expr:border-style" : [ { "keyw" : "solid" } ] }, { "expr:border-color" : [ { "rgb" : [ { "num" : 255 }, { "num" : 0 }, { "num" : 0 } ] } ] } ] }
 { "prop" : "border", "decl" : "1px red blue", "warnings" : "extra terms following 'border' declaration: blue - dropped" }
 { "prop" : "clear", "decl" : "both", "expr" : [ { "keyw" : "both" } ] }

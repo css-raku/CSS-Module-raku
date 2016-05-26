@@ -160,6 +160,38 @@ grammar CSS::Module::CSS1::Spec::Grammar {
     rule decl:sym<border-top> {:i (border\-top) ':' <val( rx{ <expr=.expr-border-top> }, &?ROUTINE.WHY)> }
     rule expr-border-top {:i :my @*SEEN; [ <expr-border-top-width> <!seen(0)> | <expr-border-style> <!seen(1)> | <color> <!seen(2)> ]+ }
 
+    #| border-top-color: <color> | transparent
+    rule decl:sym<border-top-color> {:i (border\-top\-color) ':' <val( rx{ <expr=.expr-border-top-color> }, &?ROUTINE.WHY)> }
+    rule expr-border-top-color {:i [ <color> | transparent & <keyw> ] }
+
+    #| border-right-color: <color> | transparent
+    rule decl:sym<border-right-color> {:i (border\-right\-color) ':' <val( rx{ <expr=.expr-border-right-color> }, &?ROUTINE.WHY)> }
+    rule expr-border-right-color {:i [ <color> | transparent & <keyw> ] }
+
+    #| border-bottom-color: <color> | transparent
+    rule decl:sym<border-bottom-color> {:i (border\-bottom\-color) ':' <val( rx{ <expr=.expr-border-bottom-color> }, &?ROUTINE.WHY)> }
+    rule expr-border-bottom-color {:i [ <color> | transparent & <keyw> ] }
+
+    #| border-left-color: <color> | transparent
+    rule decl:sym<border-left-color> {:i (border\-left\-color) ':' <val( rx{ <expr=.expr-border-left-color> }, &?ROUTINE.WHY)> }
+    rule expr-border-left-color {:i [ <color> | transparent & <keyw> ] }
+
+    #| border-top-style: [ none | dotted | dashed | solid | double | groove | ridge | inset | outset ]
+    rule decl:sym<border-top-style> {:i (border\-top\-style) ':' <val( rx{ <expr=.expr-border-top-style> }, &?ROUTINE.WHY)> }
+    rule expr-border-top-style {:i [ [ none | dotted | dashed | solid | double | groove | ridge | inset | outset ] & <keyw> ] }
+
+    #| border-right-style: [ none | dotted | dashed | solid | double | groove | ridge | inset | outset ]
+    rule decl:sym<border-right-style> {:i (border\-right\-style) ':' <val( rx{ <expr=.expr-border-right-style> }, &?ROUTINE.WHY)> }
+    rule expr-border-right-style {:i [ [ none | dotted | dashed | solid | double | groove | ridge | inset | outset ] & <keyw> ] }
+
+    #| border-bottom-style: [ none | dotted | dashed | solid | double | groove | ridge | inset | outset ]
+    rule decl:sym<border-bottom-style> {:i (border\-bottom\-style) ':' <val( rx{ <expr=.expr-border-bottom-style> }, &?ROUTINE.WHY)> }
+    rule expr-border-bottom-style {:i [ [ none | dotted | dashed | solid | double | groove | ridge | inset | outset ] & <keyw> ] }
+
+    #| border-left-style: [ none | dotted | dashed | solid | double | groove | ridge | inset | outset ]
+    rule decl:sym<border-left-style> {:i (border\-left\-style) ':' <val( rx{ <expr=.expr-border-left-style> }, &?ROUTINE.WHY)> }
+    rule expr-border-left-style {:i [ [ none | dotted | dashed | solid | double | groove | ridge | inset | outset ] & <keyw> ] }
+
     #| border-right: 'border-right-width' || 'border-style' || <color>
     rule decl:sym<border-right> {:i (border\-right) ':' <val( rx{ <expr=.expr-border-right> }, &?ROUTINE.WHY)> }
     rule expr-border-right {:i :my @*SEEN; [ <expr-border-right-width> <!seen(0)> | <expr-border-style> <!seen(1)> | <color> <!seen(2)> ]+ }

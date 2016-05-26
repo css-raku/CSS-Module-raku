@@ -57,8 +57,11 @@ class Build is Panda::Builder {
                         with %detail<default> -> $default {
                             my @d = $default;
                             # either a discription or concrete term
-                            with  $grammar.parse("$prop-name:$default", :$actions, :rule<declaration>) {
-                                @d.push: .ast<property><expr>
+                            if $grammar.parse("$prop-name:$default", :$actions, :rule<declaration>) {
+                                @d.push: $/.ast<property><expr>
+                            }
+                            else {
+                                warn "ignore: $prop-name:$default";
                             }
                             %detail<default> = @d;
                         }
