@@ -49,16 +49,6 @@ You can then use `panda` to test and install `CSS::Module`:
 
     % panda install CSS::Module
 
-Or to install from github:
-
-    % git clone https://github.com/p6-css/perl6-CSS-Module.git
-    % cd perl6-CSS-Module
-    % perl6 Build.pm
-    % panda install ufo
-    % ufo
-    % make test
-    % make install
-
 To try parsing some content:
 
     % perl6 -MCSS::Module::CSS21 -e"say CSS::Module::CSS21.parse('h1 {margin:2pt; color: blue}')"
@@ -70,12 +60,12 @@ To try parsing some content:
     ```
     use v6;
     use CSS::Module::CSS21;
-    use CSS::Module::CSS21::Actions;
 
     my $css = 'H1 { color: blue; foo: bar; background-color: zzz }';
 
-    my $actions =  CSS::Module::CSS21::Actions.new;
-    my $p = CSS::Module::CSS21.parse($css, :actions($actions));
+    my $grammar =  CSS::Module::CSS21.module.grammar;
+    my $actions =  CSS::Module::CSS21.module.actions.new;
+    my $p = $grammar.parse($css, :actions($actions));
     note $_ for $actions.warnings;
     say "declaration: " ~ $p.ast[0]<ruleset><declarations>.perl;
     # output:
@@ -114,8 +104,6 @@ To try parsing some content:
 	  state $this //= CSS::Module.new( :grammar($?CLASS),
                                            :actions(MyCSS3Subset::Actions) );
         }
-        
-
     };
 
     ```
@@ -133,18 +121,20 @@ See [Build.pm](Build.pm).
 - **`:lax`** Don't warn about, or discard, unknown properties, sub-rules. Pass back the elements with a classification
 of unknown. E.g.
 ```
-    my $actions =  CSS::Module::CSS21::Actions.new( :lax );
-    say CSS::Module::CSS21.parse('{bad-prop: 12mm}', :$actions, :rule<declarations>).ast.pretty;
+    my $grammar = CSS::Module::CSS21.module.grammar;
+    my $actions = CSS::Module::CSS21.module.actions.new( :lax );
+
+    say $grammar.parse('{bad-prop: 12mm}', :$actions, :rule<declarations>).ast.perl;
     # output {"property:unknown" => {:expr[{ :mm(12) }], :ident<bad-prop>}}
 
-    say CSS::Module::CSS21.parse('{ @guff {color:red} }', :$actions, :rule<declarations>).ast.pretty;
+    say $grammar.parse('{ @guff {color:red} }', :$actions, :rule<declarations>).ast.perl;
     # output: {"margin-rule:unknown" =>  { :declarations[ { :ident<color>,
                                                           :expr[ { :rgb[ { :num(255) }, { :num(0) }, { :num(0) } ] } ] } ],
                                          :at-keyw<guff> } }
 ```
 `lax` mode likewise returns quantities with unknown dimensions:
 ```
-    say CSS::Module::CSS21.parse('{margin: 12mm .1furlongs}', :$actions, :rule<declarations>).ast.pretty;
+    say $grammar.parse('{margin: 12mm .1furlongs}', :$actions, :rule<declarations>).ast.perl;
     # output {"property" => {:expr[{ :mm(12) }, { :num(0.12), "units:unknown" => <furlongs>}], :ident<margin>}}
 ```
 ## See Also
