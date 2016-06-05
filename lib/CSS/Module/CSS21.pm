@@ -2,12 +2,11 @@ use v6;
 
 # specification: http://www.w3.org/TR/2011/REC-CSS2-20110607/propidx.html
 
+use CSS::Module;
 use CSS::Specification::Terms;
 use CSS::Grammar::CSS21;
 use CSS::Module::CSS21::Spec::Interface;
 use CSS::Module::CSS21::Spec::Grammar;
-
-grammar CSS::Module::CSS21:ver<20110607.000> { ... }
 
 grammar CSS::ModuleX::CSS21:ver<20110607.000>
     is CSS::Module::CSS21::Spec::Grammar {
@@ -59,4 +58,12 @@ grammar CSS::Module::CSS21:ver<20110607.000>
     is CSS::ModuleX::CSS21
     is CSS::Specification::Terms
     is CSS::Grammar::CSS21
-    does CSS::Module::CSS21::Spec::Interface {}
+    does CSS::Module::CSS21::Spec::Interface {
+
+    method module {
+        use CSS::Module::CSS21::Actions;
+        state $this //= CSS::Module.new( :grammar($?CLASS),
+					 :actions(CSS::Module::CSS21::Actions) );
+    }
+
+}

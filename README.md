@@ -1,16 +1,31 @@
 # CSS::Module
 
+## Example
+
+Parse a sample CSS rule as CSS2.1. Dump the AST.
+```
+use v6;
+use CSS::Module::CSS21;
+my $css = 'h1 { color: orange; text-align: center }';
+my $grammar = CSS::Module::CSS21.module.grammar;
+my $actions = CSS::Module::CSS21.module.actions.new;
+$grammar.parse( $css, :$actions);
+say $/.ast.perl;
+```
+
 CSS::Module is a property-specific validator and parser for CSS Levels 1, 2.1 and  3.
 
 This module aims to be a reference implementation of [CSS Snapshot 2010](http://www.w3.org/TR/2011/NOTE-css-2010-20110512/).
 
-It implements the following grammars and actions:
+It implements modules for `CSS::Module::CSS1`, `CSS::Module::CSS21` and `CSS::Module::CSS3` for CSS levels 1.0, 2.1 and 3.0;
 
-- `CSS::Module::CSS1` + `CSS::Module::CSS1::Actions`
-- `CSS::Module::CSS21` + `CSS::Module::CSS21::Actions`
-- `CSS::Module::CSS3` + `CSS::Module::CSS3::Actions`
+`CSS::Module::CSS3.module.metadata` (class `CSS::Module::CSS3::metadata`) is a generated summary of property information, e.g.: 
+```
+% perl6 -M CSS::Module::CSS3::Metadata -e'say $CSS::Module::CSS3::Metadata::property<azimuth>.perl'
+{:default("center"), :inherit, :synopsis("<angle> | [[ left-side | far-left | left | center-left | center | center-right | right | far-right | right-side ] || behind ] | leftwards | rightwards")}
+```
 
-`CSS::Module::CSS3` is composed from the following extension modules.
+Note: `CSS::Module::CSS3` is composed from the following extension modules.
 
 - `CSS::Module::CSS3::Colors`     - CSS 3.0 Colors (@color-profile)
 - `CSS::Module::CSS3::Fonts`      - CSS 3.0 Fonts (@font-face)
@@ -20,11 +35,7 @@ It implements the following grammars and actions:
 - `CSS::Module::CSS3::PagedMedia` - CSS 3.0 Paged Media (@page)
 - `CSS::ModuleX::CSS21`           - the full set of CSS21 properties
 
-`CSS::Module::CSS3::MetaData` is a generated class that contains summary property information, e.g.: 
-```
-% perl6 -M CSS::Module::CSS3::MetaData -e'say $CSS::Module::CSS3::MetaData::property<azimuth>.perl'
-{:default("center"), :inherit, :synopsis("<angle> | [[ left-side | far-left | left | center-left | center | center-right | right | far-right | right-side ] || behind ] | leftwards | rightwards")}
-```
+This corresponds to the sub-modules described in  CSS Snapshot 2010 - http://www.w3.org/TR/2011/NOTE-css-2010-20110512/
 
 ## Installation
 
@@ -78,6 +89,7 @@ To try parsing some content:
     ```
     use v6;
 
+    use CSS::Module;
     use CSS::Module::CSS21::Actions;
     use CSS::Module::CSS21;
 
@@ -85,19 +97,27 @@ To try parsing some content:
     use CSS::Module::CSS3::Colors;
     use CSS::Module::CSS3::_Base;
 
-    grammar MyCSS3Subset::CSS3
-        is CSS::Module::CSS3::Selectors
-        is CSS::Module::CSS3::Colors
-        is CSS::ModuleX::CSS21
-        is CSS::Module::CSS3::_Base
-    {};
-
     class MyCSS3Subset::Actions
         is CSS::Module::CSS3::Selectors::Actions
         is CSS::Module::CSS3::Colors::Actions
         is CSS::ModuleX::CSS21::Actions
-        is CSS::Module::CSS3::_Base::Actions
-    {};
+        is CSS::Module::CSS3::_Base::Actions {
+    };
+    grammar MyCSS3Subset::CSS3
+        is CSS::Module::CSS3::Selectors
+        is CSS::Module::CSS3::Colors
+        is CSS::ModuleX::CSS21
+        is CSS::Module::CSS3::_Base {
+
+        #| a minimal module definition: grammar + actions
+        method module {
+	  state $this //= CSS::Module.new( :grammar($?CLASS),
+                                           :actions(MyCSS3Subset::Actions) );
+        }
+        
+
+    };
+
     ```
 
 ## Property Definitions

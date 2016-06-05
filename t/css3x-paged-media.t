@@ -7,7 +7,8 @@ use CSS::Module::CSS3;
 use CSS::Grammar::Test;
 use CSS::Writer;
 
-my $actions = CSS::Module::CSS3::Actions.new;
+my $grammar = CSS::Module::CSS3.module.grammar;
+my $actions = CSS::Module::CSS3.module.actions.new;
 my $writer = CSS::Writer.new;
 
 for ( 't/css3x-paged-media.json'.IO.lines ) {
@@ -17,7 +18,7 @@ for ( 't/css3x-paged-media.json'.IO.lines ) {
     my ($rule, $expected) = @( from-json($_) );
     my $input = $expected<input>;
 
-    CSS::Grammar::Test::parse-tests(CSS::Module::CSS3, $input,
+    CSS::Grammar::Test::parse-tests($grammar, $input,
 				    :$rule,
 				    :$actions,
 				    :suite<css3 @page>,

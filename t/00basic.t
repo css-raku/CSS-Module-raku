@@ -2,11 +2,9 @@
 
 use Test;
 
-use CSS::Module::CSS21::Actions;
+use CSS::Module::CSS1;
 use CSS::Module::CSS21;
 use CSS::Module::CSS3;
-use CSS::Module::CSS1::Actions;
-use CSS::Module::CSS1;
 use CSS::Grammar::Test;
 use CSS::Writer;
 use JSON::Fast;
@@ -25,10 +23,9 @@ for '' {
     ok  $_ ~~ /^<CSS::Module::CSS3::nonascii>$/, "non-ascii css3: $_";
 }
 
-my $css1-actions  = CSS::Module::CSS1::Actions.new;
-my $css21-actions = CSS::Module::CSS21::Actions.new;
-my $css3-actions  = CSS::Module::CSS3::Actions.new;
-my $css3-actions_2  = CSS::Module::CSS3::Actions.new( :lax );
+my $css1  = CSS::Module::CSS1.module;
+my $css21 = CSS::Module::CSS21.module;
+my $css3  = CSS::Module::CSS3.module;
 my $css-writer = CSS::Writer.new( :terse, :color-names );
 
 for 't/00basic.json'.IO.lines.map({ from-json($_).pairs[0] }) {
@@ -37,19 +34,21 @@ for 't/00basic.json'.IO.lines.map({ from-json($_).pairs[0] }) {
     my %expected = .value;
     my $input = %expected<input>;
 
-    for css1  => {class => CSS::Module::CSS1,  actions => $css1-actions, writer => $css-writer},
-       	css21 => {class => CSS::Module::CSS21, actions => $css21-actions, writer => $css-writer},	
-       	css3  => {class => CSS::Module::CSS3,  actions => $css3-actions, writer => $css-writer},
-       	lax   => {class => CSS::Module::CSS3,  actions => $css3-actions_2, writer => $css-writer} {
+    for css1  => {module => $css1,  writer => $css-writer},
+       	css21 => {module => $css21, writer => $css-writer},	
+       	css3  => {module => $css3,  writer => $css-writer},
+       	lax   => {module => $css3,  writer => $css-writer, :lax} {
 
 	    my ($level, $opt) = .kv;
-            my $class = $opt<class>;
-            my $actions = $opt<actions>;
+            my $module = $opt<module>;
+	    my Bool $lax = ? $opt<lax>;
+	    my $grammar = $module.grammar;
+            my $actions = $module.actions.new(:$lax);
             my $writer = $opt<writer>;
             my %level-tests = %( %expected{$level} // () );
             my %level-expected = %expected, %level-tests;
 
-	    CSS::Grammar::Test::parse-tests($class, $input,
+	    CSS::Grammar::Test::parse-tests($grammar, $input,
 					    :$rule,
 					    :suite($level),
 					    :$actions,

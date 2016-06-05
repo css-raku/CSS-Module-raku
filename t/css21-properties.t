@@ -3,14 +3,13 @@
 use Test;
 use JSON::Fast;
 
-use CSS::Module::CSS21::Actions;
 use CSS::Module::CSS21;
 use CSS::Module::CSS3;
 use CSS::Grammar::Test;
 use CSS::Writer;
 
-my $css21-actions = CSS::Module::CSS21::Actions.new;
-my $css3x-actions = CSS::Module::CSS3::Actions.new;
+my $css21 = CSS::Module::CSS21.module;
+my $css3x = CSS::Module::CSS3.module;
 
 my %seen;
 
@@ -27,16 +26,17 @@ for 't/css21-properties.json'.IO.lines {
     my $input = sprintf '{%s: %s}', $prop, %expected<decl>;
     my $css-writer = CSS::Writer.new;
 
-    for css21 => {class => CSS::Module::CSS21, actions => $css21-actions, proforma => qw<inherit>},
-       	css3x => {class => CSS::Module::CSS3,  actions => $css3x-actions, proforma => qw<inherit initial>, writer => $css-writer} {
+    for css21 => {module => $css21, proforma => qw<inherit>},
+       	css3x => {module => $css3x, proforma => qw<inherit initial>, writer => $css-writer} {
 
         my ($level, $opt) = .kv;
-        my $class = $opt<class>;
-        my $actions = $opt<actions>;
+        my $module = $opt<module>;
+	my $grammar = $module.grammar;
+        my $actions = $module.actions.new;
         my $proforma = $opt<proforma>;
         my $writer = $opt<writer>;
 
-	CSS::Grammar::Test::parse-tests($class, $input,
+	CSS::Grammar::Test::parse-tests($grammar, $input,
 					:rule<declarations>,
 					:$actions,
 					:suite($level),
@@ -48,7 +48,7 @@ for 't/css21-properties.json'.IO.lines {
 	    my $junk = sprintf '{%s: %s}', $prop, 'junk +-42';
 
 	    $actions.reset;
-	    my $p = $class.parse( $junk, :rule<declarations>, :$actions);
+	    my $p = $grammar.parse( $junk, :rule<declarations>, :$actions);
 	    ok($p.defined && ~$p eq $junk, "$level $prop: able to parse unexpected input")
 	        or note "unable to parse declaration list: $junk";
 
@@ -60,7 +60,7 @@ for 't/css21-properties.json'.IO.lines {
 
 		my $ast = { :declarations[{ :property{ :ident($prop), :expr[ { :keyw($misc)} ] } }] };
 
-                CSS::Grammar::Test::parse-tests($class, $decl,
+                CSS::Grammar::Test::parse-tests($grammar, $decl,
 						:rule<declarations>,
 						:$actions,
 						:suite($level),

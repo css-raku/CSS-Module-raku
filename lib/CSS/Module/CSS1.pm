@@ -4,6 +4,7 @@ use v6;
 # -- http://www.w3.org/TR/2008/REC-CSS1-20080411/#css1-properties
 # -- http://129.69.59.141/css1pqre.htm
 
+use CSS::Module;
 use CSS::Specification::Terms;
 use CSS::Grammar::CSS1;
 # BUILD.pl targets
@@ -15,6 +16,12 @@ grammar CSS::Module::CSS1:ver<20080411.000>
     is CSS::Grammar::CSS1
     is CSS::Module::CSS1::Spec::Grammar
     does CSS::Module::CSS1::Spec::Interface {
+
+        method module {
+	  use CSS::Module::CSS1::Actions;
+	  state $this //= CSS::Module.new( :grammar($?CLASS),
+                                           :actions(CSS::Module::CSS1::Actions) );
+        }
 
         # tweak generated font-family expression.
         rule expr-font-family    {:i  [ <generic-family> || <family-name> ] +% <op(',')> }

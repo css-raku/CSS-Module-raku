@@ -1,6 +1,7 @@
 use v6;
 
 use CSS::Specification::Build;
+use CSS::Module;
 use CSS::Module::CSS3;
 use CSS::Module::CSS3::Fonts::AtFontFace;
 use Panda::Builder;
