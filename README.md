@@ -13,13 +13,11 @@ say $/.ast.perl;
 
 CSS::Module is a set of property-specific grammars for parsing for CSS Levels 1, 2.1 and  3.
 
-This module aims to be a reference implementation of [CSS Snapshot 2010](http://www.w3.org/TR/2011/NOTE-css-2010-20110512/).
-
 It contains grammars `CSS::Module::CSS1`, `CSS::Module::CSS21` and `CSS::Module::CSS3` for CSS levels 1.0, 2.1 and 3.0;
 
-`CSS::Module::CSS3.module.metadata` (class `CSS::Module::CSS3::metadata`) is a generated summary of property information, e.g.: 
+`CSS::Module::CSS3.module.property-metadata` is a generated summary of property information, e.g.: 
 ```
-% perl6 -M CSS::Module::CSS3::Metadata -e'say $CSS::Module::CSS3::Metadata::property<azimuth>.perl'
+% perl6 -M CSS::Module::CSS3 -e'say CSS::Module::CSS3.module.property-metadata<azimuth>.perl'
 {:default("center"), :inherit, :synopsis("<angle> | [[ left-side | far-left | left | center-left | center | center-right | right | far-right | right-side ] || behind ] | leftwards | rightwards")}
 ```
 
@@ -33,7 +31,7 @@ Note: `CSS::Module::CSS3` is composed from the following extension modules.
 - `CSS::Module::CSS3::PagedMedia` - CSS 3.0 Paged Media (@page)
 - `CSS::ModuleX::CSS21`           - the full set of CSS21 properties
 
-This corresponds to the sub-modules described in  CSS Snapshot 2010 - http://www.w3.org/TR/2011/NOTE-css-2010-20110512/
+This corresponds to the sub-modules described in [CSS Snapshot 2010](http://www.w3.org/TR/2011/NOTE-css-2010-20110512/).
 
 ## Installation
 
@@ -63,7 +61,7 @@ To try parsing some content:
 
     my $grammar =  CSS::Module::CSS21.module.grammar;
     my $actions =  CSS::Module::CSS21.module.actions.new;
-    my $p = $grammar.parse($css, :actions($actions));
+    my $p = $grammar.parse($css, :$actions);
     note $_ for $actions.warnings;
     say "declaration: " ~ $p.ast[0]<ruleset><declarations>.perl;
     # output:

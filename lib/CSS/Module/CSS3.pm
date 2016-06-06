@@ -39,9 +39,10 @@ grammar CSS::Module::CSS3:ver<2010-20110512.000>
 
     method module {
         use CSS::Module::CSS3::Metadata;
+        my %property-metadata = %$CSS::Module::CSS3::Metadata::property;
         state $this //= CSS::Module.new( :grammar($?CLASS),
 					 :actions(CSS::Module::CSS3::Actions),
-					 :metadata(CSS::Module::CSS3::Metadata),
+					 :%property-metadata,
 	    );
     }
 
