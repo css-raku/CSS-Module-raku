@@ -1,9 +1,7 @@
 # CSS::Module
 
-## Example
-
-Parse a sample CSS rule as CSS2.1. Dump the AST.
 ```
+# Parse a sample ruleset as CSS 2.1. Dump the AST.
 use v6;
 use CSS::Module::CSS21;
 my $css = 'h1 { color: orange; text-align: center }';
@@ -13,11 +11,11 @@ $grammar.parse( $css, :$actions);
 say $/.ast.perl;
 ```
 
-CSS::Module is a property-specific validator and parser for CSS Levels 1, 2.1 and  3.
+CSS::Module is a set of property-specific grammars for parsing for CSS Levels 1, 2.1 and  3.
 
 This module aims to be a reference implementation of [CSS Snapshot 2010](http://www.w3.org/TR/2011/NOTE-css-2010-20110512/).
 
-It implements modules for `CSS::Module::CSS1`, `CSS::Module::CSS21` and `CSS::Module::CSS3` for CSS levels 1.0, 2.1 and 3.0;
+It contains grammars `CSS::Module::CSS1`, `CSS::Module::CSS21` and `CSS::Module::CSS3` for CSS levels 1.0, 2.1 and 3.0;
 
 `CSS::Module::CSS3.module.metadata` (class `CSS::Module::CSS3::metadata`) is a generated summary of property information, e.g.: 
 ```
