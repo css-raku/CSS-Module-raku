@@ -14,6 +14,7 @@ class Build is Panda::Builder {
         indir $where, {
 
             my %props;
+            my $actions = CSS::Module::CSS3::Actions.new;
 
             for (<etc css1-properties.txt> => <CSS1>,
                  <etc css21-properties.txt> => <CSS21>,
@@ -48,8 +49,6 @@ class Build is Panda::Builder {
 
                         CSS::Specification::Build::generate( $type, $name );
                     }
-
-                    my $actions =  CSS::Module::CSS3::Actions.new;
 
                     my @summary = CSS::Specification::Build::summary( :$input-path );
                     for @summary {
