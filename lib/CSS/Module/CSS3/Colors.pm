@@ -82,7 +82,7 @@ class CSS::Module::CSS3::Colors::Actions {
 
     use CSS::Grammar::AST :CSSValue;
 
-    has Hash $.colors = %CSS::Grammar::AST::CSS3-Colors;
+    method colors { %CSS::Grammar::AST::CSS3-Colors }
 
     method color-angle($/) {
         make $<number>.ast;

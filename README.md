@@ -5,9 +5,9 @@
 use v6;
 use CSS::Module::CSS21;
 my $css = 'h1 { color: orange; text-align: center }';
-my $grammar = CSS::Module::CSS21.module.grammar;
-my $actions = CSS::Module::CSS21.module.actions.new;
-$grammar.parse( $css, :$actions);
+my $module = CSS::Module::CSS21.module;
+my $actions = $module.actions.new;
+$module.grammar.parse( $css, :$actions);
 say $/.ast.perl;
 ```
 
