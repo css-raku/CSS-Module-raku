@@ -61,9 +61,13 @@ grammar CSS::Module::CSS21:ver<20110607.000>
     does CSS::Module::CSS21::Spec::Interface {
 
     method module {
+        use CSS::Module::CSS21::Metadata;
+        my %property-metadata = %$CSS::Module::CSS21::Metadata::property;
         use CSS::Module::CSS21::Actions;
         state $this //= CSS::Module.new( :grammar($?CLASS),
-					 :actions(CSS::Module::CSS21::Actions) );
+					 :actions(CSS::Module::CSS21::Actions),
+                                         :%property-metadata,
+                                       );
     }
 
 }

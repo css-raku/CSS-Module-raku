@@ -16,80 +16,83 @@ class Build is Panda::Builder {
             my %props;
             my $actions = CSS::Module::CSS3::Actions.new;
 
-            for (<etc css1-properties.txt> => <CSS1>,
-                 <etc css21-properties.txt> => <CSS21>,
-                 <etc css3x-font-properties.txt> => <CSS3 Fonts>,
-                 <etc css3x-font-@fontface-properties.txt> => <CSS3 Fonts AtFontFace>,
-                 <etc css3x-paged-media.txt> => <CSS3 PagedMedia>,
+            for (:CSS1[<etc css1-properties.txt> => <CSS1>],
+                 :CSS21[<etc css21-properties.txt> => <CSS21>],
+                 :CSS3[<etc css3x-font-properties.txt> => <CSS3 Fonts>,
+                       <etc css3x-font-@fontface-properties.txt> => <CSS3 Fonts AtFontFace>,
+                       <etc css3x-paged-media.txt> => <CSS3 PagedMedia>],
                 ) {
-                my ($input-spec, $class-isa) = .kv;
-                my $scope;
-                my $grammar = CSS::Module::CSS3;
-                if $class-isa[*-1] eq 'AtFontFace' {
-                    $scope = '@font-face';
-                    $grammar = CSS::Module::CSS3::Fonts::AtFontFace;
-                }
-
-                for :interface<Interface>,
-                    :actions<Actions> ,
-                    :grammar<Grammar> {
-                    my ($type, $subclass) = .kv;
-                    my $name = (<CSS Module>, @$class-isa, <Spec>, $subclass).flat.join('::');
-
-                    my $class-dir = $*SPEC.catdir(<lib CSS Module>, @$class-isa, <Spec>);
-                    mkdir $class-dir;
-
-                    my $class-path = $*SPEC.catfile( $class-dir, $subclass~'.pm' );
-
-                    my $input-path = $*SPEC.catfile( |@$input-spec );
-                    say "Building $input-path => $name";
-                    {
-                        my $*IN = open $input-path, :r;
-                        my $*OUT = open $class-path, :w;
-
-                        CSS::Specification::Build::generate( $type, $name );
+                my $meta = .key;
+                for .value.list {
+                    my ($input-spec, $class-isa) = .kv;
+                    my $scope;
+                    my $grammar = CSS::Module::CSS3;
+                    if $class-isa[*-1] eq 'AtFontFace' {
+                        $scope = '@font-face';
+                        $grammar = CSS::Module::CSS3::Fonts::AtFontFace;
                     }
 
-                    my @summary = CSS::Specification::Build::summary( :$input-path );
-                    for @summary {
-                        my %detail = %$_;
-                        my $prop-name = %detail<name>:delete;
-                        with %detail<default> -> $default {
-                            my @d = $default;
-                            # either a discription or concrete term
-                            if $grammar.parse("$prop-name:$default", :$actions, :rule<declaration>) {
-                                @d.push: $/.ast<property><expr>
-                            }
-                            else {
-                                warn "ignore: $prop-name:$default";
-                            }
-                            %detail<default> = @d;
+                    for (:interface<Interface>,
+                         :actions<Actions> ,
+                         :grammar<Grammar>) {
+                        my ($type, $subclass) = .kv;
+                        my $name = (<CSS Module>, @$class-isa, <Spec>, $subclass).flat.join('::');
+
+                        my $class-dir = $*SPEC.catdir(<lib CSS Module>, @$class-isa, <Spec>);
+                        mkdir $class-dir;
+
+                        my $class-path = $*SPEC.catfile( $class-dir, $subclass~'.pm' );
+
+                        my $input-path = $*SPEC.catfile( |@$input-spec );
+                        say "Building $input-path => $name";
+                        {
+                            my $*IN = open $input-path, :r;
+                            my $*OUT = open $class-path, :w;
+
+                            CSS::Specification::Build::generate( $type, $name );
                         }
-                        for %detail.pairs {
-                            if $scope {
-                                # aka @font-face
-                                %props{$scope}{$prop-name}{.key} = .value
+
+                        my @summary = CSS::Specification::Build::summary( :$input-path );
+                        for @summary {
+                            my %detail = %$_;
+                            my $prop-name = %detail<name>:delete;
+                            with %detail<default> -> $default {
+                                my @d = $default;
+                                # either a discription or concrete term
+                                if $grammar.parse("$prop-name:$default", :$actions, :rule<declaration>) {
+                                    @d.push: $/.ast<property><expr>
+                                }
+                                else {
+                                    warn "ignore: $prop-name:$default";
+                                }
+                                %detail<default> = @d;
                             }
-                            else {
-                                %props{$prop-name}{.key} = .value;
+                            for %detail.pairs {
+                                if $scope {
+                                    # aka @font-face
+                                    %props{$scope}{$prop-name}{.key} = .value
+                                }
+                                else {
+                                    %props{$prop-name}{.key} = .value;
+                                }
                             }
                         }
                     }
                 }
-            }
-            my $class-dir = $*SPEC.catdir(<lib CSS Module CSS3>);
-            my $class-path = $*SPEC.catfile( $class-dir, 'Metadata.pm' );
-            my $class-name = 'CSS::Module::CSS3::Metadata';
-            say "Building $class-name";
-            {
-                my $*OUT = open $class-path, :w;
-                say 'use v6;';
-                say "#  -- DO NOT EDIT --";
-                say "# generated by: $*PROGRAM-NAME {@*ARGS}";
-                say '';
-                say "module $class-name \{";
-                say "    BEGIN our \$property = {%props.item.perl};";
-                say '}';
+                my $class-dir = $*SPEC.catdir(flat(<lib CSS Module>,$meta));
+                my $class-path = $*SPEC.catfile( $class-dir, 'Metadata.pm' );
+                my $class-name = "CSS::Module::{$meta}::Metadata";
+                say "Building $class-name";
+                {
+                    my $*OUT = open $class-path, :w;
+                    say 'use v6;';
+                    say "#  -- DO NOT EDIT --";
+                    say "# generated by: $*PROGRAM-NAME {@*ARGS}";
+                    say '';
+                    say "module $class-name \{";
+                    say "    BEGIN our \$property = {%props.item.perl};";
+                    say '}';
+                }
             }
         }
     }

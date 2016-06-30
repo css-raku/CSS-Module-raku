@@ -18,9 +18,13 @@ grammar CSS::Module::CSS1:ver<20080411.000>
     does CSS::Module::CSS1::Spec::Interface {
 
         method module {
+            use CSS::Module::CSS1::Metadata;
+            my %property-metadata = %$CSS::Module::CSS1::Metadata::property;
 	  use CSS::Module::CSS1::Actions;
 	  state $this //= CSS::Module.new( :grammar($?CLASS),
-                                           :actions(CSS::Module::CSS1::Actions) );
+                                           :actions(CSS::Module::CSS1::Actions),
+                                           :%property-metadata,
+                                         );
         }
 
         # tweak generated font-family expression.
