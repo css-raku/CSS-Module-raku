@@ -6,6 +6,7 @@
 { "prop" : "background-attachment", "decl" : "FiXed", "expr" : [ { "keyw" : "fixed" } ] }
 { "prop" : "Background-Attachment", "decl" : "inherit", "expr" : [ { "keyw" : "inherit" } ] }
 { "prop" : "background-color", "decl" : "#37a", "expr" : [ { "rgb" : [ { "num" : 51 }, { "num" : 119 }, { "num" : 170 } ] } ] }
+{ "prop" : "Background-Color", "decl" : "transparent", "expr" : [ { "keyw" : "transparent" } ] }
 { "prop" : "background-image", "decl" : "url(images/ok.png)", "expr" : [ { "url" : "images/ok.png" } ] }
 { "prop" : "background-repeat", "decl" : "Repeat-x", "expr" : [ { "keyw" : "repeat-x" } ] }
 { "prop" : "background-position", "decl" : "100% 90%", "expr" : [ { "percent" : 100 }, { "percent" : 90 } ] }

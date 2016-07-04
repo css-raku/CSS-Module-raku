@@ -54,8 +54,8 @@ for (
     color => {input => 'orange', ast => :rgb[ :num(255), :num(165), :num(0) ]},
     color => {input => 'hotpink', ast => :rgb[ :num(255), :num(105), :num(180) ]},
     color => {input => 'lavenderblush', ast => :rgb[ :num(255), :num(240), :num(245) ]},
-    color => {input => 'currentcolor', ast => :color<currentcolor>},
-    color => {input => 'transparent', ast => :color<transparent>},
+    color => {input => 'currentcolor', ast => :keyw<currentcolor>},
+    color => {input => 'transparent', ast => :keyw<transparent>},
 # http://www.w3.org/TR/2011/REC-css3-color-20110607
 # @color-profile is in the process of being dropped
 ##    at-rule => {input => '@color-profile { name: acme_cmyk; src: url(http://printers.example.com/acmecorp/model1234); }',

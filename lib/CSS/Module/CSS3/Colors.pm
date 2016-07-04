@@ -120,11 +120,11 @@ class CSS::Module::CSS3::Colors::Actions {
     }
 
     method color:sym<current>($/) {
-        make $.token($<keyw>.ast, :type(CSSValue::ColorComponent) );
+        make $<keyw>.ast;
     }
 
     method color:sym<transparent>($/) {
-        make $.token($<keyw>.ast, :type(CSSValue::ColorComponent) );
+        make $<keyw>.ast;
     }
 
 }
