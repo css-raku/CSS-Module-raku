@@ -1,6 +1,6 @@
 {   "perl"        : "6c",
     "name"        : "CSS::Module",
-    "version"     : "0.03.2",
+    "version"     : "0.03.3",
     "description" : "Perl 6 CSS extended and property-specific grammars",
     "depends"     : [ "CSS::Grammar", "CSS::Module::CSS3::Selectors", "CSS::Specification", "CSS::Writer", "JSON::Fast" ],
     "source-url"  : "git://github.com/p6-css/perl6-CSS-Module.git",
