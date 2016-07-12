@@ -1,0 +1,3 @@
+0.03.2
+    -- CSS3 'transparent' color AST now compatibility with CSS2.1
+       returned as :keyw<transparent> (was :color<transparent>)
