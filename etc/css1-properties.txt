@@ -38,12 +38,12 @@
 'border-width'	[thin | medium | thick | <length>]{1,4}	not defined for shorthand properties	all elements	no	N/A	5.5.15
 'border-color'	<color>{1,4}	the value of the 'color' property	all elements	no	N/A	5.5.16
 'border-style'	[ none | dotted | dashed | solid | double | groove | ridge | inset | outset ]{1,4}	none	all elements	no	N/A	5.5.17
-'border-top'	'border-top-width' || 'border-style' || <color>	not defined for shorthand properties	all elements	no	N/A	5.5.18
+'border-top'	'border-top-width' || 'border-top-style' || <color>	not defined for shorthand properties	all elements	no	N/A	5.5.18
 'border-top-color' 'border-right-color' 'border-bottom-color' 'border-left-color'	<color> | transparent | inherit	the value of the 'color' property	no	 	visual
 'border-top-style' 'border-right-style' 'border-bottom-style' 'border-left-style'	[ none | dotted | dashed | solid | double | groove | ridge | inset | outset ] | inherit	none	 	no	 	visual
-'border-right'	'border-right-width' || 'border-style' || <color>	not defined for shorthand properties	all elements	no	N/A	5.5.19
-'border-bottom'	'border-bottom-width' || 'border-style' || <color>	not defined for shorthand properties	all elements	no	N/A	5.5.20
-'border-left'	'border-left-width' || 'border-style' || <color>	not defined for shorthand properties	all elements	no	N/A	5.5.21
+'border-right'	'border-right-width' || 'border-right-style' || <color>	not defined for shorthand properties	all elements	no	N/A	5.5.19
+'border-bottom'	'border-bottom-width' || 'border-bottom-style' || <color>	not defined for shorthand properties	all elements	no	N/A	5.5.20
+'border-left'	'border-left-width' || 'border-left-style' || <color>	not defined for shorthand properties	all elements	no	N/A	5.5.21
 'border'	'border-width' || 'border-style' || 'border-color'	not defined for shorthand properties	all elements	no	N/A	5.5.22
 'float'	left | right | none	none	all elements	no	N/A	5.5.25
 'clear'	none | left | right | both	none	all elements	no	N/A	5.5.26

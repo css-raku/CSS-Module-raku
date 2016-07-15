@@ -10,7 +10,10 @@
 'border-color'	[ <color> | transparent ]{1,4} | inherit	see individual properties	 	no	 	visual
 'border-spacing'	<length> <length>? | inherit	0	'table' and 'inline-table' elements 	yes	 	visual
 'border-style'	[ none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset ]{1,4} | inherit	see individual properties	 	no	 	visual
-'border-top' 'border-right' 'border-bottom' 'border-left'	[ 'border-width' || 'border-style' || 'border-color' ] | inherit	see individual properties	 	no	 	visual
+'border-top'	[ 'border-top-width' || 'border-top-style' || 'border-top-color' ] | inherit	see individual properties	 	no	 	visual
+'border-right'	[ 'border-right-width' || 'border-right-style' || 'border-right-color' ] | inherit	see individual properties	 	no	 	visual
+'border-bottom'	[ 'border-bottom-width' || 'border-bottom-style' || 'border-bottom-color' ] | inherit	see individual properties	 	no	 	visual
+'border-left'	[ 'border-left-width' || 'border-left-style' || 'border-left-color' ] | inherit	see individual properties	 	no	 	visual
 'border-top-color' 'border-right-color' 'border-bottom-color' 'border-left-color'	<color> | transparent | inherit	the value of the 'color' property	 	no	 	visual
 'border-top-style' 'border-right-style' 'border-bottom-style' 'border-left-style'	[ none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset ] | inherit	none	 	no	 	visual
 'border-top-width' 'border-right-width' 'border-bottom-width' 'border-left-width'	thin | medium | thick | <length> | inherit	medium	 	no	 	visual

@@ -21,6 +21,10 @@ class CSS::Module::CSS1::Spec::Actions {
     method expr-border-width($/) { make $.list($/) }
     method expr-border-color($/) { make $.list($/) }
     method expr-border-style($/) { make $.list($/) }
+    method expr-border-top-style($/) { make $.list($/) }
+    method expr-border-right-style($/) { make $.list($/) }
+    method expr-border-bottom-style($/) { make $.list($/) }
+    method expr-border-left-style($/) { make $.list($/) }
     method expr-list-style-type($/) { make $.list($/) }
     method expr-list-style-image($/) { make $.list($/) }
     method expr-list-style-position($/) { make $.list($/) }

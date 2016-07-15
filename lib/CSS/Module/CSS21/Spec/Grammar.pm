@@ -48,21 +48,21 @@ grammar CSS::Module::CSS21::Spec::Grammar {
     rule decl:sym<border-style> {:i (border\-style) ':' <val( rx{ <expr=.expr-border-style>**1..4 }, &?ROUTINE.WHY)> }
     rule expr-border-style {:i [ [ none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset ] & <keyw> ] }
 
-    #| border-top: [ 'border-width' || 'border-style' || 'border-color' ]
+    #| border-top: [ 'border-top-width' || 'border-top-style' || 'border-top-color' ]
     rule decl:sym<border-top> {:i (border\-top) ':' <val( rx{ <expr=.expr-border-top> }, &?ROUTINE.WHY)> }
-    rule expr-border-top {:i :my @*SEEN; [ [ <expr-border-width> <!seen(0)> | <expr-border-style> <!seen(1)> | <expr-border-color> <!seen(2)> ]+ ] }
+    rule expr-border-top {:i :my @*SEEN; [ [ <expr-border-top-width> <!seen(0)> | <expr-border-top-style> <!seen(1)> | <expr-border-top-color> <!seen(2)> ]+ ] }
 
-    #| border-right: [ 'border-width' || 'border-style' || 'border-color' ]
+    #| border-right: [ 'border-right-width' || 'border-right-style' || 'border-right-color' ]
     rule decl:sym<border-right> {:i (border\-right) ':' <val( rx{ <expr=.expr-border-right> }, &?ROUTINE.WHY)> }
-    rule expr-border-right {:i :my @*SEEN; [ [ <expr-border-width> <!seen(0)> | <expr-border-style> <!seen(1)> | <expr-border-color> <!seen(2)> ]+ ] }
+    rule expr-border-right {:i :my @*SEEN; [ [ <expr-border-right-width> <!seen(0)> | <expr-border-right-style> <!seen(1)> | <expr-border-right-color> <!seen(2)> ]+ ] }
 
-    #| border-bottom: [ 'border-width' || 'border-style' || 'border-color' ]
+    #| border-bottom: [ 'border-bottom-width' || 'border-bottom-style' || 'border-bottom-color' ]
     rule decl:sym<border-bottom> {:i (border\-bottom) ':' <val( rx{ <expr=.expr-border-bottom> }, &?ROUTINE.WHY)> }
-    rule expr-border-bottom {:i :my @*SEEN; [ [ <expr-border-width> <!seen(0)> | <expr-border-style> <!seen(1)> | <expr-border-color> <!seen(2)> ]+ ] }
+    rule expr-border-bottom {:i :my @*SEEN; [ [ <expr-border-bottom-width> <!seen(0)> | <expr-border-bottom-style> <!seen(1)> | <expr-border-bottom-color> <!seen(2)> ]+ ] }
 
-    #| border-left: [ 'border-width' || 'border-style' || 'border-color' ]
+    #| border-left: [ 'border-left-width' || 'border-left-style' || 'border-left-color' ]
     rule decl:sym<border-left> {:i (border\-left) ':' <val( rx{ <expr=.expr-border-left> }, &?ROUTINE.WHY)> }
-    rule expr-border-left {:i :my @*SEEN; [ [ <expr-border-width> <!seen(0)> | <expr-border-style> <!seen(1)> | <expr-border-color> <!seen(2)> ]+ ] }
+    rule expr-border-left {:i :my @*SEEN; [ [ <expr-border-left-width> <!seen(0)> | <expr-border-left-style> <!seen(1)> | <expr-border-left-color> <!seen(2)> ]+ ] }
 
     #| border-top-color: <color> | transparent
     rule decl:sym<border-top-color> {:i (border\-top\-color) ':' <val( rx{ <expr=.expr-border-top-color> }, &?ROUTINE.WHY)> }

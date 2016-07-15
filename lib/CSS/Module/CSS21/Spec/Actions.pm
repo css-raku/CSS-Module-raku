@@ -10,6 +10,18 @@ class CSS::Module::CSS21::Spec::Actions {
     method expr-background-repeat($/) { make $.list($/) }
     method expr-border-color($/) { make $.list($/) }
     method expr-border-style($/) { make $.list($/) }
+    method expr-border-top-color($/) { make $.list($/) }
+    method expr-border-right-color($/) { make $.list($/) }
+    method expr-border-bottom-color($/) { make $.list($/) }
+    method expr-border-left-color($/) { make $.list($/) }
+    method expr-border-top-style($/) { make $.list($/) }
+    method expr-border-right-style($/) { make $.list($/) }
+    method expr-border-bottom-style($/) { make $.list($/) }
+    method expr-border-left-style($/) { make $.list($/) }
+    method expr-border-top-width($/) { make $.list($/) }
+    method expr-border-right-width($/) { make $.list($/) }
+    method expr-border-bottom-width($/) { make $.list($/) }
+    method expr-border-left-width($/) { make $.list($/) }
     method expr-border-width($/) { make $.list($/) }
     method expr-cue-after($/) { make $.list($/) }
     method expr-cue-before($/) { make $.list($/) }

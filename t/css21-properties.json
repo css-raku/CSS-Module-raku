@@ -12,7 +12,7 @@
 { "prop" : "background-position", "decl" : "100% 90%", "expr" : [ { "percent" : 100 }, { "percent" : 90 } ] }
 { "prop" : "border-collapse", "decl" : "separate", "expr" : [ { "keyw" : "separate" } ] }
 { "prop" : "border-spacing", "decl" : "3em", "expr" : [ { "em" : 3 } ] }
-{ "prop" : "border-bottom", "decl" : "thick dotted red", "expr" : [ { "expr:border-width" : [ { "keyw" : "thick" } ] }, { "expr:border-style" : [ { "keyw" : "dotted" } ] }, { "expr:border-color" : [ { "rgb" : [ { "num" : 255 }, { "num" : 0 }, { "num" : 0 } ] } ] } ] }
+{ "prop" : "border-bottom", "decl" : "thick dotted red", "expr" : [ { "expr:border-bottom-width" : [ { "keyw" : "thick" } ] }, { "expr:border-bottom-style" : [ { "keyw" : "dotted" } ] }, { "expr:border-bottom-color" : [ { "rgb" : [ { "num" : 255 }, { "num" : 0 }, { "num" : 0 } ] } ] } ] }
 { "prop" : "border-collapse", "decl" : "collapse", "expr" : [ { "keyw" : "collapse" } ] }
 { "prop" : "border-spacing", "decl" : "2px .1cm", "expr" : [ { "px" : 2 }, { "cm" : 0.1 } ] }
 { "prop" : "border-right-color", "decl" : "green", "expr" : [ { "rgb" : [ { "num" : 0 }, { "num" : 128 }, { "num" : 0 } ] } ] }
