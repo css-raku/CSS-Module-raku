@@ -27,17 +27,10 @@ grammar CSS::Module::CSS1:ver<20080411.000>
                                          );
         }
 
-        # tweak generated font-family expression.
-        rule expr-font-family    {:i  [ <generic-family> || <family-name> ] +% <op(',')> }
-
         # allow color names and define our vocabulary
         rule color:sym<named>  {:i [aqua | black | blue | fuchsia | gray | green | lime | maroon | navy | olive | purple | red | silver | teal | white | yellow] & <keyw> }
 
-        rule family-name    { <family-name=.identifiers> || <family-name=.string> }
-        rule generic-family {:i [ serif | sans\-serif | cursive | fantasy | monospace ] & <keyw> }
 
         rule absolute-size {:i [ [x[x]?\-]?[small|large] | medium ] & <keyw> }
         rule relative-size {:i [ larger | smaller ] & <keyw> }
-
-        rule padding-width {:i <length> | <percentage> }
 }

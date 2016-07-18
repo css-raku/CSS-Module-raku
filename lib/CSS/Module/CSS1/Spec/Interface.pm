@@ -6,10 +6,12 @@ role CSS::Module::CSS1::Spec::Interface {
     method color($/) { ... }
     method family-name($/) { ... }
     method generic-family($/) { ... }
+    method identifiers($/) { ... }
     method integer($/) { ... }
     method length($/) { ... }
     method number($/) { ... }
     method percentage($/) { ... }
     method relative-size($/) { ... }
+    method string($/) { ... }
     method uri($/) { ... }
 }

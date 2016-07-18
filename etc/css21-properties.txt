@@ -9,15 +9,17 @@
 'border-collapse'	collapse | separate | inherit	separate	'table' and 'inline-table' elements	yes	 	visual
 'border-color'	[ <color> | transparent ]{1,4} | inherit	see individual properties	 	no	 	visual
 'border-spacing'	<length> <length>? | inherit	0	'table' and 'inline-table' elements 	yes	 	visual
-'border-style'	[ none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset ]{1,4} | inherit	see individual properties	 	no	 	visual
+'border-style'	<border-style>{1,4} | inherit	see individual properties	 	no	 	visual
+	<border-style> := none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset
 'border-top'	[ 'border-top-width' || 'border-top-style' || 'border-top-color' ] | inherit	see individual properties	 	no	 	visual
 'border-right'	[ 'border-right-width' || 'border-right-style' || 'border-right-color' ] | inherit	see individual properties	 	no	 	visual
 'border-bottom'	[ 'border-bottom-width' || 'border-bottom-style' || 'border-bottom-color' ] | inherit	see individual properties	 	no	 	visual
 'border-left'	[ 'border-left-width' || 'border-left-style' || 'border-left-color' ] | inherit	see individual properties	 	no	 	visual
 'border-top-color' 'border-right-color' 'border-bottom-color' 'border-left-color'	<color> | transparent | inherit	the value of the 'color' property	 	no	 	visual
-'border-top-style' 'border-right-style' 'border-bottom-style' 'border-left-style'	[ none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset ] | inherit	none	 	no	 	visual
-'border-top-width' 'border-right-width' 'border-bottom-width' 'border-left-width'	thin | medium | thick | <length> | inherit	medium	 	no	 	visual
-'border-width'	[thin | medium | thick | <length>]{1,4} | inherit	see individual properties	 	no	 	visual
+'border-top-style' 'border-right-style' 'border-bottom-style' 'border-left-style'	<border-style> | inherit	none	 	no	 	visual
+'border-top-width' 'border-right-width' 'border-bottom-width' 'border-left-width'	<border-width> | inherit	medium	 	no	 	visual
+'border-width'	<border-width>{1,4} | inherit	see individual properties	 	no	 	visual
+	<border-width>  := thin | medium | thick | <length>
 'border'	[ 'border-width' || 'border-style' || 'border-color' ] | inherit	see individual properties	 	no	 	visual
 'bottom'	<length> | <percentage> | auto | inherit	auto	positioned elements	no	refer to height of containing block	visual
 'caption-side'	top | bottom | inherit	top	'table-caption' elements	yes	 	visual
@@ -36,7 +38,9 @@
 'elevation'	<angle> | below | level | above | higher | lower | inherit	level	 	yes	 	aural
 'empty-cells'	show | hide | inherit	show	'table-cell' elements	yes	 	visual
 'float'	left | right | none | inherit	none	all, but see 9.7	no	 	visual
-'font-family'	[ <family-name> | <generic-family> ]# | inherit	depends on user agent	 	yes	 	visual
+'font-family'	[ <generic-family> | <family-name> ]# | inherit	depends on user agent	 	yes	 	visual
+	<generic-family> := serif | sans-serif | cursive | fantasy | monospace
+	<family-name> := <identifiers> | <string>
 'font-size'	<absolute-size> | <relative-size> | <length> | <percentage> | inherit	medium	 	yes	refer to inherited font size	visual
 'font-style'	normal | italic | oblique | inherit	normal	 	yes	 	visual
 'font-variant'	normal | small-caps | inherit	normal	 	yes	 	visual
@@ -50,9 +54,10 @@
 'list-style-position'	inside | outside | inherit	outside	elements with 'display: list-item'	yes	 	visual
 'list-style-type'	disc | circle | square | decimal | decimal-leading-zero | lower-roman | upper-roman | lower-greek | lower-latin | upper-latin | armenian | georgian | lower-alpha | upper-alpha | none | inherit	disc	elements with 'display: list-item'	yes	 	visual
 'list-style'	[ 'list-style-type' || 'list-style-position' || 'list-style-image' ] | inherit	see individual properties	elements with 'display: list-item'	yes	 	visual
-'margin-right' 'margin-left'	<length> | <percentage> | auto | inherit	0	all elements except elements with table display types other than table-caption, table and inline-table	no	refer to width of containing block	visual
-'margin-top' 'margin-bottom'	<length> | <percentage> | auto | inherit	0	all elements except elements with table display types other than table-caption, table and inline-table	no	refer to width of containing block	visual
-'margin'	[<length> | <percentage> | auto ]{1,4} | inherit	see individual properties	all elements except elements with table display types other than table-caption, table and inline-table	no	refer to width of containing block	visual
+'margin-right' 'margin-left'	<margin-width> | inherit	0	all elements except elements with table display types other than table-caption, table and inline-table	no	refer to width of containing block	visual
+'margin-top' 'margin-bottom'	<margin-width> | inherit	0	all elements except elements with table display types other than table-caption, table and inline-table	no	refer to width of containing block	visual
+'margin'	<margin-width>{1,4} | inherit	see individual properties	all elements except elements with table display types other than table-caption, table and inline-table	no	refer to width of containing block	visual
+	<margin-width>  := <length> | <percentage> | auto
 'max-height'	<length> | <percentage> | none | inherit	none	all elements but non-replaced inline elements, table columns, and column groups	no	see prose	visual
 'max-width'	<length> | <percentage> | none | inherit	none	all elements but non-replaced inline elements, table rows, and row groups	no	refer to width of containing block	visual
 'min-height'	<length> | <percentage> | inherit	0	all elements but non-replaced inline elements, table columns, and column groups	no	see prose	visual
@@ -64,8 +69,9 @@
 'outline-width'	thin | medium | thick | <length> | inherit	medium	 	no	 	visual, interactive
 'outline'	[ 'outline-color' || 'outline-style' || 'outline-width' ] | inherit	see individual properties	 	no	 	visual, interactive
 'overflow'	visible | hidden | scroll | auto | inherit	visible	block containers	no	 	visual
-'padding-top' 'padding-right' 'padding-bottom' 'padding-left'	<length> | <percentage> | inherit	0	all elements except table-row-group, table-header-group, table-footer-group, table-row, table-column-group and table-column	no	refer to width of containing block	visual
-'padding'	[<length> | <percentage>]{1,4} | inherit	see individual properties	all elements except table-row-group, table-header-group, table-footer-group, table-row, table-column-group and table-column	no	refer to width of containing block	visual
+'padding-top' 'padding-right' 'padding-bottom' 'padding-left'	<padding-width>	0	all elements except table-row-group, table-header-group, table-footer-group, table-row, table-column-group and table-column	no	refer to width of containing block	visual
+'padding'	<padding-width>{1,4} | inherit	see individual properties	all elements except table-row-group, table-header-group, table-footer-group, table-row, table-column-group and table-column	no	refer to width of containing block	visual
+	<padding-width> := <length> | <percentage>
 'page-break-after'	auto | always | avoid | left | right | inherit	auto	block-level elements (but see text)	no	 	visual, paged
 'page-break-before'	auto | always | avoid | left | right | inherit	auto	block-level elements (but see text)	no	 	visual, paged
 'page-break-inside'	avoid | auto | inherit	auto	block-level elements (but see text)	no	 	visual, paged
@@ -95,7 +101,9 @@
 'unicode-bidi'	normal | embed | bidi-override | inherit	normal	all elements, but see prose	no	 	visual
 'vertical-align'	baseline | sub | super | top | text-top | middle | bottom | text-bottom | <percentage> | <length> | inherit	baseline	inline-level and 'table-cell' elements	no	refer to the 'line-height' of the element itself	visual
 'visibility'	visible | hidden | collapse | inherit	visible	 	yes	 	visual
-'voice-family'	[<specific-voice> | <generic-voice> ]# | inherit	depends on user agent	 	yes	 	aural
+'voice-family'	[<generic-voice> | <specific-voice> ]# | inherit	depends on user agent	 	yes	 	aural
+	<generic-voice>  := male | female | child
+	<specific-voice> := <identifier> | <string>
 'volume'	<number> | <percentage> | silent | x-soft | soft | medium | loud | x-loud | inherit	medium	 	yes	refer to inherited value	aural
 'white-space'	normal | pre | nowrap | pre-wrap | pre-line | inherit	normal	 	yes	 	visual
 'widows'	<integer> | inherit	2	block container elements	yes	 	visual, paged

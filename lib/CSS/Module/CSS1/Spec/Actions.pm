@@ -4,6 +4,8 @@ use v6;
 
 class CSS::Module::CSS1::Spec::Actions {
     method expr-font-family($/) { make $.list($/) }
+    method generic-family($/) { make $.node($/).pairs[0] }
+    method family-name($/) { make $.node($/).pairs[0] }
     method expr-font-style($/) { make $.list($/) }
     method expr-font-variant($/) { make $.list($/) }
     method expr-font-weight($/) { make $.list($/) }

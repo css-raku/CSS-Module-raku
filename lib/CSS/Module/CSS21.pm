@@ -35,23 +35,13 @@ grammar CSS::ModuleX::CSS21:ver<20110607.000>
                               [ [left|right][\-side]? | far\-[left|right] | center[\-[left|right]]? ] & <direction=.keyw> <!seen(0)>
                               | behind & <behind=.keyw> <!seen(1)> ]+ }
 
-    rule border-style {:i [ none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset ] & <keyw> }
-    rule border-width {:i [ thin | medium | thick ] & <keyw> | <length> }
     rule expr-counter-increment {:i [ none & <keyw> || [ <identifier> <integer>? ]+ ] }
     rule expr-counter-reset {:i [ none & <keyw> || [ <identifier> <integer>? ]+ ] }
     rule expr-elevation {:i <angle>
                              | [below | level | above ] & <direction=.keyw>
                              | [ higher | lower ] & <tilt=.keyw> }
-    rule expr-font-family    {:i  [ <generic-family> || <family-name> ] +% <op(',')> }
-    rule family-name    { <family-name=.identifiers> || <family-name=.string> }
-    rule generic-family {:i [ serif | sans\-serif | cursive | fantasy | monospace ] & <keyw> }
     rule absolute-size  {:i [ [x[x]?\-]?[small|large] | medium ] & <keyw> }
     rule relative-size  {:i [ larger | smaller ] & <keyw> }
-    rule margin-width   {:i <length> | <percentage> | auto & <keyw> }
-    rule padding-width  {:i <length> | <percentage> }
-    rule generic-voice  {:i [ male | female | child ] & <keyw> }
-    rule specific-voice {:i <value=.identifier> | <value=.string> }
-    rule expr-voice-family { [ <value=.generic-voice> || <value=.specific-voice> ] +% <op(',')> }
 }
 
 grammar CSS::Module::CSS21:ver<20110607.000>

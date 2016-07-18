@@ -16,6 +16,7 @@ role CSS::Module::CSS3::Fonts::Spec::Interface {
     method font-variant-css21($/) { ... }
     method generic-family($/) { ... }
     method historical-lig-values($/) { ... }
+    method identifiers($/) { ... }
     method length($/) { ... }
     method number($/) { ... }
     method numeric-figure-values($/) { ... }

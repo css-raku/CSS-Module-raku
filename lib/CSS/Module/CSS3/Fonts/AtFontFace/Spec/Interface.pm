@@ -15,6 +15,7 @@ role CSS::Module::CSS3::Fonts::AtFontFace::Spec::Interface {
     method font-face-name($/) { ... }
     method format($/) { ... }
     method historical-lig-values($/) { ... }
+    method identifiers($/) { ... }
     method local($/) { ... }
     method numeric-figure-values($/) { ... }
     method numeric-fraction-values($/) { ... }

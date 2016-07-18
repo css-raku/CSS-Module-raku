@@ -12,9 +12,6 @@ class CSS::Module::CSS1::Actions
     is CSS::Grammar::Actions
     does CSS::Module::CSS1::Spec::Interface {
 
-        method padding-width($/) { make $.list($/) }
-        method family-name($/) { make $<family-name>.ast }
-        method generic-family($/) { make $<keyw>.ast }
         method absolute-size($/) { make $<keyw>.ast }
         method relative-size($/) { make $<keyw>.ast }
 }

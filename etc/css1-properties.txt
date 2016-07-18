@@ -1,6 +1,8 @@
 # source: http://www.w3.org/TR/2008/REC-CSS1-20080411/
 # edited for css21, css3 forwared compatibility
-'font-family'	[ <family-name> | <generic-family> ]#	UA specific	all elements	yes	N/A	5.2.2
+'font-family'	[ <generic-family> | <family-name> ]#	UA specific	all elements	yes	N/A	5.2.2
+	<generic-family> := serif | sans-serif | cursive | fantasy | monospace
+        <family-name> := <identifiers> | <string>
 'font-style'	normal | italic | oblique	normal	all elements	yes	N/A	5.2.3
 'font-variant'	normal | small-caps	normal	all elements	yes	N/A	5.2.4
 'font-weight'	normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900	normal	all elements	yes	N/A	5.2.5

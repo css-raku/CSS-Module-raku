@@ -42,16 +42,8 @@ class CSS::ModuleX::CSS21::Actions
 
    # --- Expressions --- #
 
-    method border-style($/)   { make $.list($/) }
-    method border-width($/)   { make $.list($/) }
-    method family-name($/)    { make $<family-name>.ast }
-    method generic-family($/) { make $<keyw>.ast }
     method absolute-size($/)  { make $<keyw>.ast }
     method relative-size($/)  { make $<keyw>.ast }
-    method margin-width($/)   { make $.node($/) }
-    method padding-width($/)  { make $.node($/) }
-    method generic-voice($/)  { make $<keyw>.ast }
-    method specific-voice($/) { make $<value>.ast }
 }
 
 class CSS::Module::CSS21::Actions
