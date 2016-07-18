@@ -150,13 +150,13 @@ grammar CSS::Module::CSS21::Spec::Grammar {
     rule decl:sym<content> {:i (content) ':' <val( rx{ <expr=.expr-content> }, &?ROUTINE.WHY)> }
     rule expr-content {:i [ [ normal | none ] & <keyw> || [ [ <string> || <uri> || <counter> || <counters> || <attr> || [ open\-quote | close\-quote | no\-open\-quote | no\-close\-quote ] & <keyw> ] ]+ ] }
 
-    #| counter-increment: [ <identifier> <integer>? ]+ | none
+    #| counter-increment: none | [ <identifier> <integer>? ]+
     rule decl:sym<counter-increment> {:i (counter\-increment) ':' <val( rx{ <expr=.expr-counter-increment> }, &?ROUTINE.WHY)> }
-    rule expr-counter-increment {:i [ [ <identifier> <integer>? ]+ || none & <keyw> ] }
+    rule expr-counter-increment {:i [ none & <keyw> || [ <identifier> <integer>? ]+ ] }
 
-    #| counter-reset: [ <identifier> <integer>? ]+ | none
+    #| counter-reset: none | [ <identifier> <integer>? ]+
     rule decl:sym<counter-reset> {:i (counter\-reset) ':' <val( rx{ <expr=.expr-counter-reset> }, &?ROUTINE.WHY)> }
-    rule expr-counter-reset {:i [ [ <identifier> <integer>? ]+ || none & <keyw> ] }
+    rule expr-counter-reset {:i [ none & <keyw> || [ <identifier> <integer>? ]+ ] }
 
     #| cue-after: <uri> | none
     rule decl:sym<cue-after> {:i (cue\-after) ':' <val( rx{ <expr=.expr-cue-after> }, &?ROUTINE.WHY)> }

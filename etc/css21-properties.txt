@@ -27,8 +27,8 @@
 'clip'	<shape> | auto | inherit	auto	absolutely positioned elements	no	 	visual
 'color'	<color> | inherit	depends on user agent	 	yes	 	visual
 'content'	normal | none | [ <string> | <uri> | <counter> | <counters> | attr(<identifier>) | open-quote | close-quote | no-open-quote | no-close-quote ]+ | inherit	normal	:before and :after pseudo-elements	no	 	all
-'counter-increment'	[ <identifier> <integer>? ]+ | none | inherit	none	 	no	 	all
-'counter-reset'	[ <identifier> <integer>? ]+ | none | inherit	none	 	no	 	all
+'counter-increment'	none | [ <identifier> <integer>? ]+ | inherit	none	 	no	 	all
+'counter-reset'	none | [ <identifier> <integer>? ]+ | inherit	none	 	no	 	all
 'cue-after'	<uri> | none | inherit	none	 	no	 	aural
 'cue-before'	<uri> | none | inherit	none	 	no	 	aural
 'cue'	[ 'cue-before' || 'cue-after' ] | inherit	see individual properties	 	no	 	aural

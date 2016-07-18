@@ -35,8 +35,6 @@ grammar CSS::ModuleX::CSS21:ver<20110607.000>
                               [ [left|right][\-side]? | far\-[left|right] | center[\-[left|right]]? ] & <direction=.keyw> <!seen(0)>
                               | behind & <behind=.keyw> <!seen(1)> ]+ }
 
-    rule expr-counter-increment {:i [ none & <keyw> || [ <identifier> <integer>? ]+ ] }
-    rule expr-counter-reset {:i [ none & <keyw> || [ <identifier> <integer>? ]+ ] }
     rule expr-elevation {:i <angle>
                              | [below | level | above ] & <direction=.keyw>
                              | [ higher | lower ] & <tilt=.keyw> }
