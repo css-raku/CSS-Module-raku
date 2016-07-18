@@ -40,8 +40,6 @@ grammar CSS::ModuleX::CSS21:ver<20110607.000>
     rule expr-elevation {:i <angle>
                              | [below | level | above ] & <direction=.keyw>
                              | [ higher | lower ] & <tilt=.keyw> }
-    rule absolute-size  {:i [ [x[x]?\-]?[small|large] | medium ] & <keyw> }
-    rule relative-size  {:i [ larger | smaller ] & <keyw> }
 }
 
 grammar CSS::Module::CSS21:ver<20110607.000>

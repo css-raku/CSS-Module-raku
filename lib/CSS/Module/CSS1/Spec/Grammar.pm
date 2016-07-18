@@ -30,6 +30,12 @@ grammar CSS::Module::CSS1::Spec::Grammar {
     rule decl:sym<font-size> {:i (font\-size) ':' <val( rx{ <expr=.expr-font-size> }, &?ROUTINE.WHY)> }
     rule expr-font-size {:i [ <absolute-size> || <relative-size> || <length> || <percentage> ] }
 
+    #| absolute-size: xx-small | x-small | small | medium | large | x-large | xx-large
+    rule absolute-size {:i [ xx\-small | x\-small | small | medium | large | x\-large | xx\-large ] & <keyw> }
+
+    #| relative-size: larger | smaller
+    rule relative-size {:i [ larger | smaller ] & <keyw> }
+
     #| font: [ 'font-style' || 'font-variant' || 'font-weight' ]? 'font-size' [ / 'line-height' ]? 'font-family'
     rule decl:sym<font> {:i (font) ':' <val( rx{ <expr=.expr-font> }, &?ROUTINE.WHY)> }
     rule expr-font {:i :my @*SEEN; [ [ <expr-font-style> <!seen(0)> | <expr-font-variant> <!seen(1)> | <expr-font-weight> <!seen(2)> ]+ ]? <expr-font-size> [ <op('/')> <expr-line-height> ]? <expr-font-family> }

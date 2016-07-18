@@ -10,7 +10,7 @@ class CSS::Module::CSS21::Spec::Actions {
     method expr-background-repeat($/) { make $.list($/) }
     method expr-border-color($/) { make $.list($/) }
     method expr-border-style($/) { make $.list($/) }
-    method border-style($/) { make $.node($/).pairs[0] }
+    method border-style($/) { make $.rule($/) }
     method expr-border-top-color($/) { make $.list($/) }
     method expr-border-right-color($/) { make $.list($/) }
     method expr-border-bottom-color($/) { make $.list($/) }
@@ -24,13 +24,15 @@ class CSS::Module::CSS21::Spec::Actions {
     method expr-border-bottom-width($/) { make $.list($/) }
     method expr-border-left-width($/) { make $.list($/) }
     method expr-border-width($/) { make $.list($/) }
-    method border-width($/) { make $.node($/).pairs[0] }
+    method border-width($/) { make $.rule($/) }
     method expr-cue-after($/) { make $.list($/) }
     method expr-cue-before($/) { make $.list($/) }
     method expr-font-family($/) { make $.list($/) }
-    method generic-family($/) { make $.node($/).pairs[0] }
-    method family-name($/) { make $.node($/).pairs[0] }
+    method generic-family($/) { make $.rule($/) }
+    method family-name($/) { make $.rule($/) }
     method expr-font-size($/) { make $.list($/) }
+    method absolute-size($/) { make $.rule($/) }
+    method relative-size($/) { make $.rule($/) }
     method expr-font-style($/) { make $.list($/) }
     method expr-font-variant($/) { make $.list($/) }
     method expr-font-weight($/) { make $.list($/) }
@@ -38,11 +40,11 @@ class CSS::Module::CSS21::Spec::Actions {
     method expr-list-style-image($/) { make $.list($/) }
     method expr-list-style-position($/) { make $.list($/) }
     method expr-list-style-type($/) { make $.list($/) }
-    method margin-width($/) { make $.node($/).pairs[0] }
+    method margin-width($/) { make $.rule($/) }
     method expr-outline-color($/) { make $.list($/) }
     method expr-outline-style($/) { make $.list($/) }
     method expr-outline-width($/) { make $.list($/) }
-    method padding-width($/) { make $.node($/).pairs[0] }
-    method generic-voice($/) { make $.node($/).pairs[0] }
-    method specific-voice($/) { make $.node($/).pairs[0] }
+    method padding-width($/) { make $.rule($/) }
+    method generic-voice($/) { make $.rule($/) }
+    method specific-voice($/) { make $.rule($/) }
 }

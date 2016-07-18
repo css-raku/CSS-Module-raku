@@ -8,6 +8,9 @@ grammar CSS::Module::CSS3::Fonts::Spec::Grammar {
     rule decl:sym<font> {:i (font) ':' <val( rx{ <expr=.expr-font> }, &?ROUTINE.WHY)> }
     rule expr-font {:i :my @*SEEN; [ [ [ [ <expr-font-style> <!seen(0)> | <font-variant-css21> <!seen(1)> | <expr-font-weight> <!seen(2)> | <expr-font-stretch> <!seen(3)> ]+ ]? <expr-font-size> [ <op('/')> <expr-line-height> ]? <expr-font-family> ] || [ caption | icon | menu | message\-box | small\-caption | status\-bar ] & <keyw> ] }
 
+    #| font-variant-css21: normal | small-caps
+    rule font-variant-css21 {:i [ normal | small\-caps ] & <keyw> }
+
     #| font-family: [ <generic-family> | <family-name> ]#
     rule decl:sym<font-family> {:i (font\-family) ':' <val( rx{ <expr=.expr-font-family> }, &?ROUTINE.WHY)> }
     rule expr-font-family {:i [ [ <generic-family> || <family-name> ] ] +% <op(',')> }
@@ -37,6 +40,12 @@ grammar CSS::Module::CSS3::Fonts::Spec::Grammar {
     #| font-size-adjust: none | auto | <number>
     rule decl:sym<font-size-adjust> {:i (font\-size\-adjust) ':' <val( rx{ <expr=.expr-font-size-adjust> }, &?ROUTINE.WHY)> }
     rule expr-font-size-adjust {:i [ [ none | auto ] & <keyw> || <number> ] }
+
+    #| absolute-size: xx-small | x-small | small | medium | large | x-large | xx-large
+    rule absolute-size {:i [ xx\-small | x\-small | small | medium | large | x\-large | xx\-large ] & <keyw> }
+
+    #| relative-size: larger | smaller
+    rule relative-size {:i [ larger | smaller ] & <keyw> }
 
     #| font-stretch: normal | ultra-condensed | extra-condensed | condensed | semi-condensed | semi-expanded | expanded | extra-expanded | ultra-expanded
     rule decl:sym<font-stretch> {:i (font\-stretch) ':' <val( rx{ <expr=.expr-font-stretch> }, &?ROUTINE.WHY)> }

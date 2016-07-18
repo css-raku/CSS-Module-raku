@@ -4,12 +4,14 @@ use v6;
 
 class CSS::Module::CSS1::Spec::Actions {
     method expr-font-family($/) { make $.list($/) }
-    method generic-family($/) { make $.node($/).pairs[0] }
-    method family-name($/) { make $.node($/).pairs[0] }
+    method generic-family($/) { make $.rule($/) }
+    method family-name($/) { make $.rule($/) }
     method expr-font-style($/) { make $.list($/) }
     method expr-font-variant($/) { make $.list($/) }
     method expr-font-weight($/) { make $.list($/) }
     method expr-font-size($/) { make $.list($/) }
+    method absolute-size($/) { make $.rule($/) }
+    method relative-size($/) { make $.rule($/) }
     method expr-background-color($/) { make $.list($/) }
     method expr-background-image($/) { make $.list($/) }
     method expr-background-repeat($/) { make $.list($/) }

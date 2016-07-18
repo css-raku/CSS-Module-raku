@@ -25,13 +25,6 @@ grammar CSS::Module::CSS3::Fonts:ver<20130212.000>
 
     rule font-description {<declarations=.CSS::Module::CSS3::Fonts::AtFontFace::declarations>}
     rule at-rule:sym<font-face> {\@(:i'font-face') <font-description> }
-
-    # ---- Expressions ----
-    rule expr-font {:i [ [ [ [:my @*SEEN; <expr-font-style> <!seen(0)> | <expr-font-variant=.font-variant-css21> <!seen(1)> | <expr-font-weight> <!seen(2)> | <expr-font-stretch> <!seen(3)> ]+ ]? <expr-font-size> [ <op('/')> <expr-line-height> ]? <expr-font-family> ] | [ caption | icon | menu | message\-box | small\-caption | status\-bar ] & <keyw> ] }
-    rule font-variant-css21 {:i [ normal | small\-caps ] & <keyw> }
-    rule absolute-size {:i [ [[xx|x]\-]?small | medium | [[xx|x]\-]?large ] & <keyw> }
-    rule relative-size {:i [ larger | smaller ] & <keyw> }
-    rule expr-font-size {:i <absolute-size> | <relative-size> | <length> | <percentage> }
 }
 
 # ----------------------------------------------------------------------
@@ -63,12 +56,7 @@ class CSS::Module::CSS3::Fonts::Actions
     }
 
     method font-description($/)   { make $<declarations>.ast }
-    method font-face-name($/)     { make $<font-face-name>.ast }
-    method expr-font-family($/)   { make $.list($/) }
-    method absolute-size($/)      { make $<keyw>.ast }
-    method relative-size($/)      { make $<keyw>.ast }
-    method expr-font-size($/)     { make $.list($/) }
-    method font-variant-css21($/) { make $.list($/) }
+    method font-variant-css21($/) { make $.token($.list($/), :type<expr:font-variant>) }
     method src($/)                { make $.node($/) }
 
 }

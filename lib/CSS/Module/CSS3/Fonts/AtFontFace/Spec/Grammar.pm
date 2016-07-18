@@ -35,10 +35,10 @@ grammar CSS::Module::CSS3::Fonts::AtFontFace::Spec::Grammar {
     rule decl:sym<src> {:i (src) ':' <val( rx{ <expr=.expr-src> }, &?ROUTINE.WHY)> }
     rule expr-src {:i [ [ [ [ <uri> || <local> ] ] [ <format> ]? || <font-face-name> ] ] +% <op(',')> }
 
+    #| font-face-name: <identifiers> | <string>
+    rule font-face-name {:i [ <identifiers> || <string> ] }
+
     #| unicode-range: <urange>#
     rule decl:sym<unicode-range> {:i (unicode\-range) ':' <val( rx{ <expr=.expr-unicode-range> }, &?ROUTINE.WHY)> }
     rule expr-unicode-range {:i <urange> +% <op(',')> }
-
-    #| font-face-name: <identifiers> | <string>
-    rule font-face-name {:i [ <identifiers> || <string> ] }
 }

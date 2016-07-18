@@ -208,6 +208,12 @@ grammar CSS::Module::CSS21::Spec::Grammar {
     rule decl:sym<font-size> {:i (font\-size) ':' <val( rx{ <expr=.expr-font-size> }, &?ROUTINE.WHY)> }
     rule expr-font-size {:i [ <absolute-size> || <relative-size> || <length> || <percentage> ] }
 
+    #| absolute-size: xx-small | x-small | small | medium | large | x-large | xx-large
+    rule absolute-size {:i [ xx\-small | x\-small | small | medium | large | x\-large | xx\-large ] & <keyw> }
+
+    #| relative-size: larger | smaller
+    rule relative-size {:i [ larger | smaller ] & <keyw> }
+
     #| font-style: normal | italic | oblique
     rule decl:sym<font-style> {:i (font\-style) ':' <val( rx{ <expr=.expr-font-style> }, &?ROUTINE.WHY)> }
     rule expr-font-style {:i [ normal | italic | oblique ] & <keyw> }

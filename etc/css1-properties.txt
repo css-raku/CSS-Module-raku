@@ -7,6 +7,8 @@
 'font-variant'	normal | small-caps	normal	all elements	yes	N/A	5.2.4
 'font-weight'	normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900	normal	all elements	yes	N/A	5.2.5
 'font-size'	<absolute-size> | <relative-size> | <length> | <percentage>	medium	all elements	yes	relative to parent element's font size	5.2.6
+	<absolute-size> := xx-small | x-small | small | medium | large | x-large | xx-large
+	<relative-size> := larger | smaller
 'font'	[ 'font-style' || 'font-variant' || 'font-weight' ]? 'font-size' [ / 'line-height' ]? 'font-family'	not defined for shorthand properties	all elements	yes	allowed on <font-size> and <line-height>	5.2.7
 'color'	<color>	UA specific	all elements	yes	N/A	5.3.1
 'background-color'	<color> | transparent	transparent	all elements	no	N/A	5.3.2

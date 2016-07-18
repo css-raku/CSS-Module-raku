@@ -11,8 +11,5 @@ class CSS::Module::CSS1::Actions
     is CSS::Module::CSS1::Spec::Actions
     is CSS::Grammar::Actions
     does CSS::Module::CSS1::Spec::Interface {
-
-        method absolute-size($/) { make $<keyw>.ast }
-        method relative-size($/) { make $<keyw>.ast }
 }
 

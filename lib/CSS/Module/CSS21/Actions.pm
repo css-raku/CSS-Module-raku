@@ -40,10 +40,6 @@ class CSS::ModuleX::CSS21::Actions
         make $.func( 'rect', $.list($/) );
     }
 
-   # --- Expressions --- #
-
-    method absolute-size($/)  { make $<keyw>.ast }
-    method relative-size($/)  { make $<keyw>.ast }
 }
 
 class CSS::Module::CSS21::Actions
@@ -53,5 +49,4 @@ class CSS::Module::CSS21::Actions
     does CSS::Module::CSS21::Spec::Interface {
 
     has @._proforma = 'inherit';
-
 }

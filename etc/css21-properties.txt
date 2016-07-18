@@ -19,7 +19,7 @@
 'border-top-style' 'border-right-style' 'border-bottom-style' 'border-left-style'	<border-style> | inherit	none	 	no	 	visual
 'border-top-width' 'border-right-width' 'border-bottom-width' 'border-left-width'	<border-width> | inherit	medium	 	no	 	visual
 'border-width'	<border-width>{1,4} | inherit	see individual properties	 	no	 	visual
-	<border-width>  := thin | medium | thick | <length>
+	<border-width> := thin | medium | thick | <length>
 'border'	[ 'border-width' || 'border-style' || 'border-color' ] | inherit	see individual properties	 	no	 	visual
 'bottom'	<length> | <percentage> | auto | inherit	auto	positioned elements	no	refer to height of containing block	visual
 'caption-side'	top | bottom | inherit	top	'table-caption' elements	yes	 	visual
@@ -42,6 +42,8 @@
 	<generic-family> := serif | sans-serif | cursive | fantasy | monospace
 	<family-name> := <identifiers> | <string>
 'font-size'	<absolute-size> | <relative-size> | <length> | <percentage> | inherit	medium	 	yes	refer to inherited font size	visual
+	<absolute-size> := xx-small | x-small | small | medium | large | x-large | xx-large
+	<relative-size> := larger | smaller
 'font-style'	normal | italic | oblique | inherit	normal	 	yes	 	visual
 'font-variant'	normal | small-caps | inherit	normal	 	yes	 	visual
 'font-weight'	normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | inherit	normal	 	yes	 	visual
@@ -57,7 +59,7 @@
 'margin-right' 'margin-left'	<margin-width> | inherit	0	all elements except elements with table display types other than table-caption, table and inline-table	no	refer to width of containing block	visual
 'margin-top' 'margin-bottom'	<margin-width> | inherit	0	all elements except elements with table display types other than table-caption, table and inline-table	no	refer to width of containing block	visual
 'margin'	<margin-width>{1,4} | inherit	see individual properties	all elements except elements with table display types other than table-caption, table and inline-table	no	refer to width of containing block	visual
-	<margin-width>  := <length> | <percentage> | auto
+	<margin-width> := <length> | <percentage> | auto
 'max-height'	<length> | <percentage> | none | inherit	none	all elements but non-replaced inline elements, table columns, and column groups	no	see prose	visual
 'max-width'	<length> | <percentage> | none | inherit	none	all elements but non-replaced inline elements, table rows, and row groups	no	refer to width of containing block	visual
 'min-height'	<length> | <percentage> | inherit	0	all elements but non-replaced inline elements, table columns, and column groups	no	see prose	visual
