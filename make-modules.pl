@@ -19,17 +19,17 @@ class Build is Panda::Builder {
             for (:CSS1[<etc css1-properties.txt> => <CSS1>],
                  :CSS21[<etc css21-properties.txt> => <CSS21>],
                  :CSS3[<etc css3x-font-properties.txt> => <CSS3 Fonts>,
-                       <etc css3x-font-@fontface-properties.txt> => <CSS3 Fonts AtFontFace>,
                        <etc css3x-paged-media.txt> => <CSS3 PagedMedia>],
+                 'CSS3::Fonts::AtFontFace' => [<etc css3x-font-@fontface-properties.txt> => <CSS3 Fonts AtFontFace>],
+
                 ) {
                 my $meta = .key;
                 for .value.list {
                     my ($input-spec, $class-isa) = .kv;
-                    my $scope;
                     my $grammar = CSS::Module::CSS3;
                     if $class-isa[*-1] eq 'AtFontFace' {
-                        $scope = '@font-face';
                         $grammar = CSS::Module::CSS3::Fonts::AtFontFace;
+                        %props = ();
                     }
 
                     for (:interface<Interface>,
@@ -54,9 +54,9 @@ class Build is Panda::Builder {
 
                         my @summary = CSS::Specification::Build::summary( :$input-path );
                         for @summary {
-                            my %detail = %$_;
-                            my $prop-name = %detail<name>:delete;
-                            with %detail<default> -> $default {
+                            my %prop = %$_;
+                            my $prop-name = %prop<name>:delete;
+                            with %prop<default> -> $default {
                                 my @d = $default;
                                 # either a discription or concrete term
                                 if $grammar.parse("$prop-name:$default", :$actions, :rule<declaration>) {
@@ -65,21 +65,13 @@ class Build is Panda::Builder {
                                 else {
                                     warn "ignore: $prop-name:$default";
                                 }
-                                %detail<default> = @d;
+                                %prop<default> = @d;
                             }
-                            for %detail.pairs {
-                                if $scope {
-                                    # aka @font-face
-                                    %props{$scope}{$prop-name}{.key} = .value
-                                }
-                                else {
-                                    %props{$prop-name}{.key} = .value;
-                                }
-                            }
+                            %props{$prop-name} = %prop;
                         }
                     }
                 }
-                my $class-dir = $*SPEC.catdir(flat(<lib CSS Module>,$meta));
+                my $class-dir = $*SPEC.catdir(flat(<lib CSS Module>, $meta.split('::')));
                 my $class-path = $*SPEC.catfile( $class-dir, 'Metadata.pm' );
                 my $class-name = "CSS::Module::{$meta}::Metadata";
                 say "Building $class-name";

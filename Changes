@@ -1,3 +1,5 @@
+0.4.1 Factor out @font-face as a distinct sub-module, add class
+      CSS::Module::CSS3::Fonts::AtFontFace::Metadata
 0.4.0 Convert to CSS::Specification 0.4.0
     -- Make use of the rule definition syntax to migrate rules
        from Perl Grammars and Actions to property definitons.

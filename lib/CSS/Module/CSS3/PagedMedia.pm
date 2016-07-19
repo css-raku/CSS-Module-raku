@@ -31,8 +31,6 @@ grammar CSS::Module::CSS3::PagedMedia:ver<20061010.000>
     token margin-box{:i[<box-hpos>'-'[<box-vpos>['-corner']?|<box-center>]
                       |<box-vpos>'-'[<box-hpos>['-corner']?|<box-center>]]}
     rule margin-declaration { <margin-box> <declarations> }
-
-    token page-size {:i [ a[3|4|5] | b[4|5] | letter | legal | ledger ] & <keyw> }
 }
 
 class CSS::Module::CSS3::PagedMedia::Actions
@@ -62,6 +60,4 @@ class CSS::Module::CSS3::PagedMedia::Actions
         method margin-declaration($/) {
             make $.token($.node($/), :type(CSS::Grammar::AST::CSSObject::MarginRule));
         }
-
-        method page-size($/) { make $<keyw>.ast }
 }
