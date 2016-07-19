@@ -37,7 +37,7 @@ is-deeply $css3-prop<border-style>, {:box, :edges[<border-top-style border-right
 
 is-deeply $css3-module.colors<gold>, [ 255, 215,   0 ], "colors";
 
-my $at-fontface-module = CSS::Module::CSS3::Fonts::AtFontFace.module;
+my $at-fontface-module = $css3-module.sub-module<@font-face>;
 isa-ok $at-fontface-module.grammar, ::('CSS::Module::CSS3::Fonts::AtFontFace'), '@font-face grammar';
 isa-ok $at-fontface-module.actions, ::('CSS::Module::CSS3::Actions'), '@font-face actions';
 my $at-fontface-prop = $at-fontface-module.property-metadata;

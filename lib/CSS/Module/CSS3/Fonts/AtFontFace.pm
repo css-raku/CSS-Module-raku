@@ -16,7 +16,7 @@ grammar CSS::Module::CSS3::Fonts::AtFontFace
         use CSS::Module;
         # we share the actions class
         require ::('CSS::Module::CSS3');
-        my $actions = ::('CSS::Module::CSS3').module.actions;
+        my $actions = ::('CSS::Module::CSS3::Actions');
         use CSS::Module::CSS3::Fonts::AtFontFace::Metadata;
         my %property-metadata = %$CSS::Module::CSS3::Fonts::AtFontFace::Metadata::property;
         state $this //= CSS::Module.new( :grammar($?CLASS),

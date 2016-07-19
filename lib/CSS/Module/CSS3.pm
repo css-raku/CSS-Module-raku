@@ -39,10 +39,13 @@ grammar CSS::Module::CSS3:ver<2010-20110512.000>
 
     method module {
         use CSS::Module::CSS3::Metadata;
+        require ::('CSS::Module::CSS3::Fonts::AtFontFace');
+        my %sub-module = '@font-face' => ::('CSS::Module::CSS3::Fonts::AtFontFace').module;
         my %property-metadata = %$CSS::Module::CSS3::Metadata::property;
         state $this //= CSS::Module.new( :grammar($?CLASS),
 					 :actions(CSS::Module::CSS3::Actions),
 					 :%property-metadata,
+                                         :%sub-module,
 	    );
     }
 
