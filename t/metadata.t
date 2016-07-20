@@ -28,6 +28,7 @@ nok $css21-module.colors<gold>:exists, "css21 does not have gold color";
 is-deeply $css21-module.colors<red>, [ 255, 0,   0 ], "colors";
 
 my $css3-module = CSS::Module::CSS3.module;
+is $css3-module.name, 'CSS3';
 isa-ok $css3-module.grammar, ::('CSS::Module::CSS3'), 'css3 grammar';
 isa-ok $css3-module.actions, ::('CSS::Module::CSS3::Actions'), 'css3 actions';
 my $css3-prop = $css3-module.property-metadata;

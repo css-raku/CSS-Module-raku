@@ -19,9 +19,11 @@ grammar CSS::Module::CSS3::Fonts::AtFontFace
         my $actions = ::('CSS::Module::CSS3::Actions');
         use CSS::Module::CSS3::Fonts::AtFontFace::Metadata;
         my %property-metadata = %$CSS::Module::CSS3::Fonts::AtFontFace::Metadata::property;
-        state $this //= CSS::Module.new( :grammar($?CLASS),
-					 :$actions,
-					 :%property-metadata,
+        state $this //= CSS::Module.new(
+            :name<@font-face>,
+            :grammar($?CLASS),
+	    :$actions,
+	    :%property-metadata,
 	    );
     }
     # @font-face declarations

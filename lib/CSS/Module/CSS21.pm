@@ -50,10 +50,12 @@ grammar CSS::Module::CSS21:ver<20110607.000>
         use CSS::Module::CSS21::Metadata;
         my %property-metadata = %$CSS::Module::CSS21::Metadata::property;
         use CSS::Module::CSS21::Actions;
-        state $this //= CSS::Module.new( :grammar($?CLASS),
-					 :actions(CSS::Module::CSS21::Actions),
-                                         :%property-metadata,
-                                       );
+        state $this //= CSS::Module.new(
+            :name<CSS2.1>,
+            :grammar($?CLASS),
+	    :actions(CSS::Module::CSS21::Actions),
+            :%property-metadata,
+        );
     }
 
 }

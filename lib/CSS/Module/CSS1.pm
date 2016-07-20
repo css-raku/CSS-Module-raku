@@ -20,11 +20,13 @@ grammar CSS::Module::CSS1:ver<20080411.000>
         method module {
             use CSS::Module::CSS1::Metadata;
             my %property-metadata = %$CSS::Module::CSS1::Metadata::property;
-	  use CSS::Module::CSS1::Actions;
-	  state $this //= CSS::Module.new( :grammar($?CLASS),
-                                           :actions(CSS::Module::CSS1::Actions),
-                                           :%property-metadata,
-                                         );
+	    use CSS::Module::CSS1::Actions;
+	    state $this //= CSS::Module.new(
+                :name<CSS1>,
+                :grammar($?CLASS),
+                :actions(CSS::Module::CSS1::Actions),
+                :%property-metadata,
+            );
         }
 
         # allow color names and define our vocabulary
