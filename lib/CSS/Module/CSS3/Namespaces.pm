@@ -14,6 +14,6 @@ class CSS::Module::CSS3::Namespaces::Actions {
 
     use CSS::Grammar::AST :CSSObject;
 
-    method at-decl:sym<namespace>($/) { make $.at-rule($/, :type(CSSObject::NamespaceRule)) }
+    method at-decl:sym<namespace>($/) { make $.at-rule($/) }
 }
 

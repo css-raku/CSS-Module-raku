@@ -12,19 +12,19 @@ my $writer = CSS::Writer.new;
 
 for (
     at-decl => {input => '@namespace empty "";',
-                ast => :namespace-rule{ :ns-prefix<empty>, :url(""), :at-keyw<namespace>},
+                ast => :at-rule{ :ns-prefix<empty>, :url(""), :at-keyw<namespace>},
     },
     at-decl => {input => '@NAMESPACE "";',
-                ast => :namespace-rule{ :url(""), :at-keyw<namespace>},
+                ast => :at-rule{ :url(""), :at-keyw<namespace>},
     },
     at-decl => {input => '@namespace "http://www.w3.org/1999/xhtml";',
-                ast => :namespace-rule{ :url<http://www.w3.org/1999/xhtml>, :at-keyw<namespace>},
+                ast => :at-rule{ :url<http://www.w3.org/1999/xhtml>, :at-keyw<namespace>},
     },
     at-decl => {input => '@namespace svg "http://www.w3.org/2000/svg";',
-                ast => :namespace-rule{ :ns-prefix<svg>, :url<http://www.w3.org/2000/svg>, :at-keyw<namespace>},
+                ast => :at-rule{ :ns-prefix<svg>, :url<http://www.w3.org/2000/svg>, :at-keyw<namespace>},
     },
     stylesheet => {input => '@namespace toto url(http://toto.example.org);',
-                ast => :stylesheet[{ :namespace-rule{ :ns-prefix<toto>, :url<http://toto.example.org>, :at-keyw<namespace>}}],
+                ast => :stylesheet[{ :at-rule{ :ns-prefix<toto>, :url<http://toto.example.org>, :at-keyw<namespace>}}],
     },
     ) {
     my $rule = .key;

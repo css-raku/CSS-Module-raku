@@ -39,7 +39,7 @@ class CSS::Module::CSS3::Fonts::Actions
 
     use CSS::Grammar::AST :CSSObject;
 
-    method at-rule:sym<font-face>($/) { make $.at-rule($/, :type(CSSObject::FontFaceRule)) }
+    method at-rule:sym<font-face>($/) { make $.at-rule($/) }
 
     method format($/) {
         return $.warning("usage: format(type)")

@@ -58,6 +58,6 @@ class CSS::Module::CSS3::PagedMedia::Actions
         method margin-box($/) { make $.token( $/.lc, :type(CSSValue::AtKeywordComponent)) }
 
         method margin-declaration($/) {
-            make $.token($.node($/), :type(CSS::Grammar::AST::CSSObject::MarginRule));
+            make $.at-rule($/);
         }
 }
