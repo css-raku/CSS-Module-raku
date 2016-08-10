@@ -18,10 +18,10 @@ for (
                ast => :rgba[ :num(255), :num(128), :num(0), :num(.1) ],
     },
     term   => {input => 'hsl(120, 100%, 50%)',
-               ast => :hsl[ :num(120), {percent => 100}, {percent => 50} ],
+               ast => :hsl[ :num(120), :percent(100), :percent(50) ],
     },
     term   => {input => 'hsla( 180, 100%, 50%, .75 )',
-               ast => :hsla[ :num(180), {percent => 100}, {percent => 50}, :num(.75) ],
+               ast => :hsla[ :num(180), :percent(100), :percent(50), :num(.75) ],
     },
     # clipping of out-of-range values
     term   => {input => 'rgba(101%, 50%, -5%, +1.1)',
@@ -36,7 +36,7 @@ for (
                ast => :hsl[ :num(120), :percent(100), :percent(0) ],
     },
     term   => {input => 'hsla( 180, -100%, 150%, 1.75 )',
-               ast => :hsla[ :num(180), {percent => 0}, {percent => 100}, :num(1) ],
+               ast => :hsla[ :num(180), :percent(0), :percent(100), :num(1) ],
     },
     # a few invalid cases
     term  => {input => 'rgba(10%,20%,30%)',

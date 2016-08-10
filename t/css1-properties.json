@@ -37,7 +37,7 @@
 { "prop" : "padding-bottom", "decl" : "2em", "expr" : [ { "em" : 2 } ] }
 { "prop" : "position", "decl" : "absolute", "expr" : [ { "keyw" : "absolute" } ] }
 { "prop" : "margin-top", "decl" : "1.25ex", "expr" : [ { "ex" : 1.25 } ] }
-{ "prop" : "margin", "decl" : "1.2ex 1.5em 125% 0", "expr" : [ { "ex" : 1.2 }, { "em" : 1.5 }, { "percent" : 125 }, { "length" : 0 } ] }
+{ "prop" : "margin", "decl" : "1.2ex 1.5em 125% 0", "expr" : [ { "ex" : 1.2 }, { "em" : 1.5 }, { "percent" : 125 }, { "px" : 0 } ] }
 { "prop" : "margin", "decl" : "1.2ex 1.5em", "expr" : [ { "ex" : 1.2 }, { "em" : 1.5 } ] }
 { "prop" : "text-decoration", "decl" : "Underline", "expr" : [ { "keyw" : "underline" } ] }
 { "prop" : "text-transform", "decl" : "uppercase", "expr" : [ { "keyw" : "uppercase" } ] }
