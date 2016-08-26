@@ -47,9 +47,9 @@ grammar CSS::Module::CSS21:ver<20110607.000>
     does CSS::Module::CSS21::Spec::Interface {
 
     method module {
-        use CSS::Module::CSS21::Metadata;
-        my %property-metadata = %$CSS::Module::CSS21::Metadata::property;
         use CSS::Module::CSS21::Actions;
+        require CSS::Module::CSS21::Metadata;
+        my %property-metadata = %$CSS::Module::CSS21::Metadata::property;
         state $this //= CSS::Module.new(
             :name<CSS2.1>,
             :grammar($?CLASS),
