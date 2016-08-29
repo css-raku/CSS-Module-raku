@@ -70,6 +70,14 @@ To try parsing some content:
     # declaration: {"color" => {"expr" => [{"rgb" => [{"num" => 0}, {"num" => 0}, {"num" => 255}]}]}
     ```
 
+- parse, a value as azimuth expression:
+
+```
+    use v6;
+    use CSS::Module::CSS21;
+    my $ast = CSS::Module::CSS21.module.parse-property('azimuth', 'center-left behind');
+```
+
 - Composition: A secondary aim is mixin style composition from modules. For example to create MyCSS3Subset and class MyCSS3Subset::Actions comprising CSS2.1 properties + CSS3 Selectors + CSS3 Colors:
 
     ```

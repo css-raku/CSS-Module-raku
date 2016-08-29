@@ -7,4 +7,11 @@ class CSS::Module {
                   handles <colors>;
     has %.property-metadata;
     has CSS::Module %.sub-module;
+
+    #| parse an individual property expression
+    method parse-property(Str $property-name, Str $val) {
+        my $actions = $.actions.new;
+        my \p = $.grammar.parse($val, :rule('expr-' ~ $property-name.lc), :$actions );
+        p.ast;
+    }
 }

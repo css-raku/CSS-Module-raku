@@ -1,3 +1,5 @@
+0.4.4 Implemented $module.parse-property method. Performs a property
+      specific parse, e.g. my $ast = $.module-parse('azimuth', 'center-left behind')
 0.4.3 Removed erroneous default-value from font-family meta-data
 0.4.2 Adjustments for CSS::Grammar 0.03.0 at-rule AST consolidation,
       and CSS::Specification 0.4.2 handling of zero quantities

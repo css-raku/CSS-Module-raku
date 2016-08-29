@@ -12,6 +12,7 @@ my $css1-prop = $css1-module.property-metadata;
 nok $css1-prop<azimuth>:exists, 'css1 does not have azimuth';
 is-deeply $css1-prop<border>, {:box, :edges["border-top", "border-right", "border-bottom", "border-left"], :children["border-width", "border-style", "border-color"], :!inherit, :synopsis("'border-width' || 'border-style' || 'border-color'")}, 'css1 border';
 is-deeply $css1-prop<border-style>, {:box, :edges[<border-top-style border-right-style border-bottom-style border-left-style>], :!inherit, :synopsis("[ none | dotted | dashed | solid | double | groove | ridge | inset | outset ]\{1,4}") }, 'css1 border-style';
+is-deeply $css1-module.parse-property('border-style', 'none' ), [{ :keyw<none> }, ], '$module.parse-property method';
 
 nok $css1-module.colors<gold>:exists, "css1 does not have gold color";
 is-deeply $css1-module.colors<red>, [ 255, 0,   0 ], "colors";
