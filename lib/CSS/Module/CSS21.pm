@@ -8,7 +8,7 @@ use CSS::Grammar::CSS21;
 use CSS::Module::CSS21::Spec::Interface;
 use CSS::Module::CSS21::Spec::Grammar;
 
-grammar CSS::ModuleX::CSS21:ver<20110607.000>
+grammar CSS::ModuleX::CSS21
     is CSS::Module::CSS21::Spec::Grammar {
 
     token proforma:sym<inherit> {:i inherit}
@@ -40,7 +40,7 @@ grammar CSS::ModuleX::CSS21:ver<20110607.000>
                              | [ higher | lower ] & <tilt=.keyw> }
 }
 
-grammar CSS::Module::CSS21:ver<20110607.000>
+grammar CSS::Module::CSS21:ver<0.0.1> #:api<20110607>
     is CSS::ModuleX::CSS21
     is CSS::Specification::Terms
     is CSS::Grammar::CSS21

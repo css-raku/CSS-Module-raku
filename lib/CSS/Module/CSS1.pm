@@ -11,7 +11,7 @@ use CSS::Grammar::CSS1;
 use CSS::Module::CSS1::Spec::Interface;
 use CSS::Module::CSS1::Spec::Grammar;
 
-grammar CSS::Module::CSS1:ver<20080411.000>
+grammar CSS::Module::CSS1:ver<0.0.1> #:api<20080411>
     is CSS::Specification::Terms
     is CSS::Grammar::CSS1
     is CSS::Module::CSS1::Spec::Grammar

@@ -27,7 +27,7 @@ class CSS::Module::CSS3::Actions
     is CSS::Module::CSS3::_Base::Actions {
 };
 
-grammar CSS::Module::CSS3:ver<2010-20110512.000>
+grammar CSS::Module::CSS3:ver<0.0..1> #:api<2010-20110512>
     is CSS::Module::CSS3::Colors
     is CSS::Module::CSS3::Fonts
     is CSS::Module::CSS3::MediaQueries
