@@ -5,7 +5,7 @@
 { "prop" : "background-position", "decl" : "100% 90%", "expr" : [ { "percent" : 100 }, { "percent" : 90 } ] }
 { "prop" : "background", "decl" : "url(chess.png) gray 50% repeat scroll", "expr" : [ { "expr:background-image" : [ { "url" : "chess.png" } ] }, { "expr:background-color" : [ { "rgb" : [ { "num" : 128 }, { "num" : 128 }, { "num" : 128 } ] } ] }, { "expr:background-position" : [ { "percent" : 50 } ] }, { "expr:background-repeat" : [ { "keyw" : "repeat" } ] }, { "expr:background-attachment" : [ { "keyw" : "scroll" } ] } ] }
 { "prop" : "border-top-width", "decl" : "thick", "expr" : [ { "keyw" : "thick" } ] }
-{ "prop" : "border-width", "decl" : "2ex 1.5em 3ex 2em", "expr" : [ { "ex" : 2 }, { "em" : 1.5 }, { "ex" : 3 }, { "em" : 2 } ] }
+{ "prop" : "border-width", "decl" : "2ex 1.5em 3ex 5%", "expr" : [ { "ex" : 2 }, { "em" : 1.5 }, { "ex" : 3 }, { "percent" : 5 } ] }
 { "prop" : "border-color", "decl" : "#a7f #aa77ff rgb(100,150,20) aqua", "expr" : [ { "rgb" : [ { "num" : 170 }, { "num" : 119 }, { "num" : 255 } ] }, { "rgb" : [ { "num" : 170 }, { "num" : 119 }, { "num" : 255 } ] }, { "rgb" : [ { "num" : 100 }, { "num" : 150 }, { "num" : 20 } ] }, { "rgb" : [ { "num" : 0 }, { "num" : 255 }, { "num" : 255 } ] } ] }
 { "prop" : "border-top-color", "decl" : "#aaa", "expr" : [ { "rgb" : [ { "num" : 170 }, { "num" : 170 }, { "num" : 170 } ] } ] }
 { "prop" : "border-style", "decl" : "groove", "expr" : [ { "keyw" : "groove" } ] }

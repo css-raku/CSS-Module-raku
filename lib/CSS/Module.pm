@@ -8,7 +8,7 @@ class CSS::Module:ver<0.4.4> {
     has %.property-metadata;
     has CSS::Module %.sub-module;
 
-    #| parse an individual property expression
+    #| parse an individual property-specific expression
     method parse-property(Str $property-name, Str $val) {
         my $actions = $.actions.new;
         my \p = $.grammar.parse($val, :rule('expr-' ~ $property-name.lc), :$actions );
