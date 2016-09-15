@@ -1,7 +1,7 @@
 # CSS::Module
 
 ```
-# Parse a sample ruleset as CSS 2.1. Dump the AST.
+# Parse a sample stylesheet as CSS 2.1. Dump the AST.
 use v6;
 use CSS::Module::CSS21;
 my $css = 'h1 { color: orange; text-align: center }';
@@ -11,9 +11,9 @@ $module.grammar.parse( $css, :$actions);
 say $/.ast.perl;
 ```
 
-CSS::Module is a set of property-specific grammars for parsing for CSS Levels 1, 2.1 and  3.
+CSS::Module is a set of module classes for parsing and and manipulation CSS Levels 1, 2.1 and  3.
 
-It contains grammars `CSS::Module::CSS1`, `CSS::Module::CSS21` and `CSS::Module::CSS3` for CSS levels 1.0, 2.1 and 3.0;
+It contains modules `CSS::Module::CSS1.module`, `CSS::Module::CSS21.module` and `CSS::Module::CSS3.modules` for CSS levels 1.0, 2.1 and 3.0;
 
 `CSS::Module::CSS3.module.property-metadata` is a generated summary of property information, e.g.: 
 ```
@@ -21,7 +21,7 @@ It contains grammars `CSS::Module::CSS1`, `CSS::Module::CSS21` and `CSS::Module:
 {:default("center"), :inherit, :synopsis("<angle> | [[ left-side | far-left | left | center-left | center | center-right | right | far-right | right-side ] || behind ] | leftwards | rightwards")}
 ```
 
-Note: `CSS::Module::CSS3` is composed from the following extension modules.
+Note: `CSS::Module::CSS3.module` is composed from the following grammars.
 
 - `CSS::Module::CSS3::Colors`     - CSS 3.0 Colors (@color-profile)
 - `CSS::Module::CSS3::Fonts`      - CSS 3.0 Fonts (@font-face)
@@ -45,22 +45,23 @@ You can then use `panda` to test and install `CSS::Module`:
 
     % panda install CSS::Module
 
-To try parsing some content:
+## Examples
+
+- parse a stylesheet using the CSS2.1 grammar:
 
     % perl6 -MCSS::Module::CSS21 -e"say CSS::Module::CSS21.parse('h1 {margin:2pt; color: blue}')"
 
-## Examples
 
-- parse CSS2.1:
+- compile a CSS2.1 stylesheet to an AST, using the module interface:
 
     ```
     use v6;
     use CSS::Module::CSS21;
 
     my $css = 'H1 { color: blue; foo: bar; background-color: zzz }';
-
-    my $grammar =  CSS::Module::CSS21.module.grammar;
-    my $actions =  CSS::Module::CSS21.module.actions.new;
+    my $module  = CSS::Module::CSS21.module;
+    my $grammar = $module.grammar;
+    my $actions = $module.actions.new;
     my $p = $grammar.parse($css, :$actions);
     note $_ for $actions.warnings;
     say "declaration: " ~ $p.ast[0]<ruleset><declarations>.perl;
@@ -70,7 +71,7 @@ To try parsing some content:
     # declaration: {"color" => {"expr" => [{"rgb" => [{"num" => 0}, {"num" => 0}, {"num" => 255}]}]}
     ```
 
-- parse, a value as azimuth expression:
+- parse an individual `azimuth` property expression via the module interface:
 
 ```
     use v6;
@@ -78,7 +79,7 @@ To try parsing some content:
     my $ast = CSS::Module::CSS21.module.parse-property('azimuth', 'center-left behind');
 ```
 
-- Composition: A secondary aim is mixin style composition from modules. For example to create MyCSS3Subset and class MyCSS3Subset::Actions comprising CSS2.1 properties + CSS3 Selectors + CSS3 Colors:
+- Composition: A secondary aim is mixin style module composition. For example to create a module MyCSS3Subset::CSS3 comprising CSS2.1 properties + CSS3 Selectors + CSS3 Colors:
 
     ```
     use v6;
@@ -105,8 +106,10 @@ To try parsing some content:
 
         #| a minimal module definition: grammar + actions
         method module {
-	  state $this //= CSS::Module.new( :grammar($?CLASS),
-                                           :actions(MyCSS3Subset::Actions) );
+	  state $this //= CSS::Module.new(
+              :name<my-css3-subset>,
+              :grammar($?CLASS),
+              :actions(MyCSS3Subset::Actions) );
         }
     };
 
@@ -118,15 +121,16 @@ Property definitions are built from the sources in the (etc) directory using the
 
 For example [CSS::Module:CSS1::Spec::Grammar](lib/CSS/Module/CSS1/Spec/Grammar.pm), [CSS::Module:CSS1::Spec::Actions](lib/CSS/Module/CSS1/Spec/Actions.pm) and [CSS::Module:CSS1::Spec::Interface](lib/CSS/Module/CSS1/Spec/Interface.pm) are generated from [etc/css1-properties.txt](etc/css1-properties.txt).
 
-See [Build.pm](Build.pm).
+See `make-modules.pl`.
 
 ## Actions Options
 
 - **`:lax`** Don't warn about, or discard, unknown properties, sub-rules. Pass back the elements with a classification
 of unknown. E.g.
 ```
-    my $grammar = CSS::Module::CSS21.module.grammar;
-    my $actions = CSS::Module::CSS21.module.actions.new( :lax );
+    my $module  = CSS::Module::CSS21.module;
+    my $grammar = $module.grammar;
+    my $actions = $module.actions.new( :lax );
 
     say $grammar.parse('{bad-prop: 12mm}', :$actions, :rule<declarations>).ast.perl;
     # output {"property:unknown" => {:expr[{ :mm(12) }], :ident<bad-prop>}}
