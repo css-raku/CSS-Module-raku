@@ -1,3 +1,4 @@
+0.4.5 Fix make-modules.pl for latest Rakudo
 0.4.4 Implemented $module.parse-property method. Performs a property
       specific parse, e.g. my $ast = $.module-parse('azimuth', 'center-left behind')
 0.4.3 Removed erroneous default-value from font-family meta-data
