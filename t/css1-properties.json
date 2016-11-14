@@ -27,6 +27,8 @@
 { "prop" : "font-size", "decl" : "Larger", "expr" : [ { "keyw" : "larger" } ] }
 { "prop" : "font", "decl" : "12pt/14pt sans-serif", "expr" : [ { "expr:font-size" : [ { "pt" : 12 } ] }, { "op" : "/" }, { "expr:line-height" : [ { "pt" : 14 } ] }, { "expr:font-family" : [ { "keyw" : "sans-serif" } ] } ] }
 { "prop" : "font", "decl" : "normal small-caps 120%/120% fantasy", "expr" : [ { "expr:font-style" : [{ "keyw" : "normal" }] }, { "expr:font-variant" : [{ "keyw" : "small-caps" }] }, { "expr:font-size" : [ { "percent" : 120 } ] }, { "op" : "/" }, { "expr:line-height" : [ { "percent" : 120 } ] }, { "expr:font-family" : [ { "keyw" : "fantasy" } ] } ] }
+// style following family name. Non conformant, but most browsers allow it
+{ "prop" : "font", "decl" : "10pt courier bold", "todo" : { "ast" : "font weight following family name (issue 6)" }, "expr" : [ { "expr:font-size" : [ { "pt" : 10 } ] }, { "expr:font-family" : [ { "keyw" : "courier" } ] }, { "expr:font-style" : [ { "keyw" : "bold" } ] } ] }
 { "prop" : "letter-spacing", "decl" : "normal", "expr" : [ { "keyw" : "normal" } ] }
 { "prop" : "line-height", "decl" : "120%", "expr" : [ { "percent" : 120 } ] }
 { "prop" : "list-style-type", "decl" : "square", "expr" : [ { "keyw" : "square" } ] }
