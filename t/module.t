@@ -15,6 +15,8 @@ is-deeply css1-prop<border-style>, {:box, :edges[<border-top-style border-right-
 is-deeply css1-module.parse-property('border-style', 'none' ), [{ :keyw<none> }, ], 'module.parse-property method';
 is-deeply css1-module.parse-property('width', '5pt' ), [{ :pt(5) }, ], 'module.parse-property method';
 
+nok css1-module.parse-property('border-style', 'flashy', :!warn), 'module.parse-property failure';
+
 nok css1-module.colors<gold>:exists, "css1 does not have gold color";
 is-deeply css1-module.colors<red>, [ 255, 0,   0 ], "colors";
 

@@ -1,3 +1,5 @@
+0.4.6 $module.parse-property now returns explicit Nil and warns
+      on parse failure. New :!warn option to silence warnings.
 0.4.5 Fix make-modules.pl for latest Rakudo
 0.4.4 Implemented $module.parse-property method. Performs a property
       specific parse, e.g. my $ast = $.module-parse('azimuth', 'center-left behind')
