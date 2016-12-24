@@ -48,7 +48,7 @@ grammar CSS::Module::CSS21:ver<0.0.1> #:api<20110607>
 
     method module {
         use CSS::Module::CSS21::Actions;
-        require CSS::Module::CSS21::Metadata;
+        use CSS::Module::CSS21::Metadata;
         my %property-metadata = %$CSS::Module::CSS21::Metadata::property;
         state $this //= CSS::Module.new(
             :name<CSS2.1>,

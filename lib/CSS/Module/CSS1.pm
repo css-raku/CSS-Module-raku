@@ -19,7 +19,7 @@ grammar CSS::Module::CSS1:ver<0.0.1> #:api<20080411>
 
         method module {
 	    use CSS::Module::CSS1::Actions;
-            require CSS::Module::CSS1::Metadata;
+            use CSS::Module::CSS1::Metadata;
             my %property-metadata = %$CSS::Module::CSS1::Metadata::property;
 	    state $this //= CSS::Module.new(
                 :name<CSS1>,

@@ -38,7 +38,7 @@ grammar CSS::Module::CSS3:ver<0.0..1> #:api<2010-20110512>
     is CSS::Module::CSS3::_Base {
 
     method module {
-        require CSS::Module::CSS3::Metadata;
+        use CSS::Module::CSS3::Metadata;
         my %property-metadata = %$CSS::Module::CSS3::Metadata::property;
         my %sub-module = '@font-face' => (require CSS::Module::CSS3::Fonts::AtFontFace).module;
         my $actions = CSS::Module::CSS3::Actions;
