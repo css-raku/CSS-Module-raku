@@ -3,7 +3,9 @@
 'background-attachment'	scroll | fixed | inherit	scroll	 	no	 	visual
 'background-color'	<color> | transparent | inherit	transparent	 	no	 	visual
 'background-image'	<uri> | none | inherit	none	 	no	 	visual
-'background-position'	[ [ <percentage> | <length> | left | center | right ] [ <percentage> | <length> | top | center | bottom ]? ] | [ [ left | center | right ] || [ top | center | bottom ] ] | inherit	0% 0%	 	no	refer to the size of the box itself	visual
+'background-position'	[ [ <percentage> | <length> | <align> ] [ <percentage> | <length> | <valign> ]? ] | [ <align> || <valign> ] | inherit	0% 0%	 	no	refer to the size of the box itself	visual
+    <align> := left | center | right
+    <valign> := top | center | bottom
 'background-repeat'	repeat | repeat-x | repeat-y | no-repeat | inherit	repeat	 	no	 	visual
 'background'	['background-color' || 'background-image' || 'background-repeat' || 'background-attachment' || 'background-position'] | inherit	see individual properties	 	no	allowed on 'background-position'	visual
 'border-collapse'	collapse | separate | inherit	separate	'table' and 'inline-table' elements	yes	 	visual
@@ -95,7 +97,7 @@
 'speech-rate'	<number> | x-slow | slow | medium | fast | x-fast | faster | slower | inherit	medium	 	yes	 	aural
 'stress'	<number> | inherit	50	 	yes	 	aural
 'table-layout'	auto | fixed | inherit	auto	'table' and 'inline-table' elements	no	 	visual
-'text-align'	left | right | center | justify | inherit	a nameless value that acts as 'left' if 'direction' is 'ltr', 'right' if 'direction' is 'rtl'	block containers	yes	 	visual
+'text-align'	<align> | justify | inherit	a nameless value that acts as 'left' if 'direction' is 'ltr', 'right' if 'direction' is 'rtl'	block containers	yes	 	visual
 'text-decoration'	none | [ underline || overline || line-through || blink ] | inherit	none	 	no (see prose)	 	visual
 'text-indent'	<length> | <percentage> | inherit	0	block containers	yes	refer to width of containing block	visual
 'text-transform'	capitalize | uppercase | lowercase | none | inherit	none	 	yes	 	visual

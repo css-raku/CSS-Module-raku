@@ -10,7 +10,7 @@
 { "prop" : "background-image", "decl" : "url(images/ok.png)", "expr" : [ { "url" : "images/ok.png" } ] }
 { "prop" : "background-repeat", "decl" : "Repeat-x", "expr" : [ { "keyw" : "repeat-x" } ] }
 { "prop" : "background-position", "decl" : "100% 90%", "expr" : [ { "percent" : 100 }, { "percent" : 90 } ] }
-{ "prop" : "background-position", "decl" : "right top", "expr" : [ { "keyw" : "right" }, { "keyw" : "top" } ], "todo" : { "ast" : "issue #8" } }
+{ "prop" : "background-position", "decl" : "right top", "expr" : [ { "keyw" : "right" }, { "keyw" : "top" } ] }
 { "prop" : "border-collapse", "decl" : "separate", "expr" : [ { "keyw" : "separate" } ] }
 { "prop" : "border-spacing", "decl" : "3em", "expr" : [ { "em" : 3 } ] }
 { "prop" : "border-bottom", "decl" : "thick dotted red", "expr" : [ { "expr:border-bottom-width" : [ { "keyw" : "thick" } ] }, { "expr:border-bottom-style" : [ { "keyw" : "dotted" } ] }, { "expr:border-bottom-color" : [ { "rgb" : [ { "num" : 255 }, { "num" : 0 }, { "num" : 0 } ] } ] } ] }

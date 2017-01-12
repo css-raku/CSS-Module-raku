@@ -1,3 +1,5 @@
+0.4.7 - remove Panda dependency from make-properties.pl
+      - worka-round for issue #6 - background-position
 0.4.6 $module.parse-property now returns explicit Nil and warns
       on parse failure. New :!warn option to silence warnings.
 0.4.5 Fix make-modules.pl for latest Rakudo
@@ -13,5 +15,5 @@
             <generic-voice>  := male | female | child
             <specific-voice> := <identifier> | <string>
 0.3.3 Fix definitions and AST production for border-top ... border-left
-0.3.2 CSS3 'transparent' color AST now compatibility with CSS2.1
+0.3.2 CSS3 'transparent' color AST now compatible with CSS2.1
    -- returned as :keyw<transparent> (was :color<transparent>)

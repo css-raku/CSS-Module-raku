@@ -4,10 +4,8 @@ use CSS::Specification::Build;
 use CSS::Module;
 use CSS::Module::CSS3;
 use CSS::Module::CSS3::Fonts::AtFontFace;
-use Panda::Builder;
-use Panda::Common;
 
-class Build is Panda::Builder {
+class Build {
 
     method build($where) {
 

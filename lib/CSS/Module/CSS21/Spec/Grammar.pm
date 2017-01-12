@@ -20,9 +20,15 @@ grammar CSS::Module::CSS21::Spec::Grammar {
     rule decl:sym<background-image> {:i (background\-image) ':' <val( rx{ <expr=.expr-background-image> }, &?ROUTINE.WHY)> }
     rule expr-background-image {:i [ <uri> || none & <keyw> ] }
 
-    #| background-position: [ [ <percentage> | <length> | left | center | right ] [ <percentage> | <length> | top | center | bottom ]? ] | [ [ left | center | right ] || [ top | center | bottom ] ]
+    #| background-position: [ [ <percentage> | <length> | <align> ] [ <percentage> | <length> | <valign> ]? ] | [ <align> || <valign> ]
     rule decl:sym<background-position> {:i (background\-position) ':' <val( rx{ <expr=.expr-background-position> }, &?ROUTINE.WHY)> }
-    rule expr-background-position {:i :my @*SEEN; [ [ [ [ <percentage> || <length> || [ left | center | right ] & <keyw> ] ] [ [ <percentage> || <length> || [ top | center | bottom ] & <keyw> ] ]? ] || [ [ [ [ left | center | right ] & <keyw> ] <!seen(0)> | [ [ top | center | bottom ] & <keyw> ] <!seen(1)> ]+ ] ] }
+    rule expr-background-position {:i :my @*SEEN; [ [ [ [ <percentage> || <length> || <align> ] ] [ [ <percentage> || <length> || <valign> ] ]? ] || [ [ <align> <!seen(0)> | <valign> <!seen(1)> ]+ ] ] }
+
+    #| align: left | center | right
+    rule align {:i [ left | center | right ] & <keyw> }
+
+    #| valign: top | center | bottom
+    rule valign {:i [ top | center | bottom ] & <keyw> }
 
     #| background-repeat: repeat | repeat-x | repeat-y | no-repeat
     rule decl:sym<background-repeat> {:i (background\-repeat) ':' <val( rx{ <expr=.expr-background-repeat> }, &?ROUTINE.WHY)> }
@@ -436,9 +442,9 @@ grammar CSS::Module::CSS21::Spec::Grammar {
     rule decl:sym<table-layout> {:i (table\-layout) ':' <val( rx{ <expr=.expr-table-layout> }, &?ROUTINE.WHY)> }
     rule expr-table-layout {:i [ auto | fixed ] & <keyw> }
 
-    #| text-align: left | right | center | justify
+    #| text-align: <align> | justify
     rule decl:sym<text-align> {:i (text\-align) ':' <val( rx{ <expr=.expr-text-align> }, &?ROUTINE.WHY)> }
-    rule expr-text-align {:i [ left | right | center | justify ] & <keyw> }
+    rule expr-text-align {:i [ <align> || justify & <keyw> ] }
 
     #| text-decoration: none | [ underline || overline || line-through || blink ]
     rule decl:sym<text-decoration> {:i (text\-decoration) ':' <val( rx{ <expr=.expr-text-decoration> }, &?ROUTINE.WHY)> }

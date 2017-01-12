@@ -7,6 +7,8 @@ class CSS::Module::CSS21::Spec::Actions {
     method expr-background-color($/) { make $.list($/) }
     method expr-background-image($/) { make $.list($/) }
     method expr-background-position($/) { make $.list($/) }
+    method align($/) { make $.rule($/) }
+    method valign($/) { make $.rule($/) }
     method expr-background-repeat($/) { make $.list($/) }
     method expr-border-color($/) { make $.list($/) }
     method expr-border-style($/) { make $.list($/) }
