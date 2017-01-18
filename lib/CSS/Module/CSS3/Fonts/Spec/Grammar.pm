@@ -13,7 +13,7 @@ grammar CSS::Module::CSS3::Fonts::Spec::Grammar {
 
     #| font-family: [ <generic-family> | <family-name> ]#
     rule decl:sym<font-family> {:i (font\-family) ':' <val( rx{ <expr=.expr-font-family> }, &?ROUTINE.WHY)> }
-    rule expr-font-family {:i [ [ <generic-family> || <family-name> ] ] +% <op(',')> }
+    rule expr-font-family {:i [ [ <generic-family> || <family-name> ] ]+% <op(',')> }
 
     #| generic-family: serif | sans-serif | cursive | fantasy | monospace
     rule generic-family {:i [ serif | sans\-serif | cursive | fantasy | monospace ] & <keyw> }
@@ -23,7 +23,7 @@ grammar CSS::Module::CSS3::Fonts::Spec::Grammar {
 
     #| font-feature-settings: normal | <feature-tag-value>#
     rule decl:sym<font-feature-settings> {:i (font\-feature\-settings) ':' <val( rx{ <expr=.expr-font-feature-settings> }, &?ROUTINE.WHY)> }
-    rule expr-font-feature-settings {:i [ normal & <keyw> || <feature-tag-value> +% <op(',')> ] }
+    rule expr-font-feature-settings {:i [ normal & <keyw> || <feature-tag-value>+% <op(',')> ] }
 
     #| font-kerning: auto | normal | none
     rule decl:sym<font-kerning> {:i (font\-kerning) ':' <val( rx{ <expr=.expr-font-kerning> }, &?ROUTINE.WHY)> }

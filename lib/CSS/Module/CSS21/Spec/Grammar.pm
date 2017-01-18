@@ -43,16 +43,16 @@ grammar CSS::Module::CSS21::Spec::Grammar {
     rule expr-border-collapse {:i [ collapse | separate ] & <keyw> }
 
     #| border-color: [ <color> | transparent ]{1,4}
-    rule decl:sym<border-color> {:i (border\-color) ':' <val( rx{ <expr=.expr-border-color>**1..4 }, &?ROUTINE.WHY)> }
-    rule expr-border-color {:i [ [ <color> || transparent & <keyw> ] ] }
+    rule decl:sym<border-color> {:i (border\-color) ':' <val( rx{ <expr=.expr-border-color> ** 1..4 }, &?ROUTINE.WHY)> }
+    rule expr-border-color {:i [ [ <color> || transparent & <keyw> ] ]  }
 
     #| border-spacing: <length> <length>?
     rule decl:sym<border-spacing> {:i (border\-spacing) ':' <val( rx{ <expr=.expr-border-spacing> }, &?ROUTINE.WHY)> }
     rule expr-border-spacing {:i <length> <length>? }
 
     #| border-style: <border-style>{1,4}
-    rule decl:sym<border-style> {:i (border\-style) ':' <val( rx{ <expr=.expr-border-style>**1..4 }, &?ROUTINE.WHY)> }
-    rule expr-border-style {:i <border-style> }
+    rule decl:sym<border-style> {:i (border\-style) ':' <val( rx{ <expr=.expr-border-style> ** 1..4 }, &?ROUTINE.WHY)> }
+    rule expr-border-style {:i <border-style>  }
 
     #| border-style: none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset
     rule border-style {:i [ none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset ] & <keyw> }
@@ -122,8 +122,8 @@ grammar CSS::Module::CSS21::Spec::Grammar {
     rule expr-border-left-width {:i <border-width> }
 
     #| border-width: <border-width>{1,4}
-    rule decl:sym<border-width> {:i (border\-width) ':' <val( rx{ <expr=.expr-border-width>**1..4 }, &?ROUTINE.WHY)> }
-    rule expr-border-width {:i <border-width> }
+    rule decl:sym<border-width> {:i (border\-width) ':' <val( rx{ <expr=.expr-border-width> ** 1..4 }, &?ROUTINE.WHY)> }
+    rule expr-border-width {:i <border-width>  }
 
     #| border-width: thin | medium | thick | <length>
     rule border-width {:i [ [ thin | medium | thick ] & <keyw> || <length> ] }
@@ -202,7 +202,7 @@ grammar CSS::Module::CSS21::Spec::Grammar {
 
     #| font-family: [ <generic-family> | <family-name> ]#
     rule decl:sym<font-family> {:i (font\-family) ':' <val( rx{ <expr=.expr-font-family> }, &?ROUTINE.WHY)> }
-    rule expr-font-family {:i [ [ <generic-family> || <family-name> ] ] +% <op(',')> }
+    rule expr-font-family {:i [ [ <generic-family> || <family-name> ] ]+% <op(',')> }
 
     #| generic-family: serif | sans-serif | cursive | fantasy | monospace
     rule generic-family {:i [ serif | sans\-serif | cursive | fantasy | monospace ] & <keyw> }
@@ -285,8 +285,8 @@ grammar CSS::Module::CSS21::Spec::Grammar {
     rule expr-margin-bottom {:i <margin-width> }
 
     #| margin: <margin-width>{1,4}
-    rule decl:sym<margin> {:i (margin) ':' <val( rx{ <expr=.expr-margin>**1..4 }, &?ROUTINE.WHY)> }
-    rule expr-margin {:i <margin-width> }
+    rule decl:sym<margin> {:i (margin) ':' <val( rx{ <expr=.expr-margin> ** 1..4 }, &?ROUTINE.WHY)> }
+    rule expr-margin {:i <margin-width>  }
 
     #| margin-width: <length> | <percentage> | auto
     rule margin-width {:i [ <length> || <percentage> || auto & <keyw> ] }
@@ -352,8 +352,8 @@ grammar CSS::Module::CSS21::Spec::Grammar {
     rule expr-padding-left {:i <padding-width> }
 
     #| padding: <padding-width>{1,4}
-    rule decl:sym<padding> {:i (padding) ':' <val( rx{ <expr=.expr-padding>**1..4 }, &?ROUTINE.WHY)> }
-    rule expr-padding {:i <padding-width> }
+    rule decl:sym<padding> {:i (padding) ':' <val( rx{ <expr=.expr-padding> ** 1..4 }, &?ROUTINE.WHY)> }
+    rule expr-padding {:i <padding-width>  }
 
     #| padding-width: <length> | <percentage>
     rule padding-width {:i [ <length> || <percentage> ] }
@@ -380,7 +380,7 @@ grammar CSS::Module::CSS21::Spec::Grammar {
 
     #| pause: [ [<time> | <percentage>]{1,2} ]
     rule decl:sym<pause> {:i (pause) ':' <val( rx{ <expr=.expr-pause> }, &?ROUTINE.WHY)> }
-    rule expr-pause {:i [ [ [ <time> || <percentage> ] ]**1..2 ] }
+    rule expr-pause {:i [ [ [ <time> || <percentage> ] ] ** 1..2 ] }
 
     #| pitch-range: <number>
     rule decl:sym<pitch-range> {:i (pitch\-range) ':' <val( rx{ <expr=.expr-pitch-range> }, &?ROUTINE.WHY)> }
@@ -412,7 +412,7 @@ grammar CSS::Module::CSS21::Spec::Grammar {
 
     #| size: <length>{1,2} | auto | portrait | landscape
     rule decl:sym<size> {:i (size) ':' <val( rx{ <expr=.expr-size> }, &?ROUTINE.WHY)> }
-    rule expr-size {:i [ <length>**1..2 || [ auto | portrait | landscape ] & <keyw> ] }
+    rule expr-size {:i [ <length> ** 1..2 || [ auto | portrait | landscape ] & <keyw> ] }
 
     #| speak-header: once | always
     rule decl:sym<speak-header> {:i (speak\-header) ':' <val( rx{ <expr=.expr-speak-header> }, &?ROUTINE.WHY)> }
@@ -476,7 +476,7 @@ grammar CSS::Module::CSS21::Spec::Grammar {
 
     #| voice-family: [<generic-voice> | <specific-voice> ]#
     rule decl:sym<voice-family> {:i (voice\-family) ':' <val( rx{ <expr=.expr-voice-family> }, &?ROUTINE.WHY)> }
-    rule expr-voice-family {:i [ [ <generic-voice> || <specific-voice> ] ] +% <op(',')> }
+    rule expr-voice-family {:i [ [ <generic-voice> || <specific-voice> ] ]+% <op(',')> }
 
     #| generic-voice: male | female | child
     rule generic-voice {:i [ male | female | child ] & <keyw> }

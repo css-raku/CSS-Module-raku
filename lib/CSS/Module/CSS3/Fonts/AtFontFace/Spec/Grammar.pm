@@ -13,7 +13,7 @@ grammar CSS::Module::CSS3::Fonts::AtFontFace::Spec::Grammar {
 
     #| font-feature-settings: normal | <feature-tag-value>#
     rule decl:sym<font-feature-settings> {:i (font\-feature\-settings) ':' <val( rx{ <expr=.expr-font-feature-settings> }, &?ROUTINE.WHY)> }
-    rule expr-font-feature-settings {:i [ normal & <keyw> || <feature-tag-value> +% <op(',')> ] }
+    rule expr-font-feature-settings {:i [ normal & <keyw> || <feature-tag-value>+% <op(',')> ] }
 
     #| font-stretch: normal | ultra-condensed | extra-condensed | condensed | semi-condensed | semi-expanded | expanded | extra-expanded | ultra-expanded
     rule decl:sym<font-stretch> {:i (font\-stretch) ':' <val( rx{ <expr=.expr-font-stretch> }, &?ROUTINE.WHY)> }
@@ -33,12 +33,12 @@ grammar CSS::Module::CSS3::Fonts::AtFontFace::Spec::Grammar {
 
     #| src: [ [<uri>|local(<string>)] [format(<string>#)]? | <font-face-name> ]#
     rule decl:sym<src> {:i (src) ':' <val( rx{ <expr=.expr-src> }, &?ROUTINE.WHY)> }
-    rule expr-src {:i [ [ [ [ <uri> || <local> ] ] [ <format> ]? || <font-face-name> ] ] +% <op(',')> }
+    rule expr-src {:i [ [ [ [ <uri> || <local> ] ] [ <format> ]? || <font-face-name> ] ]+% <op(',')> }
 
     #| font-face-name: <identifiers> | <string>
     rule font-face-name {:i [ <identifiers> || <string> ] }
 
     #| unicode-range: <urange>#
     rule decl:sym<unicode-range> {:i (unicode\-range) ':' <val( rx{ <expr=.expr-unicode-range> }, &?ROUTINE.WHY)> }
-    rule expr-unicode-range {:i <urange> +% <op(',')> }
+    rule expr-unicode-range {:i <urange>+% <op(',')> }
 }

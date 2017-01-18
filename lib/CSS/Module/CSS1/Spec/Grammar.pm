@@ -6,7 +6,7 @@ grammar CSS::Module::CSS1::Spec::Grammar {
 
     #| font-family: [ <generic-family> | <family-name> ]#
     rule decl:sym<font-family> {:i (font\-family) ':' <val( rx{ <expr=.expr-font-family> }, &?ROUTINE.WHY)> }
-    rule expr-font-family {:i [ [ <generic-family> || <family-name> ] ] +% <op(',')> }
+    rule expr-font-family {:i [ [ <generic-family> || <family-name> ] ]+% <op(',')> }
 
     #| generic-family: serif | sans-serif | cursive | fantasy | monospace
     rule generic-family {:i [ serif | sans\-serif | cursive | fantasy | monospace ] & <keyw> }
@@ -62,7 +62,7 @@ grammar CSS::Module::CSS1::Spec::Grammar {
 
     #| background-position: [<percentage> | <length>]{1,2} | [top | center | bottom] || [left | center | right]
     rule decl:sym<background-position> {:i (background\-position) ':' <val( rx{ <expr=.expr-background-position> }, &?ROUTINE.WHY)> }
-    rule expr-background-position {:i :my @*SEEN; [ [ [ <percentage> || <length> ] ]**1..2 || [ [ [ top | center | bottom ] & <keyw> ] <!seen(0)> | [ [ left | center | right ] & <keyw> ] <!seen(1)> ]+ ] }
+    rule expr-background-position {:i :my @*SEEN; [ [ [ <percentage> || <length> ] ] ** 1..2 || [ [ [ top | center | bottom ] & <keyw> ] <!seen(0)> | [ [ left | center | right ] & <keyw> ] <!seen(1)> ]+ ] }
 
     #| background: 'background-color' || 'background-image' || 'background-repeat' || 'background-attachment' || 'background-position'
     rule decl:sym<background> {:i (background) ':' <val( rx{ <expr=.expr-background> }, &?ROUTINE.WHY)> }
@@ -117,8 +117,8 @@ grammar CSS::Module::CSS1::Spec::Grammar {
     rule expr-margin-left {:i [ <length> || <percentage> || auto & <keyw> ] }
 
     #| margin: [ <length> | <percentage> | auto ]{1,4}
-    rule decl:sym<margin> {:i (margin) ':' <val( rx{ <expr=.expr-margin>**1..4 }, &?ROUTINE.WHY)> }
-    rule expr-margin {:i [ [ <length> || <percentage> || auto & <keyw> ] ] }
+    rule decl:sym<margin> {:i (margin) ':' <val( rx{ <expr=.expr-margin> ** 1..4 }, &?ROUTINE.WHY)> }
+    rule expr-margin {:i [ [ <length> || <percentage> || auto & <keyw> ] ]  }
 
     #| padding-top: <length> | <percentage>
     rule decl:sym<padding-top> {:i (padding\-top) ':' <val( rx{ <expr=.expr-padding-top> }, &?ROUTINE.WHY)> }
@@ -137,8 +137,8 @@ grammar CSS::Module::CSS1::Spec::Grammar {
     rule expr-padding-left {:i [ <length> || <percentage> ] }
 
     #| padding: [ <length> | <percentage> ]{1,4}
-    rule decl:sym<padding> {:i (padding) ':' <val( rx{ <expr=.expr-padding>**1..4 }, &?ROUTINE.WHY)> }
-    rule expr-padding {:i [ [ <length> || <percentage> ] ] }
+    rule decl:sym<padding> {:i (padding) ':' <val( rx{ <expr=.expr-padding> ** 1..4 }, &?ROUTINE.WHY)> }
+    rule expr-padding {:i [ [ <length> || <percentage> ] ]  }
 
     #| border-top-width: thin | medium | thick | <length>
     rule decl:sym<border-top-width> {:i (border\-top\-width) ':' <val( rx{ <expr=.expr-border-top-width> }, &?ROUTINE.WHY)> }
@@ -157,16 +157,16 @@ grammar CSS::Module::CSS1::Spec::Grammar {
     rule expr-border-left-width {:i [ [ thin | medium | thick ] & <keyw> || <length> ] }
 
     #| border-width: [thin | medium | thick | <length>]{1,4}
-    rule decl:sym<border-width> {:i (border\-width) ':' <val( rx{ <expr=.expr-border-width>**1..4 }, &?ROUTINE.WHY)> }
-    rule expr-border-width {:i [ [ [ thin | medium | thick ] & <keyw> || <length> ] ] }
+    rule decl:sym<border-width> {:i (border\-width) ':' <val( rx{ <expr=.expr-border-width> ** 1..4 }, &?ROUTINE.WHY)> }
+    rule expr-border-width {:i [ [ [ thin | medium | thick ] & <keyw> || <length> ] ]  }
 
     #| border-color: <color>{1,4}
-    rule decl:sym<border-color> {:i (border\-color) ':' <val( rx{ <expr=.expr-border-color>**1..4 }, &?ROUTINE.WHY)> }
-    rule expr-border-color {:i <color> }
+    rule decl:sym<border-color> {:i (border\-color) ':' <val( rx{ <expr=.expr-border-color> ** 1..4 }, &?ROUTINE.WHY)> }
+    rule expr-border-color {:i <color>  }
 
     #| border-style: [ none | dotted | dashed | solid | double | groove | ridge | inset | outset ]{1,4}
-    rule decl:sym<border-style> {:i (border\-style) ':' <val( rx{ <expr=.expr-border-style>**1..4 }, &?ROUTINE.WHY)> }
-    rule expr-border-style {:i [ [ none | dotted | dashed | solid | double | groove | ridge | inset | outset ] & <keyw> ] }
+    rule decl:sym<border-style> {:i (border\-style) ':' <val( rx{ <expr=.expr-border-style> ** 1..4 }, &?ROUTINE.WHY)> }
+    rule expr-border-style {:i [ [ none | dotted | dashed | solid | double | groove | ridge | inset | outset ] & <keyw> ]  }
 
     #| border-top: 'border-top-width' || 'border-top-style' || <color>
     rule decl:sym<border-top> {:i (border\-top) ':' <val( rx{ <expr=.expr-border-top> }, &?ROUTINE.WHY)> }
@@ -294,5 +294,5 @@ grammar CSS::Module::CSS1::Spec::Grammar {
 
     #| size: <length>{1,2} | auto | portrait | landscape
     rule decl:sym<size> {:i (size) ':' <val( rx{ <expr=.expr-size> }, &?ROUTINE.WHY)> }
-    rule expr-size {:i [ <length>**1..2 || [ auto | portrait | landscape ] & <keyw> ] }
+    rule expr-size {:i [ <length> ** 1..2 || [ auto | portrait | landscape ] & <keyw> ] }
 }

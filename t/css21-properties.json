@@ -59,6 +59,7 @@
 { "prop" : "richness", "decl" : "10", "expr" : [ { "num" : 10 } ] }
 { "prop" : "right", "decl" : "15%", "expr" : [ { "percent" : 15 } ] }
 { "prop" : "size", "decl" : "3ex", "expr" : [ { "ex" : 3 } ] }
+{ "prop" : "size", "decl" : "3ex 4em", "expr" : [ { "ex" : 3 }, { "em" : 4 } ] }
 { "prop" : "speak-header", "decl" : "always", "expr" : [ { "keyw" : "always" } ] }
 { "prop" : "speak-punctuation", "decl" : "code", "expr" : [ { "keyw" : "code" } ] }
 { "prop" : "speak", "decl" : "normal", "expr" : [ { "keyw" : "normal" } ] }
