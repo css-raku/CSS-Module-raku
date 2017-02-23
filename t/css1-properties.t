@@ -25,7 +25,6 @@ for 't/css1-properties.json'.IO.lines {
     my $prop = %expected<prop>.lc;
     my $input = sprintf '{%s: %s}', $prop, %expected<decl>;
     my $expr = %expected<expr>;
-    warn $input;
 
     %expected<ast> = $expr ?? { :declarations[{ :property{ :ident($prop), :$expr } }] } !! Any;
 
@@ -61,7 +60,6 @@ for 't/css1-properties.json'.IO.lines {
 
 	    for @$proforma -> $misc {
 		my $decl = sprintf '{%s: %s}', $prop, $misc;
-                warn $decl;
 
 		my $ast = { :declarations[{ :property{ :ident($prop), :expr[ { :keyw($misc)} ] } }] };
 
