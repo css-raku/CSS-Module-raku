@@ -21,10 +21,11 @@ for 't/css1-properties.json'.IO.lines {
 
     next if .substr(0,2) eq '//';
 
-    my %expected = %( from-json($_) );
+    my %expected = from-json($_);
     my $prop = %expected<prop>.lc;
     my $input = sprintf '{%s: %s}', $prop, %expected<decl>;
     my $expr = %expected<expr>;
+    warn $input;
 
     %expected<ast> = $expr ?? { :declarations[{ :property{ :ident($prop), :$expr } }] } !! Any;
 
@@ -60,6 +61,7 @@ for 't/css1-properties.json'.IO.lines {
 
 	    for @$proforma -> $misc {
 		my $decl = sprintf '{%s: %s}', $prop, $misc;
+                warn $decl;
 
 		my $ast = { :declarations[{ :property{ :ident($prop), :expr[ { :keyw($misc)} ] } }] };
 
