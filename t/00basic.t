@@ -34,11 +34,11 @@ for 't/00basic.json'.IO.lines.map({ from-json($_).pairs[0] }) {
     my %expected = .value;
     my $input = %expected<input>;
 
-    for { :module($css1),  :$writer},
-       	{ :module($css21), :$writer},	
-       	{ :module($css3),  :$writer},
-       	{ :module($css3),  :$writer, :lax}
-    -> % ( :$module!, :$writer!, :$lax=False ) {
+    for { :module($css1), },
+       	{ :module($css21),},	
+       	{ :module($css3), },
+       	{ :module($css3), :lax}
+    -> % ( :$module!, :$lax=False ) {
 
         my $suite = $module.name;
         $suite ~= '(lax)' if $lax;

@@ -63,14 +63,14 @@ for (
 ##                                           {"ident" => "src", "expr" => ["term" => "http://printers.example.com/acmecorp/model1234"]}}],
 ##                        '@' => "color-profile"},
 ##    },
-    ) -> % ( :$rule!, :$input!, :$ast!, :$writer=Any, :$warnings=Any) {
+    ) -> % ( :$rule!, :$input!, *%expected) {
 
     CSS::Grammar::Test::parse-tests($grammar, $input,
 				    :$rule,
 				    :$actions,
 				    :suite<css3-color>,
                                     :$writer,
-				    :expected{ :$ast, :$warnings, :$writer } );
+				    :%expected );
 }
 
 done-testing;

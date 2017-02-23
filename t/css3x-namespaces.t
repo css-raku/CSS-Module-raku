@@ -26,14 +26,14 @@ for (
     {:rule<stylesheet>, :input('@namespace toto url(http://toto.example.org);'),
      :ast(:stylesheet[{ :at-rule{ :ns-prefix<toto>, :url<http://toto.example.org>, :at-keyw<namespace>}}]),
     },
-) -> % ( :$rule!, :$input!, :$ast!, *%junk ) {
+) -> % ( :$rule!, :$input!, *%expected ) {
 
     CSS::Grammar::Test::parse-tests($grammar, $input,
 				    :$rule,
 				    :$actions,
 				    :suite<css3-namespaces>,
                                     :$writer,
-				    :expected{ :$ast } );
+				    :%expected );
 }
 
 done-testing;

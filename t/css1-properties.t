@@ -31,7 +31,7 @@ for 't/css1-properties.json'.IO.lines {
     for { :module($css1), :proforma[]},
        	{ :module($css21), :proforma<inherit>},	
        	{ :module($css3x), :proforma<inherit initial>, :$writer}
-    ->  % ( :$module!, :$proforma!, :$writer=Any) {
+    ->  % ( :$module!, :$proforma!, *%etc) {
 
         my $level = $module.name;
         my $grammar = $module.grammar;
@@ -41,8 +41,9 @@ for 't/css1-properties.json'.IO.lines {
 					:rule<declarations>,
 					:suite($level),
 					:$actions,
-                                        :$writer,
-					:%expected );
+					:%expected,
+                                        |%etc,
+                                       );
 
 	unless %seen{$prop}{$level}++ {
 	    # usage and inheritence  tests
@@ -65,7 +66,7 @@ for 't/css1-properties.json'.IO.lines {
 						:rule<declarations>,
 						:$actions,
 						:suite($level),
-						:expected({ :$ast }) );
+						:expected{ :$ast } );
 
             }
         }
