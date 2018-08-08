@@ -23,10 +23,10 @@ for '' {
     ok  $_ ~~ /^<CSS::Module::CSS3::nonascii>$/, "non-ascii css3: $_";
 }
 
-my $css1  = CSS::Module::CSS1.module;
-my $css21 = CSS::Module::CSS21.module;
-my $css3  = CSS::Module::CSS3.module;
-my $writer = CSS::Writer.new( :terse, :color-names );
+my CSS::Module $css1  = CSS::Module::CSS1.module;
+my CSS::Module $css21 = CSS::Module::CSS21.module;
+my CSS::Module $css3  = CSS::Module::CSS3.module;
+my CSS::Writer $writer .= new( :terse, :color-names );
 
 for 't/00basic.json'.IO.lines.map({ from-json($_).pairs[0] }) {
 

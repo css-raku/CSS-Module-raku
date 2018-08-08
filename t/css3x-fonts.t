@@ -11,7 +11,7 @@ use CSS::Writer;
 
 my $css3x-actions = CSS::Module::CSS3::Fonts::Actions.new;
 my $css21-actions = CSS::Module::CSS21::Actions.new;
-my $writer = CSS::Writer.new;
+my CSS::Writer $writer .= new;
 
 for 't/css3x-fonts.json'.IO.lines {
 

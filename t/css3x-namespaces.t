@@ -8,7 +8,7 @@ use CSS::Writer;
 
 my $grammar = CSS::Module::CSS3.module.grammar;
 my $actions = CSS::Module::CSS3.module.actions.new;
-my $writer = CSS::Writer.new;
+my CSS::Writer $writer .= new;
 
 for (
     {:rule<at-decl>, :input('@namespace empty "";'),

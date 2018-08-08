@@ -37,13 +37,9 @@ This corresponds to the sub-modules described in [CSS Snapshot 2010](http://www.
 
 This module works with Rakudo Star 2015.09 or better [download from http://rakudo.org/downloads/star/ - don't forget the final `make install`]:
 
-Ensure that `perl6` and `panda` are available on your path, e.g. :
+You can then use Perl6 `zef` module installer to test and install `CSS::Module`:
 
-    % export PATH=~/src/rakudo-star-2014.09/install/bin:$PATH
-
-You can then use `panda` to test and install `CSS::Module`:
-
-    % panda install CSS::Module
+    % zef install CSS::Module
 
 ## Examples
 

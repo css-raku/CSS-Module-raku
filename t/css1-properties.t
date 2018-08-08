@@ -9,11 +9,11 @@ use CSS::Module::CSS1;
 use CSS::Grammar::Test;
 use CSS::Writer;
 
-my $css1  = CSS::Module::CSS1.module;
-my $css21 = CSS::Module::CSS21.module;
-my $css3x = CSS::Module::CSS3.module;
+my CSS::Module $css1  = CSS::Module::CSS1.module;
+my CSS::Module $css21 = CSS::Module::CSS21.module;
+my CSS::Module $css3x = CSS::Module::CSS3.module;
 
-my $writer = CSS::Writer.new;
+my CSS::Writer $writer .= new;
 
 my %seen;
 
@@ -31,7 +31,7 @@ for 't/css1-properties.json'.IO.lines {
     for { :module($css1), :proforma[]},
        	{ :module($css21), :proforma<inherit>},	
        	{ :module($css3x), :proforma<inherit initial>, :$writer}
-    ->  % ( :$module!, :$proforma!, *%etc) {
+    ->  % ( :$module!, :$proforma!, |c) {
 
         my $level = $module.name;
         my $grammar = $module.grammar;
@@ -42,7 +42,7 @@ for 't/css1-properties.json'.IO.lines {
 					:suite($level),
 					:$actions,
 					:%expected,
-                                        |%etc,
+                                        |c,
                                        );
 
 	unless %seen{$prop}{$level}++ {

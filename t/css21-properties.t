@@ -8,8 +8,8 @@ use CSS::Module::CSS3;
 use CSS::Grammar::Test;
 use CSS::Writer;
 
-my $css21 = CSS::Module::CSS21.module;
-my $css3x = CSS::Module::CSS3.module;
+my CSS::Module $css21 = CSS::Module::CSS21.module;
+my CSS::Module $css3x = CSS::Module::CSS3.module;
 
 my %seen;
 
