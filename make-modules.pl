@@ -1,7 +1,6 @@
 use v6;
 
 use CSS::Specification::Build;
-use CSS::Module;
 use CSS::Module::CSS3;
 use CSS::Module::CSS3::Fonts::AtFontFace;
 
@@ -12,7 +11,7 @@ class Build {
         indir $where, {
 
             my %props;
-            my $actions = CSS::Module::CSS3::Actions.new;
+            my CSS::Module::CSS3::Actions $actions .= new;
 
             for (:CSS1[<etc css1-properties.txt> => <CSS1>],
                  :CSS21[<etc css21-properties.txt> => <CSS21>],

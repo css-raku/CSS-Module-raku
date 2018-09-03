@@ -28,6 +28,6 @@ grammar CSS::Module::CSS3::Fonts::AtFontFace
     # @font-face declarations
 
     # ---- Functions ----
-    rule format {:i('format')'(' [ <string> | <keyw> || <any-args> ] ')'}
-    rule local  {:i('local')'(' [ <font-face-name> || <any-args> ] ')'}
+    rule format {:i ('format')'(' [ <string> | <keyw> || <any-args> ] ')'}
+    rule local  {:i ('local')'(' [ <font-face-name> || <any-args> ] ')'}
 }
