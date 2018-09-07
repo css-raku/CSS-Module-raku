@@ -17,12 +17,11 @@ grammar CSS::Module::CSS3::Fonts::AtFontFace
         use CSS::Module::CSS3::Actions;
         use CSS::Module::CSS3::Fonts::AtFontFace::Metadata;
         # we share the actions class
-        my %property-metadata = %$CSS::Module::CSS3::Fonts::AtFontFace::Metadata::property;
-        state $this //= CSS::Module.new(
+        state $ = CSS::Module.new(
             :name<@font-face>,
             :grammar($?CLASS),
 	    :actions(CSS::Module::CSS3::Actions),
-	    :%property-metadata,
+	    :property-metadata($CSS::Module::CSS3::Fonts::AtFontFace::Metadata::property),
 	    );
     }
     # @font-face declarations

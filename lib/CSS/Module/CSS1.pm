@@ -20,12 +20,11 @@ grammar CSS::Module::CSS1 #:api<css1-20080411>
         method module {
 	    use CSS::Module::CSS1::Actions;
             use CSS::Module::CSS1::Metadata;
-            my %property-metadata = %$CSS::Module::CSS1::Metadata::property;
-	    state $this //= CSS::Module.new(
+	    state $ = CSS::Module.new(
                 :name<CSS1>,
                 :grammar($?CLASS),
                 :actions(CSS::Module::CSS1::Actions),
-                :%property-metadata,
+                :property-metadata($CSS::Module::CSS1::Metadata::property),
             );
         }
 
