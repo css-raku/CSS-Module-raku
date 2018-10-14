@@ -1,3 +1,4 @@
+0.4.9 rename etc/ to src/ and move generated modules to gen/lib
 0.4.8 Break circular '@font-face' depdendency
       - Add CSS/Module/CSS3/Actions.pm
       - Add CSS/Module/CSS3/Fonts/AtFontFace.pm

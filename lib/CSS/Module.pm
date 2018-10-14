@@ -1,5 +1,5 @@
 use v6;
-class CSS::Module {
+class CSS::Module:ver<0.4.9> {
     #= a lightweight class for bundling resources associated with a particular CSS Syntax
     has $.name;
     has $.grammar is required  #| grammar

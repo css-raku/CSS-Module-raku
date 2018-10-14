@@ -13,11 +13,11 @@ class Build {
             my %props;
             my CSS::Module::CSS3::Actions $actions .= new;
 
-            for (:CSS1[<etc css1-properties.txt> => <CSS1>],
-                 :CSS21[<etc css21-properties.txt> => <CSS21>],
-                 :CSS3[<etc css3x-font-properties.txt> => <CSS3 Fonts>,
-                       <etc css3x-paged-media.txt> => <CSS3 PagedMedia>],
-                 'CSS3::Fonts::AtFontFace' => [<etc css3x-font-@fontface-properties.txt> => <CSS3 Fonts AtFontFace>],
+            for (:CSS1[<src css1-properties.txt> => <CSS1>],
+                 :CSS21[<src css21-properties.txt> => <CSS21>],
+                 :CSS3[<src css3x-font-properties.txt> => <CSS3 Fonts>,
+                       <src css3x-paged-media.txt> => <CSS3 PagedMedia>],
+                 'CSS3::Fonts::AtFontFace' => [<src css3x-font-@fontface-properties.txt> => <CSS3 Fonts AtFontFace>],
 
                 ) {
                 my $meta = .key;
@@ -35,7 +35,7 @@ class Build {
                         my ($type, $subclass) = .kv;
                         my $name = (<CSS Module>, @$class-isa, <Spec>, $subclass).flat.join('::');
 
-                        my $class-dir = $*SPEC.catdir(<lib CSS Module>, @$class-isa, <Spec>);
+                        my $class-dir = $*SPEC.catdir(<gen lib CSS Module>, @$class-isa, <Spec>);
                         mkdir $class-dir;
 
                         my $class-path = $*SPEC.catfile( $class-dir, $subclass~'.pm' );
@@ -66,7 +66,7 @@ class Build {
                         }
                     }
                 }
-                my $class-dir = $*SPEC.catdir(flat(<lib CSS Module>, $meta.split('::')));
+                my $class-dir = $*SPEC.catdir(flat(<gen lib CSS Module>, $meta.split('::')));
                 my $class-path = $*SPEC.catfile( $class-dir, 'Metadata.pm' );
                 my $class-name = "CSS::Module::{$meta}::Metadata";
                 say "Building $class-name";
