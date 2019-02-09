@@ -33,9 +33,9 @@ class Build {
                          :actions<Actions> ,
                          :grammar<Grammar>) {
                         my ($type, $subclass) = .kv;
-                        my $name = (<CSS Module>, @$class-isa, <Spec>, $subclass).flat.join('::');
+                        my $name = (<CSS Module>, @$class-isa, <Gen>, $subclass).flat.join('::');
 
-                        my $class-dir = $*SPEC.catdir(<gen lib CSS Module>, @$class-isa, <Spec>);
+                        my $class-dir = $*SPEC.catdir(<lib CSS Module>, @$class-isa, <Gen>);
                         mkdir $class-dir;
 
                         my $class-path = $*SPEC.catfile( $class-dir, $subclass~'.pm' );
@@ -66,7 +66,7 @@ class Build {
                         }
                     }
                 }
-                my $class-dir = $*SPEC.catdir(flat(<gen lib CSS Module>, $meta.split('::')));
+                my $class-dir = $*SPEC.catdir(flat(<lib CSS Module>, $meta.split('::')));
                 my $class-path = $*SPEC.catfile( $class-dir, 'Metadata.pm' );
                 my $class-name = "CSS::Module::{$meta}::Metadata";
                 say "Building $class-name";

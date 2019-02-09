@@ -5,11 +5,11 @@ use v6;
 use CSS::Grammar::CSS21;
 use CSS::Module;
 use CSS::Specification::Terms;
-use CSS::Module::CSS21::Spec::Interface;
-use CSS::Module::CSS21::Spec::Grammar;
+use CSS::Module::CSS21::Gen::Interface;
+use CSS::Module::CSS21::Gen::Grammar;
 
 grammar CSS::ModuleX::CSS21
-    is CSS::Module::CSS21::Spec::Grammar {
+    is CSS::Module::CSS21::Gen::Grammar {
 
     token proforma:sym<inherit> {:i inherit}
 
@@ -44,7 +44,7 @@ grammar CSS::Module::CSS21 #:api<css-20110607>
     is CSS::ModuleX::CSS21
     is CSS::Specification::Terms
     is CSS::Grammar::CSS21
-    does CSS::Module::CSS21::Spec::Interface {
+    does CSS::Module::CSS21::Gen::Interface {
 
     method module {
         use CSS::Module::CSS21::Actions;

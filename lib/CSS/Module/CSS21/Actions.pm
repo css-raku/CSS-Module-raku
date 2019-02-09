@@ -1,12 +1,12 @@
 use v6;
 
 use CSS::Specification::Terms::Actions;
-use CSS::Module::CSS21::Spec::Interface;
-use CSS::Module::CSS21::Spec::Actions;
+use CSS::Module::CSS21::Gen::Interface;
+use CSS::Module::CSS21::Gen::Actions;
 use CSS::Grammar::Actions;
 
 class CSS::ModuleX::CSS21::Actions
-    is CSS::Module::CSS21::Spec::Actions {
+    is CSS::Module::CSS21::Gen::Actions {
 
     method color:sym<system>($/) { make $.node($/) }
 
@@ -46,7 +46,7 @@ class CSS::Module::CSS21::Actions
     is CSS::ModuleX::CSS21::Actions
     is CSS::Specification::Terms::Actions 
     is CSS::Grammar::Actions
-    does CSS::Module::CSS21::Spec::Interface {
+    does CSS::Module::CSS21::Gen::Interface {
 
     method decl($/, :@proforma = ['inherit']) {
         nextwith($/, :@proforma);

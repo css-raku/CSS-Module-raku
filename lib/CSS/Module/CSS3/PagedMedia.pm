@@ -6,14 +6,14 @@ use CSS::Module::CSS3::_Base::Actions;
 # - reference: http://www.w3.org/TR/2006/WD-css3-page-20061010/
 #
 
-use CSS::Module::CSS3::PagedMedia::Spec::Interface;
-use CSS::Module::CSS3::PagedMedia::Spec::Grammar;
-use CSS::Module::CSS3::PagedMedia::Spec::Actions;
+use CSS::Module::CSS3::PagedMedia::Gen::Interface;
+use CSS::Module::CSS3::PagedMedia::Gen::Grammar;
+use CSS::Module::CSS3::PagedMedia::Gen::Actions;
 
 grammar CSS::Module::CSS3::PagedMedia  # :api<css3-page-20061010>
     is CSS::Module::CSS3::_Base
-    is CSS::Module::CSS3::PagedMedia::Spec::Grammar
-    does CSS::Module::CSS3::PagedMedia::Spec::Interface {
+    is CSS::Module::CSS3::PagedMedia::Gen::Grammar
+    does CSS::Module::CSS3::PagedMedia::Gen::Interface {
 
     rule page-pseudo        {:i':'[ [left|right|first] && <keyw> || <Ident> ]? }
 
@@ -34,8 +34,8 @@ grammar CSS::Module::CSS3::PagedMedia  # :api<css3-page-20061010>
 
 class CSS::Module::CSS3::PagedMedia::Actions
     is CSS::Module::CSS3::_Base::Actions 
-    is CSS::Module::CSS3::PagedMedia::Spec::Actions
-    does CSS::Module::CSS3::PagedMedia::Spec::Interface {
+    is CSS::Module::CSS3::PagedMedia::Gen::Actions
+    does CSS::Module::CSS3::PagedMedia::Gen::Interface {
 
         use CSS::Grammar::AST :CSSValue;
 
