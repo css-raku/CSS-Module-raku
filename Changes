@@ -1,6 +1,6 @@
 0.5.0 move generated perl back from gen/lib to lib, e.g.
       CSS::Module::CSS1::Gen::Grammar. Seems that ecosystem
-      doesn't handle the former that well yet/
+      doesn't handle the former that well yet.
 0.4.9 rename etc/ to src/ and move generated modules to gen/lib
 0.4.8 Break circular '@font-face' depdendency
       - Add CSS/Module/CSS3/Actions.pm

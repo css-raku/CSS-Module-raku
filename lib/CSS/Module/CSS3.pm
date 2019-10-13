@@ -13,7 +13,7 @@ use CSS::Module::CSS3::PagedMedia;
 use CSS::Module::CSS3::Selectors;
 use CSS::Module::CSS3::_Base;
 
-grammar CSS::Module::CSS3 #:api<css-2010-20110512>
+grammar CSS::Module::CSS3:api<css-2010-20110512>
     is CSS::Module::CSS3::Colors
     is CSS::Module::CSS3::Fonts
     is CSS::Module::CSS3::MediaQueries
