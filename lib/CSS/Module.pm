@@ -7,6 +7,11 @@ class CSS::Module:ver<0.5.0> {
     has $.actions is required  #| actions class
                   handles <colors>;
     has %.property-metadata;
+    has $.prop-names;
+    method property-number(Str $_ --> Int) { $!prop-names.enums{$_} // Int }
+    method property-name(UInt $_ --> Str) { (.key with $!prop-names($_)) // Str; }
+    has &.index;
+    method index { &!index() }
     has CSS::Module %.sub-module;
 
     #| parse an individual property-specific expression

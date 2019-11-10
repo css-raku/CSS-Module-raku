@@ -55,6 +55,8 @@ grammar CSS::Module::CSS21 #:api<css-20110607>
             :grammar($?CLASS),
 	    :actions(CSS::Module::CSS21::Actions),
             :property-metadata($CSS::Module::CSS21::Metadata::property),
+            :prop-names(CSS::Module::CSS21::Metadata::prop-names),
+            :index(&CSS::Module::CSS21::Metadata::index),
         );
     }
 

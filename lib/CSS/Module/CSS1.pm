@@ -25,6 +25,8 @@ grammar CSS::Module::CSS1 #:api<css1-20080411>
                 :grammar($?CLASS),
                 :actions(CSS::Module::CSS1::Actions),
                 :property-metadata($CSS::Module::CSS1::Metadata::property),
+                :prop-names(CSS::Module::CSS1::Metadata::prop-names),
+                :index(&CSS::Module::CSS1::Metadata::index),
             );
         }
 
