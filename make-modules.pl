@@ -84,10 +84,16 @@ class Build {
                     say "    BEGIN our \$property = {%props.item.perl};";
                     # todo: BEGIN our \$index = ... ; ## Missing serialize REPR function for REPR
                     say '    our enum prop-names <' ~ %props.keys.sort.join(' ') ~ '>;';
-                    say '    our sub index {';
-                    say "        state \$ //= CArray[CSS::Module::Property].new: |\$property.sort.map(\{CSS::Module::Property.new(prop-names => prop-names, |.value)\});";
-                    say '    }';
-                    say '}';
+                    say q:to<END>;
+                        our sub index {
+                            state $ //= do {
+                                my $enums := prop-names.enums;
+                                CArray[CSS::Module::Property].new: |$property.sort.map({CSS::Module::Property.new(:$enums, name => .key, |.value)});
+                            }
+                        }
+                    }
+                    END
+                    $*OUT.close;
                 }
             }
         }

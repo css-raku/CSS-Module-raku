@@ -2,7 +2,7 @@ use v6;
 use NativeCall;
 # native representation of a property;
 class CSS::Module::Property is repr('CStruct') {
-    has Str $.prop-name;
+    has Str $.name;
     has uint8 $.prop-num;
 
     has uint8 $.inherit;
@@ -14,15 +14,11 @@ class CSS::Module::Property is repr('CStruct') {
     has uint8 $.box;
     method box { ? $!box }
 
-    has uint8 $!edge;
-    method edge { $!edge }
-
-    has Str $!synopsis;
-    method synopsis { $!synopsis }
+    has uint8 $.edge;
+    has Str $.synopsis;
 
     has Str $!default-type;
-    has Str $!default;
-    method default { $!default }
+    has Str $.default;
 
     method default-value {
         # kludgy default handling - part II
@@ -37,19 +33,20 @@ class CSS::Module::Property is repr('CStruct') {
         }
     }
 
-    has CArray[uint8] $!children;
+    has CArray $!children;
     method children { $!children }
 
-    has CArray[uint8] $!edges;
+    has CArray $!edges;
     method edges { $!edges }
 
-    submethod TWEAK(:$prop-names!, List :$children, List :$edges, Str :$edge, List :$default, Str :$synopsis) {
-        my %prop-map = $prop-names.enums;
-        $!prop-name := $prop-names($!prop-num).key;
+    submethod BUILD(:$!inherit = 0, :$!initial = 0, :$!box = 0) {}
+    submethod TWEAK(:$enums!, Str:D :$name!, List :$children, List :$edges, Str :$edge, List :$default, Str :$synopsis) {
+        $!name := $name;
+        $!prop-num = (my uint8 $ = $enums{$name});
         $!synopsis := $_ with $synopsis;
-        $!children := CArray[uint8].new(|.map({%prop-map{$_}})) with $children;
-        $!edges := CArray[uint8].new(|.map({%prop-map{$_}})) with $edges;
-        $!edge = %prop-map{$_} with $edge;
+        $!children := CArray[uint8].new(|.map({$enums{$_}})) with $children;
+        $!edges := CArray[uint8].new(|.map({$enums{$_}})) with $edges;
+        $!edge = $enums{$_} with $edge;
         with $default {
             # kludgy default handling - part I
             when .[1].defined {
