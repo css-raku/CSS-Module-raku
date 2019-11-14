@@ -23,9 +23,11 @@ is-deeply css1-module.colors<red>, [ 255, 0,   0 ], "colors";
 is css1-module.property-name(1), 'background-attachment';
 lives-ok { css1-module.index };
 lives-ok { css1-module.index[1] };
-is-deeply css1-module.index[1].default-value, ['keyw' => 'scroll'];
+is-deeply css1-module.index[1].default-type, 'keyw';
+is-deeply css1-module.index[1].default, 'scroll';
 is css1-module.property-name(6), 'border';
 is css1-module.property-number('border'), 6;
+is css1-module.index[6].child-names[1], 'border-style';
 is css1-module.property-name(css1-module.index[6].children[1]), 'border-style';
 
 my \css21-module = CSS::Module::CSS21.module;

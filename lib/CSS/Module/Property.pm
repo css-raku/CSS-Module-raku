@@ -17,41 +17,32 @@ class CSS::Module::Property is repr('CStruct') {
     has uint8 $.edge;
     has Str $.synopsis;
 
-    has Str $!default-type;
+    has Str $.default-type;
     has Str $.default;
 
-    method default-value {
-        # kludgy default handling - part II
-        with $!default-type {
-            when "keyw"                    { [$_ => $!default] }
-            when "px" && $!default eq "0"  { :px(0) }
-            when $!default eq '0% 0%'      { [:percent(0) xx 2] }
-            default { warn "ignoring default value: $!default-type:$!default" }
-        }
-        else {
-            Nil
-        }
-    }
-
-    has CArray $!children;
-    method children { $!children }
-
-    has CArray $!edges;
-    method edges { $!edges }
+    has CArray[uint8] $.children;
+    has CArray[Str] $.child-names;
+    has CArray[uint8] $.edges;
+    has CArray[Str] $.edge-names;
 
     submethod BUILD(:$!inherit = 0, :$!initial = 0, :$!box = 0) {}
     submethod TWEAK(:$enums!, Str:D :$name!, List :$children, List :$edges, Str :$edge, List :$default, Str :$synopsis) {
         $!name := $name;
         $!prop-num = (my uint8 $ = $enums{$name});
         $!synopsis := $_ with $synopsis;
-        $!children := CArray[uint8].new(|.map({$enums{$_}})) with $children;
-        $!edges := CArray[uint8].new(|.map({$enums{$_}})) with $edges;
+        with $children {
+            $!child-names := CArray[Str].new(|$_);
+            $!children := CArray[uint8].new(|.map({$enums{$_}}))
+        }
+        with $edges {
+            $!edge-names := CArray[Str].new(|$_);
+            $!edges := CArray[uint8].new(|.map({$enums{$_}}));
+        }
         $!edge = $enums{$_} with $edge;
         with $default {
-            # kludgy default handling - part I
+            $!default := .[0].Str;
             when .[1].defined {
                 $!default-type := .[1][0].keys[0];
-                $!default := .[0].Str;
             }
         }
     }
