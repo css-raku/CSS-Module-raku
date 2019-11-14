@@ -22,6 +22,8 @@ grammar CSS::Module::CSS3::Fonts::AtFontFace
             :grammar($?CLASS),
 	    :actions(CSS::Module::CSS3::Actions),
 	    :property-metadata($CSS::Module::CSS3::Fonts::AtFontFace::Metadata::property),
+            :prop-names(CSS::Module::CSS3::Fonts::AtFontFace::Metadata::prop-names),
+            :index(&CSS::Module::CSS3::Fonts::AtFontFace::Metadata::index),
 	    );
     }
     # @font-face declarations

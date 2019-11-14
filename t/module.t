@@ -20,6 +20,16 @@ nok css1-module.parse-property('border-style', 'flashy', :!warn), 'module.parse-
 
 is-deeply css1-module.colors<red>, [ 255, 0,   0 ], "colors";
 
+is css1-module.property-name(1), 'background-attachment';
+lives-ok { css1-module.index };
+lives-ok { css1-module.index[1] };
+is-deeply css1-module.index[1].default-type, 'keyw';
+is-deeply css1-module.index[1].default, 'scroll';
+is css1-module.property-name(6), 'border';
+is css1-module.property-number('border'), 6;
+is css1-module.index[6].child-names[1], 'border-style';
+is css1-module.property-name(css1-module.index[6].children[1]), 'border-style';
+
 my \css21-module = CSS::Module::CSS21.module;
 isa-ok css21-module.grammar, ::('CSS::Module::CSS21'), 'css21 grammar';
 isa-ok css21-module.actions, ::('CSS::Module::CSS21::Actions'), 'css21 actions';
@@ -29,6 +39,10 @@ is-deeply css21-prop<border>, {:box, :children["border-width", "border-style", "
 is-deeply css21-prop<border-style>, {:box, :edges[<border-top-style border-right-style border-bottom-style border-left-style>], :!inherit, :synopsis("<border-style>\{1,4}") }, 'css21 border-style';
 
 is-deeply css21-module.colors<red>, [ 255, 0,   0 ], "colors";
+
+is css21-module.property-name(7), 'border';
+is css21-module.property-number('border'), 7;
+is css21-module.property-name(css21-module.index[7].children[1]), 'border-style';
 
 my \css3-module = CSS::Module::CSS3.module;
 is css3-module.name, 'CSS3', 'module.name';
@@ -40,6 +54,10 @@ is-deeply css3-prop<border>, {:box, :children["border-width", "border-style", "b
 is-deeply css3-prop<border-style>, {:box, :edges[<border-top-style border-right-style border-bottom-style border-left-style>], :!inherit, :synopsis("<border-style>\{1,4}") }, 'css3 border-style';
 
 is-deeply css3-module.colors<gold>, [ 255, 215,   0 ], "colors";
+
+is css3-module.property-name(7), 'border';
+is css3-module.property-number('border'), 7;
+is css3-module.property-name(css3-module.index[7].children[1]), 'border-style';
 
 my \at-fontface-module = css3-module.sub-module<@font-face>;
 isa-ok at-fontface-module.grammar, ::('CSS::Module::CSS3::Fonts::AtFontFace'), '@font-face grammar';
