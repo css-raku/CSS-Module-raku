@@ -17,7 +17,7 @@ grammar CSS::Module::CSS1 #:api<css1-20080411>
     is CSS::Module::CSS1::Gen::Grammar
     does CSS::Module::CSS1::Gen::Interface {
 
-        method module {
+        method module(|c) {
 	    use CSS::Module::CSS1::Actions;
             use CSS::Module::CSS1::Metadata;
 	    state $ = CSS::Module.new(
@@ -27,6 +27,7 @@ grammar CSS::Module::CSS1 #:api<css1-20080411>
                 :property-metadata($CSS::Module::CSS1::Metadata::property),
                 :prop-names(CSS::Module::CSS1::Metadata::prop-names),
                 :index(&CSS::Module::CSS1::Metadata::index),
+                |c
             );
         }
 

@@ -26,9 +26,8 @@ class CSS::Module::Property is repr('CStruct') {
     has CArray[Str] $.edge-names;
 
     submethod BUILD(:$!inherit = 0, :$!initial = 0, :$!box = 0) {}
-    submethod TWEAK(:$enums!, Str:D :$name!, List :$children, List :$edges, Str :$edge, List :$default, Str :$synopsis) {
+    submethod TWEAK(:$enums, Str:D :$name!, :$!prop-num = (my uint8 $ = $enums{$name}), List :$children, List :$edges, Str :$edge, List :$default, Str :$synopsis) {
         $!name := $name;
-        $!prop-num = (my uint8 $ = $enums{$name});
         $!synopsis := $_ with $synopsis;
         with $children {
             $!child-names := CArray[Str].new(|$_);

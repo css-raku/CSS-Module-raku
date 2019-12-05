@@ -31,12 +31,18 @@ is css1-module.index[6].child-names[1], 'border-style';
 is css1-module.property-name(css1-module.index[6].children[1]), 'border-style';
 
 my \css21-module = CSS::Module::CSS21.module;
+css21-module.alias(:name<-x-html-align>, :like<text-align>);
+my \alias = css21-module.index.tail;
+is alias.name, '-x-html-align';
 isa-ok css21-module.grammar, ::('CSS::Module::CSS21'), 'css21 grammar';
 isa-ok css21-module.actions, ::('CSS::Module::CSS21::Actions'), 'css21 actions';
 my \css21-prop = css21-module.property-metadata;
 ok css21-prop<azimuth>:exists, 'css21 has azimuth';
 is-deeply css21-prop<border>, {:box, :children["border-width", "border-style", "border-color"], :edges["border-top", "border-right", "border-bottom", "border-left"], :!inherit, :synopsis("[ 'border-width' || 'border-style' || 'border-color' ]")}, 'css21 border';
 is-deeply css21-prop<border-style>, {:box, :edges[<border-top-style border-right-style border-bottom-style border-left-style>], :!inherit, :synopsis("<border-style>\{1,4}") }, 'css21 border-style';
+
+is-deeply css21-prop<-x-html-align>, {:inherit, :synopsis("<align> | justify")}, 'css21 alias property metadata';
+is-deeply css21-module.parse-property('-x-html-align', 'center' ), [{ :keyw<center> }, ], 'css21 alias property metadata';
 
 is-deeply css21-module.colors<red>, [ 255, 0,   0 ], "colors";
 

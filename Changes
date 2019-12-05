@@ -1,3 +1,7 @@
+0.5.1 add :alias option. A simplistic mechanism for adding extension properties when
+      they can be considered to structurally identical to an existing property, e.g.
+          CSS::Module::CSS3.module( :alias{'-xhtml-align' => :like<text-align>});
+      adds an '-xhtml-align' property that is structurally identical to 'text-align'
 0.5.0 move generated perl back from gen/lib to lib, e.g.
       CSS::Module::CSS1::Gen::Grammar. Seems that ecosystem
       doesn't handle the former that well yet.

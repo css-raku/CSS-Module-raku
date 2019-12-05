@@ -23,7 +23,7 @@ grammar CSS::Module::CSS3:api<css-2010-20110512>
     is CSS::ModuleX::CSS21
     is CSS::Module::CSS3::_Base {
 
-    method module {
+    method module(|c) {
         use CSS::Module::CSS3::Actions;
         use CSS::Module::CSS3::Metadata;
         use CSS::Module::CSS3::Fonts::AtFontFace;
@@ -35,6 +35,7 @@ grammar CSS::Module::CSS3:api<css-2010-20110512>
             :prop-names(CSS::Module::CSS3::Metadata::prop-names),
             :index(&CSS::Module::CSS3::Metadata::index),
             :sub-module('@font-face' => CSS::Module::CSS3::Fonts::AtFontFace.module),
+            |c
 	    );
     }
 

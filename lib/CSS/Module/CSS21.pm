@@ -46,7 +46,7 @@ grammar CSS::Module::CSS21 #:api<css-20110607>
     is CSS::Grammar::CSS21
     does CSS::Module::CSS21::Gen::Interface {
 
-    method module {
+    method module(|c) {
         use CSS::Module::CSS21::Actions;
         use CSS::Module::CSS21::Metadata;
 
@@ -57,6 +57,7 @@ grammar CSS::Module::CSS21 #:api<css-20110607>
             :property-metadata($CSS::Module::CSS21::Metadata::property),
             :prop-names(CSS::Module::CSS21::Metadata::prop-names),
             :index(&CSS::Module::CSS21::Metadata::index),
+            |c
         );
     }
 
