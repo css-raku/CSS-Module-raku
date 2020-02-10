@@ -39,7 +39,7 @@ class Build {
                         my $class-dir = $*SPEC.catdir(<lib CSS Module>, @$class-isa, <Gen>);
                         mkdir $class-dir;
 
-                        my $class-path = $*SPEC.catfile( $class-dir, $subclass~'.pm' );
+                        my $class-path = $*SPEC.catfile( $class-dir, $subclass~'.rakumod' );
 
                         my $input-path = $*SPEC.catfile( |@$input-spec );
                         say "Building $input-path => $name";
@@ -69,7 +69,7 @@ class Build {
                     }
                 }
                 my $class-dir = $*SPEC.catdir(flat(<lib CSS Module>, $meta.split('::')));
-                my $class-path = $*SPEC.catfile( $class-dir, 'Metadata.pm' );
+                my $class-path = $*SPEC.catfile( $class-dir, 'Metadata.rakumod' );
                 my $class-name = "CSS::Module::{$meta}::Metadata";
                 say "Building $class-name";
                 {
@@ -100,7 +100,6 @@ class Build {
     }
 }
 
-# Build.pm can also be run standalone 
 sub MAIN(Str $working-directory = '.' ) {
     Build.new.build($working-directory);
 }

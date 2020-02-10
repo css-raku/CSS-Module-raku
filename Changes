@@ -1,3 +1,4 @@
+0.5.2 rename sources *.pm -> *.rakumod
 0.5.1 add :alias option. A simplistic mechanism for adding extension properties when
       they can be considered to structurally identical to an existing property, e.g.
           CSS::Module::CSS3.module( :alias{'-xhtml-align' => :like<text-align>});

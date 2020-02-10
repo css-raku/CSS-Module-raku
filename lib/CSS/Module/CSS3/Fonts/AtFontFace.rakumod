@@ -12,18 +12,18 @@ grammar CSS::Module::CSS3::Fonts::AtFontFace
     does CSS::Module::CSS3::Fonts::AtFontFace::Gen::Interface {
 
     # declare ourselves as a distinct submodule
-    method module {
+    method module(|c) {
         use CSS::Module;
         use CSS::Module::CSS3::Actions;
         use CSS::Module::CSS3::Fonts::AtFontFace::Metadata;
         # we share the actions class
         state $ = CSS::Module.new(
-            :name<@font-face>,
             :grammar($?CLASS),
 	    :actions(CSS::Module::CSS3::Actions),
 	    :property-metadata($CSS::Module::CSS3::Fonts::AtFontFace::Metadata::property),
-            :prop-names(CSS::Module::CSS3::Fonts::AtFontFace::Metadata::prop-names),
+            :prop-names(CSS::Module::CSS3::Fonts::AtFontFace::Metadata::prop-names.enums),
             :index(&CSS::Module::CSS3::Fonts::AtFontFace::Metadata::index),
+            |c
 	    );
     }
     # @font-face declarations

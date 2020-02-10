@@ -1,5 +1,7 @@
 use v6;
-class CSS::Module:ver<0.5.1> {
+use CSS::Grammar:ver<0.3.4+>;
+
+class CSS::Module:ver<0.5.2> {
     #= a lightweight class for bundling resources associated with a particular CSS Syntax
     use CSS::Module::Property;
     has $.name;
@@ -30,7 +32,7 @@ class CSS::Module:ver<0.5.1> {
                 unless %!alias{$name} ~~ $like;
         }
         else {
-            my $prop-num = self.index.elems;
+            my UInt $prop-num = self.index.elems;
             %!alias{$name} = $like;
             %!prop-names{$name} = $prop-num;
             %!property-metadata{$name} = %!property-metadata{$like};
