@@ -1,6 +1,6 @@
 {
   "api": "css-snapshot-2010",
-  "auth": "github:p6-css",
+  "auth": "github:css-raku",
   "depends": [
     "CSS::Grammar:ver(0.3.3+)",
     "CSS::Module::CSS3::Selectors",
@@ -57,6 +57,6 @@
     "CSS::Module::CSS3::_Base::Actions": "lib/CSS/Module/CSS3/_Base/Actions.rakumod",
     "CSS::Module::Property": "lib/CSS/Module/Property.rakumod"
   },
-  "source-url": "git://github.com/p6-css/CSS-Module-p6.git",
+  "source-url": "git://github.com/css-raku/CSS-Module-raku.git",
   "version": "0.5.2"
 }

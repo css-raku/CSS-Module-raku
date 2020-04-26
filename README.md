@@ -11,7 +11,7 @@ $module.grammar.parse( $css, :$actions);
 say $/.ast.perl;
 ```
 
-CSS::Module is a set of module classes for parsing and and manipulation CSS Levels 1, 2.1 and  3.
+CSS::Module is a set of Raku classes for parsing and and manipulation CSS Levels 1, 2.1 and  3.
 
 It contains modules `CSS::Module::CSS1.module`, `CSS::Module::CSS21.module` and `CSS::Module::CSS3.modules` for CSS levels 1.0, 2.1 and 3.0;
 
@@ -146,10 +146,9 @@ of unknown. E.g.
 ```
 ## See Also
 
-- [CSS::Specification](https://github.com/p6-css/perl6-CSS-Specification) - property definition syntax
-- [CSS::Grammar](https://github.com/p6-css/perl6-CSS-Grammar) - base grammars
-- [CSS::Writer](https://github.com/p6-css/perl6-CSS-Writer) - AST reserializer
-- [CSS::Drafts](https://github.com/p6-css/perl6-CSS-Drafts) - CSS draft extension modules
+- [CSS::Specification](https://github.com/css-raku/CSS-Specification-raku) - property definition syntax
+- [CSS::Grammar](https://github.com/css-raku/CSS-Grammar-raku) - base grammars
+- [CSS::Writer](https://github.com/css-raku/CSS-Writer-raku) - AST reserializer
 
 ## References
 
