@@ -80,7 +80,7 @@ grammar CSS::Module::CSS3::Colors { #:api<css3-color-20110607>
 
 class CSS::Module::CSS3::Colors::Actions {
 
-    use CSS::Grammar::AST :CSSValue;
+    use CSS::Grammar::Defs :CSSValue;
 
     method color-angle($/) {
         make $<number>.ast;

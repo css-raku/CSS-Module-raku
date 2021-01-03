@@ -8,7 +8,6 @@ use v6;
 #
 # -- if you want the capability to to embed '@page' rules, you'll also need
 #    to load the Paged Media extension module in your class structure.
-class CSS::Module::CSS3::MediaQueries::Actions {...}
 
 class CSS::Module::CSS3::MediaQueries { #:api<css3-mediaqueries-20120619>
 
@@ -72,7 +71,7 @@ class CSS::Module::CSS3::MediaQueries { #:api<css3-mediaqueries-20120619>
 
 class CSS::Module::CSS3::MediaQueries::Actions {
 
-        use CSS::Grammar::AST :CSSValue;
+    use CSS::Grammar::Defs :CSSValue;
 
     # rule-list, media-list, media see core grammar actions
     method unknown-media-list($/) {

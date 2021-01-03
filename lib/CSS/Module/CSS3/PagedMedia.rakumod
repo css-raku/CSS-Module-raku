@@ -37,7 +37,7 @@ class CSS::Module::CSS3::PagedMedia::Actions
     is CSS::Module::CSS3::PagedMedia::Gen::Actions
     does CSS::Module::CSS3::PagedMedia::Gen::Interface {
 
-        use CSS::Grammar::AST :CSSValue;
+        use CSS::Grammar::Defs :CSSValue;
 
         method page-pseudo($/)    {
             if $<Ident> {
@@ -47,7 +47,7 @@ class CSS::Module::CSS3::PagedMedia::Actions
                 $.warning("':' should be followed by one of: left right first")
             }
             else {
-                make $.token( $<keyw>.ast, :type(CSS::Grammar::AST::CSSSelector::PseudoClass))
+                make $.token( $<keyw>.ast, :type(CSS::Grammar::Defs::CSSSelector::PseudoClass))
             }
         }
 

@@ -43,9 +43,9 @@
 'font-family'	[ <generic-family> | <family-name> ]# | inherit	depends on user agent	 	yes	 	visual
 	<generic-family> := serif | sans-serif | cursive | fantasy | monospace
 	<family-name> := <identifiers> | <string>
-'font-size'	<absolute-size> | <relative-size> | <length> | <percentage> | inherit	medium	 	yes	refer to inherited font size	visual
+'font-size'	<absolute-size> | <relative-size> | <length> | inherit	medium	 	yes	refer to inherited font size	visual
 	<absolute-size> := xx-small | x-small | small | medium | large | x-large | xx-large
-	<relative-size> := larger | smaller
+	<relative-size> := larger | smaller | <percentage>
 'font-style'	normal | italic | oblique | inherit	normal	 	yes	 	visual
 'font-variant'	normal | small-caps | inherit	normal	 	yes	 	visual
 'font-weight'	normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | inherit	normal	 	yes	 	visual

@@ -1,7 +1,7 @@
 use v6;
-use CSS::Grammar:ver<0.3.4+>;
+use CSS::Grammar;
 
-class CSS::Module:ver<0.5.2> {
+class CSS::Module:ver<0.5.3> {
     #= a lightweight class for bundling resources associated with a particular CSS Syntax
     use CSS::Module::Property;
     has $.name;

@@ -210,15 +210,15 @@ grammar CSS::Module::CSS21::Gen::Grammar {
     #| family-name: <identifiers> | <string>
     rule family-name {:i [ <identifiers> || <string> ] }
 
-    #| font-size: <absolute-size> | <relative-size> | <length> | <percentage>
+    #| font-size: <absolute-size> | <relative-size> | <length>
     rule decl:sym<font-size> {:i (font\-size) ':' <val( rx{ <expr=.expr-font-size> }, &?ROUTINE.WHY)> }
-    rule expr-font-size {:i [ <absolute-size> || <relative-size> || <length> || <percentage> ] }
+    rule expr-font-size {:i [ <absolute-size> || <relative-size> || <length> ] }
 
     #| absolute-size: xx-small | x-small | small | medium | large | x-large | xx-large
     rule absolute-size {:i [ xx\-small | x\-small | small | medium | large | x\-large | xx\-large ] & <keyw> }
 
-    #| relative-size: larger | smaller
-    rule relative-size {:i [ larger | smaller ] & <keyw> }
+    #| relative-size: larger | smaller | <percentage>
+    rule relative-size {:i [ [ larger | smaller ] & <keyw> || <percentage> ] }
 
     #| font-style: normal | italic | oblique
     rule decl:sym<font-style> {:i (font\-style) ':' <val( rx{ <expr=.expr-font-style> }, &?ROUTINE.WHY)> }
