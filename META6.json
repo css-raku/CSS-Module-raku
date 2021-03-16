@@ -1,6 +1,10 @@
 {
-  "api": "css-snapshot-2010",
   "auth": "github:css-raku",
+  "authors": [
+    "David Warring"
+  ],
+  "build-depends": [
+  ],
   "depends": [
     "CSS::Grammar:ver<0.3.5+>",
     "CSS::Module::CSS3::Selectors:ver<0.0.4>",
@@ -29,11 +33,9 @@
     "CSS::Module::CSS3": "lib/CSS/Module/CSS3.rakumod",
     "CSS::Module::CSS3::Actions": "lib/CSS/Module/CSS3/Actions.rakumod",
     "CSS::Module::CSS3::Colors": "lib/CSS/Module/CSS3/Colors.rakumod",
-    "CSS::Module::CSS3::Colors::Actions": "lib/CSS/Module/CSS3/Colors.rakumod",
     "CSS::Module::CSS3::Fonts": "lib/CSS/Module/CSS3/Fonts.rakumod",
     "CSS::Module::CSS3::Fonts::Actions": "lib/CSS/Module/CSS3/Fonts/Actions.rakumod",
     "CSS::Module::CSS3::Fonts::AtFontFace": "lib/CSS/Module/CSS3/Fonts/AtFontFace.rakumod",
-    "CSS::Module::CSS3::Fonts::AtFontFace::Actions": "lib/CSS/Module/CSS3/Fonts/AtFontFace.rakumod",
     "CSS::Module::CSS3::Fonts::AtFontFace::Gen::Actions": "lib/CSS/Module/CSS3/Fonts/AtFontFace/Gen/Actions.rakumod",
     "CSS::Module::CSS3::Fonts::AtFontFace::Gen::Grammar": "lib/CSS/Module/CSS3/Fonts/AtFontFace/Gen/Grammar.rakumod",
     "CSS::Module::CSS3::Fonts::AtFontFace::Gen::Interface": "lib/CSS/Module/CSS3/Fonts/AtFontFace/Gen/Interface.rakumod",
@@ -42,14 +44,10 @@
     "CSS::Module::CSS3::Fonts::Gen::Grammar": "lib/CSS/Module/CSS3/Fonts/Gen/Grammar.rakumod",
     "CSS::Module::CSS3::Fonts::Gen::Interface": "lib/CSS/Module/CSS3/Fonts/Gen/Interface.rakumod",
     "CSS::Module::CSS3::Fonts::Variants": "lib/CSS/Module/CSS3/Fonts/Variants.rakumod",
-    "CSS::Module::CSS3::Fonts::Variants::Actions": "lib/CSS/Module/CSS3/Fonts/Variants.rakumod",
     "CSS::Module::CSS3::MediaQueries": "lib/CSS/Module/CSS3/MediaQueries.rakumod",
-    "CSS::Module::CSS3::MediaQueries::Actions": "lib/CSS/Module/CSS3/MediaQueries.rakumod",
     "CSS::Module::CSS3::Metadata": "lib/CSS/Module/CSS3/Metadata.rakumod",
     "CSS::Module::CSS3::Namespaces": "lib/CSS/Module/CSS3/Namespaces.rakumod",
-    "CSS::Module::CSS3::Namespaces::Actions": "lib/CSS/Module/CSS3/Namespaces.rakumod",
     "CSS::Module::CSS3::PagedMedia": "lib/CSS/Module/CSS3/PagedMedia.rakumod",
-    "CSS::Module::CSS3::PagedMedia::Actions": "lib/CSS/Module/CSS3/PagedMedia.rakumod",
     "CSS::Module::CSS3::PagedMedia::Gen::Actions": "lib/CSS/Module/CSS3/PagedMedia/Gen/Actions.rakumod",
     "CSS::Module::CSS3::PagedMedia::Gen::Grammar": "lib/CSS/Module/CSS3/PagedMedia/Gen/Grammar.rakumod",
     "CSS::Module::CSS3::PagedMedia::Gen::Interface": "lib/CSS/Module/CSS3/PagedMedia/Gen/Interface.rakumod",
@@ -57,6 +55,12 @@
     "CSS::Module::CSS3::_Base::Actions": "lib/CSS/Module/CSS3/_Base/Actions.rakumod",
     "CSS::Module::Property": "lib/CSS/Module/Property.rakumod"
   },
+  "resources": [
+  ],
   "source-url": "git://github.com/css-raku/CSS-Module-raku.git",
+  "tags": [
+  ],
+  "test-depends": [
+  ],
   "version": "0.5.3"
 }
