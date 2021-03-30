@@ -27,7 +27,7 @@ grammar CSS::Module::CSS3:api<css-2010-20110512>
         use CSS::Module::CSS3::Actions;
         use CSS::Module::CSS3::Metadata;
         use CSS::Module::CSS3::Fonts::AtFontFace;
-        state $ //= CSS::Module.new(
+        CSS::Module.new(
             :name<CSS3>,
             :grammar($?CLASS),
 	    :actions(CSS::Module::CSS3::Actions),

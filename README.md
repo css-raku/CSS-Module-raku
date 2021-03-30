@@ -8,7 +8,7 @@ my $css = 'h1 { color: orange; text-align: center }';
 my $module = CSS::Module::CSS21.module;
 my $actions = $module.actions.new;
 $module.grammar.parse( $css, :$actions);
-say $/.ast.perl;
+say $/.ast.raku;
 ```
 
 CSS::Module is a set of Raku classes for parsing and and manipulation CSS Levels 1, 2.1 and  3.
@@ -17,7 +17,7 @@ It contains modules `CSS::Module::CSS1.module`, `CSS::Module::CSS21.module` and 
 
 `CSS::Module::CSS3.module.property-metadata` is a generated summary of property information, e.g.: 
 ```
-% perl6 -M CSS::Module::CSS3 -e'say CSS::Module::CSS3.module.property-metadata<azimuth>.perl'
+% raku -M CSS::Module::CSS3 -e'say CSS::Module::CSS3.module.property-metadata<azimuth>.raku'
 {:default("center"), :inherit, :synopsis("<angle> | [[ left-side | far-left | left | center-left | center | center-right | right | far-right | right-side ] || behind ] | leftwards | rightwards")}
 ```
 
@@ -35,9 +35,7 @@ This corresponds to the sub-modules described in [CSS Snapshot 2010](http://www.
 
 ## Installation
 
-This module works with Rakudo Star 2015.09 or better [download from http://rakudo.org/downloads/star/ - don't forget the final `make install`]:
-
-You can then use Perl6 `zef` module installer to test and install `CSS::Module`:
+You can use the Raku `zef` module installer to test and install `CSS::Module`:
 
     % zef install CSS::Module
 
@@ -45,7 +43,7 @@ You can then use Perl6 `zef` module installer to test and install `CSS::Module`:
 
 - parse a stylesheet using the CSS2.1 grammar:
 
-    % perl6 -MCSS::Module::CSS21 -e"say CSS::Module::CSS21.parse('h1 {margin:2pt; color: blue}')"
+    % raku -MCSS::Module::CSS21 -e"say CSS::Module::CSS21.parse('h1 {margin:2pt; color: blue}')"
 
 
 - compile a CSS2.1 stylesheet to an AST, using the module interface:
@@ -60,7 +58,7 @@ You can then use Perl6 `zef` module installer to test and install `CSS::Module`:
     my $actions = $module.actions.new;
     my $p = $grammar.parse($css, :$actions);
     note $_ for $actions.warnings;
-    say "declaration: " ~ $p.ast[0]<ruleset><declarations>.perl;
+    say "declaration: " ~ $p.ast[0]<ruleset><declarations>.raku;
     # output:
     # unknown property: foo - declaration dropped
     # usage background-color: <color> | transparent | inherit
@@ -131,19 +129,36 @@ of unknown. E.g.
     my $grammar = $module.grammar;
     my $actions = $module.actions.new( :lax );
 
-    say $grammar.parse('{bad-prop: 12mm}', :$actions, :rule<declarations>).ast.perl;
+    say $grammar.parse('{bad-prop: 12mm}', :$actions, :rule<declarations>).ast.raku;
     # output {"property:unknown" => {:expr[{ :mm(12) }], :ident<bad-prop>}}
 
-    say $grammar.parse('{ @guff {color:red} }', :$actions, :rule<declarations>).ast.perl;
+    say $grammar.parse('{ @guff {color:red} }', :$actions, :rule<declarations>).ast.raku;
     # output: {"margin-rule:unknown" =>  { :declarations[ { :ident<color>,
                                                           :expr[ { :rgb[ { :num(255) }, { :num(0) }, { :num(0) } ] } ] } ],
                                          :at-keyw<guff> } }
 ```
 `lax` mode likewise returns quantities with unknown dimensions:
 ```
-    say $grammar.parse('{margin: 12mm .1furlongs}', :$actions, :rule<declarations>).ast.perl;
+    say $grammar.parse('{margin: 12mm .1furlongs}', :$actions, :rule<declarations>).ast.raku;
     # output {"property" => {:expr[{ :mm(12) }, { :num(0.12), "units:unknown" => <furlongs>}], :ident<margin>}}
 ```
+
+## Custom Properties
+
+Properties may be added, or overriden via an `:%extensions` option to the `new*()` method.
+
+```
+subset MyAlignment of Str where 'left'|'middle'|'right';
+sub coerce(MyAlignment:D $keyw --> Pair) { :$keyw }
+
+my %extensions =  %(
+    '-my-align' => %(:synopsis("left | middle | right"), :default<middle>, :&coerce),
+);
+
+my $module = CSS::Module::CSS3.module: :%extensions;
+say $module.property-metadata<-my-align>.raku;
+```
+
 ## See Also
 
 - [CSS::Specification](https://github.com/css-raku/CSS-Specification-raku) - property definition syntax

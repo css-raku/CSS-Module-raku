@@ -11,8 +11,9 @@ class CSS::Module:ver<0.5.3> {
                   handles <colors>;
     has %.property-metadata;
     has %!prop-names;
+    has Code %!coerce;
     method prop-names { %!prop-names }
-    has %!alias;
+    has %!alias; # deprecated
     method property-number(Str $_ --> Int) { %!prop-names{.lc} // Int }
     method property-name(UInt $_ --> Str) { .name with self.index[$_]; }
     has &.index;
@@ -46,20 +47,43 @@ class CSS::Module:ver<0.5.3> {
         my $like = %!alias{$name} // die "unknown property alias: '$name'";
         %(:$name, :$like);
     }
-    submethod TWEAK(:%alias, :$prop-names! is copy) {
+    method extend(
+        Str:D :$name!,
+        :$prop-num = self.property-number($name) // self.index.elems,
+        :&coerce!,
+        Bool :$inherit = False,
+        :default($val),
+        |c,
+    ) {
+        %!prop-names{$name} = $prop-num;
+        %!coerce{$name} = &coerce;
+
+        my %metadata = %( :$inherit, ), c.hash;
+        %metadata<default> //= [$_, [&coerce($_)]]
+            with $val;
+
+        %!property-metadata{$name} = %metadata;
+        my CSS::Module::Property $prop .= new: :$name, :$prop-num, |%metadata;
+        self.index[$prop-num] = $prop;
+    }
+    submethod TWEAK(:%alias, :%extensions, :$prop-names! is copy) {
         given $prop-names {
             %!prop-names = $_ ~~ Enumeration ?? .enums !! $_;
         }
         self.alias(name => .key, |.value) for %alias.sort;
+        self.extend(name => .key, |.value) for %extensions.pairs;
     }
 
+    multi method parse-property(Str $property-name where (%!coerce{$_}:exists), $val) {
+         %!coerce{$property-name}.($val);
+    }
     #| parse an individual property-specific expression
-    method parse-property(Str() $property-name, Str() $val, Bool :$warn = True) {
+    multi method parse-property(Str $property-name, $val, Bool :$warn = True) {
         my $actions = $.actions.new;
         my $prop = $property-name.lc;
         $prop = $_ with %!alias{$prop};
         my $rule = 'expr-' ~ $prop;
-        my \p = $.grammar.parse($val, :$rule, :$actions );
+        my \p = $.grammar.parse($val.Str, :$rule, :$actions );
 
         if p {
             $actions.list(p);

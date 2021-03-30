@@ -20,7 +20,7 @@ grammar CSS::Module::CSS1 #:api<css1-20080411>
         method module(|c) {
 	    use CSS::Module::CSS1::Actions;
             use CSS::Module::CSS1::Metadata;
-	    state $ = CSS::Module.new(
+	    CSS::Module.new(
                 :name<CSS1>,
                 :grammar($?CLASS),
                 :actions(CSS::Module::CSS1::Actions),

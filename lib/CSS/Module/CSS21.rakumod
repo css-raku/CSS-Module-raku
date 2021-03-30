@@ -50,7 +50,7 @@ grammar CSS::Module::CSS21 #:api<css-20110607>
         use CSS::Module::CSS21::Actions;
         use CSS::Module::CSS21::Metadata;
 
-        state $ = CSS::Module.new(
+        CSS::Module.new(
             :name<CSS2.1>,
             :grammar($?CLASS),
 	    :actions(CSS::Module::CSS21::Actions),

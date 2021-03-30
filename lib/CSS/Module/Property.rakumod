@@ -45,4 +45,6 @@ class CSS::Module::Property is repr('CStruct') {
             }
         }
     }
+
+    multi method COERCE(%meta) { self.new: |%meta }
 }
