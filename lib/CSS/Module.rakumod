@@ -21,6 +21,7 @@ class CSS::Module:ver<0.5.4> {
     has CSS::Module %.sub-module;
 
     my subset ExtensionName of Str where .starts-with('-');
+    proto method alias(|) is DEPRECATED('extend(:$name, :$like, ...)') {*};
     multi method alias(ExtensionName :$name!, Str :$like!) is rw {
         my $metadata = %!property-metadata{$like}
             // die "unable to alias unknown property: '$like'";
@@ -47,10 +48,34 @@ class CSS::Module:ver<0.5.4> {
         my $like = %!alias{$name} // die "unknown property alias: '$name'";
         %(:$name, :$like);
     }
-    method extend(
+    method !register-property(:$name!, :%metadata) {
+        die "unable to register container property '$name' - NYI"
+            if %metadata<children> || %metadata<box>;
+
+        my $prop-num = self.property-number($name) // self.index.elems;
+        %!prop-names{$name} = $prop-num;
+        %!property-metadata{$name} = %metadata;
+        my CSS::Module::Property $prop .= new: :$name, :$prop-num, |%metadata;
+        self.index[$prop-num] = $prop;
+    }
+    multi method extend(
         Str:D :$name!,
-        :$prop-num = self.property-number($name) // self.index.elems,
+        Str:D :like($base-prop)!,
+        |c
+    ) {
+        die "unknown base property: $name"
+            unless %!property-metadata{$base-prop}:exists;
+        my %metadata = %!property-metadata{$base-prop};
+        %metadata<default>:delete
+            without %metadata<default>[1];
+        %metadata ,= c.hash;
+        %!alias{$name} = $base-prop;
+        self!register-property: :$name, :%metadata;
+    }
+    multi method extend(
+        Str:D :$name!,
         :&coerce!,
+        :$prop-num = self.property-number($name) // self.index.elems,
         Bool :$inherit = False,
         :default($val),
         |c,
@@ -58,13 +83,12 @@ class CSS::Module:ver<0.5.4> {
         %!prop-names{$name} = $prop-num;
         %!coerce{$name} = &coerce;
 
-        my %metadata = %( :$inherit, ), c.hash;
+        my %metadata = %( :$inherit, );
+        %metadata ,= c.hash;
         %metadata<default> //= [$_, [&coerce($_)]]
             with $val;
 
-        %!property-metadata{$name} = %metadata;
-        my CSS::Module::Property $prop .= new: :$name, :$prop-num, |%metadata;
-        self.index[$prop-num] = $prop;
+        self!register-property: :$name, :%metadata;
     }
     submethod TWEAK(:%alias, :%extensions, :$prop-names! is copy) {
         given $prop-names {
