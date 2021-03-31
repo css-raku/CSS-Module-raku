@@ -1,4 +1,6 @@
 {{$NEXT}}
+
+0.5.5  2021-04-01T09:30:14+13:00
   - Added :%extensions ( :$like ) suboption. Supersedes  alias()
     method, which is now deprecated.
 
