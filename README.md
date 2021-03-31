@@ -48,22 +48,22 @@ You can use the Raku `zef` module installer to test and install `CSS::Module`:
 
 - compile a CSS2.1 stylesheet to an AST, using the module interface:
 
-    ```
-    use v6;
-    use CSS::Module::CSS21;
+```
+use v6;
+use CSS::Module::CSS21;
 
-    my $css = 'H1 { color: blue; foo: bar; background-color: zzz }';
-    my $module  = CSS::Module::CSS21.module;
-    my $grammar = $module.grammar;
-    my $actions = $module.actions.new;
-    my $p = $grammar.parse($css, :$actions);
-    note $_ for $actions.warnings;
-    say "declaration: " ~ $p.ast[0]<ruleset><declarations>.raku;
-    # output:
-    # unknown property: foo - declaration dropped
-    # usage background-color: <color> | transparent | inherit
-    # declaration: {"color" => {"expr" => [{"rgb" => [{"num" => 0}, {"num" => 0}, {"num" => 255}]}]}
-    ```
+my $css = 'H1 { color: blue; foo: bar; background-color: zzz }';
+my $module  = CSS::Module::CSS21.module;
+my $grammar = $module.grammar;
+my $actions = $module.actions.new;
+my $p = $grammar.parse($css, :$actions);
+note $_ for $actions.warnings;
+say "declaration: " ~ $p.ast[0]<ruleset><declarations>.raku;
+# output:
+# unknown property: foo - declaration dropped
+# usage background-color: <color> | transparent | inherit
+# declaration: {"color" => {"expr" => [{"rgb" => [{"num" => 0}, {"num" => 0}, {"num" => 255}]}]}
+```
 
 - parse an individual `azimuth` property expression via the module interface:
 
