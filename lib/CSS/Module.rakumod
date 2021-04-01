@@ -61,6 +61,7 @@ class CSS::Module:ver<0.5.5> {
     multi method extend(
         Str:D :$name!,
         Str:D :like($base-prop)!,
+        :&coerce,
         |c
     ) {
         die "unknown base property: $name"
@@ -70,6 +71,7 @@ class CSS::Module:ver<0.5.5> {
             without %metadata<default>[1];
         %metadata ,= c.hash;
         %!alias{$name} = $base-prop;
+        %!coerce{$name} = $_ with &coerce;
         self!register-property: :$name, :%metadata;
     }
     multi method extend(
@@ -98,9 +100,21 @@ class CSS::Module:ver<0.5.5> {
         self.extend(name => .key, |.value) for %extensions.pairs;
     }
 
-    multi method parse-property(Str $property-name where (%!coerce{$_}:exists), $val) {
-         %!coerce{$property-name}.($val);
+    multi method parse-property(Str $property-name where (%!coerce{$_}:exists), $val, Bool :$warn = True) {
+
+        with try { %!coerce{$property-name}.($val); } {
+            $_;
+        }
+        else {
+            if $warn {
+                my $msg = "unable to parse CSS property '$property-name: $val;'";
+                $msg ~= "\n" ~ .message with $!;
+                note $msg;
+            }
+            Nil;
+        };
     }
+
     #| parse an individual property-specific expression
     multi method parse-property(Str $property-name, $val, Bool :$warn = True) {
         my $actions = $.actions.new;
