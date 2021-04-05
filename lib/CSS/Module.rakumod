@@ -107,9 +107,8 @@ class CSS::Module:ver<0.5.6> {
         }
         else {
             if $warn {
-                my $msg = "unable to parse CSS property '$property-name: $val;'";
-                $msg ~= "\n" ~ .message with $!;
-                note $msg;
+                note "unable to parse CSS property '$property-name: $val;'";
+                note .message with $!;
             }
             Nil;
         };
@@ -127,8 +126,10 @@ class CSS::Module:ver<0.5.6> {
             $actions.list(p);
         }
         else {
-            note "unable to parse CSS property '$property-name: $val;'"
-                if $warn;
+            if $warn {
+                note "unable to parse CSS property '$property-name: $val;'";
+                note $_ for $actions.warnings;
+            }
             Nil;
         }
     }

@@ -25,7 +25,7 @@ class Build {
                 for .value.list {
                     my ($input-spec, $class-isa) = .kv;
                     my $grammar = CSS::Module::CSS3;
-                    if $class-isa[*-1] eq 'AtFontFace' {
+                    if $class-isa.tail eq 'AtFontFace' {
                         $grammar = CSS::Module::CSS3::Fonts::AtFontFace;
                         %props = ();
                     }
