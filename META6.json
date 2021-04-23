@@ -1,5 +1,5 @@
 {
-  "auth": "github:css-raku",
+  "auth": "cpan:WARRINGD",
   "authors": [
     "David Warring"
   ],
@@ -8,7 +8,7 @@
   "depends": [
     "CSS::Grammar:ver<0.3.5+>",
     "CSS::Module::CSS3::Selectors:ver<0.0.4>",
-    "CSS::Specification:ver<0.4.9+>",
+    "CSS::Specification:ver<0.4.10+>",
     "CSS::Writer:ver<0.2.6+>",
     "JSON::Fast"
   ],

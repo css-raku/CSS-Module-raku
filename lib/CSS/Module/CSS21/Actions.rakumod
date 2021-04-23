@@ -1,6 +1,6 @@
 use v6;
 
-use CSS::Specification::Terms::Actions;
+use CSS::Specification::Defs::Actions;
 use CSS::Module::CSS21::Gen::Interface;
 use CSS::Module::CSS21::Gen::Actions;
 use CSS::Grammar::Actions;
@@ -44,7 +44,7 @@ class CSS::ModuleX::CSS21::Actions
 
 class CSS::Module::CSS21::Actions
     is CSS::ModuleX::CSS21::Actions
-    is CSS::Specification::Terms::Actions 
+    is CSS::Specification::Defs::Actions 
     is CSS::Grammar::Actions
     does CSS::Module::CSS21::Gen::Interface {
 

@@ -31,7 +31,7 @@ is css1-module.index[6].child-names[1], 'border-style';
 is css1-module.property-name(css1-module.index[6].children[1]), 'border-style';
 
 my \css21-module = CSS::Module::CSS21.module;
-css21-module.alias(:name<-xhtml-align>, :like<text-align>);
+css21-module.extend(:name<-xhtml-align>, :like<text-align>);
 my \alias = css21-module.index.tail;
 is alias.name, '-xhtml-align';
 isa-ok css21-module.grammar, ::('CSS::Module::CSS21'), 'css21 grammar';

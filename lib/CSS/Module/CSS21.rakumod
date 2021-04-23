@@ -4,7 +4,7 @@ use v6;
 
 use CSS::Grammar::CSS21;
 use CSS::Module;
-use CSS::Specification::Terms;
+use CSS::Specification::Defs;
 use CSS::Module::CSS21::Gen::Interface;
 use CSS::Module::CSS21::Gen::Grammar;
 
@@ -42,7 +42,7 @@ grammar CSS::ModuleX::CSS21
 
 grammar CSS::Module::CSS21 #:api<css-20110607>
     is CSS::ModuleX::CSS21
-    is CSS::Specification::Terms
+    is CSS::Specification::Defs
     is CSS::Grammar::CSS21
     does CSS::Module::CSS21::Gen::Interface {
 

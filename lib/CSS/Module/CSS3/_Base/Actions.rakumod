@@ -1,10 +1,10 @@
 use v6;
 
-use CSS::Specification::Terms::Actions;
+use CSS::Specification::Defs::Actions;
 use CSS::Grammar::Actions;
 
 class CSS::Module::CSS3::_Base::Actions
-    is CSS::Specification::Terms::Actions
+    is CSS::Specification::Defs::Actions
     is CSS::Grammar::Actions {
 
     method decl($/, :@proforma = <inherit initial>) {
