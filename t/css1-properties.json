@@ -18,6 +18,7 @@
 { "prop" : "float", "decl" : "left", "expr" : [ { "keyw" : "left" } ] }
 { "prop" : "font-family", "decl" : "Gill, 'Helvetica', sans-serif", "expr" : [ { "ident" : "Gill" }, { "op" : "," }, { "string" : "Helvetica" }, { "op" : "," }, { "keyw" : "sans-serif" } ] }
 { "prop" : "font-family", "decl" : "New Century Schoolbook", "expr" : [ { "ident" : "New Century Schoolbook" } ] }
+{ "prop" : "font-family", "decl" : "New\nCentury  Schoolbook", "expr" : [ { "ident" : "New Century Schoolbook" } ] }
 { "prop" : "font-style", "decl" : "italic", "expr" : [ { "keyw" : "italic" } ] }
 { "prop" : "font-variant", "decl" : "small-caps", "expr" : [ { "keyw" : "small-caps" } ] }
 { "prop" : "font-weight", "decl" : "bolder", "expr" : [ { "keyw" : "bolder" } ] }
