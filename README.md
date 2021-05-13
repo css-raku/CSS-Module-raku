@@ -1,3 +1,6 @@
+[[Raku CSS Project]](https://css-raku.github.io)
+ / [[CSS-Module]](https://css-raku.github.io/CSS-Module-raku)
+
 # CSS::Module
 
 ```
@@ -161,9 +164,9 @@ say $module.property-metadata<-my-align>.raku;
 
 ## See Also
 
-- [CSS::Specification](https://github.com/css-raku/CSS-Specification-raku) - property definition syntax
-- [CSS::Grammar](https://github.com/css-raku/CSS-Grammar-raku) - base grammars
-- [CSS::Writer](https://github.com/css-raku/CSS-Writer-raku) - AST reserializer
+- [CSS::Specification](https://css-raku.github.io/CSS-Specification-raku) - property definition syntax
+- [CSS::Grammar](https://css-raku.github.io/CSS-Grammar-raku) - base grammars
+- [CSS::Writer](https://css-raku.github.io/CSS-Writer-raku) - AST reserializer
 
 ## References
 
