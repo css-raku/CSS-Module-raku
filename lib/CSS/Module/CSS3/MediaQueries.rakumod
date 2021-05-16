@@ -67,35 +67,34 @@ class CSS::Module::CSS3::MediaQueries { #:api<css3-mediaqueries-20120619>
 
     rule media-feature-unknown  { (<.Ident>) [ ':' <any>* ]? }
 
-}
+    class Actions {
 
-class CSS::Module::CSS3::MediaQueries::Actions {
+        use CSS::Grammar::Defs :CSSValue;
 
-    use CSS::Grammar::Defs :CSSValue;
+        # rule-list, media-list, media see core grammar actions
+        method unknown-media-list($/) {
+            $.warning("discarding media list");
+            make [{"media-query" => [{keyw => "not"}, {ident => "all"}]}];
+        }
 
-    # rule-list, media-list, media see core grammar actions
-    method unknown-media-list($/) {
-	$.warning("discarding media list");
-        make [{"media-query" => [{keyw => "not"}, {ident => "all"}]}];
-    }
+        method media-query($/) {
+            return make [{keyw => "not"}, {ident => "all"}]
+                if @<media-expr> && @<media-expr>.grep({! .ast.defined});
 
-    method media-query($/) {
-        return make [{keyw => "not"}, {ident => "all"}]
-            if @<media-expr> && @<media-expr>.grep({! .ast.defined});
+            make $.list($/);
+        }
 
-	make $.list($/);
-    }
+        method media-op($/) {
+            make $.token($/.lc, :type<keyw>);
+        }
 
-    method media-op($/) {
-        make $.token($/.lc, :type<keyw>);
-    }
+        method media-expr($/) {
+            make $.token( $.decl($<expr>, :proforma()), :type(CSSValue::Property) )
+                if $<expr>;
+        }
 
-    method media-expr($/) {
-	make $.token( $.decl($<expr>, :proforma()), :type(CSSValue::Property) )
-            if $<expr>;
-    }
-
-    method media-feature-unknown($/)   {
-        $.warning('unknown media-feature', lc($0));
+        method media-feature-unknown($/)   {
+            $.warning('unknown media-feature', lc($0));
+        }
     }
 }

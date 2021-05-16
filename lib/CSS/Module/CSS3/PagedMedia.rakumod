@@ -30,12 +30,11 @@ grammar CSS::Module::CSS3::PagedMedia  # :api<css3-page-20061010>
     token margin-box{:i[<box-hpos>'-'[<box-vpos>['-corner']?|<box-center>]
                       |<box-vpos>'-'[<box-hpos>['-corner']?|<box-center>]]}
     rule margin-declaration { <margin-box> <declarations> }
-}
 
-class CSS::Module::CSS3::PagedMedia::Actions
-    is CSS::Module::CSS3::_Base::Actions 
-    is CSS::Module::CSS3::PagedMedia::Gen::Actions
-    does CSS::Module::CSS3::PagedMedia::Gen::Interface {
+    class Actions
+      is CSS::Module::CSS3::_Base::Actions
+      is CSS::Module::CSS3::PagedMedia::Gen::Actions
+      does CSS::Module::CSS3::PagedMedia::Gen::Interface {
 
         use CSS::Grammar::Defs :CSSValue;
 
@@ -59,4 +58,5 @@ class CSS::Module::CSS3::PagedMedia::Actions
         method margin-declaration($/) {
             make $.at-rule($/);
         }
+    }
 }

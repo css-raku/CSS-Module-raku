@@ -7,12 +7,9 @@ use v6;
 class CSS::Module::CSS3::Namespaces { #:api<css3-namespace-20110929>
 
     rule at-decl:sym<namespace> {'@'(:i'namespace') <ns-prefix=.Ident>? [<url=.url-string>|<url>] ';' }
+
+    class Actions {
+        use CSS::Grammar::Defs :CSSObject;
+        method at-decl:sym<namespace>($/) { make $.at-rule($/) }
+    }
 }
-
-class CSS::Module::CSS3::Namespaces::Actions {
-
-    use CSS::Grammar::Defs :CSSObject;
-
-    method at-decl:sym<namespace>($/) { make $.at-rule($/) }
-}
-

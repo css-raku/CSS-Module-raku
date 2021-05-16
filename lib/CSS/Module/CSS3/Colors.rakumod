@@ -76,54 +76,52 @@ grammar CSS::Module::CSS3::Colors { #:api<css3-color-20110607>
                    ')'
     }
 
+    class Actions {
+
+        use CSS::Grammar::Defs :CSSValue;
+
+        method color-angle($/) {
+            make $<number>.ast;
+        }
+
+        method color-alpha($/) {
+            my Numeric $alpha = $<number>.ast.value;
+            $alpha = 0.0 if $alpha < 0.0;
+            $alpha = 1.0 if $alpha > 1.0;
+            make $.token($alpha, :type(CSSValue::NumberComponent));
+        }
+
+        method percentage-range($/) {
+            return make $<color-alpha>.ast
+                if $<color-alpha>;
+            my Numeric $percentage = $<percentage>.ast.value;
+            $percentage = 0 if $percentage < 0;
+            $percentage = 100 if $percentage > 100;
+            make $.token($percentage, :type(CSSValue::PercentageComponent))
+        }
+
+        method color:sym<rgba>($/) {
+            return $.warning( $<usage>.ast ) if $<usage>;
+            make $.token( $.list($/), :type<rgba>);
+        }
+
+        method color:sym<hsl>($/)  {
+            return $.warning( $<usage>.ast ) if $<usage>;
+            make $.token( $.list($/), :type<hsl>);
+        }
+
+        method color:sym<hsla>($/) {
+            return $.warning( $<usage>.ast ) if $<usage>;
+            make $.token( $.list($/), :type<hsla>);
+        }
+
+        method color:sym<current>($/) {
+            make $<keyw>.ast;
+        }
+
+        method color:sym<transparent>($/) {
+            make $<keyw>.ast;
+        }
+
+    }
 }
-
-class CSS::Module::CSS3::Colors::Actions {
-
-    use CSS::Grammar::Defs :CSSValue;
-
-    method color-angle($/) {
-        make $<number>.ast;
-    }
-
-    method color-alpha($/) {
-        my Numeric $alpha = $<number>.ast.value;
-        $alpha = 0.0 if $alpha < 0.0;
-        $alpha = 1.0 if $alpha > 1.0;
-        make $.token($alpha, :type(CSSValue::NumberComponent));
-    }
-
-    method percentage-range($/) {
-        return make $<color-alpha>.ast
-            if $<color-alpha>;
-        my Numeric $percentage = $<percentage>.ast.value;
-        $percentage = 0 if $percentage < 0;
-        $percentage = 100 if $percentage > 100;
-        make $.token($percentage, :type(CSSValue::PercentageComponent))
-    }
-
-    method color:sym<rgba>($/) {
-        return $.warning( $<usage>.ast ) if $<usage>;
-        make $.token( $.list($/), :type<rgba>);
-    }
-
-    method color:sym<hsl>($/)  {
-        return $.warning( $<usage>.ast ) if $<usage>;
-        make $.token( $.list($/), :type<hsl>);
-    }
-
-    method color:sym<hsla>($/) {
-        return $.warning( $<usage>.ast ) if $<usage>;
-        make $.token( $.list($/), :type<hsla>);
-    }
-
-    method color:sym<current>($/) {
-        make $<keyw>.ast;
-    }
-
-    method color:sym<transparent>($/) {
-        make $<keyw>.ast;
-    }
-
-}
-
