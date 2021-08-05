@@ -16,14 +16,15 @@ grammar CSS::Module::CSS3::Fonts::AtFontFace
         use CSS::Module;
         use CSS::Module::CSS3::Actions;
         use CSS::Module::CSS3::Fonts::AtFontFace::Metadata;
+        my constant Metadata = CSS::Module::CSS3::Fonts::AtFontFace::Metadata;
         # we share the actions class
-        state $ = CSS::Module.new(
+        CSS::Module.new(
             :name<@fontface>,
             :grammar($?CLASS),
 	    :actions(CSS::Module::CSS3::Actions),
-	    :property-metadata($CSS::Module::CSS3::Fonts::AtFontFace::Metadata::property),
-            :prop-names(CSS::Module::CSS3::Fonts::AtFontFace::Metadata::prop-names.enums),
-            :index(&CSS::Module::CSS3::Fonts::AtFontFace::Metadata::index),
+	    :property-metadata($Metadata::property),
+            :prop-names(Metadata::prop-names.enums),
+            :index(&Metadata::index),
             |c
 	    );
     }

@@ -20,13 +20,14 @@ grammar CSS::Module::CSS1 #:api<css1-20080411>
         method module(|c) {
 	    use CSS::Module::CSS1::Actions;
             use CSS::Module::CSS1::Metadata;
+            my constant Metadata = CSS::Module::CSS1::Metadata;
 	    CSS::Module.new(
                 :name<CSS1>,
                 :grammar($?CLASS),
                 :actions(CSS::Module::CSS1::Actions),
-                :property-metadata($CSS::Module::CSS1::Metadata::property),
-                :prop-names(CSS::Module::CSS1::Metadata::prop-names),
-                :index(&CSS::Module::CSS1::Metadata::index),
+                :property-metadata($Metadata::property),
+                :prop-names(Metadata::prop-names),
+                :index(&Metadata::index),
                 |c
             );
         }

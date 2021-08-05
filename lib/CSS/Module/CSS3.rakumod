@@ -27,13 +27,14 @@ grammar CSS::Module::CSS3:api<css-2010-20110512>
         use CSS::Module::CSS3::Actions;
         use CSS::Module::CSS3::Metadata;
         use CSS::Module::CSS3::Fonts::AtFontFace;
+        my constant Metadata = CSS::Module::CSS3::Metadata;
         CSS::Module.new(
             :name<CSS3>,
             :grammar($?CLASS),
 	    :actions(CSS::Module::CSS3::Actions),
-	    :property-metadata($CSS::Module::CSS3::Metadata::property),
-            :prop-names(CSS::Module::CSS3::Metadata::prop-names),
-            :index(&CSS::Module::CSS3::Metadata::index),
+	    :property-metadata($Metadata::property),
+            :prop-names(Metadata::prop-names),
+            :index(&Metadata::index),
             :sub-module('@font-face' => CSS::Module::CSS3::Fonts::AtFontFace.module),
             |c
 	    );

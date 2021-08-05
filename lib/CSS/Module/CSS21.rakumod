@@ -49,14 +49,15 @@ grammar CSS::Module::CSS21 #:api<css-20110607>
     method module(|c) {
         use CSS::Module::CSS21::Actions;
         use CSS::Module::CSS21::Metadata;
+        my constant Metadata = CSS::Module::CSS21::Metadata;
 
         CSS::Module.new(
             :name<CSS2.1>,
             :grammar($?CLASS),
 	    :actions(CSS::Module::CSS21::Actions),
-            :property-metadata($CSS::Module::CSS21::Metadata::property),
-            :prop-names(CSS::Module::CSS21::Metadata::prop-names),
-            :index(&CSS::Module::CSS21::Metadata::index),
+            :property-metadata($Metadata::property),
+            :prop-names(Metadata::prop-names),
+            :index(&Metadata::index),
             |c
         );
     }
