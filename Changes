@@ -1,4 +1,7 @@
 {{$NEXT}}
+  - factor out <font-src-expr> repeating term from @font-face 'src' property
+    syntax. This fixes over-flattening issues in the AST, in particular, in
+    CSS::Properties.
 
 0.5.8  2021-04-24T09:52:07+12:00
   - Upgrade to PDF::Specification 0.4.10

@@ -35,6 +35,6 @@ class CSS::Module::CSS3::Fonts::Actions
 
     method font-description($/)   { make $<declarations>.ast }
     method font-variant-css21($/) { make $.token($.list($/), :type<expr:font-variant>) }
-    method src($/)                { make $.node($/) }
+    method font-src-expr($/)      { $.expr($/) }
 
 }
