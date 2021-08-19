@@ -71,6 +71,11 @@ class CSS::Module::CSS3::MediaQueries { #:api<css3-mediaqueries-20120619>
 
         use CSS::Grammar::Defs :CSSValue;
 
+        method !build {
+            use CSS::Specification::AST;
+            CSS::Specification::AST;
+        }
+
         # rule-list, media-list, media see core grammar actions
         method unknown-media-list($/) {
             $.warning("discarding media list");
@@ -81,15 +86,15 @@ class CSS::Module::CSS3::MediaQueries { #:api<css3-mediaqueries-20120619>
             return make [{keyw => "not"}, {ident => "all"}]
                 if @<media-expr> && @<media-expr>.grep({! .ast.defined});
 
-            make $.list($/);
+            make self!build.list($/);
         }
 
         method media-op($/) {
-            make $.token($/.lc, :type<keyw>);
+            make self!build.token($/.lc, :type<keyw>);
         }
 
-        method media-expr($/) {
-            make $.token( $.decl($<expr>, :proforma()), :type(CSSValue::Property) )
+        method media-expr($obj: $/) {
+            make self!build.token( self!build.decl($<expr>, :$obj), :type(CSSValue::Property) )
                 if $<expr>;
         }
 

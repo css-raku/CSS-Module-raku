@@ -32,27 +32,27 @@ grammar CSS::Module::CSS3::Fonts::Variants {
     class CSS::Module::CSS3::Fonts::Variants::Actions {
 
         method feature-value-name($/) { make $<identifier>.ast }
-        method feature-value-item($/) { make $.list($/) }
-        method feature-value-list($/) { make $.list($/) }
+        method feature-value-item($/) { make $.build.list($/) }
+        method feature-value-list($/) { make $.build.list($/) }
 
-        method annotation($/)        { make $.func( $0.lc, $<args>.ast ) }
-        method character-variant($/) { make $.func( $0.lc, $<args>.ast ) }
-        method ornaments($/)         { make $.func( $0.lc, $<args>.ast ) }
-        method stylistic($/)         { make $.func( $0.lc, $<args>.ast ) }
-        method styleset($/)          { make $.func( $0.lc, $<args>.ast ) }
-        method swash($/)             { make $.func( $0.lc, $<args>.ast ) }
+        method annotation($/)        { make $.build.func( $0.lc, $<args>.ast ) }
+        method character-variant($/) { make $.build.func( $0.lc, $<args>.ast ) }
+        method ornaments($/)         { make $.build.func( $0.lc, $<args>.ast ) }
+        method stylistic($/)         { make $.build.func( $0.lc, $<args>.ast ) }
+        method styleset($/)          { make $.build.func( $0.lc, $<args>.ast ) }
+        method swash($/)             { make $.build.func( $0.lc, $<args>.ast ) }
 
-        method common-lig-values($/) { make $<keyw>.ast }
-        method discretionary-lig-values($/) { make $<keyw>.ast }
-        method historical-lig-values($/) { make $<keyw>.ast }
-        method contextual-alt-values($/) { make $<keyw>.ast }
-        method numeric-figure-values($/) { make $<keyw>.ast }
-        method numeric-spacing-values($/) { make $<keyw>.ast }
-        method numeric-fraction-values($/) { make $<keyw>.ast }
+        method common-lig-values($/)         { make $<keyw>.ast }
+        method discretionary-lig-values($/)  { make $<keyw>.ast }
+        method historical-lig-values($/)     { make $<keyw>.ast }
+        method contextual-alt-values($/)     { make $<keyw>.ast }
+        method numeric-figure-values($/)     { make $<keyw>.ast }
+        method numeric-spacing-values($/)    { make $<keyw>.ast }
+        method numeric-fraction-values($/)   { make $<keyw>.ast }
         method east-asian-variant-values($/) { make $<keyw>.ast }
-        method east-asian-width-values($/) { make $<keyw>.ast }
+        method east-asian-width-values($/)   { make $<keyw>.ast }
 
-        method feature-tag-value($/) { make $.token( $.list($/), :type<expr:feature-tag-value>) }
+        method feature-tag-value($/) { make $.build.token( $.build.list($/), :type<expr:feature-tag-value>) }
         method urange($/) { make $<unicode-range>.ast }
     }
 }

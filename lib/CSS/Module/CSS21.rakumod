@@ -40,7 +40,7 @@ grammar CSS::ModuleX::CSS21
                              | [ higher | lower ] & <tilt=.keyw> }
 }
 
-grammar CSS::Module::CSS21 #:api<css-20110607>
+grammar CSS::Module::CSS21
     is CSS::ModuleX::CSS21
     is CSS::Specification::Defs
     is CSS::Grammar::CSS21

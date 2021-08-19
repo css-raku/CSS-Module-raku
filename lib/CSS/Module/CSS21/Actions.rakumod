@@ -16,28 +16,28 @@ class CSS::ModuleX::CSS21::Actions
     method attr($/)             {
         return $.warning(&?ROUTINE.WHY)
             if $<any-args>;
-        make $.func( 'attr', $.list($/) );
+        make $.build.func( 'attr', $.build.list($/) );
     }
 
     #| usage: counter(ident [, ident [,...] ])
     method counter($/) {
         return $.warning(&?ROUTINE.WHY)
             if $<any-args>;
-        make $.func( 'counter', $.list($/) );
+        make $.build.func( 'counter', $.build.list($/) );
     }
 
     #| usage: counters(ident [, "string"])
     method counters($/) {
         return $.warning(&?ROUTINE.WHY)
             if $<any-args>;
-        make $.func( 'counters', $.list($/) );
+        make $.build.func( 'counters', $.build.list($/) );
     }
 
     #| usage: rect(<top>, <right>, <botom>, <left>)
     method shape($/)     {
         return $.warning(&?ROUTINE.WHY)
             if $<any-args>;
-        make $.func( 'rect', $.list($/) );
+        make $.build.func( 'rect', $.build.list($/) );
     }
 
 }
@@ -48,8 +48,11 @@ class CSS::Module::CSS21::Actions
     is CSS::Grammar::Actions
     does CSS::Module::CSS21::Gen::Interface {
 
-    method decl($/, :@proforma = ['inherit']) {
-        nextwith($/, :@proforma);
+    method build {
+        use CSS::Specification::AST;
+        my class builder is CSS::Specification::AST {
+            method proforma { ['inherit'] }
+        }
     }
 
 }

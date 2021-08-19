@@ -7,11 +7,11 @@ use v6;
 use CSS::Module;
 use CSS::Specification::Defs;
 use CSS::Grammar::CSS1;
-# make-modules.pl targets
+# make-modules.raku targets
 use CSS::Module::CSS1::Gen::Interface;
 use CSS::Module::CSS1::Gen::Grammar;
 
-grammar CSS::Module::CSS1 #:api<css1-20080411>
+grammar CSS::Module::CSS1
     is CSS::Specification::Defs
     is CSS::Grammar::CSS1
     is CSS::Module::CSS1::Gen::Grammar

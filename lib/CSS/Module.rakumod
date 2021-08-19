@@ -120,10 +120,9 @@ class CSS::Module:ver<0.5.9> {
         my $prop = $property-name.lc;
         $prop = $_ with %!alias{$prop};
         my $rule = 'expr-' ~ $prop;
-        my \p = $.grammar.parse($val.Str, :$rule, :$actions );
 
-        if p {
-            $actions.list(p);
+        if $.grammar.parse($val.Str, :$rule, :$actions ) -> \p {
+            $actions.build.list(p);
         }
         else {
             if $warn {

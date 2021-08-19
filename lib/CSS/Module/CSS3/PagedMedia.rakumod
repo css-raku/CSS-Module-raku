@@ -10,7 +10,7 @@ use CSS::Module::CSS3::PagedMedia::Gen::Interface;
 use CSS::Module::CSS3::PagedMedia::Gen::Grammar;
 use CSS::Module::CSS3::PagedMedia::Gen::Actions;
 
-grammar CSS::Module::CSS3::PagedMedia  # :api<css3-page-20061010>
+grammar CSS::Module::CSS3::PagedMedia
     is CSS::Module::CSS3::_Base
     is CSS::Module::CSS3::PagedMedia::Gen::Grammar
     does CSS::Module::CSS3::PagedMedia::Gen::Interface {
@@ -46,17 +46,20 @@ grammar CSS::Module::CSS3::PagedMedia  # :api<css3-page-20061010>
                 $.warning("':' should be followed by one of: left right first")
             }
             else {
-                make $.token( $<keyw>.ast, :type(CSS::Grammar::Defs::CSSSelector::PseudoClass))
+                make $.build.token( $<keyw>.ast, :type(CSS::Grammar::Defs::CSSSelector::PseudoClass))
             }
         }
 
-        method page-declarations($/) { make $.token( $.declaration-list($/), :type(CSSValue::PropertyList)) }
+        method page-declarations($/) {
+            my @decls = ($<declaration>>>.ast).grep: {.defined};
+            make $.build.token(@decls, :type(CSSValue::PropertyList));
+        }
 
-        method box-center($/) { make $.token( 'center', :type(CSSValue::KeywordComponent)) }
-        method margin-box($/) { make $.token( $/.lc, :type(CSSValue::AtKeywordComponent)) }
+        method box-center($/) { make $.build.token( 'center', :type(CSSValue::KeywordComponent)) }
+        method margin-box($/) { make $.build.token( $/.lc, :type(CSSValue::AtKeywordComponent)) }
 
         method margin-declaration($/) {
-            make $.at-rule($/);
+            make $.build.at-rule($/);
         }
     }
 }
