@@ -1,5 +1,8 @@
 {{$NEXT}}
 
+0.5.10  2021-08-20T14:08:21+12:00
+  - Use CSS::Grammer 0.3.9 build() method for AST construction
+
 0.5.9  2021-08-19T07:01:37+12:00
   - factor out <font-src-expr> repeating term from @font-face 'src' property
     syntax. This fixes over-flattening issues in the AST, in particular, in
