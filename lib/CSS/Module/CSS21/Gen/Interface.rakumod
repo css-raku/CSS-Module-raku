@@ -6,11 +6,14 @@ role CSS::Module::CSS21::Gen::Interface {
     method align($/) { ... }
     method angle($/) { ... }
     method attr($/) { ... }
+    method behind($/) { ... }
     method border-style($/) { ... }
     method border-width($/) { ... }
     method color($/) { ... }
     method counter($/) { ... }
     method counters($/) { ... }
+    method delta($/) { ... }
+    method direction($/) { ... }
     method family-name($/) { ... }
     method frequency($/) { ... }
     method generic-family($/) { ... }
@@ -27,6 +30,7 @@ role CSS::Module::CSS21::Gen::Interface {
     method shape($/) { ... }
     method specific-voice($/) { ... }
     method string($/) { ... }
+    method tilt($/) { ... }
     method time($/) { ... }
     method uri($/) { ... }
     method valign($/) { ... }

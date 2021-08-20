@@ -55,7 +55,7 @@ is css3-module.name, 'CSS3', 'module.name';
 isa-ok css3-module.grammar, ::('CSS::Module::CSS3'), 'css3 grammar';
 isa-ok css3-module.actions, ::('CSS::Module::CSS3::Actions'), 'css3 actions';
 my \css3-prop = css3-module.property-metadata;
-is-deeply css3-prop<azimuth>, {:default["center", [{:keyw<center>},]], :inherit, :synopsis("<angle> | [[ left-side | far-left | left | center-left | center | center-right | right | far-right | right-side ] || behind ] | leftwards | rightwards")}, 'css3 azimuth';
+is-deeply css3-prop<azimuth>, {:default["center", [{:keyw<center>},]], :inherit, :synopsis("<angle> | [ <direction> || <behind> ] | <delta>")}, 'css3 azimuth';
 is-deeply css3-prop<border>, {:box, :children["border-width", "border-style", "border-color"], :edges["border-top", "border-right", "border-bottom", "border-left"], :!inherit, :synopsis("[ 'border-width' || 'border-style' || 'border-color' ]")}, 'css3 border';
 is-deeply css3-prop<border-style>, {:box, :edges[<border-top-style border-right-style border-bottom-style border-left-style>], :!inherit, :synopsis("<border-style>\{1,4}") }, 'css3 border-style';
 

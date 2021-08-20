@@ -1,5 +1,8 @@
 # source: http://www.w3.org/TR/2011/REC-CSS2-20110607/propidx.html
-'azimuth'	<angle> | [[ left-side | far-left | left | center-left | center | center-right | right | far-right | right-side ] || behind ] | leftwards | rightwards | inherit	center	 	yes	 	aural
+'azimuth'	<angle> | [ <direction> || <behind> ] | <delta> | inherit	center	 	yes	 	aural
+    <delta> := leftwards | rightwards
+    <direction> := left-side | far-left | left | center-left | center | center-right | right | far-right | right-side
+    <behind> := behind
 'background-attachment'	scroll | fixed | inherit	scroll	 	no	 	visual
 'background-color'	<color> | transparent | inherit	transparent	 	no	 	visual
 'background-image'	<uri> | none | inherit	none	 	no	 	visual
@@ -37,7 +40,9 @@
 'cursor'	[ [<uri> ,]* [ auto | crosshair | default | pointer | move | e-resize | ne-resize | nw-resize | n-resize | se-resize | sw-resize | s-resize | w-resize | text | wait | help | progress ] ] | inherit	auto	 	yes	 	visual, interactive
 'direction'	ltr | rtl | inherit	ltr	all elements, but see prose	yes	 	visual
 'display'	inline | block | list-item | inline-block | table | inline-table | table-row-group | table-header-group | table-footer-group | table-row | table-column-group | table-column | table-cell | table-caption | none | inherit	inline	 	no	 	all
-'elevation'	<angle> | below | level | above | higher | lower | inherit	level	 	yes	 	aural
+'elevation'	<angle> | <tilt> | inherit	level	 	yes	 	aural
+    <tilt> :=  below | level | above | higher | lower
+
 'empty-cells'	show | hide | inherit	show	'table-cell' elements	yes	 	visual
 'float'	left | right | none | inherit	none	all, but see 9.7	no	 	visual
 'font-family'	[ <generic-family> | <family-name> ]# | inherit	depends on user agent	 	yes	 	visual

@@ -4,9 +4,18 @@ use v6;
 
 grammar CSS::Module::CSS21::Gen::Grammar {
 
-    #| azimuth: <angle> | [[ left-side | far-left | left | center-left | center | center-right | right | far-right | right-side ] || behind ] | leftwards | rightwards
+    #| azimuth: <angle> | [ <direction> || <behind> ] | <delta>
     rule decl:sym<azimuth> {:i (azimuth) ':' <val( rx{ <expr=.expr-azimuth> }, &?ROUTINE.WHY)> }
-    rule expr-azimuth {:i :my @*SEEN; [ <angle> || [ [ [ [ left\-side | far\-left | left | center\-left | center | center\-right | right | far\-right | right\-side ] & <keyw> ] <!seen(0)> | behind & <keyw> <!seen(1)> ]+ ] || [ leftwards | rightwards ] & <keyw> ] }
+    rule expr-azimuth {:i :my @*SEEN; [ <angle> || [ [ <direction> <!seen(0)> | <behind> <!seen(1)> ]+ ] || <delta> ] }
+
+    #| delta: leftwards | rightwards
+    rule delta {:i [ leftwards | rightwards ] & <keyw> }
+
+    #| direction: left-side | far-left | left | center-left | center | center-right | right | far-right | right-side
+    rule direction {:i [ left\-side | far\-left | left | center\-left | center | center\-right | right | far\-right | right\-side ] & <keyw> }
+
+    #| behind: behind
+    rule behind {:i behind & <keyw> }
 
     #| background-attachment: scroll | fixed
     rule decl:sym<background-attachment> {:i (background\-attachment) ':' <val( rx{ <expr=.expr-background-attachment> }, &?ROUTINE.WHY)> }
@@ -188,9 +197,12 @@ grammar CSS::Module::CSS21::Gen::Grammar {
     rule decl:sym<display> {:i (display) ':' <val( rx{ <expr=.expr-display> }, &?ROUTINE.WHY)> }
     rule expr-display {:i [ inline | block | list\-item | inline\-block | table | inline\-table | table\-row\-group | table\-header\-group | table\-footer\-group | table\-row | table\-column\-group | table\-column | table\-cell | table\-caption | none ] & <keyw> }
 
-    #| elevation: <angle> | below | level | above | higher | lower
+    #| elevation: <angle> | <tilt>
     rule decl:sym<elevation> {:i (elevation) ':' <val( rx{ <expr=.expr-elevation> }, &?ROUTINE.WHY)> }
-    rule expr-elevation {:i [ <angle> || [ below | level | above | higher | lower ] & <keyw> ] }
+    rule expr-elevation {:i [ <angle> || <tilt> ] }
+
+    #| tilt: below | level | above | higher | lower
+    rule tilt {:i [ below | level | above | higher | lower ] & <keyw> }
 
     #| empty-cells: show | hide
     rule decl:sym<empty-cells> {:i (empty\-cells) ':' <val( rx{ <expr=.expr-empty-cells> }, &?ROUTINE.WHY)> }

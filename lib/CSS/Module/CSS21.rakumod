@@ -27,17 +27,6 @@ grammar CSS::ModuleX::CSS21
     rule counters {:i'counters(' [ <identifier> [ ',' <string> [ ',' <expr-list-style-type> ]* ]? || <any-args> ] ')' }
     rule shape    {:i'rect(' [ [ <length> | auto & <keyw> ]**4 %',' || <any-args> ] ')' }
 
-    # --- Expressions --- #
-
-    rule expr-azimuth {:i <angle>
-                           | [ leftwards | rightwards]  & <delta=.keyw>
-                           | [:my @*SEEN;
-                              [ [left|right][\-side]? | far\-[left|right] | center[\-[left|right]]? ] & <direction=.keyw> <!seen(0)>
-                              | behind & <behind=.keyw> <!seen(1)> ]+ }
-
-    rule expr-elevation {:i <angle>
-                             | [below | level | above ] & <direction=.keyw>
-                             | [ higher | lower ] & <tilt=.keyw> }
 }
 
 grammar CSS::Module::CSS21
