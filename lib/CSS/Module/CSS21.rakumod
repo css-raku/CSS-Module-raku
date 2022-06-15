@@ -2,14 +2,9 @@ use v6;
 
 # specification: http://www.w3.org/TR/2011/REC-CSS2-20110607/propidx.html
 
-use CSS::Grammar::CSS21;
-use CSS::Module;
-use CSS::Specification::Defs;
-use CSS::Module::CSS21::Gen::Interface;
-use CSS::Module::CSS21::Gen::Grammar;
-
-grammar CSS::ModuleX::CSS21
-    is CSS::Module::CSS21::Gen::Grammar {
+grammar CSS::ModuleX::CSS21 {
+    use CSS::Module::CSS21::Gen::Grammar;
+    also is CSS::Module::CSS21::Gen::Grammar;
 
     token proforma:sym<inherit> {:i inherit}
 
@@ -29,11 +24,19 @@ grammar CSS::ModuleX::CSS21
 
 }
 
-grammar CSS::Module::CSS21
-    is CSS::ModuleX::CSS21
-    is CSS::Specification::Defs
-    is CSS::Grammar::CSS21
-    does CSS::Module::CSS21::Gen::Interface {
+grammar CSS::Module::CSS21 {
+
+    use     CSS::Module;
+    also is CSS::ModuleX::CSS21;
+
+    use     CSS::Specification::Defs;
+    also is CSS::Specification::Defs;
+
+    use     CSS::Grammar::CSS21;
+    also is CSS::Grammar::CSS21;
+
+    use       CSS::Module::CSS21::Gen::Interface;
+    also does CSS::Module::CSS21::Gen::Interface;
 
     method module(|c) {
         use CSS::Module::CSS21::Actions;

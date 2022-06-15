@@ -1,12 +1,8 @@
 use v6;
 
-use CSS::Specification::Defs::Actions;
-use CSS::Module::CSS21::Gen::Interface;
-use CSS::Module::CSS21::Gen::Actions;
-use CSS::Grammar::Actions;
-
-class CSS::ModuleX::CSS21::Actions
-    is CSS::Module::CSS21::Gen::Actions {
+class CSS::ModuleX::CSS21::Actions {
+    use     CSS::Module::CSS21::Gen::Actions;
+    also is CSS::Module::CSS21::Gen::Actions;
 
     method color:sym<system>($/) { make $.node($/) }
 
@@ -42,11 +38,18 @@ class CSS::ModuleX::CSS21::Actions
 
 }
 
-class CSS::Module::CSS21::Actions
-    is CSS::ModuleX::CSS21::Actions
-    is CSS::Specification::Defs::Actions 
-    is CSS::Grammar::Actions
-    does CSS::Module::CSS21::Gen::Interface {
+class CSS::Module::CSS21::Actions {
+
+    also is CSS::ModuleX::CSS21::Actions;
+
+    use     CSS::Specification::Defs::Actions;
+    also is CSS::Specification::Defs::Actions ;
+
+    use     CSS::Grammar::Actions;
+    also is CSS::Grammar::Actions;
+
+    use       CSS::Module::CSS21::Gen::Interface;
+    also does CSS::Module::CSS21::Gen::Interface;
 
     method build {
         use CSS::Specification::AST;

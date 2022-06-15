@@ -48,6 +48,7 @@ class CSS::Module:ver<0.5.10> {
         my $like = %!alias{$name} // die "unknown property alias: '$name'";
         %(:$name, :$like);
     }
+
     method !register-property(:$name!, :%metadata) {
         die "unable to register container property '$name' - NYI"
             if %metadata<children> || %metadata<box>;
@@ -58,6 +59,7 @@ class CSS::Module:ver<0.5.10> {
         my CSS::Module::Property $prop .= new: :$name, :$prop-num, |%metadata;
         self.index[$prop-num] = $prop;
     }
+
     multi method extend(
         Str:D :$name!,
         Str:D :like($base-prop)!,
@@ -92,6 +94,7 @@ class CSS::Module:ver<0.5.10> {
 
         self!register-property: :$name, :%metadata;
     }
+
     submethod TWEAK(:%alias, :%extensions, :$prop-names! is copy) {
         given $prop-names {
             %!prop-names = $_ ~~ Enumeration ?? .enums !! $_;

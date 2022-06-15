@@ -5,20 +5,21 @@ use v6;
 #
 # nb this standard is under revision (as of Feb 2013). Biggest change
 # is the proposed at-rule @font-feature-values
+grammar CSS::Module::CSS3::Fonts {
 
-use CSS::Module::CSS3::Fonts::AtFontFace;
-use CSS::Module::CSS3::Fonts::Variants;
-use CSS::Module::CSS3::_Base;
+    use     CSS::Module::CSS3::Fonts::Variants;
+    also is CSS::Module::CSS3::Fonts::Variants;
 
-use CSS::Module::CSS3::Fonts::Gen::Interface;
-use CSS::Module::CSS3::Fonts::Gen::Grammar;
-use CSS::Module::CSS3::Fonts::AtFontFace::Gen::Interface;
+    use     CSS::Module::CSS3::Fonts::Gen::Grammar;
+    also is CSS::Module::CSS3::Fonts::Gen::Grammar;
 
-grammar CSS::Module::CSS3::Fonts #:api<css3-fonts-20130212> 
-    is CSS::Module::CSS3::Fonts::Variants
-    is CSS::Module::CSS3::Fonts::Gen::Grammar
-    is CSS::Module::CSS3::_Base
-    does CSS::Module::CSS3::Fonts::Gen::Interface {
+    use     CSS::Module::CSS3::_Base;
+    also is CSS::Module::CSS3::_Base;
+
+    use       CSS::Module::CSS3::Fonts::Gen::Interface;
+    also does CSS::Module::CSS3::Fonts::Gen::Interface;
+
+    use CSS::Module::CSS3::Fonts::AtFontFace;
 
     rule font-description {<declarations=.CSS::Module::CSS3::Fonts::AtFontFace::declarations>}
     rule at-rule:sym<font-face> {\@(:i'font-face') <font-description> }

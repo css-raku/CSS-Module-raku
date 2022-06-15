@@ -1,15 +1,19 @@
 use v6;
 
-use CSS::Module::CSS3::Fonts::Variants;
-use CSS::Module::CSS3::_Base;
-use CSS::Module::CSS3::Fonts::AtFontFace::Gen::Interface;
-use CSS::Module::CSS3::Fonts::AtFontFace::Gen::Grammar;
+# grammar for @font-face rule
+grammar CSS::Module::CSS3::Fonts::AtFontFace {
 
-grammar CSS::Module::CSS3::Fonts::AtFontFace
-    is CSS::Module::CSS3::Fonts::Variants
-    is CSS::Module::CSS3::Fonts::AtFontFace::Gen::Grammar
-    is CSS::Module::CSS3::_Base
-    does CSS::Module::CSS3::Fonts::AtFontFace::Gen::Interface {
+    use     CSS::Module::CSS3::Fonts::Variants;
+    also is CSS::Module::CSS3::Fonts::Variants;
+
+    use     CSS::Module::CSS3::Fonts::AtFontFace::Gen::Grammar;
+    also is CSS::Module::CSS3::Fonts::AtFontFace::Gen::Grammar;
+
+    use     CSS::Module::CSS3::_Base;
+    also is CSS::Module::CSS3::_Base;
+
+    use       CSS::Module::CSS3::Fonts::AtFontFace::Gen::Interface;
+    also does CSS::Module::CSS3::Fonts::AtFontFace::Gen::Interface;
 
     # declare ourselves as a distinct submodule
     method module(|c) {

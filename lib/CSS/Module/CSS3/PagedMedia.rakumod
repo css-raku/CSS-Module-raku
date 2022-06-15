@@ -1,19 +1,18 @@
 use v6;
 
-use CSS::Module::CSS3::_Base;
-use CSS::Module::CSS3::_Base::Actions;
 # CSS3 Paged Media Module Extensions
 # - reference: http://www.w3.org/TR/2006/WD-css3-page-20061010/
 #
-
 use CSS::Module::CSS3::PagedMedia::Gen::Interface;
-use CSS::Module::CSS3::PagedMedia::Gen::Grammar;
-use CSS::Module::CSS3::PagedMedia::Gen::Actions;
 
-grammar CSS::Module::CSS3::PagedMedia
-    is CSS::Module::CSS3::_Base
-    is CSS::Module::CSS3::PagedMedia::Gen::Grammar
-    does CSS::Module::CSS3::PagedMedia::Gen::Interface {
+grammar CSS::Module::CSS3::PagedMedia {
+    use     CSS::Module::CSS3::_Base;
+    also is CSS::Module::CSS3::_Base;
+
+    use     CSS::Module::CSS3::PagedMedia::Gen::Grammar;
+    also is CSS::Module::CSS3::PagedMedia::Gen::Grammar;
+
+    also does CSS::Module::CSS3::PagedMedia::Gen::Interface;
 
     rule page-pseudo        {:i':'[ [left|right|first] && <keyw> || <Ident> ]? }
 
@@ -31,10 +30,15 @@ grammar CSS::Module::CSS3::PagedMedia
                       |<box-vpos>'-'[<box-hpos>['-corner']?|<box-center>]]}
     rule margin-declaration { <margin-box> <declarations> }
 
-    class Actions
-      is CSS::Module::CSS3::_Base::Actions
-      is CSS::Module::CSS3::PagedMedia::Gen::Actions
-      does CSS::Module::CSS3::PagedMedia::Gen::Interface {
+    class Actions {
+
+        use     CSS::Module::CSS3::_Base::Actions;
+        also is CSS::Module::CSS3::_Base::Actions;
+
+        use     CSS::Module::CSS3::PagedMedia::Gen::Actions;
+        also is CSS::Module::CSS3::PagedMedia::Gen::Actions;
+
+        also does CSS::Module::CSS3::PagedMedia::Gen::Interface;
 
         use CSS::Grammar::Defs :CSSValue;
 
