@@ -1,5 +1,9 @@
 {{$NEXT}}
+
+0.5.11  2022-06-15T13:42:17+12:00
   - Revised handling of CSS21 'azimuth' and 'elevation' properties
+  - Minor refactor of classes and grammars
+  - Upload to zef ecosystem
 
 0.5.10  2021-08-20T14:08:21+12:00
   - Use CSS::Grammer 0.3.9 build() method for AST construction

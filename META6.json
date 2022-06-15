@@ -1,5 +1,5 @@
 {
-  "auth": "cpan:WARRINGD",
+  "auth": "zef:dwarring",
   "authors": [
     "David Warring"
   ],
@@ -62,5 +62,5 @@
   ],
   "test-depends": [
   ],
-  "version": "0.5.10"
+  "version": "0.5.11"
 }
