@@ -53,6 +53,12 @@
     "CSS::Module::CSS3::PagedMedia::Gen::Interface": "lib/CSS/Module/CSS3/PagedMedia/Gen/Interface.rakumod",
     "CSS::Module::CSS3::_Base": "lib/CSS/Module/CSS3/_Base.rakumod",
     "CSS::Module::CSS3::_Base::Actions": "lib/CSS/Module/CSS3/_Base/Actions.rakumod",
+    "CSS::Module::SVG": "lib/CSS/Module/SVG.rakumod",
+    "CSS::Module::SVG::Actions": "lib/CSS/Module/SVG/Actions.rakumod",
+    "CSS::Module::SVG::Gen::Actions": "lib/CSS/Module/SVG/Gen/Actions.rakumod",
+    "CSS::Module::SVG::Gen::Grammar": "lib/CSS/Module/SVG/Gen/Grammar.rakumod",
+    "CSS::Module::SVG::Gen::Interface": "lib/CSS/Module/SVG/Gen/Interface.rakumod",
+    "CSS::Module::SVG::Metadata": "lib/CSS/Module/SVG/Metadata.rakumod",
     "CSS::Module::Property": "lib/CSS/Module/Property.rakumod"
   },
   "resources": [

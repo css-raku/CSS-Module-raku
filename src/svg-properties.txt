@@ -1,0 +1,43 @@
+alignment-baseline	auto | baseline | before-edge | text-before-edge | middle | central | after-edge | text-after-edge | ideographic | alphabetic | hanging | mathematical	see property description	‘tspan’, ‘textPath’ elements	no	N/A	visual	yes	as specified
+baseline-shift	baseline | sub | super | <percentage> | <length>	baseline	‘tspan’, ‘textPath’ elements	no	refer to the "line height" of the ‘text’ element, which in the case of SVG is defined to be equal to the font size	visual	yes	absolute length, percentage, or keyword specified
+color	<color>	depends on user agent	elements to which properties fill, stroke, stop-color, flood-color, lighting-color apply	yes	N/A	visual	yes	an RGBA color
+color-interpolation	auto | sRGB | linearRGB	sRGB	container elements, graphics elements, gradient elements, ‘use’ and ‘animate’	yes	N/A	visual	yes	as specified
+color-rendering	auto | optimizeSpeed | optimizeQuality	auto	container elements, graphics elements, gradient elements, ‘use’ and ‘animate’	yes	N/A	visual	yes	as specified
+direction	ltr | rtl	ltr	text content elements	yes	N/A	visual	no	as specified
+display	inline | block | list-item | run-in | compact | marker | table | inline-table | table-row-group | table-header-group | table-footer-group | table-row | table-column-group | table-column | table-cell | table-caption | none	inline	‘svg’, ‘g’, ‘switch’, ‘a’, ‘foreignObject’, ‘use’ and graphics elements	no	N/A	all	yes	
+dominant-baseline	auto | use-script | no-change | reset-size | ideographic | alphabetic | hanging | mathematical | central | middle | text-after-edge | text-before-edge	auto	text content elements	yes	N/A	visual	yes	as specified
+fill	<paint> (See Specifying paint)	black	shapes and text content elements	yes	N/A	visual	yes	as specified, but with <color> values computed and <url> values made absolute
+fill-opacity	<alpha-value>	1	shapes and text content elements	yes	N/A	visual	yes	the specified value converted to a number, clamped to the range [0,1]
+fill-rule	nonzero | evenodd	nonzero	shapes and text content elements	yes	N/A	visual	yes	as specified
+font-variant	normal | small-caps	normal	text content elements	yes	N/A	visual	yes	see individual properties
+glyph-orientation-vertical	auto | <angle> | <number>	auto	text content elements	yes	N/A	visual	no	as specified
+image-rendering	auto | optimizeSpeed | optimizeQuality	auto	images	yes	N/A	visual	yes	as specified
+line-height	normal | <number> | <length-percentage>	normal	‘text’ elements	yes	refer to font size of element itself	visual	yes	for <length-percentage> the absolute value; otherwise as specified
+marker	see individual properties	see individual properties	shapes	yes	N/A	visual	yes	see individual properties
+marker-end
+marker-mid
+marker-start	none | <url>	none	shapes	yes	N/A	visual	yes	as specified, but with <url> values (that are part of a <marker-ref>) made absolute
+opacity	<alpha-value>	1	‘svg’, ‘g’, ‘symbol’, ‘marker’, ‘a’, ‘switch’, ‘use’, ‘unknown’ elements and graphics elements	no	N/A	visual	yes	the specified value converted to a number, clamped to the range [0,1]
+overflow	visible | hidden | scroll | auto	see prose	elements which establish a new SVG viewport, ‘pattern’ elements and ‘marker’ elements	no	N/A	visual	yes	as specified
+paint-order	normal | [ fill || stroke || markers ]	normal	shapes and text content elements	yes	N/A	visual	yes	as specified
+pointer-events	bounding-box | visiblePainted | visibleFill | visibleStroke | visible |
+painted | fill | stroke | all | none	visiblePainted	container elements, graphics elements and ‘use’	yes	N/A	visual	yes	as specified
+shape-rendering	auto | optimizeSpeed | crispEdges | geometricPrecision	auto	shapes	yes	N/A	visual	yes	as specified
+stop-color	currentColor |
+<color> [<icccolor>]	black	‘stop’ elements	no	N/A	visual	yes	
+stop-opacity	<alpha-value>	1	‘stop’ elements	no	N/A	visual	yes	
+stroke	<paint> (See Specifying paint)	none	shapes and text content elements	yes	N/A	visual	yes	as specified, but with <color> values computed and <url> values made absolute
+stroke-dasharray	none | <dasharray>	none	shapes and text content elements	yes	N/A	visual	yes [1]	absolute lengths or percentages for <dasharray>, or keyword specified
+stroke-dashoffset	<length-percentage>	0	shapes and text content elements	yes	refer to the size of the current SVG viewport	visual	yes	absolute length or percentage
+stroke-linecap	butt | round | square	butt	shapes and text content elements	yes	N/A	visual	yes	as specified
+stroke-linejoin	miter | round | bevel	miter	shapes and text content elements	yes	N/A	visual	yes	as specified
+stroke-miterlimit	<number> (non-negative)	4	shapes and text content elements	yes	N/A	visual	yes	as specified
+stroke-opacity	<alpha-value>	1	shapes and text content elements	yes	N/A	visual	yes	the specified value converted to a number, clamped to the range [0,1]
+stroke-width	<length-percentage>	1	shapes and text content elements	yes	refer to the size of the current SVG viewport	visual	yes	absolute length or percentage
+text-anchor	start | middle | end	start	text content elements	yes	N/A	visual	yes	as specified
+text-decoration	none | [ underline || overline || line-through || blink ]	none	text content elements	no (see prose)	N/A	visual	yes	see individual properties
+text-rendering	auto | optimizeSpeed | optimizeLegibility | geometricPrecision	auto	‘text’ elements	yes	N/A	visual	yes	as specified
+vector-effect	non-scaling-stroke | none	none	graphics elements and ‘use’	no	N/A	visual	yes	as specified
+visibility	visible | hidden | collapse	visible	graphics elements, ‘use’ and the ‘a’ element when it is a child of a text content element	yes	N/A	visual	yes	as specified
+white-space	normal | pre | nowrap | pre-wrap | pre-line	normal	text content elements	yes	N/A	visual	yes	as specified
+writing-mode	lr-tb | rl-tb | tb-rl | lr | rl | tb	lr-tb	‘text’ elements	yes	N/A	visual	no	as specified
