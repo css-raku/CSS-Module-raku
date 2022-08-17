@@ -2,7 +2,7 @@ use v6;
 
 # css3 - css21 base properties + css3 extensions
 # link: http://www.w3.org/TR/2011/NOTE-css-2010-20110512/#css3
-grammar CSS::Module::SVG {
+grammar CSS::Module::CSS3 {
 
     use     CSS::Module::CSS3::Colors;
     also is CSS::Module::CSS3::Colors;
@@ -22,22 +22,27 @@ grammar CSS::Module::SVG {
     use     CSS::Module::CSS3::Selectors;
     also is CSS::Module::CSS3::Selectors;
 
+    use     CSS::Module::CSS21;
+    also is CSS::ModuleX::CSS21;
+
     use     CSS::Module::CSS3::_Base;
     also is CSS::Module::CSS3::_Base;
 
     use CSS::Module;
 
     method module(|c) {
-        use CSS::Module::SVG::Actions;
-        use CSS::Module::SVG::Metadata;
-        my constant Metadata = CSS::Module::SVG::Metadata;
+        use CSS::Module::CSS3::Actions;
+        use CSS::Module::CSS3::Metadata;
+        use CSS::Module::CSS3::Fonts::AtFontFace;
+        my constant Metadata = CSS::Module::CSS3::Metadata;
         CSS::Module.new(
-            :name<SVG>,
+            :name<CSS3>,
             :grammar($?CLASS),
-	    :actions(CSS::Module::SVG::Actions),
+	    :actions(CSS::Module::CSS3::Actions),
 	    :property-metadata($Metadata::property),
             :prop-names(Metadata::prop-names),
             :index(&Metadata::index),
+            :sub-module('@font-face' => CSS::Module::CSS3::Fonts::AtFontFace.module),
             |c
 	    );
     }

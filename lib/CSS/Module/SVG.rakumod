@@ -31,20 +31,18 @@ grammar CSS::Module::SVG {
     use CSS::Module;
 
     method module(|c) {
-        use CSS::Module::CSS3::Actions;
-        use CSS::Module::CSS3::Metadata;
-        use CSS::Module::CSS3::Fonts::AtFontFace;
-        my constant Metadata = CSS::Module::CSS3::Metadata;
+        use CSS::Module::SVG::Actions;
+        use CSS::Module::SVG::Metadata;
+        my constant Metadata = CSS::Module::SVG::Metadata;
         CSS::Module.new(
-            :name<CSS3>,
+            :name<SVG>,
             :grammar($?CLASS),
-	    :actions(CSS::Module::CSS3::Actions),
+	    :actions(CSS::Module::SVG::Actions),
 	    :property-metadata($Metadata::property),
             :prop-names(Metadata::prop-names),
             :index(&Metadata::index),
-            :sub-module('@font-face' => CSS::Module::CSS3::Fonts::AtFontFace.module),
             |c
-	    );
+	);
     }
 
 };
