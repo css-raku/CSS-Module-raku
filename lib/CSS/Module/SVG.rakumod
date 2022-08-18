@@ -7,9 +7,6 @@ grammar CSS::Module::SVG {
     use     CSS::Module::CSS3::Colors;
     also is CSS::Module::CSS3::Colors;
 
-    use     CSS::Module::CSS3::Fonts;
-    also is CSS::Module::CSS3::Fonts;
-
     use     CSS::Module::CSS3::MediaQueries;
     also is CSS::Module::CSS3::MediaQueries;
 
@@ -29,6 +26,9 @@ grammar CSS::Module::SVG {
     also is CSS::Module::CSS3::_Base;
 
     use CSS::Module;
+
+    token alpha-value { <percentage-range> }
+    token length-percentage { <percentage> }
 
     method module(|c) {
         use CSS::Module::SVG::Actions;

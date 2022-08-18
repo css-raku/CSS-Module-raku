@@ -5,9 +5,6 @@ class CSS::Module::SVG::Actions {
     use     CSS::Module::CSS3::Colors;
     also is CSS::Module::CSS3::Colors::Actions;
 
-    use     CSS::Module::CSS3::Fonts::Actions;
-    also is CSS::Module::CSS3::Fonts::Actions;
-
     use     CSS::Module::CSS3::MediaQueries;
     also is CSS::Module::CSS3::MediaQueries::Actions;
 
@@ -25,4 +22,7 @@ class CSS::Module::SVG::Actions {
 
     use     CSS::Module::CSS3::_Base::Actions;
     also is CSS::Module::CSS3::_Base::Actions;
+
+    method alpha-value($/) { make $<percentage-range>.ast }
+    method length-percentage($/) { make $<percentage>.ast }
 }

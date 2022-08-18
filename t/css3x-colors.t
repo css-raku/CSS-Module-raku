@@ -17,6 +17,9 @@ for (
     { :rule<term>, input => 'rgba(100%, 128, 0%, 0.1)',
                ast => :rgba[ :num(255), :num(128), :num(0), :num(.1) ],
     },
+    { :rule<term>, input => 'rgba(100%, 128, 0%, 10%)',
+               ast => :rgba[ :num(255), :num(128), :num(0), :percent(10) ],
+    },
     { :rule<term>, input => 'hsl(120, 100%, 50%)',
                ast => :hsl[ :num(120), :percent(100), :percent(50) ],
     },
@@ -40,8 +43,7 @@ for (
     },
     # a few invalid cases
     { :rule<term>, input => 'rgba(10%,20%,30%)',
-              ast => Mu,
-              warnings => rx{^usage\: \s rgba\(},
+              ast => :rgb[ :num(26), :num(51), :num(77) ],
     },
     { :rule<term>, input => 'hsl(junk)',
               ast => Mu,
@@ -64,7 +66,6 @@ for (
 ##                        '@' => "color-profile"},
 ##    },
     ) -> % ( :$rule!, :$input!, *%expected) {
-
     CSS::Grammar::Test::parse-tests($grammar, $input,
 				    :$rule,
 				    :$actions,

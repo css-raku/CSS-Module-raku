@@ -14,7 +14,6 @@ my %seen;
 for 't/svg-properties.json'.IO.lines {
 
     next if .substr(0,2) eq '//';
-
     my %expected = %( from-json($_) );
     my $prop = %expected<prop>.lc;
     my $expr = %expected<expr>;
@@ -52,7 +51,6 @@ for 't/svg-properties.json'.IO.lines {
 
 	    for @$proforma -> $misc {
 		my $decl = sprintf '{%s: %s}', $prop, $misc;
-
 		my $ast = { :declarations[{ :property{ :ident($prop), :expr[ { :keyw($misc)} ] } }] };
 
                 CSS::Grammar::Test::parse-tests($grammar, $decl,

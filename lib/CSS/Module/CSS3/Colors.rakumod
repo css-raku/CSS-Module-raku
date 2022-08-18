@@ -48,12 +48,12 @@ grammar CSS::Module::CSS3::Colors {
     rule color-alpha{<number><!before '%'>}
 
     # <rgb> and <hex> are defined in CSS core grammar
-    #| usage: rgba(c,c,c,a) where c is 0..255 or 0%-100% and a is 0-1 or 0%-100%
+    #| usage: rgba(c,c,c[,a]?) where c is 0..255 or 0%-100% and a is 0-1 or 0%-100%
     rule color:sym<rgba> {:i'rgba('
                               [ <c=.color-range> ','
                                 <c=.color-range> ','
-                                <c=.color-range> ','
-                                <c=.color-alpha> || <usage(&?ROUTINE.WHY)> ]
+                                <c=.color-range>
+                                [',' <c=.percentage-range>]? || <usage(&?ROUTINE.WHY)> ]
                    ')'
     }
 
@@ -102,7 +102,8 @@ grammar CSS::Module::CSS3::Colors {
 
         method color:sym<rgba>($/) {
             return $.warning( $<usage>.ast ) if $<usage>;
-            make $.build.token( $.build.list($/), :type<rgba>);
+            my $type = @<c> == 4 ?? 'rgba' !! 'rgb';
+            make $.build.token( $.build.list($/), :$type);
         }
 
         method color:sym<hsl>($/)  {
