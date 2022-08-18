@@ -40,6 +40,9 @@ grammar CSS::Module::SVG::Gen::Grammar {
     rule decl:sym<fill-opacity> {:i (fill\-opacity) ':' <val( rx{ <expr=.expr-fill-opacity> }, &?ROUTINE.WHY)> }
     rule expr-fill-opacity {:i <alpha-value> }
 
+    #| alpha-value: <percentage-range>
+    rule alpha-value {:i <percentage-range> }
+
     #| fill-rule: nonzero | evenodd
     rule decl:sym<fill-rule> {:i (fill\-rule) ':' <val( rx{ <expr=.expr-fill-rule> }, &?ROUTINE.WHY)> }
     rule expr-fill-rule {:i [ nonzero | evenodd ] & <keyw> }
@@ -60,13 +63,21 @@ grammar CSS::Module::SVG::Gen::Grammar {
     rule decl:sym<line-height> {:i (line\-height) ':' <val( rx{ <expr=.expr-line-height> }, &?ROUTINE.WHY)> }
     rule expr-line-height {:i [ normal & <keyw> || <number> || <length-percentage> ] }
 
-    #| marker: see individual properties
+    #| marker: 'marker-start' || 'marker-mid' || 'marker-end'
     rule decl:sym<marker> {:i (marker) ':' <val( rx{ <expr=.expr-marker> }, &?ROUTINE.WHY)> }
-    rule expr-marker {:i see & <keyw> individual & <keyw> properties & <keyw> }
+    rule expr-marker {:i :my @*SEEN; [ <expr-marker-start> <!seen(0)> | <expr-marker-mid> <!seen(1)> | <expr-marker-end> <!seen(2)> ]+ }
 
     #| marker-start: none | <url>
     rule decl:sym<marker-start> {:i (marker\-start) ':' <val( rx{ <expr=.expr-marker-start> }, &?ROUTINE.WHY)> }
     rule expr-marker-start {:i [ none & <keyw> || <url> ] }
+
+    #| marker-mid: none | <url>
+    rule decl:sym<marker-mid> {:i (marker\-mid) ':' <val( rx{ <expr=.expr-marker-mid> }, &?ROUTINE.WHY)> }
+    rule expr-marker-mid {:i [ none & <keyw> || <url> ] }
+
+    #| marker-end: none | <url>
+    rule decl:sym<marker-end> {:i (marker\-end) ':' <val( rx{ <expr=.expr-marker-end> }, &?ROUTINE.WHY)> }
+    rule expr-marker-end {:i [ none & <keyw> || <url> ] }
 
     #| opacity: <alpha-value>
     rule decl:sym<opacity> {:i (opacity) ':' <val( rx{ <expr=.expr-opacity> }, &?ROUTINE.WHY)> }
@@ -88,9 +99,15 @@ grammar CSS::Module::SVG::Gen::Grammar {
     rule decl:sym<stop-opacity> {:i (stop\-opacity) ':' <val( rx{ <expr=.expr-stop-opacity> }, &?ROUTINE.WHY)> }
     rule expr-stop-opacity {:i <alpha-value> }
 
-    #| stroke-dasharray: none | <dasharray>
+    #| stroke-dasharray: none | <dash-elem>#
     rule decl:sym<stroke-dasharray> {:i (stroke\-dasharray) ':' <val( rx{ <expr=.expr-stroke-dasharray> }, &?ROUTINE.WHY)> }
-    rule expr-stroke-dasharray {:i [ none & <keyw> || <dasharray> ] }
+    rule expr-stroke-dasharray {:i [ none & <keyw> || <dash-elem>+% <op(',')> ] }
+
+    #| length-percentage: <length> | <percentage>
+    rule length-percentage {:i [ <length> || <percentage> ] }
+
+    #| dash-elem: <length-percentage> | <number>
+    rule dash-elem {:i [ <length-percentage> || <number> ] }
 
     #| stroke-dashoffset: <length-percentage>
     rule decl:sym<stroke-dashoffset> {:i (stroke\-dashoffset) ':' <val( rx{ <expr=.expr-stroke-dashoffset> }, &?ROUTINE.WHY)> }

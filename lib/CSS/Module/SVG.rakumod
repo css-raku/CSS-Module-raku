@@ -27,9 +27,6 @@ grammar CSS::Module::SVG {
 
     use CSS::Module;
 
-    token alpha-value { <percentage-range> }
-    token length-percentage { <percentage> }
-
     method module(|c) {
         use CSS::Module::SVG::Actions;
         use CSS::Module::SVG::Metadata;

@@ -20,3 +20,20 @@
 { "prop" : "line-height", "decl" : "90%", "expr" : [ { "percent" : 90 } ] }
 { "prop" : "line-height", "decl" : "normal", "expr" : [ { "keyw" : "normal" } ] }
 { "prop" : "line-height", "decl" : "42", "expr" : [ { "num" : 42 } ] }
+{ "prop" : "marker-start", "decl" : "none", "expr" : [ { "keyw" : "none" } ] }
+{ "prop" : "marker-start", "decl" : "url(http://www.example.com/pinkish.gif)", "expr" : [ { "url" : "http://www.example.com/pinkish.gif" } ] }
+{ "prop" : "marker-mid", "decl" : "none", "expr" : [ { "keyw" : "none" } ] }
+{ "prop" : "marker-end", "decl" : "none", "expr" : [ { "keyw" : "none" } ] }
+{ "prop" : "marker", "decl" : "none url(http://www.example.com/pinkish.gif)", "expr" : [ {"expr:marker-start" : [{"keyw":"none"}]}, {"expr:marker-mid" : [{"url":"http://www.example.com/pinkish.gif"} ] } ] }
+{ "prop" : "opacity", "decl" : "0.75", "expr" : [ { "num" : 0.75 } ] }
+{ "prop" : "opacity", "decl" : "75%", "expr" : [ { "percent" : 75 } ] }
+{ "prop" : "overflow", "decl" : "hidden", "expr" : [ { "keyw" : "hidden" } ] }
+{ "prop" : "paint-order", "decl" : "fill stroke", "expr" : [ { "keyw" : "fill" }, { "keyw" : "stroke" } ] }
+{ "prop" : "shape-rendering", "decl" : "crispEdges", "expr" : [ { "keyw" : "crispedges" } ] }
+{ "prop" : "stop-opacity", "decl" : "0.75", "expr" : [ { "num" : 0.75 } ] }
+{ "prop" : "stop-opacity", "decl" : "75%", "expr" : [ { "percent" : 75 } ] }
+{ "prop" : "stroke-dasharray", "decl" : "20,10", "expr" : [ {"num":20}, {"op":","}, {"num":10}] }
+{ "prop" : "stroke-dasharray", "decl" : "em,2em", "expr" : [ {"em":1}, {"op":","}, {"em":2}] }
+{ "prop" : "stroke-dashoffset", "decl" : "3em", "expr" : [ {"em":3} ] }
+{ "prop" : "stroke-linecap", "decl" : "round", "expr" : [ {"keyw":"round"} ] }
+{ "prop" : "stroke-linejoin", "decl" : "bevel", "expr" : [ {"keyw":"bevel"} ] }

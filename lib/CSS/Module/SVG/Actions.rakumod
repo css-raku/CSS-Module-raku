@@ -23,6 +23,4 @@ class CSS::Module::SVG::Actions {
     use     CSS::Module::CSS3::_Base::Actions;
     also is CSS::Module::CSS3::_Base::Actions;
 
-    method alpha-value($/) { make $<percentage-range>.ast }
-    method length-percentage($/) { make $<percentage>.ast }
 }
