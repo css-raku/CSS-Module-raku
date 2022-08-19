@@ -47,7 +47,15 @@ grammar CSS::Module::CSS3::Colors {
     rule color-angle{<number>}
     rule color-alpha{<number><!before '%'>}
 
-    # <rgb> and <hex> are defined in CSS core grammar
+    #| usage: rgb(c,c,c) where c is 0..255 or 0%-100%
+    rule color:sym<rgb> {:i'rgb('
+                              [ <c=.color-range> ','
+                                <c=.color-range> ','
+                                <c=.color-range>
+                                [',' <c=.percentage-range>]? || <usage(&?ROUTINE.WHY)> ]
+                   ')'
+    }
+
     #| usage: rgba(c,c,c[,a]?) where c is 0..255 or 0%-100% and a is 0-1 or 0%-100%
     rule color:sym<rgba> {:i'rgba('
                               [ <c=.color-range> ','
@@ -100,11 +108,14 @@ grammar CSS::Module::CSS3::Colors {
             make $.build.token($percentage, :type(CSSValue::PercentageComponent))
         }
 
-        method color:sym<rgba>($/) {
+        method !rgb($/) {
             return $.warning( $<usage>.ast ) if $<usage>;
             my $type = @<c> == 4 ?? 'rgba' !! 'rgb';
             make $.build.token( $.build.list($/), :$type);
         }
+
+        method color:sym<rgb>($/)  { self!rgb($/) }
+        method color:sym<rgba>($/) { self!rgb($/) }
 
         method color:sym<hsl>($/)  {
             return $.warning( $<usage>.ast ) if $<usage>;
