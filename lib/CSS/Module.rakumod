@@ -11,7 +11,7 @@ class CSS::Module:ver<0.5.11> {
                   handles <colors>;
     has %.property-metadata;
     has %!prop-names;
-    has Code %!coerce;
+    has Code %.coerce is built;
     method prop-names { %!prop-names }
     has %!alias; # deprecated
     method property-number(Str $_ --> Int) { %!prop-names{.lc} // Int }
@@ -104,9 +104,9 @@ class CSS::Module:ver<0.5.11> {
     }
 
     multi method parse-property(Str $property-name where (%!coerce{$_}:exists), $val, Bool :$warn = True) {
-
-        with try { %!coerce{$property-name}.($val); } {
-            $_;
+        with try { %!coerce{$property-name}.($val); } -> Pair:D $tk {
+            $tk.value.so; # trigger failures
+            $tk;
         }
         else {
             if $warn {
