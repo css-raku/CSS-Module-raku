@@ -10,6 +10,7 @@
 { "prop" : "direction", "decl" : "ltr", "expr" : [ { "keyw" : "ltr" } ] }
 { "prop" : "display", "decl" : "table-cell", "expr" : [ { "keyw" : "table-cell" } ] }
 { "prop" : "dominant-baseline", "decl" : "hanging", "expr" : [ { "keyw" : "hanging" } ] }
+{ "prop" : "fill", "decl" : "rgb(10,20,10%)", "expr" : [ { "rgb" : [{"num" : 10}, {"num" : 20}, {"num" : 26}] } ] }
 { "prop" : "fill-opacity", "decl" : "0.75", "expr" : [ { "num" : 0.75 } ] }
 { "prop" : "fill-opacity", "decl" : "75%", "expr" : [ { "percent" : 75 } ] }
 { "prop" : "fill-rule", "decl" : "evenOdD", "expr" : [ { "keyw" : "evenodd" } ] }
@@ -32,8 +33,18 @@
 { "prop" : "shape-rendering", "decl" : "crispEdges", "expr" : [ { "keyw" : "crispedges" } ] }
 { "prop" : "stop-opacity", "decl" : "0.75", "expr" : [ { "num" : 0.75 } ] }
 { "prop" : "stop-opacity", "decl" : "75%", "expr" : [ { "percent" : 75 } ] }
+{ "prop" : "stroke", "decl" : "none", "expr" : [ { "keyw" : "none"}] }
 { "prop" : "stroke-dasharray", "decl" : "20,10", "expr" : [ {"num":20}, {"op":","}, {"num":10}] }
 { "prop" : "stroke-dasharray", "decl" : "em,2em", "expr" : [ {"em":1}, {"op":","}, {"em":2}] }
 { "prop" : "stroke-dashoffset", "decl" : "3em", "expr" : [ {"em":3} ] }
 { "prop" : "stroke-linecap", "decl" : "round", "expr" : [ {"keyw":"round"} ] }
 { "prop" : "stroke-linejoin", "decl" : "bevel", "expr" : [ {"keyw":"bevel"} ] }
+{ "prop" : "stroke-opacity", "decl" : "0.75", "expr" : [ { "num" : 0.75 } ] }
+{ "prop" : "stroke-opacity", "decl" : "75%", "expr" : [ { "percent" : 75 } ] }
+{ "prop" : "stroke-width", "decl" : ".1em", "expr" : [ { "em" : 0.1 } ] }
+{ "prop" : "text-anchor", "decl" : "start", "expr" : [ { "keyw" : "start" } ] }
+{ "prop" : "text-decoration", "decl" : "underline blink", "expr" : [ { "keyw" : "underline" }, { "keyw" : "blink" } ] }
+{ "prop" : "text-rendering", "decl" : "geometricPrecision", "expr" : [ { "keyw" : "geometricprecision" } ] }
+{ "prop" : "visibility", "decl" : "hidden", "expr" : [ { "keyw" : "hidden" } ] }
+{ "prop" : "white-space", "decl" : "pre", "expr" : [ { "keyw" : "pre" } ] }
+{ "prop" : "writing-mode", "decl" : "rl-tb", "expr" : [ { "keyw" : "rl-tb" } ] }

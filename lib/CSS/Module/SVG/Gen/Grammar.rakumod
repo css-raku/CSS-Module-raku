@@ -36,6 +36,13 @@ grammar CSS::Module::SVG::Gen::Grammar {
     rule decl:sym<dominant-baseline> {:i (dominant\-baseline) ':' <val( rx{ <expr=.expr-dominant-baseline> }, &?ROUTINE.WHY)> }
     rule expr-dominant-baseline {:i [ auto | use\-script | no\-change | reset\-size | ideographic | alphabetic | hanging | mathematical | central | middle | text\-after\-edge | text\-before\-edge ] & <keyw> }
 
+    #| fill: <paint>
+    rule decl:sym<fill> {:i (fill) ':' <val( rx{ <expr=.expr-fill> }, &?ROUTINE.WHY)> }
+    rule expr-fill {:i <paint> }
+
+    #| paint: none | <color> | <url> [none | <color>]? | context-fill | context-stroke
+    rule paint {:i [ none & <keyw> || <color> || <url> [ [ none & <keyw> || <color> ] ]? || [ context\-fill | context\-stroke ] & <keyw> ] }
+
     #| fill-opacity: <alpha-value>
     rule decl:sym<fill-opacity> {:i (fill\-opacity) ':' <val( rx{ <expr=.expr-fill-opacity> }, &?ROUTINE.WHY)> }
     rule expr-fill-opacity {:i <alpha-value> }
@@ -98,6 +105,10 @@ grammar CSS::Module::SVG::Gen::Grammar {
     #| stop-opacity: <alpha-value>
     rule decl:sym<stop-opacity> {:i (stop\-opacity) ':' <val( rx{ <expr=.expr-stop-opacity> }, &?ROUTINE.WHY)> }
     rule expr-stop-opacity {:i <alpha-value> }
+
+    #| stroke: <paint>
+    rule decl:sym<stroke> {:i (stroke) ':' <val( rx{ <expr=.expr-stroke> }, &?ROUTINE.WHY)> }
+    rule expr-stroke {:i <paint> }
 
     #| stroke-dasharray: none | <dash-elem>#
     rule decl:sym<stroke-dasharray> {:i (stroke\-dasharray) ':' <val( rx{ <expr=.expr-stroke-dasharray> }, &?ROUTINE.WHY)> }
