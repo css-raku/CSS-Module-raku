@@ -1,5 +1,9 @@
 {{$NEXT}}
 
+0.6.0  2022-08-22T05:59:57+12:00
+  - Expose %.coerce attribute for CSS::Properties 0.9.0+
+  - Initial version of CSS::Module::SVG (experimental)
+
 0.5.11  2022-06-15T13:42:17+12:00
   - Revised handling of CSS21 'azimuth' and 'elevation' properties
   - Minor refactor of classes and grammars
