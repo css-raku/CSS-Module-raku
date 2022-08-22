@@ -20,11 +20,9 @@ marker-start,marker-mid,marker-end	none | <url>	none	shapes	yes	N/A	visual	yes	a
 opacity	<alpha-value>	1	‘svg’, ‘g’, ‘symbol’, ‘marker’, ‘a’, ‘switch’, ‘use’, ‘unknown’ elements and graphics elements	no	N/A	visual	yes	the specified value converted to a number, clamped to the range [0,1]
 overflow	visible | hidden | scroll | auto	see prose	elements which establish a new SVG viewport, ‘pattern’ elements and ‘marker’ elements	no	N/A	visual	yes	as specified
 paint-order	normal | [ fill || stroke || markers ]	normal	shapes and text content elements	yes	N/A	visual	yes	as specified
-pointer-events	bounding-box | visiblePainted | visibleFill | visibleStroke | visible |
-painted | fill | stroke | all | none	visiblePainted	container elements, graphics elements and ‘use’	yes	N/A	visual	yes	as specified
+pointer-events	bounding-box | visiblePainted | visibleFill | visibleStroke | visible | painted | fill | stroke | all | none	visiblePainted	container elements, graphics elements and ‘use’	yes	N/A	visual	yes	as specified
 shape-rendering	auto | optimizeSpeed | crispEdges | geometricPrecision	auto	shapes	yes	N/A	visual	yes	as specified
-stop-color	currentColor |
-<color> [<icccolor>]	black	‘stop’ elements	no	N/A	visual	yes	
+stop-color	currentColor |<color>	black	‘stop’ elements	no	N/A	visual	yes	
 stop-opacity	<alpha-value>	1	‘stop’ elements	no	N/A	visual	yes	
 stroke	<paint>	none	shapes and text content elements	yes	N/A	visual	yes	as specified, but with <color> values computed and <url> values made absolute
 stroke-dasharray	none | <dash-elem>#	none	shapes and text content elements	yes	N/A	visual	yes [1]	absolute lengths or percentages for <dasharray>, or keyword specified
@@ -33,7 +31,7 @@ stroke-dasharray	none | <dash-elem>#	none	shapes and text content elements	yes	N
 stroke-dashoffset	<length-percentage>	0	shapes and text content elements	yes	refer to the size of the current SVG viewport	visual	yes	absolute length or percentage
 stroke-linecap	butt | round | square	butt	shapes and text content elements	yes	N/A	visual	yes	as specified
 stroke-linejoin	miter | round | bevel	miter	shapes and text content elements	yes	N/A	visual	yes	as specified
-stroke-miterlimit	<number> (non-negative)	4	shapes and text content elements	yes	N/A	visual	yes	as specified
+stroke-miterlimit	<number>	4	shapes and text content elements	yes	N/A	visual	yes	as specified
 stroke-opacity	<alpha-value>	1	shapes and text content elements	yes	N/A	visual	yes	the specified value converted to a number, clamped to the range [0,1]
 stroke-width	<length-percentage>	1	shapes and text content elements	yes	refer to the size of the current SVG viewport	visual	yes	absolute length or percentage
 text-anchor	start | middle | end	start	text content elements	yes	N/A	visual	yes	as specified
@@ -43,3 +41,6 @@ vector-effect	non-scaling-stroke | none	none	graphics elements and ‘use’	no	
 visibility	visible | hidden | collapse	visible	graphics elements, ‘use’ and the ‘a’ element when it is a child of a text content element	yes	N/A	visual	yes	as specified
 white-space	normal | pre | nowrap | pre-wrap | pre-line	normal	text content elements	yes	N/A	visual	yes	as specified
 writing-mode	lr-tb | rl-tb | tb-rl | lr | rl | tb	lr-tb	‘text’ elements	yes	N/A	visual	no	as specified
+lighting-color	<color>	white	feDiffuseLighting and feSpecularLighting elements	no	n/a	by computed value	per grammar	as specified	visual
+text-overflow	clip | ellipsis	clip
+color-interpolation-filters	auto | sRGB | linearRGB	linearRGB	All filter primitives	yes	n/a	discrete	per grammar	as specified	visual

@@ -1,4 +1,7 @@
 {{$NEXT}}
+  - Base CSS::Module::SVG on CSS::Module::CSS3
+  - Implement most remaining SVG properties, as described in
+    https://www.w3.org/TR/SVG2/styling.html
 
 0.6.0  2022-08-22T05:59:57+12:00
   - Expose %.coerce attribute for CSS::Properties 0.9.0+

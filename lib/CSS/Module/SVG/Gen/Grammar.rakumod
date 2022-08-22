@@ -98,9 +98,17 @@ grammar CSS::Module::SVG::Gen::Grammar {
     rule decl:sym<paint-order> {:i (paint\-order) ':' <val( rx{ <expr=.expr-paint-order> }, &?ROUTINE.WHY)> }
     rule expr-paint-order {:i :my @*SEEN; [ normal & <keyw> || [ [ fill & <keyw> <!seen(0)> | stroke & <keyw> <!seen(1)> | markers & <keyw> <!seen(2)> ]+ ] ] }
 
+    #| pointer-events: bounding-box | visiblePainted | visibleFill | visibleStroke | visible | painted | fill | stroke | all | none
+    rule decl:sym<pointer-events> {:i (pointer\-events) ':' <val( rx{ <expr=.expr-pointer-events> }, &?ROUTINE.WHY)> }
+    rule expr-pointer-events {:i [ bounding\-box | visiblePainted | visibleFill | visibleStroke | visible | painted | fill | stroke | all | none ] & <keyw> }
+
     #| shape-rendering: auto | optimizeSpeed | crispEdges | geometricPrecision
     rule decl:sym<shape-rendering> {:i (shape\-rendering) ':' <val( rx{ <expr=.expr-shape-rendering> }, &?ROUTINE.WHY)> }
     rule expr-shape-rendering {:i [ auto | optimizeSpeed | crispEdges | geometricPrecision ] & <keyw> }
+
+    #| stop-color: currentColor |<color>
+    rule decl:sym<stop-color> {:i (stop\-color) ':' <val( rx{ <expr=.expr-stop-color> }, &?ROUTINE.WHY)> }
+    rule expr-stop-color {:i [ currentColor & <keyw> || <color> ] }
 
     #| stop-opacity: <alpha-value>
     rule decl:sym<stop-opacity> {:i (stop\-opacity) ':' <val( rx{ <expr=.expr-stop-opacity> }, &?ROUTINE.WHY)> }
@@ -131,6 +139,10 @@ grammar CSS::Module::SVG::Gen::Grammar {
     #| stroke-linejoin: miter | round | bevel
     rule decl:sym<stroke-linejoin> {:i (stroke\-linejoin) ':' <val( rx{ <expr=.expr-stroke-linejoin> }, &?ROUTINE.WHY)> }
     rule expr-stroke-linejoin {:i [ miter | round | bevel ] & <keyw> }
+
+    #| stroke-miterlimit: <number>
+    rule decl:sym<stroke-miterlimit> {:i (stroke\-miterlimit) ':' <val( rx{ <expr=.expr-stroke-miterlimit> }, &?ROUTINE.WHY)> }
+    rule expr-stroke-miterlimit {:i <number> }
 
     #| stroke-opacity: <alpha-value>
     rule decl:sym<stroke-opacity> {:i (stroke\-opacity) ':' <val( rx{ <expr=.expr-stroke-opacity> }, &?ROUTINE.WHY)> }
@@ -167,4 +179,16 @@ grammar CSS::Module::SVG::Gen::Grammar {
     #| writing-mode: lr-tb | rl-tb | tb-rl | lr | rl | tb
     rule decl:sym<writing-mode> {:i (writing\-mode) ':' <val( rx{ <expr=.expr-writing-mode> }, &?ROUTINE.WHY)> }
     rule expr-writing-mode {:i [ lr\-tb | rl\-tb | tb\-rl | lr | rl | tb ] & <keyw> }
+
+    #| lighting-color: <color>
+    rule decl:sym<lighting-color> {:i (lighting\-color) ':' <val( rx{ <expr=.expr-lighting-color> }, &?ROUTINE.WHY)> }
+    rule expr-lighting-color {:i <color> }
+
+    #| text-overflow: clip | ellipsis
+    rule decl:sym<text-overflow> {:i (text\-overflow) ':' <val( rx{ <expr=.expr-text-overflow> }, &?ROUTINE.WHY)> }
+    rule expr-text-overflow {:i [ clip | ellipsis ] & <keyw> }
+
+    #| color-interpolation-filters: auto | sRGB | linearRGB
+    rule decl:sym<color-interpolation-filters> {:i (color\-interpolation\-filters) ':' <val( rx{ <expr=.expr-color-interpolation-filters> }, &?ROUTINE.WHY)> }
+    rule expr-color-interpolation-filters {:i [ auto | sRGB | linearRGB ] & <keyw> }
 }

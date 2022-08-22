@@ -183,5 +183,5 @@ say $module.property-metadata<-my-align>.raku;
   - CSS3 Media Query Extensions - http://www.w3.org/TR/2012/REC-css3-mediaqueries-20120619/
   - CSS3 Module: Paged Media - http://www.w3.org/TR/2006/WD-css3-page-20061010/
   - CSS Selectors Module Level 3 - http://www.w3.org/TR/2011/REC-css3-selectors-20110929/
-- SVG - https://www.w3.org/TR/css-ui-3 https://www.w3.org/TR/SVG/propidx.html
+- SVG - https://www.w3.org/TR/SVG2/styling.html https://www.w3.org/TR/SVG/propidx.html
 
