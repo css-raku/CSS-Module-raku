@@ -4,26 +4,11 @@ use v6;
 # link: https://www.w3.org/TR/SVG/propidx.html
 grammar CSS::Module::SVG {
 
-    use     CSS::Module::CSS3::Colors;
-    also is CSS::Module::CSS3::Colors;
-
-    use     CSS::Module::CSS3::MediaQueries;
-    also is CSS::Module::CSS3::MediaQueries;
-
-    use     CSS::Module::CSS3::Namespaces;
-    also is CSS::Module::CSS3::Namespaces;
-
-    use     CSS::Module::CSS3::PagedMedia;
-    also is CSS::Module::CSS3::PagedMedia;
-
-    use     CSS::Module::CSS3::Selectors;
-    also is CSS::Module::CSS3::Selectors;
-
     use     CSS::Module::SVG::Gen::Grammar;
     also is CSS::Module::SVG::Gen::Grammar;
 
-    use     CSS::Module::CSS3::_Base;
-    also is CSS::Module::CSS3::_Base;
+    use     CSS::Module::CSS3;
+    also is CSS::Module::CSS3;
 
     use CSS::Module;
 

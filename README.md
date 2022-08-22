@@ -14,11 +14,13 @@ $module.grammar.parse( $css, :$actions);
 say $/.ast.raku;
 ```
 
-CSS::Module is a set of Raku classes for parsing and and manipulation CSS Levels 1, 2.1 and  3.
+CSS::Module is a set of Raku classes for parsing and manipulation of CSS Levels 1, 2.1 and  3, and SVG.
 
-It contains modules `CSS::Module::CSS1.module`, `CSS::Module::CSS21.module` and `CSS::Module::CSS3.modules` for CSS levels 1.0, 2.1 and 3.0;
+It contains modules `CSS::Module::CSS1`, `CSS::Module::CSS21` and `CSS::Module::CSS3` for CSS levels 1.0, 2.1 and 3.0, along with `CSS::Module::SVG`, which is a CSS3 extension for [styling SVG](https://www.w3.org/TR/SVG2/styling.html).
 
-`CSS::Module::CSS3.module.property-metadata` is a generated summary of property information, e.g.: 
+Each of these classes has a `module` method which produces an object that encapsulates grammars, actions
+and property metadata. It has a`property-metadata` method that can be used to introspect properties. For example
+
 ```
 % raku -M CSS::Module::CSS3 -e'say CSS::Module::CSS3.module.property-metadata<azimuth>.raku'
 {:default("center"), :inherit, :synopsis("<angle> | [[ left-side | far-left | left | center-left | center | center-right | right | far-right | right-side ] || behind ] | leftwards | rightwards")}
@@ -164,6 +166,7 @@ say $module.property-metadata<-my-align>.raku;
 
 ## See Also
 
+- [CSS::Properties](https://css-raku.github.io/CSS-Properties-raku) - property-set manipulation module
 - [CSS::Specification](https://css-raku.github.io/CSS-Specification-raku) - property definition syntax
 - [CSS::Grammar](https://css-raku.github.io/CSS-Grammar-raku) - base grammars
 - [CSS::Writer](https://css-raku.github.io/CSS-Writer-raku) - AST reserializer
@@ -180,5 +183,5 @@ say $module.property-metadata<-my-align>.raku;
   - CSS3 Media Query Extensions - http://www.w3.org/TR/2012/REC-css3-mediaqueries-20120619/
   - CSS3 Module: Paged Media - http://www.w3.org/TR/2006/WD-css3-page-20061010/
   - CSS Selectors Module Level 3 - http://www.w3.org/TR/2011/REC-css3-selectors-20110929/
-
+- SVG - https://www.w3.org/TR/css-ui-3 https://www.w3.org/TR/SVG/propidx.html
 
