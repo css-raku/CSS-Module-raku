@@ -4,6 +4,7 @@ use CSS::Module::CSS1;
 use CSS::Module::CSS21;
 use CSS::Module::CSS3;
 use CSS::Module::CSS3::Fonts::AtFontFace;
+use CSS::Module::SVG;
 
 lives-ok {require CSS::Specification:ver(v0.4.4..*) }, "CSS::Specification version";
 my \css1-module = CSS::Module::CSS1.module;
@@ -70,5 +71,12 @@ isa-ok at-fontface-module.grammar, ::('CSS::Module::CSS3::Fonts::AtFontFace'), '
 isa-ok at-fontface-module.actions, ::('CSS::Module::CSS3::Actions'), '@font-face actions';
 my \at-fontface-prop = at-fontface-module.property-metadata;
 is-deeply at-fontface-prop<font-style>, { :synopsis("normal | italic | oblique"), :default["normal", [{:keyw("normal")},]], }, '@font-face font-style';
+
+my \svg-module = CSS::Module::SVG.module;
+isa-ok svg-module.grammar, ::('CSS::Module::SVG'), 'svg grammar';
+isa-ok svg-module.actions, ::('CSS::Module::SVG::Actions'), 'svg actions';
+my \svg-prop = svg-module.property-metadata;
+is-deeply svg-prop<alignment-baseline>, { :synopsis("auto | baseline | before-edge | text-before-edge | middle | central | after-edge | text-after-edge | ideographic | alphabetic | hanging | mathematical"), :!inherit, :default["baseline", [{:keyw("baseline")},]], }, 'svg alignment-baseline';
+is-deeply svg-prop<font-style>, { :synopsis("normal | italic | oblique"), :default["normal", [{:keyw("normal")},]], }, '@font-face font-style';
 
 done-testing;

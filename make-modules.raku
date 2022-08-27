@@ -3,6 +3,7 @@ use v6;
 use CSS::Specification::Build;
 use CSS::Module::CSS3;
 use CSS::Module::CSS3::Fonts::AtFontFace;
+use CSS::Module::SVG;
 
 class Build {
 
@@ -29,6 +30,9 @@ class Build {
                     if $class-isa.tail eq 'AtFontFace' {
                         $grammar = CSS::Module::CSS3::Fonts::AtFontFace;
                         %props = ();
+                    }
+                    elsif $class-isa.tail eq 'SVG' {
+                        $grammar = CSS::Module::SVG;
                     }
 
                     for (:interface<Interface>,

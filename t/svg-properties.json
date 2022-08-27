@@ -1,4 +1,5 @@
 { "prop" : "alignment-baseline", "decl" : "after-edge", "expr" : [ { "keyw" : "after-edge" } ] }
+{ "prop" : "alignment-baseline", "decl" : "baseline", "expr" : [ { "keyw" : "baseline" } ] }
 { "prop" : "baseline-shift", "decl" : "super", "expr" : [ { "keyw" : "super" } ] }
 { "prop" : "baseline-shift", "decl" : "1.5em", "expr" : [ { "em" : 1.5 } ] }
 { "prop" : "baseline-shift", "decl" : "4%", "expr" : [ { "percent" : 4 } ] }

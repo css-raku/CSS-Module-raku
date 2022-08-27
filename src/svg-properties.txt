@@ -1,4 +1,4 @@
-alignment-baseline	auto | baseline | before-edge | text-before-edge | middle | central | after-edge | text-after-edge | ideographic | alphabetic | hanging | mathematical	see property description	‘tspan’, ‘textPath’ elements	no	N/A	visual	yes	as specified
+alignment-baseline	auto | baseline | before-edge | text-before-edge | middle | central | after-edge | text-after-edge | ideographic | alphabetic | hanging | mathematical	baseline	‘tspan’, ‘textPath’ elements	no	N/A	visual	yes	as specified
 baseline-shift	baseline | sub | super | <percentage> | <length>	baseline	‘tspan’, ‘textPath’ elements	no	refer to the "line height" of the ‘text’ element, which in the case of SVG is defined to be equal to the font size	visual	yes	absolute length, percentage, or keyword specified
 color	<color>	depends on user agent	elements to which properties fill, stroke, stop-color, flood-color, lighting-color apply	yes	N/A	visual	yes	an RGBA color
 color-interpolation	auto | sRGB | linearRGB	sRGB	container elements, graphics elements, gradient elements, ‘use’ and ‘animate’	yes	N/A	visual	yes	as specified
@@ -18,7 +18,7 @@ line-height	normal | <number> | <length-percentage>	normal	‘text’ elements	y
 marker	'marker-start' || 'marker-mid' || 'marker-end'	see individual properties	shapes	yes	N/A	visual	yes	see individual properties
 marker-start,marker-mid,marker-end	none | <url>	none	shapes	yes	N/A	visual	yes	as specified, but with <url> values (that are part of a <marker-ref>) made absolute
 opacity	<alpha-value>	1	‘svg’, ‘g’, ‘symbol’, ‘marker’, ‘a’, ‘switch’, ‘use’, ‘unknown’ elements and graphics elements	no	N/A	visual	yes	the specified value converted to a number, clamped to the range [0,1]
-overflow	visible | hidden | scroll | auto	see prose	elements which establish a new SVG viewport, ‘pattern’ elements and ‘marker’ elements	no	N/A	visual	yes	as specified
+overflow	visible | hidden | scroll | auto	visible	elements which establish a new SVG viewport, ‘pattern’ elements and ‘marker’ elements	no	N/A	visual	yes	as specified
 paint-order	normal | [ fill || stroke || markers ]	normal	shapes and text content elements	yes	N/A	visual	yes	as specified
 pointer-events	bounding-box | visiblePainted | visibleFill | visibleStroke | visible | painted | fill | stroke | all | none	visiblePainted	container elements, graphics elements and ‘use’	yes	N/A	visual	yes	as specified
 shape-rendering	auto | optimizeSpeed | crispEdges | geometricPrecision	auto	shapes	yes	N/A	visual	yes	as specified
