@@ -1,5 +1,8 @@
 {{$NEXT}}
 
+0.6.2  2022-08-28T05:49:10+12:00
+  - Fix setting of defaults in SVG metadata
+
 0.6.1  2022-08-23T07:22:27+12:00
   - Base CSS::Module::SVG on CSS::Module::CSS3
   - Implement most remaining SVG properties, as described in
