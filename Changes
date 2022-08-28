@@ -1,5 +1,8 @@
 {{$NEXT}}
 
+0.6.3  2022-08-29T08:42:56+12:00
+  - Further fix SVG metadata, to be based on CSS3
+
 0.6.2  2022-08-28T05:49:10+12:00
   - Fix setting of defaults in SVG metadata
 
