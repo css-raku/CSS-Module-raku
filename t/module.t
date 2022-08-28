@@ -76,7 +76,8 @@ my \svg-module = CSS::Module::SVG.module;
 isa-ok svg-module.grammar, ::('CSS::Module::SVG'), 'svg grammar';
 isa-ok svg-module.actions, ::('CSS::Module::SVG::Actions'), 'svg actions';
 my \svg-prop = svg-module.property-metadata;
+is-deeply svg-prop<azimuth>, { :synopsis("<angle> | [ <direction> || <behind> ] | <delta>"), :inherit, :default["center", [{:keyw("center")},]], }, 'svg azimuth';
 is-deeply svg-prop<alignment-baseline>, { :synopsis("auto | baseline | before-edge | text-before-edge | middle | central | after-edge | text-after-edge | ideographic | alphabetic | hanging | mathematical"), :!inherit, :default["baseline", [{:keyw("baseline")},]], }, 'svg alignment-baseline';
-is-deeply svg-prop<font-style>, { :synopsis("normal | italic | oblique"), :default["normal", [{:keyw("normal")},]], }, '@font-face font-style';
+is-deeply svg-prop<font-style>, { :synopsis("normal | italic | oblique"), :inherit, :default["normal", [{:keyw("normal")},]], }, 'svg font-style';
 
 done-testing;

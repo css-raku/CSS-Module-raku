@@ -18,8 +18,8 @@ class Build {
                  :CSS21[<src css21-properties.txt> => <CSS21>],
                  :CSS3[<src css3x-font-properties.txt> => <CSS3 Fonts>,
                        <src css3x-paged-media.txt> => <CSS3 PagedMedia>],
-                 'CSS3::Fonts::AtFontFace' => [<src css3x-font-@fontface-properties.txt> => <CSS3 Fonts AtFontFace>],
                  :SVG[<src svg-properties.txt> => <SVG>],
+                 'CSS3::Fonts::AtFontFace' => [<src css3x-font-@fontface-properties.txt> => <CSS3 Fonts AtFontFace>],
 
                 ) {
                 my $meta = .key;
