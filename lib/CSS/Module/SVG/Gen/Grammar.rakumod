@@ -122,8 +122,8 @@ grammar CSS::Module::SVG::Gen::Grammar {
     rule decl:sym<stroke-dasharray> {:i (stroke\-dasharray) ':' <val( rx{ <expr=.expr-stroke-dasharray> }, &?ROUTINE.WHY)> }
     rule expr-stroke-dasharray {:i [ none & <keyw> || <dash-elem>+% <op(',')> ] }
 
-    #| length-percentage: <length> | <percentage>
-    rule length-percentage {:i [ <length> || <percentage> ] }
+    #| length-percentage: <length> | <percentage> | <number>
+    rule length-percentage {:i [ <length> || <percentage> || <number> ] }
 
     #| dash-elem: <length-percentage> | <number>
     rule dash-elem {:i [ <length-percentage> || <number> ] }

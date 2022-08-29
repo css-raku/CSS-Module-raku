@@ -55,6 +55,8 @@
 { "prop" : "stroke-opacity", "decl" : "0.75", "expr" : [ { "num" : 0.75 } ] }
 { "prop" : "stroke-opacity", "decl" : "75%", "expr" : [ { "percent" : 75 } ] }
 { "prop" : "stroke-width", "decl" : ".1em", "expr" : [ { "em" : 0.1 } ] }
+{ "prop" : "stroke-width", "decl" : "3", "expr" : [ { "num" : 3 } ] }
+{ "prop" : "stroke-width", "decl" : "5%", "expr" : [ { "percent" : 5 } ] }
 { "prop" : "text-anchor", "decl" : "start", "expr" : [ { "keyw" : "start" } ] }
 { "prop" : "text-decoration", "decl" : "underline blink", "expr" : [ { "keyw" : "underline" }, { "keyw" : "blink" } ] }
 { "prop" : "text-overflow",  "decl" : "clip", "expr" : [ { "keyw" : "clip" } ] }

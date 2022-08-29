@@ -26,7 +26,7 @@ stop-color	currentColor |<color>	black	‘stop’ elements	no	N/A	visual	yes
 stop-opacity	<alpha-value>	1	‘stop’ elements	no	N/A	visual	yes	
 stroke	<paint>	none	shapes and text content elements	yes	N/A	visual	yes	as specified, but with <color> values computed and <url> values made absolute
 stroke-dasharray	none | <dash-elem>#	none	shapes and text content elements	yes	N/A	visual	yes [1]	absolute lengths or percentages for <dasharray>, or keyword specified
-    <length-percentage> := <length> | <percentage>
+    <length-percentage> := <length> | <percentage> | <number>
     <dash-elem> := <length-percentage> | <number>
 stroke-dashoffset	<length-percentage>	0	shapes and text content elements	yes	refer to the size of the current SVG viewport	visual	yes	absolute length or percentage
 stroke-linecap	butt | round | square	butt	shapes and text content elements	yes	N/A	visual	yes	as specified
