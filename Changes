@@ -1,5 +1,8 @@
 {{$NEXT}}
 
+0.6.4  2022-08-30T07:11:57+12:00
+  - Fix stroke-width and stroke-dasharray to handle undimensioned units #11
+
 0.6.3  2022-08-29T08:42:56+12:00
   - Further fix SVG metadata, to be based on CSS3
 
