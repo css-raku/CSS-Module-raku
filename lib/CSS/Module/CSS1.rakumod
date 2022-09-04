@@ -17,21 +17,21 @@ grammar CSS::Module::CSS1
     is CSS::Module::CSS1::Gen::Grammar
     does CSS::Module::CSS1::Gen::Interface {
 
-        method module(|c) {
-	    use CSS::Module::CSS1::Actions;
-            use CSS::Module::CSS1::Metadata;
-            my constant Metadata = CSS::Module::CSS1::Metadata;
-	    CSS::Module.new(
-                :name<CSS1>,
-                :grammar($?CLASS),
-                :actions(CSS::Module::CSS1::Actions),
-                :property-metadata($Metadata::property),
-                :prop-names(Metadata::prop-names),
-                :index(&Metadata::index),
-                |c
-            );
-        }
+    method module(|c) {
+        use CSS::Module::CSS1::Actions;
+        use CSS::Module::CSS1::Metadata;
+        my constant Metadata = CSS::Module::CSS1::Metadata;
+        CSS::Module.new(
+            :name<CSS1>,
+            :grammar($?CLASS),
+            :actions(CSS::Module::CSS1::Actions),
+            :property-metadata($Metadata::property),
+            :prop-names(Metadata::prop-names),
+            :index(&Metadata::index),
+            |c
+        );
+    }
 
-        # allow color names and define our vocabulary
-        rule color:sym<named>  {:i [aqua | black | blue | fuchsia | gray | green | lime | maroon | navy | olive | purple | red | silver | teal | white | yellow] & <keyw> }
+    # allow color names and define our vocabulary
+    rule color:sym<named>  {:i [aqua | black | blue | fuchsia | gray | green | lime | maroon | navy | olive | purple | red | silver | teal | white | yellow] & <keyw> }
 }

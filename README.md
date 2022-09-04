@@ -158,6 +158,7 @@ sub coerce(MyAlignment:D $keyw --> Pair) { :$keyw }
 
 my %extensions =  %(
     '-my-align' => %(:synopsis("left | middle | right"), :default<middle>, :&coerce),
+    '-my-misc' => %(), # can hold any value
 );
 
 my $module = CSS::Module::CSS3.module: :%extensions;

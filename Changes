@@ -1,4 +1,5 @@
 {{$NEXT}}
+  - Allow miscellaneous extension properties, which can hold any value.
 
 0.6.4  2022-08-30T07:11:57+12:00
   - Fix stroke-width and stroke-dasharray to handle undimensioned units #11

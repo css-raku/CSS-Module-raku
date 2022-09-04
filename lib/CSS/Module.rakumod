@@ -14,6 +14,7 @@ class CSS::Module:ver<0.6.4> {
     has Code %.coerce is built;
     method prop-names { %!prop-names }
     has %!alias; # deprecated
+    has Bool %!allow;
     method property-number(Str $_ --> Int) { %!prop-names{.lc} // Int }
     method property-name(UInt $_ --> Str) { .name with self.index[$_]; }
     has &.index;
@@ -78,20 +79,24 @@ class CSS::Module:ver<0.6.4> {
     }
     multi method extend(
         Str:D :$name!,
-        :&coerce!,
+        :&coerce,
         :$prop-num = self.property-number($name) // self.index.elems,
         Bool :$inherit = False,
         :default($val),
         |c,
     ) {
         %!prop-names{$name} = $prop-num;
-        %!coerce{$name} = &coerce;
 
         my %metadata = %( :$inherit, );
         %metadata ,= c.hash;
-        %metadata<default> //= [$_, [&coerce($_)]]
-            with $val;
-
+        with &coerce -> &c {
+            %!coerce{$name} = &c;
+            %metadata<default> //= [$_, [&c($_)]]
+                with $val;
+        }
+        else {
+            %!allow{$name}++;
+        }
         self!register-property: :$name, :%metadata;
     }
 
@@ -122,7 +127,7 @@ class CSS::Module:ver<0.6.4> {
         my $actions = $.actions.new;
         my $prop = $property-name.lc;
         $prop = $_ with %!alias{$prop};
-        my $rule = 'expr-' ~ $prop;
+        my $rule = %!allow{$prop} ?? 'expr' !! 'expr-' ~ $prop;
 
         if $.grammar.parse($val.Str, :$rule, :$actions ) -> \p {
             $actions.build.list(p);
