@@ -1,4 +1,6 @@
 {{$NEXT}}
+
+0.6.5  2022-09-05T07:53:59+12:00
   - Allow miscellaneous extension properties, which can hold any value.
 
 0.6.4  2022-08-30T07:11:57+12:00

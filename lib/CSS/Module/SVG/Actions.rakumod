@@ -8,4 +8,7 @@ class CSS::Module::SVG::Actions {
     use     CSS::Module::CSS3::Actions;
     also is CSS::Module::CSS3::Actions;
 
+    use       CSS::Module::SVG::Gen::Interface;
+    also does CSS::Module::SVG::Gen::Interface;
+
 }

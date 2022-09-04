@@ -10,6 +10,9 @@ grammar CSS::Module::SVG {
     use     CSS::Module::CSS3;
     also is CSS::Module::CSS3;
 
+    use       CSS::Module::SVG::Gen::Interface;
+    also does CSS::Module::SVG::Gen::Interface;
+
     use CSS::Module;
 
     method module(|c) {
