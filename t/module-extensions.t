@@ -26,8 +26,8 @@ isa-ok $module.actions, ::('CSS::Module::CSS3::Actions'), 'css3 actions';
 my $meta = $module.property-metadata;
 is-deeply $meta<-my-align>,  {:inherit, :synopsis("<align> | justify")}, "'like' extension property";
 is-deeply $meta<-my-align2>, {:default["middle", [:keyw<middle>,]], :!inherit, :synopsis("left | middle | right")}, 'coerced extension property';
-is-deeply $meta<-my-misc>,   {:!inherit,}, 'misc extension property';
-is-deeply $meta<-my-misc2>,  {:inherit,}, 'misc extension property';
+is-deeply $meta<-my-anon>,   {:!inherit,}, 'misc extension property';
+is-deeply $meta<-my-anon2>,  {:inherit,}, 'misc extension property';
 
 my $module2 = CSS::Module::CSS3.module;
 my $meta2 = $module2.property-metadata;

@@ -105,7 +105,7 @@ class CSS::Module:ver<0.6.4> {
             %!prop-names = $_ ~~ Enumeration ?? .enums !! $_;
         }
         self.alias(name => .key, |.value) for %alias.sort;
-        self.extend(name => .key, |.value) for %extensions.pairs;
+        self.extend(name => .key, |.value) for %extensions.sort;
     }
 
     multi method parse-property(Str $property-name where (%!coerce{$_}:exists), $val, Bool :$warn = True) {
