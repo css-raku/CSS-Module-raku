@@ -58,7 +58,7 @@ class CSS::Module:ver<0.6.5> {
         die "unable to register container property '$name' - NYI"
             if %metadata<children> || %metadata<box>;
 
-        my $prop-num = self.property-number($name);
+        my $prop-num = self.property-number($name) // self.index.elems;
         %!prop-names{$name} = $prop-num;
         %!property-metadata{$name} = %metadata;
         my CSS::Module::Property $prop .= new: :$name, :$prop-num, |%metadata;
