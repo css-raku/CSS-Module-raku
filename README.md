@@ -150,7 +150,7 @@ of unknown. E.g.
 
 ## Custom Properties
 
-Properties may be added, or overriden via an `:%extensions` option to the `new*()` method.
+Properties may be added, or overriden via an `:%extensions` option to the `new()` method.
 
 ```
 subset MyAlignment of Str where 'left'|'middle'|'right';

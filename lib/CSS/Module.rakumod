@@ -15,7 +15,11 @@ class CSS::Module:ver<0.6.5> {
     method prop-names { %!prop-names }
     has %!alias; # deprecated
     has Bool %!allow;
-    method property-number(Str $_ --> Int) { %!prop-names{.lc} // Int }
+    has Bool $.vivify;
+    method property-number(Str:D $_ --> Int) {
+        %!prop-names{.lc}
+            // ($!vivify ?? self.extend(:name($_)) !! Int);
+    }
     method property-name(UInt $_ --> Str) { .name with self.index[$_]; }
     has &.index;
     method index { &!index() }
@@ -54,11 +58,12 @@ class CSS::Module:ver<0.6.5> {
         die "unable to register container property '$name' - NYI"
             if %metadata<children> || %metadata<box>;
 
-        my $prop-num = self.property-number($name) // self.index.elems;
+        my $prop-num = self.property-number($name);
         %!prop-names{$name} = $prop-num;
         %!property-metadata{$name} = %metadata;
         my CSS::Module::Property $prop .= new: :$name, :$prop-num, |%metadata;
         self.index[$prop-num] = $prop;
+        $prop-num;
     }
 
     multi method extend(
@@ -80,7 +85,7 @@ class CSS::Module:ver<0.6.5> {
     multi method extend(
         Str:D :$name!,
         :&coerce,
-        :$prop-num = self.property-number($name) // self.index.elems,
+        :$prop-num = %!prop-names{$name.lc} // self.index.elems,
         Bool :$inherit = False,
         :default($val),
         |c,

@@ -1,4 +1,6 @@
 {{$NEXT}}
+  - Allow :vivify mode. Allow any properties. Add stub metadata when
+    property-number() is called to lookup the property.
 
 0.6.5  2022-09-05T07:53:59+12:00
   - Allow miscellaneous extension properties, which can hold any value.
