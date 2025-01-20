@@ -1,6 +1,6 @@
 {{$NEXT}}
 
-0.6.6  2025-01-21T12:29:37+13:00
+0.6.7  2025-01-21T12:31:26+13:00
    Update to CSS::Grammar 0.3.12, which:
    - Replaces CSS::Specification::AST with CSS::Grammar::AST
    - Defines resolution units for us.
