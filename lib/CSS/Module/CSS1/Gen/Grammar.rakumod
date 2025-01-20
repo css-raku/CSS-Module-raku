@@ -39,7 +39,7 @@ rule relative-size {:i [ larger | smaller ] & <keyw> }
 
 #| font: [ 'font-style' || 'font-variant' || 'font-weight' ]? 'font-size' [ / 'line-height' ]? 'font-family'
 rule decl:sym<font> {:i (font) ':' <val( rx{ <expr=.expr-font> }, &?ROUTINE.WHY)> }
-rule expr-font {:i :my @S; [ [ <expr-font-style> <!{@S[0]++}> | <expr-font-variant> <!{@S[1]++}> | <expr-font-weight> <!{@S[2]++}> ]+ ]? <expr-font-size> [ <op('/')> <expr-line-height> ]? <expr-font-family> }
+rule expr-font {:i :my @*SEEN; [ [ <expr-font-style> <!seen(0)> | <expr-font-variant> <!seen(1)> | <expr-font-weight> <!seen(2)> ]+ ]? <expr-font-size> [ <op('/')> <expr-line-height> ]? <expr-font-family> }
 
 #| color: <color>
 rule decl:sym<color> {:i (color) ':' <val( rx{ <expr=.expr-color> }, &?ROUTINE.WHY)> }
@@ -63,7 +63,7 @@ rule expr-background-attachment {:i [ scroll | fixed ] & <keyw> }
 
 #| background-position: [<percentage> | <length> | <align> ] [ <percentage> | <length> | <valign> ]? | [ <valign> || <align> ]
 rule decl:sym<background-position> {:i (background\-position) ':' <val( rx{ <expr=.expr-background-position> }, &?ROUTINE.WHY)> }
-rule expr-background-position {:i :my @S; [ [ [ <percentage> || <length> || <align> ] ] [ [ <percentage> || <length> || <valign> ] ]? || [ [ <valign> <!{@S[0]++}> | <align> <!{@S[1]++}> ]+ ] ] }
+rule expr-background-position {:i :my @*SEEN; [ [ [ <percentage> || <length> || <align> ] ] [ [ <percentage> || <length> || <valign> ] ]? || [ [ <valign> <!seen(0)> | <align> <!seen(1)> ]+ ] ] }
 
 #| align: left | center | right
 rule align {:i [ left | center | right ] & <keyw> }
@@ -73,7 +73,7 @@ rule valign {:i [ top | center | bottom ] & <keyw> }
 
 #| background: 'background-color' || 'background-image' || 'background-repeat' || 'background-attachment' || 'background-position'
 rule decl:sym<background> {:i (background) ':' <val( rx{ <expr=.expr-background> }, &?ROUTINE.WHY)> }
-rule expr-background {:i :my @S; [ <expr-background-color> <!{@S[0]++}> | <expr-background-image> <!{@S[1]++}> | <expr-background-repeat> <!{@S[2]++}> | <expr-background-attachment> <!{@S[3]++}> | <expr-background-position> <!{@S[4]++}> ]+ }
+rule expr-background {:i :my @*SEEN; [ <expr-background-color> <!seen(0)> | <expr-background-image> <!seen(1)> | <expr-background-repeat> <!seen(2)> | <expr-background-attachment> <!seen(3)> | <expr-background-position> <!seen(4)> ]+ }
 
 #| word-spacing: normal | <length>
 rule decl:sym<word-spacing> {:i (word\-spacing) ':' <val( rx{ <expr=.expr-word-spacing> }, &?ROUTINE.WHY)> }
@@ -85,7 +85,7 @@ rule expr-letter-spacing {:i [ normal & <keyw> || <length> ] }
 
 #| text-decoration: none | [ underline || overline || line-through || blink ]
 rule decl:sym<text-decoration> {:i (text\-decoration) ':' <val( rx{ <expr=.expr-text-decoration> }, &?ROUTINE.WHY)> }
-rule expr-text-decoration {:i :my @S; [ none & <keyw> || [ [ underline & <keyw> <!{@S[0]++}> | overline & <keyw> <!{@S[1]++}> | line\-through & <keyw> <!{@S[2]++}> | blink & <keyw> <!{@S[3]++}> ]+ ] ] }
+rule expr-text-decoration {:i :my @*SEEN; [ none & <keyw> || [ [ underline & <keyw> <!seen(0)> | overline & <keyw> <!seen(1)> | line\-through & <keyw> <!seen(2)> | blink & <keyw> <!seen(3)> ]+ ] ] }
 
 #| vertical-align: baseline | sub | super | top | text-top | middle | bottom | text-bottom | <percentage>
 rule decl:sym<vertical-align> {:i (vertical\-align) ':' <val( rx{ <expr=.expr-vertical-align> }, &?ROUTINE.WHY)> }
@@ -177,7 +177,7 @@ rule expr-border-style {:i [ [ none | dotted | dashed | solid | double | groove 
 
 #| border-top: 'border-top-width' || 'border-top-style' || <color>
 rule decl:sym<border-top> {:i (border\-top) ':' <val( rx{ <expr=.expr-border-top> }, &?ROUTINE.WHY)> }
-rule expr-border-top {:i :my @S; [ <expr-border-top-width> <!{@S[0]++}> | <expr-border-top-style> <!{@S[1]++}> | <color> <!{@S[2]++}> ]+ }
+rule expr-border-top {:i :my @*SEEN; [ <expr-border-top-width> <!seen(0)> | <expr-border-top-style> <!seen(1)> | <color> <!seen(2)> ]+ }
 
 #| border-top-color: <color> | transparent
 rule decl:sym<border-top-color> {:i (border\-top\-color) ':' <val( rx{ <expr=.expr-border-top-color> }, &?ROUTINE.WHY)> }
@@ -213,19 +213,19 @@ rule expr-border-left-style {:i [ [ none | dotted | dashed | solid | double | gr
 
 #| border-right: 'border-right-width' || 'border-right-style' || <color>
 rule decl:sym<border-right> {:i (border\-right) ':' <val( rx{ <expr=.expr-border-right> }, &?ROUTINE.WHY)> }
-rule expr-border-right {:i :my @S; [ <expr-border-right-width> <!{@S[0]++}> | <expr-border-right-style> <!{@S[1]++}> | <color> <!{@S[2]++}> ]+ }
+rule expr-border-right {:i :my @*SEEN; [ <expr-border-right-width> <!seen(0)> | <expr-border-right-style> <!seen(1)> | <color> <!seen(2)> ]+ }
 
 #| border-bottom: 'border-bottom-width' || 'border-bottom-style' || <color>
 rule decl:sym<border-bottom> {:i (border\-bottom) ':' <val( rx{ <expr=.expr-border-bottom> }, &?ROUTINE.WHY)> }
-rule expr-border-bottom {:i :my @S; [ <expr-border-bottom-width> <!{@S[0]++}> | <expr-border-bottom-style> <!{@S[1]++}> | <color> <!{@S[2]++}> ]+ }
+rule expr-border-bottom {:i :my @*SEEN; [ <expr-border-bottom-width> <!seen(0)> | <expr-border-bottom-style> <!seen(1)> | <color> <!seen(2)> ]+ }
 
 #| border-left: 'border-left-width' || 'border-left-style' || <color>
 rule decl:sym<border-left> {:i (border\-left) ':' <val( rx{ <expr=.expr-border-left> }, &?ROUTINE.WHY)> }
-rule expr-border-left {:i :my @S; [ <expr-border-left-width> <!{@S[0]++}> | <expr-border-left-style> <!{@S[1]++}> | <color> <!{@S[2]++}> ]+ }
+rule expr-border-left {:i :my @*SEEN; [ <expr-border-left-width> <!seen(0)> | <expr-border-left-style> <!seen(1)> | <color> <!seen(2)> ]+ }
 
 #| border: 'border-width' || 'border-style' || 'border-color'
 rule decl:sym<border> {:i (border) ':' <val( rx{ <expr=.expr-border> }, &?ROUTINE.WHY)> }
-rule expr-border {:i :my @S; [ <expr-border-width> <!{@S[0]++}> | <expr-border-style> <!{@S[1]++}> | <expr-border-color> <!{@S[2]++}> ]+ }
+rule expr-border {:i :my @*SEEN; [ <expr-border-width> <!seen(0)> | <expr-border-style> <!seen(1)> | <expr-border-color> <!seen(2)> ]+ }
 
 #| float: left | right | none
 rule decl:sym<float> {:i (float) ':' <val( rx{ <expr=.expr-float> }, &?ROUTINE.WHY)> }
@@ -257,7 +257,7 @@ rule expr-list-style-position {:i [ inside | outside ] & <keyw> }
 
 #| list-style: 'list-style-type' || 'list-style-image' || 'list-style-position'
 rule decl:sym<list-style> {:i (list\-style) ':' <val( rx{ <expr=.expr-list-style> }, &?ROUTINE.WHY)> }
-rule expr-list-style {:i :my @S; [ <expr-list-style-type> <!{@S[0]++}> | <expr-list-style-image> <!{@S[1]++}> | <expr-list-style-position> <!{@S[2]++}> ]+ }
+rule expr-list-style {:i :my @*SEEN; [ <expr-list-style-type> <!seen(0)> | <expr-list-style-image> <!seen(1)> | <expr-list-style-position> <!seen(2)> ]+ }
 
 #| position: absolute | relative | static
 rule decl:sym<position> {:i (position) ':' <val( rx{ <expr=.expr-position> }, &?ROUTINE.WHY)> }

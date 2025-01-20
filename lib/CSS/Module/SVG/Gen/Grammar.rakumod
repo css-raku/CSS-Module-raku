@@ -73,7 +73,7 @@ rule expr-line-height {:i [ normal & <keyw> || <number> || <length-percentage> ]
 
 #| marker: 'marker-start' || 'marker-mid' || 'marker-end'
 rule decl:sym<marker> {:i (marker) ':' <val( rx{ <expr=.expr-marker> }, &?ROUTINE.WHY)> }
-rule expr-marker {:i :my @S; [ <expr-marker-start> <!{@S[0]++}> | <expr-marker-mid> <!{@S[1]++}> | <expr-marker-end> <!{@S[2]++}> ]+ }
+rule expr-marker {:i :my @*SEEN; [ <expr-marker-start> <!seen(0)> | <expr-marker-mid> <!seen(1)> | <expr-marker-end> <!seen(2)> ]+ }
 
 #| marker-start: none | <url>
 rule decl:sym<marker-start> {:i (marker\-start) ':' <val( rx{ <expr=.expr-marker-start> }, &?ROUTINE.WHY)> }
@@ -97,7 +97,7 @@ rule expr-overflow {:i [ visible | hidden | scroll | auto ] & <keyw> }
 
 #| paint-order: normal | [ fill || stroke || markers ]
 rule decl:sym<paint-order> {:i (paint\-order) ':' <val( rx{ <expr=.expr-paint-order> }, &?ROUTINE.WHY)> }
-rule expr-paint-order {:i :my @S; [ normal & <keyw> || [ [ fill & <keyw> <!{@S[0]++}> | stroke & <keyw> <!{@S[1]++}> | markers & <keyw> <!{@S[2]++}> ]+ ] ] }
+rule expr-paint-order {:i :my @*SEEN; [ normal & <keyw> || [ [ fill & <keyw> <!seen(0)> | stroke & <keyw> <!seen(1)> | markers & <keyw> <!seen(2)> ]+ ] ] }
 
 #| pointer-events: bounding-box | visiblePainted | visibleFill | visibleStroke | visible | painted | fill | stroke | all | none
 rule decl:sym<pointer-events> {:i (pointer\-events) ':' <val( rx{ <expr=.expr-pointer-events> }, &?ROUTINE.WHY)> }
@@ -159,7 +159,7 @@ rule expr-text-anchor {:i [ start | middle | end ] & <keyw> }
 
 #| text-decoration: none | [ underline || overline || line-through || blink ]
 rule decl:sym<text-decoration> {:i (text\-decoration) ':' <val( rx{ <expr=.expr-text-decoration> }, &?ROUTINE.WHY)> }
-rule expr-text-decoration {:i :my @S; [ none & <keyw> || [ [ underline & <keyw> <!{@S[0]++}> | overline & <keyw> <!{@S[1]++}> | line\-through & <keyw> <!{@S[2]++}> | blink & <keyw> <!{@S[3]++}> ]+ ] ] }
+rule expr-text-decoration {:i :my @*SEEN; [ none & <keyw> || [ [ underline & <keyw> <!seen(0)> | overline & <keyw> <!seen(1)> | line\-through & <keyw> <!seen(2)> | blink & <keyw> <!seen(3)> ]+ ] ] }
 
 #| text-rendering: auto | optimizeSpeed | optimizeLegibility | geometricPrecision
 rule decl:sym<text-rendering> {:i (text\-rendering) ':' <val( rx{ <expr=.expr-text-rendering> }, &?ROUTINE.WHY)> }

@@ -7,7 +7,7 @@ unit grammar CSS::Module::CSS3::Fonts::Gen::Grammar;
 
 #| font: [ [ <‘font-style’> || <font-variant-css21> || <‘font-weight’> || <‘font-stretch’> ]? <‘font-size’> [ / <‘line-height’> ]? <‘font-family’> ] | caption | icon | menu | message-box | small-caption | status-bar
 rule decl:sym<font> {:i (font) ':' <val( rx{ <expr=.expr-font> }, &?ROUTINE.WHY)> }
-rule expr-font {:i :my @S; [ [ [ [ <expr-font-style> <!{@S[0]++}> | <font-variant-css21> <!{@S[1]++}> | <expr-font-weight> <!{@S[2]++}> | <expr-font-stretch> <!{@S[3]++}> ]+ ]? <expr-font-size> [ <op('/')> <expr-line-height> ]? <expr-font-family> ] || [ caption | icon | menu | message\-box | small\-caption | status\-bar ] & <keyw> ] }
+rule expr-font {:i :my @*SEEN; [ [ [ [ <expr-font-style> <!seen(0)> | <font-variant-css21> <!seen(1)> | <expr-font-weight> <!seen(2)> | <expr-font-stretch> <!seen(3)> ]+ ]? <expr-font-size> [ <op('/')> <expr-line-height> ]? <expr-font-family> ] || [ caption | icon | menu | message\-box | small\-caption | status\-bar ] & <keyw> ] }
 
 #| font-variant-css21: normal | small-caps
 rule font-variant-css21 {:i [ normal | small\-caps ] & <keyw> }
@@ -58,15 +58,15 @@ rule expr-font-style {:i [ normal | italic | oblique ] & <keyw> }
 
 #| font-synthesis: none | [ weight || style ]
 rule decl:sym<font-synthesis> {:i (font\-synthesis) ':' <val( rx{ <expr=.expr-font-synthesis> }, &?ROUTINE.WHY)> }
-rule expr-font-synthesis {:i :my @S; [ none & <keyw> || [ [ weight & <keyw> <!{@S[0]++}> | style & <keyw> <!{@S[1]++}> ]+ ] ] }
+rule expr-font-synthesis {:i :my @*SEEN; [ none & <keyw> || [ [ weight & <keyw> <!seen(0)> | style & <keyw> <!seen(1)> ]+ ] ] }
 
 #| font-variant: normal | none | [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> || stylistic(<feature-value-name>) || historical-forms || styleset(<feature-value-name> #) || character-variant(<feature-value-name> #) || swash(<feature-value-name>) || ornaments(<feature-value-name>) || annotation(<feature-value-name>) || [ small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps ] || <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero || <east-asian-variant-values> || <east-asian-width-values> || ruby ]
 rule decl:sym<font-variant> {:i (font\-variant) ':' <val( rx{ <expr=.expr-font-variant> }, &?ROUTINE.WHY)> }
-rule expr-font-variant {:i :my @S; [ [ normal | none ] & <keyw> || [ [ <common-lig-values> <!{@S[0]++}> | <discretionary-lig-values> <!{@S[1]++}> | <historical-lig-values> <!{@S[2]++}> | <contextual-alt-values> <!{@S[3]++}> | <stylistic> <!{@S[4]++}> | historical\-forms & <keyw> <!{@S[5]++}> | <styleset> <!{@S[6]++}> | <character-variant> <!{@S[7]++}> | <swash> <!{@S[8]++}> | <ornaments> <!{@S[9]++}> | <annotation> <!{@S[10]++}> | [ [ small\-caps | all\-small\-caps | petite\-caps | all\-petite\-caps | unicase | titling\-caps ] & <keyw> ] <!{@S[11]++}> | <numeric-figure-values> <!{@S[12]++}> | <numeric-spacing-values> <!{@S[13]++}> | <numeric-fraction-values> <!{@S[14]++}> | ordinal & <keyw> <!{@S[15]++}> | slashed\-zero & <keyw> <!{@S[16]++}> | <east-asian-variant-values> <!{@S[17]++}> | <east-asian-width-values> <!{@S[18]++}> | ruby & <keyw> <!{@S[19]++}> ]+ ] ] }
+rule expr-font-variant {:i :my @*SEEN; [ [ normal | none ] & <keyw> || [ [ <common-lig-values> <!seen(0)> | <discretionary-lig-values> <!seen(1)> | <historical-lig-values> <!seen(2)> | <contextual-alt-values> <!seen(3)> | <stylistic> <!seen(4)> | historical\-forms & <keyw> <!seen(5)> | <styleset> <!seen(6)> | <character-variant> <!seen(7)> | <swash> <!seen(8)> | <ornaments> <!seen(9)> | <annotation> <!seen(10)> | [ [ small\-caps | all\-small\-caps | petite\-caps | all\-petite\-caps | unicase | titling\-caps ] & <keyw> ] <!seen(11)> | <numeric-figure-values> <!seen(12)> | <numeric-spacing-values> <!seen(13)> | <numeric-fraction-values> <!seen(14)> | ordinal & <keyw> <!seen(15)> | slashed\-zero & <keyw> <!seen(16)> | <east-asian-variant-values> <!seen(17)> | <east-asian-width-values> <!seen(18)> | ruby & <keyw> <!seen(19)> ]+ ] ] }
 
 #| font-variant-alternates: normal | [ stylistic(<feature-value-name>) || historical-forms || styleset(<feature-value-name>#) || character-variant(<feature-value-name>#) || swash(<feature-value-name>) || ornaments(<feature-value-name>) || annotation(<feature-value-name>) ]
 rule decl:sym<font-variant-alternates> {:i (font\-variant\-alternates) ':' <val( rx{ <expr=.expr-font-variant-alternates> }, &?ROUTINE.WHY)> }
-rule expr-font-variant-alternates {:i :my @S; [ normal & <keyw> || [ [ <stylistic> <!{@S[0]++}> | historical\-forms & <keyw> <!{@S[1]++}> | <styleset> <!{@S[2]++}> | <character-variant> <!{@S[3]++}> | <swash> <!{@S[4]++}> | <ornaments> <!{@S[5]++}> | <annotation> <!{@S[6]++}> ]+ ] ] }
+rule expr-font-variant-alternates {:i :my @*SEEN; [ normal & <keyw> || [ [ <stylistic> <!seen(0)> | historical\-forms & <keyw> <!seen(1)> | <styleset> <!seen(2)> | <character-variant> <!seen(3)> | <swash> <!seen(4)> | <ornaments> <!seen(5)> | <annotation> <!seen(6)> ]+ ] ] }
 
 #| font-variant-caps: normal | small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps
 rule decl:sym<font-variant-caps> {:i (font\-variant\-caps) ':' <val( rx{ <expr=.expr-font-variant-caps> }, &?ROUTINE.WHY)> }
@@ -74,15 +74,15 @@ rule expr-font-variant-caps {:i [ normal | small\-caps | all\-small\-caps | peti
 
 #| font-variant-east-asian: normal | [ <east-asian-variant-values> || <east-asian-width-values> || ruby ]
 rule decl:sym<font-variant-east-asian> {:i (font\-variant\-east\-asian) ':' <val( rx{ <expr=.expr-font-variant-east-asian> }, &?ROUTINE.WHY)> }
-rule expr-font-variant-east-asian {:i :my @S; [ normal & <keyw> || [ [ <east-asian-variant-values> <!{@S[0]++}> | <east-asian-width-values> <!{@S[1]++}> | ruby & <keyw> <!{@S[2]++}> ]+ ] ] }
+rule expr-font-variant-east-asian {:i :my @*SEEN; [ normal & <keyw> || [ [ <east-asian-variant-values> <!seen(0)> | <east-asian-width-values> <!seen(1)> | ruby & <keyw> <!seen(2)> ]+ ] ] }
 
 #| font-variant-ligatures: normal | none | [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> ]
 rule decl:sym<font-variant-ligatures> {:i (font\-variant\-ligatures) ':' <val( rx{ <expr=.expr-font-variant-ligatures> }, &?ROUTINE.WHY)> }
-rule expr-font-variant-ligatures {:i :my @S; [ [ normal | none ] & <keyw> || [ [ <common-lig-values> <!{@S[0]++}> | <discretionary-lig-values> <!{@S[1]++}> | <historical-lig-values> <!{@S[2]++}> | <contextual-alt-values> <!{@S[3]++}> ]+ ] ] }
+rule expr-font-variant-ligatures {:i :my @*SEEN; [ [ normal | none ] & <keyw> || [ [ <common-lig-values> <!seen(0)> | <discretionary-lig-values> <!seen(1)> | <historical-lig-values> <!seen(2)> | <contextual-alt-values> <!seen(3)> ]+ ] ] }
 
 #| font-variant-numeric: normal | [ <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero ]
 rule decl:sym<font-variant-numeric> {:i (font\-variant\-numeric) ':' <val( rx{ <expr=.expr-font-variant-numeric> }, &?ROUTINE.WHY)> }
-rule expr-font-variant-numeric {:i :my @S; [ normal & <keyw> || [ [ <numeric-figure-values> <!{@S[0]++}> | <numeric-spacing-values> <!{@S[1]++}> | <numeric-fraction-values> <!{@S[2]++}> | ordinal & <keyw> <!{@S[3]++}> | slashed\-zero & <keyw> <!{@S[4]++}> ]+ ] ] }
+rule expr-font-variant-numeric {:i :my @*SEEN; [ normal & <keyw> || [ [ <numeric-figure-values> <!seen(0)> | <numeric-spacing-values> <!seen(1)> | <numeric-fraction-values> <!seen(2)> | ordinal & <keyw> <!seen(3)> | slashed\-zero & <keyw> <!seen(4)> ]+ ] ] }
 
 #| font-variant-position: normal | sub | super
 rule decl:sym<font-variant-position> {:i (font\-variant\-position) ':' <val( rx{ <expr=.expr-font-variant-position> }, &?ROUTINE.WHY)> }

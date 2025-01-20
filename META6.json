@@ -6,7 +6,7 @@
   "build-depends": [
   ],
   "depends": [
-    "CSS::Grammar:ver<0.3.9+>",
+    "CSS::Grammar:ver<0.3.12+>",
     "CSS::Module::CSS3::Selectors:ver<0.0.5+>",
     "CSS::Specification:ver<0.4.11+>",
     "CSS::Writer:ver<0.2.6+>",

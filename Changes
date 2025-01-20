@@ -1,4 +1,7 @@
 {{$NEXT}}
+   Update to CSS::Grammar 0.3.12, which:
+   - Replaces CSS::Specification::AST with CSS::Grammar::AST
+   - Defines resolution units for us.
 
 0.6.6  2022-09-07T06:20:51+12:00
   - Add :vivify mode. Allow any properties. Stub metadata is added when

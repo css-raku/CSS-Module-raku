@@ -8,12 +8,10 @@ class CSS::Module::CSS3::_Base::Actions
     is CSS::Grammar::Actions {
 
     method build {
-        use CSS::Specification::AST;
-        my class builder is CSS::Specification::AST {
+        use CSS::Grammar::AST;
+        my class builder is CSS::Grammar::AST {
             method proforma { ['inherit', 'initial'] }
         }
     }
 
-    method resolution:sym<dim>($/)        { make $.build.token($<num>.ast, :type($0.lc) ) }
-    method dimension:sym<resolution>($/)  { make $<resolution>.ast }
 }
