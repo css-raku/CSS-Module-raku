@@ -27,7 +27,9 @@ class CSS::Module:ver<0.6.7> {
 
     my subset ExtensionName of Str where .starts-with('-');
     proto method alias(|) is DEPRECATED('extend(:$name, :$like, ...)') {*};
-    multi method alias(ExtensionName :$name!, Str :$like!) is rw {
+    multi method alias(ExtensionName :$name! is copy, Str :$like! is copy) is rw {
+        $name .= lc;
+        $like .= lc;
         my $metadata = %!property-metadata{$like}
             // die "unable to alias unknown property: '$like'";
 
@@ -67,11 +69,13 @@ class CSS::Module:ver<0.6.7> {
     }
 
     multi method extend(
-        Str:D :$name!,
-        Str:D :like($base-prop)!,
+        Str:D :$name! is copy,
+        Str:D :like($base-prop)! is copy,
         :&coerce,
         |c
     ) {
+        $name .= lc;
+        $base-prop .= lc;
         die "unknown base property: $name"
             unless %!property-metadata{$base-prop}:exists;
         my %metadata = %!property-metadata{$base-prop};
@@ -83,13 +87,14 @@ class CSS::Module:ver<0.6.7> {
         self!register-property: :$name, :%metadata;
     }
     multi method extend(
-        Str:D :$name!,
+        Str:D :$name! is copy,
         :&coerce,
         :$prop-num = %!prop-names{$name.lc} // self.index.elems,
         Bool :$inherit = False,
         :default($val),
         |c,
     ) {
+        $name .= lc;
         %!prop-names{$name} = $prop-num;
 
         my %metadata = %( :$inherit, );

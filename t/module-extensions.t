@@ -11,7 +11,7 @@ my %extensions =  %(
                      :default<middle>,
                      :&coerce
                      ),
-    '-my-anon'  => %(),
+    '-my-Anon'  => %(),
     '-my-anon2' => %( :inherit),
 );
 
