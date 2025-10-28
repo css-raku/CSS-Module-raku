@@ -52,8 +52,8 @@ class CSS::Module::CSS21::Actions {
     also does CSS::Module::CSS21::Gen::Interface;
 
     method build {
-        use CSS::Specification::AST;
-        my class builder is CSS::Specification::AST {
+        use CSS::Grammar::AST;
+        my class builder is CSS::Grammar::AST {
             method proforma { ['inherit'] }
         }
     }

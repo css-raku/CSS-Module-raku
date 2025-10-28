@@ -72,8 +72,8 @@ class CSS::Module::CSS3::MediaQueries {
         use CSS::Grammar::Defs :CSSValue;
 
         method !build {
-            use CSS::Specification::AST;
-            CSS::Specification::AST;
+            use CSS::Grammar::AST;
+            CSS::Grammar::AST;
         }
 
         # rule-list, media-list, media see core grammar actions

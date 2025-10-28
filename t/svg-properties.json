@@ -46,6 +46,7 @@
 { "prop" : "stop-opacity", "decl" : "0.75", "expr" : [ { "num" : 0.75 } ] }
 { "prop" : "stop-opacity", "decl" : "75%", "expr" : [ { "percent" : 75 } ] }
 { "prop" : "stroke", "decl" : "none", "expr" : [ { "keyw" : "none"}] }
+{ "prop" : "stroke", "decl" : "black", "expr" : [ { "rgb" : [{"num":0}, {"num":0}, {"num":0}] } ] }
 { "prop" : "stroke-dasharray", "decl" : "20,10", "expr" : [ {"num":20}, {"op":","}, {"num":10}] }
 { "prop" : "stroke-dasharray", "decl" : "em,2em", "expr" : [ {"em":1}, {"op":","}, {"em":2}] }
 { "prop" : "stroke-dashoffset", "decl" : "3em", "expr" : [ {"em":3} ] }

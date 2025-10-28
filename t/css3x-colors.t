@@ -59,6 +59,7 @@ for (
     { :rule<color>, input => 'orange', ast => :rgb[ :num(255), :num(165), :num(0) ]},
     { :rule<color>, input => 'hotpink', ast => :rgb[ :num(255), :num(105), :num(180) ]},
     { :rule<color>, input => 'lavenderblush', ast => :rgb[ :num(255), :num(240), :num(245) ]},
+    { :rule<color>, input => 'black', ast => :rgb[ :num(0), :num(0), :num(0) ]},
     { :rule<color>, input => 'currentcolor', ast => :keyw<currentcolor>},
     { :rule<color>, input => 'transparent', ast => :keyw<transparent>},
 # http://www.w3.org/TR/2011/REC-css3-color-20110607

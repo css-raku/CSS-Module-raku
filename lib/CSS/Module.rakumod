@@ -9,7 +9,7 @@ class CSS::Module:ver<0.6.7> {
                   handles <parse subparse parsefile>;
     has $.actions is required  #| actions class
                   handles <colors>;
-    has %.property-metadata;
+    has Hash %.property-metadata;
     has %!prop-names;
     has Code %.coerce is built;
     method prop-names { %!prop-names }

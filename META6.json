@@ -8,7 +8,8 @@
   "depends": [
     "CSS::Grammar:ver<0.3.12+>",
     "CSS::Module::CSS3::Selectors:ver<0.0.5+>",
-    "CSS::Specification:ver<0.4.15+>",
+    "CSS::Specification:ver<0.5.0+>",
+    "CSS::Specification:Compiler",
     "CSS::Writer:ver<0.2.6+>",
     "JSON::Fast"
   ],
