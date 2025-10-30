@@ -1,4 +1,6 @@
 {{$NEXT}}
+
+0.6.8  2025-10-31T06:48:41+13:00
    Update to CSS::Specification v0.5.0+, which has factored out
    compilation to CSS::Specification::Compiler
 
