@@ -23,7 +23,7 @@ grammar CSS::Module::CSS3 {
     also is CSS::Module::CSS3::Selectors;
 
     use     CSS::Module::CSS21;
-    also is CSS::ModuleX::CSS21;
+    also is CSS::Module::CSS21::_Body;
 
     use     CSS::Module::CSS3::_Base;
     also is CSS::Module::CSS3::_Base;

@@ -21,7 +21,7 @@ class CSS::Module::CSS3::Actions {
     also is CSS::Module::CSS3::Selectors::Actions;
 
     use     CSS::Module::CSS21::Actions;
-    also is CSS::ModuleX::CSS21::Actions;
+    also is CSS::Module::CSS21::Actions::_Body;
 
     use     CSS::Module::CSS3::_Base::Actions;
     also is CSS::Module::CSS3::_Base::Actions;
