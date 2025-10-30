@@ -31,7 +31,8 @@ class Build {
                     my @grammar-id = @base-id.Slip, 'Grammar';
                     my $scope := 'unit';
                     my CSS::Specification::Compiler $compiler .= new;
-                    my @defs = $compiler.load-defs($input-spec.join: '/');
+                    my $file = $input-spec.join: '/';
+                    my @defs = $compiler.load-defs: :$file;
                     my %child-props = $compiler.child-props;
 
                     my RakuAST::Package $grammar-ast = $compiler.build-grammar(@grammar-id, :$scope);

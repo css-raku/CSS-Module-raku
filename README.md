@@ -118,10 +118,9 @@ say "declaration: " ~ $p.ast[0]<ruleset><declarations>.raku;
 
 Property definitions are built from the sources in the `src` directory using the CSS::Specification tools. These implement the [W3C Property Definition Syntax](https://developer.mozilla.org/en-US/docs/Web/CSS/Value_definition_syntax).
 
-
-Generated modules are written under the `gen/lib` directory.
-
-For example [CSS::Module:CSS1::Spec::Grammar](gen/lib/CSS/Module/CSS1/Spec/Grammar.pm), [CSS::Module:CSS1::Spec::Actions](gen/lib/CSS/Module/CSS1/Spec/Actions.pm) and [CSS::Module:CSS1::Spec::Interface](gen/lib/CSS/Module/CSS1/Spec/Interface.pm) are generated from [etc/css1-properties.txt](etc/css1-properties.txt).
+These also require use of CSS::Specification::Compiler to build the modules. This uses the experimental RakuAST
+API to compile the definitions, and has not yet been released to the Raku ecosystem. It can be checked out
+from https://github.com/css-raku/CSS-Specification-Compiler-raku.git and added to the Raku library path.
 
 See `make-modules.pl`.
 
