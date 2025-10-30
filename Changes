@@ -1,6 +1,6 @@
 {{$NEXT}}
-   Update to CSS::Specification v0.5.0+, which introduces a new
-   RakuAST based specification compiler.
+   Update to CSS::Specification v0.5.0+, which has factored out
+   compilation to CSS::Specification::Compiler
 
 0.6.7  2025-01-21T12:31:26+13:00
    Update to CSS::Grammar 0.3.12, which:
