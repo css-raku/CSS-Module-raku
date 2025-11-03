@@ -50,12 +50,12 @@ rule decl:sym<line-height> { :i ("line-height") ":" <val(/<expr=.expr-line-heigh
 rule expr-line-height { :i normal & <keyw>  || <number> || <length-percentage>  }
 #| marker: 'marker-start' || 'marker-mid' || 'marker-end'
 rule decl:sym<marker> { :i (marker) ":" <val(/<expr=.expr-marker> /, &?ROUTINE.WHY)>}
-rule expr-marker { :i [:my @S; <expr-marker-start><!{
-    @S[0]++
-}>| <expr-marker-mid><!{
-    @S[1]++
-}>| <expr-marker-end><!{
-    @S[2]++
+rule expr-marker { :i [<expr-marker-start>:my $a; <!{
+    $a++
+}>| <expr-marker-mid>:my $b; <!{
+    $b++
+}>| <expr-marker-end>:my $c; <!{
+    $c++
 }>]+ }
 #| marker-start: none | <url>
 rule decl:sym<marker-start> { :i ("marker-start") ":" <val(/<expr=.expr-marker-start> /, &?ROUTINE.WHY)>}
@@ -74,12 +74,12 @@ rule decl:sym<overflow> { :i (overflow) ":" <val(/<expr=.expr-overflow> /, &?ROU
 rule expr-overflow { :i [visible | hidden | scroll | auto ]& <keyw>  }
 #| paint-order: normal | [ fill || stroke || markers ]
 rule decl:sym<paint-order> { :i ("paint-order") ":" <val(/<expr=.expr-paint-order> /, &?ROUTINE.WHY)>}
-rule expr-paint-order { :i normal & <keyw>  || [[:my @S; fill & <keyw> <!{
-    @S[0]++
-}>| stroke & <keyw> <!{
-    @S[1]++
-}>| markers & <keyw> <!{
-    @S[2]++
+rule expr-paint-order { :i normal & <keyw>  || [[fill & <keyw> :my $a; <!{
+    $a++
+}>| stroke & <keyw> :my $b; <!{
+    $b++
+}>| markers & <keyw> :my $c; <!{
+    $c++
 }>]+]  }
 #| pointer-events: bounding-box | visiblePainted | visibleFill | visibleStroke | visible | painted | fill | stroke | all | none
 rule decl:sym<pointer-events> { :i ("pointer-events") ":" <val(/<expr=.expr-pointer-events> /, &?ROUTINE.WHY)>}
@@ -126,14 +126,14 @@ rule decl:sym<text-anchor> { :i ("text-anchor") ":" <val(/<expr=.expr-text-ancho
 rule expr-text-anchor { :i [start | middle | end ]& <keyw>  }
 #| text-decoration: none | [ underline || overline || line-through || blink ]
 rule decl:sym<text-decoration> { :i ("text-decoration") ":" <val(/<expr=.expr-text-decoration> /, &?ROUTINE.WHY)>}
-rule expr-text-decoration { :i none & <keyw>  || [[:my @S; underline & <keyw> <!{
-    @S[0]++
-}>| overline & <keyw> <!{
-    @S[1]++
-}>| "line-through" & <keyw> <!{
-    @S[2]++
-}>| blink & <keyw> <!{
-    @S[3]++
+rule expr-text-decoration { :i none & <keyw>  || [[underline & <keyw> :my $a; <!{
+    $a++
+}>| overline & <keyw> :my $b; <!{
+    $b++
+}>| "line-through" & <keyw> :my $c; <!{
+    $c++
+}>| blink & <keyw> :my $d; <!{
+    $d++
 }>]+]  }
 #| text-rendering: auto | optimizeSpeed | optimizeLegibility | geometricPrecision
 rule decl:sym<text-rendering> { :i ("text-rendering") ":" <val(/<expr=.expr-text-rendering> /, &?ROUTINE.WHY)>}
