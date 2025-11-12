@@ -2,7 +2,7 @@ unit class CSS::Module::CSS3::Fonts::Gen::Actions;
 method font-variant-css21 ($/) {
     make $.build.rule($/)
 }
-method expr-font-family ($/) {
+method prop-val-font-family ($/) {
     make $.build.list($/)
 }
 method generic-family ($/) {
@@ -11,7 +11,7 @@ method generic-family ($/) {
 method family-name ($/) {
     make $.build.rule($/)
 }
-method expr-font-size ($/) {
+method prop-val-font-size ($/) {
     make $.build.list($/)
 }
 method absolute-size ($/) {
@@ -20,15 +20,15 @@ method absolute-size ($/) {
 method relative-size ($/) {
     make $.build.rule($/)
 }
-method expr-font-stretch ($/) {
+method prop-val-font-stretch ($/) {
     make $.build.list($/)
 }
-method expr-font-style ($/) {
+method prop-val-font-style ($/) {
     make $.build.list($/)
 }
-method expr-font-weight ($/) {
+method prop-val-font-weight ($/) {
     make $.build.list($/)
 }
-method expr-line-height ($/) {
+method prop-val-line-height ($/) {
     make $.build.list($/)
 }

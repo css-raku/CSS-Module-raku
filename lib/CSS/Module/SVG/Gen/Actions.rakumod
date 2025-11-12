@@ -5,13 +5,13 @@ method paint ($/) {
 method alpha-value ($/) {
     make $.build.rule($/)
 }
-method expr-marker-start ($/) {
+method prop-val-marker-start ($/) {
     make $.build.list($/)
 }
-method expr-marker-mid ($/) {
+method prop-val-marker-mid ($/) {
     make $.build.list($/)
 }
-method expr-marker-end ($/) {
+method prop-val-marker-end ($/) {
     make $.build.list($/)
 }
 method length-percentage ($/) {

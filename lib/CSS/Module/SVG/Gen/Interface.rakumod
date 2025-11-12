@@ -1,26 +1,14 @@
 unit role CSS::Module::SVG::Gen::Interface;
-method alpha-value ($/) {
-    ...
-}
 method angle ($/) {
     ...
 }
 method color ($/) {
     ...
 }
-method dash-elem ($/) {
-    ...
-}
 method length ($/) {
     ...
 }
-method length-percentage ($/) {
-    ...
-}
 method number ($/) {
-    ...
-}
-method paint ($/) {
     ...
 }
 method percentage ($/) {

@@ -159,11 +159,11 @@ rule decl:sym<clear> { :i (clear) ":" <val(/<expr=.prop-val-clear> /, &?ROUTINE.
 rule prop-val-clear { :i [none | left | right | both ]& <keyw>  }
 #| clip: <shape> | auto
 rule decl:sym<clip> { :i (clip) ":" <val(/<expr=.prop-val-clip> /, &?ROUTINE.WHY)>}
-rule prop-val-clip { :i <shape> || auto & <keyw>   }
+rule prop-val-clip { :i <rect> || auto & <keyw>   }
 #| <rect()>
 rule shape { :i <rect> }
 #| rect([<length> | auto]#{4,4})
-rule rect { :i "rect(" [[<length> || auto & <keyw>  ] ** 4% "," || <usage(&?ROUTINE.WHY)> ] ")" }
+rule rect { :i "rect(" [[<length> || auto & <keyw>  ] ** 4% <op(",")> || <.val(&?ROUTINE.WHY)> ] ")" }
 #| color: <color>
 rule decl:sym<color> { :i (color) ":" <val(/<expr=.prop-val-color> /, &?ROUTINE.WHY)>}
 rule prop-val-color { :i <color> }
@@ -171,11 +171,11 @@ rule prop-val-color { :i <color> }
 rule decl:sym<content> { :i (content) ":" <val(/<expr=.prop-val-content> /, &?ROUTINE.WHY)>}
 rule prop-val-content { :i [normal | none ]& <keyw>  || [<string> || <uri> || <counter> || <counters> || <attr> || ["open-quote" | "close-quote" | "no-open-quote" | "no-close-quote" ]& <keyw>  ] +  }
 #| attr(<identifier>)
-rule attr { :i "attr(" [<identifier> || <usage(&?ROUTINE.WHY)> ] ")" }
+rule attr { :i "attr(" [<identifier> || <.val(&?ROUTINE.WHY)> ] ")" }
 #| counter(<identifier>[, <'list-style-type'>]?)
-rule counter { :i "counter(" [<identifier> ["," <prop-val-list-style-type> ] ?  || <usage(&?ROUTINE.WHY)> ] ")" }
+rule counter { :i "counter(" [<identifier> [<op(",")> <prop-val-list-style-type> ] ?  || <.val(&?ROUTINE.WHY)> ] ")" }
 #| counters(<identifier> [, <string>]?)
-rule counters { :i "counters(" [<identifier> ["," <string> ] ?  || <usage(&?ROUTINE.WHY)> ] ")" }
+rule counters { :i "counters(" [<identifier> [<op(",")> <string> ] ?  || <.val(&?ROUTINE.WHY)> ] ")" }
 #| counter-increment: none | [ <identifier> <integer>? ]+
 rule decl:sym<counter-increment> { :i ("counter-increment") ":" <val(/<expr=.prop-val-counter-increment> /, &?ROUTINE.WHY)>}
 rule prop-val-counter-increment { :i none & <keyw>  || [<identifier> <integer> ? ] +  }

@@ -137,7 +137,7 @@ class CSS::Module:ver<0.6.8> {
         my $actions = $.actions.new;
         my $prop = $property-name.lc;
         $prop = $_ with %!alias{$prop};
-        my $rule = %!allow{$prop} ?? 'expr' !! 'expr-' ~ $prop;
+        my $rule = %!allow{$prop} ?? 'expr' !! 'prop-val-' ~ $prop;
 
         if $.grammar.parse($val.Str, :$rule, :$actions ) -> \p {
             $actions.build.list(p);

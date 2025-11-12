@@ -20,19 +20,10 @@ method east-asian-variant-values ($/) {
 method east-asian-width-values ($/) {
     ...
 }
-method family-name ($/) {
-    ...
-}
 method feature-tag-value ($/) {
     ...
 }
 method feature-value-name ($/) {
-    ...
-}
-method font-face-name ($/) {
-    ...
-}
-method font-src-expr ($/) {
     ...
 }
 method format ($/) {

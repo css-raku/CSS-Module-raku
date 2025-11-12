@@ -1,7 +1,4 @@
 unit role CSS::Module::CSS3::Fonts::Gen::Interface;
-method absolute-size ($/) {
-    ...
-}
 method annotation ($/) {
     ...
 }
@@ -23,19 +20,10 @@ method east-asian-variant-values ($/) {
 method east-asian-width-values ($/) {
     ...
 }
-method family-name ($/) {
-    ...
-}
 method feature-tag-value ($/) {
     ...
 }
 method feature-value-name ($/) {
-    ...
-}
-method font-variant-css21 ($/) {
-    ...
-}
-method generic-family ($/) {
     ...
 }
 method historical-lig-values ($/) {
@@ -63,9 +51,6 @@ method ornaments ($/) {
     ...
 }
 method percentage ($/) {
-    ...
-}
-method relative-size ($/) {
     ...
 }
 method string ($/) {

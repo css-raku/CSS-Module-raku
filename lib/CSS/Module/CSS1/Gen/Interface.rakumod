@@ -1,17 +1,5 @@
 unit role CSS::Module::CSS1::Gen::Interface;
-method absolute-size ($/) {
-    ...
-}
-method align ($/) {
-    ...
-}
 method color ($/) {
-    ...
-}
-method family-name ($/) {
-    ...
-}
-method generic-family ($/) {
     ...
 }
 method identifiers ($/) {
@@ -29,15 +17,9 @@ method number ($/) {
 method percentage ($/) {
     ...
 }
-method relative-size ($/) {
-    ...
-}
 method string ($/) {
     ...
 }
 method uri ($/) {
-    ...
-}
-method valign ($/) {
     ...
 }

@@ -1,5 +1,5 @@
 unit class CSS::Module::CSS1::Gen::Actions;
-method expr-font-family ($/) {
+method prop-val-font-family ($/) {
     make $.build.list($/)
 }
 method generic-family ($/) {
@@ -8,16 +8,16 @@ method generic-family ($/) {
 method family-name ($/) {
     make $.build.rule($/)
 }
-method expr-font-style ($/) {
+method prop-val-font-style ($/) {
     make $.build.list($/)
 }
-method expr-font-variant ($/) {
+method prop-val-font-variant ($/) {
     make $.build.list($/)
 }
-method expr-font-weight ($/) {
+method prop-val-font-weight ($/) {
     make $.build.list($/)
 }
-method expr-font-size ($/) {
+method prop-val-font-size ($/) {
     make $.build.list($/)
 }
 method absolute-size ($/) {
@@ -26,19 +26,19 @@ method absolute-size ($/) {
 method relative-size ($/) {
     make $.build.rule($/)
 }
-method expr-background-color ($/) {
+method prop-val-background-color ($/) {
     make $.build.list($/)
 }
-method expr-background-image ($/) {
+method prop-val-background-image ($/) {
     make $.build.list($/)
 }
-method expr-background-repeat ($/) {
+method prop-val-background-repeat ($/) {
     make $.build.list($/)
 }
-method expr-background-attachment ($/) {
+method prop-val-background-attachment ($/) {
     make $.build.list($/)
 }
-method expr-background-position ($/) {
+method prop-val-background-position ($/) {
     make $.build.list($/)
 }
 method align ($/) {
@@ -47,48 +47,48 @@ method align ($/) {
 method valign ($/) {
     make $.build.rule($/)
 }
-method expr-line-height ($/) {
+method prop-val-line-height ($/) {
     make $.build.list($/)
 }
-method expr-border-top-width ($/) {
+method prop-val-border-top-width ($/) {
     make $.build.list($/)
 }
-method expr-border-right-width ($/) {
+method prop-val-border-right-width ($/) {
     make $.build.list($/)
 }
-method expr-border-bottom-width ($/) {
+method prop-val-border-bottom-width ($/) {
     make $.build.list($/)
 }
-method expr-border-left-width ($/) {
+method prop-val-border-left-width ($/) {
     make $.build.list($/)
 }
-method expr-border-width ($/) {
+method prop-val-border-width ($/) {
     make $.build.list($/)
 }
-method expr-border-color ($/) {
+method prop-val-border-color ($/) {
     make $.build.list($/)
 }
-method expr-border-style ($/) {
+method prop-val-border-style ($/) {
     make $.build.list($/)
 }
-method expr-border-top-style ($/) {
+method prop-val-border-top-style ($/) {
     make $.build.list($/)
 }
-method expr-border-right-style ($/) {
+method prop-val-border-right-style ($/) {
     make $.build.list($/)
 }
-method expr-border-bottom-style ($/) {
+method prop-val-border-bottom-style ($/) {
     make $.build.list($/)
 }
-method expr-border-left-style ($/) {
+method prop-val-border-left-style ($/) {
     make $.build.list($/)
 }
-method expr-list-style-type ($/) {
+method prop-val-list-style-type ($/) {
     make $.build.list($/)
 }
-method expr-list-style-image ($/) {
+method prop-val-list-style-image ($/) {
     make $.build.list($/)
 }
-method expr-list-style-position ($/) {
+method prop-val-list-style-position ($/) {
     make $.build.list($/)
 }
