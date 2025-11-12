@@ -43,13 +43,12 @@ class Build {
                     my RakuAST::Package $actions-ast = $compiler.build-actions(@actions-id, :$scope);
                     "lib/{$actions-ast.&path}.rakumod".IO.spurt: $actions-ast.DEPARSE;
 
-                    my @role-id = @base-id.Slip, 'Interface';
-                    my RakuAST::Package $role-ast = $compiler.build-role(@role-id, :$scope);
-                    "lib/{$role-ast.&path}.rakumod".IO.spurt: $role-ast.DEPARSE;
+                    my @external-id = @base-id.Slip, 'External';
+                    my RakuAST::Package $external-ast = $compiler.build-external(@external-id, :$scope);
+                    "lib/{$external-ast.&path}.rakumod".IO.spurt: $external-ast.DEPARSE;
 
                     my %meta = @defs.&build-metadata(:%child-props);
                     %props ,= %meta;
-
                     # &build-defaults is awkward here, maybe CSS::Properties should do this at run-time?
                     my $grammar = (require ::("CSS::Module::{$meta-root}"));
                     my $actions = (require ::("CSS::Module::{$meta-root.split('::').head}::Actions"));

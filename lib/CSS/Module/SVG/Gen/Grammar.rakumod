@@ -26,12 +26,12 @@ rule prop-val-dominant-baseline { :i [auto | "use-script" | "no-change" | "reset
 #| fill: <paint>
 rule decl:sym<fill> { :i (fill) ":" <val(/<expr=.prop-val-fill> /, &?ROUTINE.WHY)>}
 rule prop-val-fill { :i <paint> }
-#| none | <color> | <url> [none | <color>]? | context-fill | context-stroke
+#| <paint> = none | <color> | <url> [none | <color>]? | context-fill | context-stroke
 rule paint { :i none & <keyw>  || <color> || <url> [none & <keyw>  || <color> ] ?  || ["context-fill" | "context-stroke" ]& <keyw>   }
 #| fill-opacity: <alpha-value>
 rule decl:sym<fill-opacity> { :i ("fill-opacity") ":" <val(/<expr=.prop-val-fill-opacity> /, &?ROUTINE.WHY)>}
 rule prop-val-fill-opacity { :i <alpha-value> }
-#| <percentage-range>
+#| <alpha-value> = <percentage-range>
 rule alpha-value { :i <percentage-range> }
 #| fill-rule: nonzero | evenodd
 rule decl:sym<fill-rule> { :i ("fill-rule") ":" <val(/<expr=.prop-val-fill-rule> /, &?ROUTINE.WHY)>}
@@ -99,9 +99,9 @@ rule prop-val-stroke { :i <paint> }
 #| stroke-dasharray: none | <dash-elem>#
 rule decl:sym<stroke-dasharray> { :i ("stroke-dasharray") ":" <val(/<expr=.prop-val-stroke-dasharray> /, &?ROUTINE.WHY)>}
 rule prop-val-stroke-dasharray { :i none & <keyw>  || <dash-elem> +% <op(",")>  }
-#| <length> | <percentage> | <number>
+#| <length-percentage> = <length> | <percentage> | <number>
 rule length-percentage { :i <length> || <percentage> || <number>  }
-#| <length-percentage> | <number>
+#| <dash-elem> = <length-percentage> | <number>
 rule dash-elem { :i <length-percentage> || <number>  }
 #| stroke-dashoffset: <length-percentage>
 rule decl:sym<stroke-dashoffset> { :i ("stroke-dashoffset") ":" <val(/<expr=.prop-val-stroke-dashoffset> /, &?ROUTINE.WHY)>}

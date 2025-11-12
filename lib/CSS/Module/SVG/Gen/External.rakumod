@@ -1,4 +1,4 @@
-unit role CSS::Module::SVG::Gen::Interface;
+unit role CSS::Module::SVG::Gen::External;
 method angle ($/) {
     ...
 }

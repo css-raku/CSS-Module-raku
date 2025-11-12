@@ -16,8 +16,8 @@ grammar CSS::Module::CSS3::Fonts {
     use     CSS::Module::CSS3::_Base;
     also is CSS::Module::CSS3::_Base;
 
-    use       CSS::Module::CSS3::Fonts::Gen::Interface;
-    also does CSS::Module::CSS3::Fonts::Gen::Interface;
+    use       CSS::Module::CSS3::Fonts::Gen::External;
+    also does CSS::Module::CSS3::Fonts::Gen::External;
 
     use CSS::Module::CSS3::Fonts::AtFontFace;
 

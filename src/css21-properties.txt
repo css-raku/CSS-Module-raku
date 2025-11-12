@@ -30,8 +30,13 @@
 'caption-side'	top | bottom | inherit	top	'table-caption' elements	yes	 	visual
 'clear'	none | left | right | both | inherit	none	block-level elements	no	 	visual
 'clip'	<shape> | auto | inherit	auto	absolutely positioned elements	no	 	visual
+<shape> = <rect()>
+<rect()> = rect([<length> | auto]#{4,4})
 'color'	<color> | inherit	depends on user agent	 	yes	 	visual
-'content'	normal | none | [ <string> | <uri> | <counter> | <counters> | attr(<identifier>) | open-quote | close-quote | no-open-quote | no-close-quote ]+ | inherit	normal	:before and :after pseudo-elements	no	 	all
+'content'	normal | none | [ <string> | <uri> | <counter()> | <counters()> | attr(<identifier>) | open-quote | close-quote | no-open-quote | no-close-quote ]+ | inherit	normal	:before and :after pseudo-elements	no	 	all
+<attr()> = attr(<identifier>)
+<counter()> = counter(<identifier>[, <'list-style-type'>]?)
+<counters()> = counters(<identifier> [, <string>]?)
 'counter-increment'	none | [ <identifier> <integer>? ]+ | inherit	none	 	no	 	all
 'counter-reset'	none | [ <identifier> <integer>? ]+ | inherit	none	 	no	 	all
 'cue-after'	<uri> | none | inherit	none	 	no	 	aural

@@ -10,13 +10,13 @@ use CSS::Module;
 use CSS::Specification::Base::Grammar;
 use CSS::Grammar::CSS1;
 # make-modules.raku targets
-use CSS::Module::CSS1::Gen::Interface;
+use CSS::Module::CSS1::Gen::External;
 use CSS::Module::CSS1::Gen::Grammar;
 
 also is CSS::Grammar::CSS1;
 also is CSS::Module::CSS1::Gen::Grammar;
 also does CSS::Specification::Base::Grammar;
-also does CSS::Module::CSS1::Gen::Interface;
+also does CSS::Module::CSS1::Gen::External;
 
 method module(|c) {
     use CSS::Module::CSS1::Actions;

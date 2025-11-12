@@ -12,8 +12,8 @@ also is CSS::Module::CSS3::_Base;
 use     CSS::Module::CSS3::PagedMedia::Gen::Grammar;
 also is CSS::Module::CSS3::PagedMedia::Gen::Grammar;
 
-use CSS::Module::CSS3::PagedMedia::Gen::Interface;
-also does CSS::Module::CSS3::PagedMedia::Gen::Interface;
+use CSS::Module::CSS3::PagedMedia::Gen::External;
+also does CSS::Module::CSS3::PagedMedia::Gen::External;
 
 rule page-pseudo        {:i':'[ [left|right|first] && <keyw> || <Ident> ]? }
 
@@ -39,7 +39,7 @@ class Actions {
     use     CSS::Module::CSS3::PagedMedia::Gen::Actions;
     also is CSS::Module::CSS3::PagedMedia::Gen::Actions;
 
-    also does CSS::Module::CSS3::PagedMedia::Gen::Interface;
+    also does CSS::Module::CSS3::PagedMedia::Gen::External;
 
     use CSS::Grammar::Defs :CSSValue;
 

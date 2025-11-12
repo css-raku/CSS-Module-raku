@@ -10,14 +10,14 @@ rule prop-val-font { :i [[[<prop-val-font-style> :my $*A; <!{
 }>| <prop-val-font-stretch> :my $*D; <!{
     $*D++
 }>]+] ? <prop-val-font-size> [<op("/")> <prop-val-line-height> ] ? <prop-val-font-family> ] || [caption | icon | menu | "message-box" | "small-caption" | "status-bar" ]& <keyw>   }
-#| normal | small-caps
+#| <font-variant-css21> = normal | small-caps
 rule font-variant-css21 { :i [normal | "small-caps" ]& <keyw>  }
 #| font-family: [ <generic-family> | <family-name> ]#
 rule decl:sym<font-family> { :i ("font-family") ":" <val(/<expr=.prop-val-font-family> /, &?ROUTINE.WHY)>}
 rule prop-val-font-family { :i [<generic-family> || <family-name> ] +% <op(",")> }
-#| serif | sans-serif | cursive | fantasy | monospace
+#| <generic-family> = serif | sans-serif | cursive | fantasy | monospace
 rule generic-family { :i [serif | "sans-serif" | cursive | fantasy | monospace ]& <keyw>  }
-#| <identifiers> | <string>
+#| <family-name> = <identifiers> | <string>
 rule family-name { :i <identifiers> || <string>  }
 #| font-feature-settings: normal | <feature-tag-value>#
 rule decl:sym<font-feature-settings> { :i ("font-feature-settings") ":" <val(/<expr=.prop-val-font-feature-settings> /, &?ROUTINE.WHY)>}
@@ -34,9 +34,9 @@ rule prop-val-font-size { :i <absolute-size> || <relative-size> || <length> || <
 #| font-size-adjust: none | auto | <number>
 rule decl:sym<font-size-adjust> { :i ("font-size-adjust") ":" <val(/<expr=.prop-val-font-size-adjust> /, &?ROUTINE.WHY)>}
 rule prop-val-font-size-adjust { :i [none | auto ]& <keyw>  || <number>  }
-#| xx-small | x-small | small | medium | large | x-large | xx-large
+#| <absolute-size> = xx-small | x-small | small | medium | large | x-large | xx-large
 rule absolute-size { :i ["xx-small" | "x-small" | small | medium | large | "x-large" | "xx-large" ]& <keyw>  }
-#| larger | smaller
+#| <relative-size> = larger | smaller
 rule relative-size { :i [larger | smaller ]& <keyw>  }
 #| font-stretch: normal | ultra-condensed | extra-condensed | condensed | semi-condensed | semi-expanded | expanded | extra-expanded | ultra-expanded
 rule decl:sym<font-stretch> { :i ("font-stretch") ":" <val(/<expr=.prop-val-font-stretch> /, &?ROUTINE.WHY)>}

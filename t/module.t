@@ -70,7 +70,7 @@ my \at-fontface-module = css3-module.sub-module<@font-face>;
 isa-ok at-fontface-module.grammar, ::('CSS::Module::CSS3::Fonts::AtFontFace'), '@font-face grammar';
 isa-ok at-fontface-module.actions, ::('CSS::Module::CSS3::Actions'), '@font-face actions';
 my \at-fontface-prop = at-fontface-module.property-metadata;
-is-deeply at-fontface-prop<font-style>, { :synopsis("normal | italic | oblique"), :default["normal", [{:keyw("normal")},]], }, '@font-face font-style';
+is-deeply at-fontface-prop<font-style>, { :synopsis("normal | italic | oblique"), :!inherit, :default["normal", [{:keyw("normal")},]], }, '@font-face font-style';
 
 my \svg-module = CSS::Module::SVG.module;
 isa-ok svg-module.grammar, ::('CSS::Module::SVG'), 'svg grammar';

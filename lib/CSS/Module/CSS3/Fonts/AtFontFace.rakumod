@@ -12,8 +12,8 @@ grammar CSS::Module::CSS3::Fonts::AtFontFace {
     use     CSS::Module::CSS3::_Base;
     also is CSS::Module::CSS3::_Base;
 
-    use       CSS::Module::CSS3::Fonts::AtFontFace::Gen::Interface;
-    also does CSS::Module::CSS3::Fonts::AtFontFace::Gen::Interface;
+    use       CSS::Module::CSS3::Fonts::AtFontFace::Gen::External;
+    also does CSS::Module::CSS3::Fonts::AtFontFace::Gen::External;
 
     # declare ourselves as a distinct submodule
     method module(|c) {

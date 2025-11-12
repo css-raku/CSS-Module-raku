@@ -1,4 +1,4 @@
-unit role CSS::Module::CSS3::Fonts::AtFontFace::Gen::Interface;
+unit role CSS::Module::CSS3::Fonts::Gen::External;
 method annotation ($/) {
     ...
 }
@@ -26,16 +26,16 @@ method feature-tag-value ($/) {
 method feature-value-name ($/) {
     ...
 }
-method format ($/) {
-    ...
-}
 method historical-lig-values ($/) {
     ...
 }
 method identifiers ($/) {
     ...
 }
-method local ($/) {
+method length ($/) {
+    ...
+}
+method number ($/) {
     ...
 }
 method numeric-figure-values ($/) {
@@ -50,6 +50,9 @@ method numeric-spacing-values ($/) {
 method ornaments ($/) {
     ...
 }
+method percentage ($/) {
+    ...
+}
 method string ($/) {
     ...
 }
@@ -60,11 +63,5 @@ method stylistic ($/) {
     ...
 }
 method swash ($/) {
-    ...
-}
-method urange ($/) {
-    ...
-}
-method uri ($/) {
     ...
 }

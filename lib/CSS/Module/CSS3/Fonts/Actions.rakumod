@@ -14,11 +14,11 @@ class CSS::Module::CSS3::Fonts::Actions {
     use     CSS::Module::CSS3::Fonts::AtFontFace::Gen::Actions;
     also is CSS::Module::CSS3::Fonts::AtFontFace::Gen::Actions;
 
-    use       CSS::Module::CSS3::Fonts::Gen::Interface;
-    also does CSS::Module::CSS3::Fonts::Gen::Interface;
+    use       CSS::Module::CSS3::Fonts::Gen::External;
+    also does CSS::Module::CSS3::Fonts::Gen::External;
 
-    use       CSS::Module::CSS3::Fonts::AtFontFace::Gen::Interface;
-    also does CSS::Module::CSS3::Fonts::AtFontFace::Gen::Interface;
+    use       CSS::Module::CSS3::Fonts::AtFontFace::Gen::External;
+    also does CSS::Module::CSS3::Fonts::AtFontFace::Gen::External;
 
     use CSS::Grammar::AST :CSSObject;
 

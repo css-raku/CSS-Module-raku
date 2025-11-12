@@ -25,8 +25,8 @@ also is CSS::Grammar::CSS21;
 use     CSS::Specification::Base::Grammar;
 also does CSS::Specification::Base::Grammar;
 
-use       CSS::Module::CSS21::Gen::Interface;
-also does CSS::Module::CSS21::Gen::Interface;
+use       CSS::Module::CSS21::Gen::External;
+also does CSS::Module::CSS21::Gen::External;
 
 method module(|c) {
     use CSS::Module::CSS21::Actions;

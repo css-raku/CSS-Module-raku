@@ -6,11 +6,11 @@ rule prop-val-azimuth { :i <angle> || [[<direction> :my $*A; <!{
 }>| <behind> :my $*B; <!{
     $*B++
 }>]+] || <delta>  }
-#| leftwards | rightwards
+#| <delta> = leftwards | rightwards
 rule delta { :i [leftwards | rightwards ]& <keyw>  }
-#| left-side | far-left | left | center-left | center | center-right | right | far-right | right-side
+#| <direction> = left-side | far-left | left | center-left | center | center-right | right | far-right | right-side
 rule direction { :i ["left-side" | "far-left" | left | "center-left" | center | "center-right" | right | "far-right" | "right-side" ]& <keyw>  }
-#| behind
+#| <behind> = behind
 rule behind { :i behind & <keyw>  }
 #| background-attachment: scroll | fixed
 rule decl:sym<background-attachment> { :i ("background-attachment") ":" <val(/<expr=.prop-val-background-attachment> /, &?ROUTINE.WHY)>}
@@ -28,9 +28,9 @@ rule prop-val-background-position { :i [[<percentage> || <length> || <align> ] [
 }>| <valign> :my $*B; <!{
     $*B++
 }>]+]  }
-#| left | center | right
+#| <align> = left | center | right
 rule align { :i [left | center | right ]& <keyw>  }
-#| top | center | bottom
+#| <valign> = top | center | bottom
 rule valign { :i [top | center | bottom ]& <keyw>  }
 #| background-repeat: repeat | repeat-x | repeat-y | no-repeat
 rule decl:sym<background-repeat> { :i ("background-repeat") ":" <val(/<expr=.prop-val-background-repeat> /, &?ROUTINE.WHY)>}
@@ -60,7 +60,7 @@ rule prop-val-border-spacing { :i <length> <length> ?  }
 #| border-style: <border-style>{1,4}
 rule decl:sym<border-style> { :i ("border-style") ":" <val(/<expr=.prop-val-border-style>** 1..4 /, &?ROUTINE.WHY)>}
 rule prop-val-border-style { :i <border-style> }
-#| none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset
+#| <border-style> = none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset
 rule border-style { :i [none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset ]& <keyw>  }
 #| border-top: [ 'border-top-width' || 'border-top-style' || 'border-top-color' ]
 rule decl:sym<border-top> { :i ("border-top") ":" <val(/<expr=.prop-val-border-top> /, &?ROUTINE.WHY)>}
@@ -137,7 +137,7 @@ rule prop-val-border-left-width { :i <border-width> }
 #| border-width: <border-width>{1,4}
 rule decl:sym<border-width> { :i ("border-width") ":" <val(/<expr=.prop-val-border-width>** 1..4 /, &?ROUTINE.WHY)>}
 rule prop-val-border-width { :i <border-width> }
-#| thin | medium | thick | <length>
+#| <border-width> = thin | medium | thick | <length>
 rule border-width { :i [thin | medium | thick ]& <keyw>  || <length>  }
 #| border: [ 'border-width' || 'border-style' || 'border-color' ]
 rule decl:sym<border> { :i (border) ":" <val(/<expr=.prop-val-border> /, &?ROUTINE.WHY)>}
@@ -160,7 +160,7 @@ rule prop-val-clear { :i [none | left | right | both ]& <keyw>  }
 #| clip: <shape> | auto
 rule decl:sym<clip> { :i (clip) ":" <val(/<expr=.prop-val-clip> /, &?ROUTINE.WHY)>}
 rule prop-val-clip { :i <shape> || auto & <keyw>   }
-#| <rect()>
+#| <shape> = <rect()>
 rule shape { :i <rect> }
 #| rect([<length> | auto]#{4,4})
 rule rect { :i "rect(" [[<length> || auto & <keyw>  ] ** 4% "," || <usage(&?ROUTINE.WHY)> ] ")" }
@@ -207,7 +207,7 @@ rule prop-val-display { :i [inline | block | "list-item" | "inline-block" | tabl
 #| elevation: <angle> | <tilt>
 rule decl:sym<elevation> { :i (elevation) ":" <val(/<expr=.prop-val-elevation> /, &?ROUTINE.WHY)>}
 rule prop-val-elevation { :i <angle> || <tilt>  }
-#| below | level | above | higher | lower
+#| <tilt> = below | level | above | higher | lower
 rule tilt { :i [below | level | above | higher | lower ]& <keyw>  }
 #| empty-cells: show | hide
 rule decl:sym<empty-cells> { :i ("empty-cells") ":" <val(/<expr=.prop-val-empty-cells> /, &?ROUTINE.WHY)>}
@@ -218,16 +218,16 @@ rule prop-val-float { :i [left | right | none ]& <keyw>  }
 #| font-family: [ <generic-family> | <family-name> ]#
 rule decl:sym<font-family> { :i ("font-family") ":" <val(/<expr=.prop-val-font-family> /, &?ROUTINE.WHY)>}
 rule prop-val-font-family { :i [<generic-family> || <family-name> ] +% <op(",")> }
-#| serif | sans-serif | cursive | fantasy | monospace
+#| <generic-family> = serif | sans-serif | cursive | fantasy | monospace
 rule generic-family { :i [serif | "sans-serif" | cursive | fantasy | monospace ]& <keyw>  }
-#| <identifiers> | <string>
+#| <family-name> = <identifiers> | <string>
 rule family-name { :i <identifiers> || <string>  }
 #| font-size: <absolute-size> | <relative-size> | <length>
 rule decl:sym<font-size> { :i ("font-size") ":" <val(/<expr=.prop-val-font-size> /, &?ROUTINE.WHY)>}
 rule prop-val-font-size { :i <absolute-size> || <relative-size> || <length>  }
-#| xx-small | x-small | small | medium | large | x-large | xx-large
+#| <absolute-size> = xx-small | x-small | small | medium | large | x-large | xx-large
 rule absolute-size { :i ["xx-small" | "x-small" | small | medium | large | "x-large" | "xx-large" ]& <keyw>  }
-#| larger | smaller | <percentage>
+#| <relative-size> = larger | smaller | <percentage>
 rule relative-size { :i [larger | smaller ]& <keyw>  || <percentage>  }
 #| font-style: normal | italic | oblique
 rule decl:sym<font-style> { :i ("font-style") ":" <val(/<expr=.prop-val-font-style> /, &?ROUTINE.WHY)>}
@@ -292,7 +292,7 @@ rule prop-val-margin-bottom { :i <margin-width> }
 #| margin: <margin-width>{1,4}
 rule decl:sym<margin> { :i (margin) ":" <val(/<expr=.prop-val-margin>** 1..4 /, &?ROUTINE.WHY)>}
 rule prop-val-margin { :i <margin-width> }
-#| <length> | <percentage> | auto
+#| <margin-width> = <length> | <percentage> | auto
 rule margin-width { :i <length> || <percentage> || auto & <keyw>   }
 #| max-height: <length> | <percentage> | none
 rule decl:sym<max-height> { :i ("max-height") ":" <val(/<expr=.prop-val-max-height> /, &?ROUTINE.WHY)>}
@@ -348,7 +348,7 @@ rule prop-val-padding-left { :i <padding-width> }
 #| padding: <padding-width>{1,4}
 rule decl:sym<padding> { :i (padding) ":" <val(/<expr=.prop-val-padding>** 1..4 /, &?ROUTINE.WHY)>}
 rule prop-val-padding { :i <padding-width> }
-#| <length> | <percentage>
+#| <padding-width> = <length> | <percentage>
 rule padding-width { :i <length> || <percentage>  }
 #| page-break-after: auto | always | avoid | left | right
 rule decl:sym<page-break-after> { :i ("page-break-after") ":" <val(/<expr=.prop-val-page-break-after> /, &?ROUTINE.WHY)>}
@@ -452,9 +452,9 @@ rule prop-val-visibility { :i [visible | hidden | collapse ]& <keyw>  }
 #| voice-family: [<generic-voice> | <specific-voice> ]#
 rule decl:sym<voice-family> { :i ("voice-family") ":" <val(/<expr=.prop-val-voice-family> /, &?ROUTINE.WHY)>}
 rule prop-val-voice-family { :i [<generic-voice> || <specific-voice> ] +% <op(",")> }
-#| male | female | child
+#| <generic-voice> = male | female | child
 rule generic-voice { :i [male | female | child ]& <keyw>  }
-#| <identifier> | <string>
+#| <specific-voice> = <identifier> | <string>
 rule specific-voice { :i <identifier> || <string>  }
 #| volume: <number> | <percentage> | silent | x-soft | soft | medium | loud | x-loud
 rule decl:sym<volume> { :i (volume) ":" <val(/<expr=.prop-val-volume> /, &?ROUTINE.WHY)>}

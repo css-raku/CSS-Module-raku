@@ -2,9 +2,9 @@ unit grammar CSS::Module::CSS1::Gen::Grammar;
 #| font-family: [ <generic-family> | <family-name> ]#
 rule decl:sym<font-family> { :i ("font-family") ":" <val(/<expr=.prop-val-font-family> /, &?ROUTINE.WHY)>}
 rule prop-val-font-family { :i [<generic-family> || <family-name> ] +% <op(",")> }
-#| serif | sans-serif | cursive | fantasy | monospace
+#| <generic-family> = serif | sans-serif | cursive | fantasy | monospace
 rule generic-family { :i [serif | "sans-serif" | cursive | fantasy | monospace ]& <keyw>  }
-#| <identifiers> | <string>
+#| <family-name> = <identifiers> | <string>
 rule family-name { :i <identifiers> || <string>  }
 #| font-style: normal | italic | oblique
 rule decl:sym<font-style> { :i ("font-style") ":" <val(/<expr=.prop-val-font-style> /, &?ROUTINE.WHY)>}
@@ -18,9 +18,9 @@ rule prop-val-font-weight { :i [normal | bold | bolder | lighter ]& <keyw>  || [
 #| font-size: <absolute-size> | <relative-size> | <length> | <percentage>
 rule decl:sym<font-size> { :i ("font-size") ":" <val(/<expr=.prop-val-font-size> /, &?ROUTINE.WHY)>}
 rule prop-val-font-size { :i <absolute-size> || <relative-size> || <length> || <percentage>  }
-#| xx-small | x-small | small | medium | large | x-large | xx-large
+#| <absolute-size> = xx-small | x-small | small | medium | large | x-large | xx-large
 rule absolute-size { :i ["xx-small" | "x-small" | small | medium | large | "x-large" | "xx-large" ]& <keyw>  }
-#| larger | smaller
+#| <relative-size> = larger | smaller
 rule relative-size { :i [larger | smaller ]& <keyw>  }
 #| font: [ 'font-style' || 'font-variant' || 'font-weight' ]? 'font-size' [ / 'line-height' ]? 'font-family'
 rule decl:sym<font> { :i (font) ":" <val(/<expr=.prop-val-font> /, &?ROUTINE.WHY)>}
@@ -53,9 +53,9 @@ rule prop-val-background-position { :i [<percentage> || <length> || <align> ] [<
 }>| <align> :my $*B; <!{
     $*B++
 }>]+]  }
-#| left | center | right
+#| <align> = left | center | right
 rule align { :i [left | center | right ]& <keyw>  }
-#| top | center | bottom
+#| <valign> = top | center | bottom
 rule valign { :i [top | center | bottom ]& <keyw>  }
 #| background: 'background-color' || 'background-image' || 'background-repeat' || 'background-attachment' || 'background-position'
 rule decl:sym<background> { :i (background) ":" <val(/<expr=.prop-val-background> /, &?ROUTINE.WHY)>}

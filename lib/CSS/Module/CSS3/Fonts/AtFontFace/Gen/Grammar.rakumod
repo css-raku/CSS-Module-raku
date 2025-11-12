@@ -2,7 +2,7 @@ unit grammar CSS::Module::CSS3::Fonts::AtFontFace::Gen::Grammar;
 #| font-family: <family-name>
 rule decl:sym<font-family> { :i ("font-family") ":" <val(/<expr=.prop-val-font-family> /, &?ROUTINE.WHY)>}
 rule prop-val-font-family { :i <family-name> }
-#| <identifiers> | <string>
+#| <family-name> = <identifiers> | <string>
 rule family-name { :i <identifiers> || <string>  }
 #| font-feature-settings: normal | <feature-tag-value>#
 rule decl:sym<font-feature-settings> { :i ("font-feature-settings") ":" <val(/<expr=.prop-val-font-feature-settings> /, &?ROUTINE.WHY)>}
@@ -62,9 +62,9 @@ rule prop-val-font-weight { :i [normal | bold ]& <keyw>  || [100 | 200 | 300 | 4
 #| src: <font-src-expr>#
 rule decl:sym<src> { :i (src) ":" <val(/<expr=.prop-val-src> /, &?ROUTINE.WHY)>}
 rule prop-val-src { :i <font-src-expr> +% <op(",")> }
-#| [<uri>|local(<string>)] [format(<string>#)]? | <font-face-name>
+#| <font-src-expr> = [<uri>|local(<string>)] [format(<string>#)]? | <font-face-name>
 rule font-src-expr { :i [<uri> || <local> ] <format> ?  || <font-face-name>  }
-#| <identifiers> | <string>
+#| <font-face-name> = <identifiers> | <string>
 rule font-face-name { :i <identifiers> || <string>  }
 #| unicode-range: <urange>#
 rule decl:sym<unicode-range> { :i ("unicode-range") ":" <val(/<expr=.prop-val-unicode-range> /, &?ROUTINE.WHY)>}

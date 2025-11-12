@@ -1,5 +1,14 @@
-unit role CSS::Module::CSS1::Gen::Interface;
+unit role CSS::Module::CSS21::Gen::External;
+method angle ($/) {
+    ...
+}
 method color ($/) {
+    ...
+}
+method frequency ($/) {
+    ...
+}
+method identifier ($/) {
     ...
 }
 method identifiers ($/) {
@@ -18,6 +27,9 @@ method percentage ($/) {
     ...
 }
 method string ($/) {
+    ...
+}
+method time ($/) {
     ...
 }
 method uri ($/) {

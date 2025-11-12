@@ -6,5 +6,5 @@ rule prop-val-size { :i <length> ** 1..2 || auto & <keyw>  || [[<page-size> :my 
 }>| [[portrait | landscape ]& <keyw> ] :my $*B; <!{
     $*B++
 }>]+]  }
-#| a3 | a4 | a5 | b4 | b5 | letter | legal | ledger
+#| <page-size> = a3 | a4 | a5 | b4 | b5 | letter | legal | ledger
 rule page-size { :i [a3 | a4 | a5 | b4 | b5 | letter | legal | ledger ]& <keyw>  }
