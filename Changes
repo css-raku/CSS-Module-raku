@@ -1,5 +1,11 @@
 {{$NEXT}}
 
+0.7.0  2025-11-14T07:40:34+13:00
+   Move most CSS functions from Raku code to value definitions. Make
+   use of CSS::Specification 0.5.0+, and build via the latest version
+   of CSS::Specification::Compiler which implement this a level 4
+   value definition feature.
+
 0.6.8  2025-10-31T06:48:41+13:00
    Update to CSS::Specification v0.5.0+, which has factored out
    compilation to CSS::Specification::Compiler
