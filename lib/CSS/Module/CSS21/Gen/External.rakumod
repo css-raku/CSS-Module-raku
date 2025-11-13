@@ -1,37 +1,37 @@
 unit role CSS::Module::CSS21::Gen::External;
-method angle ($/) {
+method angle (|) {
     ...
 }
-method color ($/) {
+method color (|) {
     ...
 }
-method frequency ($/) {
+method frequency (|) {
     ...
 }
-method identifier ($/) {
+method identifier (|) {
     ...
 }
-method identifiers ($/) {
+method identifiers (|) {
     ...
 }
-method integer ($/) {
+method integer (|) {
     ...
 }
-method length ($/) {
+method length (|) {
     ...
 }
-method number ($/) {
+method number (|) {
     ...
 }
-method percentage ($/) {
+method percentage (|) {
     ...
 }
-method string ($/) {
+method string (|) {
     ...
 }
-method time ($/) {
+method time (|) {
     ...
 }
-method uri ($/) {
+method uri (|) {
     ...
 }

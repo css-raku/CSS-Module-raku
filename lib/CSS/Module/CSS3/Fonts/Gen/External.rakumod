@@ -1,67 +1,67 @@
 unit role CSS::Module::CSS3::Fonts::Gen::External;
-method annotation ($/) {
+method annotation (|) {
     ...
 }
-method character-variant ($/) {
+method character-variant (|) {
     ...
 }
-method common-lig-values ($/) {
+method common-lig-values (|) {
     ...
 }
-method contextual-alt-values ($/) {
+method contextual-alt-values (|) {
     ...
 }
-method discretionary-lig-values ($/) {
+method discretionary-lig-values (|) {
     ...
 }
-method east-asian-variant-values ($/) {
+method east-asian-variant-values (|) {
     ...
 }
-method east-asian-width-values ($/) {
+method east-asian-width-values (|) {
     ...
 }
-method feature-tag-value ($/) {
+method feature-tag-value (|) {
     ...
 }
-method feature-value-name ($/) {
+method feature-value-name (|) {
     ...
 }
-method historical-lig-values ($/) {
+method historical-lig-values (|) {
     ...
 }
-method identifiers ($/) {
+method identifiers (|) {
     ...
 }
-method length ($/) {
+method length (|) {
     ...
 }
-method number ($/) {
+method number (|) {
     ...
 }
-method numeric-figure-values ($/) {
+method numeric-figure-values (|) {
     ...
 }
-method numeric-fraction-values ($/) {
+method numeric-fraction-values (|) {
     ...
 }
-method numeric-spacing-values ($/) {
+method numeric-spacing-values (|) {
     ...
 }
-method ornaments ($/) {
+method ornaments (|) {
     ...
 }
-method percentage ($/) {
+method percentage (|) {
     ...
 }
-method string ($/) {
+method string (|) {
     ...
 }
-method styleset ($/) {
+method styleset (|) {
     ...
 }
-method stylistic ($/) {
+method stylistic (|) {
     ...
 }
-method swash ($/) {
+method swash (|) {
     ...
 }

@@ -1,70 +1,70 @@
 unit role CSS::Module::CSS3::Fonts::AtFontFace::Gen::External;
-method annotation ($/) {
+method annotation (|) {
     ...
 }
-method character-variant ($/) {
+method character-variant (|) {
     ...
 }
-method common-lig-values ($/) {
+method common-lig-values (|) {
     ...
 }
-method contextual-alt-values ($/) {
+method contextual-alt-values (|) {
     ...
 }
-method discretionary-lig-values ($/) {
+method discretionary-lig-values (|) {
     ...
 }
-method east-asian-variant-values ($/) {
+method east-asian-variant-values (|) {
     ...
 }
-method east-asian-width-values ($/) {
+method east-asian-width-values (|) {
     ...
 }
-method feature-tag-value ($/) {
+method feature-tag-value (|) {
     ...
 }
-method feature-value-name ($/) {
+method feature-value-name (|) {
     ...
 }
-method format ($/) {
+method format (|) {
     ...
 }
-method historical-lig-values ($/) {
+method historical-lig-values (|) {
     ...
 }
-method identifiers ($/) {
+method identifiers (|) {
     ...
 }
-method local ($/) {
+method local (|) {
     ...
 }
-method numeric-figure-values ($/) {
+method numeric-figure-values (|) {
     ...
 }
-method numeric-fraction-values ($/) {
+method numeric-fraction-values (|) {
     ...
 }
-method numeric-spacing-values ($/) {
+method numeric-spacing-values (|) {
     ...
 }
-method ornaments ($/) {
+method ornaments (|) {
     ...
 }
-method string ($/) {
+method string (|) {
     ...
 }
-method styleset ($/) {
+method styleset (|) {
     ...
 }
-method stylistic ($/) {
+method stylistic (|) {
     ...
 }
-method swash ($/) {
+method swash (|) {
     ...
 }
-method urange ($/) {
+method urange (|) {
     ...
 }
-method uri ($/) {
+method uri (|) {
     ...
 }

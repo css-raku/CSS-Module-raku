@@ -1,14 +1,14 @@
 # source: http://www.w3.org/TR/2008/REC-CSS1-20080411/
 # edited for css21, css3 forwared compatibility
 'font-family'	[ <generic-family> | <family-name> ]#	UA specific	all elements	yes	N/A	5.2.2
-	<generic-family> := serif | sans-serif | cursive | fantasy | monospace
-        <family-name> := <identifiers> | <string>
+	<generic-family> = serif | sans-serif | cursive | fantasy | monospace
+        <family-name> = <identifiers> | <string>
 'font-style'	normal | italic | oblique	normal	all elements	yes	N/A	5.2.3
 'font-variant'	normal | small-caps	normal	all elements	yes	N/A	5.2.4
 'font-weight'	normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900	normal	all elements	yes	N/A	5.2.5
 'font-size'	<absolute-size> | <relative-size> | <length> | <percentage>	medium	all elements	yes	relative to parent element's font size	5.2.6
-	<absolute-size> := xx-small | x-small | small | medium | large | x-large | xx-large
-	<relative-size> := larger | smaller
+	<absolute-size> = xx-small | x-small | small | medium | large | x-large | xx-large
+	<relative-size> = larger | smaller
 'font'	[ 'font-style' || 'font-variant' || 'font-weight' ]? 'font-size' [ / 'line-height' ]? 'font-family'	not defined for shorthand properties	all elements	yes	allowed on <font-size> and <line-height>	5.2.7
 'color'	<color>	UA specific	all elements	yes	N/A	5.3.1
 'background-color'	<color> | transparent	transparent	all elements	no	N/A	5.3.2
@@ -16,8 +16,8 @@
 'background-repeat'	repeat | repeat-x | repeat-y | no-repeat	repeat	all elements	no	N/A	5.3.4
 'background-attachment'	scroll | fixed	scroll	all elements	no	N/A	5.3.5
 'background-position'	[<percentage> | <length> | <align> ] [ <percentage> | <length> | <valign> ]? | [ <valign> || <align> ]	0% 0%	block-level and replaced elements	no	refer to the size of the element itself	5.3.6
-    <align> := left | center | right
-    <valign> := top | center | bottom
+    <align> = left | center | right
+    <valign> = top | center | bottom
 'background'	'background-color' || 'background-image' || 'background-repeat' || 'background-attachment' || 'background-position'	not defined for shorthand properties	all elements	no	allowed on <background-position>	5.3.7
 'word-spacing'	normal | <length>	normal	all elements	yes	N/A	5.4.1
 'letter-spacing'	normal | <length>	normal	all elements	yes	N/A	5.4.2

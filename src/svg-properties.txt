@@ -7,9 +7,9 @@ direction	ltr | rtl	ltr	text content elements	yes	N/A	visual	no	as specified
 display	inline | block | list-item | run-in | compact | marker | table | inline-table | table-row-group | table-header-group | table-footer-group | table-row | table-column-group | table-column | table-cell | table-caption | none	inline	‘svg’, ‘g’, ‘switch’, ‘a’, ‘foreignObject’, ‘use’ and graphics elements	no	N/A	all	yes	
 dominant-baseline	auto | use-script | no-change | reset-size | ideographic | alphabetic | hanging | mathematical | central | middle | text-after-edge | text-before-edge	auto	text content elements	yes	N/A	visual	yes	as specified
 fill	<paint>	black	shapes and text content elements	yes	N/A	visual	yes	as specified, but with <color> values computed and <url> values made absolute
-    <paint> := none | <color> | <url> [none | <color>]? | context-fill | context-stroke
+    <paint> = none | <color> | <url> [none | <color>]? | context-fill | context-stroke
 fill-opacity	<alpha-value>	1	shapes and text content elements	yes	N/A	visual	yes	the specified value converted to a number, clamped to the range [0,1]
-    <alpha-value> := <percentage-range>
+    <alpha-value> = <percentage-range>
 fill-rule	nonzero | evenodd	nonzero	shapes and text content elements	yes	N/A	visual	yes	as specified
 font-variant	normal | small-caps	normal	text content elements	yes	N/A	visual	yes	see individual properties
 glyph-orientation-vertical	auto | <angle> | <number>	auto	text content elements	yes	N/A	visual	no	as specified
@@ -26,8 +26,8 @@ stop-color	currentColor |<color>	black	‘stop’ elements	no	N/A	visual	yes
 stop-opacity	<alpha-value>	1	‘stop’ elements	no	N/A	visual	yes	
 stroke	<paint>	none	shapes and text content elements	yes	N/A	visual	yes	as specified, but with <color> values computed and <url> values made absolute
 stroke-dasharray	none | <dash-elem>#	none	shapes and text content elements	yes	N/A	visual	yes [1]	absolute lengths or percentages for <dasharray>, or keyword specified
-    <length-percentage> := <length> | <percentage> | <number>
-    <dash-elem> := <length-percentage> | <number>
+    <length-percentage> = <length> | <percentage> | <number>
+    <dash-elem> = <length-percentage> | <number>
 stroke-dashoffset	<length-percentage>	0	shapes and text content elements	yes	refer to the size of the current SVG viewport	visual	yes	absolute length or percentage
 stroke-linecap	butt | round | square	butt	shapes and text content elements	yes	N/A	visual	yes	as specified
 stroke-linejoin	miter | round | bevel	miter	shapes and text content elements	yes	N/A	visual	yes	as specified

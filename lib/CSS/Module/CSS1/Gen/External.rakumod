@@ -1,25 +1,25 @@
 unit role CSS::Module::CSS1::Gen::External;
-method color ($/) {
+method color (|) {
     ...
 }
-method identifiers ($/) {
+method identifiers (|) {
     ...
 }
-method integer ($/) {
+method integer (|) {
     ...
 }
-method length ($/) {
+method length (|) {
     ...
 }
-method number ($/) {
+method number (|) {
     ...
 }
-method percentage ($/) {
+method percentage (|) {
     ...
 }
-method string ($/) {
+method string (|) {
     ...
 }
-method uri ($/) {
+method uri (|) {
     ...
 }

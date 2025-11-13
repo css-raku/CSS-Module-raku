@@ -1,22 +1,22 @@
 unit role CSS::Module::SVG::Gen::External;
-method angle ($/) {
+method angle (|) {
     ...
 }
-method color ($/) {
+method color (|) {
     ...
 }
-method length ($/) {
+method length (|) {
     ...
 }
-method number ($/) {
+method number (|) {
     ...
 }
-method percentage ($/) {
+method percentage (|) {
     ...
 }
-method percentage-range ($/) {
+method percentage-range (|) {
     ...
 }
-method url ($/) {
+method url (|) {
     ...
 }
