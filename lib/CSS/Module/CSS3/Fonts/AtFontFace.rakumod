@@ -33,7 +33,4 @@ grammar CSS::Module::CSS3::Fonts::AtFontFace {
 	    );
     }
     # @font-face declarations
-
-    # ---- Functions ----
-    rule format {:i ('format')'(' [ <string> | <keyw> || <any-args> ] ')'}
 }
