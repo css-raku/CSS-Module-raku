@@ -26,16 +26,10 @@ method feature-tag-value (|) {
 method feature-value-name (|) {
     ...
 }
-method format (|) {
-    ...
-}
 method historical-lig-values (|) {
     ...
 }
 method identifiers (|) {
-    ...
-}
-method local (|) {
     ...
 }
 method numeric-figure-values (|) {

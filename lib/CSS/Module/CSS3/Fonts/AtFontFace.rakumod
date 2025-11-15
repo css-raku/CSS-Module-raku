@@ -36,5 +36,4 @@ grammar CSS::Module::CSS3::Fonts::AtFontFace {
 
     # ---- Functions ----
     rule format {:i ('format')'(' [ <string> | <keyw> || <any-args> ] ')'}
-    rule local  {:i ('local')'(' [ <font-face-name> || <any-args> ] ')'}
 }

@@ -8,3 +8,9 @@ method font-src-expr ($/) {
 method font-face-name ($/) {
     make $.build.rule($/)
 }
+method format ($/) {
+    $.make-func("format", $/)
+}
+method local ($/) {
+    $.make-func("local", $/)
+}

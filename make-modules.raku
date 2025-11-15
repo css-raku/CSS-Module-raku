@@ -49,14 +49,16 @@ class Build {
 
                     my %meta = @defs.&build-metadata(:%child-props);
                     %props ,= %meta;
-                    # &build-defaults is awkward here, maybe CSS::Properties should do this at run-time?
-                    my $grammar = (require ::("CSS::Module::{$meta-root}"));
-                    my $actions = (require ::("CSS::Module::{$meta-root.split('::').head}::Actions"));
-                    %meta.&build-defaults(:$grammar, :$actions);
                 }
                 
                 %props.&write-metadata($meta-root);
-            }
+if 1 {
+                # &build-defaults is awkward here, maybe CSS::Properties should do this at run-time?
+                my $grammar = (require ::("CSS::Module::{$meta-root}"));
+                my $actions = (require ::("CSS::Module::{$meta-root.split('::').head}::Actions"));
+                %props.&build-defaults(:$grammar, :$actions);
+                %props.&write-metadata($meta-root);
+            } }
         }
     }
 }

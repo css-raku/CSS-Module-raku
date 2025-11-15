@@ -69,3 +69,7 @@ rule font-face-name { :i <identifiers> || <string>  }
 #| unicode-range: <urange>#
 rule decl:sym<unicode-range> { :i ("unicode-range") ":" <val(/<expr=.prop-val-unicode-range> /, &?ROUTINE.WHY)>}
 rule prop-val-unicode-range { :i <urange> +% <op(",")> }
+#| local(<string>)
+rule local { :i "local(" [<string> || <usage(&?ROUTINE.WHY)> ] ")" }
+#| format(<string>#)
+rule format { :i "format(" [<string> +% "," || <usage(&?ROUTINE.WHY)> ] ")" }
