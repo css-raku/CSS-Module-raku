@@ -10,5 +10,5 @@ src	<font-src-expr>#	N/A
     <font-src-expr> = [<uri>|local(<string>)] [format(<string>#)]? | <font-face-name>
     <font-face-name> = <identifiers> | <string>
 unicode-range	<urange>#	U+0-10FFFF
-    <local()>  = local(<string>)
+    <local()>  = local(<font-face-name>)
     <format()> = format(<string>#)
