@@ -9,6 +9,6 @@ font-weight	normal | bold | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900	
 src	<font-src-expr>#	N/A
     <font-src-expr> = [<uri>|local(<string>)] [format(<string>#)]? | <font-face-name>
     <font-face-name> = <identifiers> | <string>
-unicode-range	<urange>#	U+0-10FFFF
     <local()>  = local(<font-face-name>)
     <format()> = format(<string>#)
+unicode-range	<urange>#	U+0-10FFFF

@@ -59,7 +59,7 @@
 'font-style'	normal | italic | oblique | inherit	normal	 	yes	 	visual
 'font-variant'	normal | small-caps | inherit	normal	 	yes	 	visual
 'font-weight'	normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | inherit	normal	 	yes	 	visual
-'font'	[ [ 'font-style' || 'font-variant' || 'font-weight' ]? 'font-size' [ / 'line-height' ]? 'font-family' ] | caption | icon | menu | message-box | small-caption | status-bar | inherit	see individual properties	 	yes	see individual properties	visual
+'font'	[ [ 'font-style' || 'font-variant' || 'font-weight' ]? 'font-size' [ / 'line-height' ]? 'font-family'# ] | caption | icon | menu | message-box | small-caption | status-bar | inherit	see individual properties	 	yes	see individual properties	visual
 'height'	<length> | <percentage> | auto | inherit	auto	all elements but non-replaced inline elements, table columns, and column groups	no	see prose	visual
 'left'	<length> | <percentage> | auto | inherit	auto	positioned elements	no	refer to width of containing block	visual
 'letter-spacing'	normal | <length> | inherit	normal	 	yes	 	visual

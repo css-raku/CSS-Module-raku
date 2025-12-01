@@ -6,11 +6,12 @@
   "build-depends": [
   ],
   "depends": [
-    "CSS::Grammar:ver<0.3.14+>",
+    "CSS::Grammar:ver<0.4.0+>",
     "CSS::Module::CSS3::Selectors:ver<0.0.5+>",
-    "CSS::Specification:ver<0.5.0+>",
+    "CSS::Specification:ver<0.5.1+>",
     "CSS::Writer:ver<0.2.6+>",
-    "JSON::Fast"
+    "JSON::Fast",
+    "Method::Also"
   ],
   "description": "Raku CSS extended and property-specific grammars",
   "license": "Artistic-2.0",

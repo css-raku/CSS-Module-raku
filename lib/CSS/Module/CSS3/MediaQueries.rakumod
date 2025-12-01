@@ -70,6 +70,7 @@ rule media-feature-unknown  { (<.Ident>) [ ':' <any>* ]? }
 class Actions {
 
     use CSS::Grammar::Defs :CSSValue;
+    use Method::Also;
 
     method !build {
         use CSS::Grammar::AST;
@@ -100,5 +101,9 @@ class Actions {
 
     method media-feature-unknown($/)   {
         $.warning('unknown media-feature', lc($0));
+    }
+
+    method media-expr-length($/) is also<media-expr-resolution media-expr-orientation media-expr-aspect media-expr-scan media-expr-grid> {
+        make self!build.list($/)
     }
 }

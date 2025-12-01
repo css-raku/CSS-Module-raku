@@ -136,7 +136,7 @@ multi method parse-property(Str $property-name, $val, Bool :$warn = True) {
     my $actions = $.actions.new;
     my $prop = $property-name.lc;
     $prop = $_ with %!alias{$prop};
-    my $rule = %!allow{$prop} ?? 'expr' !! 'prop-val-' ~ $prop;
+    my $rule = %!allow{$prop} ?? 'expr' !! 'css-val-' ~ $prop;
 
     if $.grammar.parse($val.Str, :$rule, :$actions ) -> \p {
         $actions.build.list(p);

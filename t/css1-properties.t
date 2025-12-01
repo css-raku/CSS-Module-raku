@@ -18,6 +18,7 @@ my CSS::Writer $writer .= new;
 my %seen;
 
 for 't/css1-properties.json'.IO.lines {
+#for '/tmp/tst.json'.IO.lines {
 
     next if .substr(0,2) eq '//';
 
@@ -48,25 +49,30 @@ for 't/css1-properties.json'.IO.lines {
 
 	        unless %seen{$prop}{$level}++ {
 	            # usage and inheritence  tests
-	            my $junk = sprintf '{%s: %s}', $prop, 'junk +-42';
+                    subtest "Unexpected input", {
+	                my $junk = sprintf '{%s: %s}', $prop, 'junk +-42';
 
-	            $actions.reset;
-	            my $p = $grammar.parse( $junk, :rule<declarations>, :$actions);
-	            ok($p.defined && ~$p eq $junk, "$prop: able to parse unexpected input")
-	            or note "unable to parse declaration list: $junk";
+	                $actions.reset;
+	                my $p = $grammar.parse( $junk, :rule<declarations>, :$actions);
+	                ok($p.defined && ~$p eq $junk, "$prop: able to parse unexpected input")
+	                or note "unable to parse declaration list: $junk";
                 
-	            ok($actions.warnings, "$prop: unexpected input produces warning")
+	                ok($actions.warnings, "$prop: unexpected input produces warning")
 		        or diag $actions.warnings;
+                    }
 
-	            for @$proforma -> $misc {
-		        my $decl = sprintf '{%s: %s}', $prop, $misc;
+                    subtest "proforma", {
+	                for @$proforma -> $keyw {
+		            my $decl = sprintf '{%s: %s}', $prop, $keyw;
 
-		        my $ast = { :declarations[{ :property{ :ident($prop), :expr[ { :keyw($misc)} ] } }] };
+		            my $ast = { :declarations[{ :property{ :ident($prop), :expr[ { :$keyw} ] } }] };
 
-                        CSS::Grammar::Test::parse-tests($grammar, $decl,
-						        :rule<declarations>,
-						        :$actions,
-						        :expected{ :$ast } );
+                            CSS::Grammar::Test::parse-tests($grammar, $decl,
+						            :rule<declarations>,
+                                                            :suite($keyw),
+						            :$actions,
+						            :expected{ :$ast } );
+                        }
                     }
                 }
             }

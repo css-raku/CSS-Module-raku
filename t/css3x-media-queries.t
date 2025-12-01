@@ -12,21 +12,24 @@ my $actions = CSS::Module::CSS3.module.actions.new;
 my CSS::Writer $writer .= new;
 
 for 't/css3x-media-queries.json'.IO.lines {
+#for '/tmp/tst.json'.IO.lines {
 
     next
         if .substr(0,2) eq '//';
 
     my ($rule, $expected) = @( from-json($_) );
     my $input = $expected<input>;
+    subtest "$rule: $input", {
 
-    &CSS::Grammar::Test::parse-tests(
-        $grammar, $input,
-        :$rule,
-        :$actions,
-        :suite<css3 @media>,
-        :$writer,
-        :$expected,
-    );
+        &CSS::Grammar::Test::parse-tests(
+            $grammar, $input,
+            :$rule,
+            :$actions,
+            :suite<css3 @media>,
+            :$writer,
+            :$expected,
+        );
+    }
 }
 
 done-testing;
