@@ -1,5 +1,9 @@
 {{$NEXT}}
 
+0.7.1  2025-12-02T09:19:42+13:00
+   - Regenerate with latest CSS::Specification::Compiler. Upgrade
+     to latest CSS::Specification, CSS::Grammar run-time.
+
 0.7.0  2025-11-14T07:40:34+13:00
    Move most CSS functions from Raku code to value definitions. Make
    use of CSS::Specification 0.5.0+, and build via the latest version
