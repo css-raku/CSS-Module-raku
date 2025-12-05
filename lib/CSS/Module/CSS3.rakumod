@@ -25,8 +25,8 @@ grammar CSS::Module::CSS3 {
     use     CSS::Module::CSS21;
     also is CSS::Module::CSS21::_Body;
 
-    use     CSS::Module::CSS3::_Base;
-    also is CSS::Module::CSS3::_Base;
+    use     CSS::Module::CSS3::Values_and_Units;
+    also is CSS::Module::CSS3::Values_and_Units;
 
     use CSS::Module;
 

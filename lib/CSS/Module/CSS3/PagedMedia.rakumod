@@ -6,8 +6,8 @@ use v6;
 
 unit grammar CSS::Module::CSS3::PagedMedia;
 
-use     CSS::Module::CSS3::_Base;
-also is CSS::Module::CSS3::_Base;
+use     CSS::Module::CSS3::Values_and_Units;
+also is CSS::Module::CSS3::Values_and_Units;
 
 use     CSS::Module::CSS3::PagedMedia::Gen::Grammar;
 also is CSS::Module::CSS3::PagedMedia::Gen::Grammar;
@@ -33,8 +33,7 @@ rule margin-declaration { <margin-box> <declarations> }
 
 class Actions {
 
-    use     CSS::Module::CSS3::_Base::Actions;
-    also is CSS::Module::CSS3::_Base::Actions;
+    also is CSS::Module::CSS3::Values_and_Units::Actions;
 
     use     CSS::Module::CSS3::PagedMedia::Gen::Actions;
     also is CSS::Module::CSS3::PagedMedia::Gen::Actions;

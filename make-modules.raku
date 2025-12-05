@@ -18,7 +18,9 @@ class Build {
             for (:CSS1[<src css1-properties.txt> => <CSS1>],
                  :CSS21[<src css21-properties.txt> => <CSS21>],
                  :CSS3[<src css3x-font-properties.txt> => <CSS3 Fonts>,
-                       <src css3x-paged-media.txt> => <CSS3 PagedMedia>],
+                       <src css3x-paged-media.txt> => <CSS3 PagedMedia>,
+                       <src css-values-3-20240322.txt> => <CSS3 Values_and_Units>,
+                      ],
                  :SVG[<src svg-properties.txt> => <SVG>],
                  'CSS3::Fonts::AtFontFace' => [<src css3x-font-@fontface-properties.txt> => <CSS3 Fonts AtFontFace>],
 
