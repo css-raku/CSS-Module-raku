@@ -42,23 +42,15 @@ grammar CSS::Module::CSS3::Values_and_Units {
 
 
     class Actions {
-        use CSS::Module::CSS3::Values_and_Units::Gen::Actions;
         use CSS::Specification::Base::Actions;
         use CSS::Grammar::Actions;
         use CSS::Specification::Base::Actions;
-        also is CSS::Module::CSS3::Values_and_Units::Gen::Actions;
         also is CSS::Specification::Base::Actions;
         also is CSS::Grammar::Actions;
         also does CSS::Module::CSS3::Values_and_Units::Gen::External;
+        use Method::Also;
 
         use CSS::Grammar::Defs :CSSValue;
-
-        method build {
-            use CSS::Grammar::AST;
-            my class builder is CSS::Grammar::AST {
-                method proforma { ['inherit', 'initial'] }
-            }
-        }
 
         method length-units:sym<viewport>($/) { make $/.lc }
         method rel-font-units($/)             { make $/.lc }
@@ -67,14 +59,18 @@ grammar CSS::Module::CSS3::Values_and_Units {
 
         method calc($/) { $.make-func( 'calc', $/, :arg-type<expr>) }
 
-        method !make-list($/, $type) {
+        method !make-expr($/, $type) {
             make $.build.token($.build.list($/), :$type);
         }
-        method length:sym<calc>($/)     { self!make-list: $/, CSSValue::LengthComponent; }
-        method frequency:sym<calc>($/)  { self!make-list: $/, CSSValue::FrequencyComponent; }
-        method angle:sym<calc>($/)      { self!make-list: $/, CSSValue::AngleComponent; }
-        method time:sym<calc>($/)       { self!make-list: $/, CSSValue::TimeComponent; }
-        method resolution:sym<calc>($/) { self!make-list: $/, CSSValue::ResolutionComponent; }
+
+        method calc-sum($/) is also<calc-product calc-number-sum calc-number-product calc-number-value calc-value> {
+            self!make-expr: $/, 'expr';
+        }
+        method length:sym<calc>($/)     { self!make-expr: $/, CSSValue::LengthComponent; }
+        method frequency:sym<calc>($/)  { self!make-expr: $/, CSSValue::FrequencyComponent; }
+        method angle:sym<calc>($/)      { self!make-expr: $/, CSSValue::AngleComponent; }
+        method time:sym<calc>($/)       { self!make-expr: $/, CSSValue::TimeComponent; }
+        method resolution:sym<calc>($/) { self!make-expr: $/, CSSValue::ResolutionComponent; }
 
     }
 }

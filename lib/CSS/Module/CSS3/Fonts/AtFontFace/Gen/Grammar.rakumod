@@ -62,7 +62,7 @@ rule css-val-font-weight { :i [normal | bold ]& <keyw>  || [100 | 200 | 300 | 40
 #| src: <font-src-expr>#
 rule decl:sym<src> { :i (src) ":" <val(/<css-val-src> +% <op(",")> /, &?ROUTINE.WHY)>}
 rule css-val-src { :i <font-src-expr> }
-#| <font-src-expr> = [<uri>|local(<string>)] [format(<string>#)]? | <font-face-name>
+#| <font-src-expr> = [<uri>|local(<font-face-name>)] [format(<string>#)]? | <font-face-name>
 rule font-src-expr { :i [<uri> || <local> ] <format> ?  || <font-face-name>  }
 #| <font-face-name> = <identifiers> | <string>
 rule font-face-name { :i <identifiers> || <string>  }
