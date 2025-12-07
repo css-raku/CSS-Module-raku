@@ -34,25 +34,28 @@ for 't/00basic.json'.IO.lines.map({ from-json($_).pairs[0] }) {
     my %expected = .value;
     my $input = %expected<input>;
 
-    for { :module($css1), },
-       	{ :module($css21),},	
-       	{ :module($css3), },
-       	{ :module($css3), :lax}
-    -> % ( :$module!, :$lax=False ) {
+    subtest $input, {
+        for { :module($css1), },
+       	    { :module($css21),},	
+       	    { :module($css3), },
+       	    { :module($css3), :lax}
+        -> % ( :$module!, :$lax=False ) {
+            
+            my $suite = $module.name;
+            $suite ~= '(lax)' if $lax;
+            subtest $suite, {
+	        my $grammar = $module.grammar;
+                my $actions = $module.actions.new(:$lax);
+                my %level-tests = %( %expected{$suite} // () );
+                my %level-expected = %expected, %level-tests;
 
-        my $suite = $module.name;
-        $suite ~= '(lax)' if $lax;
-	my $grammar = $module.grammar;
-        my $actions = $module.actions.new(:$lax);
-        my %level-tests = %( %expected{$suite} // () );
-        my %level-expected = %expected, %level-tests;
-
-        CSS::Grammar::Test::parse-tests($grammar, $input,
-                                        :$rule,
-                                        :$suite,
-                                        :$actions,
-                                        :$writer,
-                                        :expected(%level-expected) );
+                CSS::Grammar::Test::parse-tests($grammar, $input,
+                                                :$rule,
+                                                :$actions,
+                                                :$writer,
+                                                :expected(%level-expected) );
+                }
+        }
     }
 
 }

@@ -1,4 +1,6 @@
 {{$NEXT}}
+   - Add Value-and-Units module. In particular support parsing of calc()
+     expressions. See https://www.w3.org/TR/2024/WD-css-values-4-20240312/
 
 0.7.1  2025-12-02T09:19:42+13:00
    - Regenerate with latest CSS::Specification::Compiler. Upgrade

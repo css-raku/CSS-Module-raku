@@ -9,8 +9,8 @@ grammar CSS::Module::CSS3::Fonts::AtFontFace {
     use     CSS::Module::CSS3::Fonts::AtFontFace::Gen::Grammar;
     also is CSS::Module::CSS3::Fonts::AtFontFace::Gen::Grammar;
 
-    use     CSS::Module::CSS3::_Base;
-    also is CSS::Module::CSS3::_Base;
+    use     CSS::Module::CSS3::Values_and_Units;
+    also is CSS::Module::CSS3::Values_and_Units;
 
     use       CSS::Module::CSS3::Fonts::AtFontFace::Gen::External;
     also does CSS::Module::CSS3::Fonts::AtFontFace::Gen::External;

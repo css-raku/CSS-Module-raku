@@ -52,6 +52,13 @@ grammar CSS::Module::CSS3::Values_and_Units {
 
         use CSS::Grammar::Defs :CSSValue;
 
+        method build {
+            use CSS::Grammar::AST;
+            my class builder is CSS::Grammar::AST {
+                method proforma { ['inherit', 'initial'] }
+            }
+        }
+
         method length-units:sym<viewport>($/) { make $/.lc }
         method rel-font-units($/)             { make $/.lc }
         method angle-units($/)                { make $/.lc }

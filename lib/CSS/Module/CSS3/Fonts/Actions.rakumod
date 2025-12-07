@@ -2,9 +2,6 @@ use v6;
 
 class CSS::Module::CSS3::Fonts::Actions {
 
-    use     CSS::Module::CSS3::_Base::Actions;
-    also is CSS::Module::CSS3::_Base::Actions;
-
     use     CSS::Module::CSS3::Fonts::Variants;
     also is CSS::Module::CSS3::Fonts::Variants::Actions;
 
@@ -13,6 +10,9 @@ class CSS::Module::CSS3::Fonts::Actions {
 
     use     CSS::Module::CSS3::Fonts::AtFontFace::Gen::Actions;
     also is CSS::Module::CSS3::Fonts::AtFontFace::Gen::Actions;
+
+    use     CSS::Module::CSS3::Values_and_Units;
+    also is CSS::Module::CSS3::Values_and_Units::Actions;
 
     use       CSS::Module::CSS3::Fonts::Gen::External;
     also does CSS::Module::CSS3::Fonts::Gen::External;
