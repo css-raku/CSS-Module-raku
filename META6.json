@@ -54,8 +54,8 @@
     "CSS::Module::CSS3::PagedMedia::Gen::Grammar": "lib/CSS/Module/CSS3/PagedMedia/Gen/Grammar.rakumod",
     "CSS::Module::CSS3::Values_and_Units": "lib/CSS/Module/CSS3/Values_and_Units.rakumod",
     "CSS::Module::CSS3::Values_and_Units::Gen::Actions": "lib/CSS/Module/CSS3/Values_and_Units/Gen/Actions.rakumod",
-    "CSS::Module::CSS3::Values_and_Units::Gen::Grammar": "lib/CSS/Module/CSS3/Values_and_Units/Gen/Grammar.rakumod",
     "CSS::Module::CSS3::Values_and_Units::Gen::External": "lib/CSS/Module/CSS3/Values_and_Units/Gen/External.rakumod",
+    "CSS::Module::CSS3::Values_and_Units::Gen::Grammar": "lib/CSS/Module/CSS3/Values_and_Units/Gen/Grammar.rakumod",
     "CSS::Module::Property": "lib/CSS/Module/Property.rakumod",
     "CSS::Module::SVG": "lib/CSS/Module/SVG.rakumod",
     "CSS::Module::SVG::Actions": "lib/CSS/Module/SVG/Actions.rakumod",
@@ -71,5 +71,5 @@
   ],
   "test-depends": [
   ],
-  "version": "0.7.1"
+  "version": "0.7.2"
 }
