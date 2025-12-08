@@ -34,6 +34,7 @@ Note: `CSS::Module::CSS3.module` is composed from the following grammars.
 - `CSS::Module::CSS3::Namespaces` - CSS 3.0 Namespace (@namespace)
 - `CSS::Module::CSS3::Media`      - CSS 3.0 Media (@media)
 - `CSS::Module::CSS3::PagedMedia` - CSS 3.0 Paged Media (@page)
+- `CSS::Module::CSS3::Value_and_Units` - CSS 3.0 Base units and rules, plus calc() expressions
 - `CSS::ModuleX::CSS21`           - the full set of CSS21 properties
 
 This corresponds to the sub-modules described in [CSS Snapshot 2010](http://www.w3.org/TR/2011/NOTE-css-2010-20110512/).
