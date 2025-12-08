@@ -29,7 +29,7 @@ grammar CSS::Module::CSS3::Values_and_Units {
 
     # override/extend css::grammar <rel-font-units> & <angle-units>
     token rel-font-units   {:i[em|ex|ch|rem]}
-    token angle-units      {:i[deg|rad|rad|turn]}
+    token angle-units      {:i[deg|rad|turn]}
     # override/extend css::language::css3::_base <resolution-units>
     token resolution-units {:i dp[i|cm|px]}
 
