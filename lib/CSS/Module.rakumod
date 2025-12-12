@@ -137,15 +137,18 @@ multi method parse-property(Str $property-name, $val, Bool :$warn = True) {
     my $prop = $property-name.lc;
     $prop = $_ with %!alias{$prop};
     my $rule = %!allow{$prop} ?? 'expr' !! 'css-val-' ~ $prop;
+    my $ast;
 
     if $.grammar.parse($val.Str, :$rule, :$actions ) -> \p {
-        $actions.build.list(p);
+        $ast := $actions.build.list(p);
     }
     else {
-        if $warn {
-            note "unable to parse CSS property '$property-name: $val;'";
-            note $_ for $actions.warnings;
-        }
-        Nil;
+        note "unable to parse CSS property '$property-name: $val;'"
+            if $warn;
     }
+    if $warn {
+        note $_ for $actions.warnings;
+    }
+
+    $ast;
 }
