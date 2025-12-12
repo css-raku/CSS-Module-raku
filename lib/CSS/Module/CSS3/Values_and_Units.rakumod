@@ -114,7 +114,6 @@ class Actions {
     
     # binary left associative arithmetic operation
     multi sub type( %lhs, % ( :$op! ),  *@rhs (%, *@) ) {
-        use CSS::Units :ops; # Use arithmetic operator overloading
         my $t1 := type(%lhs);
         my $t2 := type(|@rhs);
         arith($t1, $op, $t2);
