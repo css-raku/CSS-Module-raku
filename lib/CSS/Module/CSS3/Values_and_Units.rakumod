@@ -137,12 +137,6 @@ class Actions {
         'fail';
     }
 
-    multi sub typecheck(@, 'expr') { }
-    multi sub typecheck(@expr, $type) is default {
-        my $dim = type |@expr;
-        dd (:@expr, :$type);
-    }
-
     method !make-expr($/, $expected-type?) {
         my @expr = $.build.list($/);
 
