@@ -144,10 +144,10 @@ class Actions {
             given type(|@expr) {
                 when $expected-type | 0 | 'percent' { } # permitted
                 when 'fail' {
-                    $.warning: "Unable to evaluate calc() expression";
+                    $.warning: "Unable to evaluate expression", $/.Str;
                 }
                 default {
-                    $.warning: "Expected calc() expression of type $expected-type, got: $_";
+                    $.warning: "Expected type of $expected-type, got {$_ ~~ Numeric ?? 'number' !! $_}", $/.Str;
                 }
             }
         }
