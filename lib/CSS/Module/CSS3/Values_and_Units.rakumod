@@ -133,26 +133,26 @@ class Actions {
     }
 
     multi sub type( *@expr ) {
-        warn "Unhandled expression: {@expr.map(*.raku).join: "|"}";
         'fail';
     }
 
-    method !make-expr($/, $expected-type?) {
+    method !make-expr($/, $type = 'expr') {
         my @expr = $.build.list($/);
 
-        if $expected-type {
+        unless $type eq 'expr' {
             given type(|@expr) {
-                when $expected-type | 0 | 'percent' { } # permitted
+                when $type | 0 | 'percent' { }
                 when 'fail' {
-                    $.warning: "Unable to evaluate expression", $/.Str;
+                    $.warning: "unable to evaluate expression", $/.Str;
+                    return;
                 }
                 default {
-                    $.warning: "Expected type of $expected-type, got {$_ ~~ Numeric ?? 'number' !! $_}", $/.Str;
+                    $.warning: "expected type of $type, got {$_ ~~ Numeric ?? 'number' !! $_}", $/.Str;
+                    return;
                 }
             }
         }
 
-        my $type = $expected-type // 'expr';
         make $.build.token(@expr, :$type);
     }
 

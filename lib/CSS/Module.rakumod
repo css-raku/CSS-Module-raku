@@ -150,5 +150,6 @@ multi method parse-property(Str $property-name, $val, Bool :$warn = True) {
         note $_ for $actions.warnings;
     }
 
+    $ast := Nil if $ast eqv [];
     $ast;
 }

@@ -11,7 +11,7 @@
 { "prop" : "border-style", "decl" : "groove", "expr" : [ { "keyw" : "groove" } ] }
 { "prop" : "border-top-style", "decl" : "ridge", "expr" : [ { "keyw" : "ridge" } ] }
 { "prop" : "border", "decl" : "1px solid red", "expr" : [ { "expr:border-width" : [ { "px" : 1 } ] }, { "expr:border-style" : [ { "keyw" : "solid" } ] }, { "expr:border-color" : [ { "rgb" : [ { "num" : 255 }, { "num" : 0 }, { "num" : 0 } ] } ] } ] }
-{ "prop" : "border", "decl" : "1px red blue", "warnings" : "extra terms following 'border' declaration: blue - dropped" }
+{ "prop" : "border", "decl" : "1px red blue", "warnings" : "extra terms following declaration 'border: 1px red': 'blue' - dropped" }
 { "prop" : "clear", "decl" : "both", "expr" : [ { "keyw" : "both" } ] }
 { "prop" : "color", "decl" : "#3377aa", "expr" : [ { "rgb" : [ { "num" : 51 }, { "num" : 119 }, { "num" : 170 } ] } ] }
 { "prop" : "display", "decl" : "list-item", "expr" : [ { "keyw" : "list-item" } ] }
