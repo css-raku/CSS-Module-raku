@@ -24,37 +24,6 @@ has &.index;
 method index { &!index() }
 has CSS::Module %.sub-module;
 
-my subset ExtensionName of Str where .starts-with('-');
-proto method alias(|) is DEPRECATED('extend(:$name, :$like, ...)') {*};
-multi method alias(ExtensionName :$name! is copy, Str :$like! is copy) is rw {
-    $name .= lc;
-    $like .= lc;
-    my $metadata = %!property-metadata{$like}
-        // die "unable to alias unknown property: '$like'";
-
-    die "unable to alias container property '$like' - NYI"
-        if $metadata<children> || $metadata<box>;
-
-    with %!prop-names{$name} {
-        die "conflicting property alias: '$name'"
-            unless %!alias{$name} ~~ $like;
-    }
-    else {
-        my UInt $prop-num = self.index.elems;
-        %!alias{$name} = $like;
-        %!prop-names{$name} = $prop-num;
-        %!property-metadata{$name} = %!property-metadata{$like};
-        %!property-metadata{$name}<default>:delete
-            without %!property-metadata{$name}<default>[1];
-        self.index[$prop-num] = CSS::Module::Property.new: :$name, :$prop-num, |%!property-metadata{$name};
-    }
-    %(:$name, :$like);
-}
-multi method alias($name) is default {
-    my $like = %!alias{$name} // die "unknown property alias: '$name'";
-    %(:$name, :$like);
-}
-
 method !register-property(:$name!, :%metadata) {
     die "unable to register container property '$name' - NYI"
         if %metadata<children> || %metadata<box>;
@@ -69,12 +38,12 @@ method !register-property(:$name!, :%metadata) {
 
 multi method extend(
     Str:D :$name! is copy,
-    Str:D :like($base-prop)! is copy,
+    Str:D :$like!,
     :&coerce,
     |c
 ) {
     $name .= lc;
-    $base-prop .= lc;
+    my $base-prop = $like.lc;
     die "unknown base property: $name"
         unless %!property-metadata{$base-prop}:exists;
     my %metadata = %!property-metadata{$base-prop};
@@ -100,7 +69,7 @@ multi method extend(
     %metadata ,= c.hash;
     with &coerce -> &c {
         %!coerce{$name} = &c;
-        %metadata<default> //= [$_, [&c($_)]]
+        %metadata<default> //= [$_, [.&c]]
             with $val;
     }
     else {
@@ -132,14 +101,14 @@ multi method parse-property(Str $property-name where (%!coerce{$_}:exists), $val
 }
 
 #| parse an individual property-specific expression
-multi method parse-property(Str $property-name, $val, Bool :$warn = True) {
+multi method parse-property(Str $property-name, Str() $val, Bool :$warn = True) {
     my $actions = $.actions.new;
     my $prop = $property-name.lc;
     $prop = $_ with %!alias{$prop};
     my $rule = %!allow{$prop} ?? 'expr' !! 'css-val-' ~ $prop;
     my $ast;
 
-    if $.grammar.parse($val.Str, :$rule, :$actions ) -> \p {
+    if $.grammar.parse($val, :$rule, :$actions ) -> \p {
         $ast := $actions.build.list(p);
     }
     else {
