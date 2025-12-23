@@ -103,14 +103,17 @@ class Actions {
     multi arith('percent', AddSub, 'percent') { 'percent' }
     multi arith('percent', AddSub, Dim $b) { $b }
     multi arith('percent', MulDiv, Numeric) { 'percent' }
+    multi arith('percent', '*', 'percent')  { 'fail' }
+    multi arith('percent', '/', 'percent')  { Numeric }
     multi arith(Numeric, MulDiv, 'percent') { Numeric }
     # dimensions
     multi arith(Dim $a, AddSub, 'percent') { $a }
     multi arith(Dim $a, MulDiv, Numeric) { $a }
     multi arith(Numeric, '*', Dim $b) { $b }
-    multi arith($a, '/', Dim $b) { $a eq $b ?? Numeric !! 'fail' }
+    multi arith(Dim $a, '/', Dim $b) { $a eq $b ?? Numeric !! 'fail' }
     multi arith(Dim $a, '*', Dim $b) { 'fail' }
     multi arith(Dim $a, AddSub, Dim $b) { $a eq $b ?? $a !! 'fail' }
+    multi arith($, MulDiv, $) { 'fail' }
     
     # binary left associative arithmetic operation
     multi sub type( %lhs, % ( :$op! ),  *@rhs (%, *@) ) {
