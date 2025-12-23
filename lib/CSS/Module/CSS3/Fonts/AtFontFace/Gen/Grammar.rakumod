@@ -62,14 +62,16 @@ rule css-val-font-weight { :i [normal | bold ]& <keyw>  || [100 | 200 | 300 | 40
 #| src: <font-src-expr>#
 rule decl:sym<src> { :i (src) ":" <val(/<css-val-src> +% <op(",")> /, &?ROUTINE.WHY)>}
 rule css-val-src { :i <font-src-expr> }
-#| <font-src-expr> = [<uri>|local(<font-face-name>)] [format(<string>#)]? | <font-face-name>
+#| <font-src-expr> = [<uri>|local(<font-face-name>)] [format(<font-format>#)]? | <font-face-name>
 rule font-src-expr { :i [<uri> || <local> ] <format> ?  || <font-face-name>  }
+#| <font-format> = [<string> | collection | embedded-opentype | opentype | svg | truetype | woff | woff2 ]
+rule font-format { :i [<string> || [collection | "embedded-opentype" | opentype | svg | truetype | woff | woff2 ]& <keyw>  ] }
 #| <font-face-name> = <identifiers> | <string>
 rule font-face-name { :i <identifiers> || <string>  }
 #| local(<font-face-name>)
 rule local { :i "local(" [<font-face-name> || <usage(&?ROUTINE.WHY)> ] ")" }
-#| format(<string>#)
-rule format { :i "format(" [<string> +% "," || <usage(&?ROUTINE.WHY)> ] ")" }
+#| format(<font-format>#)
+rule format { :i "format(" [<font-format> +% "," || <usage(&?ROUTINE.WHY)> ] ")" }
 #| unicode-range: <urange>#
 rule decl:sym<unicode-range> { :i ("unicode-range") ":" <val(/<css-val-unicode-range> +% <op(",")> /, &?ROUTINE.WHY)>}
 rule css-val-unicode-range { :i <urange> }

@@ -5,6 +5,9 @@ method family-name ($/) {
 method font-src-expr ($/) {
     make $.build.rule($/)
 }
+method font-format ($/) {
+    make $.build.rule($/)
+}
 method font-face-name ($/) {
     make $.build.rule($/)
 }

@@ -7,8 +7,9 @@ font-style	normal | italic | oblique	normal
 font-variant	normal | [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> || stylistic(<feature-value-name>) || historical-forms || styleset(<feature-value-name>#) || character-variant(<feature-value-name>#) || swash(<feature-value-name>) || ornaments(<feature-value-name>) || annotation(<feature-value-name>) || [ small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps ] || <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero || <east-asian-variant-values> || <east-asian-width-values> || ruby ]	normal
 font-weight	normal | bold | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900	normal
 src	<font-src-expr>#	N/A
-    <font-src-expr> = [<uri>|local(<font-face-name>)] [format(<string>#)]? | <font-face-name>
+    <font-src-expr> = [<uri>|local(<font-face-name>)] [format(<font-format>#)]? | <font-face-name>
+    <font-format>= [<string> | collection | embedded-opentype | opentype | svg | truetype | woff | woff2 ]
     <font-face-name> = <identifiers> | <string>
     <local()>  = local(<font-face-name>)
-    <format()> = format(<string>#)
+    <format()> = format(<font-format>#)
 unicode-range	<urange>#	U+0-10FFFF
