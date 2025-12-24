@@ -1,5 +1,8 @@
 {{$NEXT}}
 
+0.7.4  2025-12-24T13:10:59+13:00
+   - Fix @font-face src format() definition for CSS::Font::Resources
+
 0.7.3  2025-12-13T06:00:00+13:00
    - Add basic type-checking to calc() expressions.
 
