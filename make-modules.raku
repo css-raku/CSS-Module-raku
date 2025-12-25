@@ -70,13 +70,12 @@ sub build-defaults(%meta, :$grammar!, :$actions! is copy, ) {
         with %details<default> -> $default {
             unless $default ~~ Array {
                 $actions .= new;
+                my @default = $default;
                 with $default.contains('agent'|'value of'|'nameless') ?? Nil !! $grammar.parse("$prop:$default", :$actions, :rule<declaration>) {
-                    %details<default> = [$default, .ast<property><expr>]
+                    @default.push: .ast<property><expr>
                         unless $actions.warnings;
                 }
-                else {
-                     %details<default>:delete;
-                }
+                %details<default> = @default;
             }
         }
     }
