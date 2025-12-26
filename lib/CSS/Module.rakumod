@@ -1,5 +1,5 @@
 #| a lightweight class for bundling resources associated with a particular CSS Syntax
-unit class CSS::Module:ver<0.7.4>;
+unit class CSS::Module:ver<0.7.5>;
 
 use CSS::Grammar;
 use CSS::Module::Property;
