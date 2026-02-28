@@ -83,37 +83,45 @@ class Actions {
         type %expr;
     }
 
-    subset AddSub of Str where '+'|'-';
-    subset MulDiv of Str where '*'|'/';
+    subset Additive of Str where '+'|'-';
+    subset Multiplicative of Str where '*'|'/';
     subset Dim of Str where %Dim{$_};
 
     # failure propagation
     multi resolved-type('fail', $, $) { 'fail' }
     multi resolved-type($, $, 'fail') { 'fail' }
     # zero
-    multi resolved-type($, '/', 0) { 'fail' }
-    multi resolved-type(0, '/', $b) { 0 }
-    multi resolved-type($, '*', 0)  { 0 }
-    multi resolved-type(0, '*', $)  { 0 }
-    multi resolved-type($a, AddSub, 0) { $a }
-    multi resolved-type(0, AddSub, $b) { $b }
-    # numeric/percent
-    multi resolved-type(Numeric $a, '+', Numeric $b) { $a + $b }
-    multi resolved-type(Numeric $a, '-', Numeric $b) { $a - $b }
-    multi resolved-type('percent', AddSub, 'percent') { 'percent' }
-    multi resolved-type('percent', MulDiv, Numeric) { 'percent' }
-    multi resolved-type('percent', '*', 'percent')  { 'fail' }
-    multi resolved-type('percent', '/', 'percent')  { Numeric }
-    multi resolved-type(Numeric, MulDiv, 'percent') { Numeric }
-    # dimensions
-    multi resolved-type('percent', AddSub, Dim $a) { $a }
-    multi resolved-type(Dim $a, AddSub, 'percent') { $a }
-    multi resolved-type(Dim $a, MulDiv, Numeric) { $a }
-    multi resolved-type(Numeric, '*', Dim $b) { $b }
-    multi resolved-type(Dim $a, '/', Dim $b) { $a eq $b ?? Numeric !! 'fail' }
-    multi resolved-type(Dim $a, '*', Dim $b) { 'fail' }
-    multi resolved-type(Dim $a, AddSub, Dim $b) { $a eq $b ?? $a !! 'fail' }
-    multi resolved-type($, MulDiv, $) { 'fail' }
+    multi resolved-type($, '/', 0)       { 'fail' }
+    multi resolved-type(0, '/', $b)      { 0 }
+    multi resolved-type($, '*', 0)       { 0 }
+    multi resolved-type(0, '*', $)       { 0 }
+    multi resolved-type($a, Additive, 0) { $a }
+    multi resolved-type(0, Additive, $b) { $b }
+    # numeric literal values
+    multi resolved-type(Numeric:D $a, $_, Numeric:D $b)        {
+        when '+' { $a + $b }
+        when '-' { $a - $b }
+        when '*' { $a * $b }
+        when '/' { $a / $b }
+    }
+    multi resolved-type(Numeric, $, Numeric)   { Numeric }
+    # percentages
+    multi resolved-type('percent', '*', 'percent')          { 'fail' }
+    multi resolved-type('percent', '/', 'percent')          { Numeric }
+    multi resolved-type('percent', Additive, 'percent')     { 'percent' }
+    multi resolved-type('percent', Multiplicative, Numeric) { 'percent' }
+    multi resolved-type(Numeric, Multiplicative, 'percent') { Numeric }
+    # dim/percent
+    multi resolved-type(Dim $a, Additive, 'percent')        { $a }
+    multi resolved-type('percent', Additive, Dim $b)        { $b }
+    # dim/numeric
+    multi resolved-type(Dim $a, Additive, Dim $b)           { $a eq $b ?? $a !! 'fail' }
+    multi resolved-type(Dim $, '*', Dim $)                  { 'fail' }
+    multi resolved-type(Dim $a, '/', Dim $b)                { $a eq $b ?? Numeric !! 'fail' }
+    multi resolved-type(Dim $a, Multiplicative, Numeric)    { $a }
+    multi resolved-type(Numeric, '*', Dim $b)               { $b }
+    # fallback
+    multi resolved-type($, $, $)       { 'fail' }
     
     # binary left associative arithmetic operation
     multi sub type( %lhs, % ( :$op! ),  *@rhs (%, *@) ) {
