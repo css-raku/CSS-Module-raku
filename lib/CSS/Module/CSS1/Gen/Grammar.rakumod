@@ -24,11 +24,11 @@ rule absolute-size { :i ["xx-small" | "x-small" | small | medium | large | "x-la
 rule relative-size { :i [larger | smaller ]& <keyw>  }
 #| font: [ 'font-style' || 'font-variant' || 'font-weight' ]? 'font-size' [ / 'line-height' ]? 'font-family'#
 rule decl:sym<font> { :i (font) ":" <val(/<css-val-font> /, &?ROUTINE.WHY)>}
-rule css-val-font { :i [[<css-val-font-style> :my $*A; <!{
+rule css-val-font { :i [[<css-val-font-style> :my $*A;<!{
     $*A++
-}>|| <css-val-font-variant> :my $*B; <!{
+}>|| <css-val-font-variant> :my $*B;<!{
     $*B++
-}>|| <css-val-font-weight> :my $*C; <!{
+}>|| <css-val-font-weight> :my $*C;<!{
     $*C++
 }>]+] ? <css-val-font-size> [<op("/")> <css-val-line-height> ] ? <css-val-font-family> +% <op(",")>  }
 #| color: <color>
@@ -48,9 +48,9 @@ rule decl:sym<background-attachment> { :i ("background-attachment") ":" <val(/<c
 rule css-val-background-attachment { :i [scroll | fixed ]& <keyw>  }
 #| background-position: [<percentage> | <length> | <align> ] [ <percentage> | <length> | <valign> ]? | [ <valign> || <align> ]
 rule decl:sym<background-position> { :i ("background-position") ":" <val(/<css-val-background-position> /, &?ROUTINE.WHY)>}
-rule css-val-background-position { :i [<percentage> || <length> || <align> ] [<percentage> || <length> || <valign> ] ?  || [[<valign> :my $*A; <!{
+rule css-val-background-position { :i [<percentage> || <length> || <align> ] [<percentage> || <length> || <valign> ] ?  || [[<valign> :my $*A;<!{
     $*A++
-}>|| <align> :my $*B; <!{
+}>|| <align> :my $*B;<!{
     $*B++
 }>]+]  }
 #| <align> = left | center | right
@@ -59,15 +59,15 @@ rule align { :i [left | center | right ]& <keyw>  }
 rule valign { :i [top | center | bottom ]& <keyw>  }
 #| background: 'background-color' || 'background-image' || 'background-repeat' || 'background-attachment' || 'background-position'
 rule decl:sym<background> { :i (background) ":" <val(/<css-val-background> /, &?ROUTINE.WHY)>}
-rule css-val-background { :i [<css-val-background-color> :my $*A; <!{
+rule css-val-background { :i [<css-val-background-color> :my $*A;<!{
     $*A++
-}>|| <css-val-background-image> :my $*B; <!{
+}>|| <css-val-background-image> :my $*B;<!{
     $*B++
-}>|| <css-val-background-repeat> :my $*C; <!{
+}>|| <css-val-background-repeat> :my $*C;<!{
     $*C++
-}>|| <css-val-background-attachment> :my $*D; <!{
+}>|| <css-val-background-attachment> :my $*D;<!{
     $*D++
-}>|| <css-val-background-position> :my $*E; <!{
+}>|| <css-val-background-position> :my $*E;<!{
     $*E++
 }>]+ }
 #| word-spacing: normal | <length>
@@ -78,13 +78,13 @@ rule decl:sym<letter-spacing> { :i ("letter-spacing") ":" <val(/<css-val-letter-
 rule css-val-letter-spacing { :i normal & <keyw> || <length>  }
 #| text-decoration: none | [ underline || overline || line-through || blink ]
 rule decl:sym<text-decoration> { :i ("text-decoration") ":" <val(/<css-val-text-decoration> /, &?ROUTINE.WHY)>}
-rule css-val-text-decoration { :i none & <keyw> || [[underline & <keyw> :my $*A; <!{
+rule css-val-text-decoration { :i none & <keyw> || [[underline & <keyw> :my $*A;<!{
     $*A++
-}>|| overline & <keyw> :my $*B; <!{
+}>|| overline & <keyw> :my $*B;<!{
     $*B++
-}>|| "line-through" & <keyw> :my $*C; <!{
+}>|| "line-through" & <keyw> :my $*C;<!{
     $*C++
-}>|| blink & <keyw> :my $*D; <!{
+}>|| blink & <keyw> :my $*D;<!{
     $*D++
 }>]+]  }
 #| vertical-align: baseline | sub | super | top | text-top | middle | bottom | text-bottom | <percentage>
@@ -155,11 +155,11 @@ rule decl:sym<border-style> { :i ("border-style") ":" <val(/<css-val-border-styl
 rule css-val-border-style { :i [[none | dotted | dashed | solid | double | groove | ridge | inset | outset ]& <keyw> ] }
 #| border-top: 'border-top-width' || 'border-top-style' || <color>
 rule decl:sym<border-top> { :i ("border-top") ":" <val(/<css-val-border-top> /, &?ROUTINE.WHY)>}
-rule css-val-border-top { :i [<css-val-border-top-width> :my $*A; <!{
+rule css-val-border-top { :i [<css-val-border-top-width> :my $*A;<!{
     $*A++
-}>|| <css-val-border-top-style> :my $*B; <!{
+}>|| <css-val-border-top-style> :my $*B;<!{
     $*B++
-}>|| <color> :my $*C; <!{
+}>|| <color> :my $*C;<!{
     $*C++
 }>]+ }
 #| border-top-color: <color> | transparent
@@ -188,38 +188,38 @@ rule decl:sym<border-left-style> { :i ("border-left-style") ":" <val(/<css-val-b
 rule css-val-border-left-style { :i [[none | dotted | dashed | solid | double | groove | ridge | inset | outset ]& <keyw> ] }
 #| border-right: 'border-right-width' || 'border-right-style' || <color>
 rule decl:sym<border-right> { :i ("border-right") ":" <val(/<css-val-border-right> /, &?ROUTINE.WHY)>}
-rule css-val-border-right { :i [<css-val-border-right-width> :my $*A; <!{
+rule css-val-border-right { :i [<css-val-border-right-width> :my $*A;<!{
     $*A++
-}>|| <css-val-border-right-style> :my $*B; <!{
+}>|| <css-val-border-right-style> :my $*B;<!{
     $*B++
-}>|| <color> :my $*C; <!{
+}>|| <color> :my $*C;<!{
     $*C++
 }>]+ }
 #| border-bottom: 'border-bottom-width' || 'border-bottom-style' || <color>
 rule decl:sym<border-bottom> { :i ("border-bottom") ":" <val(/<css-val-border-bottom> /, &?ROUTINE.WHY)>}
-rule css-val-border-bottom { :i [<css-val-border-bottom-width> :my $*A; <!{
+rule css-val-border-bottom { :i [<css-val-border-bottom-width> :my $*A;<!{
     $*A++
-}>|| <css-val-border-bottom-style> :my $*B; <!{
+}>|| <css-val-border-bottom-style> :my $*B;<!{
     $*B++
-}>|| <color> :my $*C; <!{
+}>|| <color> :my $*C;<!{
     $*C++
 }>]+ }
 #| border-left: 'border-left-width' || 'border-left-style' || <color>
 rule decl:sym<border-left> { :i ("border-left") ":" <val(/<css-val-border-left> /, &?ROUTINE.WHY)>}
-rule css-val-border-left { :i [<css-val-border-left-width> :my $*A; <!{
+rule css-val-border-left { :i [<css-val-border-left-width> :my $*A;<!{
     $*A++
-}>|| <css-val-border-left-style> :my $*B; <!{
+}>|| <css-val-border-left-style> :my $*B;<!{
     $*B++
-}>|| <color> :my $*C; <!{
+}>|| <color> :my $*C;<!{
     $*C++
 }>]+ }
 #| border: 'border-width' || 'border-style' || 'border-color'
 rule decl:sym<border> { :i (border) ":" <val(/<css-val-border> /, &?ROUTINE.WHY)>}
-rule css-val-border { :i [<css-val-border-width> :my $*A; <!{
+rule css-val-border { :i [<css-val-border-width> :my $*A;<!{
     $*A++
-}>|| <css-val-border-style> :my $*B; <!{
+}>|| <css-val-border-style> :my $*B;<!{
     $*B++
-}>|| <css-val-border-color> :my $*C; <!{
+}>|| <css-val-border-color> :my $*C;<!{
     $*C++
 }>]+ }
 #| float: left | right | none
@@ -245,11 +245,11 @@ rule decl:sym<list-style-position> { :i ("list-style-position") ":" <val(/<css-v
 rule css-val-list-style-position { :i [inside | outside ]& <keyw>  }
 #| list-style: 'list-style-type' || 'list-style-image' || 'list-style-position'
 rule decl:sym<list-style> { :i ("list-style") ":" <val(/<css-val-list-style> /, &?ROUTINE.WHY)>}
-rule css-val-list-style { :i [<css-val-list-style-type> :my $*A; <!{
+rule css-val-list-style { :i [<css-val-list-style-type> :my $*A;<!{
     $*A++
-}>|| <css-val-list-style-image> :my $*B; <!{
+}>|| <css-val-list-style-image> :my $*B;<!{
     $*B++
-}>|| <css-val-list-style-position> :my $*C; <!{
+}>|| <css-val-list-style-position> :my $*C;<!{
     $*C++
 }>]+ }
 #| position: absolute | relative | static

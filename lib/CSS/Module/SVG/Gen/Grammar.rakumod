@@ -50,11 +50,11 @@ rule decl:sym<line-height> { :i ("line-height") ":" <val(/<css-val-line-height> 
 rule css-val-line-height { :i normal & <keyw> || <number> || <length-percentage>  }
 #| marker: 'marker-start' || 'marker-mid' || 'marker-end'
 rule decl:sym<marker> { :i (marker) ":" <val(/<css-val-marker> /, &?ROUTINE.WHY)>}
-rule css-val-marker { :i [<css-val-marker-start> :my $*A; <!{
+rule css-val-marker { :i [<css-val-marker-start> :my $*A;<!{
     $*A++
-}>|| <css-val-marker-mid> :my $*B; <!{
+}>|| <css-val-marker-mid> :my $*B;<!{
     $*B++
-}>|| <css-val-marker-end> :my $*C; <!{
+}>|| <css-val-marker-end> :my $*C;<!{
     $*C++
 }>]+ }
 #| marker-start: none | <url>
@@ -74,11 +74,11 @@ rule decl:sym<overflow> { :i (overflow) ":" <val(/<css-val-overflow> /, &?ROUTIN
 rule css-val-overflow { :i [visible | hidden | scroll | auto ]& <keyw>  }
 #| paint-order: normal | [ fill || stroke || markers ]
 rule decl:sym<paint-order> { :i ("paint-order") ":" <val(/<css-val-paint-order> /, &?ROUTINE.WHY)>}
-rule css-val-paint-order { :i normal & <keyw> || [[fill & <keyw> :my $*A; <!{
+rule css-val-paint-order { :i normal & <keyw> || [[fill & <keyw> :my $*A;<!{
     $*A++
-}>|| stroke & <keyw> :my $*B; <!{
+}>|| stroke & <keyw> :my $*B;<!{
     $*B++
-}>|| markers & <keyw> :my $*C; <!{
+}>|| markers & <keyw> :my $*C;<!{
     $*C++
 }>]+]  }
 #| pointer-events: bounding-box | visiblePainted | visibleFill | visibleStroke | visible | painted | fill | stroke | all | none
@@ -126,13 +126,13 @@ rule decl:sym<text-anchor> { :i ("text-anchor") ":" <val(/<css-val-text-anchor> 
 rule css-val-text-anchor { :i [start | middle | end ]& <keyw>  }
 #| text-decoration: none | [ underline || overline || line-through || blink ]
 rule decl:sym<text-decoration> { :i ("text-decoration") ":" <val(/<css-val-text-decoration> /, &?ROUTINE.WHY)>}
-rule css-val-text-decoration { :i none & <keyw> || [[underline & <keyw> :my $*A; <!{
+rule css-val-text-decoration { :i none & <keyw> || [[underline & <keyw> :my $*A;<!{
     $*A++
-}>|| overline & <keyw> :my $*B; <!{
+}>|| overline & <keyw> :my $*B;<!{
     $*B++
-}>|| "line-through" & <keyw> :my $*C; <!{
+}>|| "line-through" & <keyw> :my $*C;<!{
     $*C++
-}>|| blink & <keyw> :my $*D; <!{
+}>|| blink & <keyw> :my $*D;<!{
     $*D++
 }>]+]  }
 #| text-rendering: auto | optimizeSpeed | optimizeLegibility | geometricPrecision

@@ -1,13 +1,13 @@
 unit grammar CSS::Module::CSS3::Fonts::Gen::Grammar;
 #| font: [ [ <‘font-style’> || <font-variant-css21> || <‘font-weight’> || <‘font-stretch’> ]? <‘font-size’> [ / <‘line-height’> ]? <‘font-family’># ] | caption | icon | menu | message-box | small-caption | status-bar
 rule decl:sym<font> { :i (font) ":" <val(/<css-val-font> /, &?ROUTINE.WHY)>}
-rule css-val-font { :i [[[<css-val-font-style> :my $*A; <!{
+rule css-val-font { :i [[[<css-val-font-style> :my $*A;<!{
     $*A++
-}>|| <font-variant-css21> :my $*B; <!{
+}>|| <font-variant-css21> :my $*B;<!{
     $*B++
-}>|| <css-val-font-weight> :my $*C; <!{
+}>|| <css-val-font-weight> :my $*C;<!{
     $*C++
-}>|| <css-val-font-stretch> :my $*D; <!{
+}>|| <css-val-font-stretch> :my $*D;<!{
     $*D++
 }>]+] ? <css-val-font-size> [<op("/")> <css-val-line-height> ] ? <css-val-font-family> +% <op(",")> ] || [caption | icon | menu | "message-box" | "small-caption" | "status-bar" ]& <keyw>   }
 #| <font-variant-css21> = normal | small-caps
@@ -46,69 +46,69 @@ rule decl:sym<font-style> { :i ("font-style") ":" <val(/<css-val-font-style> /, 
 rule css-val-font-style { :i [normal | italic | oblique ]& <keyw>  }
 #| font-synthesis: none | [ weight || style ]
 rule decl:sym<font-synthesis> { :i ("font-synthesis") ":" <val(/<css-val-font-synthesis> /, &?ROUTINE.WHY)>}
-rule css-val-font-synthesis { :i none & <keyw> || [[weight & <keyw> :my $*A; <!{
+rule css-val-font-synthesis { :i none & <keyw> || [[weight & <keyw> :my $*A;<!{
     $*A++
-}>|| style & <keyw> :my $*B; <!{
+}>|| style & <keyw> :my $*B;<!{
     $*B++
 }>]+]  }
 #| font-variant: normal | none | [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> || stylistic(<feature-value-name>) || historical-forms || styleset(<feature-value-name> #) || character-variant(<feature-value-name> #) || swash(<feature-value-name>) || ornaments(<feature-value-name>) || annotation(<feature-value-name>) || [ small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps ] || <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero || <east-asian-variant-values> || <east-asian-width-values> || ruby ]
 rule decl:sym<font-variant> { :i ("font-variant") ":" <val(/<css-val-font-variant> /, &?ROUTINE.WHY)>}
-rule css-val-font-variant { :i [normal | none ]& <keyw>  || [[<common-lig-values> :my $*A; <!{
+rule css-val-font-variant { :i [normal | none ]& <keyw>  || [[<common-lig-values> :my $*A;<!{
     $*A++
-}>|| <discretionary-lig-values> :my $*B; <!{
+}>|| <discretionary-lig-values> :my $*B;<!{
     $*B++
-}>|| <historical-lig-values> :my $*C; <!{
+}>|| <historical-lig-values> :my $*C;<!{
     $*C++
-}>|| <contextual-alt-values> :my $*D; <!{
+}>|| <contextual-alt-values> :my $*D;<!{
     $*D++
-}>|| <stylistic> :my $*E; <!{
+}>|| <stylistic> :my $*E;<!{
     $*E++
-}>|| "historical-forms" & <keyw> :my $*F; <!{
+}>|| "historical-forms" & <keyw> :my $*F;<!{
     $*F++
-}>|| <styleset> :my $*G; <!{
+}>|| <styleset> :my $*G;<!{
     $*G++
-}>|| <character-variant> :my $*H; <!{
+}>|| <character-variant> :my $*H;<!{
     $*H++
-}>|| <swash> :my $*I; <!{
+}>|| <swash> :my $*I;<!{
     $*I++
-}>|| <ornaments> :my $*J; <!{
+}>|| <ornaments> :my $*J;<!{
     $*J++
-}>|| <annotation> :my $*K; <!{
+}>|| <annotation> :my $*K;<!{
     $*K++
-}>|| [["small-caps" | "all-small-caps" | "petite-caps" | "all-petite-caps" | unicase | "titling-caps" ]& <keyw> ] :my $*L; <!{
+}>|| [["small-caps" | "all-small-caps" | "petite-caps" | "all-petite-caps" | unicase | "titling-caps" ]& <keyw> ] :my $*L;<!{
     $*L++
-}>|| <numeric-figure-values> :my $*M; <!{
+}>|| <numeric-figure-values> :my $*M;<!{
     $*M++
-}>|| <numeric-spacing-values> :my $*N; <!{
+}>|| <numeric-spacing-values> :my $*N;<!{
     $*N++
-}>|| <numeric-fraction-values> :my $*O; <!{
+}>|| <numeric-fraction-values> :my $*O;<!{
     $*O++
-}>|| ordinal & <keyw> :my $*P; <!{
+}>|| ordinal & <keyw> :my $*P;<!{
     $*P++
-}>|| "slashed-zero" & <keyw> :my $*Q; <!{
+}>|| "slashed-zero" & <keyw> :my $*Q;<!{
     $*Q++
-}>|| <east-asian-variant-values> :my $*R; <!{
+}>|| <east-asian-variant-values> :my $*R;<!{
     $*R++
-}>|| <east-asian-width-values> :my $*S; <!{
+}>|| <east-asian-width-values> :my $*S;<!{
     $*S++
-}>|| ruby & <keyw> :my $*T; <!{
+}>|| ruby & <keyw> :my $*T;<!{
     $*T++
 }>]+]  }
 #| font-variant-alternates: normal | [ stylistic(<feature-value-name>) || historical-forms || styleset(<feature-value-name>#) || character-variant(<feature-value-name>#) || swash(<feature-value-name>) || ornaments(<feature-value-name>) || annotation(<feature-value-name>) ]
 rule decl:sym<font-variant-alternates> { :i ("font-variant-alternates") ":" <val(/<css-val-font-variant-alternates> /, &?ROUTINE.WHY)>}
-rule css-val-font-variant-alternates { :i normal & <keyw> || [[<stylistic> :my $*A; <!{
+rule css-val-font-variant-alternates { :i normal & <keyw> || [[<stylistic> :my $*A;<!{
     $*A++
-}>|| "historical-forms" & <keyw> :my $*B; <!{
+}>|| "historical-forms" & <keyw> :my $*B;<!{
     $*B++
-}>|| <styleset> :my $*C; <!{
+}>|| <styleset> :my $*C;<!{
     $*C++
-}>|| <character-variant> :my $*D; <!{
+}>|| <character-variant> :my $*D;<!{
     $*D++
-}>|| <swash> :my $*E; <!{
+}>|| <swash> :my $*E;<!{
     $*E++
-}>|| <ornaments> :my $*F; <!{
+}>|| <ornaments> :my $*F;<!{
     $*F++
-}>|| <annotation> :my $*G; <!{
+}>|| <annotation> :my $*G;<!{
     $*G++
 }>]+]  }
 #| font-variant-caps: normal | small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps
@@ -116,35 +116,35 @@ rule decl:sym<font-variant-caps> { :i ("font-variant-caps") ":" <val(/<css-val-f
 rule css-val-font-variant-caps { :i [normal | "small-caps" | "all-small-caps" | "petite-caps" | "all-petite-caps" | unicase | "titling-caps" ]& <keyw>  }
 #| font-variant-east-asian: normal | [ <east-asian-variant-values> || <east-asian-width-values> || ruby ]
 rule decl:sym<font-variant-east-asian> { :i ("font-variant-east-asian") ":" <val(/<css-val-font-variant-east-asian> /, &?ROUTINE.WHY)>}
-rule css-val-font-variant-east-asian { :i normal & <keyw> || [[<east-asian-variant-values> :my $*A; <!{
+rule css-val-font-variant-east-asian { :i normal & <keyw> || [[<east-asian-variant-values> :my $*A;<!{
     $*A++
-}>|| <east-asian-width-values> :my $*B; <!{
+}>|| <east-asian-width-values> :my $*B;<!{
     $*B++
-}>|| ruby & <keyw> :my $*C; <!{
+}>|| ruby & <keyw> :my $*C;<!{
     $*C++
 }>]+]  }
 #| font-variant-ligatures: normal | none | [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> ]
 rule decl:sym<font-variant-ligatures> { :i ("font-variant-ligatures") ":" <val(/<css-val-font-variant-ligatures> /, &?ROUTINE.WHY)>}
-rule css-val-font-variant-ligatures { :i [normal | none ]& <keyw>  || [[<common-lig-values> :my $*A; <!{
+rule css-val-font-variant-ligatures { :i [normal | none ]& <keyw>  || [[<common-lig-values> :my $*A;<!{
     $*A++
-}>|| <discretionary-lig-values> :my $*B; <!{
+}>|| <discretionary-lig-values> :my $*B;<!{
     $*B++
-}>|| <historical-lig-values> :my $*C; <!{
+}>|| <historical-lig-values> :my $*C;<!{
     $*C++
-}>|| <contextual-alt-values> :my $*D; <!{
+}>|| <contextual-alt-values> :my $*D;<!{
     $*D++
 }>]+]  }
 #| font-variant-numeric: normal | [ <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero ]
 rule decl:sym<font-variant-numeric> { :i ("font-variant-numeric") ":" <val(/<css-val-font-variant-numeric> /, &?ROUTINE.WHY)>}
-rule css-val-font-variant-numeric { :i normal & <keyw> || [[<numeric-figure-values> :my $*A; <!{
+rule css-val-font-variant-numeric { :i normal & <keyw> || [[<numeric-figure-values> :my $*A;<!{
     $*A++
-}>|| <numeric-spacing-values> :my $*B; <!{
+}>|| <numeric-spacing-values> :my $*B;<!{
     $*B++
-}>|| <numeric-fraction-values> :my $*C; <!{
+}>|| <numeric-fraction-values> :my $*C;<!{
     $*C++
-}>|| ordinal & <keyw> :my $*D; <!{
+}>|| ordinal & <keyw> :my $*D;<!{
     $*D++
-}>|| "slashed-zero" & <keyw> :my $*E; <!{
+}>|| "slashed-zero" & <keyw> :my $*E;<!{
     $*E++
 }>]+]  }
 #| font-variant-position: normal | sub | super

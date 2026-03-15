@@ -38,8 +38,7 @@ class Build {
                     my %child-props = $compiler.child-props;
 
                     my RakuAST::Package $grammar-ast = $compiler.build-grammar(@grammar-id, :$scope);
-                    "lib/{$grammar-ast.&path}.rakumod".IO.spurt: $grammar-ast.DEPARSE
-                     .subst(/";\n;"/, ';', :g); # work-around for https://github.com/rakudo/rakudo/issues/5991
+                    "lib/{$grammar-ast.&path}.rakumod".IO.spurt: $grammar-ast.DEPARSE;
 
                     my @actions-id = @base-id.Slip, 'Actions';
                     my RakuAST::Package $actions-ast = $compiler.build-actions(@actions-id, :$scope);
