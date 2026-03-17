@@ -21,8 +21,8 @@ is $module.index.tail(5)[0].name, 'z-index', 'index';
 like $module.index.tail.name, /'-my-anon'/, 'index';
 
 is $module.name, 'CSS3', 'module.name';
-isa-ok $module.grammar, ::('CSS::Module::CSS3'), 'css3 grammar';
-isa-ok $module.actions, ::('CSS::Module::CSS3::Actions'), 'css3 actions';
+isa-ok $module.grammar, 'CSS::Module::CSS3', 'css3 grammar';
+isa-ok $module.actions, 'CSS::Module::CSS3::Actions', 'css3 actions';
 my $meta = $module.property-metadata;
 is-deeply $meta<-my-align>,  {:default("a nameless value that acts as 'left' if 'direction' is 'ltr', 'right' if 'direction' is 'rtl'"), :inherit, :synopsis("<align> | justify")}, "'like' extension property";
 is-deeply $meta<-my-align2>, {:default<middle>, :!inherit, :synopsis("left | middle | right")}, 'coerced extension property';
