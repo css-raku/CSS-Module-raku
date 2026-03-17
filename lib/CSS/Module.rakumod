@@ -3,7 +3,7 @@ unit class CSS::Module:ver<0.7.5>;
 
 use CSS::Grammar;
 use CSS::Module::Property;
-has $.name;
+has Str $.name;
 has $.grammar is required  #| grammar
               handles <parse subparse parsefile>;
 has $.actions is required  #| actions class
@@ -47,8 +47,6 @@ multi method extend(
     die "unknown base property: $name"
         unless %!property-metadata{$base-prop}:exists;
     my %metadata = %!property-metadata{$base-prop};
-    %metadata<default>:delete
-        without %metadata<default>[1];
     %metadata ,= c.hash;
     %!alias{$name} = $base-prop;
     %!coerce{$name} = $_ with &coerce;
@@ -59,7 +57,7 @@ multi method extend(
     :&coerce,
     :$prop-num = %!prop-names{$name.lc} // self.index.elems,
     Bool :$inherit = False,
-    :default($val),
+    Str() :$default,
     |c,
 ) {
     $name .= lc;
@@ -67,12 +65,16 @@ multi method extend(
 
     my %metadata = %( :$inherit, );
     %metadata ,= c.hash;
-    with &coerce -> &c {
-        %!coerce{$name} = &c;
-        %metadata<default> //= [$_, [.&c]]
-            with $val;
+    if &coerce {
+        %!coerce{$name} = &coerce;
+        with $default {
+            my Pair $node = .&coerce;
+            %metadata<default> = $node.value.Str;
+            %metadata<default-type> = $node.key;
+        }
     }
     else {
+        %metadata<default> = $_ with $default;
         %!allow{$name}++;
     }
     self!register-property: :$name, :%metadata;

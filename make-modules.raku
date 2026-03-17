@@ -14,6 +14,7 @@ class Build {
 
         indir $where, {
             my %props;
+            my Pair @metadata;
 
             for (:CSS1[<src css1-properties.txt> => <CSS1>],
                  :CSS21[<src css21-properties.txt> => <CSS21>],
@@ -53,33 +54,10 @@ class Build {
                 }
                 
                 %props.&write-metadata($meta-root);
-if 1 {
-                # &build-defaults is awkward here, maybe CSS::Properties should do this at run-time?
-                my $grammar = (require ::("CSS::Module::{$meta-root}"));
-                my $actions = (require ::("CSS::Module::{$meta-root.split('::').head}::Actions"));
-                %props.&build-defaults(:$grammar, :$actions);
-                %props.&write-metadata($meta-root);
-            } }
-        }
-    }
-}
-
-sub build-defaults(%meta, :$grammar!, :$actions! is copy, ) {
-    for %meta.kv -> $prop, %details {
-        with %details<default> -> $default {
-            unless $default ~~ Array {
-                $actions .= new;
-                my @default = $default;
-                with $default.contains('agent'|'value of'|'nameless') ?? Nil !! $grammar.parse("$prop:$default", :$actions, :rule<declaration>) {
-                    @default.push: .ast<property><expr>
-                        unless $actions.warnings;
-                }
-                %details<default> = @default;
             }
         }
     }
 }
-
 
 sub write-metadata(%props, $meta) {
     my $class-dir = $*SPEC.catdir(<lib CSS Module>, $meta.split('::').Slip);

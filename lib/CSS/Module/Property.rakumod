@@ -26,7 +26,7 @@ class CSS::Module::Property is repr('CStruct') {
     has CArray[Str] $.edge-names;
 
     submethod BUILD(:$!inherit = 0, :$!initial = 0, :$!box = 0) {}
-    submethod TWEAK(:$enums, Str:D :$name!, :$!prop-num = (my uint8 $ = $enums{$name}), List :$children, List :$edges, Str :$edge, List :$default, Str :$synopsis) {
+    submethod TWEAK(:$enums, Str:D :$name!, :$!prop-num = (my uint8 $ = $enums{$name}), List :$children, List :$edges, Str :$edge, Str :$default, Str :$default-type, Str :$synopsis) {
         $!name := $name;
         $!synopsis := $_ with $synopsis;
         with $children {
@@ -38,12 +38,8 @@ class CSS::Module::Property is repr('CStruct') {
             $!edges := CArray[uint8].new(|.map({$enums{$_}}));
         }
         $!edge = $enums{$_} with $edge;
-        with $default {
-            $!default := .[0].Str;
-            when .[1].defined {
-                $!default-type := .[1][0].keys[0];
-            }
-        }
+        $!default := $_ with $default;
+        $!default-type := $_ with $default-type;
     }
 
     multi method COERCE(%meta) { self.new: |%meta }
