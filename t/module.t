@@ -24,7 +24,6 @@ is-deeply css1-module.colors<red>, [ 255, 0,   0 ], "colors";
 is css1-module.property-name(1), 'background-attachment';
 lives-ok { css1-module.index };
 lives-ok { css1-module.index[1] };
-is-deeply css1-module.index[1].default-type, 'keyw';
 is-deeply css1-module.index[1].default, 'scroll';
 is css1-module.property-name(6), 'border';
 is css1-module.property-number('border'), 6;
@@ -42,7 +41,7 @@ ok css21-prop<azimuth>:exists, 'css21 has azimuth';
 is-deeply css21-prop<border>, {:box, :children["border-width", "border-style", "border-color"], :edges["border-top", "border-right", "border-bottom", "border-left"], :!inherit, :synopsis("[ 'border-width' || 'border-style' || 'border-color' ]")}, 'css21 border';
 is-deeply css21-prop<border-style>, {:box, :edges[<border-top-style border-right-style border-bottom-style border-left-style>], :!inherit, :synopsis("<border-style>\{1,4}") }, 'css21 border-style';
 
-is-deeply css21-prop<-xhtml-align>, {:inherit, :synopsis("<align> | justify")}, 'css21 alias property metadata';
+is-deeply css21-prop<-xhtml-align>, {:default("a nameless value that acts as 'left' if 'direction' is 'ltr', 'right' if 'direction' is 'rtl'"), :inherit, :synopsis("<align> | justify")}, 'css21 alias property metadata';
 is-deeply css21-module.parse-property('-xhtml-align', 'center' ), [{ :keyw<center> }, ], 'css21 alias property metadata';
 
 is-deeply css21-module.colors<red>, [ 255, 0,   0 ], "colors";
@@ -56,7 +55,7 @@ is css3-module.name, 'CSS3', 'module.name';
 isa-ok css3-module.grammar, ::('CSS::Module::CSS3'), 'css3 grammar';
 isa-ok css3-module.actions, ::('CSS::Module::CSS3::Actions'), 'css3 actions';
 my \css3-prop = css3-module.property-metadata;
-is-deeply css3-prop<azimuth>, {:default["center", [{:keyw<center>},]], :inherit, :synopsis("<angle> | [ <direction> || <behind> ] | <delta>")}, 'css3 azimuth';
+is-deeply css3-prop<azimuth>, {:default<center>, :inherit, :synopsis("<angle> | [ <direction> || <behind> ] | <delta>")}, 'css3 azimuth';
 is-deeply css3-prop<border>, {:box, :children["border-width", "border-style", "border-color"], :edges["border-top", "border-right", "border-bottom", "border-left"], :!inherit, :synopsis("[ 'border-width' || 'border-style' || 'border-color' ]")}, 'css3 border';
 is-deeply css3-prop<border-style>, {:box, :edges[<border-top-style border-right-style border-bottom-style border-left-style>], :!inherit, :synopsis("<border-style>\{1,4}") }, 'css3 border-style';
 
@@ -70,14 +69,14 @@ my \at-fontface-module = css3-module.sub-module<@font-face>;
 isa-ok at-fontface-module.grammar, ::('CSS::Module::CSS3::Fonts::AtFontFace'), '@font-face grammar';
 isa-ok at-fontface-module.actions, ::('CSS::Module::CSS3::Actions'), '@font-face actions';
 my \at-fontface-prop = at-fontface-module.property-metadata;
-is-deeply at-fontface-prop<font-style>, { :synopsis("normal | italic | oblique"), :!inherit, :default["normal", [{:keyw("normal")},]], }, '@font-face font-style';
+is-deeply at-fontface-prop<font-style>, { :synopsis("normal | italic | oblique"), :!inherit, :default<normal>, }, '@font-face font-style';
 
 my \svg-module = CSS::Module::SVG.module;
 isa-ok svg-module.grammar, ::('CSS::Module::SVG'), 'svg grammar';
 isa-ok svg-module.actions, ::('CSS::Module::SVG::Actions'), 'svg actions';
 my \svg-prop = svg-module.property-metadata;
-is-deeply svg-prop<azimuth>, { :synopsis("<angle> | [ <direction> || <behind> ] | <delta>"), :inherit, :default["center", [{:keyw("center")},]], }, 'svg azimuth';
-is-deeply svg-prop<alignment-baseline>, { :synopsis("auto | baseline | before-edge | text-before-edge | middle | central | after-edge | text-after-edge | ideographic | alphabetic | hanging | mathematical"), :!inherit, :default["baseline", [{:keyw("baseline")},]], }, 'svg alignment-baseline';
-is-deeply svg-prop<font-style>, { :synopsis("normal | italic | oblique"), :inherit, :default["normal", [{:keyw("normal")},]], }, 'svg font-style';
+is-deeply svg-prop<azimuth>, { :synopsis("<angle> | [ <direction> || <behind> ] | <delta>"), :inherit, :default<center>, }, 'svg azimuth';
+is-deeply svg-prop<alignment-baseline>, { :synopsis("auto | baseline | before-edge | text-before-edge | middle | central | after-edge | text-after-edge | ideographic | alphabetic | hanging | mathematical"), :!inherit, :default<baseline>, }, 'svg alignment-baseline';
+is-deeply svg-prop<font-style>, { :synopsis("normal | italic | oblique"), :inherit, :default<normal>, }, 'svg font-style';
 
 done-testing;

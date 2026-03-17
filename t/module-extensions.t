@@ -24,8 +24,8 @@ is $module.name, 'CSS3', 'module.name';
 isa-ok $module.grammar, ::('CSS::Module::CSS3'), 'css3 grammar';
 isa-ok $module.actions, ::('CSS::Module::CSS3::Actions'), 'css3 actions';
 my $meta = $module.property-metadata;
-is-deeply $meta<-my-align>,  {:inherit, :synopsis("<align> | justify")}, "'like' extension property";
-is-deeply $meta<-my-align2>, {:default["middle", [:keyw<middle>,]], :!inherit, :synopsis("left | middle | right")}, 'coerced extension property';
+is-deeply $meta<-my-align>,  {:default("a nameless value that acts as 'left' if 'direction' is 'ltr', 'right' if 'direction' is 'rtl'"), :inherit, :synopsis("<align> | justify")}, "'like' extension property";
+is-deeply $meta<-my-align2>, {:default<middle>, :!inherit, :synopsis("left | middle | right")}, 'coerced extension property';
 is-deeply $meta<-my-anon>,   {:!inherit,}, 'misc extension property';
 is-deeply $meta<-my-anon2>,  {:inherit,}, 'misc extension property';
 

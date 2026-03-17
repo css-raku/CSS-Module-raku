@@ -57,7 +57,7 @@ multi method extend(
     :&coerce,
     :$prop-num = %!prop-names{$name.lc} // self.index.elems,
     Bool :$inherit = False,
-    Str() :$default,
+    Str() :$default is copy,
     |c,
 ) {
     $name .= lc;
@@ -68,15 +68,13 @@ multi method extend(
     if &coerce {
         %!coerce{$name} = &coerce;
         with $default {
-            my Pair $node = .&coerce;
-            %metadata<default> = $node.value.Str;
-            %metadata<default-type> = $node.key;
+            $default = .&coerce.value.Str;
         }
     }
     else {
-        %metadata<default> = $_ with $default;
         %!allow{$name}++;
     }
+    %metadata<default> = $_ with $default;
     self!register-property: :$name, :%metadata;
 }
 
