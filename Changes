@@ -1,5 +1,11 @@
 {{$NEXT}}
 
+0.7.6  2026-03-18T08:42:23+13:00
+   - Simplify meta-data default-value to store just the raw data.
+     Also remove CSS::Module::Property default-type() attribute.
+     CSS::Properties now handles default-value parsing at run-time
+     and has no need for these.
+
 0.7.5  2025-12-27T09:34:00+13:00
    - Retain original default-value text in Metadata. This is a v0.6.8
      regression.
