@@ -3,6 +3,7 @@ unit class CSS::Module:ver<0.7.6>;
 
 use CSS::Grammar;
 use CSS::Module::Property;
+use CSS::Writer;
 has Str $.name;
 has $.grammar is required  #| grammar
               handles <parse subparse parsefile>;
@@ -57,7 +58,7 @@ multi method extend(
     :&coerce,
     :$prop-num = %!prop-names{$name.lc} // self.index.elems,
     Bool :$inherit = False,
-    Str() :$default is copy,
+    :$default,
     |c,
 ) {
     $name .= lc;
@@ -65,16 +66,17 @@ multi method extend(
 
     my %metadata = %( :$inherit, );
     %metadata ,= c.hash;
+
     if &coerce {
         %!coerce{$name} = &coerce;
-        with $default {
-            $default = .&coerce.value.Str;
-        }
+        %metadata<default> = CSS::Writer.write(.&coerce)
+           with $default;
     }
     else {
         %!allow{$name}++;
+        %metadata<default> = .Str with $default;
     }
-    %metadata<default> = $_ with $default;
+
     self!register-property: :$name, :%metadata;
 }
 
