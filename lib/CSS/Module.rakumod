@@ -14,7 +14,7 @@ has %!prop-names;
 has Code %.coerce is built;
 method prop-names { %!prop-names }
 has %!alias; # deprecated
-has Bool %!allow;
+has Bool %!is-expr;
 has Bool $.vivify;
 method property-number(Str:D $_ --> Int) {
     %!prop-names{.lc}
@@ -73,7 +73,7 @@ multi method extend(
            with $default;
     }
     else {
-        %!allow{$name}++;
+        %!is-expr{$name}++;
         %metadata<default> = .Str with $default;
     }
 
@@ -84,18 +84,19 @@ submethod TWEAK(:%alias, :%extensions, :$prop-names! is copy) {
     given $prop-names {
         %!prop-names = $_ ~~ Enumeration ?? .enums !! $_;
     }
-    self.alias(name => .key, |.value) for %alias.sort;
+    self.extend(name => .key, like => .value) for %alias.sort;
     self.extend(name => .key, |.value) for %extensions.sort;
 }
 
-multi method parse-property(Str $property-name where (%!coerce{$_}:exists), $val, Bool :$warn = True) {
-    with try { %!coerce{$property-name}.($val); } -> Pair:D $tk {
+multi method parse-property(Str:D $property-name where (%!coerce{.lc}:exists), $val, Bool :$warn = True) {
+    my $prop = $property-name.lc;
+    with try { %!coerce{$prop}.($val); } -> Pair:D $tk {
         $tk.value.so; # trigger failures
         $tk;
     }
     else {
         if $warn {
-            note "unable to parse CSS property '$property-name: $val;'";
+            note "unable to parse CSS property '$prop: $val;'";
             note .message with $!;
         }
         Nil;
@@ -103,15 +104,16 @@ multi method parse-property(Str $property-name where (%!coerce{$_}:exists), $val
 }
 
 #| parse an individual property-specific expression
-multi method parse-property(Str $property-name, Str() $val, Bool :$warn = True) {
+multi method parse-property(Str:D $property-name, Str() $val, Bool :$warn = True) {
     my $actions = $.actions.new;
     my $prop = $property-name.lc;
     $prop = $_ with %!alias{$prop};
-    my $rule = %!allow{$prop} ?? 'expr' !! 'css-val-' ~ $prop;
+    my $rule = %!is-expr{$prop} ?? 'expr' !! 'css-val-' ~ $prop;
     my $ast;
 
     if $.grammar.parse($val, :$rule, :$actions ) -> \p {
         $ast := $actions.build.list(p);
+        $ast := Nil if $ast eqv [];
     }
     else {
         note "unable to parse CSS property '$property-name: $val;'"
@@ -121,6 +123,5 @@ multi method parse-property(Str $property-name, Str() $val, Bool :$warn = True) 
         note $_ for $actions.warnings;
     }
 
-    $ast := Nil if $ast eqv [];
     $ast;
 }
