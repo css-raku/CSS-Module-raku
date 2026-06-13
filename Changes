@@ -1,4 +1,6 @@
 {{$NEXT}}
+
+0.7.7  2026-06-14T09:16:37+12:00
    - Fix :%alias module option
    - Use instance-level CSS::Writer write() method; for compatiblity
      with CSS::Writer v0.3.0+
