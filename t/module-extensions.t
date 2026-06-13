@@ -1,5 +1,6 @@
 use v6;
 use Test;
+use CSS::Module;
 use CSS::Module::CSS3;
 
 subset MyAlignment of Str where 'left'|'middle'|'right';
@@ -17,7 +18,7 @@ my %extensions =  %(
 
 my %alias = '-my-align3' => 'text-align';
 
-my $module = CSS::Module::CSS3.module: :%alias, :%extensions;
+my CSS::Module $module = CSS::Module::CSS3.module: :%alias, :%extensions;
 
 is $module.index.tail(6).head.name, 'z-index', 'index';
 like $module.index.tail.name, /'-my-anon'/, 'index';

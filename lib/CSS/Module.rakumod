@@ -1,14 +1,16 @@
 #| a lightweight class for bundling resources associated with a particular CSS Syntax
-unit class CSS::Module:ver<0.7.6>;
+unit class CSS::Module:ver<0.7.7>;
 
 use CSS::Grammar;
 use CSS::Module::Property;
 use CSS::Writer;
+
 has Str $.name;
 has $.grammar is required  #| grammar
               handles <parse subparse parsefile>;
 has $.actions is required  #| actions class
               handles <colors>;
+has CSS::Writer $!writer .= new;
 has Hash %.property-metadata;
 has %!prop-names;
 has Code %.coerce is built;
@@ -69,7 +71,7 @@ multi method extend(
 
     if &coerce {
         %!coerce{$name} = &coerce;
-        %metadata<default> = CSS::Writer.write(.&coerce)
+        %metadata<default> = $!writer.write(.&coerce)
            with $default;
     }
     else {
