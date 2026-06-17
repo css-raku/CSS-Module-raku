@@ -5,6 +5,7 @@ use Test;
 use CSS::Module::CSS1;
 use CSS::Module::CSS21;
 use CSS::Module::CSS3;
+use CSS::Module::CSS4;
 use CSS::Grammar::Test;
 use CSS::Writer;
 use JSON::Fast;
@@ -26,6 +27,7 @@ for '' {
 my CSS::Module $css1  = CSS::Module::CSS1.module;
 my CSS::Module $css21 = CSS::Module::CSS21.module;
 my CSS::Module $css3  = CSS::Module::CSS3.module;
+my CSS::Module $css4  = CSS::Module::CSS4.module;
 my CSS::Writer $writer .= new( :terse, :color-names );
 
 for 't/00basic.json'.IO.lines.map({ from-json($_).pairs[0] }) {
@@ -38,7 +40,8 @@ for 't/00basic.json'.IO.lines.map({ from-json($_).pairs[0] }) {
         for { :module($css1), },
        	    { :module($css21),},	
        	    { :module($css3), },
-       	    { :module($css3), :lax}
+       	    { :module($css3), :lax},
+       	    { :module($css4),}
         -> % ( :$module!, :$lax=False ) {
             
             my $suite = $module.name;
