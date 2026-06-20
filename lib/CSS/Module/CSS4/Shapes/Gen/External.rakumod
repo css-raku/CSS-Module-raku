@@ -1,0 +1,16 @@
+unit role CSS::Module::CSS4::Shapes::Gen::External;
+method basic-shape (|) {
+    ...
+}
+method image (|) {
+    ...
+}
+method length-percentage (|) {
+    ...
+}
+method opacity-value (|) {
+    ...
+}
+method shape-box (|) {
+    ...
+}

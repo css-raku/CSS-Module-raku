@@ -1,0 +1,3 @@
+shape-image-threshold	<opacity-value>	0	floats	no	n/a	by computed value	per grammar	specified number, clamped to the range [0,1]
+shape-margin	<length-percentage [0,∞]>	0	floats and initial letter boxes	no	refer to the inline size of the containing block	by computed value	per grammar	computed <length-percentage> value
+shape-outside	none | [ <basic-shape> || <shape-box> ] | <image>	none	floats and initial letter boxes	no	n/a	as defined for <basic-shape>, otherwise discrete	per grammar	as defined for <basic-shape> (with <shape-box> following, if supplied); else the computed <image>; else the keyword as specified

@@ -8,6 +8,13 @@ also is CSS::Module::CSS4::Colors;
 use CSS::Module::CSS4::Masking;
 also is CSS::Module::CSS4::Masking;
 
+use CSS::Module::CSS4::Shapes;
+also is CSS::Module::CSS4::Shapes;
+
+use CSS::Module::CSS4::Masking::Gen::External;
+also does CSS::Module::CSS4::Masking::Gen::External;
+use CSS::Module::CSS4::Shapes::Gen::External;
+also does CSS::Module::CSS4::Shapes::Gen::External;
 
 method module(|c) {
     use CSS::Module::CSS4::Actions;
