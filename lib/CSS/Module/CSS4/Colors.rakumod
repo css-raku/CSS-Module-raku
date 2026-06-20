@@ -1,6 +1,6 @@
 unit grammar CSS::Module::CSS4::Colors;
 
-use CSS::Module::CSS3::Colors;
-also is CSS::Module::CSS3::Colors;
+# Note
 
-token color-delim {','?} # comma becomes optional in CSS4 rgb() rgba() and hsl()
+token func-arg-delim {','?} # comma is becoming optional in many CSS4 functions, including, rgb(), rgba(), rect()
+token alpha-channel-delim {<[,/]>}

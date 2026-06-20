@@ -24,7 +24,7 @@ class Build {
                       ],
                  :SVG[<src svg-properties.txt> => <SVG>],
                  'CSS3::Fonts::AtFontFace' => [<src css3x-font-@fontface-properties.txt> => <CSS3 Fonts AtFontFace>],
-
+                 :CSS4[<src css-snapshot-2026 css-masking.txt> => <CSS4 Masking>],
                 ) {
                 my $meta-root = .key;
                 %props = () if $meta-root eq 'CSS3::Fonts::AtFontFace';

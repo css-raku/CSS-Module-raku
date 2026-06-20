@@ -5,6 +5,10 @@ also is CSS::Module::CSS3;
 use CSS::Module::CSS4::Colors;
 also is CSS::Module::CSS4::Colors;
 
+use CSS::Module::CSS4::Masking;
+also is CSS::Module::CSS4::Masking;
+
+
 method module(|c) {
     use CSS::Module::CSS4::Actions;
     use CSS::Module::CSS3::Metadata;
