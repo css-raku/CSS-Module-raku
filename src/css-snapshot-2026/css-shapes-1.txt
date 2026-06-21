@@ -1,3 +1,22 @@
 shape-image-threshold	<opacity-value>	0	floats	no	n/a	by computed value	per grammar	specified number, clamped to the range [0,1]
 shape-margin	<length-percentage [0,∞]>	0	floats and initial letter boxes	no	refer to the inline size of the containing block	by computed value	per grammar	computed <length-percentage> value
 shape-outside	none | [ <basic-shape> || <shape-box> ] | <image>	none	floats and initial letter boxes	no	n/a	as defined for <basic-shape>, otherwise discrete	per grammar	as defined for <basic-shape> (with <shape-box> following, if supplied); else the computed <image>; else the keyword as specified
+<basic-shape> = <basic-shape-rect> | <circle()> | <ellipse()> |  <polygon()> | <path()> | <shape-rect>
+<inset()> = inset( <length-percentage>{1,4} [ round <'border-radius'> ]? )
+
+<xywh()> = xywh( <length-percentage>{2} <length-percentage [0,∞]>{2} [ round <'border-radius'> ]?)
+
+# 'clip' property already defines <rect()> with different syntax.
+<shape-rect> = rect([ <length-percentage> | auto ]{4} [ round <'border-radius'> ]?)
+
+<basic-shape-rect> = <inset()> | <rect()> | <xywh()>
+
+<circle()> = circle( <radial-size>? [ at <position> ]? )
+
+<ellipse()> = ellipse( <radial-size>? [ at <position> ]?)
+
+<polygon()> = polygon( <'fill-rule'>? [ round <length> ]? , [<length-percentage> <length-percentage>]# )
+
+<path()> = path( <'fill-rule'>? , <string> )
+
+<shape()> = shape( <'fill-rule'>? from <position> , <shape-command>#)

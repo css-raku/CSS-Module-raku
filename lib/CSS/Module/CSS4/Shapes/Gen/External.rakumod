@@ -1,8 +1,14 @@
 unit role CSS::Module::CSS4::Shapes::Gen::External;
-method basic-shape (|) {
+method css-val-border-radius (|) {
+    ...
+}
+method css-val-fill-rule (|) {
     ...
 }
 method image (|) {
+    ...
+}
+method length (|) {
     ...
 }
 method length-percentage (|) {
@@ -11,6 +17,21 @@ method length-percentage (|) {
 method opacity-value (|) {
     ...
 }
+method position (|) {
+    ...
+}
+method radial-size (|) {
+    ...
+}
+method rect (|) {
+    ...
+}
 method shape-box (|) {
+    ...
+}
+method shape-command (|) {
+    ...
+}
+method string (|) {
     ...
 }

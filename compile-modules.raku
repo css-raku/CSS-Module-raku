@@ -26,7 +26,8 @@ class Build {
                  'CSS3::Fonts::AtFontFace' => [<src css3x-font-@fontface-properties.txt> => <CSS3 Fonts AtFontFace>],
                  :CSS4[
                           <src css-snapshot-2026 css-masking-1.txt> => <CSS4 Masking>,
-                          <src css-snapshot-2026 css-shapes-1.txt> => <CSS4 Shapes>
+                          <src css-snapshot-2026 css-shapes-1.txt> => <CSS4 Shapes>,
+                          <src css-snapshot-2026 css-backgrounds-3.txt> => <CSS4 Backgrounds>,
                       ],
                 ) {
                 my $meta-root = .key;

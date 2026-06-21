@@ -1,6 +1,9 @@
 unit grammar CSS::Module::CSS4;
-use CSS::Module::CSS3;
-also is CSS::Module::CSS3;
+use CSS::Module::SVG;
+also is CSS::Module::SVG;
+
+use CSS::Module::CSS4::Backgrounds;
+also is CSS::Module::CSS4::Backgrounds;
 
 use CSS::Module::CSS4::Colors;
 also is CSS::Module::CSS4::Colors;
