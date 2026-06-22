@@ -6,6 +6,8 @@ shape-outside	none | [ <basic-shape> || <shape-box> ] | <image>	none	floats and 
 
 <xywh()> = xywh( <length-percentage>{2} <length-percentage [0,∞]>{2} [ round <'border-radius'> ]?)
 
+<shape-box> = <visual-box> | margin-box | half-border-box
+
 # 'clip' property already defines <rect()> with different syntax.
 <shape-rect> = rect([ <length-percentage> | auto ]{4} [ round <'border-radius'> ]?)
 
@@ -20,3 +22,32 @@ shape-outside	none | [ <basic-shape> || <shape-box> ] | <image>	none	floats and 
 <path()> = path( <'fill-rule'>? , <string> )
 
 <shape()> = shape( <'fill-rule'>? from <position> , <shape-command>#)
+
+<shape-command> = <move-command> | <line-command> | close |\
+                  <horizontal-line-command> | <vertical-line-command> |\
+                  <curve-command> | <smooth-command> | <arc-command>
+
+<move-command> = move <command-end-point>
+<line-command> = line <command-end-point>
+<horizontal-line-command> = hline\
+        [ to [ <length-percentage> | left | center | right | x-start | x-end ]\
+        | by <length-percentage> ]
+<vertical-line-command> = vline\
+        [ to [ <length-percentage> | top | center | bottom | y-start | y-end ]\
+        | by <length-percentage> ]
+<curve-command> = curve\
+        [ [ to <position> with <control-point> [ / <control-point> ]? ]\
+        | [ by <coordinate-pair> with <relative-control-point> [ / <relative-control-point> ]? ] ]
+<smooth-command> = smooth\
+        [ [ to <position> [ with <control-point> ]? ]\
+        | [ by <coordinate-pair> [ with <relative-control-point> ]? ] ]
+<arc-command> = arc <command-end-point>\
+            [ [ of <length-percentage>{1,2} ]\
+              && <arc-sweep>? && <arc-size>? && [rotate <angle>]? ]
+
+<command-end-point> = [ to <position> | by <coordinate-pair> ]
+<control-point> = [ <position> | <relative-control-point> ]
+<relative-control-point> = <coordinate-pair> [ from [ start | end | origin ] ]?
+<coordinate-pair> = <length-percentage>{2}
+<arc-sweep> = cw | ccw
+<arc-size> = large | small

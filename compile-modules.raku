@@ -25,9 +25,12 @@ class Build {
                  :SVG[<src svg-properties.txt> => <SVG>],
                  'CSS3::Fonts::AtFontFace' => [<src css3x-font-@fontface-properties.txt> => <CSS3 Fonts AtFontFace>],
                  :CSS4[
+                          <src css-snapshot-2026 css-backgrounds-3.txt> => <CSS4 Backgrounds>,
+                          <src css-snapshot-2026 css-color-4.txt> => <CSS4 Color>,
+                          <src css-snapshot-2026 css-images-3.txt> => <CSS4 Images>,
                           <src css-snapshot-2026 css-masking-1.txt> => <CSS4 Masking>,
                           <src css-snapshot-2026 css-shapes-1.txt> => <CSS4 Shapes>,
-                          <src css-snapshot-2026 css-backgrounds-3.txt> => <CSS4 Backgrounds>,
+                          <src css-snapshot-2026 css-values-5.txt> => <CSS4 Values>,
                       ],
                 ) {
                 my $meta-root = .key;

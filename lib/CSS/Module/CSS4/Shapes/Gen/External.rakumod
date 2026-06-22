@@ -1,4 +1,7 @@
 unit role CSS::Module::CSS4::Shapes::Gen::External;
+method angle (|) {
+    ...
+}
 method css-val-border-radius (|) {
     ...
 }
@@ -26,12 +29,9 @@ method radial-size (|) {
 method rect (|) {
     ...
 }
-method shape-box (|) {
-    ...
-}
-method shape-command (|) {
-    ...
-}
 method string (|) {
+    ...
+}
+method visual-box (|) {
     ...
 }

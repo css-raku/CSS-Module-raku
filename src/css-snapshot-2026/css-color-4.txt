@@ -1,0 +1,11 @@
+<opacity-value> = <number> | <percentage>
+# todo <color> (using CSS3 colors for now)
+#color> = <color-base> | currentColor | <system-color>
+#
+#<color-base> = <hex-color> | <color-function> | <named-color> | transparent
+#<color-function> = <rgb()> | <rgba()> |
+#              <hsl()> | <hsla()> | <hwb()> |
+#              <lab()> | <lch()> | <oklab()> | <oklch()> |
+#              <color()>
+color	<color>	CanvasText	all elements and text	yes	N/A	by computed value type	per grammar	computed color, see resolving color values
+opacity	<opacity-value>	1	all elements	no	map to the range [0,1]	by computed value type	per grammar	specified number, clamped to the range [0,1]

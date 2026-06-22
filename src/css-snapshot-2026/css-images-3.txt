@@ -1,0 +1,7 @@
+<image> = <url> | <gradient>
+<radial-size> = <radial-extent> | <length [0,∞]> | <length-percentage [0,∞]>{2}
+<radial-extent> = closest-corner | closest-side | farthest-corner | farthest-side
+image-orientation	from-image | none | [ <angle> || flip ]	from-image	all elements	yes	n/a	discrete	per grammar	the specified keyword, or an <angle>, rounded and normalized (see text), plus optionally a flip keyword
+image-rendering	auto | smooth | high-quality | pixelated | crisp-edges	auto	all elements	yes	n/a	discrete	per grammar	specified keyword
+object-fit	fill | contain | cover | none | scale-down	fill	replaced elements	no	n/a	discrete	per grammar	specified keyword
+object-position	<position>	50% 50%	replaced elements	no	refer to width and height of element itself	as for background-position	the horizontal component of the <position>, followed by the vertical component	as for background-position

@@ -1,0 +1,28 @@
+<position> = <position-one> | <position-two> | <position-four>
+<position-one> = [\
+  left | center | right | top | bottom |\
+  x-start | x-end | y-start | y-end |\
+  block-start | block-end | inline-start | inline-end |\
+  <length-percentage>\
+]
+<position-two> = [\
+  [ left | center | right | x-start | x-end ] &&\
+  [ top | center | bottom | y-start | y-end ]\
+|\
+  [ left | center | right | x-start | x-end | <length-percentage> ]\
+  [ top | center | bottom | y-start | y-end | <length-percentage> ]\
+|\
+  [ block-start | center | block-end ] &&\
+  [ inline-start | center | inline-end ]\
+|\
+  [ start | center | end ]{2}\
+]
+<position-four> = [\
+  [ [ left | right | x-start | x-end ] <length-percentage> ] &&\
+  [ [ top | bottom | y-start | y-end ] <length-percentage> ]\
+|\
+  [ [ block-start | block-end ] <length-percentage> ] &&\
+  [ [ inline-start | inline-end ] <length-percentage> ]\
+|\
+  [ [ start | end ] <length-percentage> ]{2}\
+]
