@@ -6,6 +6,9 @@ also is CSS::Module::SVG::Actions;
 use CSS::Snapshot2026::Backgrounds::Actions;
 also is CSS::Snapshot2026::Backgrounds::Actions;
 
+use CSS::Snapshot2026::Box::Actions;
+also is CSS::Snapshot2026::Box::Actions;
+
 use CSS::Snapshot2026::Color::Actions;
 also is CSS::Snapshot2026::Color::Actions;
 

@@ -16,22 +16,23 @@ class Build {
             my %props;
             my Pair @metadata;
 
-            for (:CSS1[<src css1-properties.txt> => <Module CSS1>],
-                 :CSS21[<src css21-properties.txt> => <Module CSS21>],
-                 :CSS3[<src css3x-font-properties.txt> => <Module CSS3 Fonts>,
-                       <src css3x-paged-media.txt> => <Module CSS3 PagedMedia>,
-                       <src css-values-3-20240322.txt> => <Module CSS3 Values_and_Units>,
+            for (:CSS1[<src css1-properties.tsv> => <Module CSS1>],
+                 :CSS21[<src css21-properties.tsv> => <Module CSS21>],
+                 :CSS3[<src css3x-font-properties.tsv> => <Module CSS3 Fonts>,
+                       <src css3x-paged-media.tsv> => <Module CSS3 PagedMedia>,
+                       <src css-values-3-20240322.tsv> => <Module CSS3 Values_and_Units>,
                       ],
-                 :SVG[<src svg-properties.txt> => <Module SVG>],
-                 'CSS3::Fonts::AtFontFace' => [<src css3x-font-@fontface-properties.txt> => <Module CSS3 Fonts AtFontFace>],
+                 :SVG[<src svg-properties.tsv> => <Module SVG>],
                  :CSS4[
-                          <src css-snapshot-2026 css-backgrounds-3.txt> => <Snapshot2026 Backgrounds>,
-                          <src css-snapshot-2026 css-color-4.txt> => <Snapshot2026 Color>,
-                          <src css-snapshot-2026 css-images-3.txt> => <Snapshot2026 Images>,
-                          <src css-snapshot-2026 css-masking-1.txt> => <Snapshot2026 Masking>,
-                          <src css-snapshot-2026 css-shapes-1.txt> => <Snapshot2026 Shapes>,
-                          <src css-snapshot-2026 css-values-5.txt> => <Snapshot2026 Values>,
+                          <src css-snapshot-2026 css-backgrounds-3.tsv> => <Snapshot2026 Backgrounds>,
+                          <src css-snapshot-2026 css-box-4.tsv>         => <Snapshot2026 Box>,
+                          <src css-snapshot-2026 css-color-4.tsv>       => <Snapshot2026 Color>,
+                          <src css-snapshot-2026 css-images-3.tsv>      => <Snapshot2026 Images>,
+                          <src css-snapshot-2026 css-masking-1.tsv>     => <Snapshot2026 Masking>,
+                          <src css-snapshot-2026 css-shapes-1.tsv>      => <Snapshot2026 Shapes>,
+                          <src css-snapshot-2026 css-values-5.tsv>      => <Snapshot2026 Values>,
                       ],
+                 'CSS3::Fonts::AtFontFace' => [<src css3x-font-@fontface-properties.tsv> => <Module CSS3 Fonts AtFontFace>],
                 ) {
                 my $meta-root = .key;
                 %props = () if $meta-root eq 'CSS3::Fonts::AtFontFace';

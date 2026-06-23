@@ -5,6 +5,9 @@ also is CSS::Module::SVG;
 use CSS::Snapshot2026::Backgrounds;
 also is CSS::Snapshot2026::Backgrounds;
 
+use CSS::Snapshot2026::Box;
+also is CSS::Snapshot2026::Box;
+
 use CSS::Snapshot2026::Color;
 also is CSS::Snapshot2026::Color;
 
@@ -22,6 +25,8 @@ also is CSS::Snapshot2026::Values;
 
 use CSS::Snapshot2026::Backgrounds::Gen::External;
 also does CSS::Snapshot2026::Backgrounds::Gen::External;
+use CSS::Snapshot2026::Box::Gen::External;
+also does CSS::Snapshot2026::Box::Gen::External;
 use CSS::Snapshot2026::Color::Gen::External;
 also does CSS::Snapshot2026::Color::Gen::External;
 use CSS::Snapshot2026::Masking::Gen::External;
