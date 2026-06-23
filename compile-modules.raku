@@ -16,28 +16,28 @@ class Build {
             my %props;
             my Pair @metadata;
 
-            for (:CSS1[<src css1-properties.txt> => <CSS1>],
-                 :CSS21[<src css21-properties.txt> => <CSS21>],
-                 :CSS3[<src css3x-font-properties.txt> => <CSS3 Fonts>,
-                       <src css3x-paged-media.txt> => <CSS3 PagedMedia>,
-                       <src css-values-3-20240322.txt> => <CSS3 Values_and_Units>,
+            for (:CSS1[<src css1-properties.txt> => <Module CSS1>],
+                 :CSS21[<src css21-properties.txt> => <Module CSS21>],
+                 :CSS3[<src css3x-font-properties.txt> => <Module CSS3 Fonts>,
+                       <src css3x-paged-media.txt> => <Module CSS3 PagedMedia>,
+                       <src css-values-3-20240322.txt> => <Module CSS3 Values_and_Units>,
                       ],
-                 :SVG[<src svg-properties.txt> => <SVG>],
-                 'CSS3::Fonts::AtFontFace' => [<src css3x-font-@fontface-properties.txt> => <CSS3 Fonts AtFontFace>],
+                 :SVG[<src svg-properties.txt> => <Module SVG>],
+                 'CSS3::Fonts::AtFontFace' => [<src css3x-font-@fontface-properties.txt> => <Module CSS3 Fonts AtFontFace>],
                  :CSS4[
-                          <src css-snapshot-2026 css-backgrounds-3.txt> => <CSS4 Backgrounds>,
-                          <src css-snapshot-2026 css-color-4.txt> => <CSS4 Color>,
-                          <src css-snapshot-2026 css-images-3.txt> => <CSS4 Images>,
-                          <src css-snapshot-2026 css-masking-1.txt> => <CSS4 Masking>,
-                          <src css-snapshot-2026 css-shapes-1.txt> => <CSS4 Shapes>,
-                          <src css-snapshot-2026 css-values-5.txt> => <CSS4 Values>,
+                          <src css-snapshot-2026 css-backgrounds-3.txt> => <Snapshot2026 Backgrounds>,
+                          <src css-snapshot-2026 css-color-4.txt> => <Snapshot2026 Color>,
+                          <src css-snapshot-2026 css-images-3.txt> => <Snapshot2026 Images>,
+                          <src css-snapshot-2026 css-masking-1.txt> => <Snapshot2026 Masking>,
+                          <src css-snapshot-2026 css-shapes-1.txt> => <Snapshot2026 Shapes>,
+                          <src css-snapshot-2026 css-values-5.txt> => <Snapshot2026 Values>,
                       ],
                 ) {
                 my $meta-root = .key;
                 %props = () if $meta-root eq 'CSS3::Fonts::AtFontFace';
                 for .value.list {
                     my ($input-spec, $class-isa) = .kv;
-                    my @base-id = flat <CSS Module>, @$class-isa, <Gen>;
+                    my @base-id = flat <CSS>, @$class-isa, <Gen>;
                     my @grammar-id = @base-id.Slip, 'Grammar';
                     my $scope := 'unit';
                     my CSS::Specification::Compiler $compiler .= new;
