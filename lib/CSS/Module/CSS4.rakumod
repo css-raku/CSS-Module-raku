@@ -1,6 +1,4 @@
 unit grammar CSS::Module::CSS4;
-use CSS::Module::SVG;
-also is CSS::Module::SVG;
 
 use CSS::Snapshot2026::Backgrounds;
 also is CSS::Snapshot2026::Backgrounds;
@@ -22,6 +20,9 @@ also is CSS::Snapshot2026::Shapes;
 
 use CSS::Snapshot2026::Values;
 also is CSS::Snapshot2026::Values;
+
+use CSS::Module::SVG;
+also is CSS::Module::SVG;
 
 use CSS::Snapshot2026::Backgrounds::Gen::External;
 also does CSS::Snapshot2026::Backgrounds::Gen::External;

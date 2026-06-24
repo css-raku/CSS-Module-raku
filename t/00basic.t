@@ -15,6 +15,7 @@ for "012AF", "012AFc" {
     nok $_ ~~ /^<CSS::Module::CSS1::unicode>$/, "not css1 unicode: $_";
     ok  $_ ~~ /^<CSS::Module::CSS21::unicode>$/, "css21 unicode: $_";
     ok  $_ ~~ /^<CSS::Module::CSS3::unicode>$/, "css3 unicode: $_";
+    ok  $_ ~~ /^<CSS::Module::CSS4::unicode>$/, "css4 unicode: $_";
 }
 
 # css1 and css21 only recognise latin chars as non-ascii (\o240-\o377)
@@ -22,6 +23,7 @@ for '' {
     nok $_ ~~ /^<CSS::Module::CSS1::nonascii>$/, "not non-ascii css1: $_";
     nok $_ ~~ /^<CSS::Module::CSS21::nonascii>$/, "not non-ascii css21: $_";
     ok  $_ ~~ /^<CSS::Module::CSS3::nonascii>$/, "non-ascii css3: $_";
+    ok  $_ ~~ /^<CSS::Module::CSS4::nonascii>$/, "non-ascii css3: $_";
 }
 
 my CSS::Module $css1  = CSS::Module::CSS1.module;

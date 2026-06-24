@@ -11,7 +11,7 @@ rule color:sym<rgb> {:i'rgb('
                           [ <c=.color-range> <.optional-comma>
                             <c=.color-range> <.optional-comma>
                             <c=.color-range>
-                            [<.alpha-delim> <c=.percentage-range>]? || <usage(&?ROUTINE.WHY)> ]
+                            [<.alpha-channel-delim> <c=.percentage-range>]? || <usage(&?ROUTINE.WHY)> ]
                ')'
 }
 
@@ -20,7 +20,7 @@ rule color:sym<rgba> {:i'rgba('
                           [ <c=.color-range> <.optional-comma>
                             <c=.color-range> <.optional-comma>
                             <c=.color-range>
-                            [<.alpha-delim> <c=.percentage-range>]? || <usage(&?ROUTINE.WHY)> ]
+                            [<.alpha-channel-delim> <c=.percentage-range>]? || <usage(&?ROUTINE.WHY)> ]
                ')'
 }
 #| usage: hsl(h,s,l) where h is 0..360  and s,l are 0-1 or 0%-100%
