@@ -9,12 +9,36 @@ rule css-val-clip-path { :i <clip-source> || [[<basic-shape> :my $*A;<!{
 }>|| <geometry-box> :my $*B;<!{
     $*B++
 }>]+] || none & <keyw>  }
+#| <geometry-box> = <shape-box> | fill-box | stroke-box | view-box
+rule geometry-box { :i <shape-box> || ["fill-box" | "stroke-box" | "view-box" ]& <keyw>   }
 #| clip-rule: nonzero | evenodd
 rule decl:sym<clip-rule> { :i ("clip-rule") ":" <val(/<css-val-clip-rule> /, &?ROUTINE.WHY)>}
 rule css-val-clip-rule { :i [nonzero | evenodd ]& <keyw>  }
 #| mask: <mask-layer>#
 rule decl:sym<mask> { :i (mask) ":" <val(/<css-val-mask> +% <op(",")> /, &?ROUTINE.WHY)>}
 rule css-val-mask { :i <mask-layer> }
+#| <mask-layer> = <mask-reference> ||  <position> [ / <bg-size> ]? ||  <repeat-style> ||  <geometry-box> ||  [ <geometry-box> | no-clip ] ||  <compositing-operator> ||  <masking-mode>
+rule mask-layer { :i [<mask-reference> :my $*A;<!{
+    $*A++
+}>|| <position> [<op("/")> <bg-size> ] ?  :my $*B;<!{
+    $*B++
+}>|| <repeat-style> :my $*C;<!{
+    $*C++
+}>|| <geometry-box> :my $*D;<!{
+    $*D++
+}>|| [<geometry-box> || "no-clip" & <keyw> ] :my $*E;<!{
+    $*E++
+}>|| <compositing-operator> :my $*F;<!{
+    $*F++
+}>|| <masking-mode> :my $*G;<!{
+    $*G++
+}>]+ }
+#| <mask-reference> = none | <image> | <mask-source>
+rule mask-reference { :i none & <keyw> || <image> || <mask-source>  }
+#| <mask-source> = <url>
+rule mask-source { :i <url> }
+#| <masking-mode> = alpha | luminance | match-source
+rule masking-mode { :i [alpha | luminance | "match-source" ]& <keyw>  }
 #| mask-border: <'mask-border-source'> || <'mask-border-slice'> [ / <'mask-border-width'>? [ / <'mask-border-outset'> ]? ]? || <'mask-border-repeat'> || <'mask-border-mode'>
 rule decl:sym<mask-border> { :i ("mask-border") ":" <val(/<css-val-mask-border> /, &?ROUTINE.WHY)>}
 rule css-val-mask-border { :i [<css-val-mask-border-source> :my $*A;<!{
@@ -47,9 +71,21 @@ rule css-val-mask-border-width { :i <css-val-border-image-width> }
 #| mask-clip: [ <coord-box> | no-clip ]#
 rule decl:sym<mask-clip> { :i ("mask-clip") ":" <val(/<css-val-mask-clip> +% <op(",")> /, &?ROUTINE.WHY)>}
 rule css-val-mask-clip { :i [<coord-box> || "no-clip" & <keyw> ] }
+#| <coord-box> = <paint-box> | view-box
+rule coord-box { :i <paint-box> || "view-box" & <keyw>  }
+#| <paint-box> = <visual-box> | fill-box | stroke-box
+rule paint-box { :i <visual-box> || ["fill-box" | "stroke-box" ]& <keyw>   }
+#| <visual-box> = content-box | padding-box | border-box
+rule visual-box { :i ["content-box" | "padding-box" | "border-box" ]& <keyw>  }
+#| <layout-box> = <visual-box> | margin-box
+rule layout-box { :i <visual-box> || "margin-box" & <keyw>  }
+#| <clip-source> = <url>
+rule clip-source { :i <url> }
 #| mask-composite: <compositing-operator>#
 rule decl:sym<mask-composite> { :i ("mask-composite") ":" <val(/<css-val-mask-composite> +% <op(",")> /, &?ROUTINE.WHY)>}
 rule css-val-mask-composite { :i <compositing-operator> }
+#| <compositing-operator> = add | subtract | intersect | exclude
+rule compositing-operator { :i [add | subtract | intersect | exclude ]& <keyw>  }
 #| mask-image: <mask-reference>#
 rule decl:sym<mask-image> { :i ("mask-image") ":" <val(/<css-val-mask-image> +% <op(",")> /, &?ROUTINE.WHY)>}
 rule css-val-mask-image { :i <mask-reference> }

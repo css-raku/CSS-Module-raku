@@ -1,23 +1,5 @@
 unit role CSS::Snapshot2026::Backgrounds::Gen::External;
-method attachment (|) {
-    ...
-}
-method bg-image (|) {
-    ...
-}
-method bg-layer (|) {
-    ...
-}
-method bg-position (|) {
-    ...
-}
-method bg-size (|) {
-    ...
-}
 method color (|) {
-    ...
-}
-method final-bg-layer (|) {
     ...
 }
 method image (|) {
@@ -29,22 +11,10 @@ method length (|) {
 method length-percentage (|) {
     ...
 }
-method line-style (|) {
-    ...
-}
-method line-width (|) {
-    ...
-}
 method number (|) {
     ...
 }
 method percentage (|) {
-    ...
-}
-method repeat-style (|) {
-    ...
-}
-method shadow (|) {
     ...
 }
 method visual-box (|) {

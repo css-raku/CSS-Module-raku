@@ -2,15 +2,33 @@
 # Editor’s Draft, 16 December 2025
 # https://drafts.csswg.org/css-backgrounds/
 background	<bg-layer>#? , <final-bg-layer>	see individual properties	all elements	no	see individual properties	see individual properties	per grammar	see individual properties	
-background-attachment	<attachment>#	scroll	all elements	no	N/A	discrete	per grammar	list, each item the keyword as specified	
+<bg-layer> = <bg-image> || <bg-position> [ / <bg-size> ]? || <repeat-style> || <attachment> || <visual-box> || <visual-box>
+<final-bg-layer> =  <bg-image> || <bg-position> [ / <bg-size> ]? || <repeat-style> || <attachment> || <visual-box> || <visual-box> || <'background-color'>
+<bg-position> = [\
+  [ left | center | right | top | bottom | <length-percentage> ]\
+|\
+  [ left | center | right | <length-percentage> ]\
+  [ top | center | bottom | <length-percentage> ]\
+|\
+  [ center | [ left | right ] <length-percentage>? ] &&\
+  [ center | [ top | bottom ] <length-percentage>? ]\
+]
+background-attachment	<attachment>#	scroll	all elements	no	N/A	discrete	per grammar	list, each item the keyword as specified
+<attachment> = scroll | fixed | local
 background-clip	<visual-box>#	border-box	all elements	no	N/A	repeatable list	per grammar	list, each item a keyword as specified	
 background-color	<color>	transparent	all elements	no	N/A	by computed value	per grammar	computed color	
 background-image	<bg-image>#	none	all elements	no	N/A	discrete	per grammar	list, each item either an <image> or the keyword none	
+<bg-image> = <image> | none
 background-origin	<visual-box>#	padding-box	all elements	no	N/A	repeatable list	per grammar	list, each item a keyword as specified	
 background-position	<bg-position>#	0% 0%	all elements	no	refer to size of background positioning area minus size of background image; see text	repeatable list	per grammar	list, each item a pair of offsets (horizontal and vertical) from the top left origin each given as a computed <length-percentage> value	
 background-repeat	<repeat-style>#	repeat	all elements	no	N/A	discrete	per grammar	list, each item a pair of keywords, one per dimension	
+<repeat-style> = repeat-x | repeat-y | [repeat | space | round | no-repeat]{1,2}
+
 background-size	<bg-size>#	auto	all elements	no	see text	repeatable list	per grammar	list, each item a pair of sizes (one per axis) each represented as either a keyword or a computed <length-percentage> value	
-border	<line-width> || <line-style> || <color>	See individual properties	all elements except ruby base containers and ruby annotation containers	no	N/A	see individual properties	per grammar	see individual properties	
+<bg-size> = [ <length-percentage [0,∞]> | auto ]{1,2} | cover | contain
+border	<line-width> || <line-style> || <color>	See individual properties	all elements except ruby base containers and ruby annotation containers	no	N/A	see individual properties	per grammar	see individual properties
+<line-width> = <length [0,∞]> | thin | medium | thick
+<line-style> = none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset
 border-bottom	<line-width> || <line-style> || <color>	See individual properties	all elements except ruby base containers and ruby annotation containers	no	N/A	see individual properties	per grammar	see individual properties	
 border-bottom-color	<color>	currentColor	all elements except ruby base containers and ruby annotation containers	no	N/A	by computed value	per grammar	computed color	border-color
 border-bottom-left-radius	<length-percentage [0,∞]>{1,2}	0	all elements (but see prose)	no	Refer to corresponding dimension of the border box.	by computed value	per grammar	pair of computed <length-percentage> values	border-radius
@@ -42,3 +60,4 @@ border-top-style	<line-style>	none	all elements except ruby base containers and 
 border-top-width	<line-width>	medium	all elements except ruby base containers and ruby annotation containers	no	N/A	by computed value	per grammar	absolute length, snapped as a border width	border-width
 border-width	<line-width>{1,4}	see individual properties	all elements except ruby base containers and ruby annotation containers	no	see individual properties	see individual properties	per grammar	see individual properties	
 box-shadow	none | <shadow>#	none	all elements	no	N/A	by computed value, treating none as a zero-item list and appending blank shadows (transparent 0 0 0 0) with a corresponding inset keyword as needed to match the longer list if the shorter list is otherwise compatible with the longer one	per grammar	either the keyword none or a list, each item consisting of four absolute lengths plus a computed color and optionally also a inset keyword	
+<shadow> = <color>? && [ <length>{2} [ <length [0,∞]> <length>? ]? ] && inset?

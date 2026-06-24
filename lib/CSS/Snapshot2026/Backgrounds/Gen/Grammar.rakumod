@@ -2,9 +2,47 @@ unit grammar CSS::Snapshot2026::Backgrounds::Gen::Grammar;
 #| background: <bg-layer>#? , <final-bg-layer>
 rule decl:sym<background> { :i (background) ":" <val(/<css-val-background> /, &?ROUTINE.WHY)>}
 rule css-val-background { :i [<bg-layer> <op(",")> ]* <final-bg-layer>  }
+#| <bg-layer> = <bg-image> || <bg-position> [ / <bg-size> ]? || <repeat-style> || <attachment> || <visual-box> || <visual-box>
+rule bg-layer { :i [<bg-image> :my $*A;<!{
+    $*A++
+}>|| <bg-position> [<op("/")> <bg-size> ] ?  :my $*B;<!{
+    $*B++
+}>|| <repeat-style> :my $*C;<!{
+    $*C++
+}>|| <attachment> :my $*D;<!{
+    $*D++
+}>|| <visual-box> :my $*E;<!{
+    $*E++
+}>|| <visual-box> :my $*F;<!{
+    $*F++
+}>]+ }
+#| <final-bg-layer> = <bg-image> || <bg-position> [ / <bg-size> ]? || <repeat-style> || <attachment> || <visual-box> || <visual-box> || <'background-color'>
+rule final-bg-layer { :i [<bg-image> :my $*A;<!{
+    $*A++
+}>|| <bg-position> [<op("/")> <bg-size> ] ?  :my $*B;<!{
+    $*B++
+}>|| <repeat-style> :my $*C;<!{
+    $*C++
+}>|| <attachment> :my $*D;<!{
+    $*D++
+}>|| <visual-box> :my $*E;<!{
+    $*E++
+}>|| <visual-box> :my $*F;<!{
+    $*F++
+}>|| <css-val-background-color> :my $*G;<!{
+    $*G++
+}>]+ }
+#| <bg-position> = [  [ left | center | right | top | bottom | <length-percentage> ]|  [ left | center | right | <length-percentage> ]  [ top | center | bottom | <length-percentage> ]|  [ center | [ left | right ] <length-percentage>? ] &&  [ center | [ top | bottom ] <length-percentage>? ]]
+rule bg-position { :i [[[left | center | right | top | bottom ]& <keyw>  || <length-percentage> ] || [[left | center | right ]& <keyw>  || <length-percentage> ] [[top | center | bottom ]& <keyw>  || <length-percentage> ]  || [[center & <keyw> || [[left | right ]& <keyw> ] <length-percentage> ?  ] :my $*A;<!{
+    $*A++
+}>|| [center & <keyw> || [[top | bottom ]& <keyw> ] <length-percentage> ?  ] :my $*B;<!{
+    $*B++
+}>]** 2 ] }
 #| background-attachment: <attachment>#
 rule decl:sym<background-attachment> { :i ("background-attachment") ":" <val(/<css-val-background-attachment> +% <op(",")> /, &?ROUTINE.WHY)>}
 rule css-val-background-attachment { :i <attachment> }
+#| <attachment> = scroll | fixed | local
+rule attachment { :i [scroll | fixed | local ]& <keyw>  }
 #| background-clip: <visual-box>#
 rule decl:sym<background-clip> { :i ("background-clip") ":" <val(/<css-val-background-clip> +% <op(",")> /, &?ROUTINE.WHY)>}
 rule css-val-background-clip { :i <visual-box> }
@@ -14,6 +52,8 @@ rule css-val-background-color { :i <color> }
 #| background-image: <bg-image>#
 rule decl:sym<background-image> { :i ("background-image") ":" <val(/<css-val-background-image> +% <op(",")> /, &?ROUTINE.WHY)>}
 rule css-val-background-image { :i <bg-image> }
+#| <bg-image> = <image> | none
+rule bg-image { :i <image> || none & <keyw>  }
 #| background-origin: <visual-box>#
 rule decl:sym<background-origin> { :i ("background-origin") ":" <val(/<css-val-background-origin> +% <op(",")> /, &?ROUTINE.WHY)>}
 rule css-val-background-origin { :i <visual-box> }
@@ -23,9 +63,13 @@ rule css-val-background-position { :i <bg-position> }
 #| background-repeat: <repeat-style>#
 rule decl:sym<background-repeat> { :i ("background-repeat") ":" <val(/<css-val-background-repeat> +% <op(",")> /, &?ROUTINE.WHY)>}
 rule css-val-background-repeat { :i <repeat-style> }
+#| <repeat-style> = repeat-x | repeat-y | [repeat | space | round | no-repeat]{1,2}
+rule repeat-style { :i ["repeat-x" | "repeat-y" ]& <keyw>  || [[repeat | space | round | "no-repeat" ]& <keyw> ] ** 1..2  }
 #| background-size: <bg-size>#
 rule decl:sym<background-size> { :i ("background-size") ":" <val(/<css-val-background-size> +% <op(",")> /, &?ROUTINE.WHY)>}
 rule css-val-background-size { :i <bg-size> }
+#| <bg-size> = [ <length-percentage [0,∞]> | auto ]{1,2} | cover | contain
+rule bg-size { :i [<length-percentage> || auto & <keyw> ] ** 1..2 || [cover | contain ]& <keyw>   }
 #| border: <line-width> || <line-style> || <color>
 rule decl:sym<border> { :i (border) ":" <val(/<css-val-border> /, &?ROUTINE.WHY)>}
 rule css-val-border { :i [<line-width> :my $*A;<!{
@@ -35,6 +79,10 @@ rule css-val-border { :i [<line-width> :my $*A;<!{
 }>|| <color> :my $*C;<!{
     $*C++
 }>]+ }
+#| <line-width> = <length [0,∞]> | thin | medium | thick
+rule line-width { :i <length> || [thin | medium | thick ]& <keyw>   }
+#| <line-style> = none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset
+rule line-style { :i [none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset ]& <keyw>  }
 #| border-bottom: <line-width> || <line-style> || <color>
 rule decl:sym<border-bottom> { :i ("border-bottom") ":" <val(/<css-val-border-bottom> /, &?ROUTINE.WHY)>}
 rule css-val-border-bottom { :i [<line-width> :my $*A;<!{
@@ -162,3 +210,11 @@ rule css-val-border-width { :i <line-width> }
 #| box-shadow: none | <shadow>#
 rule decl:sym<box-shadow> { :i ("box-shadow") ":" <val(/<css-val-box-shadow> /, &?ROUTINE.WHY)>}
 rule css-val-box-shadow { :i none & <keyw> || <shadow> +% <op(",")>  }
+#| <shadow> = <color>? && [ <length>{2} [ <length [0,∞]> <length>? ]? ] && inset?
+rule shadow { :i [<color> ? :my $*A; <!{
+    $*A++
+}>|| [<length> ** 2 [<length> <length> ? ] ? ] :my $*B; <!{
+    $*B++
+}>|| [inset & <keyw>] ? :my $*C; <!{
+    $*C++
+}>]** 3 }

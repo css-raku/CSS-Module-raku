@@ -1,7 +1,20 @@
+# https://www.w3.org/TR/css-masking-1/#property-index
 clip	<rect()> | auto	auto	Absolutely positioned elements. In SVG, it applies to elements which establish a new viewport, pattern elements and mask elements.	no	n/a	by computed value	per grammar	as specified	visual
 clip-path	<clip-source> | [ <basic-shape> || <geometry-box> ] | none	none	All elements. In SVG, it applies to container elements excluding the defs element, all graphics elements and the use element	no	n/a	by computed value	per grammar	as specified, but with <url> values made absolute	visual
+<geometry-box> = <shape-box> | fill-box | stroke-box | view-box
 clip-rule	nonzero | evenodd	nonzero	Applies to SVG graphics elements	yes	n/a	discrete	per grammar	as specified	visual
 mask	<mask-layer>#	see individual properties	All elements. In SVG, it applies to container elements excluding the defs element, all graphics elements and the use element	no	see individual properties	see individual properties	per grammar	see individual properties	visual
+<mask-layer> =\
+  <mask-reference> ||\
+  <position> [ / <bg-size> ]? ||\
+  <repeat-style> ||\
+  <geometry-box> ||\
+  [ <geometry-box> | no-clip ] ||\
+  <compositing-operator> ||\
+  <masking-mode>
+<mask-reference> = none | <image> | <mask-source>
+<mask-source> = <url>
+<masking-mode> = alpha | luminance | match-source
 mask-border	<'mask-border-source'> || <'mask-border-slice'> [ / <'mask-border-width'>? [ / <'mask-border-outset'> ]? ]? || <'mask-border-repeat'> || <'mask-border-mode'>	See individual properties	See individual properties	no	n/a	See individual properties	per grammar	See individual properties	visual
 mask-border-mode	luminance | alpha	alpha	All elements. In SVG, it applies to container elements excluding the defs element, all graphics elements and the use element	no	n/a	discrete	per grammar	as specified	visual
 mask-border-outset	<'border-image-outset'>	0	All elements. In SVG, it applies to container elements excluding the defs element, all graphics elements and the use element	no	n/a	by computed value	per grammar	all <length>s made absolute, otherwise as specified	visual
@@ -10,7 +23,13 @@ mask-border-slice	<'border-image-slice'>	0	All elements. In SVG, it applies to c
 mask-border-source	<'border-image-source'>	none	All elements. In SVG, it applies to container elements excluding the defs element, all graphics elements and the use element	no	n/a	discrete	per grammar	they keyword none or the computed <image>	visual
 mask-border-width	<'border-image-width'>	auto	All elements. In SVG, it applies to container elements excluding the defs element, all graphics elements and the use element	no	relative to width/height of the mask border image area	by computed value	per grammar	all <length>s made absolute, otherwise as specified	visual
 mask-clip	[ <coord-box> | no-clip ]#	border-box	All elements. In SVG, it applies to container elements excluding the defs element, all graphics elements and the use element	no	n/a	discrete	per grammar	list, each item the keyword as specified	visual
+<coord-box> = <paint-box> | view-box
+<paint-box> = <visual-box> | fill-box | stroke-box
+<visual-box> = content-box | padding-box | border-box
+<layout-box> = <visual-box> | margin-box
+<clip-source> = <url>
 mask-composite	<compositing-operator>#	add	All elements. In SVG, it applies to container elements without the defs element and all graphics elements	no	n/a	discrete	per grammar	list, each item the keyword as specified	visual
+<compositing-operator> = add | subtract | intersect | exclude
 mask-image	<mask-reference>#	none	All elements. In SVG, it applies to container elements excluding the defs element, all graphics elements and the use element	no	n/a	discrete	per grammar	list, each item the keyword none, a computed <image>, or a computed <url>	visual
 mask-mode	<masking-mode>#	match-source	All elements. In SVG, it applies to container elements excluding the defs element, all graphics elements and the use element	no	n/a	discrete	per grammar	list, each item the keyword as specified	visual
 mask-origin	<coord-box>#	border-box	All elements. In SVG, it applies to container elements excluding the defs element, all graphics elements and the use element	no	n/a	discrete	per grammar	list, each item the keyword as specified	visual
