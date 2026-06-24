@@ -2,17 +2,22 @@
 # Editor’s Draft, 16 December 2025
 # https://drafts.csswg.org/css-backgrounds/
 background	<bg-layer>#? , <final-bg-layer>	see individual properties	all elements	no	see individual properties	see individual properties	per grammar	see individual properties	
-<bg-layer> = <bg-image> || <bg-position> [ / <bg-size> ]? || <repeat-style> || <attachment> || <visual-box> || <visual-box>
-<final-bg-layer> =  <bg-image> || <bg-position> [ / <bg-size> ]? || <repeat-style> || <attachment> || <visual-box> || <visual-box> || <'background-color'>
-<bg-position> = [\
-  [ left | center | right | top | bottom | <length-percentage> ]\
-|\
-  [ left | center | right | <length-percentage> ]\
-  [ top | center | bottom | <length-percentage> ]\
-|\
-  [ center | [ left | right ] <length-percentage>? ] &&\
-  [ center | [ top | bottom ] <length-percentage>? ]\
-]
+#-<bg-layer> = <bg-image> || <bg-position> [ / <bg-size> ]? || <repeat-style> || <attachment> || <visual-box> || <visual-box>
+#-<final-bg-layer> =  <bg-image> || <bg-position> [ / <bg-size> ]? || <repeat-style> || <attachment> || <visual-box> || <visual-box> || <'background-color'>
+#+Refactored to refer to properties directly
+<bg-layer> = <'background-image'> || <'background-position'> [ / <'background-size'> ]? || <'background-repeat'> || <'background-attachment'> || <'background-clip'>
+<final-bg-layer> = <'background-image'> || <'background-position'> [ / <'background-size'>{1,2} ]? || <'background-repeat'> || <'background-attachment'> || <'background-clip'> || <'background-color'>
+#- This sees both unwieldly and wrong. E.g. does parse '100% 100%' 
+#-<bg-position> = [\
+#-  [ left | center | right | top | bottom | <length-percentage> ]\
+#-|\
+#-  [ left | center | right | <length-percentage> ]\
+#-  [ top | center | bottom | <length-percentage> ]\
+#-|\
+#-  [ center | [ left | right ] <length-percentage>? ] &&\
+#-  [ center | [ top | bottom ] <length-percentage>? ]\
+#-]
+<bg-position> = [left | center | right | <length-percentage> ] || [ top | center | bottom | <length-percentage> ]
 background-attachment	<attachment>#	scroll	all elements	no	N/A	discrete	per grammar	list, each item the keyword as specified
 <attachment> = scroll | fixed | local
 background-clip	<visual-box>#	border-box	all elements	no	N/A	repeatable list	per grammar	list, each item a keyword as specified	

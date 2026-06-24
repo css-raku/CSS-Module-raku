@@ -2,42 +2,38 @@ unit grammar CSS::Snapshot2026::Backgrounds::Gen::Grammar;
 #| background: <bg-layer>#? , <final-bg-layer>
 rule decl:sym<background> { :i (background) ":" <val(/<css-val-background> /, &?ROUTINE.WHY)>}
 rule css-val-background { :i [<bg-layer> <op(",")> ]* <final-bg-layer>  }
-#| <bg-layer> = <bg-image> || <bg-position> [ / <bg-size> ]? || <repeat-style> || <attachment> || <visual-box> || <visual-box>
-rule bg-layer { :i [<bg-image> :my $*A;<!{
+#| <bg-layer> = <'background-image'> || <'background-position'> [ / <'background-size'> ]? || <'background-repeat'> || <'background-attachment'> || <'background-clip'>
+rule bg-layer { :i [<css-val-background-image> :my $*A;<!{
     $*A++
-}>|| <bg-position> [<op("/")> <bg-size> ] ?  :my $*B;<!{
+}>|| <css-val-background-position> [<op("/")> <css-val-background-size> ] ?  :my $*B;<!{
     $*B++
-}>|| <repeat-style> :my $*C;<!{
+}>|| <css-val-background-repeat> :my $*C;<!{
     $*C++
-}>|| <attachment> :my $*D;<!{
+}>|| <css-val-background-attachment> :my $*D;<!{
     $*D++
-}>|| <visual-box> :my $*E;<!{
+}>|| <css-val-background-clip> :my $*E;<!{
     $*E++
-}>|| <visual-box> :my $*F;<!{
+}>]+ }
+#| <final-bg-layer> = <'background-image'> || <'background-position'> [ / <'background-size'>{1,2} ]? || <'background-repeat'> || <'background-attachment'> || <'background-clip'> || <'background-color'>
+rule final-bg-layer { :i [<css-val-background-image> :my $*A;<!{
+    $*A++
+}>|| <css-val-background-position> [<op("/")> <css-val-background-size> ** 1..2 ] ?  :my $*B;<!{
+    $*B++
+}>|| <css-val-background-repeat> :my $*C;<!{
+    $*C++
+}>|| <css-val-background-attachment> :my $*D;<!{
+    $*D++
+}>|| <css-val-background-clip> :my $*E;<!{
+    $*E++
+}>|| <css-val-background-color> :my $*F;<!{
     $*F++
 }>]+ }
-#| <final-bg-layer> = <bg-image> || <bg-position> [ / <bg-size> ]? || <repeat-style> || <attachment> || <visual-box> || <visual-box> || <'background-color'>
-rule final-bg-layer { :i [<bg-image> :my $*A;<!{
+#| <bg-position> = [left | center | right | <length-percentage> ] || [ top | center | bottom | <length-percentage> ]
+rule bg-position { :i [[[left | center | right ]& <keyw>  || <length-percentage> ] :my $*A;<!{
     $*A++
-}>|| <bg-position> [<op("/")> <bg-size> ] ?  :my $*B;<!{
+}>|| [[top | center | bottom ]& <keyw>  || <length-percentage> ] :my $*B;<!{
     $*B++
-}>|| <repeat-style> :my $*C;<!{
-    $*C++
-}>|| <attachment> :my $*D;<!{
-    $*D++
-}>|| <visual-box> :my $*E;<!{
-    $*E++
-}>|| <visual-box> :my $*F;<!{
-    $*F++
-}>|| <css-val-background-color> :my $*G;<!{
-    $*G++
 }>]+ }
-#| <bg-position> = [  [ left | center | right | top | bottom | <length-percentage> ]|  [ left | center | right | <length-percentage> ]  [ top | center | bottom | <length-percentage> ]|  [ center | [ left | right ] <length-percentage>? ] &&  [ center | [ top | bottom ] <length-percentage>? ]]
-rule bg-position { :i [[[left | center | right | top | bottom ]& <keyw>  || <length-percentage> ] || [[left | center | right ]& <keyw>  || <length-percentage> ] [[top | center | bottom ]& <keyw>  || <length-percentage> ]  || [[center & <keyw> || [[left | right ]& <keyw> ] <length-percentage> ?  ] :my $*A;<!{
-    $*A++
-}>|| [center & <keyw> || [[top | bottom ]& <keyw> ] <length-percentage> ?  ] :my $*B;<!{
-    $*B++
-}>]** 2 ] }
 #| background-attachment: <attachment>#
 rule decl:sym<background-attachment> { :i ("background-attachment") ":" <val(/<css-val-background-attachment> +% <op(",")> /, &?ROUTINE.WHY)>}
 rule css-val-background-attachment { :i <attachment> }

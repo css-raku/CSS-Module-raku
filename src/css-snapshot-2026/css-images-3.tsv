@@ -1,6 +1,38 @@
 <image> = <url> | <gradient>
+
+<gradient> =\
+  <linear-gradient()> | <repeating-linear-gradient()> |\
+  <radial-gradient()> | <repeating-radial-gradient()>
+
+<linear-gradient()> = linear-gradient( [ <linear-gradient-syntax> ] )
+
+<linear-gradient-syntax> = [ <angle> | <zero> | to <side-or-corner> ]? , <color-stop-list>
+
+<color-stop-list> = <linear-color-stop> , [ <linear-color-hint>? , <linear-color-stop> ]#?
+
+<linear-color-stop> = <color> <length-percentage>?
+
+<linear-color-hint> = <length-percentage>
+
+<side-or-corner> = [left | right] || [top | bottom]
+
 <radial-size> = <radial-extent> | <length [0,∞]> | <length-percentage [0,∞]>{2}
+
 <radial-extent> = closest-corner | closest-side | farthest-corner | farthest-side
+
+<radial-gradient()> = radial-gradient( [ <radial-gradient-syntax> ] )
+
+<radial-gradient-syntax> =\
+  [ <radial-shape> || <radial-size> ]? [ at <position> ]? ,\
+  <color-stop-list>
+
+<radial-shape> = circle | ellipse
+
+<repeating-linear-gradient()> = repeating-linear-gradient( [ <linear-gradient-syntax> ] )
+<repeating-radial-gradient()> = repeating-radial-gradient( [ <radial-gradient-syntax> ] )
+
+<zero> = 0
+
 image-orientation	from-image | none | [ <angle> || flip ]	from-image	all elements	yes	n/a	discrete	per grammar	the specified keyword, or an <angle>, rounded and normalized (see text), plus optionally a flip keyword
 image-rendering	auto | smooth | high-quality | pixelated | crisp-edges	auto	all elements	yes	n/a	discrete	per grammar	specified keyword
 object-fit	fill | contain | cover | none | scale-down	fill	replaced elements	no	n/a	discrete	per grammar	specified keyword

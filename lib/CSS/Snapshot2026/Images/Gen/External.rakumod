@@ -2,7 +2,7 @@ unit role CSS::Snapshot2026::Images::Gen::External;
 method angle (|) {
     ...
 }
-method gradient (|) {
+method color (|) {
     ...
 }
 method length (|) {
