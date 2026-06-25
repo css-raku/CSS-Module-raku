@@ -39,13 +39,10 @@ for 't/css1-properties.json'.IO.lines {
         ->  % ( :$module!, :$proforma!, |c) {
 
             my $level = $module.name;
-            my $grammar = $module.grammar;
-            my $actions = $module.actions.new;
 
             subtest $level, {
-	        CSS::Grammar::Test::parse-tests($grammar, $input,
+	        CSS::Grammar::Test::parse-tests($input, :$module,
 					        :rule<declarations>,
-					        :$actions,
 					        :%expected,
                                                 |c,
                                                );
@@ -55,8 +52,8 @@ for 't/css1-properties.json'.IO.lines {
                     subtest "Unexpected input", {
 	                my $junk = sprintf '{%s: %s}', $prop, 'junk +-42';
 
-	                $actions.reset;
-	                my $p = $grammar.parse( $junk, :rule<declarations>, :$actions);
+	                my $actions = $module.actions.new;
+	                my $p = $module.grammar.parse( $junk, :rule<declarations>, :$actions);
 	                ok($p.defined && ~$p eq $junk, "$prop: able to parse unexpected input")
 	                or note "unable to parse declaration list: $junk";
                 
@@ -70,10 +67,10 @@ for 't/css1-properties.json'.IO.lines {
 
 		            my $ast = { :declarations[{ :property{ :ident($prop), :expr[ { :$keyw} ] } }] };
 
-                            CSS::Grammar::Test::parse-tests($grammar, $decl,
+                            CSS::Grammar::Test::parse-tests($decl,
+                                                            :$module,
 						            :rule<declarations>,
                                                             :suite($keyw),
-						            :$actions,
 						            :expected{ :$ast } );
                         }
                     }

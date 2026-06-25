@@ -49,14 +49,12 @@ for 't/00basic.json'.IO.lines.map({ from-json($_).pairs[0] }) {
             my $suite = $module.name;
             $suite ~= '(lax)' if $lax;
             subtest $suite, {
-	        my $grammar = $module.grammar;
-                my $actions = $module.actions.new(:$lax);
                 my %level-tests = %( %expected{$suite} // () );
                 my %level-expected = %expected, %level-tests;
 
-                CSS::Grammar::Test::parse-tests($grammar, $input,
+                CSS::Grammar::Test::parse-tests($input,
+                                                :$module,
                                                 :$rule,
-                                                :$actions,
                                                 :$writer,
                                                 :expected(%level-expected) );
                 }

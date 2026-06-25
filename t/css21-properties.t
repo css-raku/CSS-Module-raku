@@ -36,12 +36,8 @@ for 't/css21-properties.json'.IO.lines {
 
             my $level = $module.name;
             subtest $level, {
-	        my $grammar = $module.grammar;
-                my $actions = $module.actions.new;
-
-	        CSS::Grammar::Test::parse-tests($grammar, $input,
+	        CSS::Grammar::Test::parse-tests($input, :$module,
 					        :rule<declarations>,
-					        :$actions,
                                                 :$writer,
 					        :%expected );
 
@@ -49,8 +45,8 @@ for 't/css21-properties.json'.IO.lines {
 	            # usage and inheritence  tests
 	            my $junk = sprintf '{%s: %s}', $prop, 'junk +-42';
 
-	            $actions.reset;
-	            my $p = $grammar.parse( $junk, :rule<declarations>, :$actions);
+	            my $actions = $module.actions.new;
+	            my $p = $module.grammar.parse( $junk, :rule<declarations>, :$actions);
 	            ok($p.defined && ~$p eq $junk, "$prop: able to parse unexpected input")
 	                or note "unable to parse declaration list: $junk";
 
@@ -62,9 +58,8 @@ for 't/css21-properties.json'.IO.lines {
 
 		        my $ast = { :declarations[{ :property{ :ident($prop), :expr[ { :keyw($misc)} ] } }] };
 
-                        CSS::Grammar::Test::parse-tests($grammar, $decl,
+                        CSS::Grammar::Test::parse-tests($decl, :$module,
 						        :rule<declarations>,
-						        :$actions,
 						        :expected({ :$ast }) );
                     }
                 }
