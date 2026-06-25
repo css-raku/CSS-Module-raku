@@ -28,12 +28,6 @@ rule final-bg-layer { :i [<css-val-background-image> :my $*A;<!{
 }>|| <css-val-background-color> :my $*F;<!{
     $*F++
 }>]+ }
-#| <bg-position> = [left | center | right | <length-percentage> ] || [ top | center | bottom | <length-percentage> ]
-rule bg-position { :i [[[left | center | right ]& <keyw>  || <length-percentage> ] :my $*A;<!{
-    $*A++
-}>|| [[top | center | bottom ]& <keyw>  || <length-percentage> ] :my $*B;<!{
-    $*B++
-}>]+ }
 #| background-attachment: <attachment>#
 rule decl:sym<background-attachment> { :i ("background-attachment") ":" <val(/<css-val-background-attachment> +% <op(",")> /, &?ROUTINE.WHY)>}
 rule css-val-background-attachment { :i <attachment> }
@@ -53,9 +47,6 @@ rule bg-image { :i <image> || none & <keyw>  }
 #| background-origin: <visual-box>#
 rule decl:sym<background-origin> { :i ("background-origin") ":" <val(/<css-val-background-origin> +% <op(",")> /, &?ROUTINE.WHY)>}
 rule css-val-background-origin { :i <visual-box> }
-#| background-position: <bg-position>#
-rule decl:sym<background-position> { :i ("background-position") ":" <val(/<css-val-background-position> +% <op(",")> /, &?ROUTINE.WHY)>}
-rule css-val-background-position { :i <bg-position> }
 #| background-repeat: <repeat-style>#
 rule decl:sym<background-repeat> { :i ("background-repeat") ":" <val(/<css-val-background-repeat> +% <op(",")> /, &?ROUTINE.WHY)>}
 rule css-val-background-repeat { :i <repeat-style> }
@@ -66,15 +57,6 @@ rule decl:sym<background-size> { :i ("background-size") ":" <val(/<css-val-backg
 rule css-val-background-size { :i <bg-size> }
 #| <bg-size> = [ <length-percentage [0,∞]> | auto ]{1,2} | cover | contain
 rule bg-size { :i [<length-percentage> || auto & <keyw> ] ** 1..2 || [cover | contain ]& <keyw>   }
-#| border: <line-width> || <line-style> || <color>
-rule decl:sym<border> { :i (border) ":" <val(/<css-val-border> /, &?ROUTINE.WHY)>}
-rule css-val-border { :i [<line-width> :my $*A;<!{
-    $*A++
-}>|| <line-style> :my $*B;<!{
-    $*B++
-}>|| <color> :my $*C;<!{
-    $*C++
-}>]+ }
 #| <line-width> = <length [0,∞]> | thin | medium | thick
 rule line-width { :i <length> || [thin | medium | thick ]& <keyw>   }
 #| <line-style> = none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset

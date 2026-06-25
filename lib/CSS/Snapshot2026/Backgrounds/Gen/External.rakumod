@@ -2,6 +2,9 @@ unit role CSS::Snapshot2026::Backgrounds::Gen::External;
 method color (|) {
     ...
 }
+method css-val-background-position (|) {
+    ...
+}
 method image (|) {
     ...
 }

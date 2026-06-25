@@ -1,21 +1,23 @@
 unit grammar CSS::Snapshot2026::Box::Gen::Grammar;
 #| <visual-box> = content-box | padding-box | border-box
 rule visual-box { :i ["content-box" | "padding-box" | "border-box" ]& <keyw>  }
-#| margin: <'margin-top'>{1,4}
+#| <margin-width> = <length-percentage> | auto
+rule margin-width { :i <length-percentage> || auto & <keyw>  }
+#| margin: <margin-width>{1,4}
 rule decl:sym<margin> { :i (margin) ":" <val(/<css-val-margin>** 1..4 /, &?ROUTINE.WHY)>}
-rule css-val-margin { :i <css-val-margin-top> }
-#| margin-bottom: <length-percentage> | auto
+rule css-val-margin { :i <margin-width> }
+#| margin-bottom: <margin-width>
 rule decl:sym<margin-bottom> { :i ("margin-bottom") ":" <val(/<css-val-margin-bottom> /, &?ROUTINE.WHY)>}
-rule css-val-margin-bottom { :i <length-percentage> || auto & <keyw>  }
-#| margin-left: <length-percentage> | auto
+rule css-val-margin-bottom { :i <margin-width> }
+#| margin-left: <margin-width>
 rule decl:sym<margin-left> { :i ("margin-left") ":" <val(/<css-val-margin-left> /, &?ROUTINE.WHY)>}
-rule css-val-margin-left { :i <length-percentage> || auto & <keyw>  }
-#| margin-right: <length-percentage> | auto
+rule css-val-margin-left { :i <margin-width> }
+#| margin-right: <margin-width>
 rule decl:sym<margin-right> { :i ("margin-right") ":" <val(/<css-val-margin-right> /, &?ROUTINE.WHY)>}
-rule css-val-margin-right { :i <length-percentage> || auto & <keyw>  }
-#| margin-top: <length-percentage> | auto
+rule css-val-margin-right { :i <margin-width> }
+#| margin-top: <margin-width>
 rule decl:sym<margin-top> { :i ("margin-top") ":" <val(/<css-val-margin-top> /, &?ROUTINE.WHY)>}
-rule css-val-margin-top { :i <length-percentage> || auto & <keyw>  }
+rule css-val-margin-top { :i <margin-width> }
 #| margin-trim: none | [ block || inline ] | [ block-start || inline-start || block-end || inline-end ]
 rule decl:sym<margin-trim> { :i ("margin-trim") ":" <val(/<css-val-margin-trim> /, &?ROUTINE.WHY)>}
 rule css-val-margin-trim { :i none & <keyw> || [[block & <keyw> :my $*A;<!{

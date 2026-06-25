@@ -3,6 +3,8 @@
 { "prop" : "background-repeat", "decl" : "Repeat-x", "expr" : [ { "keyw" : "repeat-x" } ] }
 { "prop" : "background-attachment", "decl" : "FiXed", "expr" : [ { "keyw" : "fixed" } ] }
 { "prop" : "background-position", "decl" : "100% 90%", "expr" : [ { "percent" : 100 }, { "percent" : 90 } ] }
+{ "prop" : "background-position", "decl" : "left bottom", "expr" : [ { "keyw" : "left" }, { "keyw" : "bottom" } ] }
+{ "prop" : "background-position", "decl" : "left right", "warnings" : "extra terms following declaration 'background-position: left': 'right' - dropped" }
 { "prop" : "background", "decl" : "url(chess.png) gray 50% repeat scroll", "expr" : [ { "expr:background-image" : [ { "url" : "chess.png" } ] }, { "expr:background-color" : [ { "rgb" : [ { "num" : 128 }, { "num" : 128 }, { "num" : 128 } ] } ] }, { "expr:background-position" : [ { "percent" : 50 } ] }, { "expr:background-repeat" : [ { "keyw" : "repeat" } ] }, { "expr:background-attachment" : [ { "keyw" : "scroll" } ] } ] }
 { "prop" : "border-top-width", "decl" : "thick", "expr" : [ { "keyw" : "thick" } ] }
 { "prop" : "border-width", "decl" : "2ex 1.5em 3ex 5%", "expr" : [ { "ex" : 2 }, { "em" : 1.5 }, { "ex" : 3 }, { "percent" : 5 } ] }

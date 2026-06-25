@@ -1,13 +1,17 @@
-# CSS Backgrounds and Borders Module Level 3
-# Editor’s Draft, 16 December 2025
-# https://drafts.csswg.org/css-backgrounds/
+/* CSS Backgrounds and Borders Module Level 3 */
+/* Editor’s Draft, 16 December 2025 */
+/* https://drafts.csswg.org/css-backgrounds/ */
+/* Notes:
+/*  1. inheriting the CSS21 rule for background-position, border
 background	<bg-layer>#? , <final-bg-layer>	see individual properties	all elements	no	see individual properties	see individual properties	per grammar	see individual properties	
-#-<bg-layer> = <bg-image> || <bg-position> [ / <bg-size> ]? || <repeat-style> || <attachment> || <visual-box> || <visual-box>
-#-<final-bg-layer> =  <bg-image> || <bg-position> [ / <bg-size> ]? || <repeat-style> || <attachment> || <visual-box> || <visual-box> || <'background-color'>
-#+Refactored to refer to properties directly
+
+/* Background layers refactored to refer directly to properties. */
+/* This is required for CSS::Properties to discover nested properties */
+/* <bg-layer> = <bg-image> || <bg-position> [ / <bg-size> ]? || <repeat-style> || <attachment> || <visual-box> || <visual-box> */
 <bg-layer> = <'background-image'> || <'background-position'> [ / <'background-size'> ]? || <'background-repeat'> || <'background-attachment'> || <'background-clip'>
+/* <final-bg-layer> =  <bg-image> || <bg-position> [ / <bg-size> ]? || <repeat-style> || <attachment> || <visual-box> || <visual-box> || <'background-color'> */
 <final-bg-layer> = <'background-image'> || <'background-position'> [ / <'background-size'>{1,2} ]? || <'background-repeat'> || <'background-attachment'> || <'background-clip'> || <'background-color'>
-#- This sees both unwieldly and wrong. E.g. does parse '100% 100%' 
+# w3c standard <bg-position> rule
 #-<bg-position> = [\
 #-  [ left | center | right | top | bottom | <length-percentage> ]\
 #-|\
@@ -17,7 +21,6 @@ background	<bg-layer>#? , <final-bg-layer>	see individual properties	all element
 #-  [ center | [ left | right ] <length-percentage>? ] &&\
 #-  [ center | [ top | bottom ] <length-percentage>? ]\
 #-]
-<bg-position> = [left | center | right | <length-percentage> ] || [ top | center | bottom | <length-percentage> ]
 background-attachment	<attachment>#	scroll	all elements	no	N/A	discrete	per grammar	list, each item the keyword as specified
 <attachment> = scroll | fixed | local
 background-clip	<visual-box>#	border-box	all elements	no	N/A	repeatable list	per grammar	list, each item a keyword as specified	
@@ -25,13 +28,13 @@ background-color	<color>	transparent	all elements	no	N/A	by computed value	per g
 background-image	<bg-image>#	none	all elements	no	N/A	discrete	per grammar	list, each item either an <image> or the keyword none	
 <bg-image> = <image> | none
 background-origin	<visual-box>#	padding-box	all elements	no	N/A	repeatable list	per grammar	list, each item a keyword as specified	
-background-position	<bg-position>#	0% 0%	all elements	no	refer to size of background positioning area minus size of background image; see text	repeatable list	per grammar	list, each item a pair of offsets (horizontal and vertical) from the top left origin each given as a computed <length-percentage> value	
+/* background-position	<bg-position>#	0% 0%	all elements	no	refer to size of background positioning area minus size of background image; see text	repeatable list	per grammar	list, each item a pair of offsets (horizontal and vertical) from the top left origin each given as a computed <length-percentage> value	
 background-repeat	<repeat-style>#	repeat	all elements	no	N/A	discrete	per grammar	list, each item a pair of keywords, one per dimension	
 <repeat-style> = repeat-x | repeat-y | [repeat | space | round | no-repeat]{1,2}
 
 background-size	<bg-size>#	auto	all elements	no	see text	repeatable list	per grammar	list, each item a pair of sizes (one per axis) each represented as either a keyword or a computed <length-percentage> value	
 <bg-size> = [ <length-percentage [0,∞]> | auto ]{1,2} | cover | contain
-border	<line-width> || <line-style> || <color>	See individual properties	all elements except ruby base containers and ruby annotation containers	no	N/A	see individual properties	per grammar	see individual properties
+#- border	<line-width> || <line-style> || <color>	See individual properties	all elements except ruby base containers and ruby annotation containers	no	N/A	see individual properties	per grammar	see individual properties
 <line-width> = <length [0,∞]> | thin | medium | thick
 <line-style> = none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset
 border-bottom	<line-width> || <line-style> || <color>	See individual properties	all elements except ruby base containers and ruby annotation containers	no	N/A	see individual properties	per grammar	see individual properties	

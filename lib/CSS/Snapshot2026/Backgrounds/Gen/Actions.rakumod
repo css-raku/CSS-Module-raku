@@ -5,9 +5,6 @@ method bg-layer ($/) {
 method final-bg-layer ($/) {
     make $.build.rule($/)
 }
-method bg-position ($/) {
-    make $.build.rule($/)
-}
 method attachment ($/) {
     make $.build.rule($/)
 }
