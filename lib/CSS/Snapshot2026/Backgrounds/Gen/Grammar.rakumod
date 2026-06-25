@@ -61,13 +61,13 @@ rule bg-size { :i [<length-percentage> || auto & <keyw> ] ** 1..2 || [cover | co
 rule line-width { :i <length> || [thin | medium | thick ]& <keyw>   }
 #| <line-style> = none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset
 rule line-style { :i [none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset ]& <keyw>  }
-#| border-bottom: <line-width> || <line-style> || <color>
+#| border-bottom: <'border-bottom-width'> || <'border-bottom-style'> || <'border-bottom-color'>
 rule decl:sym<border-bottom> { :i ("border-bottom") ":" <val(/<css-val-border-bottom> /, &?ROUTINE.WHY)>}
-rule css-val-border-bottom { :i [<line-width> :my $*A;<!{
+rule css-val-border-bottom { :i [<css-val-border-bottom-width> :my $*A;<!{
     $*A++
-}>|| <line-style> :my $*B;<!{
+}>|| <css-val-border-bottom-style> :my $*B;<!{
     $*B++
-}>|| <color> :my $*C;<!{
+}>|| <css-val-border-bottom-color> :my $*C;<!{
     $*C++
 }>]+ }
 #| border-bottom-color: <color>
