@@ -1,25 +1,25 @@
 unit grammar CSS::Module::CSS4;
 
-use CSS::Snapshot2026::Backgrounds;
-also is CSS::Snapshot2026::Backgrounds;
+use CSS::Snapshot2026::Backgrounds::Gen::Grammar;
+also is CSS::Snapshot2026::Backgrounds::Gen::Grammar;
 
-use CSS::Snapshot2026::Box;
-also is CSS::Snapshot2026::Box;
+use CSS::Snapshot2026::Box::Gen::Grammar;
+also is CSS::Snapshot2026::Box::Gen::Grammar;
 
 use CSS::Snapshot2026::Color;
 also is CSS::Snapshot2026::Color;
 
-use CSS::Snapshot2026::Images;
-also is CSS::Snapshot2026::Images;
+use CSS::Snapshot2026::Images::Gen::Grammar;
+also is CSS::Snapshot2026::Images::Gen::Grammar;
 
-use CSS::Snapshot2026::Masking;
-also is CSS::Snapshot2026::Masking;
+use CSS::Snapshot2026::Masking::Gen::Grammar;
+also is CSS::Snapshot2026::Masking::Gen::Grammar;
 
-use CSS::Snapshot2026::Shapes;
-also is CSS::Snapshot2026::Shapes;
+use CSS::Snapshot2026::Shapes::Gen::Grammar;
+also is CSS::Snapshot2026::Shapes::Gen::Grammar;
 
-use CSS::Snapshot2026::Values;
-also is CSS::Snapshot2026::Values;
+use CSS::Snapshot2026::Values::Gen::Grammar;
+also is CSS::Snapshot2026::Values::Gen::Grammar;
 
 use CSS::Module::SVG;
 also is CSS::Module::SVG;
