@@ -8,37 +8,38 @@ sub path(RakuAST::Package $p) {
     $p.name.parts>>.name.join: '/';
 }
 
-class Build {
+class Make {
 
-    method build($where) {
+    method make($where) {
 
         indir $where, {
             my %props;
-            my Pair @metadata;
+            my @modules;
 
-            for (:CSS1[<src css1-properties.tsv> => <Module CSS1>],
-                 :CSS21[<src css21-properties.tsv> => <Module CSS21>],
-                 :CSS3[<src css3x-font-properties.tsv> => <Module CSS3 Fonts>,
-                       <src css3x-paged-media.tsv> => <Module CSS3 PagedMedia>,
-                       <src css-values-3-20240322.tsv> => <Module CSS3 Values_and_Units>,
+            for ('Module::CSS1'  => [<src css1-properties.tsv>,],
+                 'Module::CSS21' => [<src css21-properties.tsv>,],
+                 'Module::CSS3'  => [
+                                     :Fonts<src css3x-font-properties.tsv>,
+                                     :PagedMedia<src css3x-paged-media.tsv>,
+                                     :Values_and_Units<src css-values-3-20240322.tsv>,
                       ],
-                 :SVG[<src svg-properties.tsv> => <Module SVG>],
-                 :CSS4[
-                          <src css-snapshot-2026 css-backgrounds-3.tsv> => <Snapshot2026 Backgrounds>,
-                          <src css-snapshot-2026 css-box-4.tsv>         => <Snapshot2026 Box>,
-                          <src css-snapshot-2026 css-color-4.tsv>       => <Snapshot2026 Color>,
-                          <src css-snapshot-2026 css-images-3.tsv>      => <Snapshot2026 Images>,
-                          <src css-snapshot-2026 css-masking-1.tsv>     => <Snapshot2026 Masking>,
-                          <src css-snapshot-2026 css-shapes-1.tsv>      => <Snapshot2026 Shapes>,
-                          <src css-snapshot-2026 css-values-5.tsv>      => <Snapshot2026 Values>,
+                 'Module::SVG' => [<src svg-properties.tsv>,],
+                 :Snapshot2026[
+                          :Backgrounds<src css-snapshot-2026 css-backgrounds-3.tsv>,
+                          :Box<src css-snapshot-2026 css-box-4.tsv>,
+                          :Color<src css-snapshot-2026 css-color-4.tsv>,
+                          :Images<src css-snapshot-2026 css-images-3.tsv>,
+                          :Masking<src css-snapshot-2026 css-masking-1.tsv>,
+                          :Shapes<src css-snapshot-2026 css-shapes-1.tsv>,
+                          :Values<src css-snapshot-2026 css-values-5.tsv>,
                       ],
-                 'CSS3::Fonts::AtFontFace' => [<src css3x-font-@fontface-properties.tsv> => <Module CSS3 Fonts AtFontFace>],
+                 'Module::CSS3::Fonts::AtFontFace' => [<src css3x-font-@fontface-properties.tsv>,],
                 ) {
                 my $meta-root = .key;
                 %props = () if $meta-root eq 'CSS3::Fonts::AtFontFace';
                 for .value.list {
-                    my ($input-spec, $class-isa) = .kv;
-                    my @base-id = flat <CSS>, @$class-isa, <Gen>;
+                    my ($module, $input-spec) = .isa(Pair) ?? .kv !! ([], $_);
+                    my @base-id = flat <CSS>, $meta-root.split('::'), @$module, <Gen>;
                     my @grammar-id = @base-id.Slip, 'Grammar';
                     my $scope := 'unit';
                     my CSS::Specification::Compiler $compiler .= new;
@@ -68,9 +69,9 @@ class Build {
 }
 
 sub write-metadata(%props, $meta) {
-    my $class-dir = $*SPEC.catdir(<lib CSS Module>, $meta.split('::').Slip);
+    my $class-dir = $*SPEC.catdir(<lib CSS>, $meta.split('::').Slip);
     my $class-path = $*SPEC.catfile( $class-dir, 'Metadata.rakumod' );
-    my $class-name = "CSS::Module::{$meta}::Metadata";
+    my $class-name = "CSS::{$meta}::Metadata";
     say "Building $class-name";
     {
         my $*OUT = open $class-path, :w;
@@ -97,6 +98,6 @@ sub write-metadata(%props, $meta) {
 }
 
 sub MAIN(Str $working-directory = '.' ) {
-    Build.new.build($working-directory);
+    Make.new.make($working-directory);
 }
 
