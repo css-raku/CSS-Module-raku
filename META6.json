@@ -61,6 +61,8 @@
     "CSS::Module::CSS4": "lib/CSS/Module/CSS4.rakumod",
     "CSS::Module::CSS4::Actions": "lib/CSS/Module/CSS4/Actions.rakumod",
     "CSS::Module::CSS4::Metadata": "lib/CSS/Module/CSS4/Metadata.rakumod",
+    "CSS::Snapshot2026::Gen::Actions": "lib/CSS/Snapshot2026/Gen/Actions.rakumod",
+    "CSS::Snapshot2026::Gen::Grammar": "lib/CSS/Snapshot2026/Gen/Grammar.rakumod",
 
       "CSS::Snapshot2026::Backgrounds::Gen::Actions": "lib/CSS/Snapshot2026/Backgrounds/Gen/Actions.rakumod",
       "CSS::Snapshot2026::Backgrounds::Gen::Grammar": "lib/CSS/Snapshot2026/Backgrounds/Gen/Grammar.rakumod",
@@ -70,8 +72,6 @@
       "CSS::Snapshot2026::Box::Gen::Grammar": "lib/CSS/Snapshot2026/Box/Gen/Grammar.rakumod",
       "CSS::Snapshot2026::Box::Gen::External": "lib/CSS/Snapshot2026/Box/Gen/External.rakumod",
 
-    "CSS::Snapshot2026::Color": "lib/CSS/Snapshot2026/Color.rakumod",
-    "CSS::Snapshot2026::Color::Actions": "lib/CSS/Snapshot2026/Color/Actions.rakumod",
       "CSS::Snapshot2026::Color::Gen::Actions": "lib/CSS/Snapshot2026/Color/Gen/Actions.rakumod",
       "CSS::Snapshot2026::Color::Gen::Grammar": "lib/CSS/Snapshot2026/Color/Gen/Grammar.rakumod",
       "CSS::Snapshot2026::Color::Gen::External": "lib/CSS/Snapshot2026/Color/Gen/External.rakumod",

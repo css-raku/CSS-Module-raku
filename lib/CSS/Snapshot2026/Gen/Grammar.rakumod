@@ -1,0 +1,31 @@
+unit grammar CSS::Snapshot2026::Gen::Grammar;
+
+use CSS::Snapshot2026::Backgrounds::Gen::Grammar;
+also is CSS::Snapshot2026::Backgrounds::Gen::Grammar;
+use CSS::Snapshot2026::Box::Gen::Grammar;
+also is CSS::Snapshot2026::Box::Gen::Grammar;
+use CSS::Snapshot2026::Color::Gen::Grammar;
+also is CSS::Snapshot2026::Color::Gen::Grammar;
+use CSS::Snapshot2026::Images::Gen::Grammar;
+also is CSS::Snapshot2026::Images::Gen::Grammar;
+use CSS::Snapshot2026::Masking::Gen::Grammar;
+also is CSS::Snapshot2026::Masking::Gen::Grammar;
+use CSS::Snapshot2026::Shapes::Gen::Grammar;
+also is CSS::Snapshot2026::Shapes::Gen::Grammar;
+use CSS::Snapshot2026::Values::Gen::Grammar;
+also is CSS::Snapshot2026::Values::Gen::Grammar;
+
+use CSS::Snapshot2026::Backgrounds::Gen::External;
+also does CSS::Snapshot2026::Backgrounds::Gen::External;
+use CSS::Snapshot2026::Box::Gen::External;
+also does CSS::Snapshot2026::Box::Gen::External;
+use CSS::Snapshot2026::Color::Gen::External;
+also does CSS::Snapshot2026::Color::Gen::External;
+use CSS::Snapshot2026::Images::Gen::External;
+also does CSS::Snapshot2026::Images::Gen::External;
+use CSS::Snapshot2026::Masking::Gen::External;
+also does CSS::Snapshot2026::Masking::Gen::External;
+use CSS::Snapshot2026::Shapes::Gen::External;
+also does CSS::Snapshot2026::Shapes::Gen::External;
+use CSS::Snapshot2026::Values::Gen::External;
+also does CSS::Snapshot2026::Values::Gen::External;

@@ -1,49 +1,47 @@
 unit grammar CSS::Module::CSS4;
 
-use CSS::Snapshot2026::Backgrounds::Gen::Grammar;
-also is CSS::Snapshot2026::Backgrounds::Gen::Grammar;
-
 use CSS::Snapshot2026::Box::Gen::Grammar;
-also is CSS::Snapshot2026::Box::Gen::Grammar;
-
-use CSS::Snapshot2026::Color;
-also is CSS::Snapshot2026::Color;
-
-use CSS::Snapshot2026::Images::Gen::Grammar;
-also is CSS::Snapshot2026::Images::Gen::Grammar;
-
-use CSS::Snapshot2026::Masking::Gen::Grammar;
-also is CSS::Snapshot2026::Masking::Gen::Grammar;
-
-use CSS::Snapshot2026::Shapes::Gen::Grammar;
-also is CSS::Snapshot2026::Shapes::Gen::Grammar;
-
-use CSS::Snapshot2026::Values::Gen::Grammar;
-also is CSS::Snapshot2026::Values::Gen::Grammar;
+also is  CSS::Snapshot2026::Box::Gen::Grammar;
 
 use CSS::Module::SVG;
 also is CSS::Module::SVG;
 
-use CSS::Snapshot2026::Backgrounds::Gen::External;
-also does CSS::Snapshot2026::Backgrounds::Gen::External;
+token optional-comma {','?} # comma is becoming optional in many CSS4 functions, including, rgb(), rgba(), rect()
+token alpha-channel-delim {<[,/]>}
 
-use CSS::Snapshot2026::Box::Gen::External;
-also does CSS::Snapshot2026::Box::Gen::External;
+#| usage: rgb(c c c) where c is 0..255 or 0%-100%
+rule color:sym<rgb> {:i'rgb('
+                          [ <c=.color-range> <.optional-comma>
+                            <c=.color-range> <.optional-comma>
+                            <c=.color-range>
+                            [<.alpha-channel-delim> <c=.percentage-range>]? || <usage(&?ROUTINE.WHY)> ]
+               ')'
+}
 
-use CSS::Snapshot2026::Color::Gen::External;
-also does CSS::Snapshot2026::Color::Gen::External;
+#| usage: rgba(c,c,c[,a]?) where c is 0..255 or 0%-100% and a is 0-1 or 0%-100%
+rule color:sym<rgba> {:i'rgba('
+                          [ <c=.color-range> <.optional-comma>
+                            <c=.color-range> <.optional-comma>
+                            <c=.color-range>
+                            [<.alpha-channel-delim> <c=.percentage-range>]? || <usage(&?ROUTINE.WHY)> ]
+               ')'
+}
+#| usage: hsl(h,s,l) where h is 0..360  and s,l are 0-1 or 0%-100%
+rule color:sym<hsl> {:i'hsl('
+                         [ <c=.color-angle> <.optional-comma>
+                           <c=.percentage-range> <.optional-comma>
+                           <c=.percentage-range> || <usage(&?ROUTINE.WHY)> ]
+                ')'
+}
 
-use CSS::Snapshot2026::Masking::Gen::External;
-also does CSS::Snapshot2026::Masking::Gen::External;
-
-use CSS::Snapshot2026::Images::Gen::External;
-also does CSS::Snapshot2026::Images::Gen::External;
-
-use CSS::Snapshot2026::Shapes::Gen::External;
-also does CSS::Snapshot2026::Shapes::Gen::External;
-
-use CSS::Snapshot2026::Values::Gen::External;
-also does CSS::Snapshot2026::Values::Gen::External;
+#| usage: hsla(h,s,l,a) where h is 0..360  and s,l,a are 0-1 or 0%-100%
+rule color:sym<hsla> {:i'hsla('
+                          [ <c=.color-angle> <.optional-comma>
+                            <c=.percentage-range> <.optional-comma>
+                            <c=.percentage-range> <.optional-comma>
+                            <c=.percentage-range> || <usage(&?ROUTINE.WHY)> ]
+               ')'
+}
 
 method module(|c) {
     use CSS::Module::CSS4::Actions;
