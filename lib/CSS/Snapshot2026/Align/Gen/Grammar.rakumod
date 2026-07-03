@@ -2,9 +2,23 @@ unit grammar CSS::Snapshot2026::Align::Gen::Grammar;
 #| align-content: normal | <baseline-position> | <content-distribution> | <overflow-position>? <content-position>
 rule decl:sym<align-content> { :i ("align-content") ":" <val(/<css-val-align-content> /, &?ROUTINE.WHY)>}
 rule css-val-align-content { :i normal & <keyw> || <baseline-position> || <content-distribution> || <overflow-position> ? <content-position>   }
+#| <baseline-position> = [ first | last ]? && baseline
+rule baseline-position { :i [[[first | last ]& <keyw> ] ? :my $*A;<!{
+    $*A++
+}>|| baseline & <keyw> :my $*B;<!{
+    $*B++
+}>]** 2 }
+#| <content-distribution> = space-between | space-around | space-evenly | stretch
+rule content-distribution { :i ["space-between" | "space-around" | "space-evenly" | stretch ]& <keyw>  }
+#| <content-position> = center | start | end | flex-start | flex-end
+rule content-position { :i [center | start | end | "flex-start" | "flex-end" ]& <keyw>  }
+#| <overflow-position> = unsafe | safe
+rule overflow-position { :i [unsafe | safe ]& <keyw>  }
 #| align-items: normal | stretch | <baseline-position> | <overflow-position>? <self-position>
 rule decl:sym<align-items> { :i ("align-items") ":" <val(/<css-val-align-items> /, &?ROUTINE.WHY)>}
 rule css-val-align-items { :i [normal | stretch ]& <keyw>  || <baseline-position> || <overflow-position> ? <self-position>   }
+#| <self-position> = center | start | end | self-start | self-end | flex-start | flex-end
+rule self-position { :i [center | start | end | "self-start" | "self-end" | "flex-start" | "flex-end" ]& <keyw>  }
 #| align-self: auto | <overflow-position>? [ normal | <self-position> ]| stretch | <baseline-position>
 rule decl:sym<align-self> { :i ("align-self") ":" <val(/<css-val-align-self> /, &?ROUTINE.WHY)>}
 rule css-val-align-self { :i auto & <keyw> || <overflow-position> ? [normal & <keyw> || <self-position> ]  || stretch & <keyw> || <baseline-position>  }

@@ -1,16 +1,1 @@
 unit role CSS::Snapshot2026::Align::Gen::External;
-method baseline-position (|) {
-    ...
-}
-method content-distribution (|) {
-    ...
-}
-method content-position (|) {
-    ...
-}
-method overflow-position (|) {
-    ...
-}
-method self-position (|) {
-    ...
-}

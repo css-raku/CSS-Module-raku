@@ -1,0 +1,22 @@
+unit role CSS::Snapshot2026::Gen::External;
+
+use CSS::Snapshot2026::Align::Gen::External;
+also does CSS::Snapshot2026::Align::Gen::External;
+use CSS::Snapshot2026::Backgrounds::Gen::External;
+also does CSS::Snapshot2026::Backgrounds::Gen::External;
+use CSS::Snapshot2026::Box::Gen::External;
+also does CSS::Snapshot2026::Box::Gen::External;
+use CSS::Snapshot2026::Color::Gen::External;
+also does CSS::Snapshot2026::Color::Gen::External;
+use CSS::Snapshot2026::Images::Gen::External;
+also does CSS::Snapshot2026::Images::Gen::External;
+use CSS::Snapshot2026::Inline::Gen::External;
+also does CSS::Snapshot2026::Inline::Gen::External;
+use CSS::Snapshot2026::Masking::Gen::External;
+also does CSS::Snapshot2026::Masking::Gen::External;
+use CSS::Snapshot2026::Shapes::Gen::External;
+also does CSS::Snapshot2026::Shapes::Gen::External;
+use CSS::Snapshot2026::Text::Gen::External;
+also does CSS::Snapshot2026::Text::Gen::External;
+use CSS::Snapshot2026::Values::Gen::External;
+also does CSS::Snapshot2026::Values::Gen::External;

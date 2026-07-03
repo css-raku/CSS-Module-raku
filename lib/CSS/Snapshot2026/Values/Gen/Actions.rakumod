@@ -11,3 +11,6 @@ method position-two ($/) {
 method position-four ($/) {
     make $.build.rule($/)
 }
+method length-percentage ($/) {
+    make $.build.rule($/)
+}

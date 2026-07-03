@@ -3,8 +3,14 @@ unit grammar CSS::Module::CSS4;
 use CSS::Grammar::CSS4;
 also is CSS::Grammar::CSS4;
 
-use CSS::Snapshot2026::Box::Gen::Grammar;
-also is  CSS::Snapshot2026::Box::Gen::Grammar;
+use CSS::Specification::Base::Grammar;
+also does CSS::Specification::Base::Grammar;
+
+use CSS::Snapshot2026::Gen::Grammar;
+also is  CSS::Snapshot2026::Gen::Grammar;
+
+use CSS::Snapshot2026::Gen::External;
+also does  CSS::Snapshot2026::Gen::External;
 
 token optional-comma {','?} # comma is becoming optional in many CSS4 functions, including, rgb(), rgba(), rect()
 token alpha-channel-delim {<[,/]>}

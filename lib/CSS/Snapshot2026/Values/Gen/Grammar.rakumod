@@ -14,12 +14,14 @@ rule position-two { :i [[[[left | center | right | "x-start" | "x-end" ]& <keyw>
     $*D++
 }>]** 2 || [[start | center | end ]& <keyw> ] ** 2 ] }
 #| <position-four> = [  [ [ left | right | x-start | x-end ] <length-percentage> ] &&  [ [ top | bottom | y-start | y-end ] <length-percentage> ]|  [ [ block-start | block-end ] <length-percentage> ] &&  [ [ inline-start | inline-end ] <length-percentage> ]|  [ [ start | end ] <length-percentage> ]{2}]
-rule position-four { :i [[[[[left | right | "x-start" | "x-end" ]& <keyw> ] <length-percentage> ] :my $*A; <!{
+rule position-four { :i [[[[[left | right | "x-start" | "x-end" ]& <keyw> ] <length-percentage> ] :my $*A;<!{
     $*A++
-}>|| [[[top | bottom | "y-start" | "y-end" ]& <keyw> ] <length-percentage> ] :my $*B; <!{
+}>|| [[[top | bottom | "y-start" | "y-end" ]& <keyw> ] <length-percentage> ] :my $*B;<!{
     $*B++
-}>]** 2 || [[[["block-start" | "block-end" ]& <keyw> ] <length-percentage> ] :my $*C; <!{
+}>]** 2 || [[[["block-start" | "block-end" ]& <keyw> ] <length-percentage> ] :my $*C;<!{
     $*C++
-}>|| [[["inline-start" | "inline-end" ]& <keyw> ] <length-percentage> ] :my $*D; <!{
+}>|| [[["inline-start" | "inline-end" ]& <keyw> ] <length-percentage> ] :my $*D;<!{
     $*D++
 }>]** 2 || [[[start | end ]& <keyw> ] <length-percentage> ] ** 2 ] }
+#| <length-percentage> = <length> | <percentage>
+rule length-percentage { :i <length> || <percentage>  }

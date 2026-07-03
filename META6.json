@@ -63,6 +63,7 @@
     "CSS::Module::CSS4::Metadata": "lib/CSS/Module/CSS4/Metadata.rakumod",
     "CSS::Snapshot2026::Gen::Actions": "lib/CSS/Snapshot2026/Gen/Actions.rakumod",
     "CSS::Snapshot2026::Gen::Grammar": "lib/CSS/Snapshot2026/Gen/Grammar.rakumod",
+    "CSS::Snapshot2026::Gen::External": "lib/CSS/Snapshot2026/Gen/External.rakumod",
 
       "CSS::Snapshot2026::Align::Gen::Actions": "lib/CSS/Snapshot2026/Align/Gen/Actions.rakumod",
       "CSS::Snapshot2026::Align::Gen::Grammar": "lib/CSS/Snapshot2026/Align/Gen/Grammar.rakumod",

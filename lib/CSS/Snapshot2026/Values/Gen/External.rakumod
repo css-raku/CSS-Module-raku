@@ -1,4 +1,7 @@
 unit role CSS::Snapshot2026::Values::Gen::External;
-method length-percentage (|) {
+method length (|) {
+    ...
+}
+method percentage (|) {
     ...
 }

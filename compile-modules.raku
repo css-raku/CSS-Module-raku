@@ -72,12 +72,14 @@ class Make {
                 if $meta-root eq 'Snapshot2026' {
                     my @actions-link-id = flat @group-id, 'Gen', 'Actions';
                     my @grammar-link-id = flat @group-id, 'Gen', 'Grammar';
+                    my @external-link-id = flat @group-id, 'Gen', 'External';
                     # my @use-ids = @module-ids.map: { .Slip, 'Actions' }
                     # RakuAST version nyi (Raku v2026.05)
                     # my RakuAST::Package $actions-package = CSS::Specification::Compiler.link-actions(@link-id, @use-ids);
                     # "lib/{$actions-package.&path}.rakumod".IO.spurt: $actions-package.DEPARSE;
                     ("lib/" ~ @actions-link-id.join('/') ~ ".rakumod").IO.spurt: link-actions(@actions-link-id, @module-ids);
-                    ("lib/" ~ @grammar-link-id.join('/') ~ ".rakumod").IO.spurt: link-grammars(@grammar-link-id, @module-ids);
+                    ("lib/" ~ @grammar-link-id.join('/') ~ ".rakumod").IO.spurt: link-grammar(@grammar-link-id, @module-ids);
+                    ("lib/" ~ @external-link-id.join('/') ~ ".rakumod").IO.spurt: link-external(@external-link-id, @module-ids);
                 }
             }
         }
@@ -96,7 +98,7 @@ sub link-actions(@group-id, @modules) {
     @lines.push('').join: "\n";
 }
 
-sub link-grammars(@group-id, @modules) {
+sub link-grammar(@group-id, @modules) {
     my @lines = 'unit grammar ' ~  @group-id.join('::') ~ ';';
     @lines.push: '';
     for @modules {
@@ -104,13 +106,18 @@ sub link-grammars(@group-id, @modules) {
         @lines.push: "use {$name};";
         @lines.push: "also is {$name};";
     }
+    @lines.join("\n") ~ "\n";
+}
+
+sub link-external(@group-id, @modules) {
+    my @lines = 'unit role ' ~  @group-id.join('::') ~ ';';
     @lines.push: '';
     for @modules {
         my $name = (.Slip, 'External').join('::');
         @lines.push: "use {$name};";
         @lines.push: "also does {$name};";
     }
-    @lines.push('').join: "\n";
+    @lines.join("\n") ~ "\n";
 }
 
 sub write-metadata(%props, $meta) {

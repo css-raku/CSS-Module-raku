@@ -1,5 +1,10 @@
 align-content	normal | <baseline-position> | <content-distribution> | <overflow-position>? <content-position>	normal	block containers, multicol containers, flex containers, and grid containers	no	n/a	discrete	per grammar	specified keyword(s)
+<baseline-position> = [ first | last ]? && baseline
+<content-distribution> = space-between | space-around | space-evenly | stretch
+<content-position> = center | start | end | flex-start | flex-end
+<overflow-position> = unsafe | safe
 align-items	normal | stretch | <baseline-position> | <overflow-position>? <self-position>	normal	all elements	no	n/a	discrete	per grammar	specified keyword(s)
+<self-position> = center | start | end | self-start | self-end | flex-start | flex-end
 align-self	auto | <overflow-position>? [ normal | <self-position> ]| stretch | <baseline-position>	auto	flex items, grid items, and absolutely-positioned boxes	no	n/a	discrete	per grammar	specified keyword(s)
 justify-content	normal | <content-distribution> | <overflow-position>? [ <content-position> | left | right ]	normal	multicol containers, flex containers, and grid containers	no	n/a	discrete	per grammar	specified keyword(s)
 justify-items	normal | stretch | <baseline-position> | <overflow-position>? [ <self-position> | left | right ] | legacy | legacy && [ left | right | center ]	legacy	all elements	no	n/a	discrete	per grammar	specified keyword(s), except for legacy (see prose)
