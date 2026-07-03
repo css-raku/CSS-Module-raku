@@ -1,0 +1,14 @@
+alignment-baseline	baseline | text-bottom | alphabetic | ideographic | middle | central | mathematical | text-top	baseline	inline-level boxes, flex items, grid items, table cells, and SVG text content elements	no	N/A	discrete	per grammar	specified keyword
+baseline-shift	<length-percentage> | sub | super | top | center | bottom	0	inline-level boxes and SVG text content elements	no	refer to the used value of line-height	by computed value type	per grammar	the specified keyword or a computed <length-percentage> value
+baseline-source	auto | first | last	auto	inline-level boxes	no	N/A	discrete	per grammar	specified keyword
+dominant-baseline	auto | text-bottom | alphabetic | ideographic | middle | central | mathematical | hanging | text-top	auto	block containers, inline boxes, table rows, grid containers, flex containers, and SVG text content elements	yes	N/A	discrete	per grammar	specified keyword
+initial-letter	normal | <number [1,∞]> <integer [1,∞]> | <number [1,∞]> && [ drop | raise ]?	normal	certain inline-level boxes and ::first-letter and inside ::marker boxes (see prose)	no	N/A	by computed value type	per grammar	the keyword normal or a number paired with an integer
+initial-letter-align	[ border-box? [ alphabetic | ideographic | hanging | leading ]? ]!	alphabetic	certain inline-level boxes and ::first-letter and inside ::marker boxes (see prose)	yes	N/A	discrete	per grammar	specified keyword(s)
+initial-letter-wrap	none | first | all | grid | <length-percentage>	none	certain inline-level boxes and ::first-letter and inside ::marker boxes (see prose)	yes	relative to logical width of (last fragment of) initial letter	by computed value type	per grammar	specified keyword or computed <length-percentage> value
+inline-sizing	normal | stretch	normal	inline boxes, but not ruby container boxes nor internal ruby boxes	yes	n/a	discrete	per grammar	specified keyword
+line-fit-edge	leading | <text-edge>	leading	inline boxes	yes	N/A	discrete	per grammar	the specified keyword
+line-height	normal | <number [0,∞]> | <length-percentage [0,∞]>	normal	non-replaced inline boxes and SVG text content elements	yes	computed relative to 1em	by computed value type	per grammar	the specified keyword, a number, or a computed <length> value
+text-box	normal | <'text-box-trim'> || <'text-box-edge'>	normal	block containers and inline boxes	no	N/A	discrete	per grammar	the specified keyword
+text-box-edge	auto | <text-edge>	auto	block containers and inline boxes	yes	N/A	discrete	per grammar	the specified keyword
+text-box-trim	none | trim-start | trim-end | trim-both	none	block containers and inline boxes	no	N/A	discrete	per grammar	the specified keyword
+vertical-align	[ first | last] || <'alignment-baseline'> || <'baseline-shift'>	baseline	see individual properties	no	N/A	see individual properties	per grammar	see individual properties

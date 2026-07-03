@@ -4,10 +4,12 @@ use Test;
 use JSON::Fast;
 
 use CSS::Module::SVG;
+use CSS::Module::CSS4;
 use CSS::Grammar::Test;
 use CSS::Writer;
 
 my CSS::Module $svg = CSS::Module::SVG.module;
+my CSS::Module $css4 = CSS::Module::CSS4.module;
 
 my %seen;
 
@@ -23,17 +25,15 @@ for 't/svg-properties.json'.IO.lines {
     my $input = sprintf '{%s: %s}', $prop, %expected<decl>;
     my $writer = CSS::Writer.new;
 
-    for ({ :module($svg), :proforma<inherit initial>, :$writer}, )
-    -> % ( :$module!, :$proforma!, :$writer=Any) {
+    for ({ :module($svg), :proforma<inherit initial>, :$writer},
+         { :module($css4), :proforma<inherit initial>, :$writer}, )
+   -> % ( :$module!, :$proforma!, :$writer=Any) {
 
         my $level = $module.name;
-	my $grammar = $module.grammar;
-        my $actions = $module.actions.new;
 
-	CSS::Grammar::Test::parse-tests($grammar, $input,
+	CSS::Grammar::Test::parse-tests($input,
+					:$module,
 					:rule<declarations>,
-					:$actions,
-					:suite($level),
                                         :$writer,
 					:%expected );
 
@@ -41,8 +41,8 @@ for 't/svg-properties.json'.IO.lines {
 	    # usage and inheritence  tests
 	    my $junk = sprintf '{%s: %s}', $prop, 'junk +-42';
 
-	    $actions.reset;
-	    my $p = $grammar.parse( $junk, :rule<declarations>, :$actions);
+	    my $actions = $module.actions.new;
+	    my $p = $module.grammar.parse( $junk, :rule<declarations>, :$actions);
 	    ok($p.defined && ~$p eq $junk, "$level $prop: able to parse unexpected input")
 	        or note "unable to parse declaration list: $junk";
 
@@ -53,7 +53,7 @@ for 't/svg-properties.json'.IO.lines {
 		my $decl = sprintf '{%s: %s}', $prop, $misc;
 		my $ast = { :declarations[{ :property{ :ident($prop), :expr[ { :keyw($misc)} ] } }] };
 
-                CSS::Grammar::Test::parse-tests($grammar, $decl,
+                CSS::Grammar::Test::parse-tests($module.grammar, $decl,
 						:rule<declarations>,
 						:$actions,
 						:suite($level),

@@ -1,0 +1,15 @@
+hanging-punctuation	none | [ first || [ force-end | allow-end ] || last ]	none	text	yes	n/a	discrete	per grammar	specified keyword(s)
+hyphens	none | manual | auto	manual	text	yes	n/a	discrete	n/a	specified keyword
+letter-spacing	normal | <length>	normal	inline boxes and text	yes	n/a	by computed value type	n/a	an absolute length
+line-break	auto | loose | normal | strict | anywhere	auto	text	yes	n/a	discrete	n/a	specified keyword
+overflow-wrap	normal | break-word | anywhere	normal	text	yes	n/a	discrete	n/a	specified keyword
+tab-size	<number [0,∞]> | <length [0,∞]>	8	text	yes	n/a	by computed value type	n/a	the specified number or absolute length
+text-align	start | end | left | right | center | justify | match-parent | justify-all	start	block containers	yes	see individual properties	discrete	n/a	see individual properties
+text-align-all	start | end | left | right | center | justify | match-parent	start	block containers	yes	n/a	discrete	n/a	keyword as specified, except for match-parent which computes as defined above
+text-align-last	auto | start | end | left | right | center | justify | match-parent	auto	block containers	yes	n/a	discrete	n/a	keyword as specified, except for match-parent which computes as defined above
+text-indent	[ <length-percentage> ] && hanging? && each-line?	0	block containers	yes	refers to block container’s own inline-axis inner size	by computed value type	per grammar	computed <length-percentage> value, plus any specified keywords
+text-justify	auto | none | inter-word | inter-character	auto	text	yes	n/a	discrete	n/a	specified keyword (except for the distribute legacy value)
+text-transform	none | [capitalize | uppercase | lowercase ] || full-width || full-size-kana	none	text	yes	n/a	discrete	n/a	specified keyword
+white-space	normal | pre | nowrap | pre-wrap | break-spaces | pre-line	normal	text	yes	n/a	discrete	n/a	specified keyword
+word-break	normal | keep-all | break-all | break-word	normal	text	yes	n/a	discrete	n/a	specified keyword
+word-spacing	normal | <length>	normal	text	yes	N/A	by computed value type	n/a	an absolute length

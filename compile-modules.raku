@@ -24,12 +24,15 @@ class Make {
                       ],
                  'Module::SVG' => [<src svg-properties.tsv>,],
                  :Snapshot2026[
+                          :Align<src css-snapshot-2026 css-align-3.tsv>,
                           :Backgrounds<src css-snapshot-2026 css-backgrounds-3.tsv>,
                           :Box<src css-snapshot-2026 css-box-4.tsv>,
                           :Color<src css-snapshot-2026 css-color-4.tsv>,
                           :Images<src css-snapshot-2026 css-images-3.tsv>,
+                          :Inline<src css-snapshot-2026 css-inline-3.tsv>,
                           :Masking<src css-snapshot-2026 css-masking-1.tsv>,
                           :Shapes<src css-snapshot-2026 css-shapes-1.tsv>,
+                          :Text<src css-snapshot-2026 css-text-3.tsv>,
                           :Values<src css-snapshot-2026 css-values-5.tsv>,
                       ],
                  'Module::CSS3::Fonts::AtFontFace' => [<src css3x-font-@fontface-properties.tsv>,],
@@ -48,6 +51,8 @@ class Make {
                     my @defs = $compiler.load-defs: :$file;
                     my %child-props = $compiler.child-props;
 
+
+                    mkdir 'lib/' ~ @base-id.join('/');
                     my RakuAST::Package $grammar-ast = $compiler.compile-grammar(@grammar-id, :$scope);
                     "lib/{$grammar-ast.&path}.rakumod".IO.spurt: $grammar-ast.DEPARSE;
 

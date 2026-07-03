@@ -37,7 +37,7 @@ background-size	<bg-size>#	auto	all elements	no	see text	repeatable list	per gra
 #- border	<line-width> || <line-style> || <color>	See individual properties	all elements except ruby base containers and ruby annotation containers	no	N/A	see individual properties	per grammar	see individual properties
 <line-width> = <length [0,∞]> | thin | medium | thick
 <line-style> = none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset
-border-bottom	<line-width> || <line-style> || <color>	See individual properties	all elements except ruby base containers and ruby annotation containers	no	N/A	see individual properties	per grammar	see individual properties	
+border-bottom	<'border-bottom-width'> || <'border-bottom-style'> || <'border-bottom-color'>	See individual properties	all elements except ruby base containers and ruby annotation containers	no	N/A	see individual properties	per grammar	see individual properties
 border-bottom-color	<color>	currentColor	all elements except ruby base containers and ruby annotation containers	no	N/A	by computed value	per grammar	computed color	border-color
 border-bottom-left-radius	<length-percentage [0,∞]>{1,2}	0	all elements (but see prose)	no	Refer to corresponding dimension of the border box.	by computed value	per grammar	pair of computed <length-percentage> values	border-radius
 border-bottom-right-radius	<length-percentage [0,∞]>{1,2}	0	all elements (but see prose)	no	Refer to corresponding dimension of the border box.	by computed value	per grammar	pair of computed <length-percentage> values	border-radius

@@ -1,0 +1,13 @@
+unit role CSS::Snapshot2026::Inline::Gen::External;
+method integer (|) {
+    ...
+}
+method length-percentage (|) {
+    ...
+}
+method number (|) {
+    ...
+}
+method text-edge (|) {
+    ...
+}
