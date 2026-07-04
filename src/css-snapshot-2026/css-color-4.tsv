@@ -1,4 +1,11 @@
 <opacity-value> = <number> | <percentage>
+<color-space> = <rectangular-color-space> | <polar-color-space> | <custom-color-space>
+<rectangular-color-space> = srgb | srgb-linear | display-p3 | display-p3-linear | a98-rgb | prophoto-rgb | rec2020 | lab | oklab | <xyz-space>
+<polar-color-space> = hsl | hwb | lch | oklch
+<custom-color-space> = <dashed-ident>
+<hue-interpolation-method> = [ shorter | longer | increasing | decreasing ] hue
+<color-interpolation-method> = in [ <rectangular-color-space> | <polar-color-space> <hue-interpolation-method>? | <custom-color-space> ]
+<xyz-space> = xyz | xyz-d50 | xyz-d65
 # todo <color> (using CSS3 colors for now)
 #color> = <color-base> | currentColor | <system-color>
 #

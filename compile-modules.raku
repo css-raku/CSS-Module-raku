@@ -46,6 +46,7 @@ class Make {
                 my @module-ids;
                 %props = () if $meta-root.contains: 'Fonts::AtFontFace';
                 my @group-id = flat <CSS>, $meta-root.split('::');
+                note "Building $meta-root";
                 for .value.list {
                     my ($module, $input-spec) = .isa(Pair) ?? .kv !! ([], $_);
                     my @base-id = flat @group-id, @$module, <Gen>;
@@ -56,7 +57,7 @@ class Make {
                     my @defs = $compiler.load-defs: :$file;
                     my %child-props = $compiler.child-props;
 
-
+                    note " - " ~ $file;
                     mkdir 'lib/' ~ @base-id.join('/');
                     my RakuAST::Package $grammar-ast = $compiler.compile-grammar(@grammar-id, :$scope);
                     "lib/{$grammar-ast.&path}.rakumod".IO.spurt: $grammar-ast.DEPARSE;
@@ -129,7 +130,6 @@ sub write-metadata(%props, $meta) {
     my $class-dir = $*SPEC.catdir(<lib CSS>, $meta.split('::').Slip);
     my $class-path = $*SPEC.catfile( $class-dir, 'Metadata.rakumod' );
     my $class-name = "CSS::{$meta}::Metadata";
-    say "Building $class-name";
     {
         my $*OUT = open $class-path, :w;
         say "#  -- DO NOT EDIT --";

@@ -10,9 +10,25 @@ rule css-val-font { :i [[[<css-val-font-style> :my $*A;<!{
 }>|| <font-width-css3> :my $*D;<!{
     $*D++
 }>]+] ? <css-val-font-size> [<op("/")> <css-val-line-height> ] ? <css-val-font-family> +% <op(",")> ] || <system-font-family-name>  }
-#| font-family: [ <font-family-name> | <generic-font-family> ]#
+#| <font-width-css3> = normal | ultra-condensed | extra-condensed | condensed |    semi-condensed | semi-expanded | expanded | extra-expanded | ultra-expanded
+rule font-width-css3 { :i [normal | "ultra-condensed" | "extra-condensed" | condensed | "semi-condensed" | "semi-expanded" | expanded | "extra-expanded" | "ultra-expanded" ]& <keyw>  }
+#| font-family: [ <generic-font-family> | <font-family-name> ]#
 rule decl:sym<font-family> { :i ("font-family") ":" <val(/<css-val-font-family> +% <op(",")> /, &?ROUTINE.WHY)>}
-rule css-val-font-family { :i [<font-family-name> || <generic-font-family> ] }
+rule css-val-font-family { :i [<generic-font-family> || <font-family-name> ] }
+#| <system-font-family-name> = caption | icon | menu | message-box | small-caption | status-bar
+rule system-font-family-name { :i [caption | icon | menu | "message-box" | "small-caption" | "status-bar" ]& <keyw>  }
+#| <generic-font-family> = <generic-font-script-specific>| <generic-font-complete> | <generic-font-incomplete>
+rule generic-font-family { :i <generic-font-script-specific> || <generic-font-complete> || <generic-font-incomplete>  }
+#| <generic-font-script-specific> = <generic()>
+rule generic-font-script-specific { :i <generic> }
+#| generic([fangsong | kai | khmer-mul | nastaliq])
+rule generic { :i "generic(" [[[fangsong | kai | "khmer-mul" | nastaliq ]& <keyw> ] || <usage(&?ROUTINE.WHY)> ] ")" }
+#| <generic-font-complete> = serif | sans-serif | system-ui | cursive | fantasy | math | monospace
+rule generic-font-complete { :i [serif | "sans-serif" | "system-ui" | cursive | fantasy | math | monospace ]& <keyw>  }
+#| <generic-font-incomplete> = ui-serif | ui-sans-serif | ui-monospace | ui-rounded
+rule generic-font-incomplete { :i ["ui-serif" | "ui-sans-serif" | "ui-monospace" | "ui-rounded" ]& <keyw>  }
+#| <font-family-name> = <identifiers> | <string>
+rule font-family-name { :i <identifiers> || <string>  }
 #| font-feature-settings: normal | <feature-tag-value>#
 rule decl:sym<font-feature-settings> { :i ("font-feature-settings") ":" <val(/<css-val-font-feature-settings> /, &?ROUTINE.WHY)>}
 rule css-val-font-feature-settings { :i normal & <keyw> || <feature-tag-value> +% <op(",")>  }
@@ -28,6 +44,16 @@ rule css-val-font-optical-sizing { :i [auto | none ]& <keyw>  }
 #| font-palette: normal | light | dark | <palette-identifier> | <palette-mix()>
 rule decl:sym<font-palette> { :i ("font-palette") ":" <val(/<css-val-font-palette> /, &?ROUTINE.WHY)>}
 rule css-val-font-palette { :i [normal | light | dark ]& <keyw>  || <palette-identifier> || <palette-mix>  }
+#| <palette-identifier> = <dashed-ident>
+rule palette-identifier { :i <dashed-ident> }
+#| <dashed-ident> = <custom-ident>
+rule dashed-ident { :i <custom-ident> }
+#| palette-mix(<color-interpolation-method> , [ [normal | light | dark | <palette-identifier> | <palette-mix()> ] && <percentage [0,100]>? ]#{2})
+rule palette-mix { :i "palette-mix(" [<color-interpolation-method> "," [[[[normal | light | dark ]& <keyw>  || <palette-identifier> || <palette-mix> ] :my $*A;<!{
+    $*A++
+}>|| <percentage> ? :my $*B;<!{
+    $*B++
+}>]** 2] ** 2% ","  || <usage(&?ROUTINE.WHY)> ] ")" }
 #| font-size: <absolute-size> | <relative-size> | <length-percentage [0,∞]> | math
 rule decl:sym<font-size> { :i ("font-size") ":" <val(/<css-val-font-size> /, &?ROUTINE.WHY)>}
 rule css-val-font-size { :i <absolute-size> || <relative-size> || <length-percentage> || math & <keyw>  }
@@ -136,6 +162,44 @@ rule css-val-font-variant-alternates { :i normal & <keyw> || [[<stylistic> :my $
 }>|| <annotation> :my $*G;<!{
     $*G++
 }>]+]  }
+#| <font-variant-css2> = normal | small-caps
+rule font-variant-css2 { :i [normal | "small-caps" ]& <keyw>  }
+#| <font-feature-value-name> = <ident>
+rule font-feature-value-name { :i <ident> }
+#| <feature-tag-value> = <opentype-tag> [ <integer [0,∞]> | on | off ]?
+rule feature-tag-value { :i <opentype-tag> [<integer> || [on | off ]& <keyw>  ] ?  }
+#| <opentype-tag> = <string>
+rule opentype-tag { :i <string> }
+#| <east-asian-variant-values> = [ jis78 | jis83 | jis90 | jis04 | simplified | traditional ]
+rule east-asian-variant-values { :i [[jis78 | jis83 | jis90 | jis04 | simplified | traditional ]& <keyw> ] }
+#| <east-asian-width-values> = [ full-width | proportional-width ]
+rule east-asian-width-values { :i [["full-width" | "proportional-width" ]& <keyw> ] }
+#| <common-lig-values> = [ common-ligatures | no-common-ligatures ]
+rule common-lig-values { :i [["common-ligatures" | "no-common-ligatures" ]& <keyw> ] }
+#| <discretionary-lig-values> = [ discretionary-ligatures | no-discretionary-ligatures ]
+rule discretionary-lig-values { :i [["discretionary-ligatures" | "no-discretionary-ligatures" ]& <keyw> ] }
+#| <historical-lig-values> = [ historical-ligatures | no-historical-ligatures ]
+rule historical-lig-values { :i [["historical-ligatures" | "no-historical-ligatures" ]& <keyw> ] }
+#| <contextual-alt-values> = [ contextual | no-contextual ]
+rule contextual-alt-values { :i [[contextual | "no-contextual" ]& <keyw> ] }
+#| stylistic(<font-feature-value-name>)
+rule stylistic { :i "stylistic(" [<font-feature-value-name> || <usage(&?ROUTINE.WHY)> ] ")" }
+#| styleset(<font-feature-value-name>#)
+rule styleset { :i "styleset(" [<font-feature-value-name> +% "," || <usage(&?ROUTINE.WHY)> ] ")" }
+#| character-variant(<font-feature-value-name>#)
+rule character-variant { :i "character-variant(" [<font-feature-value-name> +% "," || <usage(&?ROUTINE.WHY)> ] ")" }
+#| swash(<font-feature-value-name>)
+rule swash { :i "swash(" [<font-feature-value-name> || <usage(&?ROUTINE.WHY)> ] ")" }
+#| ornaments(<font-feature-value-name>)
+rule ornaments { :i "ornaments(" [<font-feature-value-name> || <usage(&?ROUTINE.WHY)> ] ")" }
+#| annotation(<font-feature-value-name>)
+rule annotation { :i "annotation(" [<font-feature-value-name> || <usage(&?ROUTINE.WHY)> ] ")" }
+#| <numeric-figure-values> = [ lining-nums | oldstyle-nums ]
+rule numeric-figure-values { :i [["lining-nums" | "oldstyle-nums" ]& <keyw> ] }
+#| <numeric-spacing-values> = [ proportional-nums | tabular-nums ]
+rule numeric-spacing-values { :i [["proportional-nums" | "tabular-nums" ]& <keyw> ] }
+#| <numeric-fraction-values> = [ diagonal-fractions | stacked-fractions ]
+rule numeric-fraction-values { :i [["diagonal-fractions" | "stacked-fractions" ]& <keyw> ] }
 #| font-variant-caps: normal | small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps
 rule decl:sym<font-variant-caps> { :i ("font-variant-caps") ":" <val(/<css-val-font-variant-caps> /, &?ROUTINE.WHY)>}
 rule css-val-font-variant-caps { :i [normal | "small-caps" | "all-small-caps" | "petite-caps" | "all-petite-caps" | unicase | "titling-caps" ]& <keyw>  }
@@ -184,6 +248,8 @@ rule css-val-font-variation-settings { :i normal & <keyw> || [<opentype-tag> <nu
 #| font-weight: <font-weight-absolute> | bolder | lighter
 rule decl:sym<font-weight> { :i ("font-weight") ":" <val(/<css-val-font-weight> /, &?ROUTINE.WHY)>}
 rule css-val-font-weight { :i <font-weight-absolute> || [bolder | lighter ]& <keyw>   }
+#| <font-weight-absolute> = [ normal | bold | <number [1,1000]> ]
+rule font-weight-absolute { :i [[normal | bold ]& <keyw>  || <number> ] }
 #| font-width: normal | <percentage [0,∞]> | ultra-condensed | extra-condensed | condensed | semi-condensed | semi-expanded | expanded | extra-expanded | ultra-expanded
 rule decl:sym<font-width> { :i ("font-width") ":" <val(/<css-val-font-width> /, &?ROUTINE.WHY)>}
 rule css-val-font-width { :i normal & <keyw> || <percentage> || ["ultra-condensed" | "extra-condensed" | condensed | "semi-condensed" | "semi-expanded" | expanded | "extra-expanded" | "ultra-expanded" ]& <keyw>   }

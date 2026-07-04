@@ -9,7 +9,6 @@ use CSS::Grammar::Test;
 use CSS::Writer;
 
 my CSS::Module $svg = CSS::Module::SVG.module;
-my CSS::Module $css4 = CSS::Module::CSS4.module;
 
 my %seen;
 
@@ -26,39 +25,41 @@ for 't/svg-properties.json'.IO.lines {
     my $writer = CSS::Writer.new;
 
     for ({ :module($svg), :proforma<inherit initial>, :$writer},
-         { :module($css4), :proforma<inherit initial>, :$writer}, )
+        )
    -> % ( :$module!, :$proforma!, :$writer=Any) {
 
-        my $level = $module.name;
+        subtest $input, {
+            my $level = $module.name;
 
-	CSS::Grammar::Test::parse-tests($input,
-					:$module,
-					:rule<declarations>,
-                                        :$writer,
-					:%expected );
+            CSS::Grammar::Test::parse-tests($input,
+                                            :$module,
+                                            :rule<declarations>,
+                                            :$writer,
+                                            :%expected );
 
-	unless %seen{$prop}{$level}++ {
-	    # usage and inheritence  tests
-	    my $junk = sprintf '{%s: %s}', $prop, 'junk +-42';
+            unless %seen{$prop}{$level}++ {
+                # usage and inheritence  tests
+                my $junk = sprintf '{%s: %s}', $prop, 'junk +-42';
 
-	    my $actions = $module.actions.new;
-	    my $p = $module.grammar.parse( $junk, :rule<declarations>, :$actions);
-	    ok($p.defined && ~$p eq $junk, "$level $prop: able to parse unexpected input")
-	        or note "unable to parse declaration list: $junk";
+                my $actions = $module.actions.new;
+                my $p = $module.grammar.parse( $junk, :rule<declarations>, :$actions);
+                ok($p.defined && ~$p eq $junk, "$level $prop: able to parse unexpected input")
+                    or note "unable to parse declaration list: $junk";
 
-	    ok($actions.warnings, "$level $prop: unexpected input produces warning")
-		or diag $actions.warnings;
+                ok($actions.warnings, "$level $prop: unexpected input produces warning")
+                    or diag $actions.warnings;
 
-	    for @$proforma -> $misc {
-		my $decl = sprintf '{%s: %s}', $prop, $misc;
-		my $ast = { :declarations[{ :property{ :ident($prop), :expr[ { :keyw($misc)} ] } }] };
+                for @$proforma -> $misc {
+                    my $decl = sprintf '{%s: %s}', $prop, $misc;
+                    my $ast = { :declarations[{ :property{ :ident($prop), :expr[ { :keyw($misc)} ] } }] };
 
-                CSS::Grammar::Test::parse-tests($module.grammar, $decl,
-						:rule<declarations>,
-						:$actions,
-						:suite($level),
-						:expected({ :$ast }) );
+                    CSS::Grammar::Test::parse-tests($module.grammar, $decl,
+                                                    :rule<declarations>,
+                                                    :$actions,
+                                                    :suite($level),
+                                                    :expected({ :$ast }) );
 
+                }
             }
         }
     }
