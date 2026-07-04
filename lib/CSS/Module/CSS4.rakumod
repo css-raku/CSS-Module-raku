@@ -12,6 +12,9 @@ also is  CSS::Snapshot2026::Gen::Grammar;
 use CSS::Snapshot2026::Gen::External;
 also does  CSS::Snapshot2026::Gen::External;
 
+token proforma:sym<inherit> {:i inherit}
+token proforma:sym<initial> {:i initial}
+
 token optional-comma {','?} # comma is becoming optional in many CSS4 functions, including, rgb(), rgba(), rect()
 token alpha-channel-delim {<[,/]>}
 
@@ -48,6 +51,8 @@ rule color:sym<hsla> {:i'hsla('
                             <c=.percentage-range> || <usage(&?ROUTINE.WHY)> ]
                ')'
 }
+
+rule rect {:i 'rect(' <length-percentage>** 4 % <.optional-comma> [ [round && <keyw>] <css-val-border-radius> ]? ')'}
 
 method module(|c) {
     use CSS::Module::CSS4::Actions;

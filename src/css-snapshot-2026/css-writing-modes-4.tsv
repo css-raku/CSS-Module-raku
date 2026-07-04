@@ -1,0 +1,6 @@
+direction	ltr | rtl	ltr	all elements	yes	n/a	not animatable	n/a	specified value
+glyph-orientation-vertical	auto | 0deg | 90deg | 0 | 90	n/a	n/a	n/a	n/a	n/a	n/a	n/a
+text-combine-upright	none | all | [ digits <integer [2,4]>? ]	none	inline boxes and text	yes	n/a	not animatable	n/a	specified keyword, plus integer if digits
+text-orientation	mixed | upright | sideways	mixed	all elements except table row groups, rows, column groups, and columns; and text	yes	n/a	not animatable	n/a	specified value
+unicode-bidi	normal | embed | isolate | bidi-override | isolate-override | plaintext	normal	all elements, but see prose	no	n/a	not animatable	per grammar	specified value
+writing-mode	horizontal-tb | vertical-rl | vertical-lr | sideways-rl | sideways-lr	horizontal-tb	All elements except table row groups, table column groups, table rows, table columns, ruby base containers, ruby annotation containers	yes	n/a	not animatable	n/a

@@ -1,0 +1,17 @@
+box-sizing	content-box | border-box	content-box	all elements that accept width or height	no	N/A	discrete	per grammar	specified value
+caret-color	auto | <color>	auto	all elements	yes	N/A	colorby computed value	per grammar	The computed value for auto is auto; the computed value of currentColor is currentColor (See currentcolor); see the color property for other <color> values.
+cursor	[<cursor-image>,]* <cursor-predefined>	auto	all elements	yes	N/A	discrete	per grammar	as specified, except with any relative URLs converted to absolute
+<cursor-image> = <url> <number>{2}?
+<cursor-predefined> = auto | default | none |\
+  context-menu | help | pointer | progress | wait |  cell | crosshair | text | vertical-text |\
+  alias | copy | move | no-drop | not-allowed | grab | grabbing |\
+  e-resize | n-resize | ne-resize | nw-resize | s-resize | se-resize | sw-resize | w-resize |\
+  ew-resize | ns-resize | nesw-resize | nwse-resize |\
+  col-resize | row-resize | all-scroll |  zoom-in | zoom-out
+outline	[ <'outline-color'> || <'outline-style'> || <'outline-width'> ]	see individual properties	all elements	no	N/A	see individual properties	per grammar	see individual properties
+outline-color	<color> | invert	invert	all elements	no	N/A	colorby computed value	per grammar	The computed value for invert is invert; the computed value of currentColor is currentColor (See currentcolor); see the color property for other <color> values.
+outline-offset	<length>	0	all elements	no	N/A	lengthby computed value	per grammar	<length> value in absolute units (px or physical).absolute length
+outline-style	auto | <'border-style'>	none	all elements	no	N/A	discrete	per grammar	as specified
+outline-width	<line-width>	medium	all elements	no	N/A	lengthby computed value	per grammar	absolute length, snapped as a border width; 0 if the outline style is none.
+resize	none | both | horizontal | vertical	none	elements with overflow other than visible,that are scroll containers and optionally replaced elements such as images, videos, and iframes	no	N/A	discrete	per grammar	as specified keyword
+text-overflow	clip | ellipsis	clip	block containers	no	N/A	discrete	per grammar	as specified keyword

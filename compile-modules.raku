@@ -28,18 +28,23 @@ class Make {
                           :Backgrounds<src css-snapshot-2026 css-backgrounds-3.tsv>,
                           :Box<src css-snapshot-2026 css-box-4.tsv>,
                           :Color<src css-snapshot-2026 css-color-4.tsv>,
+                          :Fonts<src css-snapshot-2026 css-fonts-4.tsv>,
                           :Images<src css-snapshot-2026 css-images-3.tsv>,
                           :Inline<src css-snapshot-2026 css-inline-3.tsv>,
                           :Masking<src css-snapshot-2026 css-masking-1.tsv>,
                           :Shapes<src css-snapshot-2026 css-shapes-1.tsv>,
+                          :SVG<src css-snapshot-2026 svg2-propidx.tsv>,
                           :Text<src css-snapshot-2026 css-text-3.tsv>,
+                          :UI<src css-snapshot-2026 css-ui-3.tsv>,
                           :Values<src css-snapshot-2026 css-values-5.tsv>,
+                          :WritingModes<src css-snapshot-2026 css-writing-modes-4.tsv>,
                       ],
+                 'Snapshot2026::Fonts::AtFontFace' => [<src css-snapshot-2026 css-fonts-4-@fontface.tsv>,],
                  'Module::CSS3::Fonts::AtFontFace' => [<src css3x-font-@fontface-properties.tsv>,],
                 ) {
                 my $meta-root = .key;
                 my @module-ids;
-                %props = () if $meta-root eq 'CSS3::Fonts::AtFontFace';
+                %props = () if $meta-root.contains: 'Fonts::AtFontFace';
                 my @group-id = flat <CSS>, $meta-root.split('::');
                 for .value.list {
                     my ($module, $input-spec) = .isa(Pair) ?? .kv !! ([], $_);

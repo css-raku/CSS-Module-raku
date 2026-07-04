@@ -5,6 +5,12 @@ method bg-layer ($/) {
 method final-bg-layer ($/) {
     make $.build.rule($/)
 }
+method align ($/) {
+    make $.build.rule($/)
+}
+method valign ($/) {
+    make $.build.rule($/)
+}
 method attachment ($/) {
     make $.build.rule($/)
 }

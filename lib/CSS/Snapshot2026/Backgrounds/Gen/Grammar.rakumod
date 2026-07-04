@@ -28,6 +28,17 @@ rule final-bg-layer { :i [<css-val-background-image> :my $*A;<!{
 }>|| <css-val-background-color> :my $*F;<!{
     $*F++
 }>]+ }
+#| background-position: [ [ <percentage> | <length> | <align> ] [ <percentage> | <length> | <valign> ]? ] | [ <align> || <valign> ]
+rule decl:sym<background-position> { :i ("background-position") ":" <val(/<css-val-background-position> /, &?ROUTINE.WHY)>}
+rule css-val-background-position { :i [[<percentage> || <length> || <align> ] [<percentage> || <length> || <valign> ] ? ] || [[<align> :my $*A;<!{
+    $*A++
+}>|| <valign> :my $*B;<!{
+    $*B++
+}>]+]  }
+#| <align> = left | center | right
+rule align { :i [left | center | right ]& <keyw>  }
+#| <valign> = top | center | bottom
+rule valign { :i [top | center | bottom ]& <keyw>  }
 #| background-attachment: <attachment>#
 rule decl:sym<background-attachment> { :i ("background-attachment") ":" <val(/<css-val-background-attachment> +% <op(",")> /, &?ROUTINE.WHY)>}
 rule css-val-background-attachment { :i <attachment> }

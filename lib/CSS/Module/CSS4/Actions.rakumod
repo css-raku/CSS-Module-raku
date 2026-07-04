@@ -8,3 +8,14 @@ also does CSS::Specification::Base::Actions;
 
 use CSS::Snapshot2026::Gen::Actions;
 also is CSS::Snapshot2026::Gen::Actions;
+
+method rect ($/) {
+    $.make-func("rect", $/)
+}
+
+method build {
+    use CSS::Grammar::AST;
+    my class builder is CSS::Grammar::AST {
+        method proforma { ['inherit', 'initial'] }
+    }
+}

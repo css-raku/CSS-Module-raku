@@ -1,4 +1,4 @@
-unit grammar CSS::Module::SVG::Gen::Grammar;
+unit grammar CSS::Snapshot2026::SVG::Gen::Grammar;
 #| alignment-baseline: auto | baseline | before-edge | text-before-edge | middle | central | after-edge | text-after-edge | ideographic | alphabetic | hanging | mathematical
 rule decl:sym<alignment-baseline> { :i ("alignment-baseline") ":" <val(/<css-val-alignment-baseline> /, &?ROUTINE.WHY)>}
 rule css-val-alignment-baseline { :i [auto | baseline | "before-edge" | "text-before-edge" | middle | central | "after-edge" | "text-after-edge" | ideographic | alphabetic | hanging | mathematical ]& <keyw>  }
@@ -31,8 +31,6 @@ rule paint { :i none & <keyw> || <color> || <url> [none & <keyw> || <color> ] ? 
 #| fill-opacity: <alpha-value>
 rule decl:sym<fill-opacity> { :i ("fill-opacity") ":" <val(/<css-val-fill-opacity> /, &?ROUTINE.WHY)>}
 rule css-val-fill-opacity { :i <alpha-value> }
-#| <alpha-value> = <number> | <percentage>
-rule alpha-value { :i <number> || <percentage>  }
 #| fill-rule: nonzero | evenodd
 rule decl:sym<fill-rule> { :i ("fill-rule") ":" <val(/<css-val-fill-rule> /, &?ROUTINE.WHY)>}
 rule css-val-fill-rule { :i [nonzero | evenodd ]& <keyw>  }
@@ -48,24 +46,18 @@ rule css-val-image-rendering { :i [auto | optimizeSpeed | optimizeQuality ]& <ke
 #| line-height: normal | <number> | <length-percentage>
 rule decl:sym<line-height> { :i ("line-height") ":" <val(/<css-val-line-height> /, &?ROUTINE.WHY)>}
 rule css-val-line-height { :i normal & <keyw> || <number> || <length-percentage>  }
-#| marker: 'marker-start' || 'marker-mid' || 'marker-end'
+#| marker: see individual properties
 rule decl:sym<marker> { :i (marker) ":" <val(/<css-val-marker> /, &?ROUTINE.WHY)>}
-rule css-val-marker { :i [<css-val-marker-start> :my $*A;<!{
-    $*A++
-}>|| <css-val-marker-mid> :my $*B;<!{
-    $*B++
-}>|| <css-val-marker-end> :my $*C;<!{
-    $*C++
-}>]+ }
-#| marker-start: none | <url>
-rule decl:sym<marker-start> { :i ("marker-start") ":" <val(/<css-val-marker-start> /, &?ROUTINE.WHY)>}
-rule css-val-marker-start { :i none & <keyw> || <url>  }
-#| marker-start: none | <url>
-rule decl:sym<marker-mid> { :i ("marker-mid") ":" <val(/<css-val-marker-mid> /, &?ROUTINE.WHY)>}
-rule css-val-marker-mid { :i none & <keyw> || <url>  }
-#| marker-start: none | <url>
+rule css-val-marker { :i see & <keyw> individual & <keyw> properties & <keyw>  }
+#| marker-end: none | <url>
 rule decl:sym<marker-end> { :i ("marker-end") ":" <val(/<css-val-marker-end> /, &?ROUTINE.WHY)>}
 rule css-val-marker-end { :i none & <keyw> || <url>  }
+#| marker-end: none | <url>
+rule decl:sym<marker-mid> { :i ("marker-mid") ":" <val(/<css-val-marker-mid> /, &?ROUTINE.WHY)>}
+rule css-val-marker-mid { :i none & <keyw> || <url>  }
+#| marker-end: none | <url>
+rule decl:sym<marker-start> { :i ("marker-start") ":" <val(/<css-val-marker-start> /, &?ROUTINE.WHY)>}
+rule css-val-marker-start { :i none & <keyw> || <url>  }
 #| opacity: <alpha-value>
 rule decl:sym<opacity> { :i (opacity) ":" <val(/<css-val-opacity> /, &?ROUTINE.WHY)>}
 rule css-val-opacity { :i <alpha-value> }
@@ -87,22 +79,22 @@ rule css-val-pointer-events { :i ["bounding-box" | visiblePainted | visibleFill 
 #| shape-rendering: auto | optimizeSpeed | crispEdges | geometricPrecision
 rule decl:sym<shape-rendering> { :i ("shape-rendering") ":" <val(/<css-val-shape-rendering> /, &?ROUTINE.WHY)>}
 rule css-val-shape-rendering { :i [auto | optimizeSpeed | crispEdges | geometricPrecision ]& <keyw>  }
-#| stop-color: currentColor |<color>
+#| stop-color: currentColor | <color> [<icc-color()>]
 rule decl:sym<stop-color> { :i ("stop-color") ":" <val(/<css-val-stop-color> /, &?ROUTINE.WHY)>}
-rule css-val-stop-color { :i currentColor & <keyw> || <color>  }
+rule css-val-stop-color { :i currentColor & <keyw> || <color> <icc-color>   }
+#| icc-color(<name> [,<number>]*)
+rule icc-color { :i "icc-color(" [<name> ["," <number> ] *  || <usage(&?ROUTINE.WHY)> ] ")" }
 #| stop-opacity: <alpha-value>
 rule decl:sym<stop-opacity> { :i ("stop-opacity") ":" <val(/<css-val-stop-opacity> /, &?ROUTINE.WHY)>}
 rule css-val-stop-opacity { :i <alpha-value> }
 #| stroke: <paint>
 rule decl:sym<stroke> { :i (stroke) ":" <val(/<css-val-stroke> /, &?ROUTINE.WHY)>}
 rule css-val-stroke { :i <paint> }
-#| stroke-dasharray: none | <dash-elem>#
+#| stroke-dasharray: none | <dasharray>
 rule decl:sym<stroke-dasharray> { :i ("stroke-dasharray") ":" <val(/<css-val-stroke-dasharray> /, &?ROUTINE.WHY)>}
-rule css-val-stroke-dasharray { :i none & <keyw> || <dash-elem> +% <op(",")>  }
-#| <length-percentage> = <length> | <percentage> | <number>
-rule length-percentage { :i <length> || <percentage> || <number>  }
-#| <dash-elem> = <length-percentage> | <number>
-rule dash-elem { :i <length-percentage> || <number>  }
+rule css-val-stroke-dasharray { :i none & <keyw> || <dasharray>  }
+#| <dasharray> = [ <length-percentage> | <number> ]#
+rule dasharray { :i [<length-percentage> || <number> ] +% <op(",")> }
 #| stroke-dashoffset: <length-percentage>
 rule decl:sym<stroke-dashoffset> { :i ("stroke-dashoffset") ":" <val(/<css-val-stroke-dashoffset> /, &?ROUTINE.WHY)>}
 rule css-val-stroke-dashoffset { :i <length-percentage> }
@@ -112,9 +104,9 @@ rule css-val-stroke-linecap { :i [butt | round | square ]& <keyw>  }
 #| stroke-linejoin: miter | round | bevel
 rule decl:sym<stroke-linejoin> { :i ("stroke-linejoin") ":" <val(/<css-val-stroke-linejoin> /, &?ROUTINE.WHY)>}
 rule css-val-stroke-linejoin { :i [miter | round | bevel ]& <keyw>  }
-#| stroke-miterlimit: <number>
+#| stroke-miterlimit: <number> (non-negative)
 rule decl:sym<stroke-miterlimit> { :i ("stroke-miterlimit") ":" <val(/<css-val-stroke-miterlimit> /, &?ROUTINE.WHY)>}
-rule css-val-stroke-miterlimit { :i <number> }
+rule css-val-stroke-miterlimit { :i <number> <op("(")> "non-negative" & <keyw> <op(")")>   }
 #| stroke-opacity: <alpha-value>
 rule decl:sym<stroke-opacity> { :i ("stroke-opacity") ":" <val(/<css-val-stroke-opacity> /, &?ROUTINE.WHY)>}
 rule css-val-stroke-opacity { :i <alpha-value> }
@@ -150,12 +142,3 @@ rule css-val-white-space { :i [normal | pre | nowrap | "pre-wrap" | "pre-line" ]
 #| writing-mode: lr-tb | rl-tb | tb-rl | lr | rl | tb
 rule decl:sym<writing-mode> { :i ("writing-mode") ":" <val(/<css-val-writing-mode> /, &?ROUTINE.WHY)>}
 rule css-val-writing-mode { :i ["lr-tb" | "rl-tb" | "tb-rl" | lr | rl | tb ]& <keyw>  }
-#| lighting-color: <color>
-rule decl:sym<lighting-color> { :i ("lighting-color") ":" <val(/<css-val-lighting-color> /, &?ROUTINE.WHY)>}
-rule css-val-lighting-color { :i <color> }
-#| text-overflow: clip | ellipsis
-rule decl:sym<text-overflow> { :i ("text-overflow") ":" <val(/<css-val-text-overflow> /, &?ROUTINE.WHY)>}
-rule css-val-text-overflow { :i [clip | ellipsis ]& <keyw>  }
-#| color-interpolation-filters: auto | sRGB | linearRGB
-rule decl:sym<color-interpolation-filters> { :i ("color-interpolation-filters") ":" <val(/<css-val-color-interpolation-filters> /, &?ROUTINE.WHY)>}
-rule css-val-color-interpolation-filters { :i [auto | sRGB | linearRGB ]& <keyw>  }

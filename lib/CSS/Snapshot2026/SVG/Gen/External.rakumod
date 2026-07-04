@@ -1,4 +1,7 @@
-unit role CSS::Module::SVG::Gen::External;
+unit role CSS::Snapshot2026::SVG::Gen::External;
+method alpha-value (|) {
+    ...
+}
 method angle (|) {
     ...
 }
@@ -6,6 +9,12 @@ method color (|) {
     ...
 }
 method length (|) {
+    ...
+}
+method length-percentage (|) {
+    ...
+}
+method name (|) {
     ...
 }
 method number (|) {

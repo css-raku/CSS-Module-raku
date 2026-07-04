@@ -30,6 +30,8 @@ rule css-val-inline-sizing { :i [normal | stretch ]& <keyw>  }
 #| line-fit-edge: leading | <text-edge>
 rule decl:sym<line-fit-edge> { :i ("line-fit-edge") ":" <val(/<css-val-line-fit-edge> /, &?ROUTINE.WHY)>}
 rule css-val-line-fit-edge { :i leading & <keyw> || <text-edge>  }
+#| <text-edge> = [ text | ideographic | ideographic-ink ]              | [ text | ideographic | ideographic-ink | cap | ex ]                [ text | ideographic | ideographic-ink | alphabetic ]
+rule text-edge { :i [[text | ideographic | "ideographic-ink" ]& <keyw> ] || [[text | ideographic | "ideographic-ink" | cap | ex ]& <keyw> ] [[text | ideographic | "ideographic-ink" | alphabetic ]& <keyw> ]   }
 #| line-height: normal | <number [0,∞]> | <length-percentage [0,∞]>
 rule decl:sym<line-height> { :i ("line-height") ":" <val(/<css-val-line-height> /, &?ROUTINE.WHY)>}
 rule css-val-line-height { :i normal & <keyw> || <number> || <length-percentage>  }

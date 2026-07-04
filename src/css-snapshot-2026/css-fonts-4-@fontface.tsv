@@ -1,0 +1,14 @@
+ascent-override	normal | <percentage [0,∞]>	normal
+descent-override	normal | <percentage [0,∞]>	normal
+font-display	auto | block | swap | fallback | optional	auto
+font-family	<font-family-name>	N/A
+font-feature-settings	normal | <feature-tag-value>#	normal
+font-language-override	normal | <string>	normal
+font-named-instance	auto | <string>	auto
+font-style	auto | normal | italic | left | right | oblique [ <angle [-90deg,90deg]>{1,2} ]?	auto
+font-variation-settings	normal | [ <string> <number>]#	normal
+font-weight	auto | <font-weight-absolute>{1,2}	auto
+font-width	auto | <'font-width'>{1,2}	auto
+line-gap-override	normal | <percentage [0,∞]>	normal
+src	<font-src-list>	N/A
+unicode-range	<unicode-range-token>#	U+0-10FFFF

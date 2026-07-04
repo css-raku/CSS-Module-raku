@@ -1,0 +1,19 @@
+unit role CSS::Snapshot2026::UI::Gen::External;
+method color (|) {
+    ...
+}
+method css-val-border-style (|) {
+    ...
+}
+method length (|) {
+    ...
+}
+method line-width (|) {
+    ...
+}
+method number (|) {
+    ...
+}
+method url (|) {
+    ...
+}

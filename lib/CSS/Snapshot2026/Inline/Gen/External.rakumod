@@ -8,6 +8,3 @@ method length-percentage (|) {
 method number (|) {
     ...
 }
-method text-edge (|) {
-    ...
-}
