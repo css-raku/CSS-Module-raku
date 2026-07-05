@@ -57,7 +57,7 @@ rule rect {:i 'rect(' <length-percentage>** 4 % <.optional-comma> [ [round && <k
 method module(|c) {
     use CSS::Module::CSS4::Actions;
     use CSS::Module::CSS4::Metadata;
-    use CSS::Module::CSS3::Fonts::AtFontFace;
+    use CSS::Module::CSS4::Fonts::AtFontFace;
     my constant Metadata = CSS::Module::CSS4::Metadata;
     CSS::Module.new(
         :name<CSS4>,
@@ -66,7 +66,7 @@ method module(|c) {
         :property-metadata($Metadata::property),
         :prop-names(Metadata::prop-names),
         :index(&Metadata::index),
-        :sub-module('@font-face' => CSS::Module::CSS3::Fonts::AtFontFace.module),
+        :sub-module('@font-face' => CSS::Module::CSS4::Fonts::AtFontFace.module),
         |c
         );
 }

@@ -1,0 +1,16 @@
+unit role CSS::Snapshot2026::Fonts::Defs::Gen::External;
+method ident (|) {
+    ...
+}
+method identifiers (|) {
+    ...
+}
+method integer (|) {
+    ...
+}
+method number (|) {
+    ...
+}
+method string (|) {
+    ...
+}

@@ -8,7 +8,6 @@ font-family	[ <generic-font-family> | <font-family-name> ]#	depends on user agen
 <generic()> = generic([fangsong | kai | khmer-mul | nastaliq])
 <generic-font-complete> = serif | sans-serif | system-ui | cursive | fantasy | math | monospace
 <generic-font-incomplete> = ui-serif | ui-sans-serif | ui-monospace | ui-rounded
-<font-family-name> = <identifiers> | <string>
 font-feature-settings	normal | <feature-tag-value>#	normal	all elements and text	yes	n/a	discrete	per grammar	as specified	
 font-kerning	auto | normal | none	auto	all elements and text	yes	n/a	discrete	per grammar	as specified	
 font-language-override	normal | <string>	normal	all elements and text	yes	N/A	discrete	per grammar	specified string or the keyword none	
@@ -29,25 +28,6 @@ font-synthesis-style	auto | none | oblique-only	auto	all elements and text	yes	N
 font-synthesis-weight	auto | none	auto	all elements and text	yes	N/A	discrete	per grammar	specified keyword	visual
 font-variant	normal | none | [ [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> ] || [ small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps ] || [ stylistic(<font-feature-value-name>) || historical-forms || styleset(<font-feature-value-name>#) || character-variant(<font-feature-value-name>#) || swash(<font-feature-value-name>) || ornaments(<font-feature-value-name>) || annotation(<font-feature-value-name>) ] || [ <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero ] || [ <east-asian-variant-values> || <east-asian-width-values> || ruby ] || [ sub | super ] || [ text | emoji | unicode ] ]	normal	all elements and text	yes	n/a	discrete	per grammar	as specified	
 font-variant-alternates	normal | [ stylistic(<font-feature-value-name>) || historical-forms || styleset(<font-feature-value-name>#) || character-variant(<font-feature-value-name>#) || swash(<font-feature-value-name>) || ornaments(<font-feature-value-name>) || annotation(<font-feature-value-name>) ]	normal	all elements and text	yes	n/a	discrete	per grammar	as specified
-<font-variant-css2> = normal | small-caps
-<font-feature-value-name> = <ident>
-<feature-tag-value> = <opentype-tag> [ <integer [0,∞]> | on | off ]?
-<opentype-tag> = <string>
-<east-asian-variant-values> = [ jis78 | jis83 | jis90 | jis04 | simplified | traditional ]
-<east-asian-width-values>   = [ full-width | proportional-width ]
-<common-lig-values>        = [ common-ligatures | no-common-ligatures ]
-<discretionary-lig-values> = [ discretionary-ligatures | no-discretionary-ligatures ]
-<historical-lig-values>    = [ historical-ligatures | no-historical-ligatures ]
-<contextual-alt-values>    = [ contextual | no-contextual ]
-<stylistic()>         = stylistic(<font-feature-value-name>)
-<styleset()>          = styleset(<font-feature-value-name>#)
-<character-variant()> = character-variant(<font-feature-value-name>#)
-<swash()>             = swash(<font-feature-value-name>)
-<ornaments()>         = ornaments(<font-feature-value-name>)
-<annotation()>        = annotation(<font-feature-value-name>)
-<numeric-figure-values>   = [ lining-nums | oldstyle-nums ]
-<numeric-spacing-values>  = [ proportional-nums | tabular-nums ]
-<numeric-fraction-values> = [ diagonal-fractions | stacked-fractions ]
 font-variant-caps	normal | small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps	normal	all elements and text	yes	n/a	discrete	per grammar	as specified	
 font-variant-east-asian	normal | [ <east-asian-variant-values> || <east-asian-width-values> || ruby ]	normal	all elements and text	yes	n/a	discrete	per grammar	as specified	
 font-variant-emoji	normal | text | emoji | unicode	normal	all elements and text	yes	N/a	discrete	per grammar	specified keyword	
@@ -56,7 +36,6 @@ font-variant-numeric	normal | [ <numeric-figure-values> || <numeric-spacing-valu
 font-variant-position	normal | sub | super	normal	all elements and text	yes	n/a	discrete	per grammar	as specified	
 font-variation-settings	normal | [ <opentype-tag> <number> ]#	normal	all elements and text	yes	n/a	see prose	per grammar	the keyword normal or a list, each item a string paired with a number	
 font-weight	<font-weight-absolute> | bolder | lighter	normal	all elements and text	yes	n/a	by computed value type	per grammar	a number, see below	
-<font-weight-absolute> = [ normal | bold | <number [1,1000]> ]
 font-width	normal | <percentage [0,∞]> | ultra-condensed | extra-condensed | condensed | semi-condensed | semi-expanded | expanded | extra-expanded | ultra-expanded	normal	all elements and text	yes	Not resolved	by computed value type	per grammar	a percentage, see below	
 
 

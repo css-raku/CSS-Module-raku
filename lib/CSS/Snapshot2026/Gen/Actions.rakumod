@@ -10,6 +10,8 @@ use CSS::Snapshot2026::Color::Gen::Actions;
 also is CSS::Snapshot2026::Color::Gen::Actions;
 use CSS::Snapshot2026::Fonts::Gen::Actions;
 also is CSS::Snapshot2026::Fonts::Gen::Actions;
+use CSS::Snapshot2026::Fonts::Defs::Gen::Actions;
+also is CSS::Snapshot2026::Fonts::Defs::Gen::Actions;
 use CSS::Snapshot2026::Images::Gen::Actions;
 also is CSS::Snapshot2026::Images::Gen::Actions;
 use CSS::Snapshot2026::Inline::Gen::Actions;

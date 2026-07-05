@@ -10,6 +10,8 @@ use CSS::Snapshot2026::Color::Gen::Grammar;
 also is CSS::Snapshot2026::Color::Gen::Grammar;
 use CSS::Snapshot2026::Fonts::Gen::Grammar;
 also is CSS::Snapshot2026::Fonts::Gen::Grammar;
+use CSS::Snapshot2026::Fonts::Defs::Gen::Grammar;
+also is CSS::Snapshot2026::Fonts::Defs::Gen::Grammar;
 use CSS::Snapshot2026::Images::Gen::Grammar;
 also is CSS::Snapshot2026::Images::Gen::Grammar;
 use CSS::Snapshot2026::Inline::Gen::Grammar;

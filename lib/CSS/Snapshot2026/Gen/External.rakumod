@@ -10,6 +10,8 @@ use CSS::Snapshot2026::Color::Gen::External;
 also does CSS::Snapshot2026::Color::Gen::External;
 use CSS::Snapshot2026::Fonts::Gen::External;
 also does CSS::Snapshot2026::Fonts::Gen::External;
+use CSS::Snapshot2026::Fonts::Defs::Gen::External;
+also does CSS::Snapshot2026::Fonts::Defs::Gen::External;
 use CSS::Snapshot2026::Images::Gen::External;
 also does CSS::Snapshot2026::Images::Gen::External;
 use CSS::Snapshot2026::Inline::Gen::External;

@@ -29,6 +29,7 @@ class Make {
                           :Box<src css-snapshot-2026 css-box-4.tsv>,
                           :Color<src css-snapshot-2026 css-color-4.tsv>,
                           :Fonts<src css-snapshot-2026 css-fonts-4.tsv>,
+                          'Fonts::Defs' => <src css-snapshot-2026 css-fonts-4/defs.tsv>,
                           :Images<src css-snapshot-2026 css-images-3.tsv>,
                           :Inline<src css-snapshot-2026 css-inline-3.tsv>,
                           :Masking<src css-snapshot-2026 css-masking-1.tsv>,
@@ -39,7 +40,9 @@ class Make {
                           :Values<src css-snapshot-2026 css-values-5.tsv>,
                           :WritingModes<src css-snapshot-2026 css-writing-modes-4.tsv>,
                       ],
-                 'Snapshot2026::Fonts::AtFontFace' => [<src css-snapshot-2026 css-fonts-4-@fontface.tsv>,],
+                 'Snapshot2026::Fonts' => [
+                                           :AtFontFace<src css-snapshot-2026 css-fonts-4/@fontface.tsv>,
+                                       ],
                  'Module::CSS3::Fonts::AtFontFace' => [<src css3x-font-@fontface-properties.tsv>,],
                 ) {
                 my $meta-root = .key;

@@ -1,0 +1,28 @@
+ascent-override	normal | <percentage [0,∞]>	normal
+descent-override	normal | <percentage [0,∞]>	normal
+font-display	auto | block | swap | fallback | optional	auto
+font-family	<font-family-name>	N/A
+font-feature-settings	normal | <feature-tag-value>#	normal
+font-language-override	normal | <string>	normal
+font-named-instance	auto | <string>	auto
+font-style	auto | normal | italic | left | right | oblique [ <angle [-90deg,90deg]>{1,2} ]?	auto
+font-variation-settings	normal | [ <string> <number>]#	normal
+font-weight	auto | <font-weight-absolute>{1,2}	auto
+font-width	auto | <'font-width'>{1,2}	auto
+line-gap-override	normal | <percentage [0,∞]>	normal
+src	<font-src>#	N/A
+<font-src> = <url> [ format( <font-format> ) ]? [ tech( <font-tech># ) ]? | local( <font-family-name> )
+<format()> = format( <font-format> )
+<tech()> = tech( <font-tech># )
+<local()> = local( <font-family-name> )
+<font-format>\
+    = [ <string> | collection | embedded-opentype | opentype\
+      | svg | truetype | woff | woff2 ]
+<font-tech>\
+    = [ <font-features-tech> | <color-font-tech>\
+      | variations | palettes | incremental ]
+<font-features-tech>\
+    = [ features-opentype | features-aat | features-graphite ]
+<color-font-tech>\
+    = [ color-COLRv0 | color-COLRv1 | color-SVG | color-sbix | color-CBDT ]
+unicode-range	<unicode-range>#	U+0-10FFFF

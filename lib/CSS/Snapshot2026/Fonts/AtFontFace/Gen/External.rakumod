@@ -8,9 +8,6 @@ method feature-tag-value (|) {
 method font-family-name (|) {
     ...
 }
-method font-src-list (|) {
-    ...
-}
 method font-weight-absolute (|) {
     ...
 }
@@ -23,6 +20,9 @@ method percentage (|) {
 method string (|) {
     ...
 }
-method unicode-range-token (|) {
+method unicode-range (|) {
+    ...
+}
+method url (|) {
     ...
 }
