@@ -4,7 +4,7 @@ use Test;
 use JSON::Fast;
 
 use CSS::Module::SVG;
-use CSS::Module::CSS4;
+use CSS::Module::CSS2026;
 use CSS::Grammar::Test;
 use CSS::Writer;
 

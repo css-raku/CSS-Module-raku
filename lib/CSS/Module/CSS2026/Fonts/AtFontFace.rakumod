@@ -1,4 +1,4 @@
-unit grammar CSS::Module::CSS4::Fonts::AtFontFace;
+unit grammar CSS::Module::CSS2026::Fonts::AtFontFace;
 
 use CSS::Grammar::CSS4;
 also is CSS::Grammar::CSS4;
@@ -35,7 +35,7 @@ class Actions {
 # declare ourselves as a distinct submodule
 method module(|c) {
     use CSS::Module;
-    use CSS::Module::CSS4::Actions;
+    use CSS::Module::CSS2026::Actions;
     use CSS::Snapshot2026::Fonts::AtFontFace::Metadata;
     my constant Metadata = CSS::Snapshot2026::Fonts::AtFontFace::Metadata;
     # we share the actions class

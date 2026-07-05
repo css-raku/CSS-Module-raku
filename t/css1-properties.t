@@ -6,14 +6,14 @@ use JSON::Fast;
 use CSS::Module::CSS1;
 use CSS::Module::CSS21;
 use CSS::Module::CSS3;
-use CSS::Module::CSS4;
+use CSS::Module::CSS2026;
 use CSS::Grammar::Test;
 use CSS::Writer;
 
 my CSS::Module $css1  = CSS::Module::CSS1.module;
 my CSS::Module $css21 = CSS::Module::CSS21.module;
 my CSS::Module $css3  = CSS::Module::CSS3.module;
-my CSS::Module $css4  = CSS::Module::CSS4.module;
+my CSS::Module $css4  = CSS::Module::CSS2026.module;
 
 my CSS::Writer $writer .= new;
 

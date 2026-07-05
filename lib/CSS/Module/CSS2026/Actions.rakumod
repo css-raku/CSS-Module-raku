@@ -1,4 +1,4 @@
-unit class CSS::Module::CSS4::Actions;
+unit class CSS::Module::CSS2026::Actions;
 
 use CSS::Grammar::Actions;
 also is CSS::Grammar::Actions;

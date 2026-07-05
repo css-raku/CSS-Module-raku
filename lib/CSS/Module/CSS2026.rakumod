@@ -1,4 +1,4 @@
-unit grammar CSS::Module::CSS4;
+unit grammar CSS::Module::CSS2026;
 
 use CSS::Grammar::CSS4;
 also is CSS::Grammar::CSS4;
@@ -55,18 +55,18 @@ rule color:sym<hsla> {:i'hsla('
 rule rect {:i 'rect(' <length-percentage>** 4 % <.optional-comma> [ [round && <keyw>] <css-val-border-radius> ]? ')'}
 
 method module(|c) {
-    use CSS::Module::CSS4::Actions;
-    use CSS::Module::CSS4::Metadata;
-    use CSS::Module::CSS4::Fonts::AtFontFace;
-    my constant Metadata = CSS::Module::CSS4::Metadata;
+    use CSS::Module::CSS2026::Actions;
+    use CSS::Module::CSS2026::Metadata;
+    use CSS::Module::CSS2026::Fonts::AtFontFace;
+    my constant Metadata = CSS::Module::CSS2026::Metadata;
     CSS::Module.new(
-        :name<CSS4>,
+        :name<CSS2026>,
         :grammar($?CLASS),
-        :actions(CSS::Module::CSS4::Actions),
+        :actions(CSS::Module::CSS2026::Actions),
         :property-metadata($Metadata::property),
         :prop-names(Metadata::prop-names),
         :index(&Metadata::index),
-        :sub-module('@font-face' => CSS::Module::CSS4::Fonts::AtFontFace.module),
+        :sub-module('@font-face' => CSS::Module::CSS2026::Fonts::AtFontFace.module),
         |c
         );
 }
