@@ -17,13 +17,13 @@ class Make {
 
             for ('Module::CSS1'  => [<src css1-properties.tsv>,],
                  'Module::CSS21' => [<src css21-properties.tsv>,],
-                 'Module::CSS3'  => [
+                 'Module::CSS3'  => [:inherit,
                                      :Fonts<src css3x-font-properties.tsv>,
                                      :PagedMedia<src css3x-paged-media.tsv>,
                                      :Values_and_Units<src css-values-3-20240322.tsv>,
                       ],
-                 'Module::SVG' => [<src svg-properties.tsv>,],
                  :Snapshot2026[
+                          :CSS21<src css21-properties.tsv>,
                           :Align<src css-snapshot-2026 css-align-3.tsv>,
                           :Backgrounds<src css-snapshot-2026 css-backgrounds-3.tsv>,
                           :Box<src css-snapshot-2026 css-box-4.tsv>,
@@ -40,17 +40,29 @@ class Make {
                           :Values<src css-snapshot-2026 css-values-5.tsv>,
                           :WritingModes<src css-snapshot-2026 css-writing-modes-4.tsv>,
                       ],
+                 'Module::SVG' => [:inherit, <src svg-properties.tsv>,],
                  'Snapshot2026::Fonts' => [
                                            :AtFontFace<src css-snapshot-2026 css-fonts-4/@fontface.tsv>,
                                        ],
                  'Module::CSS3::Fonts::AtFontFace' => [<src css3x-font-@fontface-properties.tsv>,],
                 ) {
                 my $meta-root = .key;
-                my @module-ids;
-                %props = () if $meta-root.contains: 'Fonts::AtFontFace';
+                my @modules = .value.list;
+
                 my @group-id = flat <CSS>, $meta-root.split('::');
                 note "Building $meta-root";
-                for .value.list {
+
+                my @module-ids;
+
+                subset Inherit of Pair where .key eq 'inherit' && .value.so;
+                if @modules.head ~~ Inherit {
+                    @modules.shift;
+                }
+                else {
+                    %props = ();
+                }
+
+                for @modules {
                     my ($module, $input-spec) = .isa(Pair) ?? .kv !! ([], $_);
                     my @base-id = flat @group-id, @$module, <Gen>;
                     my @grammar-id = @base-id.Slip, 'Grammar';

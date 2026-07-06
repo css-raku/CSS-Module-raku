@@ -1,5 +1,5 @@
 unit grammar CSS::Snapshot2026::Fonts::Gen::Grammar;
-#| font: [ [ <'font-style'> || <font-variant-css2> || <'font-weight'> || <font-width-css3> ]? <'font-size'> [ / <'line-height'> ]? <'font-family'># ] | <system-font-family-name>
+#| font: [ [ <'font-style'> || <font-variant-css2> || <'font-weight'> || <'font-stretch'> ]? <'font-size'> [ / <'line-height'> ]? <'font-family'># ] | <system-font-family-name>
 rule decl:sym<font> { :i (font) ":" <val(/<css-val-font> /, &?ROUTINE.WHY)>}
 rule css-val-font { :i [[[<css-val-font-style> :my $*A;<!{
     $*A++
@@ -7,9 +7,12 @@ rule css-val-font { :i [[[<css-val-font-style> :my $*A;<!{
     $*B++
 }>|| <css-val-font-weight> :my $*C;<!{
     $*C++
-}>|| <font-width-css3> :my $*D;<!{
+}>|| <css-val-font-stretch> :my $*D;<!{
     $*D++
 }>]+] ? <css-val-font-size> [<op("/")> <css-val-line-height> ] ? <css-val-font-family> +% <op(",")> ] || <system-font-family-name>  }
+#| font-stretch: <font-width-css3>
+rule decl:sym<font-stretch> { :i ("font-stretch") ":" <val(/<css-val-font-stretch> /, &?ROUTINE.WHY)>}
+rule css-val-font-stretch { :i <font-width-css3> }
 #| <font-width-css3> = normal | ultra-condensed | extra-condensed | condensed |    semi-condensed | semi-expanded | expanded | extra-expanded | ultra-expanded
 rule font-width-css3 { :i [normal | "ultra-condensed" | "extra-condensed" | condensed | "semi-condensed" | "semi-expanded" | expanded | "extra-expanded" | "ultra-expanded" ]& <keyw>  }
 #| font-family: [ <generic-font-family> | <font-family-name> ]#

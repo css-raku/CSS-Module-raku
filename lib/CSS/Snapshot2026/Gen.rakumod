@@ -1,7 +1,7 @@
-unit grammar CSS::Snapshot2026::Gen::Grammar;
+unit grammar CSS::Snapshot2026::Gen;
 
-use CSS::Snapshot2026::CSS21::Gen::Grammar;
-also is CSS::Snapshot2026::CSS21::Gen::Grammar;
+use CSS::Module::CSS21::Grammar;
+also is CSS::Module::CSS21::Grammar;
 use CSS::Snapshot2026::Align::Gen::Grammar;
 also is CSS::Snapshot2026::Align::Gen::Grammar;
 use CSS::Snapshot2026::Backgrounds::Gen::Grammar;

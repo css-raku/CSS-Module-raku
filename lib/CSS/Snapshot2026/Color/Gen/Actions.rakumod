@@ -23,3 +23,6 @@ method color-interpolation-method ($/) {
 method xyz-space ($/) {
     make $.build.rule($/)
 }
+method system-color ($/) {
+    make $.build.rule($/)
+}

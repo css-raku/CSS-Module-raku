@@ -6,13 +6,13 @@
 <hue-interpolation-method> = [ shorter | longer | increasing | decreasing ] hue
 <color-interpolation-method> = in [ <rectangular-color-space> | <polar-color-space> <hue-interpolation-method>? | <custom-color-space> ]
 <xyz-space> = xyz | xyz-d50 | xyz-d65
-# todo <color> (using CSS3 colors for now)
-#color> = <color-base> | currentColor | <system-color>
-#
-#<color-base> = <hex-color> | <color-function> | <named-color> | transparent
-#<color-function> = <rgb()> | <rgba()> |
-#              <hsl()> | <hsla()> | <hwb()> |
-#              <lab()> | <lch()> | <oklab()> | <oklch()> |
-#              <color()>
-color	<color>	CanvasText	all elements and text	yes	N/A	by computed value type	per grammar	computed color, see resolving color values
+# See <color> definition in CSS::Module::CSS2026
+# <color> = <color-base> | currentColor | <system-color>
+# <color-base> = <hex-color> | <color-function> | <named-color> | transparent
+# <color-function> = <rgb()> | <rgba()> | <hsl()> | <hsla()>\
+# | <hwb()> | <lab()> | <lch()> | <oklab()> | <oklch()> | <color()>
+<system-color> = AccentColor | AccentColorText | ActiveText | ButtonBorder | ButtonFace\
+| ButtonText | Canvas | CanvasText | Field | FieldText| GrayText | Highlight | HighlightText\
+| LinkText | Mark | MarkText | SelectedItem | SelectedItemText | VisitedText
+color	<color> | <system-color>	CanvasText	all elements and text	yes	N/A	by computed value type	per grammar	computed color, see resolving color values
 opacity	<opacity-value>	1	all elements	no	map to the range [0,1]	by computed value type	per grammar	specified number, clamped to the range [0,1]

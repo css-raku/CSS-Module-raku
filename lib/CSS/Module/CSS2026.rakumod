@@ -15,6 +15,9 @@ also does  CSS::Snapshot2026::Gen::External;
 token proforma:sym<inherit> {:i inherit}
 token proforma:sym<initial> {:i initial}
 
+use  CSS::Module::CSS3::Colors;
+also is CSS::Module::CSS3::Colors;
+
 token optional-comma {','?} # comma is becoming optional in many CSS4 functions, including, rgb(), rgba(), rect()
 token alpha-channel-delim {<[,/]>}
 

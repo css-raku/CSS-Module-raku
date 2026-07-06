@@ -15,9 +15,11 @@ rule hue-interpolation-method { :i [[shorter | longer | increasing | decreasing 
 rule color-interpolation-method { :i in & <keyw> [<rectangular-color-space> || <polar-color-space> <hue-interpolation-method> ?  || <custom-color-space> ]  }
 #| <xyz-space> = xyz | xyz-d50 | xyz-d65
 rule xyz-space { :i [xyz | "xyz-d50" | "xyz-d65" ]& <keyw>  }
-#| color: <color>
+#| <system-color> = AccentColor | AccentColorText | ActiveText | ButtonBorder | ButtonFace| ButtonText | Canvas | CanvasText | Field | FieldText| GrayText | Highlight | HighlightText| LinkText | Mark | MarkText | SelectedItem | SelectedItemText | VisitedText
+rule system-color { :i [AccentColor | AccentColorText | ActiveText | ButtonBorder | ButtonFace | ButtonText | Canvas | CanvasText | Field | FieldText | GrayText | Highlight | HighlightText | LinkText | Mark | MarkText | SelectedItem | SelectedItemText | VisitedText ]& <keyw>  }
+#| color: <color> | <system-color>
 rule decl:sym<color> { :i (color) ":" <val(/<css-val-color> /, &?ROUTINE.WHY)>}
-rule css-val-color { :i <color> }
+rule css-val-color { :i <color> || <system-color>  }
 #| opacity: <opacity-value>
 rule decl:sym<opacity> { :i (opacity) ":" <val(/<css-val-opacity> /, &?ROUTINE.WHY)>}
 rule css-val-opacity { :i <opacity-value> }
