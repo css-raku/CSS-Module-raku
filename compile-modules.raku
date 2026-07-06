@@ -23,7 +23,7 @@ class Make {
                                      :Values_and_Units<src css-values-3-20240322.tsv>,
                       ],
                  'Module::SVG' => [:inherit, <src svg-properties.tsv>,],
-                 :Snapshot2026[
+                 :Snapshot2026[:link,
                           :CSS21<src css21-properties.tsv>,
                           :Align<src css-snapshot-2026 css-align-3.tsv>,
                           :Backgrounds<src css-snapshot-2026 css-backgrounds-3.tsv>,
@@ -41,9 +41,7 @@ class Make {
                           :Values<src css-snapshot-2026 css-values-5.tsv>,
                           :WritingModes<src css-snapshot-2026 css-writing-modes-4.tsv>,
                       ],
-                 'Snapshot2026::Fonts' => [
-                                           :AtFontFace<src css-snapshot-2026 css-fonts-4/@fontface.tsv>,
-                                       ],
+                 'Snapshot2026::Fonts' => [:AtFontFace<src css-snapshot-2026 css-fonts-4/@fontface.tsv>],
                  'Module::CSS3::Fonts::AtFontFace' => [<src css3x-font-@fontface-properties.tsv>,],
                 ) {
                 my $meta-root = .key;
@@ -54,13 +52,16 @@ class Make {
 
                 my @module-ids;
 
-                subset Inherit of Pair where .key eq 'inherit' && .value.so;
-                if @modules.head ~~ Inherit {
-                    @modules.shift;
+                subset Flag of Pair where .value ~~ Bool;
+                my Bool ($inherit, $link);
+                while @modules.head ~~ Flag {
+                    given @modules.shift.key {
+                        when 'inherit' { $inherit = True }
+                        when 'link'    { $link = True }
+                    }
                 }
-                else {
-                    %props = ();
-                }
+                %props = ()
+                    unless $inherit;
 
                 for @modules {
                     my ($module, $input-spec) = .isa(Pair) ?? .kv !! ([], $_);
@@ -89,9 +90,8 @@ class Make {
                     %props ,= %meta;
                     @module-ids.push: @base-id;
                 }
-                note "write meta-data: $meta-root";
                 %props.&write-metadata($meta-root);
-                if $meta-root eq 'Snapshot2026' {
+                if $link {
                     my @actions-link-id = flat @group-id, 'Gen', 'Actions';
                     my @grammar-link-id = flat @group-id, 'Gen', 'Grammar';
                     my @external-link-id = flat @group-id, 'Gen', 'External';
