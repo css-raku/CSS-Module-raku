@@ -5,78 +5,96 @@ use CSS::Module::CSS21;
 use CSS::Module::CSS3;
 use CSS::Module::CSS3::Fonts::AtFontFace;
 use CSS::Module::SVG;
+use CSS::Module::CSS2026;
 
-lives-ok {require CSS::Specification:ver(v0.4.4..*) }, "CSS::Specification version";
-my \css1-module = CSS::Module::CSS1.module;
-isa-ok css1-module.grammar, 'CSS::Module::CSS1', 'css1 grammar';
-isa-ok css1-module.actions, 'CSS::Module::CSS1::Actions', 'css1 actions';
-my \css1-prop = css1-module.property-metadata;
-nok css1-prop<azimuth>:exists, 'css1 does not have azimuth';
-is-deeply css1-prop<border>, {:box, :edges["border-top", "border-right", "border-bottom", "border-left"], :children["border-width", "border-style", "border-color"], :!inherit, :synopsis("'border-width' || 'border-style' || 'border-color'")}, 'css1 border';
-is-deeply css1-prop<border-style>, {:box, :edges[<border-top-style border-right-style border-bottom-style border-left-style>], :!inherit, :synopsis("[ none | dotted | dashed | solid | double | groove | ridge | inset | outset ]\{1,4}") }, 'css1 border-style';
-is-deeply css1-module.parse-property('border-style', 'none' ), [{ :keyw<none> }, ], 'module.parse-property method';
-is-deeply css1-module.parse-property('width', '5pt' ), [{ :pt(5) }, ], 'module.parse-property method';
+subtest 'CSS1', {
+    my \module = CSS::Module::CSS1.module;
+    isa-ok module.grammar, 'CSS::Module::CSS1', 'css1 grammar';
+    isa-ok module.actions, 'CSS::Module::CSS1::Actions', 'css1 actions';
+    my \css1-prop = module.property-metadata;
+    nok css1-prop<azimuth>:exists, 'css1 does not have azimuth';
+    is-deeply css1-prop<border>, {:box, :edges["border-top", "border-right", "border-bottom", "border-left"], :children["border-width", "border-style", "border-color"], :!inherit, :synopsis("'border-width' || 'border-style' || 'border-color'")}, 'css1 border';
+    is-deeply css1-prop<border-style>, {:box, :edges[<border-top-style border-right-style border-bottom-style border-left-style>], :!inherit, :synopsis("[ none | dotted | dashed | solid | double | groove | ridge | inset | outset ]\{1,4}") }, 'css1 border-style';
+    is-deeply module.parse-property('border-style', 'none' ), [{ :keyw<none> }, ], 'module.parse-property method';
+    is-deeply module.parse-property('width', '5pt' ), [{ :pt(5) }, ], 'module.parse-property method';
 
-nok css1-module.parse-property('border-style', 'flashy', :!warn), 'module.parse-property failure';
+    nok module.parse-property('border-style', 'flashy', :!warn), 'module.parse-property failure';
 
-is-deeply css1-module.colors<red>, [ 255, 0,   0 ], "colors";
+    is-deeply module.colors<red>, [ 255, 0,   0 ], "colors";
 
-is css1-module.property-name(1), 'background-attachment';
-lives-ok { css1-module.index };
-lives-ok { css1-module.index[1] };
-is-deeply css1-module.index[1].default, 'scroll';
-is css1-module.property-name(6), 'border';
-is css1-module.property-number('border'), 6;
-is css1-module.index[6].child-names[1], 'border-style';
-is css1-module.property-name(css1-module.index[6].children[1]), 'border-style';
+    is module.property-name(1), 'background-attachment';
+    lives-ok { module.index };
+    lives-ok { module.index[1] };
+    is-deeply module.index[1].default, 'scroll';
+    is module.property-name(6), 'border';
+    is module.property-number('border'), 6;
+    is module.index[6].child-names[1], 'border-style';
+    is module.property-name(module.index[6].children[1]), 'border-style';
+}
 
-my \css21-module = CSS::Module::CSS21.module;
-css21-module.extend(:name<-xhtml-align>, :like<text-align>);
-my \alias = css21-module.index.tail;
-is alias.name, '-xhtml-align';
-isa-ok css21-module.grammar, 'CSS::Module::CSS21', 'css21 grammar';
-isa-ok css21-module.actions, 'CSS::Module::CSS21::Actions', 'css21 actions';
-my \css21-prop = css21-module.property-metadata;
-ok css21-prop<azimuth>:exists, 'css21 has azimuth';
-is-deeply css21-prop<border>, {:box, :children["border-width", "border-style", "border-color"], :edges["border-top", "border-right", "border-bottom", "border-left"], :!inherit, :synopsis("[ 'border-width' || 'border-style' || 'border-color' ]")}, 'css21 border';
-is-deeply css21-prop<border-style>, {:box, :edges[<border-top-style border-right-style border-bottom-style border-left-style>], :!inherit, :synopsis("<border-style>\{1,4}") }, 'css21 border-style';
+subtest 'CSS2.1', {
+    my \module = CSS::Module::CSS21.module;
+    module.extend(:name<-xhtml-align>, :like<text-align>);
+    my \alias = module.index.tail;
+    is alias.name, '-xhtml-align';
+    isa-ok module.grammar, 'CSS::Module::CSS21', 'css21 grammar';
+    isa-ok module.actions, 'CSS::Module::CSS21::Actions', 'css21 actions';
+    my \css21-prop = module.property-metadata;
+    ok css21-prop<azimuth>:exists, 'css21 has azimuth';
+    is-deeply css21-prop<border>, {:box, :children["border-width", "border-style", "border-color"], :edges["border-top", "border-right", "border-bottom", "border-left"], :!inherit, :synopsis("[ 'border-width' || 'border-style' || 'border-color' ]")}, 'css21 border';
+    is-deeply css21-prop<border-style>, {:box, :edges[<border-top-style border-right-style border-bottom-style border-left-style>], :!inherit, :synopsis("<border-style>\{1,4}") }, 'css21 border-style';
 
-is-deeply css21-prop<-xhtml-align>, {:default("a nameless value that acts as 'left' if 'direction' is 'ltr', 'right' if 'direction' is 'rtl'"), :inherit, :synopsis("<align> | justify")}, 'css21 alias property metadata';
-is-deeply css21-module.parse-property('-xhtml-align', 'center' ), [{ :keyw<center> }, ], 'css21 alias property metadata';
+    is-deeply css21-prop<-xhtml-align>, {:default("a nameless value that acts as 'left' if 'direction' is 'ltr', 'right' if 'direction' is 'rtl'"), :inherit, :synopsis("<align> | justify")}, 'css21 alias property metadata';
+    is-deeply module.parse-property('-xhtml-align', 'center' ), [{ :keyw<center> }, ], 'css21 alias property metadata';
 
-is-deeply css21-module.colors<red>, [ 255, 0,   0 ], "colors";
+    is-deeply module.colors<red>, [ 255, 0,   0 ], "colors";
 
-is css21-module.property-name(7), 'border';
-is css21-module.property-number('border'), 7;
-is css21-module.property-name(css21-module.index[7].children[1]), 'border-style';
+    is module.property-name(7), 'border';
+    is module.property-number('border'), 7;
+    is module.property-name(module.index[7].children[1]), 'border-style';
+}
 
-my \css3-module = CSS::Module::CSS3.module;
-is css3-module.name, 'CSS3', 'module.name';
-isa-ok css3-module.grammar, 'CSS::Module::CSS3', 'css3 grammar';
-isa-ok css3-module.actions, 'CSS::Module::CSS3::Actions', 'css3 actions';
-my \css3-prop = css3-module.property-metadata;
-is-deeply css3-prop<azimuth>, {:default<center>, :inherit, :synopsis("<angle> | [ <direction> || <behind> ] | <delta>")}, 'css3 azimuth';
-is-deeply css3-prop<border>, {:box, :children["border-width", "border-style", "border-color"], :edges["border-top", "border-right", "border-bottom", "border-left"], :!inherit, :synopsis("[ 'border-width' || 'border-style' || 'border-color' ]")}, 'css3 border';
-is-deeply css3-prop<border-style>, {:box, :edges[<border-top-style border-right-style border-bottom-style border-left-style>], :!inherit, :synopsis("<border-style>\{1,4}") }, 'css3 border-style';
+subtest 'CSS3', {
+    my \module = CSS::Module::CSS3.module;
+    is module.name, 'CSS3', 'module.name';
+    isa-ok module.grammar, 'CSS::Module::CSS3', 'css3 grammar';
+    isa-ok module.actions, 'CSS::Module::CSS3::Actions', 'css3 actions';
+    my \css3-prop = module.property-metadata;
+    is-deeply css3-prop<azimuth>, {:default<center>, :inherit, :synopsis("<angle> | [ <direction> || <behind> ] | <delta>")}, 'css3 azimuth';
+    is-deeply css3-prop<border>, {:box, :children["border-width", "border-style", "border-color"], :edges["border-top", "border-right", "border-bottom", "border-left"], :!inherit, :synopsis("[ 'border-width' || 'border-style' || 'border-color' ]")}, 'css3 border';
+    is-deeply css3-prop<border-style>, {:box, :edges[<border-top-style border-right-style border-bottom-style border-left-style>], :!inherit, :synopsis("<border-style>\{1,4}") }, 'css3 border-style';
 
-is-deeply css3-module.colors<gold>, [ 255, 215,   0 ], "colors";
+    is-deeply module.colors<gold>, [ 255, 215,   0 ], "colors";
 
-is css3-module.property-name(7), 'border';
-is css3-module.property-number('border'), 7;
-is css3-module.property-name(css3-module.index[7].children[1]), 'border-style';
+    is module.property-name(7), 'border';
+    is module.property-number('border'), 7;
+    is module.property-name(module.index[7].children[1]), 'border-style';
+}
 
-my \at-fontface-module = css3-module.sub-module<@font-face>;
-isa-ok at-fontface-module.grammar, 'CSS::Module::CSS3::Fonts::AtFontFace', '@font-face grammar';
-isa-ok at-fontface-module.actions, 'CSS::Module::CSS3::Actions', '@font-face actions';
-my \at-fontface-prop = at-fontface-module.property-metadata;
-is-deeply at-fontface-prop<font-style>, { :synopsis("normal | italic | oblique"), :!inherit, :default<normal>, }, '@font-face font-style';
+subtest 'CSS3 @font-face', {
+    my \module = CSS::Module::CSS3.module.sub-module<@font-face>;
+    isa-ok module.grammar, 'CSS::Module::CSS3::Fonts::AtFontFace', '@font-face grammar';
+    isa-ok module.actions, 'CSS::Module::CSS3::Actions', '@font-face actions';
+    my \at-fontface-prop = module.property-metadata;
+    is-deeply at-fontface-prop<font-style>, { :synopsis("normal | italic | oblique"), :!inherit, :default<normal>, }, '@font-face font-style';
+}
 
-my \svg-module = CSS::Module::SVG.module;
-isa-ok svg-module.grammar, 'CSS::Module::SVG', 'svg grammar';
-isa-ok svg-module.actions, 'CSS::Module::SVG::Actions', 'svg actions';
-my \svg-prop = svg-module.property-metadata;
-is-deeply svg-prop<azimuth>, { :synopsis("<angle> | [ <direction> || <behind> ] | <delta>"), :inherit, :default<center>, }, 'svg azimuth';
-is-deeply svg-prop<alignment-baseline>, { :synopsis("auto | baseline | before-edge | text-before-edge | middle | central | after-edge | text-after-edge | ideographic | alphabetic | hanging | mathematical"), :!inherit, :default<baseline>, }, 'svg alignment-baseline';
-is-deeply svg-prop<font-style>, { :synopsis("normal | italic | oblique"), :inherit, :default<normal>, }, 'svg font-style';
+subtest 'SVG', {
+    my \module = CSS::Module::SVG.module;
+    isa-ok module.grammar, 'CSS::Module::SVG', 'svg grammar';
+    isa-ok module.actions, 'CSS::Module::SVG::Actions', 'svg actions';
+    my \prop = module.property-metadata;
+    is-deeply prop<azimuth>, { :synopsis("<angle> | [ <direction> || <behind> ] | <delta>"), :inherit, :default<center>, }, 'svg azimuth';
+    is-deeply prop<alignment-baseline>, { :synopsis("auto | baseline | before-edge | text-before-edge | middle | central | after-edge | text-after-edge | ideographic | alphabetic | hanging | mathematical"), :!inherit, :default<baseline>, }, 'svg alignment-baseline';
+    is-deeply prop<font-style>, { :synopsis("normal | italic | oblique"), :inherit, :default<normal>, }, 'svg font-style';
+}
 
+subtest 'CSS2026', {
+    my \module = CSS::Module::CSS2026.module;
+    isa-ok module.grammar, 'CSS::Module::CSS2026', 'css2026 grammar';
+    isa-ok module.actions, 'CSS::Module::CSS2026::Actions', 'css2026 actions';
+    my \prop = module.property-metadata;
+    is-deeply prop<azimuth>, { :synopsis("<angle> | [ <direction> || <behind> ] | <delta>"), :inherit, :default<center>, }, 'css2026 azimuth';
+    is-deeply prop<font-style>, { :synopsis("normal | italic | left | right | oblique <angle [-90deg,90deg]>?"), :inherit, :default<normal>, }, 'css2026 font-style';
+    }
 done-testing;

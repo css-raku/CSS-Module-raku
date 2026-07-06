@@ -7,8 +7,8 @@ grammar CSS::Module::SVG {
     use     CSS::Module::SVG::Gen::Grammar;
     also is CSS::Module::SVG::Gen::Grammar;
 
-    use     CSS::Module::CSS2026;
-    also is CSS::Module::CSS2026;
+    use     CSS::Module::CSS3;
+    also is CSS::Module::CSS3;
 
     use       CSS::Module::SVG::Gen::External;
     also does CSS::Module::SVG::Gen::External;

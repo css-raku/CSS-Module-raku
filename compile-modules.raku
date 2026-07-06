@@ -22,6 +22,7 @@ class Make {
                                      :PagedMedia<src css3x-paged-media.tsv>,
                                      :Values_and_Units<src css-values-3-20240322.tsv>,
                       ],
+                 'Module::SVG' => [:inherit, <src svg-properties.tsv>,],
                  :Snapshot2026[
                           :CSS21<src css21-properties.tsv>,
                           :Align<src css-snapshot-2026 css-align-3.tsv>,
@@ -40,7 +41,6 @@ class Make {
                           :Values<src css-snapshot-2026 css-values-5.tsv>,
                           :WritingModes<src css-snapshot-2026 css-writing-modes-4.tsv>,
                       ],
-                 'Module::SVG' => [:inherit, <src svg-properties.tsv>,],
                  'Snapshot2026::Fonts' => [
                                            :AtFontFace<src css-snapshot-2026 css-fonts-4/@fontface.tsv>,
                                        ],
@@ -89,6 +89,7 @@ class Make {
                     %props ,= %meta;
                     @module-ids.push: @base-id;
                 }
+                note "write meta-data: $meta-root";
                 %props.&write-metadata($meta-root);
                 if $meta-root eq 'Snapshot2026' {
                     my @actions-link-id = flat @group-id, 'Gen', 'Actions';

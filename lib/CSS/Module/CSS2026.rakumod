@@ -59,14 +59,16 @@ rule rect {:i 'rect(' <length-percentage>** 4 % <.optional-comma> [ [round && <k
 
 method module(|c) {
     use CSS::Module::CSS2026::Actions;
-    use CSS::Module::CSS2026::Metadata;
+    use CSS::Snapshot2026::Metadata;
     use CSS::Module::CSS2026::Fonts::AtFontFace;
-    my constant Metadata = CSS::Module::CSS2026::Metadata;
+    my constant Metadata = CSS::Snapshot2026::Metadata;
+    my $property-metadata = $Metadata::property;
+
     CSS::Module.new(
         :name<CSS2026>,
         :grammar($?CLASS),
         :actions(CSS::Module::CSS2026::Actions),
-        :property-metadata($Metadata::property),
+        :$property-metadata,
         :prop-names(Metadata::prop-names),
         :index(&Metadata::index),
         :sub-module('@font-face' => CSS::Module::CSS2026::Fonts::AtFontFace.module),
