@@ -145,9 +145,11 @@ rule css-val-border-left-style { :i <line-style> }
 #| border-left-width: <line-width>
 rule decl:sym<border-left-width> { :i ("border-left-width") ":" <val(/<css-val-border-left-width> /, &?ROUTINE.WHY)>}
 rule css-val-border-left-width { :i <line-width> }
-#| border-radius: <length-percentage [0,∞]>{1,4} [ / <length-percentage [0,∞]>{1,4} ]?
+#| border-radius: <border-radius>
 rule decl:sym<border-radius> { :i ("border-radius") ":" <val(/<css-val-border-radius> /, &?ROUTINE.WHY)>}
-rule css-val-border-radius { :i <length-percentage> ** 1..4 [<op("/")> <length-percentage> ** 1..4 ] ?  }
+rule css-val-border-radius { :i <border-radius> }
+#| <border-radius> = <length-percentage [0,∞]>{1,4} [ / <length-percentage [0,∞]>{1,4} ]?
+rule border-radius { :i <length-percentage> ** 1..4 [<op("/")> <length-percentage> ** 1..4 ] ?  }
 #| border-right: <line-width> || <line-style> || <color>
 rule decl:sym<border-right> { :i ("border-right") ":" <val(/<css-val-border-right> /, &?ROUTINE.WHY)>}
 rule css-val-border-right { :i [<line-width> :my $*A;<!{

@@ -29,6 +29,9 @@ method line-width ($/) {
 method line-style ($/) {
     make $.build.rule($/)
 }
+method border-radius ($/) {
+    make $.build.rule($/)
+}
 method shadow ($/) {
     make $.build.rule($/)
 }

@@ -14,13 +14,13 @@ rule css-val-shape-outside { :i none & <keyw> || [[<basic-shape> :my $*A;<!{
 }>]+] || <image>  }
 #| <basic-shape> = <basic-shape-rect> | <circle()> | <ellipse()> |  <polygon()> | <path()> | <shape-rect>
 rule basic-shape { :i <basic-shape-rect> || <circle> || <ellipse> || <polygon> || <path> || <shape-rect>  }
-#| inset( <length-percentage>{1,4} [ round <'border-radius'> ]? )
-rule inset { :i "inset(" [<length-percentage> ** 1..4 [round & <keyw> <css-val-border-radius> ] ?  || <usage(&?ROUTINE.WHY)> ] ")" }
-#| xywh( <length-percentage>{2} <length-percentage [0,∞]>{2} [ round <'border-radius'> ]?)
-rule xywh { :i "xywh(" [<length-percentage> ** 2 <length-percentage> ** 2 [round & <keyw> <css-val-border-radius> ] ?  || <usage(&?ROUTINE.WHY)> ] ")" }
+#| inset( <length-percentage>{1,4} [ round <border-radius> ]? )
+rule inset { :i "inset(" [<length-percentage> ** 1..4 [round & <keyw> <border-radius> ] ?  || <usage(&?ROUTINE.WHY)> ] ")" }
+#| xywh( <length-percentage>{2} <length-percentage [0,∞]>{2} [ round <border-radius> ]?)
+rule xywh { :i "xywh(" [<length-percentage> ** 2 <length-percentage> ** 2 [round & <keyw> <border-radius> ] ?  || <usage(&?ROUTINE.WHY)> ] ")" }
 #| <shape-box> = <visual-box> | margin-box | half-border-box
 rule shape-box { :i <visual-box> || ["margin-box" | "half-border-box" ]& <keyw>   }
-#| <shape-rect> = rect([ <length-percentage> | auto ]{4} [ round <'border-radius'> ]?)
+#| <shape-rect> = rect([ <length-percentage> | auto ]{4} [ round <border-radius> ]?)
 rule shape-rect { :i <rect> }
 #| <basic-shape-rect> = <inset()> | <rect()> | <xywh()>
 rule basic-shape-rect { :i <inset> || <rect> || <xywh>  }

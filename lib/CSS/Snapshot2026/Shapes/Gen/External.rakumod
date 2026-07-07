@@ -2,7 +2,7 @@ unit role CSS::Snapshot2026::Shapes::Gen::External;
 method angle (|) {
     ...
 }
-method css-val-border-radius (|) {
+method border-radius (|) {
     ...
 }
 method css-val-fill-rule (|) {

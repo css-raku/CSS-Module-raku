@@ -2,14 +2,14 @@ shape-image-threshold	<opacity-value>	0	floats	no	n/a	by computed value	per gram
 shape-margin	<length-percentage [0,∞]>	0	floats and initial letter boxes	no	refer to the inline size of the containing block	by computed value	per grammar	computed <length-percentage> value
 shape-outside	none | [ <basic-shape> || <shape-box> ] | <image>	none	floats and initial letter boxes	no	n/a	as defined for <basic-shape>, otherwise discrete	per grammar	as defined for <basic-shape> (with <shape-box> following, if supplied); else the computed <image>; else the keyword as specified
 <basic-shape> = <basic-shape-rect> | <circle()> | <ellipse()> |  <polygon()> | <path()> | <shape-rect>
-<inset()> = inset( <length-percentage>{1,4} [ round <'border-radius'> ]? )
+<inset()> = inset( <length-percentage>{1,4} [ round <border-radius> ]? )
 
-<xywh()> = xywh( <length-percentage>{2} <length-percentage [0,∞]>{2} [ round <'border-radius'> ]?)
+<xywh()> = xywh( <length-percentage>{2} <length-percentage [0,∞]>{2} [ round <border-radius> ]?)
 
 <shape-box> = <visual-box> | margin-box | half-border-box
 
 # 'clip' property already defines <rect()> with different syntax.
-<shape-rect> = rect([ <length-percentage> | auto ]{4} [ round <'border-radius'> ]?)
+<shape-rect> = rect([ <length-percentage> | auto ]{4} [ round <border-radius> ]?)
 
 <basic-shape-rect> = <inset()> | <rect()> | <xywh()>
 

@@ -30,7 +30,7 @@ class Make {
                           :Box<src css-snapshot-2026 css-box-4.tsv>,
                           :Color<src css-snapshot-2026 css-color-4.tsv>,
                           :Fonts<src css-snapshot-2026 css-fonts-4.tsv>,
-                          'Fonts::Defs' => <src css-snapshot-2026 css-fonts-4/defs.tsv>,
+                          'Fonts::Defs' => <src css-snapshot-2026 css-fonts-4 defs.tsv>,
                           :Images<src css-snapshot-2026 css-images-3.tsv>,
                           :Inline<src css-snapshot-2026 css-inline-3.tsv>,
                           :Masking<src css-snapshot-2026 css-masking-1.tsv>,
@@ -41,7 +41,7 @@ class Make {
                           :Values<src css-snapshot-2026 css-values-5.tsv>,
                           :WritingModes<src css-snapshot-2026 css-writing-modes-4.tsv>,
                       ],
-                 'Snapshot2026::Fonts' => [:AtFontFace<src css-snapshot-2026 css-fonts-4/@fontface.tsv>],
+                 'Snapshot2026::Fonts' => [:AtFontFace<src css-snapshot-2026 css-fonts-4 @fontface.tsv>],
                  'Module::CSS3::Fonts::AtFontFace' => [<src css3x-font-@fontface-properties.tsv>,],
                 ) {
                 my $meta-root = .key;
@@ -71,7 +71,7 @@ class Make {
                     my CSS::Specification::Compiler $compiler .= new;
                     my $file = $input-spec.join: '/';
                     my @defs = $compiler.load-defs: :$file;
-                    my %child-props = $compiler.child-props;
+                    my %child-rules = $compiler.child-rules;
 
                     note " - " ~ $file;
                     mkdir 'lib/' ~ @base-id.join('/');
@@ -86,7 +86,7 @@ class Make {
                     my RakuAST::Package $external-ast = $compiler.compile-external(@external-id, :$scope);
                     "lib/{$external-ast.&path}.rakumod".IO.spurt: $external-ast.DEPARSE;
 
-                    my %meta = @defs.&build-metadata(:%child-props);
+                    my %meta = @defs.&build-metadata(:%child-rules);
                     %props ,= %meta;
                     @module-ids.push: @base-id;
                 }
@@ -97,10 +97,10 @@ class Make {
                     my @external-link-id = flat @group-id, 'Gen', 'External';
                     # my @use-ids = @module-ids.map: { .Slip, 'Actions' }
                     # RakuAST version nyi (Raku v2026.05)
-                    # my RakuAST::Package $actions-package = CSS::Specification::Compiler.link-actions(@link-id, @use-ids);
+                    # my RakuAST::Package $actions-package = CSS::Specification::Compiler.link-actions(@actions-link-id, @module-ids);
                     # "lib/{$actions-package.&path}.rakumod".IO.spurt: $actions-package.DEPARSE;
-                    ("lib/" ~ @actions-link-id.join('/') ~ ".rakumod").IO.spurt: link-actions(@actions-link-id, @module-ids);
-                    ("lib/" ~ @grammar-link-id.join('/') ~ ".rakumod").IO.spurt: link-grammar(@grammar-link-id, @module-ids);
+                    ("lib/" ~ @actions-link-id.join('/') ~ ".rakumod").IO.spurt:  link-actions(@actions-link-id, @module-ids);
+                    ("lib/" ~ @grammar-link-id.join('/') ~ ".rakumod").IO.spurt:  link-grammar(@grammar-link-id, @module-ids);
                     ("lib/" ~ @external-link-id.join('/') ~ ".rakumod").IO.spurt: link-external(@external-link-id, @module-ids);
                 }
             }

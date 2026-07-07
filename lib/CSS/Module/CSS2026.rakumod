@@ -59,8 +59,8 @@ rule rect {:i 'rect(' <length-percentage>** 4 % <.optional-comma> [ [round && <k
 
 method module(|c) {
     use CSS::Module::CSS2026::Actions;
-    use CSS::Snapshot2026::Metadata;
     use CSS::Module::CSS2026::Fonts::AtFontFace;
+    use CSS::Snapshot2026::Metadata;
     my constant Metadata = CSS::Snapshot2026::Metadata;
     my $property-metadata = $Metadata::property;
 
