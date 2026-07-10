@@ -1,7 +1,5 @@
 unit class CSS::Snapshot2026::Gen::Actions;
 
-use CSS::Snapshot2026::CSS21::Gen::Actions;
-also is CSS::Snapshot2026::CSS21::Gen::Actions;
 use CSS::Snapshot2026::Align::Gen::Actions;
 also is CSS::Snapshot2026::Align::Gen::Actions;
 use CSS::Snapshot2026::Backgrounds::Gen::Actions;
@@ -32,3 +30,5 @@ use CSS::Snapshot2026::Values::Gen::Actions;
 also is CSS::Snapshot2026::Values::Gen::Actions;
 use CSS::Snapshot2026::WritingModes::Gen::Actions;
 also is CSS::Snapshot2026::WritingModes::Gen::Actions;
+use CSS::Snapshot2026::CSS21::Gen::Actions;
+also is CSS::Snapshot2026::CSS21::Gen::Actions;

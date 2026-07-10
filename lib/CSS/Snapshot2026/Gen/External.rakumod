@@ -1,7 +1,5 @@
 unit role CSS::Snapshot2026::Gen::External;
 
-use CSS::Snapshot2026::CSS21::Gen::External;
-also does CSS::Snapshot2026::CSS21::Gen::External;
 use CSS::Snapshot2026::Align::Gen::External;
 also does CSS::Snapshot2026::Align::Gen::External;
 use CSS::Snapshot2026::Backgrounds::Gen::External;
@@ -32,3 +30,5 @@ use CSS::Snapshot2026::Values::Gen::External;
 also does CSS::Snapshot2026::Values::Gen::External;
 use CSS::Snapshot2026::WritingModes::Gen::External;
 also does CSS::Snapshot2026::WritingModes::Gen::External;
+use CSS::Snapshot2026::CSS21::Gen::External;
+also does CSS::Snapshot2026::CSS21::Gen::External;

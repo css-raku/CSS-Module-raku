@@ -13,7 +13,7 @@ class Make {
     method make($where) {
 
         indir $where, {
-            my %props;
+            my %inherit;
 
             for ('Module::CSS1'  => [<src css1-properties.tsv>,],
                  'Module::CSS21' => [<src css21-properties.tsv>,],
@@ -24,7 +24,6 @@ class Make {
                       ],
                  'Module::SVG' => [:inherit, <src svg-properties.tsv>,],
                  :Snapshot2026[:link,
-                          :CSS21<src css21-properties.tsv>,
                           :Align<src css-snapshot-2026 css-align-3.tsv>,
                           :Backgrounds<src css-snapshot-2026 css-backgrounds-3.tsv>,
                           :Box<src css-snapshot-2026 css-box-4.tsv>,
@@ -40,12 +39,14 @@ class Make {
                           :UI<src css-snapshot-2026 css-ui-3.tsv>,
                           :Values<src css-snapshot-2026 css-values-5.tsv>,
                           :WritingModes<src css-snapshot-2026 css-writing-modes-4.tsv>,
+                          :CSS21<src css21-properties.tsv>,
                       ],
                  'Snapshot2026::Fonts' => [:AtFontFace<src css-snapshot-2026 css-fonts-4 @fontface.tsv>],
                  'Module::CSS3::Fonts::AtFontFace' => [<src css3x-font-@fontface-properties.tsv>,],
                 ) {
                 my $meta-root = .key;
                 my @modules = .value.list;
+                my %props;
 
                 my @group-id = flat <CSS>, $meta-root.split('::');
                 note "Building $meta-root";
@@ -60,8 +61,6 @@ class Make {
                         when 'link'    { $link = True }
                     }
                 }
-                %props = ()
-                    unless $inherit;
 
                 for @modules {
                     my ($module, $input-spec) = .isa(Pair) ?? .kv !! ([], $_);
@@ -87,10 +86,17 @@ class Make {
                     "lib/{$external-ast.&path}.rakumod".IO.spurt: $external-ast.DEPARSE;
 
                     my %meta = @defs.&build-metadata(:%child-rules);
-                    %props ,= %meta;
+                    %props{.key} //= .value for %meta.pairs;
                     @module-ids.push: @base-id;
                 }
+
+                if $inherit {
+                    %props{.key} //= .value for %inherit.pairs;
+                }
+                %inherit := %props;
+
                 %props.&write-metadata($meta-root);
+
                 if $link {
                     my @actions-link-id = flat @group-id, 'Gen', 'Actions';
                     my @grammar-link-id = flat @group-id, 'Gen', 'Grammar';

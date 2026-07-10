@@ -1,7 +1,5 @@
 unit grammar CSS::Snapshot2026::Gen::Grammar;
 
-use CSS::Snapshot2026::CSS21::Gen::Grammar;
-also is CSS::Snapshot2026::CSS21::Gen::Grammar;
 use CSS::Snapshot2026::Align::Gen::Grammar;
 also is CSS::Snapshot2026::Align::Gen::Grammar;
 use CSS::Snapshot2026::Backgrounds::Gen::Grammar;
@@ -32,3 +30,5 @@ use CSS::Snapshot2026::Values::Gen::Grammar;
 also is CSS::Snapshot2026::Values::Gen::Grammar;
 use CSS::Snapshot2026::WritingModes::Gen::Grammar;
 also is CSS::Snapshot2026::WritingModes::Gen::Grammar;
+use CSS::Snapshot2026::CSS21::Gen::Grammar;
+also is CSS::Snapshot2026::CSS21::Gen::Grammar;

@@ -33,9 +33,9 @@ rule css-val-margin-trim { :i none & <keyw> || [[block & <keyw> :my $*A;<!{
 }>|| "inline-end" & <keyw> :my $*F;<!{
     $*F++
 }>]+]  }
-#| padding: <'padding-top'>{1,4}
+#| padding: <length-percentage [0,∞]>{1,4}
 rule decl:sym<padding> { :i (padding) ":" <val(/<css-val-padding>** 1..4 /, &?ROUTINE.WHY)>}
-rule css-val-padding { :i <css-val-padding-top> }
+rule css-val-padding { :i <length-percentage> }
 #| padding-bottom: <length-percentage [0,∞]>
 rule decl:sym<padding-bottom> { :i ("padding-bottom") ":" <val(/<css-val-padding-bottom> /, &?ROUTINE.WHY)>}
 rule css-val-padding-bottom { :i <length-percentage> }
