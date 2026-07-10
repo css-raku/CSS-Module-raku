@@ -127,13 +127,13 @@ rule css-val-border-image-source { :i none & <keyw> || <image>  }
 #| border-image-width: [ <length-percentage [0,∞]> | <number [0,∞]> | auto ]{1,4}
 rule decl:sym<border-image-width> { :i ("border-image-width") ":" <val(/<css-val-border-image-width>** 1..4 /, &?ROUTINE.WHY)>}
 rule css-val-border-image-width { :i [<length-percentage> || <number> || auto & <keyw> ] }
-#| border-left: <line-width> || <line-style> || <color>
+#| border-left: <'border-left-width'> || <'border-left-style'> || <'border-left-color'>
 rule decl:sym<border-left> { :i ("border-left") ":" <val(/<css-val-border-left> /, &?ROUTINE.WHY)>}
-rule css-val-border-left { :i [<line-width> :my $*A;<!{
+rule css-val-border-left { :i [<css-val-border-left-width> :my $*A;<!{
     $*A++
-}>|| <line-style> :my $*B;<!{
+}>|| <css-val-border-left-style> :my $*B;<!{
     $*B++
-}>|| <color> :my $*C;<!{
+}>|| <css-val-border-left-color> :my $*C;<!{
     $*C++
 }>]+ }
 #| border-left-color: <color>
@@ -150,13 +150,13 @@ rule decl:sym<border-radius> { :i ("border-radius") ":" <val(/<css-val-border-ra
 rule css-val-border-radius { :i <border-radius> }
 #| <border-radius> = <length-percentage [0,∞]>{1,4} [ / <length-percentage [0,∞]>{1,4} ]?
 rule border-radius { :i <length-percentage> ** 1..4 [<op("/")> <length-percentage> ** 1..4 ] ?  }
-#| border-right: <line-width> || <line-style> || <color>
+#| border-right: <'border-right-width'> || <'border-right-style'> || <'border-right-color'>
 rule decl:sym<border-right> { :i ("border-right") ":" <val(/<css-val-border-right> /, &?ROUTINE.WHY)>}
-rule css-val-border-right { :i [<line-width> :my $*A;<!{
+rule css-val-border-right { :i [<css-val-border-right-width> :my $*A;<!{
     $*A++
-}>|| <line-style> :my $*B;<!{
+}>|| <css-val-border-right-style> :my $*B;<!{
     $*B++
-}>|| <color> :my $*C;<!{
+}>|| <css-val-border-right-color> :my $*C;<!{
     $*C++
 }>]+ }
 #| border-right-color: <color>
@@ -171,13 +171,13 @@ rule css-val-border-right-width { :i <line-width> }
 #| border-style: <line-style>{1,4}
 rule decl:sym<border-style> { :i ("border-style") ":" <val(/<css-val-border-style>** 1..4 /, &?ROUTINE.WHY)>}
 rule css-val-border-style { :i <line-style> }
-#| border-top: <line-width> || <line-style> || <color>
+#| border-top: <'border-top-width'> || <'border-top-style'> || <'border-top-color'>
 rule decl:sym<border-top> { :i ("border-top") ":" <val(/<css-val-border-top> /, &?ROUTINE.WHY)>}
-rule css-val-border-top { :i [<line-width> :my $*A;<!{
+rule css-val-border-top { :i [<css-val-border-top-width> :my $*A;<!{
     $*A++
-}>|| <line-style> :my $*B;<!{
+}>|| <css-val-border-top-style> :my $*B;<!{
     $*B++
-}>|| <color> :my $*C;<!{
+}>|| <css-val-border-top-color> :my $*C;<!{
     $*C++
 }>]+ }
 #| border-top-color: <color>
