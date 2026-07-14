@@ -29,11 +29,11 @@ rule circle { :i "circle(" [<radial-size> ? [at & <keyw> <position> ] ?  || <usa
 #| ellipse( <radial-size>? [ at <position> ]?)
 rule ellipse { :i "ellipse(" [<radial-size> ? [at & <keyw> <position> ] ?  || <usage(&?ROUTINE.WHY)> ] ")" }
 #| polygon( <'fill-rule'>? [ round <length> ]? , [<length-percentage> <length-percentage>]# )
-rule polygon { :i "polygon(" [<css-val-fill-rule> ? [round & <keyw> <length> ] ? "," [<length-percentage> <length-percentage> ] +% ","  || <usage(&?ROUTINE.WHY)> ] ")" }
+rule polygon { :i "polygon(" [<css-val-fill-rule> ? [[round & <keyw> <length> ] ","]? [<length-percentage> <length-percentage> ] +% ","?  || <usage(&?ROUTINE.WHY)> ] ")" }
 #| path( <'fill-rule'>? , <string> )
-rule path { :i "path(" [<css-val-fill-rule> ? "," <string>  || <usage(&?ROUTINE.WHY)> ] ")" }
+rule path { :i "path(" [[<css-val-fill-rule> ","]? <string>  || <usage(&?ROUTINE.WHY)> ] ")" }
 #| shape( <'fill-rule'>? from <position> , <shape-command>#)
-rule shape { :i "shape(" [<css-val-fill-rule> ? from & <keyw> <position> "," <shape-command> +% ","  || <usage(&?ROUTINE.WHY)> ] ")" }
+rule shape { :i "shape(" [<css-val-fill-rule> ? from & <keyw> <position> "," <shape-command> +% ","?  || <usage(&?ROUTINE.WHY)> ] ")" }
 #| <shape-command> = <move-command> | <line-command> | close |                  <horizontal-line-command> | <vertical-line-command> |                  <curve-command> | <smooth-command> | <arc-command>
 rule shape-command { :i <move-command> || <line-command> || close & <keyw> || <horizontal-line-command> || <vertical-line-command> || <curve-command> || <smooth-command> || <arc-command>  }
 #| <move-command> = move <command-end-point>

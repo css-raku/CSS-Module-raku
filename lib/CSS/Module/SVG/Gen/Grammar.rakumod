@@ -98,7 +98,7 @@ rule decl:sym<stroke> { :i (stroke) ":" <val(/<css-val-stroke> /, &?ROUTINE.WHY)
 rule css-val-stroke { :i <paint> }
 #| stroke-dasharray: none | <dash-elem>#
 rule decl:sym<stroke-dasharray> { :i ("stroke-dasharray") ":" <val(/<css-val-stroke-dasharray> /, &?ROUTINE.WHY)>}
-rule css-val-stroke-dasharray { :i none & <keyw> || <dash-elem> +% <op(",")>  }
+rule css-val-stroke-dasharray { :i none & <keyw> || <dash-elem> +% <op(",")>?  }
 #| <length-percentage> = <length> | <percentage> | <number>
 rule length-percentage { :i <length> || <percentage> || <number>  }
 #| <dash-elem> = <length-percentage> | <number>

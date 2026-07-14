@@ -9,15 +9,15 @@ rule css-val-font { :i [[[<css-val-font-style> :my $*A;<!{
     $*C++
 }>|| <css-val-font-stretch> :my $*D;<!{
     $*D++
-}>]+] ? <css-val-font-size> [<op("/")> <css-val-line-height> ] ? <css-val-font-family> +% <op(",")> ] || <system-font-family-name>  }
+}>]+] ? <css-val-font-size> [<op("/")> <css-val-line-height> ] ? <css-val-font-family> +% <op(",")>? ] || <system-font-family-name>  }
 #| font-stretch: <font-width-css3>
 rule decl:sym<font-stretch> { :i ("font-stretch") ":" <val(/<css-val-font-stretch> /, &?ROUTINE.WHY)>}
 rule css-val-font-stretch { :i <font-width-css3> }
 #| <font-width-css3> = normal | ultra-condensed | extra-condensed | condensed |    semi-condensed | semi-expanded | expanded | extra-expanded | ultra-expanded
 rule font-width-css3 { :i [normal | "ultra-condensed" | "extra-condensed" | condensed | "semi-condensed" | "semi-expanded" | expanded | "extra-expanded" | "ultra-expanded" ]& <keyw>  }
 #| font-family: [ <generic-font-family> | <font-family-name> ]#
-rule decl:sym<font-family> { :i ("font-family") ":" <val(/<css-val-font-family> +% <op(",")> /, &?ROUTINE.WHY)>}
-rule css-val-font-family { :i [<generic-font-family> || <font-family-name> ] }
+rule decl:sym<font-family> { :i ("font-family") ":" <val(/<css-val-font-family> /, &?ROUTINE.WHY)>}
+rule css-val-font-family { :i [<generic-font-family> || <font-family-name> ] +% <op(",")>? }
 #| <system-font-family-name> = caption | icon | menu | message-box | small-caption | status-bar
 rule system-font-family-name { :i [caption | icon | menu | "message-box" | "small-caption" | "status-bar" ]& <keyw>  }
 #| <generic-font-family> = <generic-font-script-specific>| <generic-font-complete> | <generic-font-incomplete>
@@ -32,7 +32,7 @@ rule generic-font-complete { :i [serif | "sans-serif" | "system-ui" | cursive | 
 rule generic-font-incomplete { :i ["ui-serif" | "ui-sans-serif" | "ui-monospace" | "ui-rounded" ]& <keyw>  }
 #| font-feature-settings: normal | <feature-tag-value>#
 rule decl:sym<font-feature-settings> { :i ("font-feature-settings") ":" <val(/<css-val-font-feature-settings> /, &?ROUTINE.WHY)>}
-rule css-val-font-feature-settings { :i normal & <keyw> || <feature-tag-value> +% <op(",")>  }
+rule css-val-font-feature-settings { :i normal & <keyw> || <feature-tag-value> +% <op(",")>?  }
 #| font-kerning: auto | normal | none
 rule decl:sym<font-kerning> { :i ("font-kerning") ":" <val(/<css-val-font-kerning> /, &?ROUTINE.WHY)>}
 rule css-val-font-kerning { :i [auto | normal | none ]& <keyw>  }
@@ -54,7 +54,7 @@ rule palette-mix { :i "palette-mix(" [<color-interpolation-method> "," [[[[norma
     $*A++
 }>|| <percentage> ? :my $*B;<!{
     $*B++
-}>]** 2] ** 2% ","  || <usage(&?ROUTINE.WHY)> ] ")" }
+}>]** 2] ** 2% ","?  || <usage(&?ROUTINE.WHY)> ] ")" }
 #| font-size: <absolute-size> | <relative-size> | <length-percentage [0,∞]> | math
 rule decl:sym<font-size> { :i ("font-size") ":" <val(/<css-val-font-size> /, &?ROUTINE.WHY)>}
 rule css-val-font-size { :i <absolute-size> || <relative-size> || <length-percentage> || math & <keyw>  }
@@ -207,7 +207,7 @@ rule decl:sym<font-variant-position> { :i ("font-variant-position") ":" <val(/<c
 rule css-val-font-variant-position { :i [normal | sub | super ]& <keyw>  }
 #| font-variation-settings: normal | [ <opentype-tag> <number> ]#
 rule decl:sym<font-variation-settings> { :i ("font-variation-settings") ":" <val(/<css-val-font-variation-settings> /, &?ROUTINE.WHY)>}
-rule css-val-font-variation-settings { :i normal & <keyw> || [<opentype-tag> <number> ] +% <op(",")>  }
+rule css-val-font-variation-settings { :i normal & <keyw> || [<opentype-tag> <number> ] +% <op(",")>?  }
 #| font-weight: <font-weight-absolute> | bolder | lighter
 rule decl:sym<font-weight> { :i ("font-weight") ":" <val(/<css-val-font-weight> /, &?ROUTINE.WHY)>}
 rule css-val-font-weight { :i <font-weight-absolute> || [bolder | lighter ]& <keyw>   }

@@ -9,19 +9,19 @@ rule css-val-font { :i [[[<css-val-font-style> :my $*A;<!{
     $*C++
 }>|| <css-val-font-stretch> :my $*D;<!{
     $*D++
-}>]+] ? <css-val-font-size> [<op("/")> <css-val-line-height> ] ? <css-val-font-family> +% <op(",")> ] || [caption | icon | menu | "message-box" | "small-caption" | "status-bar" ]& <keyw>   }
+}>]+] ? <css-val-font-size> [<op("/")> <css-val-line-height> ] ? <css-val-font-family> +% <op(",")>? ] || [caption | icon | menu | "message-box" | "small-caption" | "status-bar" ]& <keyw>   }
 #| <font-variant-css21> = normal | small-caps
 rule font-variant-css21 { :i [normal | "small-caps" ]& <keyw>  }
 #| font-family: [ <generic-family> | <family-name> ]#
-rule decl:sym<font-family> { :i ("font-family") ":" <val(/<css-val-font-family> +% <op(",")> /, &?ROUTINE.WHY)>}
-rule css-val-font-family { :i [<generic-family> || <family-name> ] }
+rule decl:sym<font-family> { :i ("font-family") ":" <val(/<css-val-font-family> /, &?ROUTINE.WHY)>}
+rule css-val-font-family { :i [<generic-family> || <family-name> ] +% <op(",")>? }
 #| <generic-family> = serif | sans-serif | cursive | fantasy | monospace
 rule generic-family { :i [serif | "sans-serif" | cursive | fantasy | monospace ]& <keyw>  }
 #| <family-name> = <identifiers> | <string>
 rule family-name { :i <identifiers> || <string>  }
 #| font-feature-settings: normal | <feature-tag-value>#
 rule decl:sym<font-feature-settings> { :i ("font-feature-settings") ":" <val(/<css-val-font-feature-settings> /, &?ROUTINE.WHY)>}
-rule css-val-font-feature-settings { :i normal & <keyw> || <feature-tag-value> +% <op(",")>  }
+rule css-val-font-feature-settings { :i normal & <keyw> || <feature-tag-value> +% <op(",")>?  }
 #| font-kerning: auto | normal | none
 rule decl:sym<font-kerning> { :i ("font-kerning") ":" <val(/<css-val-font-kerning> /, &?ROUTINE.WHY)>}
 rule css-val-font-kerning { :i [auto | normal | none ]& <keyw>  }

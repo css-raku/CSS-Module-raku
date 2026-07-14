@@ -15,8 +15,8 @@ rule geometry-box { :i <shape-box> || ["fill-box" | "stroke-box" | "view-box" ]&
 rule decl:sym<clip-rule> { :i ("clip-rule") ":" <val(/<css-val-clip-rule> /, &?ROUTINE.WHY)>}
 rule css-val-clip-rule { :i [nonzero | evenodd ]& <keyw>  }
 #| mask: <mask-layer>#
-rule decl:sym<mask> { :i (mask) ":" <val(/<css-val-mask> +% <op(",")> /, &?ROUTINE.WHY)>}
-rule css-val-mask { :i <mask-layer> }
+rule decl:sym<mask> { :i (mask) ":" <val(/<css-val-mask> /, &?ROUTINE.WHY)>}
+rule css-val-mask { :i <mask-layer> +% <op(",")>? }
 #| <mask-layer> = <mask-reference> ||  <position> [ / <bg-size> ]? ||  <repeat-style> ||  <geometry-box> ||  [ <geometry-box> | no-clip ] ||  <compositing-operator> ||  <masking-mode>
 rule mask-layer { :i [<mask-reference> :my $*A;<!{
     $*A++
@@ -69,8 +69,8 @@ rule css-val-mask-border-source { :i <css-val-border-image-source> }
 rule decl:sym<mask-border-width> { :i ("mask-border-width") ":" <val(/<css-val-mask-border-width> /, &?ROUTINE.WHY)>}
 rule css-val-mask-border-width { :i <css-val-border-image-width> }
 #| mask-clip: [ <coord-box> | no-clip ]#
-rule decl:sym<mask-clip> { :i ("mask-clip") ":" <val(/<css-val-mask-clip> +% <op(",")> /, &?ROUTINE.WHY)>}
-rule css-val-mask-clip { :i [<coord-box> || "no-clip" & <keyw> ] }
+rule decl:sym<mask-clip> { :i ("mask-clip") ":" <val(/<css-val-mask-clip> /, &?ROUTINE.WHY)>}
+rule css-val-mask-clip { :i [<coord-box> || "no-clip" & <keyw> ] +% <op(",")>? }
 #| <coord-box> = <paint-box> | view-box
 rule coord-box { :i <paint-box> || "view-box" & <keyw>  }
 #| <paint-box> = <visual-box> | fill-box | stroke-box
@@ -82,28 +82,28 @@ rule layout-box { :i <visual-box> || "margin-box" & <keyw>  }
 #| <clip-source> = <url>
 rule clip-source { :i <url> }
 #| mask-composite: <compositing-operator>#
-rule decl:sym<mask-composite> { :i ("mask-composite") ":" <val(/<css-val-mask-composite> +% <op(",")> /, &?ROUTINE.WHY)>}
-rule css-val-mask-composite { :i <compositing-operator> }
+rule decl:sym<mask-composite> { :i ("mask-composite") ":" <val(/<css-val-mask-composite> /, &?ROUTINE.WHY)>}
+rule css-val-mask-composite { :i <compositing-operator> +% <op(",")>? }
 #| <compositing-operator> = add | subtract | intersect | exclude
 rule compositing-operator { :i [add | subtract | intersect | exclude ]& <keyw>  }
 #| mask-image: <mask-reference>#
-rule decl:sym<mask-image> { :i ("mask-image") ":" <val(/<css-val-mask-image> +% <op(",")> /, &?ROUTINE.WHY)>}
-rule css-val-mask-image { :i <mask-reference> }
+rule decl:sym<mask-image> { :i ("mask-image") ":" <val(/<css-val-mask-image> /, &?ROUTINE.WHY)>}
+rule css-val-mask-image { :i <mask-reference> +% <op(",")>? }
 #| mask-mode: <masking-mode>#
-rule decl:sym<mask-mode> { :i ("mask-mode") ":" <val(/<css-val-mask-mode> +% <op(",")> /, &?ROUTINE.WHY)>}
-rule css-val-mask-mode { :i <masking-mode> }
+rule decl:sym<mask-mode> { :i ("mask-mode") ":" <val(/<css-val-mask-mode> /, &?ROUTINE.WHY)>}
+rule css-val-mask-mode { :i <masking-mode> +% <op(",")>? }
 #| mask-origin: <coord-box>#
-rule decl:sym<mask-origin> { :i ("mask-origin") ":" <val(/<css-val-mask-origin> +% <op(",")> /, &?ROUTINE.WHY)>}
-rule css-val-mask-origin { :i <coord-box> }
+rule decl:sym<mask-origin> { :i ("mask-origin") ":" <val(/<css-val-mask-origin> /, &?ROUTINE.WHY)>}
+rule css-val-mask-origin { :i <coord-box> +% <op(",")>? }
 #| mask-position: <position>#
-rule decl:sym<mask-position> { :i ("mask-position") ":" <val(/<css-val-mask-position> +% <op(",")> /, &?ROUTINE.WHY)>}
-rule css-val-mask-position { :i <position> }
+rule decl:sym<mask-position> { :i ("mask-position") ":" <val(/<css-val-mask-position> /, &?ROUTINE.WHY)>}
+rule css-val-mask-position { :i <position> +% <op(",")>? }
 #| mask-repeat: <repeat-style>#
-rule decl:sym<mask-repeat> { :i ("mask-repeat") ":" <val(/<css-val-mask-repeat> +% <op(",")> /, &?ROUTINE.WHY)>}
-rule css-val-mask-repeat { :i <repeat-style> }
+rule decl:sym<mask-repeat> { :i ("mask-repeat") ":" <val(/<css-val-mask-repeat> /, &?ROUTINE.WHY)>}
+rule css-val-mask-repeat { :i <repeat-style> +% <op(",")>? }
 #| mask-size: <bg-size>#
-rule decl:sym<mask-size> { :i ("mask-size") ":" <val(/<css-val-mask-size> +% <op(",")> /, &?ROUTINE.WHY)>}
-rule css-val-mask-size { :i <bg-size> }
+rule decl:sym<mask-size> { :i ("mask-size") ":" <val(/<css-val-mask-size> /, &?ROUTINE.WHY)>}
+rule css-val-mask-size { :i <bg-size> +% <op(",")>? }
 #| mask-type: luminance | alpha
 rule decl:sym<mask-type> { :i ("mask-type") ":" <val(/<css-val-mask-type> /, &?ROUTINE.WHY)>}
 rule css-val-mask-type { :i [luminance | alpha ]& <keyw>  }

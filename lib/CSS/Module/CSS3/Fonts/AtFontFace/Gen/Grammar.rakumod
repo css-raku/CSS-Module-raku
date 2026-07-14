@@ -6,7 +6,7 @@ rule css-val-font-family { :i <family-name> }
 rule family-name { :i <identifiers> || <string>  }
 #| font-feature-settings: normal | <feature-tag-value>#
 rule decl:sym<font-feature-settings> { :i ("font-feature-settings") ":" <val(/<css-val-font-feature-settings> /, &?ROUTINE.WHY)>}
-rule css-val-font-feature-settings { :i normal & <keyw> || <feature-tag-value> +% <op(",")>  }
+rule css-val-font-feature-settings { :i normal & <keyw> || <feature-tag-value> +% <op(",")>?  }
 #| font-stretch: normal | ultra-condensed | extra-condensed | condensed | semi-condensed | semi-expanded | expanded | extra-expanded | ultra-expanded
 rule decl:sym<font-stretch> { :i ("font-stretch") ":" <val(/<css-val-font-stretch> /, &?ROUTINE.WHY)>}
 rule css-val-font-stretch { :i [normal | "ultra-condensed" | "extra-condensed" | condensed | "semi-condensed" | "semi-expanded" | expanded | "extra-expanded" | "ultra-expanded" ]& <keyw>  }
@@ -60,8 +60,8 @@ rule css-val-font-variant { :i normal & <keyw> || [[<common-lig-values> :my $*A;
 rule decl:sym<font-weight> { :i ("font-weight") ":" <val(/<css-val-font-weight> /, &?ROUTINE.WHY)>}
 rule css-val-font-weight { :i [normal | bold ]& <keyw>  || [100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 ]& <number>  }
 #| src: <font-src-expr>#
-rule decl:sym<src> { :i (src) ":" <val(/<css-val-src> +% <op(",")> /, &?ROUTINE.WHY)>}
-rule css-val-src { :i <font-src-expr> }
+rule decl:sym<src> { :i (src) ":" <val(/<css-val-src> /, &?ROUTINE.WHY)>}
+rule css-val-src { :i <font-src-expr> +% <op(",")>? }
 #| <font-src-expr> = [<uri>|local(<font-face-name>)] [format(<font-format>#)]? | <font-face-name>
 rule font-src-expr { :i [<uri> || <local> ] <format> ?  || <font-face-name>  }
 #| <font-format> = [<string> | collection | embedded-opentype | opentype | svg | truetype | woff | woff2 ]
@@ -71,7 +71,7 @@ rule font-face-name { :i <identifiers> || <string>  }
 #| local(<font-face-name>)
 rule local { :i "local(" [<font-face-name> || <usage(&?ROUTINE.WHY)> ] ")" }
 #| format(<font-format>#)
-rule format { :i "format(" [<font-format> +% "," || <usage(&?ROUTINE.WHY)> ] ")" }
+rule format { :i "format(" [<font-format> +% ","? || <usage(&?ROUTINE.WHY)> ] ")" }
 #| unicode-range: <urange>#
-rule decl:sym<unicode-range> { :i ("unicode-range") ":" <val(/<css-val-unicode-range> +% <op(",")> /, &?ROUTINE.WHY)>}
-rule css-val-unicode-range { :i <urange> }
+rule decl:sym<unicode-range> { :i ("unicode-range") ":" <val(/<css-val-unicode-range> /, &?ROUTINE.WHY)>}
+rule css-val-unicode-range { :i <urange> +% <op(",")>? }

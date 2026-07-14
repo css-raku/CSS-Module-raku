@@ -24,9 +24,9 @@ rule contextual-alt-values { :i [[contextual | "no-contextual" ]& <keyw> ] }
 #| stylistic(<font-feature-value-name>)
 rule stylistic { :i "stylistic(" [<font-feature-value-name> || <usage(&?ROUTINE.WHY)> ] ")" }
 #| styleset(<font-feature-value-name>#)
-rule styleset { :i "styleset(" [<font-feature-value-name> +% "," || <usage(&?ROUTINE.WHY)> ] ")" }
+rule styleset { :i "styleset(" [<font-feature-value-name> +% ","? || <usage(&?ROUTINE.WHY)> ] ")" }
 #| character-variant(<font-feature-value-name>#)
-rule character-variant { :i "character-variant(" [<font-feature-value-name> +% "," || <usage(&?ROUTINE.WHY)> ] ")" }
+rule character-variant { :i "character-variant(" [<font-feature-value-name> +% ","? || <usage(&?ROUTINE.WHY)> ] ")" }
 #| swash(<font-feature-value-name>)
 rule swash { :i "swash(" [<font-feature-value-name> || <usage(&?ROUTINE.WHY)> ] ")" }
 #| ornaments(<font-feature-value-name>)

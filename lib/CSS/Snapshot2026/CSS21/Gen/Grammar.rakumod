@@ -52,14 +52,14 @@ rule css-val-background { :i [[<css-val-background-color> :my $*A;<!{
 rule decl:sym<border-collapse> { :i ("border-collapse") ":" <val(/<css-val-border-collapse> /, &?ROUTINE.WHY)>}
 rule css-val-border-collapse { :i [collapse | separate ]& <keyw>  }
 #| border-color: [ <color> | transparent ]{1,4}
-rule decl:sym<border-color> { :i ("border-color") ":" <val(/<css-val-border-color>** 1..4 /, &?ROUTINE.WHY)>}
-rule css-val-border-color { :i [<color> || transparent & <keyw> ] }
+rule decl:sym<border-color> { :i ("border-color") ":" <val(/<css-val-border-color> /, &?ROUTINE.WHY)>}
+rule css-val-border-color { :i [<color> || transparent & <keyw> ] ** 1..4 }
 #| border-spacing: <length> <length>?
 rule decl:sym<border-spacing> { :i ("border-spacing") ":" <val(/<css-val-border-spacing> /, &?ROUTINE.WHY)>}
 rule css-val-border-spacing { :i <length> <length> ?  }
 #| border-style: <border-style>{1,4}
-rule decl:sym<border-style> { :i ("border-style") ":" <val(/<css-val-border-style>** 1..4 /, &?ROUTINE.WHY)>}
-rule css-val-border-style { :i <border-style> }
+rule decl:sym<border-style> { :i ("border-style") ":" <val(/<css-val-border-style> /, &?ROUTINE.WHY)>}
+rule css-val-border-style { :i <border-style> ** 1..4 }
 #| <border-style> = none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset
 rule border-style { :i [none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset ]& <keyw>  }
 #| border-top: [ 'border-top-width' || 'border-top-style' || 'border-top-color' ]
@@ -135,8 +135,8 @@ rule css-val-border-bottom-width { :i <border-width> }
 rule decl:sym<border-left-width> { :i ("border-left-width") ":" <val(/<css-val-border-left-width> /, &?ROUTINE.WHY)>}
 rule css-val-border-left-width { :i <border-width> }
 #| border-width: <border-width>{1,4}
-rule decl:sym<border-width> { :i ("border-width") ":" <val(/<css-val-border-width>** 1..4 /, &?ROUTINE.WHY)>}
-rule css-val-border-width { :i <border-width> }
+rule decl:sym<border-width> { :i ("border-width") ":" <val(/<css-val-border-width> /, &?ROUTINE.WHY)>}
+rule css-val-border-width { :i <border-width> ** 1..4 }
 #| <border-width> = thin | medium | thick | <length>
 rule border-width { :i [thin | medium | thick ]& <keyw>  || <length>  }
 #| border: [ 'border-width' || 'border-style' || 'border-color' ]
@@ -163,7 +163,7 @@ rule css-val-clip { :i <shape> || auto & <keyw>  }
 #| <shape> = <rect()>
 rule shape { :i <rect> }
 #| rect([<length> | auto]#{4,4})
-rule rect { :i "rect(" [[<length> || auto & <keyw> ] ** 4% "," || <usage(&?ROUTINE.WHY)> ] ")" }
+rule rect { :i "rect(" [[<length> || auto & <keyw> ] ** 4% ","? || <usage(&?ROUTINE.WHY)> ] ")" }
 #| color: <color>
 rule decl:sym<color> { :i (color) ":" <val(/<css-val-color> /, &?ROUTINE.WHY)>}
 rule css-val-color { :i <color> }
@@ -216,8 +216,8 @@ rule css-val-empty-cells { :i [show | hide ]& <keyw>  }
 rule decl:sym<float> { :i (float) ":" <val(/<css-val-float> /, &?ROUTINE.WHY)>}
 rule css-val-float { :i [left | right | none ]& <keyw>  }
 #| font-family: [ <generic-family> | <family-name> ]#
-rule decl:sym<font-family> { :i ("font-family") ":" <val(/<css-val-font-family> +% <op(",")> /, &?ROUTINE.WHY)>}
-rule css-val-font-family { :i [<generic-family> || <family-name> ] }
+rule decl:sym<font-family> { :i ("font-family") ":" <val(/<css-val-font-family> /, &?ROUTINE.WHY)>}
+rule css-val-font-family { :i [<generic-family> || <family-name> ] +% <op(",")>? }
 #| <generic-family> = serif | sans-serif | cursive | fantasy | monospace
 rule generic-family { :i [serif | "sans-serif" | cursive | fantasy | monospace ]& <keyw>  }
 #| <family-name> = <identifiers> | <string>
@@ -246,7 +246,7 @@ rule css-val-font { :i [[[<css-val-font-style> :my $*A;<!{
     $*B++
 }>|| <css-val-font-weight> :my $*C;<!{
     $*C++
-}>]+] ? <css-val-font-size> [<op("/")> <css-val-line-height> ] ? <css-val-font-family> +% <op(",")> ] || [caption | icon | menu | "message-box" | "small-caption" | "status-bar" ]& <keyw>   }
+}>]+] ? <css-val-font-size> [<op("/")> <css-val-line-height> ] ? <css-val-font-family> +% <op(",")>? ] || [caption | icon | menu | "message-box" | "small-caption" | "status-bar" ]& <keyw>   }
 #| height: <length> | <percentage> | auto
 rule decl:sym<height> { :i (height) ":" <val(/<css-val-height> /, &?ROUTINE.WHY)>}
 rule css-val-height { :i <length> || <percentage> || auto & <keyw>  }
@@ -290,8 +290,8 @@ rule css-val-margin-top { :i <margin-width> }
 rule decl:sym<margin-bottom> { :i ("margin-bottom") ":" <val(/<css-val-margin-bottom> /, &?ROUTINE.WHY)>}
 rule css-val-margin-bottom { :i <margin-width> }
 #| margin: <margin-width>{1,4}
-rule decl:sym<margin> { :i (margin) ":" <val(/<css-val-margin>** 1..4 /, &?ROUTINE.WHY)>}
-rule css-val-margin { :i <margin-width> }
+rule decl:sym<margin> { :i (margin) ":" <val(/<css-val-margin> /, &?ROUTINE.WHY)>}
+rule css-val-margin { :i <margin-width> ** 1..4 }
 #| <margin-width> = <length> | <percentage> | auto
 rule margin-width { :i <length> || <percentage> || auto & <keyw>  }
 #| max-height: <length> | <percentage> | none
@@ -346,8 +346,8 @@ rule css-val-padding-bottom { :i <padding-width> }
 rule decl:sym<padding-left> { :i ("padding-left") ":" <val(/<css-val-padding-left> /, &?ROUTINE.WHY)>}
 rule css-val-padding-left { :i <padding-width> }
 #| padding: <padding-width>{1,4}
-rule decl:sym<padding> { :i (padding) ":" <val(/<css-val-padding>** 1..4 /, &?ROUTINE.WHY)>}
-rule css-val-padding { :i <padding-width> }
+rule decl:sym<padding> { :i (padding) ":" <val(/<css-val-padding> /, &?ROUTINE.WHY)>}
+rule css-val-padding { :i <padding-width> ** 1..4 }
 #| <padding-width> = <length> | <percentage>
 rule padding-width { :i <length> || <percentage>  }
 #| page-break-after: auto | always | avoid | left | right
@@ -450,8 +450,8 @@ rule css-val-vertical-align { :i [baseline | sub | super | top | "text-top" | mi
 rule decl:sym<visibility> { :i (visibility) ":" <val(/<css-val-visibility> /, &?ROUTINE.WHY)>}
 rule css-val-visibility { :i [visible | hidden | collapse ]& <keyw>  }
 #| voice-family: [<generic-voice> | <specific-voice> ]#
-rule decl:sym<voice-family> { :i ("voice-family") ":" <val(/<css-val-voice-family> +% <op(",")> /, &?ROUTINE.WHY)>}
-rule css-val-voice-family { :i [<generic-voice> || <specific-voice> ] }
+rule decl:sym<voice-family> { :i ("voice-family") ":" <val(/<css-val-voice-family> /, &?ROUTINE.WHY)>}
+rule css-val-voice-family { :i [<generic-voice> || <specific-voice> ] +% <op(",")>? }
 #| <generic-voice> = male | female | child
 rule generic-voice { :i [male | female | child ]& <keyw>  }
 #| <specific-voice> = <identifier> | <string>

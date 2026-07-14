@@ -13,7 +13,7 @@ rule decl:sym<font-family> { :i ("font-family") ":" <val(/<css-val-font-family> 
 rule css-val-font-family { :i <font-family-name> }
 #| font-feature-settings: normal | <feature-tag-value>#
 rule decl:sym<font-feature-settings> { :i ("font-feature-settings") ":" <val(/<css-val-font-feature-settings> /, &?ROUTINE.WHY)>}
-rule css-val-font-feature-settings { :i normal & <keyw> || <feature-tag-value> +% <op(",")>  }
+rule css-val-font-feature-settings { :i normal & <keyw> || <feature-tag-value> +% <op(",")>?  }
 #| font-language-override: normal | <string>
 rule decl:sym<font-language-override> { :i ("font-language-override") ":" <val(/<css-val-font-language-override> /, &?ROUTINE.WHY)>}
 rule css-val-font-language-override { :i normal & <keyw> || <string>  }
@@ -25,7 +25,7 @@ rule decl:sym<font-style> { :i ("font-style") ":" <val(/<css-val-font-style> /, 
 rule css-val-font-style { :i [auto | normal | italic | left | right | oblique ]& <keyw>  [<angle> ** 1..2] ?  }
 #| font-variation-settings: normal | [ <string> <number>]#
 rule decl:sym<font-variation-settings> { :i ("font-variation-settings") ":" <val(/<css-val-font-variation-settings> /, &?ROUTINE.WHY)>}
-rule css-val-font-variation-settings { :i normal & <keyw> || [<string> <number> ] +% <op(",")>  }
+rule css-val-font-variation-settings { :i normal & <keyw> || [<string> <number> ] +% <op(",")>?  }
 #| font-weight: auto | <font-weight-absolute>{1,2}
 rule decl:sym<font-weight> { :i ("font-weight") ":" <val(/<css-val-font-weight> /, &?ROUTINE.WHY)>}
 rule css-val-font-weight { :i auto & <keyw> || <font-weight-absolute> ** 1..2  }
@@ -36,14 +36,14 @@ rule css-val-font-width { :i auto & <keyw> || <css-val-font-width> ** 1..2  }
 rule decl:sym<line-gap-override> { :i ("line-gap-override") ":" <val(/<css-val-line-gap-override> /, &?ROUTINE.WHY)>}
 rule css-val-line-gap-override { :i normal & <keyw> || <percentage>  }
 #| src: <font-src>#
-rule decl:sym<src> { :i (src) ":" <val(/<css-val-src> +% <op(",")> /, &?ROUTINE.WHY)>}
-rule css-val-src { :i <font-src> }
+rule decl:sym<src> { :i (src) ":" <val(/<css-val-src> /, &?ROUTINE.WHY)>}
+rule css-val-src { :i <font-src> +% <op(",")>? }
 #| <font-src> = <url> [ format( <font-format> ) ]? [ tech( <font-tech># ) ]? | local( <font-family-name> )
 rule font-src { :i <url> <format> ? <tech> ?  || <local>  }
 #| format( <font-format> )
 rule format { :i "format(" [<font-format> || <usage(&?ROUTINE.WHY)> ] ")" }
 #| tech( <font-tech># )
-rule tech { :i "tech(" [<font-tech> +% "," || <usage(&?ROUTINE.WHY)> ] ")" }
+rule tech { :i "tech(" [<font-tech> +% ","? || <usage(&?ROUTINE.WHY)> ] ")" }
 #| local( <font-family-name> )
 rule local { :i "local(" [<font-family-name> || <usage(&?ROUTINE.WHY)> ] ")" }
 #| <font-format> = [ <string> | collection | embedded-opentype | opentype      | svg | truetype | woff | woff2 ]
@@ -55,5 +55,5 @@ rule font-features-tech { :i [["features-opentype" | "features-aat" | "features-
 #| <color-font-tech> = [ color-COLRv0 | color-COLRv1 | color-SVG | color-sbix | color-CBDT ]
 rule color-font-tech { :i [["color-COLRv0" | "color-COLRv1" | "color-SVG" | "color-sbix" | "color-CBDT" ]& <keyw> ] }
 #| unicode-range: <unicode-range>#
-rule decl:sym<unicode-range> { :i ("unicode-range") ":" <val(/<css-val-unicode-range> +% <op(",")> /, &?ROUTINE.WHY)>}
-rule css-val-unicode-range { :i <unicode-range> }
+rule decl:sym<unicode-range> { :i ("unicode-range") ":" <val(/<css-val-unicode-range> /, &?ROUTINE.WHY)>}
+rule css-val-unicode-range { :i <unicode-range> +% <op(",")>? }

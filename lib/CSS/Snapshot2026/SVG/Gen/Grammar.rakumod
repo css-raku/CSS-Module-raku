@@ -94,7 +94,7 @@ rule css-val-stroke { :i <paint> }
 rule decl:sym<stroke-dasharray> { :i ("stroke-dasharray") ":" <val(/<css-val-stroke-dasharray> /, &?ROUTINE.WHY)>}
 rule css-val-stroke-dasharray { :i none & <keyw> || <dasharray>  }
 #| <dasharray> = [ <length-percentage> | <number> ]#
-rule dasharray { :i [<length-percentage> || <number> ] +% <op(",")> }
+rule dasharray { :i [<length-percentage> || <number> ] +% <op(",")>? }
 #| stroke-dashoffset: <length-percentage>
 rule decl:sym<stroke-dashoffset> { :i ("stroke-dashoffset") ":" <val(/<css-val-stroke-dashoffset> /, &?ROUTINE.WHY)>}
 rule css-val-stroke-dashoffset { :i <length-percentage> }
