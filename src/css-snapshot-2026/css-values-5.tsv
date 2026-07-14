@@ -1,4 +1,4 @@
-<position> = <position-one> | <position-two> | <position-four>
+<position> = <position-four> | <position-two> | <position-one>
 <position-one> = [\
   left | center | right | top | bottom |\
   x-start | x-end | y-start | y-end |\

@@ -3,8 +3,8 @@ unit class CSS::Module::CSS2026::Actions;
 use CSS::Grammar::Actions;
 also is CSS::Grammar::Actions;
 
-use     CSS::Module::CSS3::Colors;
-also is CSS::Module::CSS3::Colors::Actions;
+use     CSS::Module::CSS2026::Colors;
+also is CSS::Module::CSS2026::Colors::Actions;
 
 use CSS::Specification::Base::Actions;
 also does CSS::Specification::Base::Actions;

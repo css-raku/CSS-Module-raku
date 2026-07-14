@@ -60,6 +60,7 @@
     "CSS::Module::Latest": "lib/CSS/Module/Latest.rakumod",
     "CSS::Module::CSS2026": "lib/CSS/Module/CSS2026.rakumod",
     "CSS::Module::CSS2026::Actions": "lib/CSS/Module/CSS2026/Actions.rakumod",
+    "CSS::Module::CSS2026::Colors": "lib/CSS/Module/CSS2026/Colors.rakumod",
     "CSS::Module::CSS2026::Fonts::AtFontFace": "lib/CSS/Module/CSS2026/Fonts/AtFontFace.rakumod",
     "CSS::Snapshot2026::Metadata": "lib/CSS/Snapshot2026/Metadata.rakumod",
     "CSS::Snapshot2026::Gen::Actions": "lib/CSS/Snapshot2026/Gen/Actions.rakumod",
