@@ -79,9 +79,9 @@ rule css-val-pointer-events { :i ["bounding-box" | visiblePainted | visibleFill 
 #| shape-rendering: auto | optimizeSpeed | crispEdges | geometricPrecision
 rule decl:sym<shape-rendering> { :i ("shape-rendering") ":" <val(/<css-val-shape-rendering> /, &?ROUTINE.WHY)>}
 rule css-val-shape-rendering { :i [auto | optimizeSpeed | crispEdges | geometricPrecision ]& <keyw>  }
-#| stop-color: currentColor | <color> [<icc-color()>]
+#| stop-color: currentColor | <color>
 rule decl:sym<stop-color> { :i ("stop-color") ":" <val(/<css-val-stop-color> /, &?ROUTINE.WHY)>}
-rule css-val-stop-color { :i currentColor & <keyw> || <color> <icc-color>   }
+rule css-val-stop-color { :i currentColor & <keyw> || <color>  }
 #| icc-color(<name> [,<number>]*)
 rule icc-color { :i "icc-color(" [<name> ["," <number> ] *  || <usage(&?ROUTINE.WHY)> ] ")" }
 #| stop-opacity: <alpha-value>
@@ -104,9 +104,9 @@ rule css-val-stroke-linecap { :i [butt | round | square ]& <keyw>  }
 #| stroke-linejoin: miter | round | bevel
 rule decl:sym<stroke-linejoin> { :i ("stroke-linejoin") ":" <val(/<css-val-stroke-linejoin> /, &?ROUTINE.WHY)>}
 rule css-val-stroke-linejoin { :i [miter | round | bevel ]& <keyw>  }
-#| stroke-miterlimit: <number> (non-negative)
+#| stroke-miterlimit: <number>
 rule decl:sym<stroke-miterlimit> { :i ("stroke-miterlimit") ":" <val(/<css-val-stroke-miterlimit> /, &?ROUTINE.WHY)>}
-rule css-val-stroke-miterlimit { :i <number> <op("(")> "non-negative" & <keyw> <op(")")>   }
+rule css-val-stroke-miterlimit { :i <number> }
 #| stroke-opacity: <alpha-value>
 rule decl:sym<stroke-opacity> { :i ("stroke-opacity") ":" <val(/<css-val-stroke-opacity> /, &?ROUTINE.WHY)>}
 rule css-val-stroke-opacity { :i <alpha-value> }

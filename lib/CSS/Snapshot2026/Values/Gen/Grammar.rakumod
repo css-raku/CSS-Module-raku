@@ -23,5 +23,5 @@ rule position-four { :i [[[[[left | right | "x-start" | "x-end" ]& <keyw> ] <len
 }>|| [[["inline-start" | "inline-end" ]& <keyw> ] <length-percentage> ] :my $*D;<!{
     $*D++
 }>]** 2 || [[[start | end ]& <keyw> ] <length-percentage> ] ** 2 ] }
-#| <length-percentage> = <length> | <percentage>
-rule length-percentage { :i <length> || <percentage>  }
+#| <length-percentage> = <length> | <percentage> | <number>
+rule length-percentage { :i <length> || <percentage> || <number>  }

@@ -25,13 +25,9 @@ rule css-val-align-self { :i auto & <keyw> || <overflow-position> ? [normal & <k
 #| justify-content: normal | <content-distribution> | <overflow-position>? [ <content-position> | left | right ]
 rule decl:sym<justify-content> { :i ("justify-content") ":" <val(/<css-val-justify-content> /, &?ROUTINE.WHY)>}
 rule css-val-justify-content { :i normal & <keyw> || <content-distribution> || <overflow-position> ? [<content-position> || [left | right ]& <keyw>  ]   }
-#| justify-items: normal | stretch | <baseline-position> | <overflow-position>? [ <self-position> | left | right ] | legacy | legacy && [ left | right | center ]
+#| justify-items: normal | stretch | <baseline-position> | <overflow-position>? [ <self-position> | left | right ] | legacy [ left | right | center ]?
 rule decl:sym<justify-items> { :i ("justify-items") ":" <val(/<css-val-justify-items> /, &?ROUTINE.WHY)>}
-rule css-val-justify-items { :i [normal | stretch ]& <keyw>  || <baseline-position> || <overflow-position> ? [<self-position> || [left | right ]& <keyw>  ]  || [[legacy | legacy ]& <keyw>  :my $*A;<!{
-    $*A++
-}>|| [[left | right | center ]& <keyw> ] :my $*B;<!{
-    $*B++
-}>]** 2  }
+rule css-val-justify-items { :i [normal | stretch ]& <keyw>  || <baseline-position> || <overflow-position> ? [<self-position> || [left | right ]& <keyw>  ]  || legacy & <keyw> [[left | right | center ]& <keyw> ] ?   }
 #| justify-self: auto | <overflow-position>? [ normal | <self-position> | left | right ] | stretch | <baseline-position>
 rule decl:sym<justify-self> { :i ("justify-self") ":" <val(/<css-val-justify-self> /, &?ROUTINE.WHY)>}
 rule css-val-justify-self { :i auto & <keyw> || <overflow-position> ? [normal & <keyw> || <self-position> || [left | right ]& <keyw>  ]  || stretch & <keyw> || <baseline-position>  }

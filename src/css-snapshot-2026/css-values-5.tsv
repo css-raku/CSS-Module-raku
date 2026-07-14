@@ -26,4 +26,4 @@
 |\
   [ [ start | end ] <length-percentage> ]{2}\
 ]
-<length-percentage> = <length> | <percentage>
+<length-percentage> = <length> | <percentage> | <number>
