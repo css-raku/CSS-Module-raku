@@ -4,8 +4,8 @@ rule visual-box { :i ["content-box" | "padding-box" | "border-box" ]& <keyw>  }
 #| <margin-width> = <length-percentage> | auto
 rule margin-width { :i <length-percentage> || auto & <keyw>  }
 #| margin: <margin-width>{1,4}
-rule decl:sym<margin> { :i (margin) ":" <val(/<css-val-margin> /, &?ROUTINE.WHY)>}
-rule css-val-margin { :i <margin-width> ** 1..4 }
+rule decl:sym<margin> { :i (margin) ":" <val(/<css-val-margin>** 1..4 /, &?ROUTINE.WHY)>}
+rule css-val-margin { :i <margin-width> }
 #| margin-bottom: <margin-width>
 rule decl:sym<margin-bottom> { :i ("margin-bottom") ":" <val(/<css-val-margin-bottom> /, &?ROUTINE.WHY)>}
 rule css-val-margin-bottom { :i <margin-width> }
@@ -34,8 +34,8 @@ rule css-val-margin-trim { :i none & <keyw> || [[block & <keyw> :my $*A;<!{
     $*F++
 }>]+]  }
 #| padding: <length-percentage [0,∞]>{1,4}
-rule decl:sym<padding> { :i (padding) ":" <val(/<css-val-padding> /, &?ROUTINE.WHY)>}
-rule css-val-padding { :i <length-percentage> ** 1..4 }
+rule decl:sym<padding> { :i (padding) ":" <val(/<css-val-padding>** 1..4 /, &?ROUTINE.WHY)>}
+rule css-val-padding { :i <length-percentage> }
 #| padding-bottom: <length-percentage [0,∞]>
 rule decl:sym<padding-bottom> { :i ("padding-bottom") ":" <val(/<css-val-padding-bottom> /, &?ROUTINE.WHY)>}
 rule css-val-padding-bottom { :i <length-percentage> }

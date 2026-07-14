@@ -115,8 +115,8 @@ rule css-val-margin-bottom { :i <length> || <percentage> || auto & <keyw>  }
 rule decl:sym<margin-left> { :i ("margin-left") ":" <val(/<css-val-margin-left> /, &?ROUTINE.WHY)>}
 rule css-val-margin-left { :i <length> || <percentage> || auto & <keyw>  }
 #| margin: [ <length> | <percentage> | auto ]{1,4}
-rule decl:sym<margin> { :i (margin) ":" <val(/<css-val-margin> /, &?ROUTINE.WHY)>}
-rule css-val-margin { :i [<length> || <percentage> || auto & <keyw> ] ** 1..4 }
+rule decl:sym<margin> { :i (margin) ":" <val(/<css-val-margin>** 1..4 /, &?ROUTINE.WHY)>}
+rule css-val-margin { :i [<length> || <percentage> || auto & <keyw> ] }
 #| padding-top: <length> | <percentage>
 rule decl:sym<padding-top> { :i ("padding-top") ":" <val(/<css-val-padding-top> /, &?ROUTINE.WHY)>}
 rule css-val-padding-top { :i <length> || <percentage>  }
@@ -130,8 +130,8 @@ rule css-val-padding-bottom { :i <length> || <percentage>  }
 rule decl:sym<padding-left> { :i ("padding-left") ":" <val(/<css-val-padding-left> /, &?ROUTINE.WHY)>}
 rule css-val-padding-left { :i <length> || <percentage>  }
 #| padding: [ <length> | <percentage> ]{1,4}
-rule decl:sym<padding> { :i (padding) ":" <val(/<css-val-padding> /, &?ROUTINE.WHY)>}
-rule css-val-padding { :i [<length> || <percentage> ] ** 1..4 }
+rule decl:sym<padding> { :i (padding) ":" <val(/<css-val-padding>** 1..4 /, &?ROUTINE.WHY)>}
+rule css-val-padding { :i [<length> || <percentage> ] }
 #| border-top-width: thin | medium | thick | <length>
 rule decl:sym<border-top-width> { :i ("border-top-width") ":" <val(/<css-val-border-top-width> /, &?ROUTINE.WHY)>}
 rule css-val-border-top-width { :i [thin | medium | thick ]& <keyw>  || <length>  }
@@ -145,14 +145,14 @@ rule css-val-border-bottom-width { :i [thin | medium | thick ]& <keyw>  || <leng
 rule decl:sym<border-left-width> { :i ("border-left-width") ":" <val(/<css-val-border-left-width> /, &?ROUTINE.WHY)>}
 rule css-val-border-left-width { :i [thin | medium | thick ]& <keyw>  || <length>  }
 #| border-width: [thin | medium | thick | <length>]{1,4}
-rule decl:sym<border-width> { :i ("border-width") ":" <val(/<css-val-border-width> /, &?ROUTINE.WHY)>}
-rule css-val-border-width { :i [[thin | medium | thick ]& <keyw>  || <length> ] ** 1..4 }
+rule decl:sym<border-width> { :i ("border-width") ":" <val(/<css-val-border-width>** 1..4 /, &?ROUTINE.WHY)>}
+rule css-val-border-width { :i [[thin | medium | thick ]& <keyw>  || <length> ] }
 #| border-color: <color>{1,4}
-rule decl:sym<border-color> { :i ("border-color") ":" <val(/<css-val-border-color> /, &?ROUTINE.WHY)>}
-rule css-val-border-color { :i <color> ** 1..4 }
+rule decl:sym<border-color> { :i ("border-color") ":" <val(/<css-val-border-color>** 1..4 /, &?ROUTINE.WHY)>}
+rule css-val-border-color { :i <color> }
 #| border-style: [ none | dotted | dashed | solid | double | groove | ridge | inset | outset ]{1,4}
-rule decl:sym<border-style> { :i ("border-style") ":" <val(/<css-val-border-style> /, &?ROUTINE.WHY)>}
-rule css-val-border-style { :i [[none | dotted | dashed | solid | double | groove | ridge | inset | outset ]& <keyw> ] ** 1..4 }
+rule decl:sym<border-style> { :i ("border-style") ":" <val(/<css-val-border-style>** 1..4 /, &?ROUTINE.WHY)>}
+rule css-val-border-style { :i [[none | dotted | dashed | solid | double | groove | ridge | inset | outset ]& <keyw> ] }
 #| border-top: 'border-top-width' || 'border-top-style' || <color>
 rule decl:sym<border-top> { :i ("border-top") ":" <val(/<css-val-border-top> /, &?ROUTINE.WHY)>}
 rule css-val-border-top { :i [<css-val-border-top-width> :my $*A;<!{
