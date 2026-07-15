@@ -98,7 +98,7 @@ multi method parse-property(Str:D $property-name where (%!coerce{.lc}:exists), $
     }
     else {
         if $warn {
-            note "unable to parse CSS property '$prop: $val;'";
+            note "unable to parse {$.name} property '$prop: $val;'";
             note .message with $!;
         }
         Nil;
@@ -118,7 +118,7 @@ multi method parse-property(Str:D $property-name, Str() $val, Bool :$warn = True
         $ast := Nil if $ast eqv [];
     }
     else {
-        note "unable to parse CSS property '$property-name: $val;'"
+        note "unable to parse {$.name} property '$property-name: $val;'"
             if $warn;
     }
     if $warn {

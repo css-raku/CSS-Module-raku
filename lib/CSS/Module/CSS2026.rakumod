@@ -18,6 +18,9 @@ token proforma:sym<initial> {:i initial}
 use CSS::Module::CSS2026::Colors;
 also is CSS::Module::CSS2026::Colors;
 
+use CSS::Module::CSS3::Values_and_Units;
+also is CSS::Module::CSS3::Values_and_Units::Calc;
+
 rule rect {:i 'rect(' <length-percentage>** 4 % <.optional-comma> [ [round && <keyw>] <css-val-border-radius> ]? ')'}
 
 method module(|c) {
@@ -28,7 +31,7 @@ method module(|c) {
     my $property-metadata = $Metadata::property;
 
     CSS::Module.new(
-        :name<CSS2026>,
+        :name<CSS-2026>,
         :grammar($?CLASS),
         :actions(CSS::Module::CSS2026::Actions),
         :$property-metadata,

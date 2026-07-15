@@ -112,9 +112,17 @@
       "CSS::Snapshot2026::Masking::Gen::Grammar": "lib/CSS/Snapshot2026/Masking/Gen/Grammar.rakumod",
       "CSS::Snapshot2026::Masking::Gen::External": "lib/CSS/Snapshot2026/Masking/Gen/External.rakumod",
 
+      "CSS::Snapshot2026::PagedMedia::Gen::Actions": "lib/CSS/Snapshot2026/PagedMedia/Gen/Actions.rakumod",
+      "CSS::Snapshot2026::PagedMedia::Gen::Grammar": "lib/CSS/Snapshot2026/PagedMedia/Gen/Grammar.rakumod",
+      "CSS::Snapshot2026::PagedMedia::Gen::External": "lib/CSS/Snapshot2026/PagedMedia/Gen/External.rakumod",
+
       "CSS::Snapshot2026::Shapes::Gen::Actions": "lib/CSS/Snapshot2026/Shapes/Gen/Actions.rakumod",
       "CSS::Snapshot2026::Shapes::Gen::Grammar": "lib/CSS/Snapshot2026/Shapes/Gen/Grammar.rakumod",
       "CSS::Snapshot2026::Shapes::Gen::External": "lib/CSS/Snapshot2026/Shapes/Gen/External.rakumod",
+
+      "CSS::Snapshot2026::Speech::Gen::Actions": "lib/CSS/Snapshot2026/Speech/Gen/Actions.rakumod",
+      "CSS::Snapshot2026::Speech::Gen::Grammar": "lib/CSS/Snapshot2026/Speech/Gen/Grammar.rakumod",
+      "CSS::Snapshot2026::Speech::Gen::External": "lib/CSS/Snapshot2026/Speech/Gen/External.rakumod",
 
       "CSS::Snapshot2026::SVG::Gen::Actions": "lib/CSS/Snapshot2026/SVG/Gen/Actions.rakumod",
       "CSS::Snapshot2026::SVG::Gen::Grammar": "lib/CSS/Snapshot2026/SVG/Gen/Grammar.rakumod",
