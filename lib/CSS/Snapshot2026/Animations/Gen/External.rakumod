@@ -1,0 +1,19 @@
+unit role CSS::Snapshot2026::Animations::Gen::External;
+method custom-ident (|) {
+    ...
+}
+method integer (|) {
+    ...
+}
+method number (|) {
+    ...
+}
+method percentage (|) {
+    ...
+}
+method string (|) {
+    ...
+}
+method time (|) {
+    ...
+}

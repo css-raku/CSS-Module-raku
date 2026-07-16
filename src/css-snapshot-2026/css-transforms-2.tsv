@@ -1,0 +1,7 @@
+backface-visibility	visible | hidden	visible	transformable elements	no	N/A	discrete	per grammar	specified keyword	
+perspective	none | <length [0,∞]>	none	transformable elements	no	N/A	by computed value	per grammar	the keyword none or an absolute length	
+perspective-origin	<position>	50% 50%	transformable elements	no	refer to the size of the reference box	by computed value	per grammar	see background-position	
+rotate	none | <angle> | [ x | y | z | <number>{3} ] && <angle>	none	transformable elements	no	n/a	as SLERP, but see below for none	per grammar	the keyword none, or an <angle> with an axis consisting of a list of three <number>s	
+scale	none | [ <number> | <percentage> ]{1,3}	none	transformable elements	no	n/a	by computed value, but see below for none	per grammar	the keyword none, or a list of 3 <number>s	
+transform-style	flat | preserve-3d	flat	transformable elements	no	N/A	discrete	per grammar	specified keyword	flat if a grouping property is present, specified keyword otherwise
+translate	none | <length-percentage> [ <length-percentage> <length>? ]?	none	transformable elements	no	relative to the width of the reference box (for the first value) or the height (for the second value)	by computed value, but see below for none	per grammar	the keyword none or a pair of computed <length-percentage> values and an absolute length

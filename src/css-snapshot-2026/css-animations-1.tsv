@@ -1,0 +1,30 @@
+# Name	Value	Initial	Applies to	Inh.	%ages	Anim­ation type	Canonical order	Com­puted value
+animation	<single-animation>#	see individual properties	all elements	no	N/A	not animatable	per grammar	see individual properties
+<single-animation> = <time [0s,∞]> || <easing-function> || <time> || <single-animation-iteration-count> || <single-animation-direction> || <single-animation-fill-mode> || <single-animation-play-state> || [ none | <keyframes-name> ]
+<single-animation-iteration-count> = infinite | <number [0,∞]>
+<single-animation-direction> = normal | reverse | alternate | alternate-reverse
+<single-animation-fill-mode> = none | forwards | backwards | both
+<single-animation-play-state> = running | paused
+
+animation-delay	<time>#	0s	all elements	no	N/A	not animatable	per grammar	list, each item a duration
+animation-direction	<single-animation-direction>#	normal	all elements	no	N/A	not animatable	per grammar	list, each item a keyword as specified
+animation-duration	<time [0s,∞]>#	0s	all elements	no	N/A	not animatable	per grammar	list, each item a duration
+animation-fill-mode	<single-animation-fill-mode>#	none	all elements	no	N/A	not animatable	per grammar	list, each item a keyword as specified
+animation-iteration-count	<single-animation-iteration-count>#	1	all elements	no	N/A	not animatable	per grammar	list, each item either a number or the keyword infinite
+animation-name	[ none | <keyframes-name> ]#	none	all elements	no	N/A	not animatable	per grammar	list, each item either a case-sensitive css identifier or the keyword none
+<keyframes-name> = <custom-ident> | <string>
+animation-play-state	<single-animation-play-state>#	running	all elements	no	N/A	not animatable	per grammar	list, each item a keyword as specified
+animation-timing-function	<easing-function>#	ease	all elements	no	N/A	not animatable	per grammar	list, each item a computed <easing-function>
+<easing-function> = <linear-easing-function> | <cubic-bezier-easing-function> | <step-easing-function>
+
+<linear-easing-function> = linear | <linear()>
+<linear()> = linear( [ <number> && <percentage>{0,2} ]# )
+
+<cubic-bezier-easing-function> = ease | ease-in | ease-out | ease-in-out | <cubic-bezier()>
+
+<cubic-bezier()> = cubic-bezier( [ <number [0,1]>, <number> ]#{2} )
+
+<step-easing-function> = step-start | step-end | <steps()>
+
+<steps()> = steps( <integer>, <step-position>?)
+<step-position> = jump-start | jump-end | jump-none | jump-both | start | end

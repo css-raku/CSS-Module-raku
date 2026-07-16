@@ -21,7 +21,7 @@ background	<bg-layer>#? , <final-bg-layer>	see individual properties	all element
 #-  [ center | [ top | bottom ] <length-percentage>? ]\
 #-]
 ## Backported from CSS2.1
-'background-position'	[ [ <percentage> | <length> | <align> ] [ <percentage> | <length> | <valign> ]? ] | [ <align> || <valign> ] | inherit	0% 0%	 	no	refer to the size of the box itself	visual
+'background-position'	[ [ <length-percentage> | <align> ] [ <length-percentage> | <valign> ]? ] | [ <align> || <valign> ] | inherit	0% 0%	 	no	refer to the size of the box itself	visual
     <align> = left | center | right
     <valign> = top | center | bottom
 background-attachment	<attachment>#	scroll	all elements	no	N/A	discrete	per grammar	list, each item the keyword as specified

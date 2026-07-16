@@ -1,0 +1,11 @@
+background-blend-mode	<blend-mode>#	normal	All HTML elements	no	N/A	discrete	per grammar	as specified	visual
+isolation	<isolation-mode>	auto	All elements. In SVG, it applies to container elements, graphics elements and graphics referencing elements. [SVG11]	no	N/A	discrete	per grammar	as specified	visual
+mix-blend-mode	<blend-mode>	normal	All elements. In SVG, it applies to container elements, graphics elements and graphics referencing elements. [SVG11]	no	N/A	discrete	per grammar	as specified	visual
+<blend-mode> =\
+  normal |\
+  darken | multiply | color-burn |\
+  lighten | screen | color-dodge |\
+  overlay | soft-light | hard-light |\
+  difference | exclusion |\
+  hue | saturation | color | luminosity
+<isolation-mode> = auto | isolate

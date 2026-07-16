@@ -1,0 +1,23 @@
+cue	<'cue-before'> <'cue-after'>?	see individual properties	all elements	no	N/A	see individual properties	per grammar	see individual properties
+cue-after	<url> <decibel>? | none	none	all elements	no	N/A	by computed value type	per grammar	specified value
+cue-before	<url> <decibel>? | none	none	all elements	no	N/A	by computed value type	per grammar	specified value
+pause	<'pause-before'> <'pause-after'>?	see individual properties	all elements	no	N/A	see individual properties	per grammar	see individual properties
+pause-after	<time [0s,∞]> | none | x-weak | weak | medium | strong | x-strong	none	all elements	no	N/A	by computed value type	per grammar	specified value
+pause-before	<time [0s,∞]> | none | x-weak | weak | medium | strong | x-strong	none	all elements	no	N/A	by computed value type	per grammar	specified value
+rest	<'rest-before'> <'rest-after'>?	see individual properties	all elements	no	N/A	see individual properties	per grammar	see individual properties
+rest-after	<time [0s,∞]> | none | x-weak | weak | medium | strong | x-strong	none	all elements	no	N/A	by computed value type	per grammar	specified value
+rest-before	<time [0s,∞]> | none | x-weak | weak | medium | strong | x-strong	none	all elements	no	N/A	by computed value type	per grammar	specified value
+speak	auto | never | always	auto	all elements	yes	N/A	discrete	per grammar	specified value
+speak-as	normal | spell-out || digits || [ literal-punctuation | no-punctuation ]	normal	all elements	yes	N/A	discrete	per grammar	specified value
+voice-balance	<number> | left | center | right | leftwards | rightwards	center	all elements	yes	N/A	by computed value type	per grammar	the specified value resolved to a <number> between -100 and 100 (inclusive)
+voice-duration	auto | <time [0s,∞]>	auto	all elements	no	N/A	by computed value type	per grammar	specified value
+voice-family	[ <voice-family-name> | <generic-voice> ]# | preserve	implementation-dependent	all elements	yes	N/A	discrete	per grammar	specified value
+<voice-family-name> = <string> | <identifiers>
+<generic-voice> = <age>? <gender> <integer [1,∞]>?
+<age> = child | young | old
+<gender> = male | female | neutral
+voice-pitch	<frequency [0Hz,∞]> && absolute | [ [ x-low | low | medium | high | x-high ] || [ <frequency [0Hz,∞]> | <semitones> | <percentage> ] ]	medium	all elements	yes	refer to inherited value	by computed value type	per grammar	one of the predefined pitch keywords if only the keyword is specified by itself, otherwise an absolute frequency calculated by converting the keyword value (if any) to a fixed frequency based on the current voice-family and by applying the specified relative offset (if any)
+voice-range	<frequency [0Hz,∞]> && absolute | [ [ x-low | low | medium | high | x-high ] || [ <frequency [0Hz,∞]> | <semitones> | <percentage> ] ]	medium	all elements	yes	refer to inherited value	by computed value type	per grammar	one of the predefined pitch keywords if only the keyword is specified by itself, otherwise an absolute frequency calculated by converting the keyword value (if any) to a fixed frequency based on the current voice-family and by applying the specified relative offset (if any)
+voice-rate	[ normal | x-slow | slow | medium | fast | x-fast ] || <percentage [0,∞]>	normal	all elements	yes	refer to default value	by computed value type	per grammar	a keyword value, and optionally also a percentage relative to the keyword (if not 100%)
+voice-stress	normal | strong | moderate | none | reduced	normal	all elements	yes	N/A	discrete	per grammar	specified value
+voice-volume	silent | [ [ x-soft | soft | medium | loud | x-loud ] || <decibel> ]	medium	all elements	yes	N/A	by computed value type	per grammar	silent, or a keyword value and optionally also a decibel offset (if not zero)

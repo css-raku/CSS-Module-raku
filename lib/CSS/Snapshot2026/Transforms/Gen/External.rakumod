@@ -1,0 +1,19 @@
+unit role CSS::Snapshot2026::Transforms::Gen::External;
+method angle (|) {
+    ...
+}
+method length (|) {
+    ...
+}
+method length-percentage (|) {
+    ...
+}
+method number (|) {
+    ...
+}
+method percentage (|) {
+    ...
+}
+method position (|) {
+    ...
+}

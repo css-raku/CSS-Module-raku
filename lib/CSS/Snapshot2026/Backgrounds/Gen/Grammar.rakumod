@@ -28,9 +28,9 @@ rule final-bg-layer { :i [<css-val-background-image> :my $*A;<!{
 }>|| <css-val-background-color> :my $*F;<!{
     $*F++
 }>]+ }
-#| background-position: [ [ <percentage> | <length> | <align> ] [ <percentage> | <length> | <valign> ]? ] | [ <align> || <valign> ]
+#| background-position: [ [ <length-percentage> | <align> ] [ <length-percentage> | <valign> ]? ] | [ <align> || <valign> ]
 rule decl:sym<background-position> { :i ("background-position") ":" <val(/<css-val-background-position> /, &?ROUTINE.WHY)>}
-rule css-val-background-position { :i [[<percentage> || <length> || <align> ] [<percentage> || <length> || <valign> ] ? ] || [[<align> :my $*A;<!{
+rule css-val-background-position { :i [[<length-percentage> || <align> ] [<length-percentage> || <valign> ] ? ] || [[<align> :my $*A;<!{
     $*A++
 }>|| <valign> :my $*B;<!{
     $*B++
