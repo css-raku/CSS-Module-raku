@@ -1,0 +1,16 @@
+unit role CSS::Snapshot2026::MultiCol::Gen::External;
+method color (|) {
+    ...
+}
+method integer (|) {
+    ...
+}
+method length (|) {
+    ...
+}
+method line-style (|) {
+    ...
+}
+method line-width (|) {
+    ...
+}

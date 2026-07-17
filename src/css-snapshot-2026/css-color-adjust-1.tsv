@@ -1,0 +1,4 @@
+color-adjust	<'print-color-adjust'>	see individual properties	see individual properties	see individual properties	see individual properties	see individual properties	per grammar	see individual properties
+color-scheme	normal | [ light | dark | <custom-ident> ]+ && only?	normal	all elements and text	yes	n/a	discrete	per grammar	the keyword normal, or a color scheme support
+forced-color-adjust	auto | none | preserve-parent-color	auto	all elements and text	yes	n/a	not animatable	per grammar	as specified
+print-color-adjust	economy | exact	economy	all elements	yes	N/A	discrete	per grammar	specified keyword

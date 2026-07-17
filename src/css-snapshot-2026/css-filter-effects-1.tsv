@@ -1,0 +1,20 @@
+color-interpolation-filters	auto | sRGB | linearRGB	linearRGB	All filter primitives	yes	n/a	discrete	per grammar	as specified	visual
+filter	none | <filter-value-list>	none	All elements. In SVG, it applies to container elements without the defs element, all graphics elements and the use element.	no	n/a	See prose in Animation of Filters.	per grammar	as specified	visual
+
+<filter-value-list> = [ <filter-function> | <url> ]+
+<filter-function> = <blur()> | <brightness()> | <contrast()> | <drop-shadow()> |\
+  <grayscale()> | <hue-rotate()> | <invert()> | <opacity()> | <sepia()> | <saturate()>
+blur() = blur( <length>? )
+brightness() = brightness( [ <number> |  <percentage> ]? )
+contrast() = contrast( [ <number> |  <percentage> ]? )
+drop-shadow() = drop-shadow( [ <color>? && <length>{2,3} ] )
+grayscale() = grayscale( [ <number> |  <percentage> ]? )
+hue-rotate() = hue-rotate( [ <angle> | <zero> ]? )
+invert() = invert( [ <number> |  <percentage> ]? )
+opacity() = opacity( [ <number> |  <percentage> ]? )
+saturate() = saturate( [ <number> |  <percentage> ]? )
+sepia() = sepia( [ <number> |  <percentage> ]? )
+
+flood-color	<color>	black	feFlood and feDropShadow elements	no	n/a	by computed value	per grammar	as specified	visual
+flood-opacity	<'opacity'>	1	feFlood and feDropShadow elements	no	n/a	by computed value	per grammar	the specified value converted to a number, clamped to the range [0,1]	visual
+lighting-color	<color>	white	feDiffuseLighting and feSpecularLighting elements	no	n/a	by computed value	per grammar	as specified	visual

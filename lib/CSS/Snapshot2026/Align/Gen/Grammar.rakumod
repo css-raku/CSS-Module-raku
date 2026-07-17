@@ -40,3 +40,9 @@ rule css-val-place-items { :i <css-val-align-items> <css-val-justify-items> ?  }
 #| place-self: <'align-self'> <'justify-self'>?
 rule decl:sym<place-self> { :i ("place-self") ":" <val(/<css-val-place-self> /, &?ROUTINE.WHY)>}
 rule css-val-place-self { :i <css-val-align-self> <css-val-justify-self> ?  }
+#| row-gap: normal | <length-percentage [0,∞]>
+rule decl:sym<row-gap> { :i ("row-gap") ":" <val(/<css-val-row-gap> /, &?ROUTINE.WHY)>}
+rule css-val-row-gap { :i normal & <keyw> || <length-percentage>  }
+#| row-gap: normal | <length-percentage [0,∞]>
+rule decl:sym<column-gap> { :i ("column-gap") ":" <val(/<css-val-column-gap> /, &?ROUTINE.WHY)>}
+rule css-val-column-gap { :i normal & <keyw> || <length-percentage>  }

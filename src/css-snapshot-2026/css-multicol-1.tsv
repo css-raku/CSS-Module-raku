@@ -1,0 +1,9 @@
+column-count	auto | <integer [1,∞]>	auto	block containers except table wrapper boxes	no	N/A	by computed value	per grammar	specified value
+column-fill	auto | balance | balance-all	balance	multicol containers	no	N/A	discrete	per grammar	specified keyword
+column-rule	<'column-rule-width'> || <'column-rule-style'> || <'column-rule-color'>	see individual properties	see individual properties	see individual properties	see individual properties	see individual properties	per grammar	see individual properties
+column-rule-color	<color>	currentcolor	multicol containers	no	N/A	by computed value type	per grammar	computed color
+column-rule-style	<line-style>	none	multicol containers	no	N/A	discrete	per grammar	specified keyword
+column-rule-width	<line-width>	medium	multicol containers	no	N/A	by computed value type	per grammar	absolute length, snapped as a border width
+column-span	none | all	none	in-flow block-level elements	no	N/A	discrete	per grammar	specified keyword
+column-width	auto | <length [0,∞]>	auto	block containers except table wrapper boxes	no	N/A	by computed value type	per grammar	the keyword auto or an absolute length
+columns	<'column-width'> || <'column-count'>	see individual properties	see individual properties	see individual properties	see individual properties	see individual properties	per grammar	see individual properties
