@@ -32,13 +32,19 @@ class Make {
                           :Compositing<src css-snapshot-2026 css-compositing-1.tsv>,
                           :Color<src css-snapshot-2026 css-color-4.tsv>,
                           :ColorAdjust<src css-snapshot-2026 css-color-adjust-1.tsv>,
+                          :Contain<src css-snapshot-2026 css-contain-2.tsv>,
+                          :Display<src css-snapshot-2026 css-display-3.tsv>,
+                          :FlexBox<src css-snapshot-2026 css-flexbox-1.tsv>,
                           :Fonts<src css-snapshot-2026 css-fonts-4.tsv>,
                           'Fonts::Defs' => <src css-snapshot-2026 css-fonts-4 defs.tsv>,
                           :FilterEffects<src css-snapshot-2026 css-filter-effects-1.tsv>,
+                          :Grid<src css-snapshot-2026 css-grid-1.tsv>,
                           :Images<src css-snapshot-2026 css-images-3.tsv>,
                           :Inline<src css-snapshot-2026 css-inline-3.tsv>,
+                          :Lists<src css-snapshot-2026 css-lists-3.tsv>,
                           :Logical<src css-snapshot-2026 css-logical-1.tsv>,
                           :Masking<src css-snapshot-2026 css-masking-1.tsv>,
+                          :Motion<src css-snapshot-2026 css-motion-1.tsv>,
                           :MultiCol<src css-snapshot-2026 css-multicol-1.tsv>,
                           :PagedMedia<src css3x-paged-media.tsv>,
                           :Shapes<src css-snapshot-2026 css-shapes-1.tsv>,
@@ -74,15 +80,15 @@ class Make {
 
                 for @modules {
                     my ($module, $input-spec) = .isa(Pair) ?? .kv !! ([], $_);
+                    my $file = $input-spec.join: '/';
+                    note " - " ~ $file;
                     my @base-id = flat @group-id, @$module, <Gen>;
                     my @grammar-id = @base-id.Slip, 'Grammar';
                     my $scope := 'unit';
                     my CSS::Specification::Compiler $compiler .= new;
-                    my $file = $input-spec.join: '/';
                     my @defs = $compiler.load-defs: :$file;
                     my %child-rules = $compiler.child-rules;
 
-                    note " - " ~ $file;
                     mkdir 'lib/' ~ @base-id.join('/');
                     my RakuAST::Package $grammar-ast = $compiler.compile-grammar(@grammar-id, :$scope);
                     "lib/{$grammar-ast.&path}.rakumod".IO.spurt: $grammar-ast.DEPARSE;

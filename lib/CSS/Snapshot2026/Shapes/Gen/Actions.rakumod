@@ -6,7 +6,7 @@ method shape-box ($/) {
     make $.build.rule($/)
 }
 method shape-rect ($/) {
-    make $.build.rule($/)
+    $.make-func("rect", $/)
 }
 method basic-shape-rect ($/) {
     make $.build.rule($/)

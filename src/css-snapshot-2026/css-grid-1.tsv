@@ -1,0 +1,34 @@
+grid	<'grid-template'> | <'grid-template-rows'> / [ auto-flow && dense? ] <'grid-auto-columns'>? | [ auto-flow && dense? ] <'grid-auto-rows'>? / <'grid-template-columns'>	none	grid containers	see individual properties	see individual properties	see individual properties	per grammar	see individual properties
+grid-area	<grid-line> [ / <grid-line> ]{0,3}	auto	grid items and absolutely-positioned boxes whose containing block is a grid container	no	N/A	discrete	per grammar	see individual properties
+grid-auto-columns	<track-size>+	auto	grid containers	no	see Track Sizing	if the list lengths match, by computed value type per item; discrete otherwise	per grammar	see Track Sizing
+grid-auto-flow	[ row | column ] || dense	row	grid containers	no	n/a	discrete	per grammar	specified keyword(s)
+grid-auto-rows	<track-size>+	auto	grid containers	no	see Track Sizing	if the list lengths match, by computed value type per item; discrete otherwise	per grammar	see Track Sizing
+grid-column	<grid-line> [ / <grid-line> ]?	auto	grid items and absolutely-positioned boxes whose containing block is a grid container	no	N/A	discrete	per grammar	see individual properties
+grid-column-end	<grid-line>	auto	grid items and absolutely-positioned boxes whose containing block is a grid container	no	n/a	discrete	per grammar	specified keyword, identifier, and/or integer
+grid-column-start	<grid-line>	auto	grid items and absolutely-positioned boxes whose containing block is a grid container	no	n/a	discrete	per grammar	specified keyword, identifier, and/or integer
+grid-row	<grid-line> [ / <grid-line> ]?	auto	grid items and absolutely-positioned boxes whose containing block is a grid container	no	N/A	discrete	per grammar	see individual properties
+grid-row-end	<grid-line>	auto	grid items and absolutely-positioned boxes whose containing block is a grid container	no	n/a	discrete	per grammar	specified keyword, identifier, and/or integer
+grid-row-start	<grid-line>	auto	grid items and absolutely-positioned boxes whose containing block is a grid container	no	n/a	discrete	per grammar	specified keyword, identifier, and/or integer
+grid-template	none | [ <'grid-template-rows'> / <'grid-template-columns'> ] | [ <line-names>? <string> <track-size>? <line-names>? ]+ [ / <explicit-track-list> ]?	none	grid containers	see individual properties	see individual properties	see individual properties	per grammar	see individual properties
+grid-template-areas	none | <string>+	none	grid containers	no	n/a	discrete	per grammar	the keyword none or a list of string values
+grid-template-columns	none | <track-list> | <auto-track-list>	none	grid containers	no	refer to corresponding dimension of the content area	if the list lengths match, by computed value type per item in the computed track list (see and ); discrete otherwise	per grammar	the keyword none or a computed track list
+grid-template-rows	none | <track-list> | <auto-track-list>	none	grid containers	no	refer to corresponding dimension of the content area	if the list lengths match, by computed value type per item in the computed track list (see and ); discrete otherwise	per grammar	the keyword none or a computed track list
+<track-list>          = [ <line-names>? [ <track-size> | <track-repeat> ] ]+ <line-names>?
+<auto-track-list>     = [ <line-names>? [ <fixed-size> | <fixed-repeat> ] ]* <line-names>? <auto-repeat>\
+                        [ <line-names>? [ <fixed-size> | <fixed-repeat> ] ]* <line-names>?
+<explicit-track-list> = [ <line-names>? <track-size> ]+ <line-names>?
+<track-size>          = <track-breadth> | <track-minmax>  | fit-content( <length-percentage [0,∞]> )
+<track-minmax> = minmax( <inflexible-breadth> , <track-breadth> )
+<fixed-size>          = <fixed-breadth> | <fixed-minmax> | <track-minmax>
+<fixed-minmax> = minmax( <fixed-breadth> , <track-breadth> )
+<track-breadth>       = <length-percentage [0,∞]> | <flex [0,∞]> | min-content | max-content | auto
+<inflexible-breadth>  = <length-percentage [0,∞]> | min-content | max-content | auto
+<fixed-breadth>       = <length-percentage [0,∞]>
+<line-names>          = '[' <custom-ident>* ']'
+<track-repeat> = repeat( [ <integer [1,∞]> ] , [ <line-names>? <track-size> ]+ <line-names>? )
+<auto-repeat>  = repeat( [ auto-fill | auto-fit ] , [ <line-names>? <fixed-size> ]+ <line-names>? )
+<fixed-repeat> = repeat( [ <integer [1,∞]> ] , [ <line-names>? <fixed-size> ]+ <line-names>? )
+fit-content() = fit-content( <length-percentage> )
+<grid-line> = auto | <custom-ident> |\
+  [ [ <integer [-∞,-1]> | <integer [1,∞]> ] && <custom-ident>? ] |\
+  [ span && [ <integer [1,∞]> || <custom-ident> ] ]

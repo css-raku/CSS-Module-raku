@@ -29,6 +29,9 @@ method radial-size (|) {
 method rect (|) {
     ...
 }
+method shape-rect (|) {
+    ...
+}
 method string (|) {
     ...
 }

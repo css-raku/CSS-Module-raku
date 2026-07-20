@@ -1,0 +1,2 @@
+contain	none | strict | content | [ [size | inline-size] || layout || style || paint ]	none	See below	no	n/a	not animatable	per grammar	the keyword none or one or more of size, layout, style, paint
+content-visibility	visible | auto | hidden	visible	elements for which size containment can apply	no	n/a	see	per grammar	as specified

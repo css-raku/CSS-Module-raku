@@ -1,0 +1,6 @@
+offset	[ <'offset-position'>? [ <'offset-path'> [ <'offset-distance'> || <'offset-rotate'> ]? ]? ]! [ / <'offset-anchor'> ]?	see individual properties	transformable elements	see individual properties	see individual properties	see individual properties	per grammar	see individual properties	
+offset-anchor	auto | <position>	auto	transformable elements	no	relative to the width and the height of the element’s reference box	by computed value	per grammar	the auto keyword or a computed <position>	visual
+offset-distance	<length-percentage>	0	transformable elements	no	relative to the offset path length	by computed value	per grammar	a computed <length-percentage> value	visual
+offset-path	none | <offset-path> || <coord-box>	none	transformable elements	no	n/a	by computed value	per grammar	as specified	visual
+offset-position	normal | auto | <position>	normal	transformable elements	no	Refer to the size of containing block	by computed value	per grammar	The normal or auto keywords, or a computed <position>	visual
+offset-rotate	[ auto | reverse ] || <angle>	auto	transformable elements	no	n/a	by computed value	per grammar	computed <angle> value, optionally preceded by auto	visual

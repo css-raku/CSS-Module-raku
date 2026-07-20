@@ -12,5 +12,6 @@ justify-self	auto | <overflow-position>? [ normal | <self-position> | left | rig
 place-content	<'align-content'> <'justify-content'>?	normal	see individual properties	no	n/a	discrete	per grammar	see individual properties
 place-items	<'align-items'> <'justify-items'>?	see individual properties	all elements	no	n/a	discrete	per grammar	see individual properties
 place-self	<'align-self'> <'justify-self'>?	auto	see individual properties	no	n/a	discrete	per grammar	see individual properties
-# missing from proerty index
-row-gap, column-gap	normal | <length-percentage [0,∞]>	normal		no
+# missing from property index
+gap, grid-gap	<'row-gap'> <'column-gap'>?		no
+row-gap, grid-row-gap, column-gap, grid-column-gap	normal | <length-percentage [0,∞]>	normal		no

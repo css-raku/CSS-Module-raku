@@ -1,0 +1,11 @@
+align-content	flex-start | flex-end | center | space-between | space-around | stretch	stretch	multi-line flex containers	no	n/a	discrete	per grammar	specified keyword
+align-items	flex-start | flex-end | center | baseline | stretch	stretch	flex containers	no	n/a	discrete	per grammar	specified keyword
+align-self	auto | flex-start | flex-end | center | baseline | stretch	auto	flex items	no	n/a	discrete	per grammar	specified keyword
+flex	none | [ <'flex-grow'> <'flex-shrink'>? || <'flex-basis'> ]	0 1 auto	flex items	no	see individual properties	by computed value type	per grammar	see individual properties
+flex-basis	content | <'width'>	auto	flex items	no	relative to the flex container’s inner main size	by computed value type	per grammar	specified keyword or a computed <length-percentage> value
+flex-direction	row | row-reverse | column | column-reverse	row	flex containers	no	n/a	discrete	per grammar	specified keyword
+flex-flow	<'flex-direction'> || <'flex-wrap'>	see individual properties	see individual properties	see individual properties	see individual properties	see individual properties	per grammar	see individual properties
+flex-grow	<number [0,∞]>	0	flex items	no	n/a	by computed value type	per grammar	specified number
+flex-shrink	<number [0,∞]>	1	flex items	no	n/a	number	per grammar	specified value
+flex-wrap	nowrap | wrap | wrap-reverse	nowrap	flex containers	no	n/a	discrete	per grammar	specified keyword
+justify-content	flex-start | flex-end | center | space-between | space-around	flex-start	flex containers	no	n/a	discrete	per grammar	specified keyword

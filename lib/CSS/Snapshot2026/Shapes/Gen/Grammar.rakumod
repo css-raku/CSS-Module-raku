@@ -20,8 +20,8 @@ rule inset { :i "inset(" [<length-percentage> ** 1..4 [round & <keyw> <border-ra
 rule xywh { :i "xywh(" [<length-percentage> ** 2 <length-percentage> ** 2 [round & <keyw> <border-radius> ] ?  || <usage(&?ROUTINE.WHY)> ] ")" }
 #| <shape-box> = <visual-box> | margin-box | half-border-box
 rule shape-box { :i <visual-box> || ["margin-box" | "half-border-box" ]& <keyw>   }
-#| <shape-rect> = rect([ <length-percentage> | auto ]{4} [ round <border-radius> ]?)
-rule shape-rect { :i <rect> }
+#| rect([ <length-percentage> | auto ]{4} [ round <border-radius> ]?)
+rule shape-rect { :i "rect(" [[<length-percentage> || auto & <keyw> ] ** 4 [round & <keyw> <border-radius> ] ?  || <usage(&?ROUTINE.WHY)> ] ")" }
 #| <basic-shape-rect> = <inset()> | <rect()> | <xywh()>
 rule basic-shape-rect { :i <inset> || <rect> || <xywh>  }
 #| circle( <radial-size>? [ at <position> ]? )

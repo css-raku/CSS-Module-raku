@@ -103,6 +103,18 @@
       "CSS::Snapshot2026::Compositing::Gen::Grammar": "lib/CSS/Snapshot2026/Compositing/Gen/Grammar.rakumod",
       "CSS::Snapshot2026::Compositing::Gen::External": "lib/CSS/Snapshot2026/Compositing/Gen/External.rakumod",
 
+      "CSS::Snapshot2026::Contain::Gen::Actions": "lib/CSS/Snapshot2026/Contain/Gen/Actions.rakumod",
+      "CSS::Snapshot2026::Contain::Gen::Grammar": "lib/CSS/Snapshot2026/Contain/Gen/Grammar.rakumod",
+      "CSS::Snapshot2026::Contain::Gen::External": "lib/CSS/Snapshot2026/Contain/Gen/External.rakumod",
+
+      "CSS::Snapshot2026::Display::Gen::Actions": "lib/CSS/Snapshot2026/Display/Gen/Actions.rakumod",
+      "CSS::Snapshot2026::Display::Gen::Grammar": "lib/CSS/Snapshot2026/Display/Gen/Grammar.rakumod",
+      "CSS::Snapshot2026::Display::Gen::External": "lib/CSS/Snapshot2026/Display/Gen/External.rakumod",
+
+      "CSS::Snapshot2026::FlexBox::Gen::Actions": "lib/CSS/Snapshot2026/FlexBox/Gen/Actions.rakumod",
+      "CSS::Snapshot2026::FlexBox::Gen::Grammar": "lib/CSS/Snapshot2026/FlexBox/Gen/Grammar.rakumod",
+      "CSS::Snapshot2026::FlexBox::Gen::External": "lib/CSS/Snapshot2026/FlexBox/Gen/External.rakumod",
+
       "CSS::Snapshot2026::Fonts::Gen::Actions": "lib/CSS/Snapshot2026/Fonts/Gen/Actions.rakumod",
       "CSS::Snapshot2026::Fonts::Gen::Grammar": "lib/CSS/Snapshot2026/Fonts/Gen/Grammar.rakumod",
       "CSS::Snapshot2026::Fonts::Gen::External": "lib/CSS/Snapshot2026/Fonts/Gen/External.rakumod",
@@ -120,6 +132,10 @@
       "CSS::Snapshot2026::FilterEffects::Gen::Grammar": "lib/CSS/Snapshot2026/FilterEffects/Gen/Grammar.rakumod",
       "CSS::Snapshot2026::FilterEffects::Gen::External": "lib/CSS/Snapshot2026/FilterEffects/Gen/External.rakumod",
 
+      "CSS::Snapshot2026::Grid::Gen::Actions": "lib/CSS/Snapshot2026/Grid/Gen/Actions.rakumod",
+      "CSS::Snapshot2026::Grid::Gen::Grammar": "lib/CSS/Snapshot2026/Grid/Gen/Grammar.rakumod",
+      "CSS::Snapshot2026::Grid::Gen::External": "lib/CSS/Snapshot2026/Grid/Gen/External.rakumod",
+
       "CSS::Snapshot2026::Images::Gen::Actions": "lib/CSS/Snapshot2026/Images/Gen/Actions.rakumod",
       "CSS::Snapshot2026::Images::Gen::Grammar": "lib/CSS/Snapshot2026/Images/Gen/Grammar.rakumod",
       "CSS::Snapshot2026::Images::Gen::External": "lib/CSS/Snapshot2026/Images/Gen/External.rakumod",
@@ -128,6 +144,10 @@
       "CSS::Snapshot2026::Inline::Gen::Grammar": "lib/CSS/Snapshot2026/Inline/Gen/Grammar.rakumod",
       "CSS::Snapshot2026::Inline::Gen::External": "lib/CSS/Snapshot2026/Inline/Gen/External.rakumod",
 
+      "CSS::Snapshot2026::Lists::Gen::Actions": "lib/CSS/Snapshot2026/Lists/Gen/Actions.rakumod",
+      "CSS::Snapshot2026::Lists::Gen::Grammar": "lib/CSS/Snapshot2026/Lists/Gen/Grammar.rakumod",
+      "CSS::Snapshot2026::Lists::Gen::External": "lib/CSS/Snapshot2026/Lists/Gen/External.rakumod",
+
       "CSS::Snapshot2026::Logical::Gen::Actions": "lib/CSS/Snapshot2026/Logical/Gen/Actions.rakumod",
       "CSS::Snapshot2026::Logical::Gen::Grammar": "lib/CSS/Snapshot2026/Logical/Gen/Grammar.rakumod",
       "CSS::Snapshot2026::Logical::Gen::External": "lib/CSS/Snapshot2026/Logical/Gen/External.rakumod",
@@ -135,6 +155,10 @@
       "CSS::Snapshot2026::Masking::Gen::Actions": "lib/CSS/Snapshot2026/Masking/Gen/Actions.rakumod",
       "CSS::Snapshot2026::Masking::Gen::Grammar": "lib/CSS/Snapshot2026/Masking/Gen/Grammar.rakumod",
       "CSS::Snapshot2026::Masking::Gen::External": "lib/CSS/Snapshot2026/Masking/Gen/External.rakumod",
+
+      "CSS::Snapshot2026::Motion::Gen::Actions": "lib/CSS/Snapshot2026/Motion/Gen/Actions.rakumod",
+      "CSS::Snapshot2026::Motion::Gen::Grammar": "lib/CSS/Snapshot2026/Motion/Gen/Grammar.rakumod",
+      "CSS::Snapshot2026::Motion::Gen::External": "lib/CSS/Snapshot2026/Motion/Gen/External.rakumod",
 
       "CSS::Snapshot2026::MultiCol::Gen::Actions": "lib/CSS/Snapshot2026/MultiCol/Gen/Actions.rakumod",
       "CSS::Snapshot2026::MultiCol::Gen::Grammar": "lib/CSS/Snapshot2026/MultiCol/Gen/Grammar.rakumod",

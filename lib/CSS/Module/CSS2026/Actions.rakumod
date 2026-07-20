@@ -15,9 +15,7 @@ also is CSS::Snapshot2026::Gen::Actions;
 use CSS::Module::CSS3::Values_and_Units;
 also is CSS::Module::CSS3::Values_and_Units::Actions::Calc;
 
-method rect ($/) {
-    $.make-func("rect", $/)
-}
+method rect ($/)   { $.make-func("rect", $/) }
 
 method build {
     use CSS::Grammar::AST;
