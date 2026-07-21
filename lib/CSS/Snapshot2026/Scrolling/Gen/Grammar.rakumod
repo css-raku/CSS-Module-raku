@@ -1,4 +1,13 @@
-unit grammar CSS::Snapshot2026::ScrollSnap::Gen::Grammar;
+unit grammar CSS::Snapshot2026::Scrolling::Gen::Grammar;
+#| overflow-anchor: auto | none
+rule decl:sym<overflow-anchor> { :i ("overflow-anchor") ":" <val(/<css-val-overflow-anchor> /, &?ROUTINE.WHY)>}
+rule css-val-overflow-anchor { :i [auto | none ]& <keyw>  }
+#| scrollbar-color: auto | <color>{2}
+rule decl:sym<scrollbar-color> { :i ("scrollbar-color") ":" <val(/<css-val-scrollbar-color> /, &?ROUTINE.WHY)>}
+rule css-val-scrollbar-color { :i auto & <keyw> || <color> ** 2  }
+#| scrollbar-width: auto | thin | none
+rule decl:sym<scrollbar-width> { :i ("scrollbar-width") ":" <val(/<css-val-scrollbar-width> /, &?ROUTINE.WHY)>}
+rule css-val-scrollbar-width { :i [auto | thin | none ]& <keyw>  }
 #| scroll-margin: <length>{1,4}
 rule decl:sym<scroll-margin> { :i ("scroll-margin") ":" <val(/<css-val-scroll-margin>** 1..4 /, &?ROUTINE.WHY)>}
 rule css-val-scroll-margin { :i <length> }

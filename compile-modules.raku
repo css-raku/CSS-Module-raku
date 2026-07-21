@@ -15,53 +15,55 @@ class Make {
         indir $where, {
             my %inherit;
 
-            for ('Module::CSS1'  => [<src css1-properties.tsv>,],
-                 'Module::CSS21' => [<src css21-properties.tsv>,],
+            for ('Module::CSS1'  => [<src/css1-properties.tsv>,],
+                 'Module::CSS21' => [<src/css21-properties.tsv>,],
                  'Module::CSS3'  => [:inherit,
-                                     :Fonts<src css3x-font-properties.tsv>,
-                                     :PagedMedia<src css3x-paged-media.tsv>,
-                                     :Values_and_Units<src css-values-3-20240322.tsv>,
+                                     :Fonts<src/css3x-font-properties.tsv>,
+                                     :PagedMedia<src/css3x-paged-media.tsv>,
+                                     :Values_and_Units<src/css-values-3-20240322.tsv>,
                       ],
-                 'Module::SVG' => [:inherit, <src svg-properties.tsv>,],
+                 'Module::SVG' => [:inherit, <src/svg-properties.tsv>,],
                  :Snapshot2026[:link,
-                          :Align<src css-snapshot-2026 css-align-3.tsv>,
-                          :Animations<src css-snapshot-2026 css-animations-1.tsv>,
-                          :Backgrounds<src css-snapshot-2026 css-backgrounds-3.tsv>,
-                          :Box<src css-snapshot-2026 css-box-4.tsv>,
-                          :Break<src css-snapshot-2026 css-break-1.tsv>,
-                          :Compositing<src css-snapshot-2026 css-compositing-1.tsv>,
-                          :Color<src css-snapshot-2026 css-color-4.tsv>,
-                          :ColorAdjust<src css-snapshot-2026 css-color-adjust-1.tsv>,
-                          :Contain<src css-snapshot-2026 css-contain-2.tsv>,
-                          :Display<src css-snapshot-2026 css-display-3.tsv>,
-                          :FlexBox<src css-snapshot-2026 css-flexbox-1.tsv>,
-                          :Fonts<src css-snapshot-2026 css-fonts-4.tsv>,
-                          'Fonts::Defs' => <src css-snapshot-2026 css-fonts-4 defs.tsv>,
-                          :FilterEffects<src css-snapshot-2026 css-filter-effects-1.tsv>,
-                          :Grid<src css-snapshot-2026 css-grid-1.tsv>,
-                          :Images<src css-snapshot-2026 css-images-3.tsv>,
-                          :Inline<src css-snapshot-2026 css-inline-3.tsv>,
-                          :Lists<src css-snapshot-2026 css-lists-3.tsv>,
-                          :Logical<src css-snapshot-2026 css-logical-1.tsv>,
-                          :Masking<src css-snapshot-2026 css-masking-1.tsv>,
-                          :Motion<src css-snapshot-2026 css-motion-1.tsv>,
-                          :MultiCol<src css-snapshot-2026 css-multicol-1.tsv>,
-                          :PagedMedia<src css3x-paged-media.tsv>,
-                          :ScrollAnchoring<src css-snapshot-2026 css-scroll-anchoring-1.tsv>,
-                          :Scrollbars<src css-snapshot-2026 css-scrollbars-1.tsv>,
-                          :ScrollSnap<src css-snapshot-2026 css-scroll-snap-1.tsv>,
-                          :Shapes<src css-snapshot-2026 css-shapes-1.tsv>,
-                          :Speech<src css-snapshot-2026 css-speech-1.tsv>,
-                          :SVG<src css-snapshot-2026 svg2-propidx.tsv>,
-                          :Text<src css-snapshot-2026 css-text-3.tsv>,
-                          :Transforms<src css-snapshot-2026 css-transforms-2.tsv>,
-                          :UI<src css-snapshot-2026 css-ui-3.tsv>,
-                          :Values<src css-snapshot-2026 css-values-5.tsv>,
-                          :WritingModes<src css-snapshot-2026 css-writing-modes-4.tsv>,
-                          :CSS21<src css-snapshot-2026 drafts-css2.tsv>,
+                          :Align<src/css-snapshot-2026/css-align-3.tsv>,
+                          :Animations<src/css-snapshot-2026/css-animations-1.tsv>,
+                          :Backgrounds<src/css-snapshot-2026/css-backgrounds-3.tsv>,
+                          :Box<src/css-snapshot-2026/css-box-4.tsv>,
+                          :Break<src/css-snapshot-2026/css-break-1.tsv>,
+                          :Compositing<src/css-snapshot-2026/css-compositing-1.tsv>,
+                          :Color<src/css-snapshot-2026/css-color-4.tsv>,
+                          :ColorAdjust<src/css-snapshot-2026/css-color-adjust-1.tsv>,
+                          :Contain<src/css-snapshot-2026/css-contain-2.tsv>,
+                          :Display<src/css-snapshot-2026/css-display-3.tsv>,
+                          :FlexBox<src/css-snapshot-2026/css-flexbox-1.tsv>,
+                          :Fonts<src/css-snapshot-2026/css-fonts-4.tsv>,
+                          'Fonts::Defs' => <src/css-snapshot-2026/css-fonts-4/defs.tsv>,
+                          :FilterEffects<src/css-snapshot-2026/css-filter-effects-1.tsv>,
+                          :Grid<src/css-snapshot-2026/css-grid-1.tsv>,
+                          :Images<src/css-snapshot-2026/css-images-3.tsv>,
+                          :Inline<src/css-snapshot-2026/css-inline-3.tsv>,
+                          :Lists<src/css-snapshot-2026/css-lists-3.tsv>,
+                          :Logical<src/css-snapshot-2026/css-logical-1.tsv>,
+                          :Masking<src/css-snapshot-2026/css-masking-1.tsv>,
+                          :Motion<src/css-snapshot-2026/css-motion-1.tsv>,
+                          :MultiCol<src/css-snapshot-2026/css-multicol-1.tsv>,
+                          :PagedMedia<src/css3x-paged-media.tsv>,
+                          :Scrolling<
+                               src/css-snapshot-2026/css-scroll-anchoring-1.tsv
+                               src/css-snapshot-2026/css-scrollbars-1.tsv
+                               src/css-snapshot-2026/css-scroll-snap-1.tsv
+                           >,
+                          :Shapes<src/css-snapshot-2026/css-shapes-1.tsv>,
+                          :Speech<src/css-snapshot-2026/css-speech-1.tsv>,
+                          :SVG<src/css-snapshot-2026/svg2-propidx.tsv>,
+                          :Text<src/css-snapshot-2026/css-text-3.tsv>,
+                          :Transforms<src/css-snapshot-2026/css-transforms-2.tsv>,
+                          :UI<src/css-snapshot-2026/css-ui-3.tsv>,
+                          :Values<src/css-snapshot-2026/css-values-5.tsv>,
+                          :WritingModes<src/css-snapshot-2026/css-writing-modes-4.tsv>,
+                          :CSS21<src/css-snapshot-2026/drafts-css2.tsv>,
                       ],
-                 'Snapshot2026::Fonts' => [:AtFontFace<src css-snapshot-2026 css-fonts-4 @fontface.tsv>],
-                 'Module::CSS3::Fonts::AtFontFace' => [<src css3x-font-@fontface-properties.tsv>,],
+                 'Snapshot2026::Fonts' => [:AtFontFace<src/css-snapshot-2026/css-fonts-4/@fontface.tsv>],
+                 'Module::CSS3::Fonts::AtFontFace' => [<src/css3x-font-@fontface-properties.tsv>,],
                 ) {
                 my $meta-root = .key;
                 my @modules = .value.list;
@@ -82,14 +84,16 @@ class Make {
                 }
 
                 for @modules {
-                    my ($module, $input-spec) = .isa(Pair) ?? .kv !! ([], $_);
-                    my $file = $input-spec.join: '/';
-                    note " - " ~ $file;
+                    my ($module, $files) = .isa(Pair) ?? .kv !! ([], $_);
                     my @base-id = flat @group-id, @$module, <Gen>;
                     my @grammar-id = @base-id.Slip, 'Grammar';
                     my $scope := 'unit';
+                    my @defs;
                     my CSS::Specification::Compiler $compiler .= new;
-                    my @defs = $compiler.load-defs: :$file;
+                    for $files.List -> $file {
+                        note " - " ~ $file;
+                        @defs.append: $compiler.load-defs(:$file);
+                    }
                     my %child-rules = $compiler.child-rules;
 
                     mkdir 'lib/' ~ @base-id.join('/');
