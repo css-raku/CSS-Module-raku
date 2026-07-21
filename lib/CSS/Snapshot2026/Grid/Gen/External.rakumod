@@ -1,14 +1,5 @@
 unit role CSS::Snapshot2026::Grid::Gen::External;
-method auto-repeat (|) {
-    ...
-}
 method custom-ident (|) {
-    ...
-}
-method fixed-minmax (|) {
-    ...
-}
-method fixed-repeat (|) {
     ...
 }
 method flex (|) {
@@ -21,11 +12,5 @@ method length-percentage (|) {
     ...
 }
 method string (|) {
-    ...
-}
-method track-minmax (|) {
-    ...
-}
-method track-repeat (|) {
     ...
 }

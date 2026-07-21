@@ -6,8 +6,6 @@ rule css-val-counter-increment { :i [<counter-name> <integer> ? ] + || none & <k
 rule counter-name { :i <identifier> }
 #| reversed( <counter-name> )
 rule reversed-counter-name { :i "reversed(" [<counter-name> || <usage(&?ROUTINE.WHY)> ] ")" }
-#| reversed( <counter-name> )
-rule reversed { :i "reversed(" [<counter-name> || <usage(&?ROUTINE.WHY)> ] ")" }
 #| <counter-style> = decimal | decimal-leading-zero | arabic-indic | armenian | upper-armenian | lower-armenian | bengali | cambodian | khmer | cjk-decimal | devanagari | georgian | gujarati | gurmukhi | hebrew | kannada | lao | malayalam | mongolian | myanmar | oriya | persian | lower-roman | upper-roman | tamil | telugu | thai | tibetan | <identifier>
 rule counter-style { :i [decimal | "decimal-leading-zero" | "arabic-indic" | armenian | "upper-armenian" | "lower-armenian" | bengali | cambodian | khmer | "cjk-decimal" | devanagari | georgian | gujarati | gurmukhi | hebrew | kannada | lao | malayalam | mongolian | myanmar | oriya | persian | "lower-roman" | "upper-roman" | tamil | telugu | thai | tibetan ]& <keyw>  || <identifier>  }
 #| counter-reset: [ <counter-name> <integer>? | <reversed-counter-name> <integer>? ]+ | none

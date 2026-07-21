@@ -8,6 +8,3 @@ method reversed-counter-name ($/) {
 method counter-style ($/) {
     make $.build.rule($/)
 }
-method reversed ($/) {
-    $.make-func("reversed", $/)
-}

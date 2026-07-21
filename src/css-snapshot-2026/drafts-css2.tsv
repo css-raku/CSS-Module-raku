@@ -1,0 +1,121 @@
+background	[<'background-color'> || <'background-image'> || <'background-repeat'> || <'background-attachment'> || <'background-position'>] | inherit	see individual properties	*	no	allowed on background-position	see individual properties	per grammar	see individual properties	visual
+background-attachment	scroll | fixed | inherit	scroll	*	no	N/A	discrete	per grammar	as specified	visual
+background-color	<color> | transparent | inherit	transparent	*	no	N/A	by computed value type	per grammar	as specified	visual
+background-image	<uri> | none | inherit	none	*	no	N/A	discrete	per grammar	absolute URI or none	visual
+background-position	[ [ <percentage> | <length> | left | center | right ] [ <percentage> | <length> | top | center | bottom ]? ] | [ [ left | center | right ] || [ top | center | bottom ] ] | inherit	0% 0%	*	no	refer to the size of the box itself	by computed value type	per grammar	for <length> the absolute value, otherwise a percentage	visual
+background-repeat	repeat | repeat-x | repeat-y | no-repeat | inherit	repeat	*	no	N/A	discrete	per grammar	as specified	visual
+border	[ <border-width> || <border-style> || <'border-top-color'> ] | inherit	see individual properties	*	no	N/A	see individual properties	per grammar	see individual properties	visual
+border-bottom	[ <border-width> || <border-style> || <'border-top-color'> ] | inherit	see individual properties	*	no	N/A	see individual properties	per grammar	see individual properties	visual
+border-bottom-color	<color> | transparent | inherit	the value of the color property	*	no	N/A	by computed value type	per grammar	when taken from the color property, the computed value of color; otherwise, as specified	visual
+border-bottom-style	<border-style> | inherit	none	*	no	N/A	discrete	per grammar	as specified	visual
+border-bottom-width	<border-width> | inherit	medium	*	no	N/A	by computed value type	per grammar	absolute length; 0 if the border style is none or hidden	visual
+border-collapse	collapse | separate | inherit	separate	table and inline-table elements	yes	N/A	discrete	per grammar	as specified	visual
+border-color	[ <color> | transparent ]{1,4} | inherit	see individual properties	*	no	N/A	see individual properties	per grammar	see individual properties	visual
+border-left	[ <border-width> || <border-style> || <'border-top-color'> ] | inherit	see individual properties	*	no	N/A	see individual properties	per grammar	see individual properties	visual
+border-left-color	<color> | transparent | inherit	the value of the color property	*	no	N/A	by computed value type	per grammar	when taken from the color property, the computed value of color; otherwise, as specified	visual
+border-left-style	<border-style> | inherit	none	*	no	N/A	discrete	per grammar	as specified	visual
+border-left-width	<border-width> | inherit	medium	*	no	N/A	by computed value type	per grammar	absolute length; 0 if the border style is none or hidden	visual
+border-right	[ <border-width> || <border-style> || <'border-top-color'> ] | inherit	see individual properties	*	no	N/A	see individual properties	per grammar	see individual properties	visual
+border-right-color	<color> | transparent | inherit	the value of the color property	*	no	N/A	by computed value type	per grammar	when taken from the color property, the computed value of color; otherwise, as specified	visual
+border-right-style	<border-style> | inherit	none	*	no	N/A	discrete	per grammar	as specified	visual
+border-right-width	<border-width> | inherit	medium	*	no	N/A	by computed value type	per grammar	absolute length; 0 if the border style is none or hidden	visual
+border-spacing	<length> <length>? | inherit	0	table and inline-table elements*	yes	N/A	by computed value type	per grammar	two absolute lengths	visual
+border-style	<border-style>{1,4} | inherit	see individual properties	*	no	N/A	see individual properties	per grammar	see individual properties	visual
+<border-style> = none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset
+border-top	[ <border-width> || <border-style> || <'border-top-color'> ] | inherit	see individual properties	*	no	N/A	see individual properties	per grammar	see individual properties	visual
+border-top-color	<color> | transparent | inherit	the value of the color property	*	no	N/A	by computed value type	per grammar	when taken from the color property, the computed value of color; otherwise, as specified	visual
+border-top-style	<border-style> | inherit	none	*	no	N/A	discrete	per grammar	as specified	visual
+border-top-width	<border-width> | inherit	medium	*	no	N/A	by computed value type	per grammar	absolute length; 0 if the border style is none or hidden	visual
+border-width	<border-width>{1,4} | inherit	see individual properties	*	no	N/A	see individual properties	per grammar	see individual properties	visual
+	<border-width> = thin | medium | thick | <length>
+bottom	<length> | <percentage> | auto | inherit	auto	positioned elements	no	refer to height of containing block	by computed value type	per grammar	if specified as a length, the corresponding absolute length; if specified as a percentage, the specified value; otherwise, auto.	visual
+caption-side	top | bottom | inherit	top	table-caption elements	yes	N/A	discrete	per grammar	as specified	visual
+clear	none | left | right | both | inherit	none	block-level elements	no	N/A	discrete	per grammar	as specified	visual
+clip	<shape> | auto | inherit	auto	absolutely positioned elements	no	N/A	by computed value type	per grammar	auto if specified as auto, otherwise a rectangle with four values, each of which is auto if specified as auto and the computed length otherwise	visual
+color	<color> | inherit	depends on user agent	*	yes	N/A	by computed value type	per grammar	as specified	visual
+content	normal | none | [ <string> | <uri> | <counter> | attr(<identifier>) | open-quote | close-quote | no-open-quote | no-close-quote ]+ | inherit	normal	:before and :after pseudo-elements	no	N/A	by computed value type	per grammar	On elements, always computes to normal. On :before and :after, if normal is specified, computes to none. Otherwise, for URI values, the absolute URI; for attr() values, the resulting string; for other keywords, as specified.	all
+<counter> = counter(<identifier>, <list-style-type>?)
+<list-style-type> = disc | circle | square | decimal | decimal-leading-zero | lower-roman | upper-roman | lower-greek | lower-latin | upper-latin | armenian | georgian | lower-alpha | upper-alpha | none
+<attr()> = attr(<identifier>)
+counter-increment	[ <identifier> <integer>? ]+ | none | inherit	none	*	no	N/A	by computed value type	per grammar	as specified	all
+counter-reset	[ <identifier> <integer>? ]+ | none | inherit	none	*	no	N/A	by computed value type	per grammar	as specified	all
+cursor	[ [<uri> ,]* [ auto | crosshair | default | pointer | move | e-resize | ne-resize | nw-resize | n-resize | se-resize | sw-resize | s-resize | w-resize | text | wait | help | progress ] ] | inherit	auto	*	yes	N/A	by computed value type	per grammar	as specified, except with any relative URLs converted to absolute	visual, interactive
+direction	ltr | rtl | inherit	ltr	all elements, but see prose	yes	N/A	discrete	per grammar	as specified	visual
+display	inline | block | list-item | inline-block | table | inline-table | table-row-group | table-header-group | table-footer-group | table-row | table-column-group | table-column | table-cell | table-caption | none | inherit	inline	*	no	N/A	discrete	per grammar	see text	all
+empty-cells	show | hide | inherit	show	table-cell elements	yes	N/A	discrete	per grammar	as specified	visual
+float	left | right | none | inherit	none	all, but see {visuren.html#dis-pos-flo}9.7{}	no	N/A	discrete	per grammar	as specified	visual
+font	[ [ <'font-style'> || <'font-variant'> || <'font-weight'> ]? <'font-size'> [ / <'line-height'> ]? <'font-family'> ] | caption | icon | menu | message-box | small-caption | status-bar | inherit	see individual properties	*	yes	see individual properties	see individual properties	per grammar	see individual properties	visual
+font-family	[ [ <family-name> | <generic-family> ] [, <family-name> | <generic-family>]* ] | inherit	depends on user agent	*	yes	N/A	discrete	per grammar	as specified	visual
+<generic-family> = serif | sans-serif | cursive | fantasy | monospace
+<family-name> = <identifiers> | <string>
+font-size	<absolute-size> | <relative-size> | <length> | <percentage> | inherit	medium	*	yes	refer to inherited font size	by computed value type	per grammar	absolute length	visual
+font-style	normal | italic | oblique | inherit	normal	*	yes	N/A	discrete	per grammar	as specified	visual
+font-variant	normal | small-caps | inherit	normal	*	yes	N/A	discrete	per grammar	as specified	visual
+font-weight	normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | inherit	normal	*	yes	N/A	by computed value type	per grammar	see text	visual
+height	<length> | <percentage> | auto | inherit	auto	all elements but non-replaced inline elements, table columns, and column groups	no	see prose	by computed value type	per grammar	the percentage or auto (see prose under <percentage>) or the absolute length	visual
+left	<length> | <percentage> | auto | inherit	auto	positioned elements	no	refer to width of containing block	by computed value type	per grammar	if specified as a length, the corresponding absolute length; if specified as a percentage, the specified value; otherwise, auto.	visual
+letter-spacing	normal | <length> | inherit	normal	*	yes	N/A	by computed value type	per grammar	normal or absolute length	visual
+line-height	normal | <number> | <length> | <percentage> | inherit	normal	*	yes	refer to the font size of the element itself	by computed value type	per grammar	for <length> and <percentage> the absolute value; otherwise as specified	visual
+list-style	[ <'list-style-type'> || <'list-style-position'> || <'list-style-image'> ] | inherit	see individual properties	elements with 'display: list-item'	yes	N/A	see individual properties	per grammar	see individual properties	visual
+list-style-image	<uri> | none | inherit	none	elements with 'display: list-item'	yes	N/A	discrete	per grammar	absolute URI or none	visual
+list-style-position	inside | outside | inherit	outside	elements with 'display: list-item'	yes	N/A	discrete	per grammar	as specified	visual
+list-style-type	disc | circle | square | decimal | decimal-leading-zero | lower-roman | upper-roman | lower-greek | lower-latin | upper-latin | armenian | georgian | lower-alpha | upper-alpha | none | inherit	disc	elements with 'display: list-item'	yes	N/A	discrete	per grammar	as specified	visual
+margin	<margin-width>{1,4} | inherit	see individual properties	all elements except elements with table display types other than table-caption, table and inline-table	no	refer to width of containing block	see individual properties	per grammar	see individual properties	visual
+margin-bottom	<margin-width> | inherit	0	all elements except elements with table display types other than table-caption, table and inline-table	no	refer to width of containing block	by computed value type	per grammar	the percentage as specified or the absolute length	visual
+margin-left	<margin-width> | inherit	0	all elements except elements with table display types other than table-caption, table and inline-table	no	refer to width of containing block	by computed value type	per grammar	the percentage as specified or the absolute length	visual
+margin-right	<margin-width> | inherit	0	all elements except elements with table display types other than table-caption, table and inline-table	no	refer to width of containing block	by computed value type	per grammar	the percentage as specified or the absolute length	visual
+margin-top	<margin-width> | inherit	0	all elements except elements with table display types other than table-caption, table and inline-table	no	refer to width of containing block	by computed value type	per grammar	the percentage as specified or the absolute length	visual
+max-height	<length> | <percentage> | none | inherit	none	all elements but non-replaced inline elements, table columns, and column groups	no	see prose	by computed value type	per grammar	the percentage as specified or the absolute length or none	visual
+max-width	<length> | <percentage> | none | inherit	none	all elements but non-replaced inline elements, table rows, and row groups	no	refer to width of containing block	by computed value type	per grammar	the percentage as specified or the absolute length or none	visual
+min-height	<length> | <percentage> | inherit	0	all elements but non-replaced inline elements, table columns, and column groups	no	see prose	by computed value type	per grammar	the percentage as specified or the absolute length	visual
+min-width	<length> | <percentage> | inherit	0	all elements but non-replaced inline elements, table rows, and row groups	no	refer to width of containing block	by computed value type	per grammar	the percentage as specified or the absolute length	visual
+orphans	<integer> | inherit	2	block container elements	yes	N/A	by computed value type	per grammar	as specified	visual, paged
+outline	[ <'outline-color'> || <'outline-style'> || <'outline-width'> ] | inherit	see individual properties	*	no	N/A	see individual properties	per grammar	see individual properties	visual, interactive
+outline-color	<color> | invert | inherit	invert	*	no	N/A	by computed value type	per grammar	as specified	visual, interactive
+outline-style	<border-style> | inherit	none	*	no	N/A	by computed value type	per grammar	as specified	visual, interactive
+outline-width	<border-width> | inherit	medium	*	no	N/A	by computed value type	per grammar	absolute length; 0 if the outline style is none	visual, interactive
+overflow	visible | hidden | scroll | auto | inherit	visible	block containers	no	N/A	discrete	per grammar	as specified	visual
+padding	<padding-width>{1,4} | inherit	see individual properties	all elements except table-row-group, table-header-group, table-footer-group, table-row, table-column-group and table-column	no	refer to width of containing block	see individual properties	per grammar	see individual properties	visual
+<padding-width> = <length-percentage>
+padding-bottom	<padding-width> | inherit	0	all elements except table-row-group, table-header-group, table-footer-group, table-row, table-column-group and table-column	no	refer to width of containing block	by computed value type	per grammar	the percentage as specified or the absolute length	visual
+padding-left	<padding-width> | inherit	0	all elements except table-row-group, table-header-group, table-footer-group, table-row, table-column-group and table-column	no	refer to width of containing block	by computed value type	per grammar	the percentage as specified or the absolute length	visual
+padding-right	<padding-width> | inherit	0	all elements except table-row-group, table-header-group, table-footer-group, table-row, table-column-group and table-column	no	refer to width of containing block	by computed value type	per grammar	the percentage as specified or the absolute length	visual
+padding-top	<padding-width> | inherit	0	all elements except table-row-group, table-header-group, table-footer-group, table-row, table-column-group and table-column	no	refer to width of containing block	by computed value type	per grammar	the percentage as specified or the absolute length	visual
+page-break-after	auto | always | avoid | left | right | inherit	auto	block-level elements (but see text)	no	N/A	discrete	per grammar	as specified	visual, paged
+page-break-before	auto | always | avoid | left | right | inherit	auto	block-level elements (but see text)	no	N/A	discrete	per grammar	as specified	visual, paged
+page-break-inside	avoid | auto | inherit	auto	block-level elements (but see text)	no	N/A	discrete	per grammar	as specified	visual, paged
+position	static | relative | absolute | fixed | inherit	static	*	no	N/A	discrete	per grammar	as specified	visual
+quotes	[<string> <string>]+ | none | inherit	depends on user agent	*	yes	N/A	discrete	per grammar	as specified	visual
+right	<length> | <percentage> | auto | inherit	auto	positioned elements	no	refer to width of containing block	by computed value type	per grammar	if specified as a length, the corresponding absolute length; if specified as a percentage, the specified value; otherwise, auto.	visual
+table-layout	auto | fixed | inherit	auto	table and inline-table elements	no	N/A	discrete	per grammar	as specified	visual
+text-align	left | right | center | justify | inherit	a nameless value that acts as left if direction is ltr, right if direction is rtl	block containers	yes	N/A	discrete	per grammar	the initial value or as specified	visual
+text-decoration	none | [ underline || overline || line-through || blink ] | inherit	none	*	no (see prose)	N/A	discrete	per grammar	as specified	visual
+text-indent	<length> | <percentage> | inherit	0	block containers	yes	refer to width of containing block	by computed value type	per grammar	the percentage as specified or the absolute length	visual
+text-transform	capitalize | uppercase | lowercase | none | inherit	none	*	yes	N/A	discrete	per grammar	as specified	visual
+top	<length> | <percentage> | auto | inherit	auto	positioned elements	no	refer to height of containing block	by computed value type	per grammar	if specified as a length, the corresponding absolute length; if specified as a percentage, the specified value; otherwise, auto.	visual
+unicode-bidi	normal | embed | bidi-override | inherit	normal	all elements, but see prose	no	N/A	discrete	per grammar	as specified	visual
+vertical-align	baseline | sub | super | top | text-top | middle | bottom | text-bottom | <percentage> | <length> | inherit	baseline	inline-level and table-cell elements	no	refer to the line-height of the element itself	by computed value type	per grammar	for <percentage> and <length> the absolute length, otherwise as specified	visual
+visibility	visible | hidden | collapse | inherit	visible	*	yes	N/A	discrete	per grammar	as specified	visual
+white-space	normal | pre | nowrap | pre-wrap | pre-line | inherit	normal	*	yes	N/A	discrete	per grammar	as specified	visual
+widows	<integer> | inherit	2	block container elements	yes	N/A	by computed value type	per grammar	as specified	visual, paged
+width	<length> | <percentage> | auto | inherit	auto	all elements but non-replaced inline elements, table rows, and row groups	no	refer to width of containing block	by computed value type	per grammar	the percentage or auto as specified or the absolute length	visual
+word-spacing	normal | <length> | inherit	normal	*	yes	N/A	by computed value type	per grammar	for normal the value 0; otherwise the absolute length	visual
+z-index	auto | <integer> | inherit	auto	positioned elements	no	N/A	by computed value type	per grammar	as specified	visual
+#+CSS2.1 Aural properties
+azimuth	<angle> | [ <direction> || <behind> ] | <delta> | inherit	center	 	yes	 	aural
+elevation	<angle> | <tilt> | inherit	level	 	yes	 	aural
+<tilt> =  below | level | above | higher | lower
+<delta> = leftwards | rightwards
+<direction> = left-side | far-left | left | center-left | center | center-right | right | far-right | right-side
+<behind> = behind
+pitch-range	<number> | inherit	50	 	yes	 	aural
+pitch	<frequency> | x-low | low | medium | high | x-high | inherit	medium	 	yes	 	aural
+play-during	<uri> [ mix || repeat ]? | auto | none | inherit	auto	 	no	 	aural
+richness	<number> | inherit	50	 	yes	 	aural
+speak-header	once | always | inherit	once	elements that have table header information	yes	 	aural
+speak-numeral	digits | continuous | inherit	continuous	 	yes	 	aural
+speak-punctuation	code | none | inherit	none	 	yes	 	aural
+speech-rate	<number> | x-slow | slow | medium | fast | x-fast | faster | slower | inherit	medium	 	yes	 	aural
+speak	normal | none | spell-out | inherit	normal	 	yes	 	aural
+stress	<number> | inherit	50	 	yes	 	aural
+volume	<number> | <percentage> | silent | x-soft | soft | medium | loud | x-loud | inherit	medium	 	yes	refer to inherited value	aural

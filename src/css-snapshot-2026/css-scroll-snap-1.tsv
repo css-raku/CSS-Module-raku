@@ -1,0 +1,25 @@
+scroll-margin	<length>{1,4}	0	all elements	no	n/a	by computed value type	per grammar	per side, an absolute length	
+scroll-margin-block	<length>{1,2}	0	all elements	no	n/a	by computed value type	per grammar	see individual properties	
+scroll-margin-block-end	<length>	0	all elements	no	n/a	by computed value type	per grammar	absolute length	scroll-margin
+scroll-margin-block-start	<length>	0	all elements	no	n/a	by computed value type	per grammar	absolute length	scroll-margin
+scroll-margin-bottom	<length>	0	all elements	no	n/a	by computed value type	per grammar	absolute length	scroll-margin
+scroll-margin-inline	<length>{1,2}	0	all elements	no	n/a	by computed value type	per grammar	see individual properties	
+scroll-margin-inline-end	<length>	0	all elements	no	n/a	by computed value type	per grammar	absolute length	scroll-margin
+scroll-margin-inline-start	<length>	0	all elements	no	n/a	by computed value type	per grammar	absolute length	scroll-margin
+scroll-margin-left	<length>	0	all elements	no	n/a	by computed value type	per grammar	absolute length	scroll-margin
+scroll-margin-right	<length>	0	all elements	no	n/a	by computed value type	per grammar	absolute length	scroll-margin
+scroll-margin-top	<length>	0	all elements	no	n/a	by computed value type	per grammar	absolute length	scroll-margin
+scroll-padding	[ auto | <length-percentage [0,∞]> ]{1,4}	auto	scroll containers	no	relative to the corresponding dimension of the scroll container’s scrollport	by computed value type	per grammar	per side, either the keyword auto or a computed <length-percentage> value	
+scroll-padding-block	[ auto | <length-percentage [0,∞]> ]{1,2}	auto	scroll containers	no	relative to the scroll container’s scrollport	by computed value	per grammar	see individual properties	
+scroll-padding-block-end	auto | <length-percentage [0,∞]>	auto	scroll containers	no	relative to the scroll container’s scrollport	by computed value type	per grammar	the keyword auto or a computed <length-percentage> value	scroll-padding
+scroll-padding-block-start	auto | <length-percentage [0,∞]>	auto	scroll containers	no	relative to the scroll container’s scrollport	by computed value type	per grammar	the keyword auto or a computed <length-percentage> value	scroll-padding
+scroll-padding-bottom	auto | <length-percentage [0,∞]>	auto	scroll containers	no	relative to the scroll container’s scrollport	by computed value type	per grammar	the keyword auto or a computed <length-percentage> value	scroll-padding
+scroll-padding-inline	[ auto | <length-percentage [0,∞]> ]{1,2}	auto	scroll containers	no	relative to the scroll container’s scrollport	by computed value	per grammar	see individual properties	
+scroll-padding-inline-end	auto | <length-percentage [0,∞]>	auto	scroll containers	no	relative to the scroll container’s scrollport	by computed value type	per grammar	the keyword auto or a computed <length-percentage> value	scroll-padding
+scroll-padding-inline-start	auto | <length-percentage [0,∞]>	auto	scroll containers	no	relative to the scroll container’s scrollport	by computed value type	per grammar	the keyword auto or a computed <length-percentage> value	scroll-padding
+scroll-padding-left	auto | <length-percentage [0,∞]>	auto	scroll containers	no	relative to the scroll container’s scrollport	by computed value type	per grammar	the keyword auto or a computed <length-percentage> value	scroll-padding
+scroll-padding-right	auto | <length-percentage [0,∞]>	auto	scroll containers	no	relative to the scroll container’s scrollport	by computed value type	per grammar	the keyword auto or a computed <length-percentage> value	scroll-padding
+scroll-padding-top	auto | <length-percentage [0,∞]>	auto	scroll containers	no	relative to the scroll container’s scrollport	by computed value type	per grammar	the keyword auto or a computed <length-percentage> value	scroll-padding
+scroll-snap-align	[ none | start | end | center ]{1,2}	none	all elements	no	n/a	discrete	per grammar	two keywords	
+scroll-snap-stop	normal | always	normal	all elements	no	n/a	discrete	per grammar	specified keyword	
+scroll-snap-type	none | [ x | y | block | inline | both ] [ mandatory | proximity ]?	none	all elements	no	n/a	discrete	per grammar	specified keyword(s)	

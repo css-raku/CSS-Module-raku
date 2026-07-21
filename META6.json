@@ -168,6 +168,18 @@
       "CSS::Snapshot2026::PagedMedia::Gen::Grammar": "lib/CSS/Snapshot2026/PagedMedia/Gen/Grammar.rakumod",
       "CSS::Snapshot2026::PagedMedia::Gen::External": "lib/CSS/Snapshot2026/PagedMedia/Gen/External.rakumod",
 
+      "CSS::Snapshot2026::ScrollAnchoring::Gen::Actions": "lib/CSS/Snapshot2026/ScrollAnchoring/Gen/Actions.rakumod",
+      "CSS::Snapshot2026::ScrollAnchoring::Gen::Grammar": "lib/CSS/Snapshot2026/ScrollAnchoring/Gen/Grammar.rakumod",
+      "CSS::Snapshot2026::ScrollAnchoring::Gen::External": "lib/CSS/Snapshot2026/ScrollAnchoring/Gen/External.rakumod",
+
+      "CSS::Snapshot2026::Scrollbars::Gen::Actions": "lib/CSS/Snapshot2026/Scrollbars/Gen/Actions.rakumod",
+      "CSS::Snapshot2026::Scrollbars::Gen::Grammar": "lib/CSS/Snapshot2026/Scrollbars/Gen/Grammar.rakumod",
+      "CSS::Snapshot2026::Scrollbars::Gen::External": "lib/CSS/Snapshot2026/Scrollbars/Gen/External.rakumod",
+
+      "CSS::Snapshot2026::ScrollSnap::Gen::Actions": "lib/CSS/Snapshot2026/ScrollSnap/Gen/Actions.rakumod",
+      "CSS::Snapshot2026::ScrollSnap::Gen::Grammar": "lib/CSS/Snapshot2026/ScrollSnap/Gen/Grammar.rakumod",
+      "CSS::Snapshot2026::ScrollSnap::Gen::External": "lib/CSS/Snapshot2026/ScrollSnap/Gen/External.rakumod",
+
       "CSS::Snapshot2026::Shapes::Gen::Actions": "lib/CSS/Snapshot2026/Shapes/Gen/Actions.rakumod",
       "CSS::Snapshot2026::Shapes::Gen::Grammar": "lib/CSS/Snapshot2026/Shapes/Gen/Grammar.rakumod",
       "CSS::Snapshot2026::Shapes::Gen::External": "lib/CSS/Snapshot2026/Shapes/Gen/External.rakumod",

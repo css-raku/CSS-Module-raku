@@ -8,9 +8,6 @@ method image (|) {
 method integer (|) {
     ...
 }
-method reversed-counter-name (|) {
-    ...
-}
 method string (|) {
     ...
 }

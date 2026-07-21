@@ -1,0 +1,2 @@
+scrollbar-color	auto | <color>{2}	auto	scroll containers	yes	n/a	by computed value	per grammar	specified keyword or two computed colors
+scrollbar-width	auto | thin | none	auto	scroll containers	no	n/a	discrete	per grammar	specified keyword
