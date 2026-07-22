@@ -1,0 +1,10 @@
+text-decoration	<'text-decoration-line'> || <'text-decoration-style'> || <'text-decoration-color'>	see individual properties	see individual properties	see individual properties	see individual properties	see individual properties	per grammar	see individual properties
+text-decoration-color	<color>	currentcolor	all elements	no	n/a	by computed value type	per grammar	computed color
+text-decoration-line	none | [ underline || overline || line-through || blink ]	none	all elements	no (but see prose, above)	n/a	discrete	per grammar	specified keyword(s)
+text-decoration-style	solid | double | dotted | dashed | wavy	solid	all elements	no	n/a	discrete	per grammar	specified keyword
+text-emphasis	<'text-emphasis-style'> || <'text-emphasis-color'>	see individual properties	see individual properties	see individual properties	see individual properties	see individual properties	per grammar	see individual properties
+text-emphasis-color	<color>	currentcolor	text	yes	n/a	by computed value type	per grammar	computed color
+text-emphasis-position	[ over | under ] && [ right | left ]?	over right	text	yes	n/a	discrete	per grammar	specified keyword(s)
+text-emphasis-style	none | [ [ filled | open ] || [ dot | circle | double-circle | triangle | sesame ] ] | <string>	none	text	yes	n/a	discrete	per grammar	the keyword none, a pair of keywords representing the shape and fill, or a string
+text-shadow	none | [ <color>? && [ <length>{2} <length [0,∞]>? ] ]#	none	text	yes	n/a	as shadow list	per grammar	either the keyword none or a list, each item consisting of three absolute lengths plus a computed color
+text-underline-position	auto | [ under || [ left | right ] ]	auto	all elements	yes	n/a	discrete	per grammar	specified keyword(s)

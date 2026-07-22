@@ -6,11 +6,11 @@ also is CSS::Grammar::CSS4;
 use CSS::Specification::Base::Grammar;
 also does CSS::Specification::Base::Grammar;
 
-use CSS::Snapshot2026::Gen::Grammar;
-also is  CSS::Snapshot2026::Gen::Grammar;
+use CSS::Snapshot2026::Grammar;
+also is  CSS::Snapshot2026::Grammar;
 
-use CSS::Snapshot2026::Gen::External;
-also does  CSS::Snapshot2026::Gen::External;
+use CSS::Snapshot2026::External;
+also does  CSS::Snapshot2026::External;
 
 token proforma:sym<inherit> {:i inherit}
 token proforma:sym<initial> {:i initial}

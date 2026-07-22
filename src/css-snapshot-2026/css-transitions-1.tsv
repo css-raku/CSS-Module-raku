@@ -1,0 +1,7 @@
+transition	<single-transition>#	see individual properties	all elements	no	N/A	not animatable	per grammar	see individual properties
+<single-transition> = [ none | <single-transition-property> ] || <time> || <easing-function> || <time>
+<single-transition-property> = all | <custom-ident>
+transition-delay	<time>#	0s	all elements	no	N/A	not animatable	per grammar	list, each item a duration
+transition-duration	<time [0s,∞]>#	0s	all elements	no	N/A	not animatable	per grammar	list, each item a duration
+transition-property	none | <single-transition-property>#	all	all elements	no	N/A	not animatable	per grammar	the keyword none else a list of identifiers
+transition-timing-function	<easing-function>#	ease	all elements	no	N/A	not animatable	per grammar	as specified

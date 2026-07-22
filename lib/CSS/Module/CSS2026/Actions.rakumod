@@ -9,8 +9,8 @@ also is CSS::Module::CSS2026::Colors::Actions;
 use CSS::Specification::Base::Actions;
 also does CSS::Specification::Base::Actions;
 
-use CSS::Snapshot2026::Gen::Actions;
-also is CSS::Snapshot2026::Gen::Actions;
+use CSS::Snapshot2026::Actions;
+also is CSS::Snapshot2026::Actions;
 
 use CSS::Module::CSS3::Values_and_Units;
 also is CSS::Module::CSS3::Values_and_Units::Actions::Calc;

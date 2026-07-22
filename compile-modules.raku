@@ -24,6 +24,7 @@ class Make {
                       ],
                  'Module::SVG' => [:inherit, <src/svg-properties.tsv>,],
                  :Snapshot2026[:link,
+                          <src/css-snapshot-2026/css-cascade-5.tsv>,
                           :Align<src/css-snapshot-2026/css-align-3.tsv>,
                           :Animations<src/css-snapshot-2026/css-animations-1.tsv>,
                           :Backgrounds<src/css-snapshot-2026/css-backgrounds-3.tsv>,
@@ -56,11 +57,23 @@ class Make {
                           :Speech<src/css-snapshot-2026/css-speech-1.tsv>,
                           :SVG<src/css-snapshot-2026/svg2-propidx.tsv>,
                           :Text<src/css-snapshot-2026/css-text-3.tsv>,
-                          :Transforms<src/css-snapshot-2026/css-transforms-2.tsv>,
+                          :TextDecor<src/css-snapshot-2026/css-text-decor-3.tsv>,
+                          :Transitions<
+                              src/css-snapshot-2026/css-transitions-1.tsv
+                              src/css-snapshot-2026/css-view-transitions-1.tsv
+                           >,
+                          :Transforms<
+                              src/css-snapshot-2026/css-transforms-1.tsv
+                              src/css-snapshot-2026/css-transforms-2.tsv
+                           >,
                           :UI<src/css-snapshot-2026/css-ui-3.tsv>,
                           :Values<src/css-snapshot-2026/css-values-5.tsv>,
                           :WritingModes<src/css-snapshot-2026/css-writing-modes-4.tsv>,
-                          :CSS21<src/css-snapshot-2026/drafts-css2.tsv>,
+                          :WillChange<src/css-snapshot-2026/css-will-change-1.tsv>,
+                          :CSS21<
+                               src/css-snapshot-2026/drafts-css2.tsv
+                               src/css-snapshot-2026/css21-aural.tsv
+                           >,
                       ],
                  'Snapshot2026::Fonts' => [:AtFontFace<src/css-snapshot-2026/css-fonts-4/@fontface.tsv>],
                  'Module::CSS3::Fonts::AtFontFace' => [<src/css3x-font-@fontface-properties.tsv>,],
@@ -121,9 +134,9 @@ class Make {
                 %props.&write-metadata($meta-root);
 
                 if $link {
-                    my @actions-link-id = flat @group-id, 'Gen', 'Actions';
-                    my @grammar-link-id = flat @group-id, 'Gen', 'Grammar';
-                    my @external-link-id = flat @group-id, 'Gen', 'External';
+                    my @actions-link-id = flat @group-id, 'Actions';
+                    my @grammar-link-id = flat @group-id, 'Grammar';
+                    my @external-link-id = flat @group-id, 'External';
                     # my @use-ids = @module-ids.map: { .Slip, 'Actions' }
                     # RakuAST version nyi (Raku v2026.05)
                     # my RakuAST::Package $actions-package = CSS::Specification::Compiler.link-actions(@actions-link-id, @module-ids);

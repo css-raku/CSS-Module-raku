@@ -2,7 +2,7 @@ hanging-punctuation	none | [ first || [ force-end | allow-end ] || last ]	none	t
 hyphens	none | manual | auto	manual	text	yes	n/a	discrete	n/a	specified keyword
 letter-spacing	normal | <length>	normal	inline boxes and text	yes	n/a	by computed value type	n/a	an absolute length
 line-break	auto | loose | normal | strict | anywhere	auto	text	yes	n/a	discrete	n/a	specified keyword
-overflow-wrap	normal | break-word | anywhere	normal	text	yes	n/a	discrete	n/a	specified keyword
+overflow-wrap, word-wrap	normal | break-word | anywhere	normal	text	yes	n/a	discrete	n/a	specified keyword
 tab-size	<number [0,∞]> | <length [0,∞]>	8	text	yes	n/a	by computed value type	n/a	the specified number or absolute length
 text-align	start | end | left | right | center | justify | match-parent | justify-all	start	block containers	yes	see individual properties	discrete	n/a	see individual properties
 text-align-all	start | end | left | right | center | justify | match-parent	start	block containers	yes	n/a	discrete	n/a	keyword as specified, except for match-parent which computes as defined above

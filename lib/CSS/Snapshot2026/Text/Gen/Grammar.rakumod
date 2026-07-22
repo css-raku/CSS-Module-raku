@@ -20,6 +20,9 @@ rule css-val-line-break { :i [auto | loose | normal | strict | anywhere ]& <keyw
 #| overflow-wrap: normal | break-word | anywhere
 rule decl:sym<overflow-wrap> { :i ("overflow-wrap") ":" <val(/<css-val-overflow-wrap> /, &?ROUTINE.WHY)>}
 rule css-val-overflow-wrap { :i [normal | "break-word" | anywhere ]& <keyw>  }
+#| overflow-wrap: normal | break-word | anywhere
+rule decl:sym<word-wrap> { :i ("word-wrap") ":" <val(/<css-val-word-wrap> /, &?ROUTINE.WHY)>}
+rule css-val-word-wrap { :i [normal | "break-word" | anywhere ]& <keyw>  }
 #| tab-size: <number [0,∞]> | <length [0,∞]>
 rule decl:sym<tab-size> { :i ("tab-size") ":" <val(/<css-val-tab-size> /, &?ROUTINE.WHY)>}
 rule css-val-tab-size { :i <number> || <length>  }

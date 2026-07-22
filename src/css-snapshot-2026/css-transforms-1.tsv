@@ -1,0 +1,40 @@
+transform	none | <transform-list>	none	transformable elements	no	refer to the size of reference box	transform list, see interpolation rules	per grammar	as specified, but with lengths made absolute
+<transform-list> = <transform-function>+
+<transform-function> = <matrix()> | <translate()> | <translateX()> | <translateY()> | <scale()> | <scaleX()> | <scaleY()> | <rotate()> | <skew()> | <skewX()> | <skewY()>
+
+matrix() = matrix( <number>#{6} )
+# specifies a 2D transformation in the form of a transformation matrix of the six values a, b, c, d, e, f.
+
+translate() = translate( <length-percentage> , <length-percentage>? )
+# specifies a 2D translation by the vector [tx, ty], where tx is the first translation-value parameter and ty is the optional second translation-value parameter. If <ty> is not provided, ty has zero as a value.
+
+translateX() = translateX( <length-percentage> )
+# specifies a translation by the given amount in the X direction.
+
+translateY() = translateY( <length-percentage> )
+# specifies a translation by the given amount in the Y direction.
+
+scale() = scale( <number> , <number>? )
+# specifies a 2D scale operation by the [sx,sy] scaling vector described by the 2 parameters. If the second parameter is not provided, it takes a value equal to the first. For example, scale(1, 1) would leave an element unchanged, while scale(2, 2) would cause it to appear twice as long in both the X and Y axes, or four times its typical geometric size.
+
+scaleX() = scaleX( <number> )
+# specifies a 2D scale operation using the [sx,1] scaling vector, where sx is given as the parameter.
+
+scaleY() = scaleY( <number> )
+# specifies a 2D scale operation using the [1,sy] scaling vector, where sy is given as the parameter.
+
+rotate() = rotate( [ <angle> | <zero> ] )
+# specifies a 2D rotation by the angle specified in the parameter about the origin of the element, as defined by the transform-origin property. For example, rotate(90deg) would cause elements to appear rotated one-quarter of a turn in the clockwise direction.
+
+skew() = skew( [ <angle> | <zero> ] , [ <angle> | <zero> ]? )
+# specifies a 2D skew by [ax,ay] for X and Y. If the second parameter is not provided, it has a zero value.
+
+skewX() = skewX( [ <angle> | <zero> ] )
+# specifies a 2D skew transformation along the X axis by the given angle.
+
+skewY() = skewY( [ <angle> | <zero> ] )
+# specifies a 2D skew transformation along the Y axis by the given angle.
+
+
+transform-box	content-box | border-box | fill-box | stroke-box | view-box	view-box	transformable elements	no	N/A	discrete	per grammar	specified keyword
+transform-origin	[ left | center | right | top | bottom | <length-percentage> ] |   [ left | center | right | <length-percentage> ]  [ top | center | bottom | <length-percentage> ] <length>? |  [ [ center | left | right ] && [ center | top | bottom ] ] <length>?	50% 50%	transformable elements	no	refer to the size of reference box	by computed value	per grammar	see background-position

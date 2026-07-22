@@ -17,3 +17,6 @@ method percentage (|) {
 method position (|) {
     ...
 }
+method zero (|) {
+    ...
+}

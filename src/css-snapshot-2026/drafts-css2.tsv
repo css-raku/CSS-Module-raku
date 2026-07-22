@@ -101,21 +101,3 @@ widows	<integer> | inherit	2	block container elements	yes	N/A	by computed value 
 width	<length> | <percentage> | auto | inherit	auto	all elements but non-replaced inline elements, table rows, and row groups	no	refer to width of containing block	by computed value type	per grammar	the percentage or auto as specified or the absolute length	visual
 word-spacing	normal | <length> | inherit	normal	*	yes	N/A	by computed value type	per grammar	for normal the value 0; otherwise the absolute length	visual
 z-index	auto | <integer> | inherit	auto	positioned elements	no	N/A	by computed value type	per grammar	as specified	visual
-#+CSS2.1 Aural properties
-azimuth	<angle> | [ <direction> || <behind> ] | <delta> | inherit	center	 	yes	 	aural
-elevation	<angle> | <tilt> | inherit	level	 	yes	 	aural
-<tilt> =  below | level | above | higher | lower
-<delta> = leftwards | rightwards
-<direction> = left-side | far-left | left | center-left | center | center-right | right | far-right | right-side
-<behind> = behind
-pitch-range	<number> | inherit	50	 	yes	 	aural
-pitch	<frequency> | x-low | low | medium | high | x-high | inherit	medium	 	yes	 	aural
-play-during	<uri> [ mix || repeat ]? | auto | none | inherit	auto	 	no	 	aural
-richness	<number> | inherit	50	 	yes	 	aural
-speak-header	once | always | inherit	once	elements that have table header information	yes	 	aural
-speak-numeral	digits | continuous | inherit	continuous	 	yes	 	aural
-speak-punctuation	code | none | inherit	none	 	yes	 	aural
-speech-rate	<number> | x-slow | slow | medium | fast | x-fast | faster | slower | inherit	medium	 	yes	 	aural
-speak	normal | none | spell-out | inherit	normal	 	yes	 	aural
-stress	<number> | inherit	50	 	yes	 	aural
-volume	<number> | <percentage> | silent | x-soft | soft | medium | loud | x-loud | inherit	medium	 	yes	refer to inherited value	aural
