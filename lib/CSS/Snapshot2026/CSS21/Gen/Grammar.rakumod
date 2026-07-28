@@ -31,27 +31,29 @@ rule css-val-background-position { :i [[<percentage> || <length> || [left | cent
 #| background-repeat: repeat | repeat-x | repeat-y | no-repeat
 rule decl:sym<background-repeat> { :i ("background-repeat") ":" <val(/<css-val-background-repeat> /, &?ROUTINE.WHY)>}
 rule css-val-background-repeat { :i [repeat | "repeat-x" | "repeat-y" | "no-repeat" ]& <keyw>  }
-#| border: [ <border-width> || <border-style> || <'border-top-color'> ]
+#| border: [ <'border-width'> || <'border-style'> || <'border-color'> ]
 rule decl:sym<border> { :i (border) ":" <val(/<css-val-border> /, &?ROUTINE.WHY)>}
-rule css-val-border { :i [[<border-width> :my $*A;<!{
+rule css-val-border { :i [[<css-val-border-width> :my $*A;<!{
     $*A++
-}>|| <border-style> :my $*B;<!{
+}>|| <css-val-border-style> :my $*B;<!{
     $*B++
-}>|| <css-val-border-top-color> :my $*C;<!{
+}>|| <css-val-border-color> :my $*C;<!{
     $*C++
 }>]+] }
-#| border-bottom: [ <border-width> || <border-style> || <'border-top-color'> ]
+#| border-bottom: [ <'border-bottom-width'> || <'border-bottom-style'> || <'border-bottom-color'> ]
 rule decl:sym<border-bottom> { :i ("border-bottom") ":" <val(/<css-val-border-bottom> /, &?ROUTINE.WHY)>}
-rule css-val-border-bottom { :i [[<border-width> :my $*A;<!{
+rule css-val-border-bottom { :i [[<css-val-border-bottom-width> :my $*A;<!{
     $*A++
-}>|| <border-style> :my $*B;<!{
+}>|| <css-val-border-bottom-style> :my $*B;<!{
     $*B++
-}>|| <css-val-border-top-color> :my $*C;<!{
+}>|| <css-val-border-bottom-color> :my $*C;<!{
     $*C++
 }>]+] }
-#| border-bottom-color: <color> | transparent
+#| border-bottom-color: <border-color>
 rule decl:sym<border-bottom-color> { :i ("border-bottom-color") ":" <val(/<css-val-border-bottom-color> /, &?ROUTINE.WHY)>}
-rule css-val-border-bottom-color { :i <color> || transparent & <keyw>  }
+rule css-val-border-bottom-color { :i <border-color> }
+#| <border-color> = <color> | transparent
+rule border-color { :i <color> || transparent & <keyw>  }
 #| border-bottom-style: <border-style>
 rule decl:sym<border-bottom-style> { :i ("border-bottom-style") ":" <val(/<css-val-border-bottom-style> /, &?ROUTINE.WHY)>}
 rule css-val-border-bottom-style { :i <border-style> }
@@ -61,39 +63,39 @@ rule css-val-border-bottom-width { :i <border-width> }
 #| border-collapse: collapse | separate
 rule decl:sym<border-collapse> { :i ("border-collapse") ":" <val(/<css-val-border-collapse> /, &?ROUTINE.WHY)>}
 rule css-val-border-collapse { :i [collapse | separate ]& <keyw>  }
-#| border-color: [ <color> | transparent ]{1,4}
+#| border-color: <border-color>{1,4}
 rule decl:sym<border-color> { :i ("border-color") ":" <val(/<css-val-border-color>** 1..4 /, &?ROUTINE.WHY)>}
-rule css-val-border-color { :i [<color> || transparent & <keyw> ] }
-#| border-left: [ <border-width> || <border-style> || <'border-top-color'> ]
+rule css-val-border-color { :i <border-color> }
+#| border-left: [ <'border-left-width'> || <'border-left-style'> || <'border-left-color'> ]
 rule decl:sym<border-left> { :i ("border-left") ":" <val(/<css-val-border-left> /, &?ROUTINE.WHY)>}
-rule css-val-border-left { :i [[<border-width> :my $*A;<!{
+rule css-val-border-left { :i [[<css-val-border-left-width> :my $*A;<!{
     $*A++
-}>|| <border-style> :my $*B;<!{
+}>|| <css-val-border-left-style> :my $*B;<!{
     $*B++
-}>|| <css-val-border-top-color> :my $*C;<!{
+}>|| <css-val-border-left-color> :my $*C;<!{
     $*C++
 }>]+] }
-#| border-left-color: <color> | transparent
+#| border-left-color: <border-color>
 rule decl:sym<border-left-color> { :i ("border-left-color") ":" <val(/<css-val-border-left-color> /, &?ROUTINE.WHY)>}
-rule css-val-border-left-color { :i <color> || transparent & <keyw>  }
+rule css-val-border-left-color { :i <border-color> }
 #| border-left-style: <border-style>
 rule decl:sym<border-left-style> { :i ("border-left-style") ":" <val(/<css-val-border-left-style> /, &?ROUTINE.WHY)>}
 rule css-val-border-left-style { :i <border-style> }
 #| border-left-width: <border-width>
 rule decl:sym<border-left-width> { :i ("border-left-width") ":" <val(/<css-val-border-left-width> /, &?ROUTINE.WHY)>}
 rule css-val-border-left-width { :i <border-width> }
-#| border-right: [ <border-width> || <border-style> || <'border-top-color'> ]
+#| border-right: [ <'border-right-width'> || <'border-right-style'> || <'border-right-color'> ]
 rule decl:sym<border-right> { :i ("border-right") ":" <val(/<css-val-border-right> /, &?ROUTINE.WHY)>}
-rule css-val-border-right { :i [[<border-width> :my $*A;<!{
+rule css-val-border-right { :i [[<css-val-border-right-width> :my $*A;<!{
     $*A++
-}>|| <border-style> :my $*B;<!{
+}>|| <css-val-border-right-style> :my $*B;<!{
     $*B++
-}>|| <css-val-border-top-color> :my $*C;<!{
+}>|| <css-val-border-right-color> :my $*C;<!{
     $*C++
 }>]+] }
-#| border-right-color: <color> | transparent
+#| border-right-color: <border-color>
 rule decl:sym<border-right-color> { :i ("border-right-color") ":" <val(/<css-val-border-right-color> /, &?ROUTINE.WHY)>}
-rule css-val-border-right-color { :i <color> || transparent & <keyw>  }
+rule css-val-border-right-color { :i <border-color> }
 #| border-right-style: <border-style>
 rule decl:sym<border-right-style> { :i ("border-right-style") ":" <val(/<css-val-border-right-style> /, &?ROUTINE.WHY)>}
 rule css-val-border-right-style { :i <border-style> }
@@ -108,18 +110,18 @@ rule decl:sym<border-style> { :i ("border-style") ":" <val(/<css-val-border-styl
 rule css-val-border-style { :i <border-style> }
 #| <border-style> = none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset
 rule border-style { :i [none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset ]& <keyw>  }
-#| border-top: [ <border-width> || <border-style> || <'border-top-color'> ]
+#| border-top: [ <'border-top-width'> || <'border-top-style'> || <'border-top-color'> ]
 rule decl:sym<border-top> { :i ("border-top") ":" <val(/<css-val-border-top> /, &?ROUTINE.WHY)>}
-rule css-val-border-top { :i [[<border-width> :my $*A;<!{
+rule css-val-border-top { :i [[<css-val-border-top-width> :my $*A;<!{
     $*A++
-}>|| <border-style> :my $*B;<!{
+}>|| <css-val-border-top-style> :my $*B;<!{
     $*B++
 }>|| <css-val-border-top-color> :my $*C;<!{
     $*C++
 }>]+] }
-#| border-top-color: <color> | transparent
+#| border-top-color: <border-color>
 rule decl:sym<border-top-color> { :i ("border-top-color") ":" <val(/<css-val-border-top-color> /, &?ROUTINE.WHY)>}
-rule css-val-border-top-color { :i <color> || transparent & <keyw>  }
+rule css-val-border-top-color { :i <border-color> }
 #| border-top-style: <border-style>
 rule decl:sym<border-top-style> { :i ("border-top-style") ":" <val(/<css-val-border-top-style> /, &?ROUTINE.WHY)>}
 rule css-val-border-top-style { :i <border-style> }
@@ -204,9 +206,11 @@ rule css-val-font-variant { :i [normal | "small-caps" ]& <keyw>  }
 #| font-weight: normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
 rule decl:sym<font-weight> { :i ("font-weight") ":" <val(/<css-val-font-weight> /, &?ROUTINE.WHY)>}
 rule css-val-font-weight { :i [normal | bold | bolder | lighter ]& <keyw>  || [100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 ]& <number>  }
-#| height: <length> | <percentage> | auto
+#| height: <width-or-height>
 rule decl:sym<height> { :i (height) ":" <val(/<css-val-height> /, &?ROUTINE.WHY)>}
-rule css-val-height { :i <length> || <percentage> || auto & <keyw>  }
+rule css-val-height { :i <width-or-height> }
+#| <width-or-height> = <length> | <percentage> | auto
+rule width-or-height { :i <length> || <percentage> || auto & <keyw>  }
 #| left: <length> | <percentage> | auto
 rule decl:sym<left> { :i (left) ":" <val(/<css-val-left> /, &?ROUTINE.WHY)>}
 rule css-val-left { :i <length> || <percentage> || auto & <keyw>  }
@@ -343,9 +347,11 @@ rule css-val-text-indent { :i <length> || <percentage>  }
 #| text-transform: capitalize | uppercase | lowercase | none
 rule decl:sym<text-transform> { :i ("text-transform") ":" <val(/<css-val-text-transform> /, &?ROUTINE.WHY)>}
 rule css-val-text-transform { :i [capitalize | uppercase | lowercase | none ]& <keyw>  }
-#| top: <length> | <percentage> | auto
+#| top: <top-offset>
 rule decl:sym<top> { :i (top) ":" <val(/<css-val-top> /, &?ROUTINE.WHY)>}
-rule css-val-top { :i <length> || <percentage> || auto & <keyw>  }
+rule css-val-top { :i <top-offset> }
+#| <top-offset> = <length> | <percentage> | auto
+rule top-offset { :i <length> || <percentage> || auto & <keyw>  }
 #| unicode-bidi: normal | embed | bidi-override
 rule decl:sym<unicode-bidi> { :i ("unicode-bidi") ":" <val(/<css-val-unicode-bidi> /, &?ROUTINE.WHY)>}
 rule css-val-unicode-bidi { :i [normal | embed | "bidi-override" ]& <keyw>  }
@@ -361,9 +367,9 @@ rule css-val-white-space { :i [normal | pre | nowrap | "pre-wrap" | "pre-line" ]
 #| widows: <integer>
 rule decl:sym<widows> { :i (widows) ":" <val(/<css-val-widows> /, &?ROUTINE.WHY)>}
 rule css-val-widows { :i <integer> }
-#| width: <length> | <percentage> | auto
+#| width: <width-or-height>
 rule decl:sym<width> { :i (width) ":" <val(/<css-val-width> /, &?ROUTINE.WHY)>}
-rule css-val-width { :i <length> || <percentage> || auto & <keyw>  }
+rule css-val-width { :i <width-or-height> }
 #| word-spacing: normal | <length>
 rule decl:sym<word-spacing> { :i ("word-spacing") ":" <val(/<css-val-word-spacing> /, &?ROUTINE.WHY)>}
 rule css-val-word-spacing { :i normal & <keyw> || <length>  }

@@ -53,19 +53,19 @@ rule css-val-mask-border { :i [<css-val-mask-border-source> :my $*A;<!{
 #| mask-border-mode: luminance | alpha
 rule decl:sym<mask-border-mode> { :i ("mask-border-mode") ":" <val(/<css-val-mask-border-mode> /, &?ROUTINE.WHY)>}
 rule css-val-mask-border-mode { :i [luminance | alpha ]& <keyw>  }
-#| mask-border-outset: <'border-image-outset'>
+#| mask-border-outset: <.'border-image-outset'>
 rule decl:sym<mask-border-outset> { :i ("mask-border-outset") ":" <val(/<css-val-mask-border-outset> /, &?ROUTINE.WHY)>}
 rule css-val-mask-border-outset { :i <css-val-border-image-outset> }
-#| mask-border-repeat: <'border-image-repeat'>
+#| mask-border-repeat: <.'border-image-repeat'>
 rule decl:sym<mask-border-repeat> { :i ("mask-border-repeat") ":" <val(/<css-val-mask-border-repeat> /, &?ROUTINE.WHY)>}
 rule css-val-mask-border-repeat { :i <css-val-border-image-repeat> }
-#| mask-border-slice: <'border-image-slice'>
+#| mask-border-slice: <.'border-image-slice'>
 rule decl:sym<mask-border-slice> { :i ("mask-border-slice") ":" <val(/<css-val-mask-border-slice> /, &?ROUTINE.WHY)>}
 rule css-val-mask-border-slice { :i <css-val-border-image-slice> }
-#| mask-border-source: <'border-image-source'>
+#| mask-border-source: <.'border-image-source'>
 rule decl:sym<mask-border-source> { :i ("mask-border-source") ":" <val(/<css-val-mask-border-source> /, &?ROUTINE.WHY)>}
 rule css-val-mask-border-source { :i <css-val-border-image-source> }
-#| mask-border-width: <'border-image-width'>
+#| mask-border-width: <.'border-image-width'>
 rule decl:sym<mask-border-width> { :i ("mask-border-width") ":" <val(/<css-val-mask-border-width> /, &?ROUTINE.WHY)>}
 rule css-val-mask-border-width { :i <css-val-border-image-width> }
 #| mask-clip: [ <coord-box> | no-clip ]#

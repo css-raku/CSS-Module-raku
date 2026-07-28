@@ -14,3 +14,18 @@ method position-four ($/) {
 method length-percentage ($/) {
     make $.build.rule($/)
 }
+method calc-sum ($/) {
+    make $.build.rule($/)
+}
+method calc-product ($/) {
+    make $.build.rule($/)
+}
+method calc-value ($/) {
+    make $.build.rule($/)
+}
+method calc-keyword ($/) {
+    make $.build.rule($/)
+}
+method calc ($/) {
+    $.make-func("calc", $/)
+}

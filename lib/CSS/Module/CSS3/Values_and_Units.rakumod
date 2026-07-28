@@ -169,7 +169,7 @@ class Actions {
             make $.build.token(@expr, :$type);
         }
 
-        method calc-sum($/) is also<calc-product calc-number-sum calc-number-product calc-number-value calc-value> {
+        method calc-sum($/) is also<calc-product calc-number-sum calc-number-product calc-number-value calc-value calc-keyword> {
             self!make-expr: $/;
         }
         method length:sym<calc>($/)     { self!make-expr: $/, CSSValue::LengthComponent; }

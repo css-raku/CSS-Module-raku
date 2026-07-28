@@ -25,3 +25,13 @@ rule position-four { :i [[[[[left | right | "x-start" | "x-end" ]& <keyw> ] <len
 }>]** 2 || [[[start | end ]& <keyw> ] <length-percentage> ] ** 2 ] }
 #| <length-percentage> = <length> | <percentage> | <number>
 rule length-percentage { :i <length> || <percentage> || <number>  }
+#| calc( <calc-sum> )
+rule calc { :i "calc(" [<calc-sum> || <usage(&?ROUTINE.WHY)> ] ")" }
+#| <calc-sum> = <calc-product> [ [ '+' | '-' ] <calc-product> ]*
+rule calc-sum { :i <calc-product> [[<op("+")> || <op("-")> ] <calc-product> ] *  }
+#| <calc-product> = <calc-value> [ [ '*' | '/' ] <calc-value> ]*
+rule calc-product { :i <calc-value> [[<op("*")> || <op("/")> ] <calc-value> ] *  }
+#| <calc-value> = <number> | <dimension> | <percentage> |               <calc-keyword> | ( <calc-sum> )
+rule calc-value { :i <number> || <dimension> || <percentage> || <calc-keyword> || <op("(")> <calc-sum> <op(")")>   }
+#| <calc-keyword> = e | pi | infinity | -infinity | NaN
+rule calc-keyword { :i [e | pi | infinity | "-infinity" | NaN ]& <keyw>  }

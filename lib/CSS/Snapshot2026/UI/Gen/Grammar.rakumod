@@ -27,7 +27,7 @@ rule css-val-outline-color { :i <color> || invert & <keyw>  }
 #| outline-offset: <length>
 rule decl:sym<outline-offset> { :i ("outline-offset") ":" <val(/<css-val-outline-offset> /, &?ROUTINE.WHY)>}
 rule css-val-outline-offset { :i <length> }
-#| outline-style: auto | <'border-style'>
+#| outline-style: auto | <.'border-style'>
 rule decl:sym<outline-style> { :i ("outline-style") ":" <val(/<css-val-outline-style> /, &?ROUTINE.WHY)>}
 rule css-val-outline-style { :i auto & <keyw> || <css-val-border-style>  }
 #| outline-width: <line-width>

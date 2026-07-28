@@ -15,7 +15,7 @@ rule css-val-flex { :i none & <keyw> || [[<css-val-flex-grow> <css-val-flex-shri
 }>|| <css-val-flex-basis> :my $*B;<!{
     $*B++
 }>]+]  }
-#| flex-basis: content | <'width'>
+#| flex-basis: content | <.'width'>
 rule decl:sym<flex-basis> { :i ("flex-basis") ":" <val(/<css-val-flex-basis> /, &?ROUTINE.WHY)>}
 rule css-val-flex-basis { :i content & <keyw> || <css-val-width>  }
 #| flex-direction: row | row-reverse | column | column-reverse

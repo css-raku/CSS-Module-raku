@@ -27,3 +27,9 @@
   [ [ start | end ] <length-percentage> ]{2}\
 ]
 <length-percentage> = <length> | <percentage> | <number>
+<calc()> = calc( <calc-sum> )
+<calc-sum> = <calc-product> [ [ '+' | '-' ] <calc-product> ]*
+<calc-product> = <calc-value> [ [ '*' | '/' ] <calc-value> ]*
+<calc-value> = <number> | <dimension> | <percentage> |\
+               <calc-keyword> | ( <calc-sum> )
+<calc-keyword> = e | pi | infinity | -infinity | NaN

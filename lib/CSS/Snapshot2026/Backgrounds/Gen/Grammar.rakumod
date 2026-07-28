@@ -145,11 +145,11 @@ rule css-val-border-left-style { :i <line-style> }
 #| border-left-width: <line-width>
 rule decl:sym<border-left-width> { :i ("border-left-width") ":" <val(/<css-val-border-left-width> /, &?ROUTINE.WHY)>}
 rule css-val-border-left-width { :i <line-width> }
-#| border-radius: <border-radius>
-rule decl:sym<border-radius> { :i ("border-radius") ":" <val(/<css-val-border-radius> /, &?ROUTINE.WHY)>}
+#| border-radius: <border-radius>{1,4}
+rule decl:sym<border-radius> { :i ("border-radius") ":" <val(/<css-val-border-radius>** 1..4 /, &?ROUTINE.WHY)>}
 rule css-val-border-radius { :i <border-radius> }
-#| <border-radius> = <length-percentage [0,∞]>{1,4} [ / <length-percentage [0,∞]>{1,4} ]?
-rule border-radius { :i <length-percentage> ** 1..4 [<op("/")> <length-percentage> ** 1..4 ] ?  }
+#| <border-radius> = <length-percentage [0,∞]> [ / <length-percentage [0,∞]>{1,4} ]?
+rule border-radius { :i <length-percentage> [<op("/")> <length-percentage> ** 1..4 ] ?  }
 #| border-right: <'border-right-width'> || <'border-right-style'> || <'border-right-color'>
 rule decl:sym<border-right> { :i ("border-right") ":" <val(/<css-val-border-right> /, &?ROUTINE.WHY)>}
 rule css-val-border-right { :i [<css-val-border-right-width> :my $*A;<!{
@@ -183,12 +183,12 @@ rule css-val-border-top { :i [<css-val-border-top-width> :my $*A;<!{
 #| border-top-color: <color>
 rule decl:sym<border-top-color> { :i ("border-top-color") ":" <val(/<css-val-border-top-color> /, &?ROUTINE.WHY)>}
 rule css-val-border-top-color { :i <color> }
-#| border-top-left-radius: <length-percentage [0,∞]>{1,2}
+#| border-top-left-radius: <border-radius>{1,2}
 rule decl:sym<border-top-left-radius> { :i ("border-top-left-radius") ":" <val(/<css-val-border-top-left-radius> /, &?ROUTINE.WHY)>}
-rule css-val-border-top-left-radius { :i <length-percentage> ** 1..2 }
-#| border-top-right-radius: <length-percentage [0,∞]>{1,2}
+rule css-val-border-top-left-radius { :i <border-radius> ** 1..2 }
+#| border-top-right-radius: <border-radius>{1,2}
 rule decl:sym<border-top-right-radius> { :i ("border-top-right-radius") ":" <val(/<css-val-border-top-right-radius> /, &?ROUTINE.WHY)>}
-rule css-val-border-top-right-radius { :i <length-percentage> ** 1..2 }
+rule css-val-border-top-right-radius { :i <border-radius> ** 1..2 }
 #| border-top-style: <line-style>
 rule decl:sym<border-top-style> { :i ("border-top-style") ":" <val(/<css-val-border-top-style> /, &?ROUTINE.WHY)>}
 rule css-val-border-top-style { :i <line-style> }

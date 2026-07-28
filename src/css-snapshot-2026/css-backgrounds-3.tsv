@@ -58,8 +58,8 @@ border-left	<'border-left-width'> || <'border-left-style'> || <'border-left-colo
 border-left-color	<color>	currentColor	all elements except ruby base containers and ruby annotation containers	no	N/A	by computed value	per grammar	computed color	border-color
 border-left-style	<line-style>	none	all elements except ruby base containers and ruby annotation containers	no	N/A	discrete	per grammar	specified keyword	border-style
 border-left-width	<line-width>	medium	all elements except ruby base containers and ruby annotation containers	no	N/A	by computed value	per grammar	absolute length, snapped as a border width	border-width
-border-radius	<border-radius>	see individual properties	all elements (but see prose)	no	Refer to corresponding dimension of the border box.	see individual properties	per grammar	see individual properties
-<border-radius> = <length-percentage [0,∞]>{1,4} [ / <length-percentage [0,∞]>{1,4} ]?
+border-radius	<border-radius>{1,4}	see individual properties	all elements (but see prose)	no	Refer to corresponding dimension of the border box.	see individual properties	per grammar	see individual properties
+<border-radius> = <length-percentage [0,∞]> [ / <length-percentage [0,∞]>{1,4} ]?
 border-right	<'border-right-width'> || <'border-right-style'> || <'border-right-color'>	See individual properties	all elements except ruby base containers and ruby annotation containers	no	N/A	see individual properties	per grammar	see individual properties	
 border-right-color	<color>	currentColor	all elements except ruby base containers and ruby annotation containers	no	N/A	by computed value	per grammar	computed color	border-color
 border-right-style	<line-style>	none	all elements except ruby base containers and ruby annotation containers	no	N/A	discrete	per grammar	specified keyword	border-style
@@ -67,8 +67,8 @@ border-right-width	<line-width>	medium	all elements except ruby base containers 
 border-style	<line-style>{1,4}	see individual properties	all elements except ruby base containers and ruby annotation containers	no	N/A	see individual properties	per grammar	see individual properties	
 border-top	<'border-top-width'> || <'border-top-style'> || <'border-top-color'>	See individual properties	all elements except ruby base containers and ruby annotation containers	no	N/A	see individual properties	per grammar	see individual properties	
 border-top-color	<color>	currentColor	all elements except ruby base containers and ruby annotation containers	no	N/A	by computed value	per grammar	computed color	border-color
-border-top-left-radius	<length-percentage [0,∞]>{1,2}	0	all elements (but see prose)	no	Refer to corresponding dimension of the border box.	by computed value	per grammar	pair of computed <length-percentage> values	border-radius
-border-top-right-radius	<length-percentage [0,∞]>{1,2}	0	all elements (but see prose)	no	Refer to corresponding dimension of the border box.	by computed value	per grammar	pair of computed <length-percentage> values	border-radius
+border-top-left-radius	<border-radius>{1,2}	0	all elements (but see prose)	no	Refer to corresponding dimension of the border box.	by computed value	per grammar	pair of computed <length-percentage> values	border-radius
+border-top-right-radius	<border-radius>{1,2}	0	all elements (but see prose)	no	Refer to corresponding dimension of the border box.	by computed value	per grammar	pair of computed <length-percentage> values	border-radius
 border-top-style	<line-style>	none	all elements except ruby base containers and ruby annotation containers	no	N/A	discrete	per grammar	specified keyword	border-style
 border-top-width	<line-width>	medium	all elements except ruby base containers and ruby annotation containers	no	N/A	by computed value	per grammar	absolute length, snapped as a border width	border-width
 border-width	<line-width>{1,4}	see individual properties	all elements except ruby base containers and ruby annotation containers	no	see individual properties	see individual properties	per grammar	see individual properties	

@@ -11,7 +11,7 @@ cursor	[<cursor-image>,]* <cursor-predefined>	auto	all elements	yes	N/A	discrete
 outline	[ <'outline-color'> || <'outline-style'> || <'outline-width'> ]	see individual properties	all elements	no	N/A	see individual properties	per grammar	see individual properties
 outline-color	<color> | invert	invert	all elements	no	N/A	colorby computed value	per grammar	The computed value for invert is invert; the computed value of currentColor is currentColor (See currentcolor); see the color property for other <color> values.
 outline-offset	<length>	0	all elements	no	N/A	lengthby computed value	per grammar	<length> value in absolute units (px or physical).absolute length
-outline-style	auto | <'border-style'>	none	all elements	no	N/A	discrete	per grammar	as specified
+outline-style	auto | <.'border-style'>	none	all elements	no	N/A	discrete	per grammar	as specified
 outline-width	<line-width>	medium	all elements	no	N/A	lengthby computed value	per grammar	absolute length, snapped as a border width; 0 if the outline style is none.
 resize	none | both | horizontal | vertical	none	elements with overflow other than visible,that are scroll containers and optionally replaced elements such as images, videos, and iframes	no	N/A	discrete	per grammar	as specified keyword
 text-overflow	clip | ellipsis	clip	block containers	no	N/A	discrete	per grammar	as specified keyword

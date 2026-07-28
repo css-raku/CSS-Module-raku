@@ -3,6 +3,12 @@ unit grammar CSS::Module::CSS2026;
 use CSS::Grammar::CSS4;
 also is CSS::Grammar::CSS4;
 
+use CSS::Module::CSS2026::Colors;
+also is CSS::Module::CSS2026::Colors;
+
+use CSS::Module::CSS3::Values_and_Units;
+also is CSS::Module::CSS3::Values_and_Units::Calc;
+
 use CSS::Specification::Base::Grammar;
 also does CSS::Specification::Base::Grammar;
 
@@ -15,12 +21,6 @@ also does  CSS::Snapshot2026::External;
 token proforma:sym<inherit> {:i inherit}
 token proforma:sym<initial> {:i initial}
 
-use CSS::Module::CSS2026::Colors;
-also is CSS::Module::CSS2026::Colors;
-
-use CSS::Module::CSS3::Values_and_Units;
-also is CSS::Module::CSS3::Values_and_Units::Calc;
-
 rule rect {:i 'rect(' <length-percentage>** 4 % <.optional-comma> [ [round && <keyw>] <css-val-border-radius> ]? ')'}
 
 method module(|c) {
@@ -29,14 +29,16 @@ method module(|c) {
     use CSS::Snapshot2026::Metadata;
     my constant Metadata = CSS::Snapshot2026::Metadata;
     my $property-metadata = $Metadata::property;
+    my $prop-names = Metadata::prop-names;
+    my &index = &Metadata::index;
 
     CSS::Module.new(
         :name<CSS-2026>,
         :grammar($?CLASS),
         :actions(CSS::Module::CSS2026::Actions),
         :$property-metadata,
-        :prop-names(Metadata::prop-names),
-        :index(&Metadata::index),
+        :$prop-names,
+        :&index,
         :sub-module('@font-face' => CSS::Module::CSS2026::Fonts::AtFontFace.module),
         |c
         );

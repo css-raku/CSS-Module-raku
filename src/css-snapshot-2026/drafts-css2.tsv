@@ -4,26 +4,27 @@ background-color	<color> | transparent | inherit	transparent	*	no	N/A	by compute
 background-image	<uri> | none | inherit	none	*	no	N/A	discrete	per grammar	absolute URI or none	visual
 background-position	[ [ <percentage> | <length> | left | center | right ] [ <percentage> | <length> | top | center | bottom ]? ] | [ [ left | center | right ] || [ top | center | bottom ] ] | inherit	0% 0%	*	no	refer to the size of the box itself	by computed value type	per grammar	for <length> the absolute value, otherwise a percentage	visual
 background-repeat	repeat | repeat-x | repeat-y | no-repeat | inherit	repeat	*	no	N/A	discrete	per grammar	as specified	visual
-border	[ <border-width> || <border-style> || <'border-top-color'> ] | inherit	see individual properties	*	no	N/A	see individual properties	per grammar	see individual properties	visual
-border-bottom	[ <border-width> || <border-style> || <'border-top-color'> ] | inherit	see individual properties	*	no	N/A	see individual properties	per grammar	see individual properties	visual
-border-bottom-color	<color> | transparent | inherit	the value of the color property	*	no	N/A	by computed value type	per grammar	when taken from the color property, the computed value of color; otherwise, as specified	visual
+border	[ <'border-width'> || <'border-style'> || <'border-color'> ] | inherit	see individual properties	*	no	N/A	see individual properties	per grammar	see individual properties	visual
+border-bottom	[ <'border-bottom-width'> || <'border-bottom-style'> || <'border-bottom-color'> ] | inherit	see individual properties	*	no	N/A	see individual properties	per grammar	see individual properties	visual
+border-bottom-color	<border-color> | inherit	the value of the color property	*	no	N/A	by computed value type	per grammar	when taken from the color property, the computed value of color; otherwise, as specified	visual
+<border-color> = <color> | transparent
 border-bottom-style	<border-style> | inherit	none	*	no	N/A	discrete	per grammar	as specified	visual
 border-bottom-width	<border-width> | inherit	medium	*	no	N/A	by computed value type	per grammar	absolute length; 0 if the border style is none or hidden	visual
 border-collapse	collapse | separate | inherit	separate	table and inline-table elements	yes	N/A	discrete	per grammar	as specified	visual
-border-color	[ <color> | transparent ]{1,4} | inherit	see individual properties	*	no	N/A	see individual properties	per grammar	see individual properties	visual
-border-left	[ <border-width> || <border-style> || <'border-top-color'> ] | inherit	see individual properties	*	no	N/A	see individual properties	per grammar	see individual properties	visual
-border-left-color	<color> | transparent | inherit	the value of the color property	*	no	N/A	by computed value type	per grammar	when taken from the color property, the computed value of color; otherwise, as specified	visual
+border-color	<border-color>{1,4} | inherit	see individual properties	*	no	N/A	see individual properties	per grammar	see individual properties	visual
+border-left	[ <'border-left-width'> || <'border-left-style'> || <'border-left-color'> ] | inherit	see individual properties	*	no	N/A	see individual properties	per grammar	see individual properties	visual
+border-left-color	<border-color> | inherit	the value of the color property	*	no	N/A	by computed value type	per grammar	when taken from the color property, the computed value of color; otherwise, as specified	visual
 border-left-style	<border-style> | inherit	none	*	no	N/A	discrete	per grammar	as specified	visual
 border-left-width	<border-width> | inherit	medium	*	no	N/A	by computed value type	per grammar	absolute length; 0 if the border style is none or hidden	visual
-border-right	[ <border-width> || <border-style> || <'border-top-color'> ] | inherit	see individual properties	*	no	N/A	see individual properties	per grammar	see individual properties	visual
-border-right-color	<color> | transparent | inherit	the value of the color property	*	no	N/A	by computed value type	per grammar	when taken from the color property, the computed value of color; otherwise, as specified	visual
+border-right	[ <'border-right-width'> || <'border-right-style'> || <'border-right-color'> ] | inherit	see individual properties	*	no	N/A	see individual properties	per grammar	see individual properties	visual
+border-right-color	<border-color> | inherit	the value of the color property	*	no	N/A	by computed value type	per grammar	when taken from the color property, the computed value of color; otherwise, as specified	visual
 border-right-style	<border-style> | inherit	none	*	no	N/A	discrete	per grammar	as specified	visual
 border-right-width	<border-width> | inherit	medium	*	no	N/A	by computed value type	per grammar	absolute length; 0 if the border style is none or hidden	visual
 border-spacing	<length> <length>? | inherit	0	table and inline-table elements*	yes	N/A	by computed value type	per grammar	two absolute lengths	visual
 border-style	<border-style>{1,4} | inherit	see individual properties	*	no	N/A	see individual properties	per grammar	see individual properties	visual
 <border-style> = none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset
-border-top	[ <border-width> || <border-style> || <'border-top-color'> ] | inherit	see individual properties	*	no	N/A	see individual properties	per grammar	see individual properties	visual
-border-top-color	<color> | transparent | inherit	the value of the color property	*	no	N/A	by computed value type	per grammar	when taken from the color property, the computed value of color; otherwise, as specified	visual
+border-top	[ <'border-top-width'> || <'border-top-style'> || <'border-top-color'> ] | inherit	see individual properties	*	no	N/A	see individual properties	per grammar	see individual properties	visual
+border-top-color	<border-color> | inherit	the value of the color property	*	no	N/A	by computed value type	per grammar	when taken from the color property, the computed value of color; otherwise, as specified	visual
 border-top-style	<border-style> | inherit	none	*	no	N/A	discrete	per grammar	as specified	visual
 border-top-width	<border-width> | inherit	medium	*	no	N/A	by computed value type	per grammar	absolute length; 0 if the border style is none or hidden	visual
 border-width	<border-width>{1,4} | inherit	see individual properties	*	no	N/A	see individual properties	per grammar	see individual properties	visual
@@ -52,7 +53,8 @@ font-size	<absolute-size> | <relative-size> | <length> | <percentage> | inherit	
 font-style	normal | italic | oblique | inherit	normal	*	yes	N/A	discrete	per grammar	as specified	visual
 font-variant	normal | small-caps | inherit	normal	*	yes	N/A	discrete	per grammar	as specified	visual
 font-weight	normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | inherit	normal	*	yes	N/A	by computed value type	per grammar	see text	visual
-height	<length> | <percentage> | auto | inherit	auto	all elements but non-replaced inline elements, table columns, and column groups	no	see prose	by computed value type	per grammar	the percentage or auto (see prose under <percentage>) or the absolute length	visual
+height	<width-or-height> | inherit	auto	all elements but non-replaced inline elements, table columns, and column groups	no	see prose	by computed value type	per grammar	the percentage or auto (see prose under <percentage>) or the absolute length	visual
+<width-or-height> = <length> | <percentage> | auto
 left	<length> | <percentage> | auto | inherit	auto	positioned elements	no	refer to width of containing block	by computed value type	per grammar	if specified as a length, the corresponding absolute length; if specified as a percentage, the specified value; otherwise, auto.	visual
 letter-spacing	normal | <length> | inherit	normal	*	yes	N/A	by computed value type	per grammar	normal or absolute length	visual
 line-height	normal | <number> | <length> | <percentage> | inherit	normal	*	yes	refer to the font size of the element itself	by computed value type	per grammar	for <length> and <percentage> the absolute value; otherwise as specified	visual
@@ -92,12 +94,13 @@ text-align	left | right | center | justify | inherit	a nameless value that acts 
 text-decoration	none | [ underline || overline || line-through || blink ] | inherit	none	*	no (see prose)	N/A	discrete	per grammar	as specified	visual
 text-indent	<length> | <percentage> | inherit	0	block containers	yes	refer to width of containing block	by computed value type	per grammar	the percentage as specified or the absolute length	visual
 text-transform	capitalize | uppercase | lowercase | none | inherit	none	*	yes	N/A	discrete	per grammar	as specified	visual
-top	<length> | <percentage> | auto | inherit	auto	positioned elements	no	refer to height of containing block	by computed value type	per grammar	if specified as a length, the corresponding absolute length; if specified as a percentage, the specified value; otherwise, auto.	visual
+top	<top-offset> | inherit	auto	positioned elements	no	refer to height of containing block	by computed value type	per grammar	if specified as a length, the corresponding absolute length; if specified as a percentage, the specified value; otherwise, auto.	visual
+<top-offset> = <length> | <percentage> | auto
 unicode-bidi	normal | embed | bidi-override | inherit	normal	all elements, but see prose	no	N/A	discrete	per grammar	as specified	visual
 vertical-align	baseline | sub | super | top | text-top | middle | bottom | text-bottom | <percentage> | <length> | inherit	baseline	inline-level and table-cell elements	no	refer to the line-height of the element itself	by computed value type	per grammar	for <percentage> and <length> the absolute length, otherwise as specified	visual
 visibility	visible | hidden | collapse | inherit	visible	*	yes	N/A	discrete	per grammar	as specified	visual
 white-space	normal | pre | nowrap | pre-wrap | pre-line | inherit	normal	*	yes	N/A	discrete	per grammar	as specified	visual
 widows	<integer> | inherit	2	block container elements	yes	N/A	by computed value type	per grammar	as specified	visual, paged
-width	<length> | <percentage> | auto | inherit	auto	all elements but non-replaced inline elements, table rows, and row groups	no	refer to width of containing block	by computed value type	per grammar	the percentage or auto as specified or the absolute length	visual
+width	<width-or-height> | inherit	auto	all elements but non-replaced inline elements, table rows, and row groups	no	refer to width of containing block	by computed value type	per grammar	the percentage or auto as specified or the absolute length	visual
 word-spacing	normal | <length> | inherit	normal	*	yes	N/A	by computed value type	per grammar	for normal the value 0; otherwise the absolute length	visual
 z-index	auto | <integer> | inherit	auto	positioned elements	no	N/A	by computed value type	per grammar	as specified	visual

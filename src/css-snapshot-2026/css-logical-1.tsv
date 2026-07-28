@@ -1,55 +1,53 @@
-
-Name	Value	Initial	Applies to	Inh.	%ages	Anim­ation type	Canonical order	Com­puted value	Logical property group
-block-size	<'width'>	auto	Same as height and width	no	As for the corresponding physical property	by computed value type	per grammar	Same as height, width	size
-border-block	<'border-block-start'>	see individual properties	see individual properties	see individual properties	see individual properties	see individual properties	per grammar	see individual properties	
-border-block-color	<'border-top-color'>{1,2}	see individual properties	see individual properties	see individual properties	see individual properties	see individual properties	per grammar	see individual properties	
-border-block-end	<'border-top-width'> || <'border-top-style'> || <color>	see individual properties	see individual properties	see individual properties	see individual properties	see individual properties	per grammar	see individual properties	
-border-block-end-color	<'border-top-color'>	currentcolor	Same as border-top-color	no	n/a	by computed value type	per grammar	Same as corresponding border-*-color properties	border-color
-border-block-end-style	<'border-top-style'>	none	Same as border-top-style	no	n/a	discrete	per grammar	Same as corresponding border-*-style properties	border-style
-border-block-end-width	<'border-top-width'>	medium	Same as border-top-width	no	n/a	by computed value type	per grammar	Same as corresponding border-*-width properties	border-width
-border-block-start	<'border-top-width'> || <'border-top-style'> || <color>	see individual properties	see individual properties	see individual properties	see individual properties	see individual properties	per grammar	see individual properties	
-border-block-start-color	<'border-top-color'>	currentcolor	Same as border-top-color	no	n/a	by computed value type	per grammar	Same as corresponding border-*-color properties	border-color
-border-block-start-style	<'border-top-style'>	none	Same as border-top-style	no	n/a	discrete	per grammar	Same as corresponding border-*-style properties	border-style
-border-block-start-width	<'border-top-width'>	medium	Same as border-top-width	no	n/a	by computed value type	per grammar	Same as corresponding border-*-width properties	border-width
-border-block-style	<'border-top-style'>{1,2}	see individual properties	see individual properties	see individual properties	see individual properties	see individual properties	per grammar	see individual properties	
-border-block-width	<'border-top-width'>{1,2}	see individual properties	see individual properties	see individual properties	see individual properties	see individual properties	per grammar	see individual properties	
-border-end-end-radius	<'border-top-left-radius'>	Same as border-top-left-radius	Same as border-top-left-radius	no	Same as border-top-left-radius	by computed value type	per grammar	Same as corresponding physical border-*-radius properties	border-radius
-border-end-start-radius	<'border-top-left-radius'>	Same as border-top-left-radius	Same as border-top-left-radius	no	Same as border-top-left-radius	by computed value type	per grammar	Same as corresponding physical border-*-radius properties	border-radius
-border-inline	<'border-block-start'>	see individual properties	see individual properties	see individual properties	see individual properties	see individual properties	per grammar	see individual properties	
-border-inline-color	<'border-top-color'>{1,2}	see individual properties	see individual properties	see individual properties	see individual properties	see individual properties	per grammar	see individual properties	
-border-inline-end	<'border-top-width'> || <'border-top-style'> || <color>	see individual properties	see individual properties	see individual properties	see individual properties	see individual properties	per grammar	see individual properties	
-border-inline-end-color	<'border-top-color'>	currentcolor	Same as border-top-color	no	n/a	by computed value type	per grammar	Same as corresponding border-*-color properties	border-color
-border-inline-end-style	<'border-top-style'>	none	Same as border-top-style	no	n/a	discrete	per grammar	Same as corresponding border-*-style properties	border-style
-border-inline-end-width	<'border-top-width'>	medium	Same as border-top-width	no	n/a	by computed value type	per grammar	Same as corresponding border-*-width properties	border-width
-border-inline-start	<'border-top-width'> || <'border-top-style'> || <color>	see individual properties	see individual properties	see individual properties	see individual properties	see individual properties	per grammar	see individual properties	
-border-inline-start-color	<'border-top-color'>	currentcolor	Same as border-top-color	no	n/a	by computed value type	per grammar	Same as corresponding border-*-color properties	border-color
-border-inline-start-style	<'border-top-style'>	none	Same as border-top-style	no	n/a	discrete	per grammar	Same as corresponding border-*-style properties	border-style
-border-inline-start-width	<'border-top-width'>	medium	Same as border-top-width	no	n/a	by computed value type	per grammar	Same as corresponding border-*-width properties	border-width
-border-inline-style	<'border-top-style'>{1,2}	see individual properties	see individual properties	see individual properties	see individual properties	see individual properties	per grammar	see individual properties	
-border-inline-width	<'border-top-width'>{1,2}	see individual properties	see individual properties	see individual properties	see individual properties	see individual properties	per grammar	see individual properties	
-border-start-end-radius	<'border-top-left-radius'>	Same as border-top-left-radius	Same as border-top-left-radius	no	Same as border-top-left-radius	by computed value type	per grammar	Same as corresponding physical border-*-radius properties	border-radius
-border-start-start-radius	<'border-top-left-radius'>	Same as border-top-left-radius	Same as border-top-left-radius	no	Same as border-top-left-radius	by computed value type	per grammar	Same as corresponding physical border-*-radius properties	border-radius
-inline-size	<'width'>	auto	Same as height and width	no	As for the corresponding physical property	by computed value type	per grammar	Same as height, width	size
-inset	<'top'>{1,4}	see individual properties	see individual properties	see individual properties	see individual properties	see individual properties	per grammar	see individual properties	
-inset-block	<'top'>{1,2}	see individual properties	see individual properties	see individual properties	see individual properties	see individual properties	per grammar	see individual properties	
-inset-block-end	<'top'>	auto	positioned elements	no	As for the corresponding physical property	by computed value type	per grammar	Same as corresponding top/right/bottom/left properties	inset
-inset-block-start	<'top'>	auto	positioned elements	no	As for the corresponding physical property	by computed value type	per grammar	Same as corresponding top/right/bottom/left properties	inset
-inset-inline	<'top'>{1,2}	see individual properties	see individual properties	see individual properties	see individual properties	see individual properties	per grammar	see individual properties	
-inset-inline-end	<'top'>	auto	positioned elements	no	As for the corresponding physical property	by computed value type	per grammar	Same as corresponding top/right/bottom/left properties	inset
-inset-inline-start	<'top'>	auto	positioned elements	no	As for the corresponding physical property	by computed value type	per grammar	Same as corresponding top/right/bottom/left properties	inset
-margin-block	<'margin-top'>{1,2}	see individual properties	see individual properties	see individual properties	see individual properties	see individual properties	per grammar	see individual properties	
-margin-block-end	<'margin-top'>	0	Same as margin-top	no	As for the corresponding physical property	by computed value type	per grammar	Same as corresponding margin-* properties	margin
-margin-block-start	<'margin-top'>	0	Same as margin-top	no	As for the corresponding physical property	by computed value type	per grammar	Same as corresponding margin-* properties	margin
-margin-inline	<'margin-top'>{1,2}	see individual properties	see individual properties	see individual properties	see individual properties	see individual properties	per grammar	see individual properties	
-margin-inline-end	<'margin-top'>	0	Same as margin-top	no	As for the corresponding physical property	by computed value type	per grammar	Same as corresponding margin-* properties	margin
-margin-inline-start	<'margin-top'>	0	Same as margin-top	no	As for the corresponding physical property	by computed value type	per grammar	Same as corresponding margin-* properties	margin
-max-block-size	<'max-width'>	none	same as height and width	no	As for the corresponding physical property	by computed value type	per grammar	Same as max-height, max-width	max-size
-max-inline-size	<'max-width'>	none	same as height and width	no	As for the corresponding physical property	by computed value type	per grammar	Same as max-height, max-width	max-size
-min-block-size	<'min-width'>	0	same as height and width	no	As for the corresponding physical property	by computed value type	per grammar	Same as min-height, min-width	min-size
-min-inline-size	<'min-width'>	0	same as height and width	no	As for the corresponding physical property	by computed value type	per grammar	Same as min-height, min-width	min-size
-padding-block	<'padding-top'>{1,2}	see individual properties	see individual properties	see individual properties	see individual properties	see individual properties	per grammar	see individual properties	
-padding-block-end	<'padding-top'>	0	Same as padding-top	no	As for the corresponding physical property	by computed value type	per grammar	Same as corresponding padding-* properties	padding
-padding-block-start	<'padding-top'>	0	Same as padding-top	no	As for the corresponding physical property	by computed value type	per grammar	Same as corresponding padding-* properties	padding
-padding-inline	<'padding-top'>{1,2}	see individual properties	see individual properties	see individual properties	see individual properties	see individual properties	per grammar	see individual properties	
-padding-inline-end	<'padding-top'>	0	Same as padding-top	no	As for the corresponding physical property	by computed value type	per grammar	Same as corresponding padding-* properties	padding
-padding-inline-start	<'padding-top'>	0	Same as padding-top	no	As for the corresponding physical property	by computed value type	per grammar	Same as corresponding padding-* properties	padding
+block-size	<.'width'>	auto	Same as height and width	no	As for the corresponding physical property	by computed value type	per grammar	Same as height, width	size
+border-block	<.'border-block-start'>	see individual properties	see individual properties	see individual properties	see individual properties	see individual properties	per grammar	see individual properties	
+border-block-color	<.'border-top-color'>{1,2}	see individual properties	see individual properties	see individual properties	see individual properties	see individual properties	per grammar	see individual properties	
+border-block-end	<.'border-top-width'> || <.'border-top-style'> || <color>	see individual properties	see individual properties	see individual properties	see individual properties	see individual properties	per grammar	see individual properties	
+border-block-end-color	<.'border-top-color'>	currentcolor	Same as border-top-color	no	n/a	by computed value type	per grammar	Same as corresponding border-*-color properties	border-color
+border-block-end-style	<.'border-top-style'>	none	Same as border-top-style	no	n/a	discrete	per grammar	Same as corresponding border-*-style properties	border-style
+border-block-end-width	<.'border-top-width'>	medium	Same as border-top-width	no	n/a	by computed value type	per grammar	Same as corresponding border-*-width properties	border-width
+border-block-start	<.'border-top-width'> || <.'border-top-style'> || <color>	see individual properties	see individual properties	see individual properties	see individual properties	see individual properties	per grammar	see individual properties	
+border-block-start-color	<.'border-top-color'>	currentcolor	Same as border-top-color	no	n/a	by computed value type	per grammar	Same as corresponding border-*-color properties	border-color
+border-block-start-style	<.'border-top-style'>	none	Same as border-top-style	no	n/a	discrete	per grammar	Same as corresponding border-*-style properties	border-style
+border-block-start-width	<.'border-top-width'>	medium	Same as border-top-width	no	n/a	by computed value type	per grammar	Same as corresponding border-*-width properties	border-width
+border-block-style	<.'border-top-style'>{1,2}	see individual properties	see individual properties	see individual properties	see individual properties	see individual properties	per grammar	see individual properties	
+border-block-width	<.'border-top-width'>{1,2}	see individual properties	see individual properties	see individual properties	see individual properties	see individual properties	per grammar	see individual properties	
+border-end-end-radius	<.'border-top-left-radius'>	0	Same as border-top-left-radius	no	Same as border-top-left-radius	by computed value type	per grammar	Same as corresponding physical border-*-radius properties	border-radius
+border-end-start-radius	<.'border-top-left-radius'>	0	Same as border-top-left-radius	no	Same as border-top-left-radius	by computed value type	per grammar	Same as corresponding physical border-*-radius properties	border-radius
+border-inline	<.'border-block-start'>	see individual properties	see individual properties	see individual properties	see individual properties	see individual properties	per grammar	see individual properties	
+border-inline-color	<.'border-top-color'>{1,2}	see individual properties	see individual properties	see individual properties	see individual properties	see individual properties	per grammar	see individual properties	
+border-inline-end	<.'border-top-width'> || <.'border-top-style'> || <color>	see individual properties	see individual properties	see individual properties	see individual properties	see individual properties	per grammar	see individual properties	
+border-inline-end-color	<.'border-top-color'>	currentcolor	Same as border-top-color	no	n/a	by computed value type	per grammar	Same as corresponding border-*-color properties	border-color
+border-inline-end-style	<.'border-top-style'>	none	Same as border-top-style	no	n/a	discrete	per grammar	Same as corresponding border-*-style properties	border-style
+border-inline-end-width	<.'border-top-width'>	medium	Same as border-top-width	no	n/a	by computed value type	per grammar	Same as corresponding border-*-width properties	border-width
+border-inline-start	<.'border-top-width'> || <.'border-top-style'> || <color>	see individual properties	see individual properties	see individual properties	see individual properties	see individual properties	per grammar	see individual properties	
+border-inline-start-color	<.'border-top-color'>	currentcolor	Same as border-top-color	no	n/a	by computed value type	per grammar	Same as corresponding border-*-color properties	border-color
+border-inline-start-style	<.'border-top-style'>	none	Same as border-top-style	no	n/a	discrete	per grammar	Same as corresponding border-*-style properties	border-style
+border-inline-start-width	<.'border-top-width'>	medium	Same as border-top-width	no	n/a	by computed value type	per grammar	Same as corresponding border-*-width properties	border-width
+border-inline-style	<.'border-top-style'>{1,2}	see individual properties	see individual properties	see individual properties	see individual properties	see individual properties	per grammar	see individual properties	
+border-inline-width	<.'border-top-width'>{1,2}	see individual properties	see individual properties	see individual properties	see individual properties	see individual properties	per grammar	see individual properties	
+border-start-end-radius	<.'border-top-left-radius'>	0	Same as border-top-left-radius	no	Same as border-top-left-radius	by computed value type	per grammar	Same as corresponding physical border-*-radius properties	border-radius
+border-start-start-radius	<.'border-top-left-radius'>	0	Same as border-top-left-radius	no	Same as border-top-left-radius	by computed value type	per grammar	Same as corresponding physical border-*-radius properties	border-radius
+inline-size	<.'width'>	auto	Same as height and width	no	As for the corresponding physical property	by computed value type	per grammar	Same as height, width	size
+inset	<.'top'>{1,4}	see individual properties	see individual properties	see individual properties	see individual properties	see individual properties	per grammar	see individual properties	
+inset-block	<.'top'>{1,2}	see individual properties	see individual properties	see individual properties	see individual properties	see individual properties	per grammar	see individual properties	
+inset-block-end	<.'top'>	auto	positioned elements	no	As for the corresponding physical property	by computed value type	per grammar	Same as corresponding top/right/bottom/left properties	inset
+inset-block-start	<.'top'>	auto	positioned elements	no	As for the corresponding physical property	by computed value type	per grammar	Same as corresponding top/right/bottom/left properties	inset
+inset-inline	<.'top'>{1,2}	see individual properties	see individual properties	see individual properties	see individual properties	see individual properties	per grammar	see individual properties	
+inset-inline-end	<.'top'>	auto	positioned elements	no	As for the corresponding physical property	by computed value type	per grammar	Same as corresponding top/right/bottom/left properties	inset
+inset-inline-start	<.'top'>	auto	positioned elements	no	As for the corresponding physical property	by computed value type	per grammar	Same as corresponding top/right/bottom/left properties	inset
+margin-block	<.'margin-top'>{1,2}	see individual properties	see individual properties	see individual properties	see individual properties	see individual properties	per grammar	see individual properties	
+margin-block-end	<.'margin-top'>	0	Same as margin-top	no	As for the corresponding physical property	by computed value type	per grammar	Same as corresponding margin-* properties	margin
+margin-block-start	<.'margin-top'>	0	Same as margin-top	no	As for the corresponding physical property	by computed value type	per grammar	Same as corresponding margin-* properties	margin
+margin-inline	<.'margin-top'>{1,2}	see individual properties	see individual properties	see individual properties	see individual properties	see individual properties	per grammar	see individual properties	
+margin-inline-end	<.'margin-top'>	0	Same as margin-top	no	As for the corresponding physical property	by computed value type	per grammar	Same as corresponding margin-* properties	margin
+margin-inline-start	<.'margin-top'>	0	Same as margin-top	no	As for the corresponding physical property	by computed value type	per grammar	Same as corresponding margin-* properties	margin
+max-block-size	<.'max-width'>	none	same as height and width	no	As for the corresponding physical property	by computed value type	per grammar	Same as max-height, max-width	max-size
+max-inline-size	<.'max-width'>	none	same as height and width	no	As for the corresponding physical property	by computed value type	per grammar	Same as max-height, max-width	max-size
+min-block-size	<.'min-width'>	0	same as height and width	no	As for the corresponding physical property	by computed value type	per grammar	Same as min-height, min-width	min-size
+min-inline-size	<.'min-width'>	0	same as height and width	no	As for the corresponding physical property	by computed value type	per grammar	Same as min-height, min-width	min-size
+padding-block	<.'padding-top'>{1,2}	see individual properties	see individual properties	see individual properties	see individual properties	see individual properties	per grammar	see individual properties	
+padding-block-end	<.'padding-top'>	0	Same as padding-top	no	As for the corresponding physical property	by computed value type	per grammar	Same as corresponding padding-* properties	padding
+padding-block-start	<.'padding-top'>	0	Same as padding-top	no	As for the corresponding physical property	by computed value type	per grammar	Same as corresponding padding-* properties	padding
+padding-inline	<.'padding-top'>{1,2}	see individual properties	see individual properties	see individual properties	see individual properties	see individual properties	per grammar	see individual properties	
+padding-inline-end	<.'padding-top'>	0	Same as padding-top	no	As for the corresponding physical property	by computed value type	per grammar	Same as corresponding padding-* properties	padding
+padding-inline-start	<.'padding-top'>	0	Same as padding-top	no	As for the corresponding physical property	by computed value type	per grammar	Same as corresponding padding-* properties	padding

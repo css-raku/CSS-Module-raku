@@ -107,7 +107,6 @@ class Make {
                         note " - " ~ $file;
                         @defs.append: $compiler.load-defs(:$file);
                     }
-                    my %child-rules = $compiler.child-rules;
 
                     mkdir 'lib/' ~ @base-id.join('/');
                     my RakuAST::Package $grammar-ast = $compiler.compile-grammar(@grammar-id, :$scope);
@@ -121,7 +120,9 @@ class Make {
                     my RakuAST::Package $external-ast = $compiler.compile-external(@external-id, :$scope);
                     "lib/{$external-ast.&path}.rakumod".IO.spurt: $external-ast.DEPARSE;
 
-                    my %meta = @defs.&build-metadata(:%child-rules);
+                    my %child-rules = $compiler.child-rules;
+                    my %child-props = $compiler.child-props;
+                    my %meta = @defs.&build-metadata(:%child-rules, :%child-props);
                     %props{.key} //= .value for %meta.pairs;
                     @module-ids.push: @base-id;
                 }
