@@ -3,38 +3,38 @@ use NativeCall;
 # native representation of a property;
 class CSS::Module::Property is repr('CStruct') {
     has Str $.name;
-    has uint8 $.prop-num;
+    has uint16 $.prop-num;
 
-    has uint8 $.inherit;
+    has bool $.inherit;
     method inherit { ? $!inherit }
 
-    has uint8 $.initial;
+    has bool $.initial;
     method initial { ? $!initial }
 
-    has uint8 $.box;
+    has bool $.box;
     method box { ? $!box }
 
-    has uint8 $.edge;
+    has uint16 $.edge;
     has Str $.synopsis;
 
     has Str $.default;
 
-    has CArray[uint8] $.children;
+    has CArray[uint16] $.children;
     has CArray[Str] $.child-names;
-    has CArray[uint8] $.edges;
+    has CArray[uint16] $.edges;
     has CArray[Str] $.edge-names;
 
     submethod BUILD(:$!inherit = 0, :$!initial = 0, :$!box = 0) {}
-    submethod TWEAK(:$enums, Str:D :$name!, :$!prop-num = (my uint8 $ = $enums{$name}), List :$children, List :$edges, Str :$edge, Str :$default, Str :$synopsis) {
+    submethod TWEAK(:$enums, Str:D :$name!, :$!prop-num = (my uint16 $ = $enums{$name}), List :$children, List :$edges, Str :$edge, Str :$default, Str :$synopsis) {
         $!name := $name;
         $!synopsis := $_ with $synopsis;
         with $children {
             $!child-names := CArray[Str].new(|$_);
-            $!children := CArray[uint8].new(|.map({$enums{$_}}))
+            $!children := CArray[uint16].new(|.map({$enums{$_}}))
         }
         with $edges {
             $!edge-names := CArray[Str].new(|$_);
-            $!edges := CArray[uint8].new(|.map({$enums{$_}}));
+            $!edges := CArray[uint16].new(|.map({$enums{$_}}));
         }
         $!edge = $enums{$_} with $edge;
         $!default := $_ with $default;
