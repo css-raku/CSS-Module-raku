@@ -106,7 +106,7 @@ multi method parse-property(Str:D $property-name where (%!coerce{.lc}:exists), $
 }
 
 #| parse an individual property-specific expression
-multi method parse-property(Str:D $property-name, Str() $val, Bool :$warn = True) {
+multi method parse-property(Str:D $property-name, Str() $val, Bool :$warn = True, Bool :$trace) {
     my $actions = $.actions.new;
     my $prop = $property-name.lc;
     $prop = $_ with %!alias{$prop};
@@ -114,6 +114,7 @@ multi method parse-property(Str:D $property-name, Str() $val, Bool :$warn = True
     my $ast;
 
     if $.grammar.parse($val, :$rule, :$actions ) -> \p {
+        note p if $trace;
         $ast := $actions.build.list(p);
         $ast := Nil if $ast eqv [];
     }

@@ -13,32 +13,30 @@ use CSS::Writer;
 my CSS::Module $css1  = CSS::Module::CSS1.module;
 my CSS::Module $css21 = CSS::Module::CSS21.module;
 my CSS::Module $css3  = CSS::Module::CSS3.module;
-my CSS::Module $css4  = CSS::Module::CSS2026.module;
+my CSS::Module $snapshot2026  = CSS::Module::CSS2026.module;
 
 my CSS::Writer $writer .= new;
 
 my %seen;
 
 for 't/css1-properties.json'.IO.lines {
-#for '/tmp/tst.json'.IO.lines {
-
     next if .substr(0,2) eq '//';
 
     my %expected = from-json($_);
     my $prop = %expected<prop>.lc;
     my $input = sprintf '{%s: %s}', $prop, %expected<decl>;
-    my $expr = %expected<expr>;
-
-    %expected<ast> = $expr ?? { :declarations[{ :property{ :ident($prop), :$expr } }] } !! Any;
 
     subtest $input, {
         for { :module($css1), :proforma[]},
        	{ :module($css21), :proforma<inherit>},	
         { :module($css3), :proforma<inherit initial>, :$writer},
-       	{ :module($css4), :proforma<inherit initial>, :$writer}
+       	{ :module($snapshot2026), :proforma<inherit initial>, :$writer}
         ->  % ( :$module!, :$proforma!, |c) {
 
             my $level = $module.name;
+            temp %expected ,= .Hash with %expected{$level};
+            my $expr = %expected<expr>;
+            %expected<ast> = $expr ?? { :declarations[{ :property{ :ident($prop), :$expr } }] } !! Any;
 
             subtest $level, {
 	        CSS::Grammar::Test::parse-tests($input, :$module,

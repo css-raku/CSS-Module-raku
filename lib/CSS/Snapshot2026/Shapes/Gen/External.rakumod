@@ -26,9 +26,6 @@ method position (|) {
 method radial-size (|) {
     ...
 }
-method rect (|) {
-    ...
-}
 method string (|) {
     ...
 }

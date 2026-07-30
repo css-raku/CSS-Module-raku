@@ -15,6 +15,16 @@ rule hue-interpolation-method { :i [[shorter | longer | increasing | decreasing 
 rule color-interpolation-method { :i in & <keyw> [<rectangular-color-space> || <polar-color-space> <hue-interpolation-method> ?  || <custom-color-space> ]  }
 #| <xyz-space> = xyz | xyz-d50 | xyz-d65
 rule xyz-space { :i [xyz | "xyz-d50" | "xyz-d65" ]& <keyw>  }
+#| rgb([<number> | <percentage>]#{3} [[,|/] <alpha-value>]?)
+rule rgb { :i "rgb(" [[<number> || <percentage> ] ** 3% ","? [["," || <op("/")> ] <alpha-value> ] ?  || <usage(&?ROUTINE.WHY)> ] ")" }
+#| rgb([<number> | <percentage>]#{3} [[,|/] <alpha-value>]?)
+rule rgba { :i "rgba(" [[<number> || <percentage> ] ** 3% ","? [["," || <op("/")> ] <alpha-value> ] ?  || <usage(&?ROUTINE.WHY)> ] ")" }
+#| hsl(    [<hue> | none] ,?  [<percentage> | <number> | none] ,?    [<percentage> | <number> | none] [,|/]? [ <alpha-value>]?)
+rule hsl { :i "hsl(" [[<hue> || none & <keyw> ] [","] ? [<percentage> || <number> || none & <keyw> ] [","] ? [<percentage> || <number> || none & <keyw> ] ["," || <op("/")> ] ? <alpha-value> ?  || <usage(&?ROUTINE.WHY)> ] ")" }
+#| hsla(    [<hue> | none] ,?  [<percentage> | <number> | none] ,?    [<percentage> | <number> | none] [,|/]? [ <alpha-value>]?)
+rule hsla { :i "hsla(" [[<hue> || none & <keyw> ] [","] ? [<percentage> || <number> || none & <keyw> ] [","] ? [<percentage> || <number> || none & <keyw> ] ["," || <op("/")> ] ? <alpha-value> ?  || <usage(&?ROUTINE.WHY)> ] ")" }
+#| <hue> = <number> | <angle>
+rule hue { :i <number> || <angle>  }
 #| <system-color> = AccentColor | AccentColorText | ActiveText | ButtonBorder | ButtonFace| ButtonText | Canvas | CanvasText | Field | FieldText| GrayText | Highlight | HighlightText| LinkText | Mark | MarkText | SelectedItem | SelectedItemText | VisitedText
 rule system-color { :i [AccentColor | AccentColorText | ActiveText | ButtonBorder | ButtonFace | ButtonText | Canvas | CanvasText | Field | FieldText | GrayText | Highlight | HighlightText | LinkText | Mark | MarkText | SelectedItem | SelectedItemText | VisitedText ]& <keyw>  }
 #| color: <color> | <system-color>

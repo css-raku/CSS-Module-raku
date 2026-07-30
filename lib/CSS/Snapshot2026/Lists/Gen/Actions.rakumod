@@ -8,3 +8,12 @@ method reversed-counter-name ($/) {
 method counter-style ($/) {
     make $.build.rule($/)
 }
+method counter-style-name ($/) {
+    make $.build.rule($/)
+}
+method symbols-type ($/) {
+    make $.build.rule($/)
+}
+method symbols ($/) {
+    $.make-func("symbols", $/)
+}

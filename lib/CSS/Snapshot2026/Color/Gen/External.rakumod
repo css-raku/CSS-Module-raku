@@ -1,4 +1,10 @@
 unit role CSS::Snapshot2026::Color::Gen::External;
+method alpha-value (|) {
+    ...
+}
+method angle (|) {
+    ...
+}
 method color (|) {
     ...
 }

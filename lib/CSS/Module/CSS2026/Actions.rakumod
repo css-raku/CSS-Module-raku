@@ -3,9 +3,6 @@ unit class CSS::Module::CSS2026::Actions;
 use CSS::Grammar::Actions;
 also is CSS::Grammar::Actions;
 
-use     CSS::Module::CSS2026::Colors;
-also is CSS::Module::CSS2026::Colors::Actions;
-
 use CSS::Module::CSS3::Values_and_Units;
 also is CSS::Module::CSS3::Values_and_Units::Actions::Calc;
 
@@ -15,7 +12,8 @@ also does CSS::Specification::Base::Actions;
 use CSS::Snapshot2026::Actions;
 also is CSS::Snapshot2026::Actions;
 
-method rect ($/)   { $.make-func("rect", $/) }
+use     CSS::Module::CSS2026::Colors;
+also is CSS::Module::CSS2026::Colors::Actions;
 
 method build {
     use CSS::Grammar::AST;

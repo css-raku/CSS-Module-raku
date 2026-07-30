@@ -41,9 +41,6 @@ method font-family-name (|) {
 method font-feature-value-name (|) {
     ...
 }
-method font-variant-css2 (|) {
-    ...
-}
 method font-weight-absolute (|) {
     ...
 }

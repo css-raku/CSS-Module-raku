@@ -1,4 +1,7 @@
 unit class CSS::Snapshot2026::Fonts::Gen::Actions;
+method font-variant-css2 ($/) {
+    make $.build.rule($/)
+}
 method font-width-css3 ($/) {
     make $.build.rule($/)
 }

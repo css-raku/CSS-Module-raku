@@ -11,6 +11,22 @@
 # <color-base> = <hex-color> | <color-function> | <named-color> | transparent
 # <color-function> = <rgb()> | <rgba()> | <hsl()> | <hsla()>\
 # | <hwb()> | <lab()> | <lch()> | <oklab()> | <oklch()> | <color()>
+
+# Browsers are pretty forgiving with mixing rgb() vs rgba() and legacy vs modern syntax
+<rgb()> = rgb([<number> | <percentage>]#{3} [[,|/] <alpha-value>]?)
+<rgba()> = rgb([<number> | <percentage>]#{3} [[,|/] <alpha-value>]?)
+
+# Same goes for hsl() vs hsla()
+<hsl()> = hsl(\
+    [<hue> | none] ,?  [<percentage> | <number> | none] ,?\
+    [<percentage> | <number> | none] [,|/]? [ <alpha-value>]?\
+)
+<hsla()> = hsla(\
+    [<hue> | none] ,?  [<percentage> | <number> | none] ,?\
+    [<percentage> | <number> | none] [,|/]? [ <alpha-value>]?\
+)
+<hue> = <number> | <angle>
+
 <system-color> = AccentColor | AccentColorText | ActiveText | ButtonBorder | ButtonFace\
 | ButtonText | Canvas | CanvasText | Field | FieldText| GrayText | Highlight | HighlightText\
 | LinkText | Mark | MarkText | SelectedItem | SelectedItemText | VisitedText

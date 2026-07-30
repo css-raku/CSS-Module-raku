@@ -5,9 +5,6 @@ method basic-shape ($/) {
 method shape-box ($/) {
     make $.build.rule($/)
 }
-method shape-rect ($/) {
-    $.make-func("rect", $/)
-}
 method basic-shape-rect ($/) {
     make $.build.rule($/)
 }
@@ -67,6 +64,9 @@ method path ($/) {
 }
 method polygon ($/) {
     $.make-func("polygon", $/)
+}
+method rect ($/) {
+    $.make-func("rect", $/)
 }
 method shape ($/) {
     $.make-func("shape", $/)

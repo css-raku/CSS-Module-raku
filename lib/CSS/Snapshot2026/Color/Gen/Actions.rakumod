@@ -23,6 +23,21 @@ method color-interpolation-method ($/) {
 method xyz-space ($/) {
     make $.build.rule($/)
 }
+method hue ($/) {
+    make $.build.rule($/)
+}
 method system-color ($/) {
     make $.build.rule($/)
+}
+method hsl ($/) {
+    $.make-func("hsl", $/)
+}
+method hsla ($/) {
+    $.make-func("hsla", $/)
+}
+method rgb ($/) {
+    $.make-func("rgb", $/)
+}
+method rgba ($/) {
+    $.make-func("rgba", $/)
 }

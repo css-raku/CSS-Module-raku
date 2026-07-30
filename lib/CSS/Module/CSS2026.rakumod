@@ -3,9 +3,6 @@ unit grammar CSS::Module::CSS2026;
 use CSS::Grammar::CSS4;
 also is CSS::Grammar::CSS4;
 
-use CSS::Module::CSS2026::Colors;
-also is CSS::Module::CSS2026::Colors;
-
 use CSS::Module::CSS3::Values_and_Units;
 also is CSS::Module::CSS3::Values_and_Units::Calc;
 
@@ -15,13 +12,14 @@ also does CSS::Specification::Base::Grammar;
 use CSS::Snapshot2026::Grammar;
 also is  CSS::Snapshot2026::Grammar;
 
+use CSS::Module::CSS2026::Colors;
+also is CSS::Module::CSS2026::Colors;
+
 use CSS::Snapshot2026::External;
 also does  CSS::Snapshot2026::External;
 
 token proforma:sym<inherit> {:i inherit}
 token proforma:sym<initial> {:i initial}
-
-rule rect {:i 'rect(' <length-percentage>** 4 % <.optional-comma> [ [round && <keyw>] <css-val-border-radius> ]? ')'}
 
 method module(|c) {
     use CSS::Module::CSS2026::Actions;
@@ -33,7 +31,7 @@ method module(|c) {
     my &index = &Metadata::index;
 
     CSS::Module.new(
-        :name<CSS-2026>,
+        :name<Snapshot2026>,
         :grammar($?CLASS),
         :actions(CSS::Module::CSS2026::Actions),
         :$property-metadata,

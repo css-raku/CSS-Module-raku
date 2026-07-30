@@ -42,7 +42,10 @@ class Make {
                           :Grid<src/css-snapshot-2026/css-grid-1.tsv>,
                           :Images<src/css-snapshot-2026/css-images-3.tsv>,
                           :Inline<src/css-snapshot-2026/css-inline-3.tsv>,
-                          :Lists<src/css-snapshot-2026/css-lists-3.tsv>,
+                          :Lists<
+                               src/css-snapshot-2026/css-lists-3.tsv
+                               src/css-snapshot-2026/css-counter-styles-3.tsv
+                           >,
                           :Logical<src/css-snapshot-2026/css-logical-1.tsv>,
                           :Masking<src/css-snapshot-2026/css-masking-1.tsv>,
                           :Motion<src/css-snapshot-2026/css-motion-1.tsv>,

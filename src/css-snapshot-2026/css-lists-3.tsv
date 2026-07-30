@@ -1,7 +1,6 @@
 counter-increment	[ <counter-name> <integer>? ]+ | none	none	all elements	no	n/a	by computed value type	per grammar	the keyword none or a list, each item an identifier paired with an integer
 <counter-name> = <identifier>
 <reversed-counter-name> = reversed( <counter-name> )
-<counter-style> =  decimal | decimal-leading-zero | arabic-indic | armenian | upper-armenian | lower-armenian | bengali | cambodian | khmer | cjk-decimal | devanagari | georgian | gujarati | gurmukhi | hebrew | kannada | lao | malayalam | mongolian | myanmar | oriya | persian | lower-roman | upper-roman | tamil | telugu | thai | tibetan | <identifier>
 counter-reset	[ <counter-name> <integer>? | <reversed-counter-name> <integer>? ]+ | none	none	all elements	no	n/a	by computed value type	per grammar	the keyword none or a list, each item an identifier or a reversed() function paired with an integer
 counter-set	[ <counter-name> <integer>? ]+ | none	none	all elements	no	n/a	by computed value type	per grammar	the keyword none or a list, each item an identifier paired with an integer
 list-style	<'list-style-position'> || <'list-style-image'> || <'list-style-type'>	see individual properties	list items	see individual properties	see individual properties	see individual properties	per grammar	see individual properties

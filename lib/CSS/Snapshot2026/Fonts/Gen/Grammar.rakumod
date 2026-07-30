@@ -10,6 +10,8 @@ rule css-val-font { :i [[[<css-val-font-style> :my $*A;<!{
 }>|| <css-val-font-stretch> :my $*D;<!{
     $*D++
 }>]+] ? <css-val-font-size> [<op("/")> <css-val-line-height> ] ? <css-val-font-family> +% <op(",")>? ] || <system-font-family-name>  }
+#| <font-variant-css2> = normal | small-caps
+rule font-variant-css2 { :i [normal | "small-caps" ]& <keyw>  }
 #| font-stretch: <font-width-css3>
 rule decl:sym<font-stretch> { :i ("font-stretch") ":" <val(/<css-val-font-stretch> /, &?ROUTINE.WHY)>}
 rule css-val-font-stretch { :i <font-width-css3> }

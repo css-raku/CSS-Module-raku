@@ -56,6 +56,7 @@ for 't/00basic.json'.IO.lines.map({ from-json($_).pairs[0] }) {
                                                 :$module,
                                                 :$rule,
                                                 :$writer,
+                                                :$lax,
                                                 :expected(%level-expected) );
                 }
         }

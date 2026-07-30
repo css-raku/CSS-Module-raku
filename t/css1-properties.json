@@ -5,7 +5,7 @@
 { "prop" : "background-position", "decl" : "100% 90%", "expr" : [ { "percent" : 100 }, { "percent" : 90 } ] }
 { "prop" : "background-position", "decl" : "left bottom", "expr" : [ { "keyw" : "left" }, { "keyw" : "bottom" } ] }
 { "prop" : "background-position", "decl" : "left right", "warnings" : "extra terms following declaration 'background-position: left': 'right' - dropped" }
-{ "prop" : "background", "decl" : "url(chess.png) gray 50% repeat scroll", "expr" : [ { "expr:background-image" : [ { "url" : "chess.png" } ] }, { "expr:background-color" : [ { "rgb" : [ { "num" : 128 }, { "num" : 128 }, { "num" : 128 } ] } ] }, { "expr:background-position" : [ { "percent" : 50 } ] }, { "expr:background-repeat" : [ { "keyw" : "repeat" } ] }, { "expr:background-attachment" : [ { "keyw" : "scroll" } ] } ] }
+{ "prop" : "background", "decl" : "url(chess.png) gray 50% repeat scroll", "expr" : [ { "expr:background-image" : [ { "url" : "chess.png" } ] }, { "expr:background-color" : [ { "rgb" : [ { "num" : 128 }, { "num" : 128 }, { "num" : 128 } ] } ] }, { "expr:background-position" : [ { "percent" : 50 } ] }, { "expr:background-repeat" : [ { "keyw" : "repeat" } ] }, { "expr:background-attachment" : [ { "keyw" : "scroll" } ] } ], "Snapshot2026" : { "expr" : [ { "expr" : [ { "expr:background-image" : [ { "url" : "chess.png" } ] }, { "expr:background-color" : [ { "rgb" : [ { "num" : 128 }, { "num" : 128 }, { "num" : 128 } ] } ] }, { "expr:background-position" : [ { "percent" : 50 } ] }, { "expr:background-repeat" : [ { "keyw" : "repeat" } ] }, { "expr:background-attachment" : [ { "keyw" : "scroll" } ] } ] } ] } }
 { "prop" : "border-top-width", "decl" : "thick", "expr" : [ { "keyw" : "thick" } ] }
 { "prop" : "border-width", "decl" : "2ex 1.5em 3ex 5%", "expr" : [ { "ex" : 2 }, { "em" : 1.5 }, { "ex" : 3 }, { "percent" : 5 } ] }
 { "prop" : "border-color", "decl" : "#a7f #aa77ff rgb(100,150,20) aqua", "expr" : [ { "rgb" : [ { "num" : 170 }, { "num" : 119 }, { "num" : 255 } ] }, { "rgb" : [ { "num" : 170 }, { "num" : 119 }, { "num" : 255 } ] }, { "rgb" : [ { "num" : 100 }, { "num" : 150 }, { "num" : 20 } ] }, { "rgb" : [ { "num" : 0 }, { "num" : 255 }, { "num" : 255 } ] } ] }
@@ -29,7 +29,7 @@
 { "prop" : "font-size", "decl" : "150%", "expr" : [ { "percent" : 150 } ] }
 { "prop" : "font-size", "decl" : "Larger", "expr" : [ { "keyw" : "larger" } ] }
 { "prop" : "font", "decl" : "12pt/14pt sans-serif", "expr" : [ { "expr:font-size" : [ { "pt" : 12 } ] }, { "op" : "/" }, { "expr:line-height" : [ { "pt" : 14 } ] }, { "expr:font-family" : [ { "keyw" : "sans-serif" } ] } ] }
-{ "prop" : "font", "decl" : "normal small-caps 120%/120% fantasy", "expr" : [ { "expr:font-style" : [{ "keyw" : "normal" }] }, { "expr:font-variant" : [{ "keyw" : "small-caps" }] }, { "expr:font-size" : [ { "percent" : 120 } ] }, { "op" : "/" }, { "expr:line-height" : [ { "percent" : 120 } ] }, { "expr:font-family" : [ { "keyw" : "fantasy" } ] } ] }
+{ "prop" : "font", "decl" : "normal small-caps 120%/120% fantasy", "expr" : [ { "expr:font-style" : [{ "keyw" : "normal" }] }, { "expr:font-variant" : [{ "keyw" : "small-caps" }] }, { "expr:font-size" : [ { "percent" : 120 } ] }, { "op" : "/" }, { "expr:line-height" : [ { "percent" : 120 } ] }, { "expr:font-family" : [ { "keyw" : "fantasy" } ] } ], "Snapshot2026" : { "expr" : [{"expr:font-style":[{"keyw":"normal"}]},{"keyw":"small-caps"},{"expr:font-size":[{"percent":120}]},{"op":"/"},{"expr:line-height":[{"percent":120}]},{"expr:font-family":[{"keyw":"fantasy"}]}] } }
 // style/weight following family name - non conformant
 { "prop" : "font", "decl" : "10pt courier bold", "expr" : [ { "expr:font-size" : [ { "pt" : 10 } ] }, { "expr:font-family" : [ { "ident" : "courier bold" } ] } ] }
 { "prop" : "letter-spacing", "decl" : "normal", "expr" : [ { "keyw" : "normal" } ] }
@@ -48,7 +48,7 @@
 { "prop" : "text-transform", "decl" : "uppercase", "expr" : [ { "keyw" : "uppercase" } ] }
 { "prop" : "text-align", "decl" : "justify", "expr" : [ { "keyw" : "justify" } ] }
 { "prop" : "text-decoration", "decl" : "underline", "expr" : [ { "keyw" : "underline" } ] }
-{ "prop" : "vertical-align", "decl" : "text-top", "expr" : [ { "keyw" : "text-top" } ] }
+{ "prop" : "vertical-align", "decl" : "text-top", "expr" : [ { "keyw" : "text-top" } ], "Snapshot2026" : { "expr" : [ {"expr:alignment-baseline":[{"keyw":"text-top"}] } ] } }
 { "prop" : "width", "decl" : "55mm", "expr" : [ { "mm" : 55 } ] }
 { "prop" : "word-spacing", "decl" : "1.5em", "expr" : [ { "em" : 1.5 } ] }
 { "prop" : "white-space", "decl" : "nowrap", "expr" : [ { "keyw" : "nowrap" } ] }

@@ -11,7 +11,7 @@ use CSS::Writer;
 
 my CSS::Module $css21 = CSS::Module::CSS21.module;
 my CSS::Module $css3  = CSS::Module::CSS3.module;
-my CSS::Module $css4  = CSS::Module::CSS2026.module;
+my CSS::Module $snapshot2026  = CSS::Module::CSS2026.module;
 
 my %seen;
 
@@ -31,7 +31,7 @@ for 't/css21-properties.json'.IO.lines {
     subtest $input, {
         for { :module($css21), :proforma<inherit>},
         { :module($css3), :proforma<inherit initial>, :$writer},
-        { :module($css4), :proforma<inherit initial>, :$writer}
+        { :module($snapshot2026), :proforma<inherit initial>, :$writer}
         -> % ( :$module!, :$proforma!, :$writer=Any) {
 
             my $level = $module.name;
