@@ -1,4 +1,4 @@
-unit grammar CSS::Module::CSS2026::Colors;
+unit grammar CSS::Module::Snapshot2026::Colors;
 
 use  CSS::Module::CSS3::Colors;
 also is CSS::Module::CSS3::Colors;

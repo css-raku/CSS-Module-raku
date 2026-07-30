@@ -1,4 +1,4 @@
-unit class CSS::Module::CSS2026::Actions;
+unit class CSS::Module::Snapshot2026::Actions;
 
 use CSS::Grammar::Actions;
 also is CSS::Grammar::Actions;
@@ -12,8 +12,8 @@ also does CSS::Specification::Base::Actions;
 use CSS::Snapshot2026::Actions;
 also is CSS::Snapshot2026::Actions;
 
-use     CSS::Module::CSS2026::Colors;
-also is CSS::Module::CSS2026::Colors::Actions;
+use     CSS::Module::Snapshot2026::Colors;
+also is CSS::Module::Snapshot2026::Colors::Actions;
 
 method build {
     use CSS::Grammar::AST;

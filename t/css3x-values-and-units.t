@@ -4,12 +4,12 @@ use Test;
 use JSON::Fast;
 use CSS::Grammar::Test;
 use CSS::Module::CSS3;
-use CSS::Module::CSS2026;
+use CSS::Module::Snapshot2026;
 use CSS::Writer;
 
 my $writer = CSS::Writer.new;
 my $css3 = CSS::Module::CSS3.module;
-my $css2026 = CSS::Module::CSS2026.module;
+my $css2026 = CSS::Module::Snapshot2026.module;
 my $tests = @*ARGS.head // 't/css3x-values-and-units.json';
 
 for $tests.IO.lines {

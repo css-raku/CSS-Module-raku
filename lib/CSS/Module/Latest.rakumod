@@ -1,3 +1,3 @@
 unit class CSS::Module::Latest;
-use CSS::Module::CSS2026;
-also is CSS::Module::CSS2026;
+use CSS::Module::Snapshot2026;
+also is CSS::Module::Snapshot2026;

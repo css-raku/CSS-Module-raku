@@ -1,4 +1,4 @@
-unit grammar CSS::Module::CSS2026;
+unit grammar CSS::Module::Snapshot2026;
 
 use CSS::Grammar::CSS4;
 also is CSS::Grammar::CSS4;
@@ -12,8 +12,8 @@ also does CSS::Specification::Base::Grammar;
 use CSS::Snapshot2026::Grammar;
 also is  CSS::Snapshot2026::Grammar;
 
-use CSS::Module::CSS2026::Colors;
-also is CSS::Module::CSS2026::Colors;
+use CSS::Module::Snapshot2026::Colors;
+also is CSS::Module::Snapshot2026::Colors;
 
 use CSS::Snapshot2026::External;
 also does  CSS::Snapshot2026::External;
@@ -22,8 +22,8 @@ token proforma:sym<inherit> {:i inherit}
 token proforma:sym<initial> {:i initial}
 
 method module(|c) {
-    use CSS::Module::CSS2026::Actions;
-    use CSS::Module::CSS2026::Fonts::AtFontFace;
+    use CSS::Module::Snapshot2026::Actions;
+    use CSS::Module::Snapshot2026::Fonts::AtFontFace;
     use CSS::Snapshot2026::Metadata;
     my constant Metadata = CSS::Snapshot2026::Metadata;
     my $property-metadata = $Metadata::property;
@@ -33,11 +33,11 @@ method module(|c) {
     CSS::Module.new(
         :name<Snapshot2026>,
         :grammar($?CLASS),
-        :actions(CSS::Module::CSS2026::Actions),
+        :actions(CSS::Module::Snapshot2026::Actions),
         :$property-metadata,
         :$prop-names,
         :&index,
-        :sub-module('@font-face' => CSS::Module::CSS2026::Fonts::AtFontFace.module),
+        :sub-module('@font-face' => CSS::Module::Snapshot2026::Fonts::AtFontFace.module),
         |c
         );
 }

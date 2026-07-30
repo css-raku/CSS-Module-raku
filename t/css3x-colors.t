@@ -3,7 +3,7 @@
 use Test;
 
 use CSS::Module::CSS3;
-use CSS::Module::CSS2026;
+use CSS::Module::Snapshot2026;
 use CSS::Grammar::Test;
 use CSS::Writer;
 

@@ -5,7 +5,7 @@ use CSS::Module::CSS21;
 use CSS::Module::CSS3;
 use CSS::Module::CSS3::Fonts::AtFontFace;
 use CSS::Module::SVG;
-use CSS::Module::CSS2026;
+use CSS::Module::Snapshot2026;
 
 subtest 'CSS1', {
     my \module = CSS::Module::CSS1.module;
@@ -89,10 +89,10 @@ subtest 'SVG', {
     is-deeply prop<font-style>, { :synopsis("normal | italic | oblique"), :inherit, :default<normal>, }, 'svg font-style';
 }
 
-subtest 'CSS2026', {
-    my \module = CSS::Module::CSS2026.module;
-    isa-ok module.grammar, 'CSS::Module::CSS2026', 'css2026 grammar';
-    isa-ok module.actions, 'CSS::Module::CSS2026::Actions', 'css2026 actions';
+subtest 'Snapshot2026', {
+    my \module = CSS::Module::Snapshot2026.module;
+    isa-ok module.grammar, 'CSS::Module::Snapshot2026', 'css2026 grammar';
+    isa-ok module.actions, 'CSS::Module::Snapshot2026::Actions', 'css2026 actions';
     my \prop = module.property-metadata;
     is-deeply prop<azimuth>, { :synopsis("<angle> | [ <direction> || <behind> ] | <delta>"), :inherit, :default<center>, }, 'css2026 azimuth';
     is-deeply prop<font-style>, { :synopsis("normal | italic | left | right | oblique <angle [-90deg,90deg]>?"), :inherit, :default<normal>, }, 'css2026 font-style';
