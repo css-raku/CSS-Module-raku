@@ -3,7 +3,7 @@ font	[ [ <'font-style'> || <font-variant-css2> || <'font-weight'> || <'font-stre
 font-stretch	<font-width-css3>	normal	all elements	yes	N/A	visual
 <font-width-css3> = normal | ultra-condensed | extra-condensed | condensed |\
     semi-condensed | semi-expanded | expanded | extra-expanded | ultra-expanded
-font-family	[ <generic-font-family> | <font-family-name> ]#	depends on user agent	all elements and text	yes	n/a	discrete	per grammar	list, each item a string and/or <generic-font-family> keywords
+font-family	[ <font-family-name> | !<generic-font-family> ]#	depends on user agent	all elements and text	yes	n/a	discrete	per grammar	list, each item a string and/or <generic-font-family> keywords
 <system-font-family-name> = caption | icon | menu | message-box | small-caption | status-bar
 <generic-font-family> = <generic-font-script-specific>| <generic-font-complete> | <generic-font-incomplete>
 <generic-font-script-specific> = <generic()>

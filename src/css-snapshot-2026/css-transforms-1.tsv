@@ -37,4 +37,4 @@ skewY() = skewY( [ <angle> | <zero> ] )
 
 
 transform-box	content-box | border-box | fill-box | stroke-box | view-box	view-box	transformable elements	no	N/A	discrete	per grammar	specified keyword
-transform-origin	[ left | center | right | top | bottom | <length-percentage> ] |   [ left | center | right | <length-percentage> ]  [ top | center | bottom | <length-percentage> ] <length>? |  [ [ center | left | right ] && [ center | top | bottom ] ] <length>?	50% 50%	transformable elements	no	refer to the size of reference box	by computed value	per grammar	see background-position
+transform-origin	[ left | center | right | top | bottom | <length-percentage> ] | ![ left | center | right | <length-percentage> ]  [ top | center | bottom | <length-percentage> ] <length>? | [ [ center | left | right ] && [ center | top | bottom ] ] <length>?	50% 50%	transformable elements	no	refer to the size of reference box	by computed value	per grammar	see background-position

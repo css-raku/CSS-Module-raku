@@ -31,9 +31,9 @@ rule skewY { :i "skewY(" [[<angle> || <zero> ] || <usage(&?ROUTINE.WHY)> ] ")" }
 #| transform-box: content-box | border-box | fill-box | stroke-box | view-box
 rule decl:sym<transform-box> { :i ("transform-box") ":" <val(/<css-val-transform-box> /, &?ROUTINE.WHY)>}
 rule css-val-transform-box { :i ["content-box" | "border-box" | "fill-box" | "stroke-box" | "view-box" ]& <keyw>  }
-#| transform-origin: [ left | center | right | top | bottom | <length-percentage> ] |   [ left | center | right | <length-percentage> ]  [ top | center | bottom | <length-percentage> ] <length>? |  [ [ center | left | right ] && [ center | top | bottom ] ] <length>?
+#| transform-origin: [ left | center | right | top | bottom | <length-percentage> ] | ![ left | center | right | <length-percentage> ]  [ top | center | bottom | <length-percentage> ] <length>? | [ [ center | left | right ] && [ center | top | bottom ] ] <length>?
 rule decl:sym<transform-origin> { :i ("transform-origin") ":" <val(/<css-val-transform-origin> /, &?ROUTINE.WHY)>}
-rule css-val-transform-origin { :i [[left | center | right | top | bottom ]& <keyw>  || <length-percentage> ] || [[left | center | right ]& <keyw>  || <length-percentage> ] [[top | center | bottom ]& <keyw>  || <length-percentage> ] <length> ?  || [[[[center | left | right ]& <keyw> ] :my $*A;<!{
+rule css-val-transform-origin { :i [[left | center | right ]& <keyw>  || <length-percentage> ] [[top | center | bottom ]& <keyw>  || <length-percentage> ] <length> ?  || [[left | center | right | top | bottom ]& <keyw>  || <length-percentage> ] || [[[[center | left | right ]& <keyw> ] :my $*A;<!{
     $*A++
 }>|| [[center | top | bottom ]& <keyw> ] :my $*B;<!{
     $*B++

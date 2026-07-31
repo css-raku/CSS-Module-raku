@@ -17,7 +17,7 @@ rule decl:sym<font-stretch> { :i ("font-stretch") ":" <val(/<css-val-font-stretc
 rule css-val-font-stretch { :i <font-width-css3> }
 #| <font-width-css3> = normal | ultra-condensed | extra-condensed | condensed |    semi-condensed | semi-expanded | expanded | extra-expanded | ultra-expanded
 rule font-width-css3 { :i [normal | "ultra-condensed" | "extra-condensed" | condensed | "semi-condensed" | "semi-expanded" | expanded | "extra-expanded" | "ultra-expanded" ]& <keyw>  }
-#| font-family: [ <generic-font-family> | <font-family-name> ]#
+#| font-family: [ <font-family-name> | !<generic-font-family> ]#
 rule decl:sym<font-family> { :i ("font-family") ":" <val(/<css-val-font-family> /, &?ROUTINE.WHY)>}
 rule css-val-font-family { :i [<generic-font-family> || <font-family-name> ] +% <op(",")>? }
 #| <system-font-family-name> = caption | icon | menu | message-box | small-caption | status-bar
