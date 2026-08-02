@@ -44,6 +44,11 @@ for (
     },
     { :rule<term>, input => 'hsla( 180, -100%, 150%, 1.75 )',
                ast => :hsla[ :num(180), :percent(0), :percent(100), :num(1) ],
+               :writer{
+                   # writer converts hsla(...,1) to hsl(...)
+                   ast => :hsl[ :num(180), :percent(0), :percent(100) ],
+                   { :rule<token>, type => 'color', units => 'hsl'},
+               },
     },
     # a few invalid cases
     { :rule<term>, input => 'rgba(10%,20%,30%)',
