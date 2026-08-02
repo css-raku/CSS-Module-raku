@@ -6,9 +6,9 @@ rule gradient { :i <linear-gradient> || <repeating-linear-gradient> || <radial-g
 #| linear-gradient( [ <linear-gradient-syntax> ] )
 rule linear-gradient { :i "linear-gradient(" [<linear-gradient-syntax> || <usage(&?ROUTINE.WHY)> ] ")" }
 #| <linear-gradient-syntax> = [ <angle> | <zero> | to <side-or-corner> ]? , <color-stop-list>
-rule linear-gradient-syntax { :i [:!r [<angle> || <zero> || to & <keyw> <side-or-corner>  ] <op(",")>]? <color-stop-list>  }
+rule linear-gradient-syntax { :i [[<angle> || <zero> || to & <keyw> <side-or-corner>  ] <op(",")>]? <color-stop-list>  }
 #| <color-stop-list> = <linear-color-stop> , [ <linear-color-hint>? , <linear-color-stop> ]#?
-rule color-stop-list { :i <linear-color-stop> <op(",")> [[[:!r <linear-color-hint> <op(",")>]? <linear-color-stop> ] +% <op(",")>?] ?  }
+rule color-stop-list { :i <linear-color-stop> <op(",")> [[[<linear-color-hint> <op(",")>]? <linear-color-stop> ] +% <op(",")>?] ?  }
 #| <linear-color-stop> = <color> <length-percentage>?
 rule linear-color-stop { :i <color> <length-percentage> ?  }
 #| <linear-color-hint> = <length-percentage>
@@ -30,7 +30,7 @@ rule radial-gradient-syntax { :i [[<radial-shape> :my $*A;<!{
     $*A++
 }>|| <radial-size> :my $*B;<!{
     $*B++
-}>]+] ? [:!r [at & <keyw> <position> ] <op(",")>]? <color-stop-list>  }
+}>]+] ? [[at & <keyw> <position> ] <op(",")>]? <color-stop-list>  }
 #| <radial-shape> = circle | ellipse
 rule radial-shape { :i [circle | ellipse ]& <keyw>  }
 #| repeating-linear-gradient( [ <linear-gradient-syntax> ] )

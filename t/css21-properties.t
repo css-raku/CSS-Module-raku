@@ -21,9 +21,6 @@ for 't/css21-properties.json'.IO.lines {
 
     my %expected = %( from-json($_) );
     my $prop = %expected<prop>.lc;
-    my $expr = %expected<expr>;
-
-    %expected<ast> = $expr ?? { :declarations[{ :property{ :ident($prop), :$expr } }] } !! Any;
 
     my $input = sprintf '{%s: %s}', $prop, %expected<decl>;
     my $writer = CSS::Writer.new;
@@ -35,6 +32,10 @@ for 't/css21-properties.json'.IO.lines {
         -> % ( :$module!, :$proforma!, :$writer=Any) {
 
             my $level = $module.name;
+            temp %expected ,= .Hash with %expected{$level};
+            my $expr = %expected<expr>;
+            %expected<ast> = $expr ?? { :declarations[{ :property{ :ident($prop), :$expr } }] } !! Any;
+
             subtest $level, {
 	        CSS::Grammar::Test::parse-tests($input, :$module,
 					        :rule<declarations>,

@@ -28,13 +28,12 @@ rule final-bg-layer { :i [<css-val-background-image> :my $*A;<!{
 }>|| <css-val-background-color> :my $*F;<!{
     $*F++
 }>]+ }
-#| background-position: [ [ <length-percentage> | <align> ] [ <length-percentage> | <valign> ]? ] | [ <align> || <valign> ]
-rule decl:sym<background-position> { :i ("background-position") ":" <val(/<css-val-background-position> /, &?ROUTINE.WHY)>}
-rule css-val-background-position { :i [[<length-percentage> || <align> ] [<length-percentage> || <valign> ] ? ] || [[<align> :my $*A;<!{
+#| <bg-position> = [ [ left | center | right | top | bottom | <length-percentage> ] |! [ left | center | right | <length-percentage> ] [ top | center | bottom | <length-percentage> ] |!! [ center | [ left | right ] <length-percentage>? ] && [ center | [ top | bottom ] <length-percentage>? ]]
+rule bg-position { :i [[[center & <keyw> || [[left | right ]& <keyw> ] <length-percentage> ?  ] :my $*A;<!{
     $*A++
-}>|| <valign> :my $*B;<!{
+}>|| [center & <keyw> || [[top | bottom ]& <keyw> ] <length-percentage> ?  ] :my $*B;<!{
     $*B++
-}>]+]  }
+}>]** 2 || [[left | center | right ]& <keyw>  || <length-percentage> ] [[top | center | bottom ]& <keyw>  || <length-percentage> ]  || [[left | center | right | top | bottom ]& <keyw>  || <length-percentage> ] ] }
 #| <align> = left | center | right
 rule align { :i [left | center | right ]& <keyw>  }
 #| <valign> = top | center | bottom
@@ -58,6 +57,9 @@ rule bg-image { :i <image> || none & <keyw>  }
 #| background-origin: <visual-box>#
 rule decl:sym<background-origin> { :i ("background-origin") ":" <val(/<css-val-background-origin> /, &?ROUTINE.WHY)>}
 rule css-val-background-origin { :i <visual-box> +% <op(",")>? }
+#| background-position: <bg-position>#
+rule decl:sym<background-position> { :i ("background-position") ":" <val(/<css-val-background-position> /, &?ROUTINE.WHY)>}
+rule css-val-background-position { :i <bg-position> +% <op(",")>? }
 #| background-repeat: <repeat-style>#
 rule decl:sym<background-repeat> { :i ("background-repeat") ":" <val(/<css-val-background-repeat> /, &?ROUTINE.WHY)>}
 rule css-val-background-repeat { :i <repeat-style> +% <op(",")>? }
