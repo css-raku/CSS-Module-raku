@@ -29,7 +29,7 @@
 { "prop" : "font-size", "decl" : "150%", "expr" : [ { "percent" : 150 } ] }
 { "prop" : "font-size", "decl" : "Larger", "expr" : [ { "keyw" : "larger" } ] }
 { "prop" : "font", "decl" : "12pt/14pt sans-serif", "expr" : [ { "expr:font-size" : [ { "pt" : 12 } ] }, { "op" : "/" }, { "expr:line-height" : [ { "pt" : 14 } ] }, { "expr:font-family" : [ { "keyw" : "sans-serif" } ] } ] }
-{ "prop" : "font", "decl" : "normal small-caps 120%/120% fantasy", "expr" : [ { "expr:font-style" : [{ "keyw" : "normal" }] }, { "expr:font-variant" : [{ "keyw" : "small-caps" }] }, { "expr:font-size" : [ { "percent" : 120 } ] }, { "op" : "/" }, { "expr:line-height" : [ { "percent" : 120 } ] }, { "expr:font-family" : [ { "keyw" : "fantasy" } ] } ], "Snapshot2026" : { "expr" : [{"expr:font-style":[{"keyw":"normal"}]},{"keyw":"small-caps"},{"expr:font-size":[{"percent":120}]},{"op":"/"},{"expr:line-height":[{"percent":120}]},{"expr:font-family":[{"keyw":"fantasy"}]}] } }
+{ "prop" : "font", "decl" : "normal small-caps 120%/120% fantasy", "expr" : [ { "expr:font-style" : [{ "keyw" : "normal" }] }, { "expr:font-variant" : [{ "keyw" : "small-caps" }] }, { "expr:font-size" : [ { "percent" : 120 } ] }, { "op" : "/" }, { "expr:line-height" : [ { "percent" : 120 } ] }, { "expr:font-family" : [ { "keyw" : "fantasy" } ] } ] }
 // style/weight following family name - non conformant
 { "prop" : "font", "decl" : "10pt courier bold", "expr" : [ { "expr:font-size" : [ { "pt" : 10 } ] }, { "expr:font-family" : [ { "ident" : "courier bold" } ] } ] }
 { "prop" : "letter-spacing", "decl" : "normal", "expr" : [ { "keyw" : "normal" } ] }

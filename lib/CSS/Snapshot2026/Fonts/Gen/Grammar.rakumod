@@ -1,9 +1,9 @@
 unit grammar CSS::Snapshot2026::Fonts::Gen::Grammar;
-#| font: [ [ <'font-style'> || <font-variant-css2> || <'font-weight'> || <'font-stretch'> ]? <'font-size'> [ / <'line-height'> ]? <'font-family'># ] | <system-font-family-name>
+#| font: [ [ <'font-style'> || <'font-variant'=.font-variant-css2> || <'font-weight'> || <'font-stretch'> ]? <'font-size'> [ / <'line-height'> ]? <'font-family'># ] | <system-font-family-name>
 rule decl:sym<font> { :i (font) ":" <val(/<css-val-font> /, &?ROUTINE.WHY)>}
 rule css-val-font { :i [[[<css-val-font-style> :my $*A;<!{
     $*A++
-}>|| <font-variant-css2> :my $*B;<!{
+}>|| <css-val-font-variant=.font-variant-css2> :my $*B;<!{
     $*B++
 }>|| <css-val-font-weight> :my $*C;<!{
     $*C++

@@ -34,10 +34,6 @@ rule bg-position { :i [[[center & <keyw> || [[left | right ]& <keyw> ] <length-p
 }>|| [center & <keyw> || [[top | bottom ]& <keyw> ] <length-percentage> ?  ] :my $*B;<!{
     $*B++
 }>]** 2 || [[left | center | right ]& <keyw>  || <length-percentage> ] [[top | center | bottom ]& <keyw>  || <length-percentage> ]  || [[left | center | right | top | bottom ]& <keyw>  || <length-percentage> ] ] }
-#| <align> = left | center | right
-rule align { :i [left | center | right ]& <keyw>  }
-#| <valign> = top | center | bottom
-rule valign { :i [top | center | bottom ]& <keyw>  }
 #| background-attachment: <attachment>#
 rule decl:sym<background-attachment> { :i ("background-attachment") ":" <val(/<css-val-background-attachment> /, &?ROUTINE.WHY)>}
 rule css-val-background-attachment { :i <attachment> +% <op(",")>? }

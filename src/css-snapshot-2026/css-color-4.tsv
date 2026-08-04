@@ -14,7 +14,7 @@
 
 # Browsers are pretty forgiving with mixing rgb() vs rgba() and legacy vs modern syntax
 <rgb()> = rgb([<number> | <percentage>]#{3} [[,|/] <alpha-value>]?)
-<rgba()> = rgb([<number> | <percentage>]#{3} [[,|/] <alpha-value>]?)
+<rgba()> = rgba([<number> | <percentage>]#{3} [[,|/] <alpha-value>]?)
 
 # Same goes for hsl() vs hsla()
 <hsl()> = hsl(\

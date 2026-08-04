@@ -8,12 +8,6 @@ method final-bg-layer ($/) {
 method bg-position ($/) {
     make $.build.rule($/)
 }
-method align ($/) {
-    make $.build.rule($/)
-}
-method valign ($/) {
-    make $.build.rule($/)
-}
 method attachment ($/) {
     make $.build.rule($/)
 }

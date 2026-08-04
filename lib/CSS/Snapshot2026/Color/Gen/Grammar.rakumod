@@ -17,7 +17,7 @@ rule color-interpolation-method { :i in & <keyw> [<rectangular-color-space> || <
 rule xyz-space { :i [xyz | "xyz-d50" | "xyz-d65" ]& <keyw>  }
 #| rgb([<number> | <percentage>]#{3} [[,|/] <alpha-value>]?)
 rule rgb { :i "rgb(" [[<number> || <percentage> ] ** 3% ","? [["," || <op("/")> ] <alpha-value> ] ?  || <usage(&?ROUTINE.WHY)> ] ")" }
-#| rgb([<number> | <percentage>]#{3} [[,|/] <alpha-value>]?)
+#| rgba([<number> | <percentage>]#{3} [[,|/] <alpha-value>]?)
 rule rgba { :i "rgba(" [[<number> || <percentage> ] ** 3% ","? [["," || <op("/")> ] <alpha-value> ] ?  || <usage(&?ROUTINE.WHY)> ] ")" }
 #| hsl(    [<hue> | none] ,?  [<percentage> | <number> | none] ,?    [<percentage> | <number> | none] [,|/]? [ <alpha-value>]?)
 rule hsl { :i "hsl(" [[<hue> || none & <keyw> ] [","] ? [<percentage> || <number> || none & <keyw> ] [","] ? [<percentage> || <number> || none & <keyw> ] ["," || <op("/")> ] ? <alpha-value> ?  || <usage(&?ROUTINE.WHY)> ] ")" }

@@ -10,20 +10,15 @@ background	<bg-layer>#? , <final-bg-layer>	see individual properties	all element
 <bg-layer> = <'background-image'> || <'background-position'> [ / <'background-size'> ]? || <'background-repeat'> || <'background-attachment'> || <'background-clip'>
 /* <final-bg-layer> =  <bg-image> || <bg-position> [ / <bg-size> ]? || <repeat-style> || <attachment> || <visual-box> || <visual-box> || <'background-color'> */
 <final-bg-layer> = <'background-image'> || <'background-position'> [ / <'background-size'>{1,2} ]? || <'background-repeat'> || <'background-attachment'> || <'background-clip'> || <'background-color'>
-# w3c standard <bg-position> rule
-#-<bg-position> = [\
-#-  [ left | center | right | top | bottom | <length-percentage> ]\
-#-|\
-#-  [ left | center | right | <length-percentage> ]\
-#-  [ top | center | bottom | <length-percentage> ]\
-#-|\
-#-  [ center | [ left | right ] <length-percentage>? ] &&\
-#-  [ center | [ top | bottom ] <length-percentage>? ]\
-#-]
-## Backported from CSS2.1
-'background-position'	[ [ <length-percentage> | <align> ] [ <length-percentage> | <valign> ]? ] | [ <align> || <valign> ] | inherit	0% 0%	 	no	refer to the size of the box itself	visual
-<align>  = left | center | right
-<valign> = top | center | bottom
+<bg-position> = [\
+ [ left | center | right | top | bottom | <length-percentage> ]\
+ |!\
+ [ left | center | right | <length-percentage> ]\
+ [ top | center | bottom | <length-percentage> ]\
+ |!!\
+ [ center | [ left | right ] <length-percentage>? ] &&\
+ [ center | [ top | bottom ] <length-percentage>? ]\
+]
 background-attachment	<attachment>#	scroll	all elements	no	N/A	discrete	per grammar	list, each item the keyword as specified
 <attachment> = scroll | fixed | local
 background-clip	<visual-box>#	border-box	all elements	no	N/A	repeatable list	per grammar	list, each item a keyword as specified	
@@ -31,7 +26,7 @@ background-color	<color>	transparent	all elements	no	N/A	by computed value	per g
 background-image	<bg-image>#	none	all elements	no	N/A	discrete	per grammar	list, each item either an <image> or the keyword none	
 <bg-image> = <image> | none
 background-origin	<visual-box>#	padding-box	all elements	no	N/A	repeatable list	per grammar	list, each item a keyword as specified	
-#-- background-position	<bg-position>#	0% 0%	all elements	no	refer to size of background positioning area minus size of background image; see text	repeatable list	per grammar	list, each item a pair of offsets (horizontal and vertical) from the top left origin each given as a computed <length-percentage> value
+background-position	<bg-position>#	0% 0%	all elements	no	refer to size of background positioning area minus size of background image; see text	repeatable list	per grammar	list, each item a pair of offsets (horizontal and vertical) from the top left origin each given as a computed <length-percentage> value
 
 background-repeat	<repeat-style>#	repeat	all elements	no	N/A	discrete	per grammar	list, each item a pair of keywords, one per dimension	
 <repeat-style> = repeat-x | repeat-y | [repeat | space | round | no-repeat]{1,2}
