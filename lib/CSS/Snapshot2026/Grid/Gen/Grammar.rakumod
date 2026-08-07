@@ -1,7 +1,7 @@
 unit grammar CSS::Snapshot2026::Grid::Gen::Grammar;
-#| grid: <.'grid-template'> | <.'grid-template-rows'> / [ auto-flow && dense? ] <'grid-auto-columns'>? | [ auto-flow && dense? ] <'grid-auto-rows'>? / <.'grid-template-columns'>
+#| grid: <'grid-template'> |! <'grid-template'=.'grid-template-rows'> / [ auto-flow && dense? ] <'grid-auto-columns'>? |! [ auto-flow && dense? ] <'grid-auto-rows'>? / <'grid-template'=.'grid-template-columns'>
 rule decl:sym<grid> { :i (grid) ":" <val(/<css-val-grid> /, &?ROUTINE.WHY)>}
-rule css-val-grid { :i <css-val-grid-template> || <css-val-grid-template-rows> <op("/")> [["auto-flow" & <keyw> :my $*A;<!{
+rule css-val-grid { :i <css-val-grid-template=.css-val-grid-template-rows> <op("/")> [["auto-flow" & <keyw> :my $*A;<!{
     $*A++
 }>|| [dense & <keyw>] ? :my $*B;<!{
     $*B++
@@ -9,7 +9,7 @@ rule css-val-grid { :i <css-val-grid-template> || <css-val-grid-template-rows> <
     $*C++
 }>|| [dense & <keyw>] ? :my $*D;<!{
     $*D++
-}>]** 2] <css-val-grid-auto-rows> ? <op("/")> <css-val-grid-template-columns>   }
+}>]** 2] <css-val-grid-auto-rows> ? <op("/")> <css-val-grid-template=.css-val-grid-template-columns>  || <css-val-grid-template>  }
 #| grid-area: <grid-line> [ / <grid-line> ]{0,3}
 rule decl:sym<grid-area> { :i ("grid-area") ":" <val(/<css-val-grid-area> /, &?ROUTINE.WHY)>}
 rule css-val-grid-area { :i <grid-line> [<op("/")> <grid-line> ] ** 0..3  }
@@ -44,7 +44,7 @@ rule css-val-grid-row-end { :i <grid-line> }
 #| grid-row-start: <grid-line>
 rule decl:sym<grid-row-start> { :i ("grid-row-start") ":" <val(/<css-val-grid-row-start> /, &?ROUTINE.WHY)>}
 rule css-val-grid-row-start { :i <grid-line> }
-#| grid-template: none | [ <.'grid-template-rows'> / <.'grid-template-columns'> ] | [ <line-names>? <string> <track-size>? <line-names>? ]+ [ / <explicit-track-list> ]?
+#| grid-template: none | [ <'grid-template-rows'> / <'grid-template-columns'> ] | [ <line-names>? <string> <track-size>? <line-names>? ]+ [ / <explicit-track-list> ]?
 rule decl:sym<grid-template> { :i ("grid-template") ":" <val(/<css-val-grid-template> /, &?ROUTINE.WHY)>}
 rule css-val-grid-template { :i none & <keyw> || [<css-val-grid-template-rows> <op("/")> <css-val-grid-template-columns> ] || [<line-names> ? <string> <track-size> ? <line-names> ? ] + [<op("/")> <explicit-track-list> ] ?   }
 #| grid-template-areas: none | <string>+
