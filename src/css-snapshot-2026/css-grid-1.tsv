@@ -1,4 +1,4 @@
-grid	<'grid-template'> |! <'grid-template'=.'grid-template-rows'> / [ auto-flow && dense? ] <'grid-auto-columns'>? |! [ auto-flow && dense? ] <'grid-auto-rows'>? / <'grid-template'=.'grid-template-columns'>	none	grid containers	see individual properties	see individual properties	see individual properties	per grammar	see individual properties
+grid	<'grid-template'> |! <'grid-template-rows'> / [ auto-flow && dense? ] <'grid-auto-columns'>? |! [ auto-flow && dense? ] <'grid-auto-rows'>? / <'grid-template-columns'>	none	grid containers	see individual properties	see individual properties	see individual properties	per grammar	see individual properties
 grid-area	<grid-line> [ / <grid-line> ]{0,3}	auto	grid items and absolutely-positioned boxes whose containing block is a grid container	no	N/A	discrete	per grammar	see individual properties
 grid-auto-columns	<track-size>+	auto	grid containers	no	see Track Sizing	if the list lengths match, by computed value type per item; discrete otherwise	per grammar	see Track Sizing
 grid-auto-flow	[ row | column ] || dense	row	grid containers	no	n/a	discrete	per grammar	specified keyword(s)
