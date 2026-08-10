@@ -18,7 +18,9 @@ also does CSS::Module::CSS3::PagedMedia::Gen::External;
 rule page-pseudo        {:i':'[ [left|right|first] && <keyw> || <Ident> ]? }
 
 # @page declarations
-rule at-rule:sym<page>  {'@'(:i'page') <page-pseudo>? <declarations=.page-declarations> }
+
+rule at-rule:sym<page> { <at-rule=.at-rule-page> }
+rule at-rule-page  {'@'(:i'page') <page-pseudo>? <declarations=.page-declarations> }
 
 rule page-declarations {
     '{' [ '@'<declaration=.margin-declaration> || <declaration> || <dropped-decl> ]* <.end-block>

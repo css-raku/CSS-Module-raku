@@ -20,10 +20,11 @@ class CSS::Module::CSS3::Fonts::Actions {
     use       CSS::Module::CSS3::Fonts::AtFontFace::Gen::External;
     also does CSS::Module::CSS3::Fonts::AtFontFace::Gen::External;
 
-    method at-rule:sym<font-face>($/) { make $.build.at-rule($/) }
-    method font-description($/)   { make $<declarations>.ast }
+    method at-rule:sym<font-face>($/) { make $<at-rule>.ast }
+    method font-face-declarations($/) { make $<declarations>.ast }
+    method at-rule-font-face($/)      { make $.build.at-rule($/) }
     # mimic <'font-variant'>
-    method font-variant-css21($/) { make $.build.token($.build.list($/), :type<expr:font-variant>) }
-    method font-src-expr($/)      { $.expr($/) }
+    method font-variant-css21($/)     { make $.build.token($.build.list($/), :type<expr:font-variant>) }
+    method font-src-expr($/)          { $.expr($/) }
 
 }

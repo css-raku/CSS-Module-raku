@@ -12,8 +12,8 @@ use v6;
 unit class CSS::Module::CSS3::MediaQueries;
 
 use CSS::Grammar;
-
-rule at-rule:sym<media> {'@'(:i'media') [<media-list>||<media-list=.unknown-media-list>] <rule-list> }
+rule at-rule:sym<media> {<at-rule=.at-rule-media> }
+rule at-rule-media {'@'(:i'media') [<media-list>||<media-list=.unknown-media-list>] <rule-list> }
 
 rule rule-list {
     '{' [ <at-rule> | <ruleset> ]* <.end-block>
