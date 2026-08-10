@@ -2,33 +2,33 @@ unit role CSS::Snapshot2026::Logical::Gen::External;
 method color (|) {
     ...
 }
-method css-val-border-top-color (|) {
+method prop-val-border-top-color (|) {
     ...
 }
-method css-val-border-top-left-radius (|) {
+method prop-val-border-top-left-radius (|) {
     ...
 }
-method css-val-border-top-style (|) {
+method prop-val-border-top-style (|) {
     ...
 }
-method css-val-border-top-width (|) {
+method prop-val-border-top-width (|) {
     ...
 }
-method css-val-margin-top (|) {
+method prop-val-margin-top (|) {
     ...
 }
-method css-val-max-width (|) {
+method prop-val-max-width (|) {
     ...
 }
-method css-val-min-width (|) {
+method prop-val-min-width (|) {
     ...
 }
-method css-val-padding-top (|) {
+method prop-val-padding-top (|) {
     ...
 }
-method css-val-top (|) {
+method prop-val-top (|) {
     ...
 }
-method css-val-width (|) {
+method prop-val-width (|) {
     ...
 }

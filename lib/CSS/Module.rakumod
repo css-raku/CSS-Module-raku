@@ -110,7 +110,7 @@ multi method parse-property(Str:D $property-name, Str() $val, Bool :$warn = True
     my $actions = $.actions.new;
     my $prop = $property-name.lc;
     $prop = $_ with %!alias{$prop};
-    my $rule = %!is-expr{$prop} ?? 'expr' !! 'css-val-' ~ $prop;
+    my $rule = %!is-expr{$prop} ?? 'expr' !! 'prop-val-' ~ $prop;
     my $ast;
 
     if $.grammar.parse($val, :$rule, :$actions ) -> \p {

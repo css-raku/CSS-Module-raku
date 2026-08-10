@@ -17,9 +17,6 @@ method common-lig-values (|) {
 method contextual-alt-values (|) {
     ...
 }
-method css-val-line-height (|) {
-    ...
-}
 method custom-ident (|) {
     ...
 }
@@ -69,6 +66,9 @@ method ornaments (|) {
     ...
 }
 method percentage (|) {
+    ...
+}
+method prop-val-line-height (|) {
     ...
 }
 method string (|) {

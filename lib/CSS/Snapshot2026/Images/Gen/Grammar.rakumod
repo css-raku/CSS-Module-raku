@@ -40,18 +40,18 @@ rule repeating-radial-gradient { :i "repeating-radial-gradient(" [<radial-gradie
 #| <zero> = 0
 rule zero { :i 0 & <number> }
 #| image-orientation: from-image | none | [ <angle> || flip ]
-rule decl:sym<image-orientation> { :i ("image-orientation") ":" <val(/<css-val-image-orientation> /, &?ROUTINE.WHY)>}
-rule css-val-image-orientation { :i ["from-image" | none ]& <keyw>  || [[<angle> :my $*A;<!{
+rule decl:sym<image-orientation> { :i ("image-orientation") ":" <val(/<prop-val-image-orientation> /, &?ROUTINE.WHY)>}
+rule prop-val-image-orientation { :i ["from-image" | none ]& <keyw>  || [[<angle> :my $*A;<!{
     $*A++
 }>|| flip & <keyw> :my $*B;<!{
     $*B++
 }>]+]  }
 #| image-rendering: auto | smooth | high-quality | pixelated | crisp-edges
-rule decl:sym<image-rendering> { :i ("image-rendering") ":" <val(/<css-val-image-rendering> /, &?ROUTINE.WHY)>}
-rule css-val-image-rendering { :i [auto | smooth | "high-quality" | pixelated | "crisp-edges" ]& <keyw>  }
+rule decl:sym<image-rendering> { :i ("image-rendering") ":" <val(/<prop-val-image-rendering> /, &?ROUTINE.WHY)>}
+rule prop-val-image-rendering { :i [auto | smooth | "high-quality" | pixelated | "crisp-edges" ]& <keyw>  }
 #| object-fit: fill | contain | cover | none | scale-down
-rule decl:sym<object-fit> { :i ("object-fit") ":" <val(/<css-val-object-fit> /, &?ROUTINE.WHY)>}
-rule css-val-object-fit { :i [fill | contain | cover | none | "scale-down" ]& <keyw>  }
+rule decl:sym<object-fit> { :i ("object-fit") ":" <val(/<prop-val-object-fit> /, &?ROUTINE.WHY)>}
+rule prop-val-object-fit { :i [fill | contain | cover | none | "scale-down" ]& <keyw>  }
 #| object-position: <position>
-rule decl:sym<object-position> { :i ("object-position") ":" <val(/<css-val-object-position> /, &?ROUTINE.WHY)>}
-rule css-val-object-position { :i <position> }
+rule decl:sym<object-position> { :i ("object-position") ":" <val(/<prop-val-object-position> /, &?ROUTINE.WHY)>}
+rule prop-val-object-position { :i <position> }

@@ -1,7 +1,7 @@
 unit grammar CSS::Snapshot2026::Display::Gen::Grammar;
 #| display: [ <display-outside> || <display-inside> ] | <display-listitem> | <display-internal> | <display-box> | <display-legacy>
-rule decl:sym<display> { :i (display) ":" <val(/<css-val-display> /, &?ROUTINE.WHY)>}
-rule css-val-display { :i [[<display-outside> :my $*A;<!{
+rule decl:sym<display> { :i (display) ":" <val(/<prop-val-display> /, &?ROUTINE.WHY)>}
+rule prop-val-display { :i [[<display-outside> :my $*A;<!{
     $*A++
 }>|| <display-inside> :my $*B;<!{
     $*B++
@@ -25,8 +25,8 @@ rule display-box { :i [contents | none ]& <keyw>  }
 #| <display-legacy> = inline-block | inline-table | inline-flex | inline-grid
 rule display-legacy { :i ["inline-block" | "inline-table" | "inline-flex" | "inline-grid" ]& <keyw>  }
 #| order: <integer>
-rule decl:sym<order> { :i (order) ":" <val(/<css-val-order> /, &?ROUTINE.WHY)>}
-rule css-val-order { :i <integer> }
+rule decl:sym<order> { :i (order) ":" <val(/<prop-val-order> /, &?ROUTINE.WHY)>}
+rule prop-val-order { :i <integer> }
 #| visibility: visible | hidden | collapse
-rule decl:sym<visibility> { :i (visibility) ":" <val(/<css-val-visibility> /, &?ROUTINE.WHY)>}
-rule css-val-visibility { :i [visible | hidden | collapse ]& <keyw>  }
+rule decl:sym<visibility> { :i (visibility) ":" <val(/<prop-val-visibility> /, &?ROUTINE.WHY)>}
+rule prop-val-visibility { :i [visible | hidden | collapse ]& <keyw>  }

@@ -1,21 +1,21 @@
 unit grammar CSS::Module::CSS3::Fonts::AtFontFace::Gen::Grammar;
 #| font-family: <family-name>
-rule decl:sym<font-family> { :i ("font-family") ":" <val(/<css-val-font-family> /, &?ROUTINE.WHY)>}
-rule css-val-font-family { :i <family-name> }
+rule decl:sym<font-family> { :i ("font-family") ":" <val(/<prop-val-font-family> /, &?ROUTINE.WHY)>}
+rule prop-val-font-family { :i <family-name> }
 #| <family-name> = <identifiers> | <string>
 rule family-name { :i <identifiers> || <string>  }
 #| font-feature-settings: normal | <feature-tag-value>#
-rule decl:sym<font-feature-settings> { :i ("font-feature-settings") ":" <val(/<css-val-font-feature-settings> /, &?ROUTINE.WHY)>}
-rule css-val-font-feature-settings { :i normal & <keyw> || <feature-tag-value> +% <op(",")>?  }
+rule decl:sym<font-feature-settings> { :i ("font-feature-settings") ":" <val(/<prop-val-font-feature-settings> /, &?ROUTINE.WHY)>}
+rule prop-val-font-feature-settings { :i normal & <keyw> || <feature-tag-value> +% <op(",")>?  }
 #| font-stretch: normal | ultra-condensed | extra-condensed | condensed | semi-condensed | semi-expanded | expanded | extra-expanded | ultra-expanded
-rule decl:sym<font-stretch> { :i ("font-stretch") ":" <val(/<css-val-font-stretch> /, &?ROUTINE.WHY)>}
-rule css-val-font-stretch { :i [normal | "ultra-condensed" | "extra-condensed" | condensed | "semi-condensed" | "semi-expanded" | expanded | "extra-expanded" | "ultra-expanded" ]& <keyw>  }
+rule decl:sym<font-stretch> { :i ("font-stretch") ":" <val(/<prop-val-font-stretch> /, &?ROUTINE.WHY)>}
+rule prop-val-font-stretch { :i [normal | "ultra-condensed" | "extra-condensed" | condensed | "semi-condensed" | "semi-expanded" | expanded | "extra-expanded" | "ultra-expanded" ]& <keyw>  }
 #| font-style: normal | italic | oblique
-rule decl:sym<font-style> { :i ("font-style") ":" <val(/<css-val-font-style> /, &?ROUTINE.WHY)>}
-rule css-val-font-style { :i [normal | italic | oblique ]& <keyw>  }
+rule decl:sym<font-style> { :i ("font-style") ":" <val(/<prop-val-font-style> /, &?ROUTINE.WHY)>}
+rule prop-val-font-style { :i [normal | italic | oblique ]& <keyw>  }
 #| font-variant: normal | [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> || stylistic(<feature-value-name>) || historical-forms || styleset(<feature-value-name>#) || character-variant(<feature-value-name>#) || swash(<feature-value-name>) || ornaments(<feature-value-name>) || annotation(<feature-value-name>) || [ small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps ] || <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero || <east-asian-variant-values> || <east-asian-width-values> || ruby ]
-rule decl:sym<font-variant> { :i ("font-variant") ":" <val(/<css-val-font-variant> /, &?ROUTINE.WHY)>}
-rule css-val-font-variant { :i normal & <keyw> || [[<common-lig-values> :my $*A;<!{
+rule decl:sym<font-variant> { :i ("font-variant") ":" <val(/<prop-val-font-variant> /, &?ROUTINE.WHY)>}
+rule prop-val-font-variant { :i normal & <keyw> || [[<common-lig-values> :my $*A;<!{
     $*A++
 }>|| <discretionary-lig-values> :my $*B;<!{
     $*B++
@@ -57,11 +57,11 @@ rule css-val-font-variant { :i normal & <keyw> || [[<common-lig-values> :my $*A;
     $*T++
 }>]+]  }
 #| font-weight: normal | bold | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
-rule decl:sym<font-weight> { :i ("font-weight") ":" <val(/<css-val-font-weight> /, &?ROUTINE.WHY)>}
-rule css-val-font-weight { :i [normal | bold ]& <keyw>  || [100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 ]& <number>  }
+rule decl:sym<font-weight> { :i ("font-weight") ":" <val(/<prop-val-font-weight> /, &?ROUTINE.WHY)>}
+rule prop-val-font-weight { :i [normal | bold ]& <keyw>  || [100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 ]& <number>  }
 #| src: <font-src-expr>#
-rule decl:sym<src> { :i (src) ":" <val(/<css-val-src> /, &?ROUTINE.WHY)>}
-rule css-val-src { :i <font-src-expr> +% <op(",")>? }
+rule decl:sym<src> { :i (src) ":" <val(/<prop-val-src> /, &?ROUTINE.WHY)>}
+rule prop-val-src { :i <font-src-expr> +% <op(",")>? }
 #| <font-src-expr> = [<uri>|local(<font-face-name>)] [format(<font-format>#)]? | <font-face-name>
 rule font-src-expr { :i [<uri> || <local> ] <format> ?  || <font-face-name>  }
 #| <font-format> = [<string> | collection | embedded-opentype | opentype | svg | truetype | woff | woff2 ]
@@ -73,5 +73,5 @@ rule local { :i "local(" [<font-face-name> || <usage(&?ROUTINE.WHY)> ] ")" }
 #| format(<font-format>#)
 rule format { :i "format(" [<font-format> +% ","? || <usage(&?ROUTINE.WHY)> ] ")" }
 #| unicode-range: <urange>#
-rule decl:sym<unicode-range> { :i ("unicode-range") ":" <val(/<css-val-unicode-range> /, &?ROUTINE.WHY)>}
-rule css-val-unicode-range { :i <urange> +% <op(",")>? }
+rule decl:sym<unicode-range> { :i ("unicode-range") ":" <val(/<prop-val-unicode-range> /, &?ROUTINE.WHY)>}
+rule prop-val-unicode-range { :i <urange> +% <op(",")>? }

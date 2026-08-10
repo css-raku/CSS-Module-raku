@@ -5,9 +5,6 @@ method angle (|) {
 method border-radius (|) {
     ...
 }
-method css-val-fill-rule (|) {
-    ...
-}
 method image (|) {
     ...
 }
@@ -21,6 +18,9 @@ method opacity-value (|) {
     ...
 }
 method position (|) {
+    ...
+}
+method prop-val-fill-rule (|) {
     ...
 }
 method radial-size (|) {

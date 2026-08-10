@@ -1,10 +1,10 @@
 unit grammar CSS::Snapshot2026::FilterEffects::Gen::Grammar;
 #| color-interpolation-filters: auto | sRGB | linearRGB
-rule decl:sym<color-interpolation-filters> { :i ("color-interpolation-filters") ":" <val(/<css-val-color-interpolation-filters> /, &?ROUTINE.WHY)>}
-rule css-val-color-interpolation-filters { :i [auto | sRGB | linearRGB ]& <keyw>  }
+rule decl:sym<color-interpolation-filters> { :i ("color-interpolation-filters") ":" <val(/<prop-val-color-interpolation-filters> /, &?ROUTINE.WHY)>}
+rule prop-val-color-interpolation-filters { :i [auto | sRGB | linearRGB ]& <keyw>  }
 #| filter: none | <filter-value-list>
-rule decl:sym<filter> { :i (filter) ":" <val(/<css-val-filter> /, &?ROUTINE.WHY)>}
-rule css-val-filter { :i none & <keyw> || <filter-value-list>  }
+rule decl:sym<filter> { :i (filter) ":" <val(/<prop-val-filter> /, &?ROUTINE.WHY)>}
+rule prop-val-filter { :i none & <keyw> || <filter-value-list>  }
 #| <filter-value-list> = [ <filter-function> | <url> ]+
 rule filter-value-list { :i [<filter-function> || <url> ] + }
 #| <filter-function> = <blur()> | <brightness()> | <contrast()> | <drop-shadow()> |  <grayscale()> | <hue-rotate()> | <invert()> | <opacity()> | <sepia()> | <saturate()>
@@ -34,11 +34,11 @@ rule saturate { :i "saturate(" [[<number> || <percentage> ] ? || <usage(&?ROUTIN
 #| sepia( [ <number> |  <percentage> ]? )
 rule sepia { :i "sepia(" [[<number> || <percentage> ] ? || <usage(&?ROUTINE.WHY)> ] ")" }
 #| flood-color: <color>
-rule decl:sym<flood-color> { :i ("flood-color") ":" <val(/<css-val-flood-color> /, &?ROUTINE.WHY)>}
-rule css-val-flood-color { :i <color> }
+rule decl:sym<flood-color> { :i ("flood-color") ":" <val(/<prop-val-flood-color> /, &?ROUTINE.WHY)>}
+rule prop-val-flood-color { :i <color> }
 #| flood-opacity: <'opacity'>
-rule decl:sym<flood-opacity> { :i ("flood-opacity") ":" <val(/<css-val-flood-opacity> /, &?ROUTINE.WHY)>}
-rule css-val-flood-opacity { :i <css-val-opacity> }
+rule decl:sym<flood-opacity> { :i ("flood-opacity") ":" <val(/<prop-val-flood-opacity> /, &?ROUTINE.WHY)>}
+rule prop-val-flood-opacity { :i <prop-val-opacity> }
 #| lighting-color: <color>
-rule decl:sym<lighting-color> { :i ("lighting-color") ":" <val(/<css-val-lighting-color> /, &?ROUTINE.WHY)>}
-rule css-val-lighting-color { :i <color> }
+rule decl:sym<lighting-color> { :i ("lighting-color") ":" <val(/<prop-val-lighting-color> /, &?ROUTINE.WHY)>}
+rule prop-val-lighting-color { :i <color> }

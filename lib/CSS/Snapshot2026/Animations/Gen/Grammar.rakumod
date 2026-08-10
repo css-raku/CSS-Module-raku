@@ -1,7 +1,7 @@
 unit grammar CSS::Snapshot2026::Animations::Gen::Grammar;
 #| animation: <single-animation>#
-rule decl:sym<animation> { :i (animation) ":" <val(/<css-val-animation> /, &?ROUTINE.WHY)>}
-rule css-val-animation { :i <single-animation> +% <op(",")>? }
+rule decl:sym<animation> { :i (animation) ":" <val(/<prop-val-animation> /, &?ROUTINE.WHY)>}
+rule prop-val-animation { :i <single-animation> +% <op(",")>? }
 #| <single-animation> = <time [0s,∞]> || <easing-function> || <time> || <single-animation-iteration-count> || <single-animation-direction> || <single-animation-fill-mode> || <single-animation-play-state> || [ none | <keyframes-name> ]
 rule single-animation { :i [<time> :my $*A;<!{
     $*A++
@@ -29,31 +29,31 @@ rule single-animation-fill-mode { :i [none | forwards | backwards | both ]& <key
 #| <single-animation-play-state> = running | paused
 rule single-animation-play-state { :i [running | paused ]& <keyw>  }
 #| animation-delay: <time>#
-rule decl:sym<animation-delay> { :i ("animation-delay") ":" <val(/<css-val-animation-delay> /, &?ROUTINE.WHY)>}
-rule css-val-animation-delay { :i <time> +% <op(",")>? }
+rule decl:sym<animation-delay> { :i ("animation-delay") ":" <val(/<prop-val-animation-delay> /, &?ROUTINE.WHY)>}
+rule prop-val-animation-delay { :i <time> +% <op(",")>? }
 #| animation-direction: <single-animation-direction>#
-rule decl:sym<animation-direction> { :i ("animation-direction") ":" <val(/<css-val-animation-direction> /, &?ROUTINE.WHY)>}
-rule css-val-animation-direction { :i <single-animation-direction> +% <op(",")>? }
+rule decl:sym<animation-direction> { :i ("animation-direction") ":" <val(/<prop-val-animation-direction> /, &?ROUTINE.WHY)>}
+rule prop-val-animation-direction { :i <single-animation-direction> +% <op(",")>? }
 #| animation-duration: <time [0s,∞]>#
-rule decl:sym<animation-duration> { :i ("animation-duration") ":" <val(/<css-val-animation-duration> /, &?ROUTINE.WHY)>}
-rule css-val-animation-duration { :i <time> +% <op(",")>? }
+rule decl:sym<animation-duration> { :i ("animation-duration") ":" <val(/<prop-val-animation-duration> /, &?ROUTINE.WHY)>}
+rule prop-val-animation-duration { :i <time> +% <op(",")>? }
 #| animation-fill-mode: <single-animation-fill-mode>#
-rule decl:sym<animation-fill-mode> { :i ("animation-fill-mode") ":" <val(/<css-val-animation-fill-mode> /, &?ROUTINE.WHY)>}
-rule css-val-animation-fill-mode { :i <single-animation-fill-mode> +% <op(",")>? }
+rule decl:sym<animation-fill-mode> { :i ("animation-fill-mode") ":" <val(/<prop-val-animation-fill-mode> /, &?ROUTINE.WHY)>}
+rule prop-val-animation-fill-mode { :i <single-animation-fill-mode> +% <op(",")>? }
 #| animation-iteration-count: <single-animation-iteration-count>#
-rule decl:sym<animation-iteration-count> { :i ("animation-iteration-count") ":" <val(/<css-val-animation-iteration-count> /, &?ROUTINE.WHY)>}
-rule css-val-animation-iteration-count { :i <single-animation-iteration-count> +% <op(",")>? }
+rule decl:sym<animation-iteration-count> { :i ("animation-iteration-count") ":" <val(/<prop-val-animation-iteration-count> /, &?ROUTINE.WHY)>}
+rule prop-val-animation-iteration-count { :i <single-animation-iteration-count> +% <op(",")>? }
 #| animation-name: [ none | <keyframes-name> ]#
-rule decl:sym<animation-name> { :i ("animation-name") ":" <val(/<css-val-animation-name> /, &?ROUTINE.WHY)>}
-rule css-val-animation-name { :i [none & <keyw> || <keyframes-name> ] +% <op(",")>? }
+rule decl:sym<animation-name> { :i ("animation-name") ":" <val(/<prop-val-animation-name> /, &?ROUTINE.WHY)>}
+rule prop-val-animation-name { :i [none & <keyw> || <keyframes-name> ] +% <op(",")>? }
 #| <keyframes-name> = <custom-ident> | <string>
 rule keyframes-name { :i <custom-ident> || <string>  }
 #| animation-play-state: <single-animation-play-state>#
-rule decl:sym<animation-play-state> { :i ("animation-play-state") ":" <val(/<css-val-animation-play-state> /, &?ROUTINE.WHY)>}
-rule css-val-animation-play-state { :i <single-animation-play-state> +% <op(",")>? }
+rule decl:sym<animation-play-state> { :i ("animation-play-state") ":" <val(/<prop-val-animation-play-state> /, &?ROUTINE.WHY)>}
+rule prop-val-animation-play-state { :i <single-animation-play-state> +% <op(",")>? }
 #| animation-timing-function: <easing-function>#
-rule decl:sym<animation-timing-function> { :i ("animation-timing-function") ":" <val(/<css-val-animation-timing-function> /, &?ROUTINE.WHY)>}
-rule css-val-animation-timing-function { :i <easing-function> +% <op(",")>? }
+rule decl:sym<animation-timing-function> { :i ("animation-timing-function") ":" <val(/<prop-val-animation-timing-function> /, &?ROUTINE.WHY)>}
+rule prop-val-animation-timing-function { :i <easing-function> +% <op(",")>? }
 #| <easing-function> = <linear-easing-function> | <cubic-bezier-easing-function> | <step-easing-function>
 rule easing-function { :i <linear-easing-function> || <cubic-bezier-easing-function> || <step-easing-function>  }
 #| <linear-easing-function> = linear | <linear()>

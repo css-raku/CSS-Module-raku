@@ -28,8 +28,8 @@ rule hue { :i <number> || <angle>  }
 #| <system-color> = AccentColor | AccentColorText | ActiveText | ButtonBorder | ButtonFace| ButtonText | Canvas | CanvasText | Field | FieldText| GrayText | Highlight | HighlightText| LinkText | Mark | MarkText | SelectedItem | SelectedItemText | VisitedText
 rule system-color { :i [AccentColor | AccentColorText | ActiveText | ButtonBorder | ButtonFace | ButtonText | Canvas | CanvasText | Field | FieldText | GrayText | Highlight | HighlightText | LinkText | Mark | MarkText | SelectedItem | SelectedItemText | VisitedText ]& <keyw>  }
 #| color: <color> | <system-color>
-rule decl:sym<color> { :i (color) ":" <val(/<css-val-color> /, &?ROUTINE.WHY)>}
-rule css-val-color { :i <color> || <system-color>  }
+rule decl:sym<color> { :i (color) ":" <val(/<prop-val-color> /, &?ROUTINE.WHY)>}
+rule prop-val-color { :i <color> || <system-color>  }
 #| opacity: <opacity-value>
-rule decl:sym<opacity> { :i (opacity) ":" <val(/<css-val-opacity> /, &?ROUTINE.WHY)>}
-rule css-val-opacity { :i <opacity-value> }
+rule decl:sym<opacity> { :i (opacity) ":" <val(/<prop-val-opacity> /, &?ROUTINE.WHY)>}
+rule prop-val-opacity { :i <opacity-value> }

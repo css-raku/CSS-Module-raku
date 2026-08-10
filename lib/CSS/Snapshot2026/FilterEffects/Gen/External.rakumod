@@ -5,9 +5,6 @@ method angle (|) {
 method color (|) {
     ...
 }
-method css-val-opacity (|) {
-    ...
-}
 method length (|) {
     ...
 }
@@ -15,6 +12,9 @@ method number (|) {
     ...
 }
 method percentage (|) {
+    ...
+}
+method prop-val-opacity (|) {
     ...
 }
 method url (|) {
