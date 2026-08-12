@@ -6,6 +6,9 @@ also is CSS::Grammar::Actions;
 use CSS::Module::CSS3::Values_and_Units;
 also is CSS::Module::CSS3::Values_and_Units::Actions::Calc;
 
+use CSS::Module::CSS3::Namespaces;
+also is CSS::Module::CSS3::Namespaces::Actions;
+
 use CSS::Specification::Base::Actions;
 also does CSS::Specification::Base::Actions;
 

@@ -21,8 +21,8 @@ grammar CSS::Module::CSS3::Fonts {
 
     use CSS::Module::CSS3::Fonts::AtFontFace;
 
-    rule at-rule:sym<font-face> {<at-rule=.at-rule-font-face> }
-    rule at-rule-font-face {\@(:i'font-face') <font-face-declarations> }
+    rule at-rule:sym<font-face> { \@<at-rule-font-face> }
+    rule at-rule-font-face {(:i'font-face') <font-face-declarations> }
     # declaration list is scoped to @font-face module properties
     rule font-face-declarations { <declarations=.CSS::Module::CSS3::Fonts::AtFontFace::declarations> }
 }

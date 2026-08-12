@@ -6,6 +6,9 @@ also is CSS::Grammar::CSS4;
 use CSS::Module::CSS3::Values_and_Units;
 also is CSS::Module::CSS3::Values_and_Units::Calc;
 
+use CSS::Module::CSS3::Namespaces;
+also is CSS::Module::CSS3::Namespaces;
+
 use CSS::Specification::Base::Grammar;
 also does CSS::Specification::Base::Grammar;
 

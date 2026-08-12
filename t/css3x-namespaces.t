@@ -3,12 +3,13 @@
 use Test;
 
 use CSS::Module::CSS3;
+use CSS::Module::Snapshot2026;
 use CSS::Grammar::Test;
 use CSS::Writer;
 
-my $grammar = CSS::Module::CSS3.module.grammar;
-my $actions = CSS::Module::CSS3.module.actions.new;
 my CSS::Writer $writer .= new;
+my $css3 = CSS::Module::CSS3.module;
+my $snapshot2026 = CSS::Module::Snapshot2026.module;
 
 for (
     {:rule<at-decl>, :input('@namespace empty "";'),
@@ -28,12 +29,13 @@ for (
     },
 ) -> % ( :$rule!, :$input!, *%expected ) {
 
-    CSS::Grammar::Test::parse-tests($grammar, $input,
-				    :$rule,
-				    :$actions,
-				    :suite<css3-namespaces>,
-                                    :$writer,
-				    :%expected );
+    for $css3, $snapshot2026 -> $module {
+        CSS::Grammar::Test::parse-tests($input,
+                                        :$module,
+				        :$rule,
+                                        :$writer,
+				        :%expected );
+    }
 }
 
 done-testing;

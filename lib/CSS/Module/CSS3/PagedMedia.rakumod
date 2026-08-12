@@ -19,11 +19,11 @@ rule page-pseudo        {:i':'[ [left|right|first] && <keyw> || <Ident> ]? }
 
 # @page declarations
 
-rule at-rule:sym<page> { <at-rule=.at-rule-page> }
-rule at-rule-page  {'@'(:i'page') <page-pseudo>? <declarations=.page-declarations> }
+rule at-rule:sym<page> {'@'<at-rule-page> }
+rule at-rule-page  {(:i'page') <page-pseudo>? <declarations=.page-declarations> }
 
 rule page-declarations {
-    '{' [ '@'<declaration=.margin-declaration> || <declaration> || <dropped-decl> ]* <.end-block>
+    '{' [ '@'<declaration=.at-margin-declaration> || <declaration> || <dropped-decl> ]* <.end-block>
 }
 
 token box-hpos   {:i[left|right]}
@@ -31,7 +31,7 @@ token box-vpos   {:i[top|bottom]}
 token box-center {:i[cent[er|re]]}
 token margin-box{:i[<box-hpos>'-'[<box-vpos>['-corner']?|<box-center>]
                   |<box-vpos>'-'[<box-hpos>['-corner']?|<box-center>]]}
-rule margin-declaration { <margin-box> <declarations> }
+rule at-margin-declaration { <margin-box> <declarations> }
 
 class Actions {
 
@@ -64,7 +64,7 @@ class Actions {
     method box-center($/) { make $.build.token( 'center', :type(CSSValue::KeywordComponent)) }
     method margin-box($/) { make $.build.token( $/.lc, :type(CSSValue::AtKeywordComponent)) }
 
-    method margin-declaration($/) {
+    method at-margin-declaration($/) {
         make $.build.at-rule($/);
     }
 }

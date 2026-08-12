@@ -6,14 +6,11 @@ use v6;
 # The CSS3 Core includes some basic CSS2.1 compatible @media at rules. This
 # module follows the latest W3C recommendations, to extend the syntax.
 #
-# -- if you want the capability to to embed '@page' rules, you'll also need
-#    to load the Paged Media extension module in your class structure.
-
 unit class CSS::Module::CSS3::MediaQueries;
 
 use CSS::Grammar;
-rule at-rule:sym<media> {<at-rule=.at-rule-media> }
-rule at-rule-media {'@'(:i'media') [<media-list>||<media-list=.unknown-media-list>] <rule-list> }
+rule at-rule:sym<media> {'@'<at-rule-media> }
+rule at-rule-media {(:i'media') [<media-list>||<media-list=.unknown-media-list>] <rule-list> }
 
 rule rule-list {
     '{' [ <at-rule> | <ruleset> ]* <.end-block>
