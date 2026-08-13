@@ -16,8 +16,6 @@ use CSS::Snapshot2026::Compositing::Gen::External;
 also does CSS::Snapshot2026::Compositing::Gen::External;
 use CSS::Snapshot2026::Color::Gen::External;
 also does CSS::Snapshot2026::Color::Gen::External;
-use CSS::Snapshot2026::ColorAdjust::Gen::External;
-also does CSS::Snapshot2026::ColorAdjust::Gen::External;
 use CSS::Snapshot2026::Contain::Gen::External;
 also does CSS::Snapshot2026::Contain::Gen::External;
 use CSS::Snapshot2026::Display::Gen::External;

@@ -16,8 +16,6 @@ use CSS::Snapshot2026::Compositing::Gen::Actions;
 also is CSS::Snapshot2026::Compositing::Gen::Actions;
 use CSS::Snapshot2026::Color::Gen::Actions;
 also is CSS::Snapshot2026::Color::Gen::Actions;
-use CSS::Snapshot2026::ColorAdjust::Gen::Actions;
-also is CSS::Snapshot2026::ColorAdjust::Gen::Actions;
 use CSS::Snapshot2026::Contain::Gen::Actions;
 also is CSS::Snapshot2026::Contain::Gen::Actions;
 use CSS::Snapshot2026::Display::Gen::Actions;

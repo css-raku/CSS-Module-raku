@@ -16,8 +16,6 @@ use CSS::Snapshot2026::Compositing::Gen::Grammar;
 also is CSS::Snapshot2026::Compositing::Gen::Grammar;
 use CSS::Snapshot2026::Color::Gen::Grammar;
 also is CSS::Snapshot2026::Color::Gen::Grammar;
-use CSS::Snapshot2026::ColorAdjust::Gen::Grammar;
-also is CSS::Snapshot2026::ColorAdjust::Gen::Grammar;
 use CSS::Snapshot2026::Contain::Gen::Grammar;
 also is CSS::Snapshot2026::Contain::Gen::Grammar;
 use CSS::Snapshot2026::Display::Gen::Grammar;

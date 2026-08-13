@@ -104,10 +104,6 @@
       "CSS::Snapshot2026::Color::AtColorProfile::Gen::Grammar": "lib/CSS/Snapshot2026/Color/AtColorProfile/Gen/Grammar.rakumod",
       "CSS::Snapshot2026::Color::AtColorProfile::Gen::External": "lib/CSS/Snapshot2026/Color/AtColorProfile/Gen/External.rakumod",
 
-      "CSS::Snapshot2026::ColorAdjust::Gen::Actions": "lib/CSS/Snapshot2026/ColorAdjust/Gen/Actions.rakumod",
-      "CSS::Snapshot2026::ColorAdjust::Gen::Grammar": "lib/CSS/Snapshot2026/ColorAdjust/Gen/Grammar.rakumod",
-      "CSS::Snapshot2026::ColorAdjust::Gen::External": "lib/CSS/Snapshot2026/ColorAdjust/Gen/External.rakumod",
-
       "CSS::Snapshot2026::Compositing::Gen::Actions": "lib/CSS/Snapshot2026/Compositing/Gen/Actions.rakumod",
       "CSS::Snapshot2026::Compositing::Gen::Grammar": "lib/CSS/Snapshot2026/Compositing/Gen/Grammar.rakumod",
       "CSS::Snapshot2026::Compositing::Gen::External": "lib/CSS/Snapshot2026/Compositing/Gen/External.rakumod",

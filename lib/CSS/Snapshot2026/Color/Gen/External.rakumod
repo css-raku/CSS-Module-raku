@@ -8,6 +8,9 @@ method angle (|) {
 method color (|) {
     ...
 }
+method custom-ident (|) {
+    ...
+}
 method dashed-ident (|) {
     ...
 }

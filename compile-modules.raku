@@ -35,8 +35,8 @@ class Make {
                           :Color<
                               src/css-snapshot-2026/css-color-4.tsv
                               src/css-snapshot-2026/css-color-5.tsv
+                              src/css-snapshot-2026/css-color-adjust-1.tsv
                             >,
-                          :ColorAdjust<src/css-snapshot-2026/css-color-adjust-1.tsv>,
                           :Contain<src/css-snapshot-2026/css-contain-2.tsv>,
                           :Display<src/css-snapshot-2026/css-display-3.tsv>,
                           :FlexBox<src/css-snapshot-2026/css-flexbox-1.tsv>,
