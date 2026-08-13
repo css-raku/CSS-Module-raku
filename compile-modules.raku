@@ -23,6 +23,7 @@ class Make {
                                      :Values_and_Units<src/css-values-3-20240322.tsv>,
                       ],
                  'Module::SVG' => [:inherit, <src/svg-properties.tsv>,],
+                 'Module::CSS3::Fonts::AtFontFace' => [<src/css3x-font/@fontface.tsv>,],
                  :Snapshot2026[:link,
                           <src/css-snapshot-2026/css-cascade-5.tsv>,
                           :Align<src/css-snapshot-2026/css-align-3.tsv>,
@@ -31,7 +32,10 @@ class Make {
                           :Box<src/css-snapshot-2026/css-box-4.tsv>,
                           :Break<src/css-snapshot-2026/css-break-1.tsv>,
                           :Compositing<src/css-snapshot-2026/css-compositing-1.tsv>,
-                          :Color<src/css-snapshot-2026/css-color-4.tsv>,
+                          :Color<
+                              src/css-snapshot-2026/css-color-4.tsv
+                              src/css-snapshot-2026/css-color-5.tsv
+                            >,
                           :ColorAdjust<src/css-snapshot-2026/css-color-adjust-1.tsv>,
                           :Contain<src/css-snapshot-2026/css-contain-2.tsv>,
                           :Display<src/css-snapshot-2026/css-display-3.tsv>,
@@ -78,8 +82,8 @@ class Make {
                                src/css-snapshot-2026/css21-aural.tsv
                            >,
                       ],
-                 'Snapshot2026::Fonts' => [:AtFontFace<src/css-snapshot-2026/css-fonts-4/@fontface.tsv>],
-                 'Module::CSS3::Fonts::AtFontFace' => [<src/css3x-font-@fontface-properties.tsv>,],
+                 'Snapshot2026::Fonts::AtFontFace' => [<src/css-snapshot-2026/css-fonts-4/@fontface.tsv>],
+                 'Snapshot2026::Color::AtColorProfile' => [<src/css-snapshot-2026/css-color-5/@color-profile.tsv>],
                 ) {
                 my $meta-root = .key;
                 my @modules = .value.list;

@@ -29,6 +29,12 @@ method hue ($/) {
 method system-color ($/) {
     make $.build.rule($/)
 }
+method at-rule:sym<color-profile> ($/) {
+    make $<at-rule-color-profile>.ast
+}
+method at-rule-color-profile ($/) {
+    make $.build.at-rule($/)
+}
 method hsl ($/) {
     $.make-func("hsl", $/)
 }

@@ -11,6 +11,9 @@ method color (|) {
 method dashed-ident (|) {
     ...
 }
+method declaration-list (|) {
+    ...
+}
 method number (|) {
     ...
 }
