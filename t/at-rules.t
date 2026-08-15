@@ -22,7 +22,7 @@ END
         CSS::Grammar::Test::parse-tests($input,
                                         :$module,
 				        :$rule,
-##todo                                        :$writer,
+                                        :$writer,
 				        :%expected );
     }
 }
