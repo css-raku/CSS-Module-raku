@@ -1,5 +1,5 @@
 unit role CSS::Snapshot2026::Fonts::Defs::Gen::External;
-method ident (|) {
+method css-ident (|) {
     ...
 }
 method identifiers (|) {

@@ -4,7 +4,7 @@ rule font-family-name { :i <identifiers> || <string>  }
 #| <font-variant-css2> = normal | small-caps
 rule font-variant-css2 { :i [normal | "small-caps" ]& <keyw>  }
 #| <font-feature-value-name> = <ident>
-rule font-feature-value-name { :i <ident> }
+rule font-feature-value-name { :i <css-ident> }
 #| <feature-tag-value> = <opentype-tag> [ <integer [0,∞]> | on | off ]?
 rule feature-tag-value { :i <opentype-tag> [<integer> || [on | off ]& <keyw>  ] ?  }
 #| <opentype-tag> = <string>
@@ -24,9 +24,9 @@ rule contextual-alt-values { :i [[contextual | "no-contextual" ]& <keyw> ] }
 #| stylistic(<font-feature-value-name>)
 rule stylistic { :i "stylistic(" [<font-feature-value-name> || <usage(&?ROUTINE.WHY)> ] ")" }
 #| styleset(<font-feature-value-name>#)
-rule styleset { :i "styleset(" [<font-feature-value-name> +% "," || <usage(&?ROUTINE.WHY)> ] ")" }
+rule styleset { :i "styleset(" [<font-feature-value-name> +% ","? || <usage(&?ROUTINE.WHY)> ] ")" }
 #| character-variant(<font-feature-value-name>#)
-rule character-variant { :i "character-variant(" [<font-feature-value-name> +% "," || <usage(&?ROUTINE.WHY)> ] ")" }
+rule character-variant { :i "character-variant(" [<font-feature-value-name> +% ","? || <usage(&?ROUTINE.WHY)> ] ")" }
 #| swash(<font-feature-value-name>)
 rule swash { :i "swash(" [<font-feature-value-name> || <usage(&?ROUTINE.WHY)> ] ")" }
 #| ornaments(<font-feature-value-name>)

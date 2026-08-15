@@ -33,9 +33,6 @@ rule prop-val-color { :i <color> || <system-color>  }
 #| opacity: <opacity-value>
 rule decl:sym<opacity> { :i (opacity) ":" <val(/<prop-val-opacity> /, &?ROUTINE.WHY)>}
 rule prop-val-opacity { :i <opacity-value> }
-#| @color-profile [<dashed-ident> | device-cmyk] { <declaration-list> }
-rule at-rule:sym<color-profile> { "\@"<at-rule=.at-rule-color-profile>}
-rule at-rule-color-profile { (:i "color-profile") [<dashed-ident> || "device-cmyk" & <keyw> ] <op("\{")> <declaration-list> <op("}")>  }
 #| color-adjust: <'print-color-adjust'>
 rule decl:sym<color-adjust> { :i ("color-adjust") ":" <val(/<prop-val-color-adjust> /, &?ROUTINE.WHY)>}
 rule prop-val-color-adjust { :i <prop-val-print-color-adjust> }

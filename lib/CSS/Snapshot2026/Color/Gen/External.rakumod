@@ -14,9 +14,6 @@ method custom-ident (|) {
 method dashed-ident (|) {
     ...
 }
-method declaration-list (|) {
-    ...
-}
 method number (|) {
     ...
 }

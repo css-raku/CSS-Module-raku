@@ -1,2 +1,0 @@
-@color-profile = @color-profile [<dashed-ident> | device-cmyk] { <declaration-list> }
-# see also css-color-5/@color-profile.tsv
