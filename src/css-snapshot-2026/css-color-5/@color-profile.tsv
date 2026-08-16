@@ -1,4 +1,6 @@
 @color-profile = @color-profile [<dashed-ident> | device-cmyk] <declarations>
+<dashed-ident> = <custom-ident>
 components	<ident>#	n/a
 rendering-intent	relative-colorimetric | absolute-colorimetric | perceptual | saturation	relative-colorimetric
 src	<url>	n/a
+

@@ -10,9 +10,10 @@ my $css3 = CSS::Module::CSS3.module;
 my $snapshot2026 = CSS::Module::Snapshot2026.module;
 
 for (
-{:rule<at-rule>, input => q:to<END>, :ast(:at-rule{:at-keyw<color-profile>, :declarations[:property{:expr[{:url("http://example.org/swop-coated.icc")},], :ident<src>}], :ident<--swopc> })},
+{:rule<at-rule>, input => q:to<END>, :ast(:at-rule{:at-keyw<color-profile>, :declarations[:property{:expr[{:url("http://example.org/swop-coated.icc")},], :ident<src>}], :ident<--swopc> }), :warnings[ "dropping unknown property: color" ] },
 @color-profile --swopc {
   src: url('http://example.org/swop-coated.icc');
+  color: blue;
 }
 END
     

@@ -5,3 +5,6 @@ method at-rule:sym<color-profile> ($/) {
 method at-rule-color-profile ($/) {
     make $.build.at-rule($/)
 }
+method dashed-ident ($/) {
+    make $.build.rule($/)
+}

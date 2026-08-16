@@ -2,7 +2,7 @@ unit role CSS::Snapshot2026::Color::AtColorProfile::Gen::External;
 method css-ident (|) {
     ...
 }
-method dashed-ident (|) {
+method custom-ident (|) {
     ...
 }
 method declarations (|) {

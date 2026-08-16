@@ -34,14 +34,13 @@ class Make {
                           :Compositing<src/css-snapshot-2026/css-compositing-1.tsv>,
                           :Color<
                               src/css-snapshot-2026/css-color-4.tsv
-                              src/css-snapshot-2026/css-color-5.tsv
                               src/css-snapshot-2026/css-color-adjust-1.tsv
                             >,
                           :Contain<src/css-snapshot-2026/css-contain-2.tsv>,
                           :Display<src/css-snapshot-2026/css-display-3.tsv>,
                           :FlexBox<src/css-snapshot-2026/css-flexbox-1.tsv>,
                           :Fonts<src/css-snapshot-2026/css-fonts-4.tsv>,
-                          'Fonts::Defs' => <src/css-snapshot-2026/css-fonts-4/defs.tsv>,
+                          <Fonts Defs> => <src/css-snapshot-2026/css-fonts-4/defs.tsv>,
                           :FilterEffects<src/css-snapshot-2026/css-filter-effects-1.tsv>,
                           :Grid<src/css-snapshot-2026/css-grid-1.tsv>,
                           :Images<src/css-snapshot-2026/css-images-3.tsv>,
@@ -82,30 +81,33 @@ class Make {
                                src/css-snapshot-2026/css21-aural.tsv
                            >,
                       ],
-                 'Snapshot2026::Fonts::AtFontFace' => [<src/css-snapshot-2026/css-fonts-4/@fontface.tsv>],
-                 'Snapshot2026::Color::AtColorProfile' => [<src/css-snapshot-2026/css-color-5/@color-profile.tsv>],
+                 'Snapshot2026::Fonts::AtFontFace' => [
+                     <src/css-snapshot-2026/css-fonts-4/@fontface.tsv>
+                  ],
+                 'Snapshot2026::Color::AtColorProfile' => [
+                     <src/css-snapshot-2026/css-color-5/@color-profile.tsv>
+                 ],
                 ) {
                 my $meta-root = .key;
                 my @modules = .value.list;
                 my %props;
+                my %at-rules;
 
                 my @group-id = flat <CSS>, $meta-root.split('::');
                 note "Building $meta-root";
 
                 my @module-ids;
 
-                subset Flag of Pair where .value ~~ Bool;
+                subset Opt of Pair where .key ~~ 'at-rule'|'inherit'|'link';
                 my Bool ($inherit, $link);
-                while @modules.head ~~ Flag {
-                    given @modules.shift.key {
-                        when 'inherit' { $inherit = True }
-                        when 'link'    { $link = True }
-                    }
-                }
+                my %opt;
+                %opt ,= @modules.shift
+                   while @modules.head ~~ Opt;
 
                 for @modules {
                     my ($module, $files) = .isa(Pair) ?? .kv !! ([], $_);
                     my @base-id = flat @group-id, @$module, <Gen>;
+                    %at-rules{$_} = $module with %opt<at-rule>;
                     my @grammar-id = @base-id.Slip, 'Grammar';
                     my $scope := 'unit';
                     my @defs;
@@ -134,14 +136,14 @@ class Make {
                     @module-ids.push: @base-id;
                 }
 
-                if $inherit {
+                if %opt<inherit> {
                     %props{.key} //= .value for %inherit.pairs;
                 }
                 %inherit := %props;
 
                 %props.&write-metadata($meta-root);
 
-                if $link {
+                if %opt<link> {
                     my @actions-link-id = flat @group-id, 'Actions';
                     my @grammar-link-id = flat @group-id, 'Grammar';
                     my @external-link-id = flat @group-id, 'External';

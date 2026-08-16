@@ -2,6 +2,8 @@ unit grammar CSS::Snapshot2026::Color::AtColorProfile::Gen::Grammar;
 #| @color-profile [<dashed-ident> | device-cmyk] <declarations>
 rule at-rule:sym<color-profile> { "\@"<at-rule=.at-rule-color-profile>}
 rule at-rule-color-profile { (:i "color-profile") [<dashed-ident> || "device-cmyk" & <keyw> ] <declarations>  }
+#| <dashed-ident> = <custom-ident>
+rule dashed-ident { :i <custom-ident> }
 #| components: <ident>#
 rule decl:sym<components> { :i (components) ":" <val(/<prop-val-components> /, &?ROUTINE.WHY)>}
 rule prop-val-components { :i <css-ident> +% <op(",")>? }
