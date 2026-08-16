@@ -61,7 +61,6 @@
     "CSS::Module::Snapshot2026": "lib/CSS/Module/Snapshot2026.rakumod",
     "CSS::Module::Snapshot2026::Actions": "lib/CSS/Module/Snapshot2026/Actions.rakumod",
     "CSS::Module::Snapshot2026::Colors": "lib/CSS/Module/Snapshot2026/Colors.rakumod",
-    "CSS::Module::Snapshot2026::Fonts::AtFontFace": "lib/CSS/Module/Snapshot2026/Fonts/AtFontFace.rakumod",
     "CSS::Snapshot2026::Metadata": "lib/CSS/Snapshot2026/Metadata.rakumod",
     "CSS::Snapshot2026::Actions": "lib/CSS/Snapshot2026/Actions.rakumod",
     "CSS::Snapshot2026::Grammar": "lib/CSS/Snapshot2026/Grammar.rakumod",

@@ -96,5 +96,22 @@ subtest 'Snapshot2026', {
     my \prop = module.property-metadata;
     is-deeply prop<azimuth>, { :synopsis("<angle> | [ <direction> || <behind> ] | <delta>"), :inherit, :default<center>, }, 'css2026 azimuth';
     is-deeply prop<font-style>, { :synopsis("normal | italic | left | right | oblique <angle [-90deg,90deg]>?"), :inherit, :default<normal>, }, 'css2026 font-style';
-    }
+}
+
+subtest 'Snapshot2026 @color-profile', {
+    my \module = CSS::Module::Snapshot2026.module.sub-module<@color-profile>;
+    isa-ok module.grammar, 'CSS::Module::Snapshot2026::AtColorProfile', '@color-profile grammar';
+    isa-ok module.actions, 'CSS::Module::Snapshot2026::Actions::AtColorProfile', '@color-profile actions';
+    my \at-color-profile-prop = module.property-metadata;
+    is-deeply at-color-profile-prop<components>, { :synopsis("<ident>#"), :!inherit, :default<n/a>, }, '@color-profile ';
+}
+
+subtest 'Snapshot2026 @font-face', {
+    my \module = CSS::Module::Snapshot2026.module.sub-module<@font-face>;
+    isa-ok module.grammar, 'CSS::Module::Snapshot2026::AtFontFace', '@font-face grammar';
+    isa-ok module.actions, 'CSS::Module::Snapshot2026::Actions::AtFontFace', '@font-face actions';
+    my \at-fontface-prop = module.property-metadata;
+    is-deeply at-fontface-prop<font-style>, { :synopsis("auto | normal | italic | left | right | oblique [ <angle [-90deg,90deg]>\{1,2} ]?"), :!inherit, :default<auto>, }, '@font-face font-style';
+}
+
 done-testing;

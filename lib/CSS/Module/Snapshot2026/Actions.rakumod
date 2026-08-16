@@ -31,8 +31,19 @@ method at-rule:sym<color-profile>($/) {
     $actions.at-rule-color-profile($<at-rule>);
     make $<at-rule>.ast;
 }
-use CSS::Snapshot2026::Color::AtColorProfile::Gen::Actions;
-also is CSS::Snapshot2026::Color::AtColorProfile::Gen::Actions;
+
+method at-rule:sym<font-face>($/) {
+    class AtFontFace is Base {
+        use     CSS::Snapshot2026::Fonts::AtFontFace::Gen::Actions;
+        also is CSS::Snapshot2026::Fonts::AtFontFace::Gen::Actions;
+
+        use     CSS::Snapshot2026::Fonts::Defs::Gen::Actions;
+        also is CSS::Snapshot2026::Fonts::Defs::Gen::Actions;
+    }
+    my AtFontFace $actions .= new;
+    $actions.at-rule-font-face($<at-rule>);
+    make $<at-rule>.ast;
+}
 
 method build {
     use CSS::Grammar::AST;
