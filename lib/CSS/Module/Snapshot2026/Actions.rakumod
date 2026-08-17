@@ -6,7 +6,6 @@ class Base {
 
     use CSS::Specification::Base::Actions;
     also does CSS::Specification::Base::Actions;
-
 }
 also is Base;
 

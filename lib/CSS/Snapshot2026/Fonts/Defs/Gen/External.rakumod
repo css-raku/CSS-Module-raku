@@ -14,3 +14,6 @@ method number (|) {
 method string (|) {
     ...
 }
+method url (|) {
+    ...
+}

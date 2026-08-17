@@ -103,7 +103,7 @@ subtest 'Snapshot2026 @color-profile', {
     isa-ok module.grammar, 'CSS::Module::Snapshot2026::AtColorProfile', '@color-profile grammar';
     isa-ok module.actions, 'CSS::Module::Snapshot2026::Actions::AtColorProfile', '@color-profile actions';
     my \at-color-profile-prop = module.property-metadata;
-    is-deeply at-color-profile-prop<components>, { :synopsis("<ident>#"), :!inherit, :default<n/a>, }, '@color-profile ';
+    is-deeply at-color-profile-prop<components>, { :synopsis("<ident>#"), :!inherit, :default<n/a>, }, '@color-profile components';
 }
 
 subtest 'Snapshot2026 @font-face', {

@@ -41,3 +41,19 @@ rule numeric-spacing-values { :i [["proportional-nums" | "tabular-nums" ]& <keyw
 rule numeric-fraction-values { :i [["diagonal-fractions" | "stacked-fractions" ]& <keyw> ] }
 #| <font-weight-absolute> = [ normal | bold | <number [1,1000]> ]
 rule font-weight-absolute { :i [[normal | bold ]& <keyw>  || <number> ] }
+#| <font-src> = <url> [ format( <font-format> ) ]? [ tech( <font-tech># ) ]? | local( <font-family-name> )
+rule font-src { :i <url> <format> ? <tech> ?  || <local>  }
+#| format( <font-format> )
+rule format { :i "format(" [<font-format> || <usage(&?ROUTINE.WHY)> ] ")" }
+#| tech( <font-tech># )
+rule tech { :i "tech(" [<font-tech> +% ","? || <usage(&?ROUTINE.WHY)> ] ")" }
+#| local( <font-family-name> )
+rule local { :i "local(" [<font-family-name> || <usage(&?ROUTINE.WHY)> ] ")" }
+#| <font-format> = [ <string> | collection | embedded-opentype | opentype      | svg | truetype | woff | woff2 ]
+rule font-format { :i [<string> || [collection | "embedded-opentype" | opentype | svg | truetype | woff | woff2 ]& <keyw>  ] }
+#| <font-tech> = [ <font-features-tech> | <color-font-tech>      | variations | palettes | incremental ]
+rule font-tech { :i [<font-features-tech> || <color-font-tech> || [variations | palettes | incremental ]& <keyw>  ] }
+#| <font-features-tech> = [ features-opentype | features-aat | features-graphite ]
+rule font-features-tech { :i [["features-opentype" | "features-aat" | "features-graphite" ]& <keyw> ] }
+#| <color-font-tech> = [ color-COLRv0 | color-COLRv1 | color-SVG | color-sbix | color-CBDT ]
+rule color-font-tech { :i [["color-COLRv0" | "color-COLRv1" | "color-SVG" | "color-sbix" | "color-CBDT" ]& <keyw> ] }

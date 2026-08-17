@@ -19,3 +19,18 @@
 <numeric-spacing-values>  = [ proportional-nums | tabular-nums ]
 <numeric-fraction-values> = [ diagonal-fractions | stacked-fractions ]
 <font-weight-absolute> = [ normal | bold | <number [1,1000]> ]
+# @font-face rules
+<font-src> = <url> [ format( <font-format> ) ]? [ tech( <font-tech># ) ]? | local( <font-family-name> )
+<format()> = format( <font-format> )
+<tech()> = tech( <font-tech># )
+<local()> = local( <font-family-name> )
+<font-format>\
+    = [ <string> | collection | embedded-opentype | opentype\
+      | svg | truetype | woff | woff2 ]
+<font-tech>\
+    = [ <font-features-tech> | <color-font-tech>\
+      | variations | palettes | incremental ]
+<font-features-tech>\
+    = [ features-opentype | features-aat | features-graphite ]
+<color-font-tech>\
+    = [ color-COLRv0 | color-COLRv1 | color-SVG | color-sbix | color-CBDT ]

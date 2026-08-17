@@ -44,11 +44,32 @@ method numeric-fraction-values ($/) {
 method font-weight-absolute ($/) {
     make $.build.rule($/)
 }
+method font-src ($/) {
+    make $.build.rule($/)
+}
+method font-format ($/) {
+    make $.build.rule($/)
+}
+method font-tech ($/) {
+    make $.build.rule($/)
+}
+method font-features-tech ($/) {
+    make $.build.rule($/)
+}
+method color-font-tech ($/) {
+    make $.build.rule($/)
+}
 method annotation ($/) {
     $.make-func("annotation", $/)
 }
 method character-variant ($/) {
     $.make-func("character-variant", $/)
+}
+method format ($/) {
+    $.make-func("format", $/)
+}
+method local ($/) {
+    $.make-func("local", $/)
 }
 method ornaments ($/) {
     $.make-func("ornaments", $/)
@@ -61,4 +82,7 @@ method stylistic ($/) {
 }
 method swash ($/) {
     $.make-func("swash", $/)
+}
+method tech ($/) {
+    $.make-func("tech", $/)
 }

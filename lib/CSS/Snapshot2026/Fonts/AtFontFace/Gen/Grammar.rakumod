@@ -1,4 +1,6 @@
 unit grammar CSS::Snapshot2026::Fonts::AtFontFace::Gen::Grammar;
+#| @font-face <declarations>
+rule at-rule-font-face { (:i "font-face") <declarations> }
 #| ascent-override: normal | <percentage [0,∞]>
 rule decl:sym<ascent-override> { :i ("ascent-override") ":" <val(/<prop-val-ascent-override> /, &?ROUTINE.WHY)>}
 rule prop-val-ascent-override { :i normal & <keyw> || <percentage>  }
@@ -38,22 +40,6 @@ rule prop-val-line-gap-override { :i normal & <keyw> || <percentage>  }
 #| src: <font-src>#
 rule decl:sym<src> { :i (src) ":" <val(/<prop-val-src> /, &?ROUTINE.WHY)>}
 rule prop-val-src { :i <font-src> +% <op(",")>? }
-#| <font-src> = <url> [ format( <font-format> ) ]? [ tech( <font-tech># ) ]? | local( <font-family-name> )
-rule font-src { :i <url> <format> ? <tech> ?  || <local>  }
-#| format( <font-format> )
-rule format { :i "format(" [<font-format> || <usage(&?ROUTINE.WHY)> ] ")" }
-#| tech( <font-tech># )
-rule tech { :i "tech(" [<font-tech> +% ","? || <usage(&?ROUTINE.WHY)> ] ")" }
-#| local( <font-family-name> )
-rule local { :i "local(" [<font-family-name> || <usage(&?ROUTINE.WHY)> ] ")" }
-#| <font-format> = [ <string> | collection | embedded-opentype | opentype      | svg | truetype | woff | woff2 ]
-rule font-format { :i [<string> || [collection | "embedded-opentype" | opentype | svg | truetype | woff | woff2 ]& <keyw>  ] }
-#| <font-tech> = [ <font-features-tech> | <color-font-tech>      | variations | palettes | incremental ]
-rule font-tech { :i [<font-features-tech> || <color-font-tech> || [variations | palettes | incremental ]& <keyw>  ] }
-#| <font-features-tech> = [ features-opentype | features-aat | features-graphite ]
-rule font-features-tech { :i [["features-opentype" | "features-aat" | "features-graphite" ]& <keyw> ] }
-#| <color-font-tech> = [ color-COLRv0 | color-COLRv1 | color-SVG | color-sbix | color-CBDT ]
-rule color-font-tech { :i [["color-COLRv0" | "color-COLRv1" | "color-SVG" | "color-sbix" | "color-CBDT" ]& <keyw> ] }
 #| unicode-range: <unicode-range>#
 rule decl:sym<unicode-range> { :i ("unicode-range") ":" <val(/<prop-val-unicode-range> /, &?ROUTINE.WHY)>}
 rule prop-val-unicode-range { :i <unicode-range> +% <op(",")>? }
