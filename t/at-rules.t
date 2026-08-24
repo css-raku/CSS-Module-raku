@@ -48,7 +48,8 @@ for (
                                  :at-rule{:at-keyw("swash"), :expr[
                                                                       :expr[:ident("pretty"), :op(":"), :int(1)],
                                                                       :expr[:ident("cool"), :op(":"), :int(2)]],
-                                          :op("}")}],
+                                         },
+                                ],
                    :ident("foo")}),
     :warnings[ "dropping unknown property: color" ],
     },

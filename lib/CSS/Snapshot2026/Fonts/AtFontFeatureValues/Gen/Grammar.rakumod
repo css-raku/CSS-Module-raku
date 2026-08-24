@@ -15,10 +15,10 @@ rule font-feature-property { :i <font-feature-value-name> <op(":")> <font-featur
 rule swash-declaration-list { :i <font-feature-property> * }
 #| @swash { <swash-declaration-list> }
 rule decl:sym<@swash> { "\@"<at-rule=.at-rule-swash>}
-rule at-rule-swash { (:i swash) <op("\{")> <swash-declaration-list> <op("}")>  }
+rule at-rule-swash { (:i swash) "\{" <swash-declaration-list> "}"  }
 #| @ornaments { <declaration-list> }
 rule decl:sym<@ornaments> { "\@"<at-rule=.at-rule-ornaments>}
-rule at-rule-ornaments { (:i ornaments) <op("\{")> <declaration-list> <op("}")>  }
+rule at-rule-ornaments { (:i ornaments) "\{" <declaration-list> "}"  }
 #| @annotation { <declaration-list> }
 rule decl:sym<@annotation> { "\@"<at-rule=.at-rule-annotation>}
-rule at-rule-annotation { (:i annotation) <op("\{")> <declaration-list> <op("}")>  }
+rule at-rule-annotation { (:i annotation) "\{" <declaration-list> "}"  }

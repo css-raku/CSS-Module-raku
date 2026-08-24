@@ -1,7 +1,7 @@
 unit grammar CSS::Snapshot2026::Fonts::AtFontPaletteValues::Gen::Grammar;
 #| @font-palette-values <dashed-ident> {  <declaration-list>}
 rule decl:sym<@font-palette-values> { "\@"<at-rule=.at-rule-font-palette-values>}
-rule at-rule-font-palette-values { (:i "font-palette-values") <dashed-ident> <op("\{")> <declaration-list> <op("}")>  }
+rule at-rule-font-palette-values { (:i "font-palette-values") <dashed-ident> "\{" <declaration-list> "}"  }
 #| <dashed-ident> = <custom-ident>
 rule dashed-ident { :i <custom-ident> }
 #| base-palette: light | dark | <integer [0,∞]>
