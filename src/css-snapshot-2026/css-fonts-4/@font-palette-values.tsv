@@ -1,0 +1,7 @@
+@font-palette-values = @font-palette-values <dashed-ident> {\
+  <declaration-list>\
+}
+<dashed-ident> = <custom-ident>
+base-palette	light | dark | <integer [0,∞]>	N/A
+font-family	<font-family-name>#	N/A
+override-colors	[ <integer [0,∞]> <color> ]#	N/A

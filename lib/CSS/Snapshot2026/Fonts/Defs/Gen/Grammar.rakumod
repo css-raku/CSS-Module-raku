@@ -4,7 +4,7 @@ rule font-family-name { :i <identifiers> || <string>  }
 #| <font-variant-css2> = normal | small-caps
 rule font-variant-css2 { :i [normal | "small-caps" ]& <keyw>  }
 #| <font-feature-value-name> = <ident>
-rule font-feature-value-name { :i <css-ident> }
+rule font-feature-value-name { :i <Ident> }
 #| <feature-tag-value> = <opentype-tag> [ <integer [0,∞]> | on | off ]?
 rule feature-tag-value { :i <opentype-tag> [<integer> || [on | off ]& <keyw>  ] ?  }
 #| <opentype-tag> = <string>

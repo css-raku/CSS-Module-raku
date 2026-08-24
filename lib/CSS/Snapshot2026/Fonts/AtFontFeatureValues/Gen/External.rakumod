@@ -1,0 +1,19 @@
+unit role CSS::Snapshot2026::Fonts::AtFontFeatureValues::Gen::External;
+method Ident (|) {
+    ...
+}
+method declaration-list (|) {
+    ...
+}
+method declarations (|) {
+    ...
+}
+method end-decl (|) {
+    ...
+}
+method font-family-name (|) {
+    ...
+}
+method integer (|) {
+    ...
+}

@@ -101,7 +101,7 @@ subtest 'Snapshot2026', {
 subtest 'Snapshot2026 @color-profile', {
     my \module = CSS::Module::Snapshot2026.module.sub-module<@color-profile>;
     isa-ok module.grammar, 'CSS::Module::Snapshot2026::AtColorProfile', '@color-profile grammar';
-    isa-ok module.actions, 'CSS::Module::Snapshot2026::Actions::AtColorProfile', '@color-profile actions';
+    isa-ok module.actions, 'CSS::Module::Snapshot2026::Actions', '@color-profile actions';
     my \at-color-profile-prop = module.property-metadata;
     is-deeply at-color-profile-prop<components>, { :synopsis("<ident>#"), :!inherit, :default<n/a>, }, '@color-profile components';
 }
@@ -109,7 +109,7 @@ subtest 'Snapshot2026 @color-profile', {
 subtest 'Snapshot2026 @font-face', {
     my \module = CSS::Module::Snapshot2026.module.sub-module<@font-face>;
     isa-ok module.grammar, 'CSS::Module::Snapshot2026::AtFontFace', '@font-face grammar';
-    isa-ok module.actions, 'CSS::Module::Snapshot2026::Actions::AtFontFace', '@font-face actions';
+    isa-ok module.actions, 'CSS::Module::Snapshot2026::Actions', '@font-face actions';
     my \at-fontface-prop = module.property-metadata;
     is-deeply at-fontface-prop<font-style>, { :synopsis("auto | normal | italic | left | right | oblique [ <angle [-90deg,90deg]>\{1,2} ]?"), :!inherit, :default<auto>, }, '@font-face font-style';
 }

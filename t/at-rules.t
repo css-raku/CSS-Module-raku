@@ -18,7 +18,7 @@ for (
      END
      :ast(:at-rule{:at-keyw<color-profile>,
                    :declarations[
-                            :property{:expr[{:url("http://example.org/swop-coated.icc")},], :ident<src>}
+                            :property{:expr[:url("http://example.org/swop-coated.icc"),], :ident<src>}
                         ],
                    :ident<--swopc> }),
      :warnings[ "dropping unknown property: color" ],
@@ -32,8 +32,24 @@ for (
      END
     :ast(:at-rule{:at-keyw<font-face>,
                   :declarations[
-                           :property{:expr[{:ident<Gentium>},], :ident<font-family>},
-                           :property{:expr[{:url("http://example.com/fonts/Gentium.woff")},], :ident<src>}]}),
+                           :property{:expr[:ident<Gentium>,], :ident<font-family>},
+                           :property{:expr[:url("http://example.com/fonts/Gentium.woff"),], :ident<src>}]}),
+    :warnings[ "dropping unknown property: color" ],
+    },
+    {:rule<at-rule>, input => q:to<END>,
+     @font-feature-values foo {
+         font-display: auto;
+         color: blue;
+         @swash { pretty: 1; cool: 2; }
+     }
+     END
+     :ast(:at-rule{:at-keyw<font-feature-values>,
+                   :declarations[:property{:expr($[{:keyw("auto")},]), :ident("font-display")},
+                                 :at-rule{:at-keyw("swash"), :expr[
+                                                                      :expr[:ident("pretty"), :op(":"), :int(1)],
+                                                                      :expr[:ident("cool"), :op(":"), :int(2)]],
+                                          :op("}")}],
+                   :ident("foo")}),
     :warnings[ "dropping unknown property: color" ],
     },
 ) -> % ( :$rule!, :$input!, *%expected ) {

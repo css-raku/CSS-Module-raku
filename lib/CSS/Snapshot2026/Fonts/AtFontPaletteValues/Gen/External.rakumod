@@ -1,0 +1,16 @@
+unit role CSS::Snapshot2026::Fonts::AtFontPaletteValues::Gen::External;
+method color (|) {
+    ...
+}
+method custom-ident (|) {
+    ...
+}
+method declaration-list (|) {
+    ...
+}
+method font-family-name (|) {
+    ...
+}
+method integer (|) {
+    ...
+}

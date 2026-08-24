@@ -43,7 +43,7 @@ grammar AtColorProfile is Base {
         CSS::Module.new(
             :name<@color-profile>,
             :grammar($?CLASS),
-	    :actions(CSS::Module::Snapshot2026::Actions::AtColorProfile),
+	    :actions(CSS::Module::Snapshot2026::Actions),
 	    :property-metadata($Metadata::property),
             :prop-names(Metadata::prop-names.enums),
             :index(&Metadata::index),
@@ -77,7 +77,7 @@ grammar AtFontFace is Base {
         CSS::Module.new(
             :name<@fontface>,
             :grammar($?CLASS),
-            :actions(CSS::Module::Snapshot2026::Actions::AtFontFace),
+            :actions(CSS::Module::Snapshot2026::Actions),
             :property-metadata($Metadata::property),
             :prop-names(Metadata::prop-names.enums),
             :index(&Metadata::index),
@@ -87,6 +87,74 @@ grammar AtFontFace is Base {
 }
 rule at-rule:sym<font-face> {
     \@<at-rule=.AtFontFace::at-rule-font-face>
+}
+
+grammar AtFontFeatureValues is Base {
+    use     CSS::Snapshot2026::Fonts::AtFontFeatureValues::Gen::Grammar;
+    also is CSS::Snapshot2026::Fonts::AtFontFeatureValues::Gen::Grammar;
+
+    use     CSS::Snapshot2026::Fonts::Defs::Gen::Grammar;
+    also is CSS::Snapshot2026::Fonts::Defs::Gen::Grammar;
+
+    use       CSS::Snapshot2026::Fonts::AtFontFeatureValues::Gen::External;
+    also does CSS::Snapshot2026::Fonts::AtFontFeatureValues::Gen::External;
+
+    use       CSS::Snapshot2026::Fonts::Defs::Gen::External;
+    also does CSS::Snapshot2026::Fonts::Defs::Gen::External;
+
+    method module(|c) {
+        use CSS::Module;
+        use CSS::Module::Snapshot2026::Actions;
+        use CSS::Snapshot2026::Fonts::AtFontFeatureValues::Metadata;
+        my constant Metadata = CSS::Snapshot2026::Fonts::AtFontFeatureValues::Metadata;
+        # we share the actions class
+        CSS::Module.new(
+            :name<@font-feature-values>,
+            :grammar($?CLASS),
+            :actions(CSS::Module::Snapshot2026::Actions),
+            :property-metadata($Metadata::property),
+            :prop-names(Metadata::prop-names.enums),
+            :index(&Metadata::index),
+            |c
+        );
+    }
+}
+rule at-rule:sym<font-feature-values> {
+    \@<at-rule=.AtFontFeatureValues::at-rule-font-feature-values>
+}
+
+grammar AtFontPaletteValues is Base {
+    use     CSS::Snapshot2026::Fonts::AtFontPaletteValues::Gen::Grammar;
+    also is CSS::Snapshot2026::Fonts::AtFontPaletteValues::Gen::Grammar;
+
+    use     CSS::Snapshot2026::Fonts::Defs::Gen::Grammar;
+    also is CSS::Snapshot2026::Fonts::Defs::Gen::Grammar;
+
+    use       CSS::Snapshot2026::Fonts::AtFontPaletteValues::Gen::External;
+    also does CSS::Snapshot2026::Fonts::AtFontPaletteValues::Gen::External;
+
+    use       CSS::Snapshot2026::Fonts::Defs::Gen::External;
+    also does CSS::Snapshot2026::Fonts::Defs::Gen::External;
+
+    method module(|c) {
+        use CSS::Module;
+        use CSS::Module::Snapshot2026::Actions;
+        use CSS::Snapshot2026::Fonts::AtFontPaletteValues::Metadata;
+        my constant Metadata = CSS::Snapshot2026::Fonts::AtFontPaletteValues::Metadata;
+        # we share the actions class
+        CSS::Module.new(
+            :name<@font-palette-values>,
+            :grammar($?CLASS),
+            :actions(CSS::Module::Snapshot2026::Actions),
+            :property-metadata($Metadata::property),
+            :prop-names(Metadata::prop-names.enums),
+            :index(&Metadata::index),
+            |c
+        );
+    }
+}
+rule at-rule:sym<font-palette-values> {
+    \@<at-rule=.AtFontPaletteValues::at-rule-font-palette-values>
 }
 
 method module(|c) {

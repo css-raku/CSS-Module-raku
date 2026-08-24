@@ -84,6 +84,12 @@ class Make {
                  'Snapshot2026::Fonts::AtFontFace' => [
                      <src/css-snapshot-2026/css-fonts-4/@fontface.tsv>
                   ],
+                 'Snapshot2026::Fonts::AtFontFeatureValues' => [
+                     <src/css-snapshot-2026/css-fonts-4/@font-feature-values.tsv>
+                  ],
+                 'Snapshot2026::Fonts::AtFontPaletteValues' => [
+                     <src/css-snapshot-2026/css-fonts-4/@font-palette-values.tsv>
+                  ],
                  'Snapshot2026::Color::AtColorProfile' => [
                      <src/css-snapshot-2026/css-color-5/@color-profile.tsv>
                  ],

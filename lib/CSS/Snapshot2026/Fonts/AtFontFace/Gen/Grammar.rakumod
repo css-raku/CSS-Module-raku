@@ -1,5 +1,6 @@
 unit grammar CSS::Snapshot2026::Fonts::AtFontFace::Gen::Grammar;
 #| @font-face <declarations>
+rule decl:sym<@font-face> { "\@"<at-rule=.at-rule-font-face>}
 rule at-rule-font-face { (:i "font-face") <declarations> }
 #| ascent-override: normal | <percentage [0,∞]>
 rule decl:sym<ascent-override> { :i ("ascent-override") ":" <val(/<prop-val-ascent-override> /, &?ROUTINE.WHY)>}

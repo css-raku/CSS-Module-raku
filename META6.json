@@ -128,6 +128,16 @@
       "CSS::Snapshot2026::Fonts::AtFontFace::Gen::Grammar": "lib/CSS/Snapshot2026/Fonts/AtFontFace/Gen/Grammar.rakumod",
       "CSS::Snapshot2026::Fonts::AtFontFace::Gen::External": "lib/CSS/Snapshot2026/Fonts/AtFontFace/Gen/External.rakumod",
 
+      "CSS::Snapshot2026::Fonts::AtFontFeatureValues::Metadata": "lib/CSS/Snapshot2026/Fonts/AtFontFeatureValues/Metadata.rakumod",
+      "CSS::Snapshot2026::Fonts::AtFontFeatureValues::Gen::Actions": "lib/CSS/Snapshot2026/Fonts/AtFontFeatureValues/Gen/Actions.rakumod",
+      "CSS::Snapshot2026::Fonts::AtFontFeatureValues::Gen::Grammar": "lib/CSS/Snapshot2026/Fonts/AtFontFeatureValues/Gen/Grammar.rakumod",
+      "CSS::Snapshot2026::Fonts::AtFontFeatureValues::Gen::External": "lib/CSS/Snapshot2026/Fonts/AtFontFeatureValues/Gen/External.rakumod",
+
+      "CSS::Snapshot2026::Fonts::AtFontPaletteValues::Metadata": "lib/CSS/Snapshot2026/Fonts/AtFontPaletteValues/Metadata.rakumod",
+      "CSS::Snapshot2026::Fonts::AtFontPaletteValues::Gen::Actions": "lib/CSS/Snapshot2026/Fonts/AtFontPaletteValues/Gen/Actions.rakumod",
+      "CSS::Snapshot2026::Fonts::AtFontPaletteValues::Gen::Grammar": "lib/CSS/Snapshot2026/Fonts/AtFontPaletteValues/Gen/Grammar.rakumod",
+      "CSS::Snapshot2026::Fonts::AtFontPaletteValues::Gen::External": "lib/CSS/Snapshot2026/Fonts/AtFontPaletteValues/Gen/External.rakumod",
+
       "CSS::Snapshot2026::Fonts::Defs::Gen::Actions": "lib/CSS/Snapshot2026/Fonts/Defs/Gen/Actions.rakumod",
       "CSS::Snapshot2026::Fonts::Defs::Gen::Grammar": "lib/CSS/Snapshot2026/Fonts/Defs/Gen/Grammar.rakumod",
       "CSS::Snapshot2026::Fonts::Defs::Gen::External": "lib/CSS/Snapshot2026/Fonts/Defs/Gen/External.rakumod",
