@@ -40,7 +40,7 @@ for (
      @font-feature-values foo {
          font-display: auto;
          color: blue;
-         @swash { pretty: 1; cool: 2; }
+         @swash { pretty: 1; Cool: 2; }
      }
      END
      :ast(
@@ -52,7 +52,7 @@ for (
                           :at-keyw<swash>,
                           :expr[
                                    :expr[:ident<pretty>, :op<:>, :int(1)],
-                                   :expr[:ident<cool>, :op<:>, :int(2)],
+                                   :expr[:ident<Cool>, :op<:>, :int(2)],
                                ],
                       },
                   ],

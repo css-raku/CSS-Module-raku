@@ -5,8 +5,8 @@ rule at-rule-font-feature-values { (:i "font-feature-values") <font-family-name>
 #| font-display: auto | block | swap | fallback | optional
 rule decl:sym<font-display> { :i ("font-display") ":" <val(/<prop-val-font-display> /, &?ROUTINE.WHY)>}
 rule prop-val-font-display { :i [auto | block | swap | fallback | optional ]& <keyw>  }
-#| <font-feature-value-name> = <ident>
-rule font-feature-value-name { :i <Ident> }
+#| <font-feature-value-name> = <identifier>
+rule font-feature-value-name { :i <identifier> }
 #| <font-feature-index> = <integer>
 rule font-feature-index { :i <integer> }
 #| <font-feature-property> = <font-feature-value-name> : <font-feature-index> <end-decl>

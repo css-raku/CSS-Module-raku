@@ -215,7 +215,7 @@ rule prop-val-empty-cells { :i [show | hide ]& <keyw>  }
 #| float: left | right | none
 rule decl:sym<float> { :i (float) ":" <val(/<prop-val-float> /, &?ROUTINE.WHY)>}
 rule prop-val-float { :i [left | right | none ]& <keyw>  }
-#| font-family: [ <generic-family> | <family-name> ]#
+#| font-family: [ <family-name> | !<generic-family> ]#
 rule decl:sym<font-family> { :i ("font-family") ":" <val(/<prop-val-font-family> /, &?ROUTINE.WHY)>}
 rule prop-val-font-family { :i [<generic-family> || <family-name> ] +% <op(",")>? }
 #| <generic-family> = serif | sans-serif | cursive | fantasy | monospace

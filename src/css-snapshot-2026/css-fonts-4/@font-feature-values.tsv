@@ -1,7 +1,7 @@
 @font-feature-values = @font-feature-values <font-family-name># <declarations>
 font-display	auto | block | swap | fallback | optional	auto
 
-<font-feature-value-name> = <ident>
+<font-feature-value-name> = <identifier>
 <font-feature-index> = <integer>
 <font-feature-property> = <font-feature-value-name> : <font-feature-index> <end-decl>
 <font-feature-declaration-list> = [ <font-feature-property> ]*
