@@ -43,14 +43,22 @@ for (
          @swash { pretty: 1; cool: 2; }
      }
      END
-     :ast(:at-rule{:at-keyw<font-feature-values>,
-                   :declarations[:property{:expr($[{:keyw("auto")},]), :ident("font-display")},
-                                 :at-rule{:at-keyw("swash"), :expr[
-                                                                      :expr[:ident("pretty"), :op(":"), :int(1)],
-                                                                      :expr[:ident("cool"), :op(":"), :int(2)]],
-                                         },
-                                ],
-                   :ident("foo")}),
+     :ast(
+         :at-rule{
+             :at-keyw<font-feature-values>,
+             :declarations[
+                      :property{:expr[:keyw<auto>,], :ident<font-display>},
+                      :at-rule{
+                          :at-keyw<swash>,
+                          :expr[
+                                   :expr[:ident<pretty>, :op<:>, :int(1)],
+                                   :expr[:ident<cool>, :op<:>, :int(2)],
+                               ],
+                      },
+                  ],
+             :ident<foo>,
+         }
+     ),
     :warnings[ "dropping unknown property: color" ],
     },
 ) -> % ( :$rule!, :$input!, *%expected ) {

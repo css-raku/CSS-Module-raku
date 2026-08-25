@@ -14,8 +14,32 @@ method font-feature-index ($/) {
 method font-feature-property ($/) {
     make $.build.rule($/)
 }
-method swash-declaration-list ($/) {
+method font-feature-declaration-list ($/) {
     make $.build.rule($/)
+}
+method at-rule:sym<stylistic> ($/) {
+    make $<at-rule-stylistic>.ast
+}
+method at-rule-stylistic ($/) {
+    make $.build.at-rule($/)
+}
+method at-rule:sym<historical-forms> ($/) {
+    make $<at-rule-historical-forms>.ast
+}
+method at-rule-historical-forms ($/) {
+    make $.build.at-rule($/)
+}
+method at-rule:sym<styleset> ($/) {
+    make $<at-rule-styleset>.ast
+}
+method at-rule-styleset ($/) {
+    make $.build.at-rule($/)
+}
+method at-rule:sym<character-variant> ($/) {
+    make $<at-rule-character-variant>.ast
+}
+method at-rule-character-variant ($/) {
+    make $.build.at-rule($/)
 }
 method at-rule:sym<swash> ($/) {
     make $<at-rule-swash>.ast

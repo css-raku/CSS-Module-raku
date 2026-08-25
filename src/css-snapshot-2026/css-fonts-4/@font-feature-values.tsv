@@ -1,14 +1,15 @@
 @font-feature-values = @font-feature-values <font-family-name># <declarations>
 font-display	auto | block | swap | fallback | optional	auto
-#todo
-#@stylistic = @stylistic { <declaration-list> }
-#@historical-forms = @historical-forms { <declaration-list> }
-#@styleset = @styleset { <declaration-list> }
-#@character-variant = @character-variant { <declaration-list> }
+
 <font-feature-value-name> = <ident>
 <font-feature-index> = <integer>
 <font-feature-property> = <font-feature-value-name> : <font-feature-index> <end-decl>
-<swash-declaration-list> = [ <font-feature-property> ]*
-@swash = @swash { <swash-declaration-list> }
-@ornaments = @ornaments { <declaration-list> }
-@annotation = @annotation { <declaration-list> }
+<font-feature-declaration-list> = [ <font-feature-property> ]*
+
+@stylistic = @stylistic { <font-feature-declaration-list> }
+@historical-forms = @historical-forms { <font-feature-declaration-list> }
+@styleset = @styleset { <font-feature-declaration-list> }
+@character-variant = @character-variant { <font-feature-declaration-list> }
+@swash = @swash { <font-feature-declaration-list> }
+@ornaments = @ornaments { <font-feature-declaration-list> }
+@annotation = @annotation { <font-feature-declaration-list> }
