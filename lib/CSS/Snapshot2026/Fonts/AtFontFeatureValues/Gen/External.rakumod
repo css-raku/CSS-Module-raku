@@ -1,8 +1,8 @@
 unit role CSS::Snapshot2026::Fonts::AtFontFeatureValues::Gen::External;
-method declarations (|) {
+method any-args (|) {
     ...
 }
-method end-decl (|) {
+method declarations (|) {
     ...
 }
 method font-family-name (|) {

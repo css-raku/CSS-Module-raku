@@ -10,9 +10,9 @@ rule polar-color-space { :i [hsl | hwb | lch | oklch ]& <keyw>  }
 #| <custom-color-space> = <dashed-ident>
 rule custom-color-space { :i <dashed-ident> }
 #| <hue-interpolation-method> = [ shorter | longer | increasing | decreasing ] hue
-rule hue-interpolation-method { :i [[shorter | longer | increasing | decreasing ]& <keyw> ] hue & <keyw>  }
+rule hue-interpolation-method { :i [[shorter | longer | increasing | decreasing ]& <keyw> ] [hue & <keyw> ]  }
 #| <color-interpolation-method> = in [ <rectangular-color-space> | <polar-color-space> <hue-interpolation-method>? | <custom-color-space> ]
-rule color-interpolation-method { :i in & <keyw> [<rectangular-color-space> || <polar-color-space> <hue-interpolation-method> ?  || <custom-color-space> ]  }
+rule color-interpolation-method { :i [in & <keyw> ] [<rectangular-color-space> || <polar-color-space> <hue-interpolation-method> ?  || <custom-color-space> ]  }
 #| <xyz-space> = xyz | xyz-d50 | xyz-d65
 rule xyz-space { :i [xyz | "xyz-d50" | "xyz-d65" ]& <keyw>  }
 #| rgb([<number> | <percentage>]#{3} [[,|/] <alpha-value>]?)
@@ -20,9 +20,9 @@ rule rgb { :i "rgb(" [[<number> || <percentage> ] ** 3% ","? [["," || <op("/")> 
 #| rgba([<number> | <percentage>]#{3} [[,|/] <alpha-value>]?)
 rule rgba { :i "rgba(" [[<number> || <percentage> ] ** 3% ","? [["," || <op("/")> ] <alpha-value> ] ?  || <usage(&?ROUTINE.WHY)> ] ")" }
 #| hsl(    [<hue> | none] ,?  [<percentage> | <number> | none] ,?    [<percentage> | <number> | none] [,|/]? [ <alpha-value>]?)
-rule hsl { :i "hsl(" [[<hue> || none & <keyw> ] [","] ? [<percentage> || <number> || none & <keyw> ] [","] ? [<percentage> || <number> || none & <keyw> ] ["," || <op("/")> ] ? <alpha-value> ?  || <usage(&?ROUTINE.WHY)> ] ")" }
+rule hsl { :i "hsl(" [[<hue> || [none & <keyw> ] ] [","] ? [<percentage> || <number> || [none & <keyw> ] ] [","] ? [<percentage> || <number> || [none & <keyw> ] ] ["," || <op("/")> ] ? <alpha-value> ?  || <usage(&?ROUTINE.WHY)> ] ")" }
 #| hsla(    [<hue> | none] ,?  [<percentage> | <number> | none] ,?    [<percentage> | <number> | none] [,|/]? [ <alpha-value>]?)
-rule hsla { :i "hsla(" [[<hue> || none & <keyw> ] [","] ? [<percentage> || <number> || none & <keyw> ] [","] ? [<percentage> || <number> || none & <keyw> ] ["," || <op("/")> ] ? <alpha-value> ?  || <usage(&?ROUTINE.WHY)> ] ")" }
+rule hsla { :i "hsla(" [[<hue> || [none & <keyw> ] ] [","] ? [<percentage> || <number> || [none & <keyw> ] ] [","] ? [<percentage> || <number> || [none & <keyw> ] ] ["," || <op("/")> ] ? <alpha-value> ?  || <usage(&?ROUTINE.WHY)> ] ")" }
 #| <hue> = <number> | <angle>
 rule hue { :i <number> || <angle>  }
 #| <system-color> = AccentColor | AccentColorText | ActiveText | ButtonBorder | ButtonFace| ButtonText | Canvas | CanvasText | Field | FieldText| GrayText | Highlight | HighlightText| LinkText | Mark | MarkText | SelectedItem | SelectedItemText | VisitedText
@@ -38,9 +38,9 @@ rule decl:sym<color-adjust> { :i ("color-adjust") ":" <val(/<prop-val-color-adju
 rule prop-val-color-adjust { :i <prop-val-print-color-adjust> }
 #| color-scheme: normal | [ light | dark | <custom-ident> ]+ && only?
 rule decl:sym<color-scheme> { :i ("color-scheme") ":" <val(/<prop-val-color-scheme> /, &?ROUTINE.WHY)>}
-rule prop-val-color-scheme { :i normal & <keyw> || [[[light | dark ]& <keyw>  || <custom-ident> ] + :my $*A;<!{
+rule prop-val-color-scheme { :i [normal & <keyw> ] || [[[light | dark ]& <keyw>  || <custom-ident> ] + :my $*A;<!{
     $*A++
-}>|| [only & <keyw>] ? :my $*B;<!{
+}>|| [only & <keyw> ] ? :my $*B;<!{
     $*B++
 }>]** 2  }
 #| forced-color-adjust: auto | none | preserve-parent-color

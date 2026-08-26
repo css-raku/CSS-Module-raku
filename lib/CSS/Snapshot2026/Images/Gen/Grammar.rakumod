@@ -6,7 +6,7 @@ rule gradient { :i <linear-gradient> || <repeating-linear-gradient> || <radial-g
 #| linear-gradient( [ <linear-gradient-syntax> ] )
 rule linear-gradient { :i "linear-gradient(" [<linear-gradient-syntax> || <usage(&?ROUTINE.WHY)> ] ")" }
 #| <linear-gradient-syntax> = [ <angle> | <zero> | to <side-or-corner> ]? , <color-stop-list>
-rule linear-gradient-syntax { :i [[<angle> || <zero> || to & <keyw> <side-or-corner>  ] <op(",")>]? <color-stop-list>  }
+rule linear-gradient-syntax { :i [[<angle> || <zero> || [to & <keyw> ] <side-or-corner>  ] <op(",")>]? <color-stop-list>  }
 #| <color-stop-list> = <linear-color-stop> , [ <linear-color-hint>? , <linear-color-stop> ]#?
 rule color-stop-list { :i <linear-color-stop> <op(",")> [[[<linear-color-hint> <op(",")>]? <linear-color-stop> ] +% <op(",")>?] ?  }
 #| <linear-color-stop> = <color> <length-percentage>?
@@ -30,7 +30,7 @@ rule radial-gradient-syntax { :i [[<radial-shape> :my $*A;<!{
     $*A++
 }>|| <radial-size> :my $*B;<!{
     $*B++
-}>]+] ? [[at & <keyw> <position> ] <op(",")>]? <color-stop-list>  }
+}>]+] ? [[[at & <keyw> ] <position> ] <op(",")>]? <color-stop-list>  }
 #| <radial-shape> = circle | ellipse
 rule radial-shape { :i [circle | ellipse ]& <keyw>  }
 #| repeating-linear-gradient( [ <linear-gradient-syntax> ] )
@@ -43,7 +43,7 @@ rule zero { :i 0 & <number> }
 rule decl:sym<image-orientation> { :i ("image-orientation") ":" <val(/<prop-val-image-orientation> /, &?ROUTINE.WHY)>}
 rule prop-val-image-orientation { :i ["from-image" | none ]& <keyw>  || [[<angle> :my $*A;<!{
     $*A++
-}>|| flip & <keyw> :my $*B;<!{
+}>|| [flip & <keyw> ] :my $*B;<!{
     $*B++
 }>]+]  }
 #| image-rendering: auto | smooth | high-quality | pixelated | crisp-edges

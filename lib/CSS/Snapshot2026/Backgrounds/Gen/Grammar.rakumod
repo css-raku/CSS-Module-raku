@@ -29,9 +29,9 @@ rule final-bg-layer { :i [<prop-val-background-image> :my $*A;<!{
     $*F++
 }>]+ }
 #| <bg-position> = [ [ left | center | right | top | bottom | <length-percentage> ] |! [ left | center | right | <length-percentage> ] [ top | center | bottom | <length-percentage> ] |!! [ center | [ left | right ] <length-percentage>? ] && [ center | [ top | bottom ] <length-percentage>? ]]
-rule bg-position { :i [[[center & <keyw> || [[left | right ]& <keyw> ] <length-percentage> ?  ] :my $*A;<!{
+rule bg-position { :i [[[[center & <keyw> ] || [[left | right ]& <keyw> ] <length-percentage> ?  ] :my $*A;<!{
     $*A++
-}>|| [center & <keyw> || [[top | bottom ]& <keyw> ] <length-percentage> ?  ] :my $*B;<!{
+}>|| [[center & <keyw> ] || [[top | bottom ]& <keyw> ] <length-percentage> ?  ] :my $*B;<!{
     $*B++
 }>]** 2 || [[left | center | right ]& <keyw>  || <length-percentage> ] [[top | center | bottom ]& <keyw>  || <length-percentage> ]  || [[left | center | right | top | bottom ]& <keyw>  || <length-percentage> ] ] }
 #| background-attachment: <attachment>#
@@ -49,7 +49,7 @@ rule prop-val-background-color { :i <color> }
 rule decl:sym<background-image> { :i ("background-image") ":" <val(/<prop-val-background-image> /, &?ROUTINE.WHY)>}
 rule prop-val-background-image { :i <bg-image> +% <op(",")>? }
 #| <bg-image> = <image> | none
-rule bg-image { :i <image> || none & <keyw>  }
+rule bg-image { :i <image> || [none & <keyw> ]  }
 #| background-origin: <visual-box>#
 rule decl:sym<background-origin> { :i ("background-origin") ":" <val(/<prop-val-background-origin> /, &?ROUTINE.WHY)>}
 rule prop-val-background-origin { :i <visual-box> +% <op(",")>? }
@@ -65,7 +65,7 @@ rule repeat-style { :i ["repeat-x" | "repeat-y" ]& <keyw>  || [[repeat | space |
 rule decl:sym<background-size> { :i ("background-size") ":" <val(/<prop-val-background-size> /, &?ROUTINE.WHY)>}
 rule prop-val-background-size { :i <bg-size> +% <op(",")>? }
 #| <bg-size> = [ <length-percentage [0,∞]> | auto ]{1,2} | cover | contain
-rule bg-size { :i [<length-percentage> || auto & <keyw> ] ** 1..2 || [cover | contain ]& <keyw>   }
+rule bg-size { :i [<length-percentage> || [auto & <keyw> ] ] ** 1..2 || [cover | contain ]& <keyw>   }
 #| <line-width> = <length [0,∞]> | thin | medium | thick
 rule line-width { :i <length> || [thin | medium | thick ]& <keyw>   }
 #| <line-style> = none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset
@@ -116,15 +116,15 @@ rule prop-val-border-image-repeat { :i [[stretch | repeat | round | space ]& <ke
 rule decl:sym<border-image-slice> { :i ("border-image-slice") ":" <val(/<prop-val-border-image-slice> /, &?ROUTINE.WHY)>}
 rule prop-val-border-image-slice { :i [[<number> || <percentage> ] ** 1..4 :my $*A;<!{
     $*A++
-}>|| [fill & <keyw>] ? :my $*B;<!{
+}>|| [fill & <keyw> ] ? :my $*B;<!{
     $*B++
 }>]** 2 }
 #| border-image-source: none | <image>
 rule decl:sym<border-image-source> { :i ("border-image-source") ":" <val(/<prop-val-border-image-source> /, &?ROUTINE.WHY)>}
-rule prop-val-border-image-source { :i none & <keyw> || <image>  }
+rule prop-val-border-image-source { :i [none & <keyw> ] || <image>  }
 #| border-image-width: [ <length-percentage [0,∞]> | <number [0,∞]> | auto ]{1,4}
 rule decl:sym<border-image-width> { :i ("border-image-width") ":" <val(/<prop-val-border-image-width>** 1..4 /, &?ROUTINE.WHY)>}
-rule prop-val-border-image-width { :i [<length-percentage> || <number> || auto & <keyw> ] }
+rule prop-val-border-image-width { :i [<length-percentage> || <number> || [auto & <keyw> ] ] }
 #| border-left: <'border-left-width'> || <'border-left-style'> || <'border-left-color'>
 rule decl:sym<border-left> { :i ("border-left") ":" <val(/<prop-val-border-left> /, &?ROUTINE.WHY)>}
 rule prop-val-border-left { :i [<prop-val-border-left-width> :my $*A;<!{
@@ -198,12 +198,12 @@ rule decl:sym<border-width> { :i ("border-width") ":" <val(/<prop-val-border-wid
 rule prop-val-border-width { :i <line-width> }
 #| box-shadow: none | <shadow>#
 rule decl:sym<box-shadow> { :i ("box-shadow") ":" <val(/<prop-val-box-shadow> /, &?ROUTINE.WHY)>}
-rule prop-val-box-shadow { :i none & <keyw> || <shadow> +% <op(",")>?  }
+rule prop-val-box-shadow { :i [none & <keyw> ] || <shadow> +% <op(",")>?  }
 #| <shadow> = <color>? && [ <length>{2} [ <length [0,∞]> <length>? ]? ] && inset?
 rule shadow { :i [<color> ? :my $*A; <!{
     $*A++
 }>|| [<length> ** 2 [<length> <length> ? ] ? ] :my $*B; <!{
     $*B++
-}>|| [inset & <keyw>] ? :my $*C; <!{
+}>|| [inset & <keyw> ] ? :my $*C; <!{
     $*C++
 }>]** 3 }

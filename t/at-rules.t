@@ -40,7 +40,7 @@ for (
      @font-feature-values foo {
          font-display: auto;
          color: blue;
-         @swash { pretty: 1; Cool: 2; }
+         @swash { pretty: 1 xx; Cool: 2 !important; }
      }
      END
      :ast(
@@ -51,15 +51,15 @@ for (
                       :at-rule{
                           :at-keyw<swash>,
                           :expr[
-                                   :expr[:ident<pretty>, :op<:>, :int(1)],
-                                   :expr[:ident<Cool>, :op<:>, :int(2)],
+                                   :expr[:ident<pretty>, :op<:>, :int(1), :op<;>],
+                                   :expr[:ident<Cool>, :op<:>, :int(2), :op<!>, :keyw<important>, :op<;>],
                                ],
                       },
                   ],
              :ident<foo>,
          }
      ),
-    :warnings[ "dropping unknown property: color" ],
+    :warnings[ "dropping unknown property: color", "skipping: xx" ],
     },
 ) -> % ( :$rule!, :$input!, *%expected ) {
 

@@ -13,13 +13,13 @@ rule decl:sym<text-decoration-color> { :i ("text-decoration-color") ":" <val(/<p
 rule prop-val-text-decoration-color { :i <color> }
 #| text-decoration-line: none | [ underline || overline || line-through || blink ]
 rule decl:sym<text-decoration-line> { :i ("text-decoration-line") ":" <val(/<prop-val-text-decoration-line> /, &?ROUTINE.WHY)>}
-rule prop-val-text-decoration-line { :i none & <keyw> || [[underline & <keyw> :my $*A;<!{
+rule prop-val-text-decoration-line { :i [none & <keyw> ] || [[[underline & <keyw> ] :my $*A;<!{
     $*A++
-}>|| overline & <keyw> :my $*B;<!{
+}>|| [overline & <keyw> ] :my $*B;<!{
     $*B++
-}>|| "line-through" & <keyw> :my $*C;<!{
+}>|| ["line-through" & <keyw> ] :my $*C;<!{
     $*C++
-}>|| blink & <keyw> :my $*D;<!{
+}>|| [blink & <keyw> ] :my $*D;<!{
     $*D++
 }>]+]  }
 #| text-decoration-style: solid | double | dotted | dashed | wavy
@@ -44,21 +44,21 @@ rule prop-val-text-emphasis-position { :i [[[over | under ]& <keyw> ] :my $*A;<!
 }>]** 2 }
 #| text-emphasis-style: none | [ [ filled | open ] || [ dot | circle | double-circle | triangle | sesame ] ] | <string>
 rule decl:sym<text-emphasis-style> { :i ("text-emphasis-style") ":" <val(/<prop-val-text-emphasis-style> /, &?ROUTINE.WHY)>}
-rule prop-val-text-emphasis-style { :i none & <keyw> || [[[[filled | open ]& <keyw> ] :my $*A;<!{
+rule prop-val-text-emphasis-style { :i [none & <keyw> ] || [[[[filled | open ]& <keyw> ] :my $*A;<!{
     $*A++
 }>|| [[dot | circle | "double-circle" | triangle | sesame ]& <keyw> ] :my $*B;<!{
     $*B++
 }>]+] || <string>  }
 #| text-shadow: none | [ <color>? && [ <length>{2} <length [0,∞]>? ] ]#
 rule decl:sym<text-shadow> { :i ("text-shadow") ":" <val(/<prop-val-text-shadow> /, &?ROUTINE.WHY)>}
-rule prop-val-text-shadow { :i none & <keyw> || [[<color> ? :my $*A;<!{
+rule prop-val-text-shadow { :i [none & <keyw> ] || [[<color> ? :my $*A;<!{
     $*A++
 }>|| [<length> ** 2 <length> ? ] :my $*B;<!{
     $*B++
 }>]** 2] +% <op(",")>?  }
 #| text-underline-position: auto | [ under || [ left | right ] ]
 rule decl:sym<text-underline-position> { :i ("text-underline-position") ":" <val(/<prop-val-text-underline-position> /, &?ROUTINE.WHY)>}
-rule prop-val-text-underline-position { :i auto & <keyw> || [[under & <keyw> :my $*A; <!{
+rule prop-val-text-underline-position { :i [auto & <keyw> ] || [[[under & <keyw> ] :my $*A; <!{
     $*A++
 }>|| [[left | right ]& <keyw> ] :my $*B; <!{
     $*B++

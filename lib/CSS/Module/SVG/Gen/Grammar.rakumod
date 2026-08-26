@@ -27,7 +27,7 @@ rule prop-val-dominant-baseline { :i [auto | "use-script" | "no-change" | "reset
 rule decl:sym<fill> { :i (fill) ":" <val(/<prop-val-fill> /, &?ROUTINE.WHY)>}
 rule prop-val-fill { :i <paint> }
 #| <paint> = none | <color> | <url> [none | <color>]? | context-fill | context-stroke
-rule paint { :i none & <keyw> || <color> || <url> [none & <keyw> || <color> ] ?  || ["context-fill" | "context-stroke" ]& <keyw>   }
+rule paint { :i [none & <keyw> ] || <color> || <url> [[none & <keyw> ] || <color> ] ?  || ["context-fill" | "context-stroke" ]& <keyw>   }
 #| fill-opacity: <alpha-value>
 rule decl:sym<fill-opacity> { :i ("fill-opacity") ":" <val(/<prop-val-fill-opacity> /, &?ROUTINE.WHY)>}
 rule prop-val-fill-opacity { :i <alpha-value> }
@@ -41,13 +41,13 @@ rule decl:sym<font-variant> { :i ("font-variant") ":" <val(/<prop-val-font-varia
 rule prop-val-font-variant { :i [normal | "small-caps" ]& <keyw>  }
 #| glyph-orientation-vertical: auto | <angle> | <number>
 rule decl:sym<glyph-orientation-vertical> { :i ("glyph-orientation-vertical") ":" <val(/<prop-val-glyph-orientation-vertical> /, &?ROUTINE.WHY)>}
-rule prop-val-glyph-orientation-vertical { :i auto & <keyw> || <angle> || <number>  }
+rule prop-val-glyph-orientation-vertical { :i [auto & <keyw> ] || <angle> || <number>  }
 #| image-rendering: auto | optimizeSpeed | optimizeQuality
 rule decl:sym<image-rendering> { :i ("image-rendering") ":" <val(/<prop-val-image-rendering> /, &?ROUTINE.WHY)>}
 rule prop-val-image-rendering { :i [auto | optimizeSpeed | optimizeQuality ]& <keyw>  }
 #| line-height: normal | <number> | <length-percentage>
 rule decl:sym<line-height> { :i ("line-height") ":" <val(/<prop-val-line-height> /, &?ROUTINE.WHY)>}
-rule prop-val-line-height { :i normal & <keyw> || <number> || <length-percentage>  }
+rule prop-val-line-height { :i [normal & <keyw> ] || <number> || <length-percentage>  }
 #| marker: 'marker-start' || 'marker-mid' || 'marker-end'
 rule decl:sym<marker> { :i (marker) ":" <val(/<prop-val-marker> /, &?ROUTINE.WHY)>}
 rule prop-val-marker { :i [<prop-val-marker-start> :my $*A;<!{
@@ -59,13 +59,13 @@ rule prop-val-marker { :i [<prop-val-marker-start> :my $*A;<!{
 }>]+ }
 #| marker-start: none | <url>
 rule decl:sym<marker-start> { :i ("marker-start") ":" <val(/<prop-val-marker-start> /, &?ROUTINE.WHY)>}
-rule prop-val-marker-start { :i none & <keyw> || <url>  }
+rule prop-val-marker-start { :i [none & <keyw> ] || <url>  }
 #| marker-start: none | <url>
 rule decl:sym<marker-mid> { :i ("marker-mid") ":" <val(/<prop-val-marker-mid> /, &?ROUTINE.WHY)>}
-rule prop-val-marker-mid { :i none & <keyw> || <url>  }
+rule prop-val-marker-mid { :i [none & <keyw> ] || <url>  }
 #| marker-start: none | <url>
 rule decl:sym<marker-end> { :i ("marker-end") ":" <val(/<prop-val-marker-end> /, &?ROUTINE.WHY)>}
-rule prop-val-marker-end { :i none & <keyw> || <url>  }
+rule prop-val-marker-end { :i [none & <keyw> ] || <url>  }
 #| opacity: <alpha-value>
 rule decl:sym<opacity> { :i (opacity) ":" <val(/<prop-val-opacity> /, &?ROUTINE.WHY)>}
 rule prop-val-opacity { :i <alpha-value> }
@@ -74,11 +74,11 @@ rule decl:sym<overflow> { :i (overflow) ":" <val(/<prop-val-overflow> /, &?ROUTI
 rule prop-val-overflow { :i [visible | hidden | scroll | auto ]& <keyw>  }
 #| paint-order: normal | [ fill || stroke || markers ]
 rule decl:sym<paint-order> { :i ("paint-order") ":" <val(/<prop-val-paint-order> /, &?ROUTINE.WHY)>}
-rule prop-val-paint-order { :i normal & <keyw> || [[fill & <keyw> :my $*A;<!{
+rule prop-val-paint-order { :i [normal & <keyw> ] || [[[fill & <keyw> ] :my $*A;<!{
     $*A++
-}>|| stroke & <keyw> :my $*B;<!{
+}>|| [stroke & <keyw> ] :my $*B;<!{
     $*B++
-}>|| markers & <keyw> :my $*C;<!{
+}>|| [markers & <keyw> ] :my $*C;<!{
     $*C++
 }>]+]  }
 #| pointer-events: bounding-box | visiblePainted | visibleFill | visibleStroke | visible | painted | fill | stroke | all | none
@@ -89,7 +89,7 @@ rule decl:sym<shape-rendering> { :i ("shape-rendering") ":" <val(/<prop-val-shap
 rule prop-val-shape-rendering { :i [auto | optimizeSpeed | crispEdges | geometricPrecision ]& <keyw>  }
 #| stop-color: currentColor |<color>
 rule decl:sym<stop-color> { :i ("stop-color") ":" <val(/<prop-val-stop-color> /, &?ROUTINE.WHY)>}
-rule prop-val-stop-color { :i currentColor & <keyw> || <color>  }
+rule prop-val-stop-color { :i [currentColor & <keyw> ] || <color>  }
 #| stop-opacity: <alpha-value>
 rule decl:sym<stop-opacity> { :i ("stop-opacity") ":" <val(/<prop-val-stop-opacity> /, &?ROUTINE.WHY)>}
 rule prop-val-stop-opacity { :i <alpha-value> }
@@ -98,7 +98,7 @@ rule decl:sym<stroke> { :i (stroke) ":" <val(/<prop-val-stroke> /, &?ROUTINE.WHY
 rule prop-val-stroke { :i <paint> }
 #| stroke-dasharray: none | <dash-elem>#
 rule decl:sym<stroke-dasharray> { :i ("stroke-dasharray") ":" <val(/<prop-val-stroke-dasharray> /, &?ROUTINE.WHY)>}
-rule prop-val-stroke-dasharray { :i none & <keyw> || <dash-elem> +% <op(",")>?  }
+rule prop-val-stroke-dasharray { :i [none & <keyw> ] || <dash-elem> +% <op(",")>?  }
 #| <length-percentage> = <length> | <percentage> | <number>
 rule length-percentage { :i <length> || <percentage> || <number>  }
 #| <dash-elem> = <length-percentage> | <number>
@@ -126,13 +126,13 @@ rule decl:sym<text-anchor> { :i ("text-anchor") ":" <val(/<prop-val-text-anchor>
 rule prop-val-text-anchor { :i [start | middle | end ]& <keyw>  }
 #| text-decoration: none | [ underline || overline || line-through || blink ]
 rule decl:sym<text-decoration> { :i ("text-decoration") ":" <val(/<prop-val-text-decoration> /, &?ROUTINE.WHY)>}
-rule prop-val-text-decoration { :i none & <keyw> || [[underline & <keyw> :my $*A;<!{
+rule prop-val-text-decoration { :i [none & <keyw> ] || [[[underline & <keyw> ] :my $*A;<!{
     $*A++
-}>|| overline & <keyw> :my $*B;<!{
+}>|| [overline & <keyw> ] :my $*B;<!{
     $*B++
-}>|| "line-through" & <keyw> :my $*C;<!{
+}>|| ["line-through" & <keyw> ] :my $*C;<!{
     $*C++
-}>|| blink & <keyw> :my $*D;<!{
+}>|| [blink & <keyw> ] :my $*D;<!{
     $*D++
 }>]+]  }
 #| text-rendering: auto | optimizeSpeed | optimizeLegibility | geometricPrecision

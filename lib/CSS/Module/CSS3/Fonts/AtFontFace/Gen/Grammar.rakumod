@@ -6,7 +6,7 @@ rule prop-val-font-family { :i <family-name> }
 rule family-name { :i <identifiers> || <string>  }
 #| font-feature-settings: normal | <feature-tag-value>#
 rule decl:sym<font-feature-settings> { :i ("font-feature-settings") ":" <val(/<prop-val-font-feature-settings> /, &?ROUTINE.WHY)>}
-rule prop-val-font-feature-settings { :i normal & <keyw> || <feature-tag-value> +% <op(",")>?  }
+rule prop-val-font-feature-settings { :i [normal & <keyw> ] || <feature-tag-value> +% <op(",")>?  }
 #| font-stretch: normal | ultra-condensed | extra-condensed | condensed | semi-condensed | semi-expanded | expanded | extra-expanded | ultra-expanded
 rule decl:sym<font-stretch> { :i ("font-stretch") ":" <val(/<prop-val-font-stretch> /, &?ROUTINE.WHY)>}
 rule prop-val-font-stretch { :i [normal | "ultra-condensed" | "extra-condensed" | condensed | "semi-condensed" | "semi-expanded" | expanded | "extra-expanded" | "ultra-expanded" ]& <keyw>  }
@@ -15,7 +15,7 @@ rule decl:sym<font-style> { :i ("font-style") ":" <val(/<prop-val-font-style> /,
 rule prop-val-font-style { :i [normal | italic | oblique ]& <keyw>  }
 #| font-variant: normal | [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> || stylistic(<feature-value-name>) || historical-forms || styleset(<feature-value-name>#) || character-variant(<feature-value-name>#) || swash(<feature-value-name>) || ornaments(<feature-value-name>) || annotation(<feature-value-name>) || [ small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps ] || <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero || <east-asian-variant-values> || <east-asian-width-values> || ruby ]
 rule decl:sym<font-variant> { :i ("font-variant") ":" <val(/<prop-val-font-variant> /, &?ROUTINE.WHY)>}
-rule prop-val-font-variant { :i normal & <keyw> || [[<common-lig-values> :my $*A;<!{
+rule prop-val-font-variant { :i [normal & <keyw> ] || [[<common-lig-values> :my $*A;<!{
     $*A++
 }>|| <discretionary-lig-values> :my $*B;<!{
     $*B++
@@ -25,7 +25,7 @@ rule prop-val-font-variant { :i normal & <keyw> || [[<common-lig-values> :my $*A
     $*D++
 }>|| <stylistic> :my $*E;<!{
     $*E++
-}>|| "historical-forms" & <keyw> :my $*F;<!{
+}>|| ["historical-forms" & <keyw> ] :my $*F;<!{
     $*F++
 }>|| <styleset> :my $*G;<!{
     $*G++
@@ -45,15 +45,15 @@ rule prop-val-font-variant { :i normal & <keyw> || [[<common-lig-values> :my $*A
     $*N++
 }>|| <numeric-fraction-values> :my $*O;<!{
     $*O++
-}>|| ordinal & <keyw> :my $*P;<!{
+}>|| [ordinal & <keyw> ] :my $*P;<!{
     $*P++
-}>|| "slashed-zero" & <keyw> :my $*Q;<!{
+}>|| ["slashed-zero" & <keyw> ] :my $*Q;<!{
     $*Q++
 }>|| <east-asian-variant-values> :my $*R;<!{
     $*R++
 }>|| <east-asian-width-values> :my $*S;<!{
     $*S++
-}>|| ruby & <keyw> :my $*T;<!{
+}>|| [ruby & <keyw> ] :my $*T;<!{
     $*T++
 }>]+]  }
 #| font-weight: normal | bold | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900

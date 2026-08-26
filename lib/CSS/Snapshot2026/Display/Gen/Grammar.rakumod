@@ -15,7 +15,7 @@ rule display-listitem { :i [<display-outside> ? :my $*A;<!{
     $*A++
 }>|| [[flow | "flow-root" ]& <keyw> ] ? :my $*B;<!{
     $*B++
-}>|| "list-item" & <keyw> :my $*C;<!{
+}>|| ["list-item" & <keyw> ] :my $*C;<!{
     $*C++
 }>]** 3 }
 #| <display-internal> = table-row-group | table-header-group |                     table-footer-group | table-row | table-cell |                     table-column-group | table-column | table-caption |                     ruby-base | ruby-text | ruby-base-container |                     ruby-text-container

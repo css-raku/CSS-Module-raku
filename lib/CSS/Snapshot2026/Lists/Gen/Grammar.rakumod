@@ -1,17 +1,17 @@
 unit grammar CSS::Snapshot2026::Lists::Gen::Grammar;
 #| counter-increment: [ <counter-name> <integer>? ]+ | none
 rule decl:sym<counter-increment> { :i ("counter-increment") ":" <val(/<prop-val-counter-increment> /, &?ROUTINE.WHY)>}
-rule prop-val-counter-increment { :i [<counter-name> <integer> ? ] + || none & <keyw>  }
+rule prop-val-counter-increment { :i [<counter-name> <integer> ? ] + || [none & <keyw> ]  }
 #| <counter-name> = <identifier>
 rule counter-name { :i <identifier> }
 #| reversed( <counter-name> )
 rule reversed-counter-name { :i "reversed(" [<counter-name> || <usage(&?ROUTINE.WHY)> ] ")" }
 #| counter-reset: [ <counter-name> <integer>? | <reversed-counter-name> <integer>? ]+ | none
 rule decl:sym<counter-reset> { :i ("counter-reset") ":" <val(/<prop-val-counter-reset> /, &?ROUTINE.WHY)>}
-rule prop-val-counter-reset { :i [<counter-name> <integer> ?  || <reversed-counter-name> <integer> ?  ] + || none & <keyw>  }
+rule prop-val-counter-reset { :i [<counter-name> <integer> ?  || <reversed-counter-name> <integer> ?  ] + || [none & <keyw> ]  }
 #| counter-set: [ <counter-name> <integer>? ]+ | none
 rule decl:sym<counter-set> { :i ("counter-set") ":" <val(/<prop-val-counter-set> /, &?ROUTINE.WHY)>}
-rule prop-val-counter-set { :i [<counter-name> <integer> ? ] + || none & <keyw>  }
+rule prop-val-counter-set { :i [<counter-name> <integer> ? ] + || [none & <keyw> ]  }
 #| list-style: <'list-style-position'> || <'list-style-image'> || <'list-style-type'>
 rule decl:sym<list-style> { :i ("list-style") ":" <val(/<prop-val-list-style> /, &?ROUTINE.WHY)>}
 rule prop-val-list-style { :i [<prop-val-list-style-position> :my $*A;<!{
@@ -23,13 +23,13 @@ rule prop-val-list-style { :i [<prop-val-list-style-position> :my $*A;<!{
 }>]+ }
 #| list-style-image: <image> | none
 rule decl:sym<list-style-image> { :i ("list-style-image") ":" <val(/<prop-val-list-style-image> /, &?ROUTINE.WHY)>}
-rule prop-val-list-style-image { :i <image> || none & <keyw>  }
+rule prop-val-list-style-image { :i <image> || [none & <keyw> ]  }
 #| list-style-position: inside | outside
 rule decl:sym<list-style-position> { :i ("list-style-position") ":" <val(/<prop-val-list-style-position> /, &?ROUTINE.WHY)>}
 rule prop-val-list-style-position { :i [inside | outside ]& <keyw>  }
 #| list-style-type: <counter-style> | <string> | none
 rule decl:sym<list-style-type> { :i ("list-style-type") ":" <val(/<prop-val-list-style-type> /, &?ROUTINE.WHY)>}
-rule prop-val-list-style-type { :i <counter-style> || <string> || none & <keyw>  }
+rule prop-val-list-style-type { :i <counter-style> || <string> || [none & <keyw> ]  }
 #| marker-side: match-self | match-parent
 rule decl:sym<marker-side> { :i ("marker-side") ":" <val(/<prop-val-marker-side> /, &?ROUTINE.WHY)>}
 rule prop-val-marker-side { :i ["match-self" | "match-parent" ]& <keyw>  }

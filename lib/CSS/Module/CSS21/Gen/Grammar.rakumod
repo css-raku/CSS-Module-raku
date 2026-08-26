@@ -11,16 +11,16 @@ rule delta { :i [leftwards | rightwards ]& <keyw>  }
 #| <direction> = left-side | far-left | left | center-left | center | center-right | right | far-right | right-side
 rule direction { :i ["left-side" | "far-left" | left | "center-left" | center | "center-right" | right | "far-right" | "right-side" ]& <keyw>  }
 #| <behind> = behind
-rule behind { :i behind & <keyw> }
+rule behind { :i [behind & <keyw> ] }
 #| background-attachment: scroll | fixed
 rule decl:sym<background-attachment> { :i ("background-attachment") ":" <val(/<prop-val-background-attachment> /, &?ROUTINE.WHY)>}
 rule prop-val-background-attachment { :i [scroll | fixed ]& <keyw>  }
 #| background-color: <color> | transparent
 rule decl:sym<background-color> { :i ("background-color") ":" <val(/<prop-val-background-color> /, &?ROUTINE.WHY)>}
-rule prop-val-background-color { :i <color> || transparent & <keyw>  }
+rule prop-val-background-color { :i <color> || [transparent & <keyw> ]  }
 #| background-image: <uri> | none
 rule decl:sym<background-image> { :i ("background-image") ":" <val(/<prop-val-background-image> /, &?ROUTINE.WHY)>}
-rule prop-val-background-image { :i <uri> || none & <keyw>  }
+rule prop-val-background-image { :i <uri> || [none & <keyw> ]  }
 #| background-position: [ [ <percentage> | <length> | <align> ] [ <percentage> | <length> | <valign> ]? ] | [ <align> || <valign> ]
 rule decl:sym<background-position> { :i ("background-position") ":" <val(/<prop-val-background-position> /, &?ROUTINE.WHY)>}
 rule prop-val-background-position { :i [[<percentage> || <length> || <align> ] [<percentage> || <length> || <valign> ] ? ] || [[<align> :my $*A;<!{
@@ -53,7 +53,7 @@ rule decl:sym<border-collapse> { :i ("border-collapse") ":" <val(/<prop-val-bord
 rule prop-val-border-collapse { :i [collapse | separate ]& <keyw>  }
 #| border-color: [ <color> | transparent ]{1,4}
 rule decl:sym<border-color> { :i ("border-color") ":" <val(/<prop-val-border-color>** 1..4 /, &?ROUTINE.WHY)>}
-rule prop-val-border-color { :i [<color> || transparent & <keyw> ] }
+rule prop-val-border-color { :i [<color> || [transparent & <keyw> ] ] }
 #| border-spacing: <length> <length>?
 rule decl:sym<border-spacing> { :i ("border-spacing") ":" <val(/<prop-val-border-spacing> /, &?ROUTINE.WHY)>}
 rule prop-val-border-spacing { :i <length> <length> ?  }
@@ -100,16 +100,16 @@ rule prop-val-border-left { :i [[<prop-val-border-left-width> :my $*A;<!{
 }>]+] }
 #| border-top-color: <color> | transparent
 rule decl:sym<border-top-color> { :i ("border-top-color") ":" <val(/<prop-val-border-top-color> /, &?ROUTINE.WHY)>}
-rule prop-val-border-top-color { :i <color> || transparent & <keyw>  }
+rule prop-val-border-top-color { :i <color> || [transparent & <keyw> ]  }
 #| border-top-color: <color> | transparent
 rule decl:sym<border-right-color> { :i ("border-right-color") ":" <val(/<prop-val-border-right-color> /, &?ROUTINE.WHY)>}
-rule prop-val-border-right-color { :i <color> || transparent & <keyw>  }
+rule prop-val-border-right-color { :i <color> || [transparent & <keyw> ]  }
 #| border-top-color: <color> | transparent
 rule decl:sym<border-bottom-color> { :i ("border-bottom-color") ":" <val(/<prop-val-border-bottom-color> /, &?ROUTINE.WHY)>}
-rule prop-val-border-bottom-color { :i <color> || transparent & <keyw>  }
+rule prop-val-border-bottom-color { :i <color> || [transparent & <keyw> ]  }
 #| border-top-color: <color> | transparent
 rule decl:sym<border-left-color> { :i ("border-left-color") ":" <val(/<prop-val-border-left-color> /, &?ROUTINE.WHY)>}
-rule prop-val-border-left-color { :i <color> || transparent & <keyw>  }
+rule prop-val-border-left-color { :i <color> || [transparent & <keyw> ]  }
 #| border-top-style: <border-style>
 rule decl:sym<border-top-style> { :i ("border-top-style") ":" <val(/<prop-val-border-top-style> /, &?ROUTINE.WHY)>}
 rule prop-val-border-top-style { :i <border-style> }
@@ -150,7 +150,7 @@ rule prop-val-border { :i [[<prop-val-border-width> :my $*A;<!{
 }>]+] }
 #| bottom: <length> | <percentage> | auto
 rule decl:sym<bottom> { :i (bottom) ":" <val(/<prop-val-bottom> /, &?ROUTINE.WHY)>}
-rule prop-val-bottom { :i <length> || <percentage> || auto & <keyw>  }
+rule prop-val-bottom { :i <length> || <percentage> || [auto & <keyw> ]  }
 #| caption-side: top | bottom
 rule decl:sym<caption-side> { :i ("caption-side") ":" <val(/<prop-val-caption-side> /, &?ROUTINE.WHY)>}
 rule prop-val-caption-side { :i [top | bottom ]& <keyw>  }
@@ -159,11 +159,11 @@ rule decl:sym<clear> { :i (clear) ":" <val(/<prop-val-clear> /, &?ROUTINE.WHY)>}
 rule prop-val-clear { :i [none | left | right | both ]& <keyw>  }
 #| clip: <shape> | auto
 rule decl:sym<clip> { :i (clip) ":" <val(/<prop-val-clip> /, &?ROUTINE.WHY)>}
-rule prop-val-clip { :i <shape> || auto & <keyw>  }
+rule prop-val-clip { :i <shape> || [auto & <keyw> ]  }
 #| <shape> = <rect()>
 rule shape { :i <rect> }
 #| rect([<length> | auto]#{4,4})
-rule rect { :i "rect(" [[<length> || auto & <keyw> ] ** 4% ","? || <usage(&?ROUTINE.WHY)> ] ")" }
+rule rect { :i "rect(" [[<length> || [auto & <keyw> ] ] ** 4% ","? || <usage(&?ROUTINE.WHY)> ] ")" }
 #| color: <color>
 rule decl:sym<color> { :i (color) ":" <val(/<prop-val-color> /, &?ROUTINE.WHY)>}
 rule prop-val-color { :i <color> }
@@ -178,16 +178,16 @@ rule counter { :i "counter(" [<identifier> ["," <prop-val-list-style-type> ] ?  
 rule counters { :i "counters(" [<identifier> ["," <string> ] ?  || <usage(&?ROUTINE.WHY)> ] ")" }
 #| counter-increment: none | [ <identifier> <integer>? ]+
 rule decl:sym<counter-increment> { :i ("counter-increment") ":" <val(/<prop-val-counter-increment> /, &?ROUTINE.WHY)>}
-rule prop-val-counter-increment { :i none & <keyw> || [<identifier> <integer> ? ] +  }
+rule prop-val-counter-increment { :i [none & <keyw> ] || [<identifier> <integer> ? ] +  }
 #| counter-reset: none | [ <identifier> <integer>? ]+
 rule decl:sym<counter-reset> { :i ("counter-reset") ":" <val(/<prop-val-counter-reset> /, &?ROUTINE.WHY)>}
-rule prop-val-counter-reset { :i none & <keyw> || [<identifier> <integer> ? ] +  }
+rule prop-val-counter-reset { :i [none & <keyw> ] || [<identifier> <integer> ? ] +  }
 #| cue-after: <uri> | none
 rule decl:sym<cue-after> { :i ("cue-after") ":" <val(/<prop-val-cue-after> /, &?ROUTINE.WHY)>}
-rule prop-val-cue-after { :i <uri> || none & <keyw>  }
+rule prop-val-cue-after { :i <uri> || [none & <keyw> ]  }
 #| cue-before: <uri> | none
 rule decl:sym<cue-before> { :i ("cue-before") ":" <val(/<prop-val-cue-before> /, &?ROUTINE.WHY)>}
-rule prop-val-cue-before { :i <uri> || none & <keyw>  }
+rule prop-val-cue-before { :i <uri> || [none & <keyw> ]  }
 #| cue: [ 'cue-before' || 'cue-after' ]
 rule decl:sym<cue> { :i (cue) ":" <val(/<prop-val-cue> /, &?ROUTINE.WHY)>}
 rule prop-val-cue { :i [[<prop-val-cue-before> :my $*A;<!{
@@ -249,19 +249,19 @@ rule prop-val-font { :i [[[<prop-val-font-style> :my $*A;<!{
 }>]+] ? <prop-val-font-size> [<op("/")> <prop-val-line-height> ] ? <prop-val-font-family> +% <op(",")>? ] || [caption | icon | menu | "message-box" | "small-caption" | "status-bar" ]& <keyw>   }
 #| height: <length> | <percentage> | auto
 rule decl:sym<height> { :i (height) ":" <val(/<prop-val-height> /, &?ROUTINE.WHY)>}
-rule prop-val-height { :i <length> || <percentage> || auto & <keyw>  }
+rule prop-val-height { :i <length> || <percentage> || [auto & <keyw> ]  }
 #| left: <length> | <percentage> | auto
 rule decl:sym<left> { :i (left) ":" <val(/<prop-val-left> /, &?ROUTINE.WHY)>}
-rule prop-val-left { :i <length> || <percentage> || auto & <keyw>  }
+rule prop-val-left { :i <length> || <percentage> || [auto & <keyw> ]  }
 #| letter-spacing: normal | <length>
 rule decl:sym<letter-spacing> { :i ("letter-spacing") ":" <val(/<prop-val-letter-spacing> /, &?ROUTINE.WHY)>}
-rule prop-val-letter-spacing { :i normal & <keyw> || <length>  }
+rule prop-val-letter-spacing { :i [normal & <keyw> ] || <length>  }
 #| line-height: normal | <number> | <length> | <percentage>
 rule decl:sym<line-height> { :i ("line-height") ":" <val(/<prop-val-line-height> /, &?ROUTINE.WHY)>}
-rule prop-val-line-height { :i normal & <keyw> || <number> || <length> || <percentage>  }
+rule prop-val-line-height { :i [normal & <keyw> ] || <number> || <length> || <percentage>  }
 #| list-style-image: <uri> | none
 rule decl:sym<list-style-image> { :i ("list-style-image") ":" <val(/<prop-val-list-style-image> /, &?ROUTINE.WHY)>}
-rule prop-val-list-style-image { :i <uri> || none & <keyw>  }
+rule prop-val-list-style-image { :i <uri> || [none & <keyw> ]  }
 #| list-style-position: inside | outside
 rule decl:sym<list-style-position> { :i ("list-style-position") ":" <val(/<prop-val-list-style-position> /, &?ROUTINE.WHY)>}
 rule prop-val-list-style-position { :i [inside | outside ]& <keyw>  }
@@ -293,13 +293,13 @@ rule prop-val-margin-bottom { :i <margin-width> }
 rule decl:sym<margin> { :i (margin) ":" <val(/<prop-val-margin>** 1..4 /, &?ROUTINE.WHY)>}
 rule prop-val-margin { :i <margin-width> }
 #| <margin-width> = <length> | <percentage> | auto
-rule margin-width { :i <length> || <percentage> || auto & <keyw>  }
+rule margin-width { :i <length> || <percentage> || [auto & <keyw> ]  }
 #| max-height: <length> | <percentage> | none
 rule decl:sym<max-height> { :i ("max-height") ":" <val(/<prop-val-max-height> /, &?ROUTINE.WHY)>}
-rule prop-val-max-height { :i <length> || <percentage> || none & <keyw>  }
+rule prop-val-max-height { :i <length> || <percentage> || [none & <keyw> ]  }
 #| max-width: <length> | <percentage> | none
 rule decl:sym<max-width> { :i ("max-width") ":" <val(/<prop-val-max-width> /, &?ROUTINE.WHY)>}
-rule prop-val-max-width { :i <length> || <percentage> || none & <keyw>  }
+rule prop-val-max-width { :i <length> || <percentage> || [none & <keyw> ]  }
 #| min-height: <length> | <percentage>
 rule decl:sym<min-height> { :i ("min-height") ":" <val(/<prop-val-min-height> /, &?ROUTINE.WHY)>}
 rule prop-val-min-height { :i <length> || <percentage>  }
@@ -314,7 +314,7 @@ rule decl:sym<orphans> { :i (orphans) ":" <val(/<prop-val-orphans> /, &?ROUTINE.
 rule prop-val-orphans { :i <integer> }
 #| outline-color: <color> | invert
 rule decl:sym<outline-color> { :i ("outline-color") ":" <val(/<prop-val-outline-color> /, &?ROUTINE.WHY)>}
-rule prop-val-outline-color { :i <color> || invert & <keyw>  }
+rule prop-val-outline-color { :i <color> || [invert & <keyw> ]  }
 #| outline-style: [ none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset ]
 rule decl:sym<outline-style> { :i ("outline-style") ":" <val(/<prop-val-outline-style> /, &?ROUTINE.WHY)>}
 rule prop-val-outline-style { :i [[none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset ]& <keyw> ] }
@@ -376,9 +376,9 @@ rule decl:sym<pitch> { :i (pitch) ":" <val(/<prop-val-pitch> /, &?ROUTINE.WHY)>}
 rule prop-val-pitch { :i <frequency> || ["x-low" | low | medium | high | "x-high" ]& <keyw>   }
 #| play-during: <uri> [ mix || repeat ]? | auto | none
 rule decl:sym<play-during> { :i ("play-during") ":" <val(/<prop-val-play-during> /, &?ROUTINE.WHY)>}
-rule prop-val-play-during { :i <uri> [[mix & <keyw> :my $*A;<!{
+rule prop-val-play-during { :i <uri> [[[mix & <keyw> ] :my $*A;<!{
     $*A++
-}>|| repeat & <keyw> :my $*B;<!{
+}>|| [repeat & <keyw> ] :my $*B;<!{
     $*B++
 }>]+] ?  || [auto | none ]& <keyw>   }
 #| position: static | relative | absolute | fixed
@@ -386,13 +386,13 @@ rule decl:sym<position> { :i (position) ":" <val(/<prop-val-position> /, &?ROUTI
 rule prop-val-position { :i [static | relative | absolute | fixed ]& <keyw>  }
 #| quotes: [<string> <string>]+ | none
 rule decl:sym<quotes> { :i (quotes) ":" <val(/<prop-val-quotes> /, &?ROUTINE.WHY)>}
-rule prop-val-quotes { :i [<string> <string> ] + || none & <keyw>  }
+rule prop-val-quotes { :i [<string> <string> ] + || [none & <keyw> ]  }
 #| richness: <number>
 rule decl:sym<richness> { :i (richness) ":" <val(/<prop-val-richness> /, &?ROUTINE.WHY)>}
 rule prop-val-richness { :i <number> }
 #| right: <length> | <percentage> | auto
 rule decl:sym<right> { :i (right) ":" <val(/<prop-val-right> /, &?ROUTINE.WHY)>}
-rule prop-val-right { :i <length> || <percentage> || auto & <keyw>  }
+rule prop-val-right { :i <length> || <percentage> || [auto & <keyw> ]  }
 #| size: <length>{1,2} | auto | portrait | landscape
 rule decl:sym<size> { :i (size) ":" <val(/<prop-val-size> /, &?ROUTINE.WHY)>}
 rule prop-val-size { :i <length> ** 1..2 || [auto | portrait | landscape ]& <keyw>   }
@@ -419,16 +419,16 @@ rule decl:sym<table-layout> { :i ("table-layout") ":" <val(/<prop-val-table-layo
 rule prop-val-table-layout { :i [auto | fixed ]& <keyw>  }
 #| text-align: <align> | justify
 rule decl:sym<text-align> { :i ("text-align") ":" <val(/<prop-val-text-align> /, &?ROUTINE.WHY)>}
-rule prop-val-text-align { :i <align> || justify & <keyw>  }
+rule prop-val-text-align { :i <align> || [justify & <keyw> ]  }
 #| text-decoration: none | [ underline || overline || line-through || blink ]
 rule decl:sym<text-decoration> { :i ("text-decoration") ":" <val(/<prop-val-text-decoration> /, &?ROUTINE.WHY)>}
-rule prop-val-text-decoration { :i none & <keyw> || [[underline & <keyw> :my $*A;<!{
+rule prop-val-text-decoration { :i [none & <keyw> ] || [[[underline & <keyw> ] :my $*A;<!{
     $*A++
-}>|| overline & <keyw> :my $*B;<!{
+}>|| [overline & <keyw> ] :my $*B;<!{
     $*B++
-}>|| "line-through" & <keyw> :my $*C;<!{
+}>|| ["line-through" & <keyw> ] :my $*C;<!{
     $*C++
-}>|| blink & <keyw> :my $*D;<!{
+}>|| [blink & <keyw> ] :my $*D;<!{
     $*D++
 }>]+]  }
 #| text-indent: <length> | <percentage>
@@ -439,7 +439,7 @@ rule decl:sym<text-transform> { :i ("text-transform") ":" <val(/<prop-val-text-t
 rule prop-val-text-transform { :i [capitalize | uppercase | lowercase | none ]& <keyw>  }
 #| top: <length> | <percentage> | auto
 rule decl:sym<top> { :i (top) ":" <val(/<prop-val-top> /, &?ROUTINE.WHY)>}
-rule prop-val-top { :i <length> || <percentage> || auto & <keyw>  }
+rule prop-val-top { :i <length> || <percentage> || [auto & <keyw> ]  }
 #| unicode-bidi: normal | embed | bidi-override
 rule decl:sym<unicode-bidi> { :i ("unicode-bidi") ":" <val(/<prop-val-unicode-bidi> /, &?ROUTINE.WHY)>}
 rule prop-val-unicode-bidi { :i [normal | embed | "bidi-override" ]& <keyw>  }
@@ -467,10 +467,10 @@ rule decl:sym<widows> { :i (widows) ":" <val(/<prop-val-widows> /, &?ROUTINE.WHY
 rule prop-val-widows { :i <integer> }
 #| width: <length> | <percentage> | auto
 rule decl:sym<width> { :i (width) ":" <val(/<prop-val-width> /, &?ROUTINE.WHY)>}
-rule prop-val-width { :i <length> || <percentage> || auto & <keyw>  }
+rule prop-val-width { :i <length> || <percentage> || [auto & <keyw> ]  }
 #| word-spacing: normal | <length>
 rule decl:sym<word-spacing> { :i ("word-spacing") ":" <val(/<prop-val-word-spacing> /, &?ROUTINE.WHY)>}
-rule prop-val-word-spacing { :i normal & <keyw> || <length>  }
+rule prop-val-word-spacing { :i [normal & <keyw> ] || <length>  }
 #| z-index: auto | <integer>
 rule decl:sym<z-index> { :i ("z-index") ":" <val(/<prop-val-z-index> /, &?ROUTINE.WHY)>}
-rule prop-val-z-index { :i auto & <keyw> || <integer>  }
+rule prop-val-z-index { :i [auto & <keyw> ] || <integer>  }

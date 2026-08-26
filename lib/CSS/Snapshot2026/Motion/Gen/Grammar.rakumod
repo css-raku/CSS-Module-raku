@@ -8,13 +8,13 @@ rule prop-val-offset { :i [<prop-val-offset-position> ? [<prop-val-offset-path> 
 }>]+] ? ] ? ] [<op("/")> <prop-val-offset-anchor> ] ?  }
 #| offset-anchor: auto | <position>
 rule decl:sym<offset-anchor> { :i ("offset-anchor") ":" <val(/<prop-val-offset-anchor> /, &?ROUTINE.WHY)>}
-rule prop-val-offset-anchor { :i auto & <keyw> || <position>  }
+rule prop-val-offset-anchor { :i [auto & <keyw> ] || <position>  }
 #| offset-distance: <length-percentage>
 rule decl:sym<offset-distance> { :i ("offset-distance") ":" <val(/<prop-val-offset-distance> /, &?ROUTINE.WHY)>}
 rule prop-val-offset-distance { :i <length-percentage> }
 #| offset-path: none | <offset-path> || <coord-box>
 rule decl:sym<offset-path> { :i ("offset-path") ":" <val(/<prop-val-offset-path> /, &?ROUTINE.WHY)>}
-rule prop-val-offset-path { :i none & <keyw> || [<offset-path> :my $*A;<!{
+rule prop-val-offset-path { :i [none & <keyw> ] || [<offset-path> :my $*A;<!{
     $*A++
 }>|| <coord-box> :my $*B;<!{
     $*B++
@@ -26,13 +26,13 @@ rule ray { :i "ray(" [[<angle> :my $*A;<!{
     $*A++
 }>|| <ray-size> ? :my $*B;<!{
     $*B++
-}>|| [contain & <keyw>] ? :my $*C;<!{
+}>|| [contain & <keyw> ] ? :my $*C;<!{
     $*C++
-}>|| [at & <keyw> <position> ] ? :my $*D;<!{
+}>|| [[at & <keyw> ] <position> ] ? :my $*D;<!{
     $*D++
 }>]** 4 || <usage(&?ROUTINE.WHY)> ] ")" }
 #| <ray-size> = <radial-extent> | sides
-rule ray-size { :i <radial-extent> || sides & <keyw>  }
+rule ray-size { :i <radial-extent> || [sides & <keyw> ]  }
 #| offset-position: normal | auto | <position>
 rule decl:sym<offset-position> { :i ("offset-position") ":" <val(/<prop-val-offset-position> /, &?ROUTINE.WHY)>}
 rule prop-val-offset-position { :i [normal | auto ]& <keyw>  || <position>  }

@@ -4,7 +4,7 @@ rule decl:sym<color-interpolation-filters> { :i ("color-interpolation-filters") 
 rule prop-val-color-interpolation-filters { :i [auto | sRGB | linearRGB ]& <keyw>  }
 #| filter: none | <filter-value-list>
 rule decl:sym<filter> { :i (filter) ":" <val(/<prop-val-filter> /, &?ROUTINE.WHY)>}
-rule prop-val-filter { :i none & <keyw> || <filter-value-list>  }
+rule prop-val-filter { :i [none & <keyw> ] || <filter-value-list>  }
 #| <filter-value-list> = [ <filter-function> | <url> ]+
 rule filter-value-list { :i [<filter-function> || <url> ] + }
 #| <filter-function> = <blur()> | <brightness()> | <contrast()> | <drop-shadow()> |  <grayscale()> | <hue-rotate()> | <invert()> | <opacity()> | <sepia()> | <saturate()>

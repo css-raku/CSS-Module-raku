@@ -2,7 +2,7 @@ unit grammar CSS::Snapshot2026::Box::Gen::Grammar;
 #| <visual-box> = content-box | padding-box | border-box
 rule visual-box { :i ["content-box" | "padding-box" | "border-box" ]& <keyw>  }
 #| <margin-width> = <length-percentage> | auto
-rule margin-width { :i <length-percentage> || auto & <keyw>  }
+rule margin-width { :i <length-percentage> || [auto & <keyw> ]  }
 #| margin: <margin-width>{1,4}
 rule decl:sym<margin> { :i (margin) ":" <val(/<prop-val-margin>** 1..4 /, &?ROUTINE.WHY)>}
 rule prop-val-margin { :i <margin-width> }
@@ -20,17 +20,17 @@ rule decl:sym<margin-top> { :i ("margin-top") ":" <val(/<prop-val-margin-top> /,
 rule prop-val-margin-top { :i <margin-width> }
 #| margin-trim: none | [ block || inline ] | [ block-start || inline-start || block-end || inline-end ]
 rule decl:sym<margin-trim> { :i ("margin-trim") ":" <val(/<prop-val-margin-trim> /, &?ROUTINE.WHY)>}
-rule prop-val-margin-trim { :i none & <keyw> || [[block & <keyw> :my $*A;<!{
+rule prop-val-margin-trim { :i [none & <keyw> ] || [[[block & <keyw> ] :my $*A;<!{
     $*A++
-}>|| inline & <keyw> :my $*B;<!{
+}>|| [inline & <keyw> ] :my $*B;<!{
     $*B++
-}>]+] || [["block-start" & <keyw> :my $*C;<!{
+}>]+] || [[["block-start" & <keyw> ] :my $*C;<!{
     $*C++
-}>|| "inline-start" & <keyw> :my $*D;<!{
+}>|| ["inline-start" & <keyw> ] :my $*D;<!{
     $*D++
-}>|| "block-end" & <keyw> :my $*E;<!{
+}>|| ["block-end" & <keyw> ] :my $*E;<!{
     $*E++
-}>|| "inline-end" & <keyw> :my $*F;<!{
+}>|| ["inline-end" & <keyw> ] :my $*F;<!{
     $*F++
 }>]+]  }
 #| padding: <length-percentage [0,∞]>{1,4}

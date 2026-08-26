@@ -17,11 +17,11 @@ rule single-animation { :i [<time> :my $*A;<!{
     $*F++
 }>|| <single-animation-play-state> :my $*G;<!{
     $*G++
-}>|| [none & <keyw> || <keyframes-name> ] :my $*H;<!{
+}>|| [[none & <keyw> ] || <keyframes-name> ] :my $*H;<!{
     $*H++
 }>]+ }
 #| <single-animation-iteration-count> = infinite | <number [0,∞]>
-rule single-animation-iteration-count { :i infinite & <keyw> || <number>  }
+rule single-animation-iteration-count { :i [infinite & <keyw> ] || <number>  }
 #| <single-animation-direction> = normal | reverse | alternate | alternate-reverse
 rule single-animation-direction { :i [normal | reverse | alternate | "alternate-reverse" ]& <keyw>  }
 #| <single-animation-fill-mode> = none | forwards | backwards | both
@@ -45,7 +45,7 @@ rule decl:sym<animation-iteration-count> { :i ("animation-iteration-count") ":" 
 rule prop-val-animation-iteration-count { :i <single-animation-iteration-count> +% <op(",")>? }
 #| animation-name: [ none | <keyframes-name> ]#
 rule decl:sym<animation-name> { :i ("animation-name") ":" <val(/<prop-val-animation-name> /, &?ROUTINE.WHY)>}
-rule prop-val-animation-name { :i [none & <keyw> || <keyframes-name> ] +% <op(",")>? }
+rule prop-val-animation-name { :i [[none & <keyw> ] || <keyframes-name> ] +% <op(",")>? }
 #| <keyframes-name> = <custom-ident> | <string>
 rule keyframes-name { :i <custom-ident> || <string>  }
 #| animation-play-state: <single-animation-play-state>#
@@ -57,7 +57,7 @@ rule prop-val-animation-timing-function { :i <easing-function> +% <op(",")>? }
 #| <easing-function> = <linear-easing-function> | <cubic-bezier-easing-function> | <step-easing-function>
 rule easing-function { :i <linear-easing-function> || <cubic-bezier-easing-function> || <step-easing-function>  }
 #| <linear-easing-function> = linear | <linear()>
-rule linear-easing-function { :i linear & <keyw> || <linear>  }
+rule linear-easing-function { :i [linear & <keyw> ] || <linear>  }
 #| linear( [ <number> && <percentage>{0,2} ]# )
 rule linear { :i "linear(" [[[<number> :my $*A;<!{
     $*A++

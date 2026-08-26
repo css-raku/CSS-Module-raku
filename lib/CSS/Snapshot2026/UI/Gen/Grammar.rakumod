@@ -4,7 +4,7 @@ rule decl:sym<box-sizing> { :i ("box-sizing") ":" <val(/<prop-val-box-sizing> /,
 rule prop-val-box-sizing { :i ["content-box" | "border-box" ]& <keyw>  }
 #| caret-color: auto | <color>
 rule decl:sym<caret-color> { :i ("caret-color") ":" <val(/<prop-val-caret-color> /, &?ROUTINE.WHY)>}
-rule prop-val-caret-color { :i auto & <keyw> || <color>  }
+rule prop-val-caret-color { :i [auto & <keyw> ] || <color>  }
 #| cursor: [<cursor-image>,]* <cursor-predefined>
 rule decl:sym<cursor> { :i (cursor) ":" <val(/<prop-val-cursor> /, &?ROUTINE.WHY)>}
 rule prop-val-cursor { :i [<cursor-image> <op(",")> ] * <cursor-predefined>  }
@@ -23,13 +23,13 @@ rule prop-val-outline { :i [[<prop-val-outline-color> :my $*A;<!{
 }>]+] }
 #| outline-color: <color> | invert
 rule decl:sym<outline-color> { :i ("outline-color") ":" <val(/<prop-val-outline-color> /, &?ROUTINE.WHY)>}
-rule prop-val-outline-color { :i <color> || invert & <keyw>  }
+rule prop-val-outline-color { :i <color> || [invert & <keyw> ]  }
 #| outline-offset: <length>
 rule decl:sym<outline-offset> { :i ("outline-offset") ":" <val(/<prop-val-outline-offset> /, &?ROUTINE.WHY)>}
 rule prop-val-outline-offset { :i <length> }
 #| outline-style: auto | <.'border-style'>
 rule decl:sym<outline-style> { :i ("outline-style") ":" <val(/<prop-val-outline-style> /, &?ROUTINE.WHY)>}
-rule prop-val-outline-style { :i auto & <keyw> || <prop-val-border-style>  }
+rule prop-val-outline-style { :i [auto & <keyw> ] || <prop-val-border-style>  }
 #| outline-width: <line-width>
 rule decl:sym<outline-width> { :i ("outline-width") ":" <val(/<prop-val-outline-width> /, &?ROUTINE.WHY)>}
 rule prop-val-outline-width { :i <line-width> }

@@ -10,14 +10,14 @@ rule decl:sym<align-self> { :i ("align-self") ":" <val(/<prop-val-align-self> /,
 rule prop-val-align-self { :i [auto | "flex-start" | "flex-end" | center | baseline | stretch ]& <keyw>  }
 #| flex: none | [ <'flex-grow'> <'flex-shrink'>? || <'flex-basis'> ]
 rule decl:sym<flex> { :i (flex) ":" <val(/<prop-val-flex> /, &?ROUTINE.WHY)>}
-rule prop-val-flex { :i none & <keyw> || [[<prop-val-flex-grow> <prop-val-flex-shrink> ?  :my $*A;<!{
+rule prop-val-flex { :i [none & <keyw> ] || [[<prop-val-flex-grow> <prop-val-flex-shrink> ?  :my $*A;<!{
     $*A++
 }>|| <prop-val-flex-basis> :my $*B;<!{
     $*B++
 }>]+]  }
 #| flex-basis: content | <.'width'>
 rule decl:sym<flex-basis> { :i ("flex-basis") ":" <val(/<prop-val-flex-basis> /, &?ROUTINE.WHY)>}
-rule prop-val-flex-basis { :i content & <keyw> || <prop-val-width>  }
+rule prop-val-flex-basis { :i [content & <keyw> ] || <prop-val-width>  }
 #| flex-direction: row | row-reverse | column | column-reverse
 rule decl:sym<flex-direction> { :i ("flex-direction") ":" <val(/<prop-val-flex-direction> /, &?ROUTINE.WHY)>}
 rule prop-val-flex-direction { :i [row | "row-reverse" | column | "column-reverse" ]& <keyw>  }

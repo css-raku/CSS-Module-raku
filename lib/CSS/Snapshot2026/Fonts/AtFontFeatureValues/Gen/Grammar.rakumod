@@ -9,8 +9,8 @@ rule prop-val-font-display { :i [auto | block | swap | fallback | optional ]& <k
 rule font-feature-value-name { :i <identifier> }
 #| <font-feature-index> = <integer>
 rule font-feature-index { :i <integer> }
-#| <font-feature-property> = <font-feature-value-name> : <font-feature-index> <end-decl>
-rule font-feature-property { :i <font-feature-value-name> <op(":")> <font-feature-index> <end-decl>  }
+#| <font-feature-property> = <font-feature-value-name> ':' <font-feature-index> ['!'important]? <any-args> ';'?
+rule font-feature-property { :i <font-feature-value-name> <op(":")> <font-feature-index> [<op("!")> [important & <keyw> ] ] ? <any-args> <op(";")> ?  }
 #| <font-feature-declaration-list> = [ <font-feature-property> ]*
 rule font-feature-declaration-list { :i <font-feature-property> * }
 #| @stylistic { <font-feature-declaration-list> }
