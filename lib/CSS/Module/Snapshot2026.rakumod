@@ -55,6 +55,37 @@ rule at-rule:sym<color-profile> {
     \@<at-rule=.AtColorProfile::at-rule-color-profile>
 }
 
+grammar AtCounterStyle is Base {
+    use CSS::Snapshot2026::Lists::AtCounterStyle::Gen::Grammar;
+    also is CSS::Snapshot2026::Lists::AtCounterStyle::Gen::Grammar;
+
+    use CSS::Snapshot2026::Images::Gen::Grammar;
+    also is CSS::Snapshot2026::Images::Gen::Grammar;
+
+    use       CSS::Snapshot2026::Lists::AtCounterStyle::Gen::External;
+    also does CSS::Snapshot2026::Lists::AtCounterStyle::Gen::External;
+
+    method module(|c) {
+        use CSS::Module;
+        use CSS::Module::Snapshot2026::Actions;
+        use CSS::Snapshot2026::Lists::AtCounterStyle::Metadata;
+        my constant Metadata = CSS::Snapshot2026::Lists::AtCounterStyle::Metadata;
+        # we share the actions class
+        CSS::Module.new(
+            :name<@counter-style>,
+            :grammar($?CLASS),
+	    :actions(CSS::Module::Snapshot2026::Actions),
+	    :property-metadata($Metadata::property),
+            :prop-names(Metadata::prop-names.enums),
+            :index(&Metadata::index),
+            |c
+        );
+    }
+}
+rule at-rule:sym<counter-style> {
+    \@<at-rule=.AtCounterStyle::at-rule-counter-style>
+}
+
 grammar AtFontFace is Base {
     use     CSS::Snapshot2026::Fonts::AtFontFace::Gen::Grammar;
     also is CSS::Snapshot2026::Fonts::AtFontFace::Gen::Grammar;

@@ -162,6 +162,11 @@
       "CSS::Snapshot2026::Lists::Gen::Grammar": "lib/CSS/Snapshot2026/Lists/Gen/Grammar.rakumod",
       "CSS::Snapshot2026::Lists::Gen::External": "lib/CSS/Snapshot2026/Lists/Gen/External.rakumod",
 
+      "CSS::Snapshot2026::Lists::AtCounterStyle::Metadata": "lib/CSS/Snapshot2026/Lists/AtCounterStyle/Metadata.rakumod",
+      "CSS::Snapshot2026::Lists::AtCounterStyle::Gen::Actions": "lib/CSS/Snapshot2026/Lists/AtCounterStyle/Gen/Actions.rakumod",
+      "CSS::Snapshot2026::Lists::AtCounterStyle::Gen::Grammar": "lib/CSS/Snapshot2026/Lists/AtCounterStyle/Gen/Grammar.rakumod",
+      "CSS::Snapshot2026::Lists::AtCounterStyle::Gen::External": "lib/CSS/Snapshot2026/Lists/AtCounterStyle/Gen/External.rakumod",
+
       "CSS::Snapshot2026::Logical::Gen::Actions": "lib/CSS/Snapshot2026/Logical/Gen/Actions.rakumod",
       "CSS::Snapshot2026::Logical::Gen::Grammar": "lib/CSS/Snapshot2026/Logical/Gen/Grammar.rakumod",
       "CSS::Snapshot2026::Logical::Gen::External": "lib/CSS/Snapshot2026/Logical/Gen/External.rakumod",

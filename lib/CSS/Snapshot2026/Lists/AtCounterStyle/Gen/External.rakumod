@@ -1,0 +1,16 @@
+unit role CSS::Snapshot2026::Lists::AtCounterStyle::Gen::External;
+method custom-ident (|) {
+    ...
+}
+method declarations (|) {
+    ...
+}
+method image (|) {
+    ...
+}
+method integer (|) {
+    ...
+}
+method string (|) {
+    ...
+}

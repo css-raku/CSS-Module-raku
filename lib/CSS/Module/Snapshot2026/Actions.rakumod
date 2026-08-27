@@ -24,6 +24,12 @@ method at-rule:sym<color-profile>($/) {
     make $<at-rule>.ast;
 }
 
+use CSS::Snapshot2026::Lists::AtCounterStyle::Gen::Actions;
+also is CSS::Snapshot2026::Lists::AtCounterStyle::Gen::Actions;
+method at-rule:sym<counter-style>($/) {
+    make $<at-rule>.ast;
+}
+
 use     CSS::Snapshot2026::Fonts::AtFontFace::Gen::Actions;
 also is CSS::Snapshot2026::Fonts::AtFontFace::Gen::Actions;
 method at-rule:sym<font-face>($/) {

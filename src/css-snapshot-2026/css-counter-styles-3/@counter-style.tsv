@@ -1,0 +1,14 @@
+@counter-style = @counter-style <counter-style-name> <declarations>
+
+additive-symbols	[ <integer [0,∞]> && <symbol> ]#	n/a
+<symbol> = <string> | <image> | <custom-ident>
+fallback	<counter-style-name>	decimal
+<counter-style-name> = <custom-ident>
+negative	<symbol> <symbol>?	"-"
+pad	<integer [0,∞]> && <symbol>	0 ""
+prefix	<symbol>	""
+range	[ [ <integer> | infinite ]{2} ]# | auto	auto
+speak-as	auto | bullets | numbers | words | spell-out | <counter-style-name>	auto
+suffix	<symbol>	". "
+symbols	<symbol>+	n/a
+system	cyclic | numeric | alphabetic | symbolic | additive | [fixed <integer>?] | [ extends <counter-style-name> ]	symbolic
