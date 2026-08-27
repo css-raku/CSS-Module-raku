@@ -206,7 +206,10 @@ method module(|c) {
         :&index,
         :sub-module(
             '@color-profile' => AtColorProfile.module,
+            '@counter-style' => AtCounterStyle.module,
             '@font-face' => AtFontFace.module,
+            '@font-feature-values' => AtFontFeatureValues.module,
+            '@font-palette-values' => AtFontPaletteValues.module,
         ),
         |c
         );
