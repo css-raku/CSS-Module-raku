@@ -25,7 +25,6 @@ class Make {
                  'Module::SVG' => [:inherit, <src/svg-properties.tsv>,],
                  'Module::CSS3::Fonts::AtFontFace' => [<src/css3x-font/@fontface.tsv>,],
                  :Snapshot2026[:link,
-                          <src/css-snapshot-2026/css-cascade-5.tsv>,
                           :Align<src/css-snapshot-2026/css-align-3.tsv>,
                           :Animations<src/css-snapshot-2026/css-animations-1.tsv>,
                           :Backgrounds<src/css-snapshot-2026/css-backgrounds-3.tsv>,
@@ -100,14 +99,13 @@ class Make {
                 my $meta-root = .key;
                 my @modules = .value.list;
                 my %props;
-                my %at-rules;
 
                 my @group-id = flat <CSS>, $meta-root.split('::');
                 note "Building $meta-root";
 
                 my @module-ids;
 
-                subset Opt of Pair where .key ~~ 'at-rule'|'inherit'|'link';
+                subset Opt of Pair where .key ~~ 'inherit'|'link';
                 my Bool ($inherit, $link);
                 my %opt;
                 %opt ,= @modules.shift
@@ -116,7 +114,6 @@ class Make {
                 for @modules {
                     my ($module, $files) = .isa(Pair) ?? .kv !! ([], $_);
                     my @base-id = flat @group-id, @$module, <Gen>;
-                    %at-rules{$_} = $module with %opt<at-rule>;
                     my @grammar-id = @base-id.Slip, 'Grammar';
                     my $scope := 'unit';
                     my @defs;

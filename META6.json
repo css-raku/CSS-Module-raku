@@ -66,10 +66,6 @@
     "CSS::Snapshot2026::Grammar": "lib/CSS/Snapshot2026/Grammar.rakumod",
     "CSS::Snapshot2026::External": "lib/CSS/Snapshot2026/External.rakumod",
 
-    "CSS::Snapshot2026::Gen::Actions": "lib/CSS/Snapshot2026/Gen/Actions.rakumod",
-    "CSS::Snapshot2026::Gen::Grammar": "lib/CSS/Snapshot2026/Gen/Grammar.rakumod",
-    "CSS::Snapshot2026::Gen::External": "lib/CSS/Snapshot2026/Gen/External.rakumod",
-
       "CSS::Snapshot2026::CSS21::Gen::Actions": "lib/CSS/Snapshot2026/CSS21/Gen/Actions.rakumod",
       "CSS::Snapshot2026::CSS21::Gen::Grammar": "lib/CSS/Snapshot2026/CSS21/Gen/Grammar.rakumod",
       "CSS::Snapshot2026::CSS21::Gen::External": "lib/CSS/Snapshot2026/CSS21/Gen/External.rakumod",

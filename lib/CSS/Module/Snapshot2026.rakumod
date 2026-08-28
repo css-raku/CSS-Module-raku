@@ -24,8 +24,13 @@ also is CSS::Module::Snapshot2026::Colors;
 use CSS::Snapshot2026::External;
 also does  CSS::Snapshot2026::External;
 
+# see css-cascade-5
 token proforma:sym<inherit> {:i inherit}
 token proforma:sym<initial> {:i initial}
+token proforma:sym<unset>   {:i unset}
+token proforma:sym<revert>  {:i revert}
+token proforma:sym<revert-layer> {:i revert\-layer}
+token proforma:sym<revert-rule>  {:i revert\-rule}
 
 grammar AtColorProfile is Base {
     use CSS::Snapshot2026::Color::AtColorProfile::Gen::Grammar;
@@ -50,7 +55,7 @@ grammar AtColorProfile is Base {
             |c
         );
     }
-};
+}
 rule at-rule:sym<color-profile> {
     \@<at-rule=.AtColorProfile::at-rule-color-profile>
 }

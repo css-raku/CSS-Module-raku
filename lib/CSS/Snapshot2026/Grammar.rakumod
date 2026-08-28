@@ -1,7 +1,5 @@
 unit grammar CSS::Snapshot2026::Grammar;
 
-use CSS::Snapshot2026::Gen::Grammar;
-also is CSS::Snapshot2026::Gen::Grammar;
 use CSS::Snapshot2026::Align::Gen::Grammar;
 also is CSS::Snapshot2026::Align::Gen::Grammar;
 use CSS::Snapshot2026::Animations::Gen::Grammar;

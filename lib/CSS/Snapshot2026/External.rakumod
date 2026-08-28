@@ -1,7 +1,5 @@
 unit role CSS::Snapshot2026::External;
 
-use CSS::Snapshot2026::Gen::External;
-also does CSS::Snapshot2026::Gen::External;
 use CSS::Snapshot2026::Align::Gen::External;
 also does CSS::Snapshot2026::Align::Gen::External;
 use CSS::Snapshot2026::Animations::Gen::External;

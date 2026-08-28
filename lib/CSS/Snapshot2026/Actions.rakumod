@@ -1,7 +1,5 @@
 unit class CSS::Snapshot2026::Actions;
 
-use CSS::Snapshot2026::Gen::Actions;
-also is CSS::Snapshot2026::Gen::Actions;
 use CSS::Snapshot2026::Align::Gen::Actions;
 also is CSS::Snapshot2026::Align::Gen::Actions;
 use CSS::Snapshot2026::Animations::Gen::Actions;

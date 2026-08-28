@@ -51,6 +51,6 @@ also is CSS::Snapshot2026::Fonts::AtFontPaletteValues::Gen::Actions;
 method build {
     use CSS::Grammar::AST;
     my class builder is CSS::Grammar::AST {
-        method proforma { ['inherit', 'initial'] }
+        method proforma { ['inherit', 'initial', 'unset', 'revert', 'revert-layer', 'revert-rule'] }
     }
 }
