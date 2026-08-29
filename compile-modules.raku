@@ -80,6 +80,9 @@ class Make {
                                src/css-snapshot-2026/css21-aural.tsv
                            >,
                       ],
+                 'Snapshot2026::Animations::AtKeyFrames' => [:inherit,
+                     <src/css-snapshot-2026/css-animations-1/@keyframes.tsv>
+                  ],
                  'Snapshot2026::Fonts::AtFontFace' => [
                      <src/css-snapshot-2026/css-fonts-4/@fontface.tsv>
                   ],
@@ -91,10 +94,10 @@ class Make {
                   ],
                  'Snapshot2026::Color::AtColorProfile' => [
                      <src/css-snapshot-2026/css-color-5/@color-profile.tsv>
-                 ],
+                  ],
                  'Snapshot2026::Lists::AtCounterStyle' => [
                      <src/css-snapshot-2026/css-counter-styles-3/@counter-style.tsv>
-                 ],
+                  ],
                 ) {
                 my $meta-root = .key;
                 my @modules = .value.list;

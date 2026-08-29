@@ -1,0 +1,13 @@
+unit role CSS::Snapshot2026::Animations::AtKeyFrames::Gen::External;
+method custom-ident (|) {
+    ...
+}
+method declaration-list (|) {
+    ...
+}
+method percentage (|) {
+    ...
+}
+method string (|) {
+    ...
+}

@@ -15,22 +15,25 @@ grammar Base {
     token proforma:sym<revert-layer> {:i revert\-layer}
     token proforma:sym<revert-rule>  {:i revert\-rule}
 }
-also is Base;
 
-use CSS::Module::CSS3::Values_and_Units;
-also is CSS::Module::CSS3::Values_and_Units::Calc;
+grammar BaseProperties {
+    also is Base;
+    use CSS::Module::CSS3::Values_and_Units;
+    also is CSS::Module::CSS3::Values_and_Units::Calc;
 
-use CSS::Module::CSS3::Namespaces;
-also is CSS::Module::CSS3::Namespaces;
+    use CSS::Module::CSS3::Namespaces;
+    also is CSS::Module::CSS3::Namespaces;
 
-use CSS::Snapshot2026::Grammar;
-also is  CSS::Snapshot2026::Grammar;
+    use CSS::Snapshot2026::Grammar;
+    also is  CSS::Snapshot2026::Grammar;
 
-use CSS::Module::Snapshot2026::Colors;
-also is CSS::Module::Snapshot2026::Colors;
+    use CSS::Module::Snapshot2026::Colors;
+    also is CSS::Module::Snapshot2026::Colors;
 
-use CSS::Snapshot2026::External;
-also does  CSS::Snapshot2026::External;
+    use CSS::Snapshot2026::External;
+    also does  CSS::Snapshot2026::External;
+}
+also is BaseProperties;
 
 grammar AtColorProfile is Base {
     use CSS::Snapshot2026::Color::AtColorProfile::Gen::Grammar;
@@ -193,6 +196,34 @@ rule at-rule:sym<font-palette-values> {
     \@<at-rule=.AtFontPaletteValues::at-rule-font-palette-values>
 }
 
+grammar AtKeyFrames is BaseProperties {
+    use CSS::Snapshot2026::Animations::AtKeyFrames::Gen::Grammar;
+    also is CSS::Snapshot2026::Animations::AtKeyFrames::Gen::Grammar;
+
+    use       CSS::Snapshot2026::Animations::AtKeyFrames::Gen::External;
+    also does CSS::Snapshot2026::Animations::AtKeyFrames::Gen::External;
+
+    method module(|c) {
+        use CSS::Module;
+        use CSS::Module::Snapshot2026::Actions;
+        use CSS::Snapshot2026::Animations::AtKeyFrames::Metadata;
+        my constant Metadata = CSS::Snapshot2026::Animations::AtKeyFrames::Metadata;
+        # we share the actions class
+        CSS::Module.new(
+            :name<@keyframes>,
+            :grammar($?CLASS),
+	    :actions(CSS::Module::Snapshot2026::Actions),
+	    :property-metadata($Metadata::property),
+            :prop-names(Metadata::prop-names.enums),
+            :index(&Metadata::index),
+            |c
+        );
+    }
+}
+rule at-rule:sym<keyframes> {
+    \@<at-rule=.AtKeyFrames::at-rule-keyframes>
+}
+
 method module(|c) {
     use CSS::Module;
     use CSS::Module::Snapshot2026::Actions;
@@ -215,6 +246,7 @@ method module(|c) {
             '@font-face' => AtFontFace.module,
             '@font-feature-values' => AtFontFeatureValues.module,
             '@font-palette-values' => AtFontPaletteValues.module,
+            '@keyframes' => AtKeyFrames.module,
         ),
         |c
         );

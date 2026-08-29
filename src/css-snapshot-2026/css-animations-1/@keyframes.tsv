@@ -1,0 +1,7 @@
+@keyframes = @keyframes <keyframes-name> { <keyframe-block>* }
+
+<keyframes-name> = <custom-ident> | <string>
+
+<keyframe-block> = <keyframe-selector># { <declaration-list> }
+
+<keyframe-selector> = from | to | <percentage [0,100]>

@@ -78,6 +78,11 @@
       "CSS::Snapshot2026::Animations::Gen::Grammar": "lib/CSS/Snapshot2026/Animations/Gen/Grammar.rakumod",
       "CSS::Snapshot2026::Animations::Gen::External": "lib/CSS/Snapshot2026/Animations/Gen/External.rakumod",
 
+      "CSS::Snapshot2026::Animations::AtKeyFrames::Metadata": "lib/CSS/Snapshot2026/Animations/AtKeyFrames/Metadata.rakumod",
+      "CSS::Snapshot2026::Animations::AtKeyFrames::Gen::Actions": "lib/CSS/Snapshot2026/Animations/AtKeyFrames/Gen/Actions.rakumod",
+      "CSS::Snapshot2026::Animations::AtKeyFrames::Gen::Grammar": "lib/CSS/Snapshot2026/Animations/AtKeyFrames/Gen/Grammar.rakumod",
+      "CSS::Snapshot2026::Animations::AtKeyFrames::Gen::External": "lib/CSS/Snapshot2026/Animations/AtKeyFrames/Gen/External.rakumod",
+
       "CSS::Snapshot2026::Backgrounds::Gen::Actions": "lib/CSS/Snapshot2026/Backgrounds/Gen/Actions.rakumod",
       "CSS::Snapshot2026::Backgrounds::Gen::Grammar": "lib/CSS/Snapshot2026/Backgrounds/Gen/Grammar.rakumod",
       "CSS::Snapshot2026::Backgrounds::Gen::External": "lib/CSS/Snapshot2026/Backgrounds/Gen/External.rakumod",

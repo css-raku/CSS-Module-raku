@@ -47,6 +47,15 @@ method at-rule:sym<font-feature-values>($/) {
 
 use     CSS::Snapshot2026::Fonts::AtFontPaletteValues::Gen::Actions;
 also is CSS::Snapshot2026::Fonts::AtFontPaletteValues::Gen::Actions;
+method at-rule:sym<font-palette-values>($/) {
+    make $<at-rule>.ast;
+}
+
+use CSS::Snapshot2026::Animations::AtKeyFrames::Gen::Actions;
+also is CSS::Snapshot2026::Animations::AtKeyFrames::Gen::Actions;
+method at-rule:sym<keyframes>($/) {
+    make $<at-rule>.ast;
+}
 
 method build {
     use CSS::Grammar::AST;
