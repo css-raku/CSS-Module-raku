@@ -61,6 +61,20 @@ for (
      ),
     :warnings[ "dropping unknown property: color", "skipping: xx" ],
     },
+    {:rule<at-rule>, input => q:to<END>,
+     @font-feature-values foo {
+         font-display: blah;
+     }
+     END
+     :ast(
+         :at-rule{
+             :at-keyw<font-feature-values>,
+             :declarations[ ],
+             :ident<foo>,
+         }
+     ),
+    :warnings[ "skipping: blah", "usage font-display: auto | block | swap | fallback | optional | inherit | initial | unset | revert | revert-layer | revert-rule" ],
+    },
 ) -> % ( :$rule!, :$input!, *%expected ) {
 
     for $snapshot2026 -> $module {

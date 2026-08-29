@@ -6,6 +6,14 @@ grammar Base {
 
     use CSS::Specification::Base::Grammar;
     also does CSS::Specification::Base::Grammar;
+
+    # see css-cascade-5
+    token proforma:sym<inherit> {:i inherit}
+    token proforma:sym<initial> {:i initial}
+    token proforma:sym<unset>   {:i unset}
+    token proforma:sym<revert>  {:i revert}
+    token proforma:sym<revert-layer> {:i revert\-layer}
+    token proforma:sym<revert-rule>  {:i revert\-rule}
 }
 also is Base;
 
@@ -23,14 +31,6 @@ also is CSS::Module::Snapshot2026::Colors;
 
 use CSS::Snapshot2026::External;
 also does  CSS::Snapshot2026::External;
-
-# see css-cascade-5
-token proforma:sym<inherit> {:i inherit}
-token proforma:sym<initial> {:i initial}
-token proforma:sym<unset>   {:i unset}
-token proforma:sym<revert>  {:i revert}
-token proforma:sym<revert-layer> {:i revert\-layer}
-token proforma:sym<revert-rule>  {:i revert\-rule}
 
 grammar AtColorProfile is Base {
     use CSS::Snapshot2026::Color::AtColorProfile::Gen::Grammar;
