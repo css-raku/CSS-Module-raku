@@ -1,0 +1,13 @@
+unit role CSS::Snapshot2026::PagedMedia::AtPage::Gen::External;
+method Ident (|) {
+    ...
+}
+method declarations (|) {
+    ...
+}
+method length (|) {
+    ...
+}
+method length-percentage (|) {
+    ...
+}

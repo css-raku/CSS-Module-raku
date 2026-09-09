@@ -224,6 +224,41 @@ rule at-rule:sym<keyframes> {
     \@<at-rule=.AtKeyFrames::at-rule-keyframes>
 }
 
+grammar AtPage is BaseProperties {
+    use     CSS::Snapshot2026::PagedMedia::AtPage::Gen::Grammar;
+    also is CSS::Snapshot2026::PagedMedia::AtPage::Gen::Grammar;
+
+##    use     CSS::Snapshot2026::Values::Gen::Grammar;
+##    also is CSS::Snapshot2026::Values::Gen::Grammar;
+
+    use       CSS::Snapshot2026::PagedMedia::AtPage::Gen::External;
+    also does CSS::Snapshot2026::PagedMedia::AtPage::Gen::External;
+
+    use       CSS::Snapshot2026::Values::Gen::External;
+    also does CSS::Snapshot2026::Values::Gen::External;
+
+    method module(|c) {
+        use CSS::Module;
+        use CSS::Module::Snapshot2026::Actions;
+        use CSS::Snapshot2026::PagedMedia::AtPage::Metadata;
+        my constant Metadata = CSS::Snapshot2026::PagedMedia::AtPage::Metadata;
+        # we share the actions class
+        CSS::Module.new(
+            :name<@page>,
+            :grammar($?CLASS),
+            :actions(CSS::Module::Snapshot2026::Actions),
+            :property-metadata($Metadata::property),
+            :prop-names(Metadata::prop-names.enums),
+            :index(&Metadata::index),
+            |c
+        );
+    }
+}
+rule page-declarations { <declarations=.AtPage::declarations> }
+rule at-rule:sym<page> {
+    \@<at-rule=.AtPage::at-rule-page>
+}
+
 method module(|c) {
     use CSS::Module;
     use CSS::Module::Snapshot2026::Actions;
@@ -247,6 +282,7 @@ method module(|c) {
             '@font-feature-values' => AtFontFeatureValues.module,
             '@font-palette-values' => AtFontPaletteValues.module,
             '@keyframes' => AtKeyFrames.module,
+            '@page' => AtPage.module,
         ),
         |c
         );

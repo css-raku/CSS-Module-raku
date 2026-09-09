@@ -1,8 +1,6 @@
 unit grammar CSS::Snapshot2026::Box::Gen::Grammar;
 #| <visual-box> = content-box | padding-box | border-box
 rule visual-box { :i ["content-box" | "padding-box" | "border-box" ]& <keyw>  }
-#| <margin-width> = <length-percentage> | auto
-rule margin-width { :i <length-percentage> || [auto & <keyw> ]  }
 #| margin: <margin-width>{1,4}
 rule decl:sym<margin> { :i (margin) ":" <val(/<prop-val-margin>** 1..4 /, &?ROUTINE.WHY)>}
 rule prop-val-margin { :i <margin-width> }

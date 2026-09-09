@@ -75,10 +75,7 @@ class Make {
                           :Values<src/css-snapshot-2026/css-values-5.tsv>,
                           :WritingModes<src/css-snapshot-2026/css-writing-modes-4.tsv>,
                           :WillChange<src/css-snapshot-2026/css-will-change-1.tsv>,
-                          :CSS21<
-                               src/css-snapshot-2026/drafts-css2.tsv
-                               src/css-snapshot-2026/css21-aural.tsv
-                           >,
+                          :CSS21<src/css21-properties.tsv>,
                       ],
                  'Snapshot2026::Animations::AtKeyFrames' => [:inherit,
                      <src/css-snapshot-2026/css-animations-1/@keyframes.tsv>
@@ -97,6 +94,13 @@ class Make {
                   ],
                  'Snapshot2026::Lists::AtCounterStyle' => [
                      <src/css-snapshot-2026/css-counter-styles-3/@counter-style.tsv>
+                  ],
+                 'Snapshot2026::PagedMedia::AtMedia' => [
+                     <src/css-snapshot-2026/css-conditional-3/@media.tsv>
+                  ],
+                  'Snapshot2026::PagedMedia::AtPage' => [
+                     <src/css-snapshot-2026/css-page-3/@page.tsv
+                     src/css-snapshot-2026/css2/margins.tsv>,
                   ],
                 ) {
                 my $meta-root = .key;

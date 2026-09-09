@@ -57,6 +57,14 @@ method at-rule:sym<keyframes>($/) {
     make $<at-rule>.ast;
 }
 
+use CSS::Snapshot2026::PagedMedia::AtPage::Gen::Actions;
+also is CSS::Snapshot2026::PagedMedia::AtPage::Gen::Actions;
+
+method page-declarations($/) { make $<declarations>.ast }
+method at-rule:sym<page>($/) {
+    make $<at-rule>.ast;
+}
+
 method build {
     use CSS::Grammar::AST;
     my class builder is CSS::Grammar::AST {

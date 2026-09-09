@@ -1,5 +1,4 @@
 <visual-box> = content-box | padding-box | border-box
-<margin-width> = <length-percentage> | auto
 margin	<margin-width>{1,4}	0	all elements except internal table elements, ruby base containers, and ruby annotation containers	no	refer to logical width of containing block	by computed value type	per grammar	see individual properties	
 margin-bottom	<margin-width>	0	all elements except internal table elements, ruby base containers, and ruby annotation containers	no	refer to logical width of containing block	by computed value type	per grammar	the keyword auto or a computed <length-percentage> value	margin
 margin-left	<margin-width>	0	all elements except internal table elements, ruby base containers, and ruby annotation containers	no	refer to logical width of containing block	by computed value type	per grammar	the keyword auto or a computed <length-percentage> value	margin

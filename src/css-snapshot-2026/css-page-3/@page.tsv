@@ -1,0 +1,28 @@
+/* https://www.w3.org/TR/css-page-3/ */
+@page = @page [<page-selector-list>?] <declarations>
+<page-selector-list> = <page-selector>#
+<page-selector> = [ <ident>? <pseudo-page>* ]!
+<pseudo-page> = ':' [ left | right | first | blank ]
+
+/* Margin rules */
+@top-left-corner = @top-left-corner <declarations>;?
+@top-left = @top-left <declarations>;?
+@top-center = @top-center <declarations>;?
+@top-right = @top-right <declarations>;?
+@top-right-corner = @top-right-corner <declarations>;?
+@bottom-left-corner = @bottom-left-corner <declarations>;?
+@bottom-left = @bottom-left <declarations>;?
+@bottom-center = @bottom-center <declarations>;?
+@bottom-right = @bottom-right <declarations>;?
+@bottom-right-corner = @bottom-right-corner <declarations>;?
+@left-top = @left-top <declarations>;?
+@left-middle = @left-middle <declarations>;?
+@left-bottom = @left-bottom <declarations>;?
+@right-top = @right-top <declarations>;?
+@right-middle = @right-middle <declarations>;?
+@right-bottom = @right-bottom <declarations>;?
+bleed	auto | <length>	auto	as specified
+marks	none | [ crop || cross ]	none	as specified
+page-orientation	upright | rotate-left | rotate-right	upright	as specified
+size	<length>{1,2} | auto | [ <page-size> || [ portrait | landscape ] ]	auto	specified value, with <length>s made absolute.
+<page-size> = a3 | a4 | a5 | b4 | b5 | jis-b4 | jis-b5 | letter | legal | ledger

@@ -128,6 +128,10 @@ multi method parse-property(Str:D $property-name where .starts-with('@'), Str:D(
     $ast;
 }
 
+multi method parse-property(Str:D $property-name, Str:D :sub-module($)! where my ($sub-module = %!sub-module{$_}), |c) {
+    $sub-module.parse-property: $property-name, |c;
+}
+
 #| parse an individual property-specific expression
 multi method parse-property(Str:D $property-name, Str:D() $val, Bool :$warn = True, Bool :$trace) {
     my $actions = $.actions.new;

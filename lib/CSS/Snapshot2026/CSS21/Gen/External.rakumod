@@ -1,7 +1,4 @@
 unit role CSS::Snapshot2026::CSS21::Gen::External;
-method absolute-size (|) {
-    ...
-}
 method angle (|) {
     ...
 }
@@ -23,25 +20,16 @@ method integer (|) {
 method length (|) {
     ...
 }
-method length-percentage (|) {
-    ...
-}
-method margin-width (|) {
-    ...
-}
 method number (|) {
     ...
 }
 method percentage (|) {
     ...
 }
-method relative-size (|) {
-    ...
-}
-method shape (|) {
-    ...
-}
 method string (|) {
+    ...
+}
+method time (|) {
     ...
 }
 method uri (|) {

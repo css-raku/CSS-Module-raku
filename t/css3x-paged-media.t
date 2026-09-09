@@ -4,26 +4,29 @@ use Test;
 use JSON::Fast;
 
 use CSS::Module::CSS3;
+use CSS::Module::Snapshot2026;
 use CSS::Grammar::Test;
 use CSS::Writer;
 
-my $grammar = CSS::Module::CSS3.module.grammar;
-my $actions = CSS::Module::CSS3.module.actions.new;
+my $css3 = CSS::Module::CSS3.module;
+my $snapshot2026 = CSS::Module::Snapshot2026.module;
 my CSS::Writer $writer .= new;
 
 for ( 't/css3x-paged-media.json'.IO.lines ) {
     next
         if .substr(0,2) eq '//';
 
-    my ($rule, $expected) = @( from-json($_) );
-    my $input = $expected<input>;
+    my :($rule, $expected) := @( from-json($_) );
 
-    &CSS::Grammar::Test::parse-tests($grammar, $input,
-                                     :$rule,
-                                     :$actions,
-                                     :suite<css3 @page>,
-                                     :$writer,
-                                     :$expected );
+    for $css3, $snapshot2026 -> $module {
+        my %expected = %$expected;
+        %expected ,= .Hash with %expected{$module.name}:delete;
+        my $input = %expected<input>:delete;
+        &CSS::Grammar::Test::parse-tests($input, :$module,
+                                         :$rule,
+                                         :$writer,
+                                         :%expected );
+    }
 }
 
 done-testing;
