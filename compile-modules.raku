@@ -25,6 +25,7 @@ class Make {
                  'Module::SVG' => [:inherit, <src/svg-properties.tsv>,],
                  'Module::CSS3::Fonts::AtFontFace' => [<src/css3x-font/@fontface.tsv>,],
                  :Snapshot2026[:link,
+                          'src/css-snapshot-2026/css-cascade-5.tsv',
                           :Align<src/css-snapshot-2026/css-align-3.tsv>,
                           :Animations<src/css-snapshot-2026/css-animations-1.tsv>,
                           :Backgrounds<src/css-snapshot-2026/css-backgrounds-3.tsv>,

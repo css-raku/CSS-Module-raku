@@ -1,1 +1,21 @@
-all	initial | inherit | unset | revert | revert-layer | revert-rule	see individual properties	see individual properties	see individual properties	see individual properties	see individual properties	per grammar	see individual properties
+#all	initial | inherit | unset | revert | revert-layer | revert-rule	see individual properties	see individual properties	see individual properties	see individual properties	see individual properties	per grammar	see individual properties
+@import = @import [ <url> | <string> ]\
+        [ layer | layer(<layer-name>) ]?\
+        <import-conditions> ;
+
+<layer-name> = <ident> [ '.' <ident> ]*
+
+<import-conditions> = [ supports( [ <supports-condition> | <declaration> ] ) ]?
+#\                     <media-query-list>?
+
+
+@layer = @layer <layer-name>? <declarations>
+<supports-condition> = not <supports-in-parens>\
+                     | <supports-in-parens> [ and <supports-in-parens> ]*\
+                     | <supports-in-parens> [ or <supports-in-parens> ]*
+<supports-in-parens> = ( <supports-condition> ) | <supports-feature> | <general-enclosed>
+<supports-feature> = <supports-decl>
+<supports-decl> = ( <declaration> )
+<general-enclosed> = [ <function> ( <any-value>? ) ] | [ ( <any-value>? ) ]
+<function> = <ident>
+<supports()> = supports( [ <supports-condition> | <declaration> ] )

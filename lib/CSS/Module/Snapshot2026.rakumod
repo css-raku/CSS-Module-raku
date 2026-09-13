@@ -276,13 +276,13 @@ method module(|c) {
         :$prop-names,
         :&index,
         :sub-module(
-            '@color-profile' => AtColorProfile.module,
-            '@counter-style' => AtCounterStyle.module,
-            '@font-face' => AtFontFace.module,
+            '@color-profile'       => AtColorProfile.module,
+            '@counter-style'       => AtCounterStyle.module,
+            '@font-face'           => AtFontFace.module,
             '@font-feature-values' => AtFontFeatureValues.module,
             '@font-palette-values' => AtFontPaletteValues.module,
-            '@keyframes' => AtKeyFrames.module,
-            '@page' => AtPage.module,
+            '@keyframes'           => AtKeyFrames.module,
+            '@page'                => AtPage.module,
         ),
         |c
         );

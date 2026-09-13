@@ -1,0 +1,19 @@
+unit role CSS::Snapshot2026::Gen::External;
+method Ident (|) {
+    ...
+}
+method any-value (|) {
+    ...
+}
+method declaration (|) {
+    ...
+}
+method declarations (|) {
+    ...
+}
+method string (|) {
+    ...
+}
+method url (|) {
+    ...
+}
