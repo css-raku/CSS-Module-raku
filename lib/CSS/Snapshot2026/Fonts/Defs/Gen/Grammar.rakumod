@@ -1,12 +1,12 @@
 unit grammar CSS::Snapshot2026::Fonts::Defs::Gen::Grammar;
 #| <font-family-name> = <identifiers> | <string>
-rule font-family-name { :i <identifiers> || <string>  }
+rule font-family-name { :i <identifiers> || <string> }
 #| <font-variant-css2> = normal | small-caps
-rule font-variant-css2 { :i [normal | "small-caps" ]& <keyw>  }
+rule font-variant-css2 { :i [normal | "small-caps" ]& <keyw> }
 #| <font-feature-value-name> = <ident>
 rule font-feature-value-name { :i <Ident> }
 #| <feature-tag-value> = <opentype-tag> [ <integer [0,∞]> | on | off ]?
-rule feature-tag-value { :i <opentype-tag> [<integer> || [on | off ]& <keyw>  ] ?  }
+rule feature-tag-value { :i <opentype-tag> [<integer> || [on | off ]& <keyw> ] ? }
 #| <opentype-tag> = <string>
 rule opentype-tag { :i <string> }
 #| <east-asian-variant-values> = [ jis78 | jis83 | jis90 | jis04 | simplified | traditional ]
@@ -24,9 +24,9 @@ rule contextual-alt-values { :i [[contextual | "no-contextual" ]& <keyw> ] }
 #| stylistic(<font-feature-value-name>)
 rule stylistic { :i "stylistic(" [<font-feature-value-name> || <usage(&?ROUTINE.WHY)> ] ")" }
 #| styleset(<font-feature-value-name>#)
-rule styleset { :i "styleset(" [<font-feature-value-name> +% ","? || <usage(&?ROUTINE.WHY)> ] ")" }
+rule styleset { :i "styleset(" [<font-feature-value-name> + % ","? || <usage(&?ROUTINE.WHY)> ] ")" }
 #| character-variant(<font-feature-value-name>#)
-rule character-variant { :i "character-variant(" [<font-feature-value-name> +% ","? || <usage(&?ROUTINE.WHY)> ] ")" }
+rule character-variant { :i "character-variant(" [<font-feature-value-name> + % ","? || <usage(&?ROUTINE.WHY)> ] ")" }
 #| swash(<font-feature-value-name>)
 rule swash { :i "swash(" [<font-feature-value-name> || <usage(&?ROUTINE.WHY)> ] ")" }
 #| ornaments(<font-feature-value-name>)
@@ -40,19 +40,19 @@ rule numeric-spacing-values { :i [["proportional-nums" | "tabular-nums" ]& <keyw
 #| <numeric-fraction-values> = [ diagonal-fractions | stacked-fractions ]
 rule numeric-fraction-values { :i [["diagonal-fractions" | "stacked-fractions" ]& <keyw> ] }
 #| <font-weight-absolute> = [ normal | bold | <number [1,1000]> ]
-rule font-weight-absolute { :i [[normal | bold ]& <keyw>  || <number> ] }
+rule font-weight-absolute { :i [[normal | bold ]& <keyw> || <number> ] }
 #| <font-src> = <url> [ format( <font-format> ) ]? [ tech( <font-tech># ) ]? | local( <font-family-name> )
-rule font-src { :i <url> <format> ? <tech> ?  || <local>  }
+rule font-src { :i <url> <format> ? <tech> ? || <local> }
 #| format( <font-format> )
 rule format { :i "format(" [<font-format> || <usage(&?ROUTINE.WHY)> ] ")" }
 #| tech( <font-tech># )
-rule tech { :i "tech(" [<font-tech> +% ","? || <usage(&?ROUTINE.WHY)> ] ")" }
+rule tech { :i "tech(" [<font-tech> + % ","? || <usage(&?ROUTINE.WHY)> ] ")" }
 #| local( <font-family-name> )
 rule local { :i "local(" [<font-family-name> || <usage(&?ROUTINE.WHY)> ] ")" }
 #| <font-format> = [ <string> | collection | embedded-opentype | opentype      | svg | truetype | woff | woff2 ]
-rule font-format { :i [<string> || [collection | "embedded-opentype" | opentype | svg | truetype | woff | woff2 ]& <keyw>  ] }
+rule font-format { :i [<string> || [collection | "embedded-opentype" | opentype | svg | truetype | woff | woff2 ]& <keyw> ] }
 #| <font-tech> = [ <font-features-tech> | <color-font-tech>      | variations | palettes | incremental ]
-rule font-tech { :i [<font-features-tech> || <color-font-tech> || [variations | palettes | incremental ]& <keyw>  ] }
+rule font-tech { :i [<font-features-tech> || <color-font-tech> || [variations | palettes | incremental ]& <keyw> ] }
 #| <font-features-tech> = [ features-opentype | features-aat | features-graphite ]
 rule font-features-tech { :i [["features-opentype" | "features-aat" | "features-graphite" ]& <keyw> ] }
 #| <color-font-tech> = [ color-COLRv0 | color-COLRv1 | color-SVG | color-sbix | color-CBDT ]

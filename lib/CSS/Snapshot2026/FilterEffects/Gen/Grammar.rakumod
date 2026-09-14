@@ -1,14 +1,14 @@
 unit grammar CSS::Snapshot2026::FilterEffects::Gen::Grammar;
 #| color-interpolation-filters: auto | sRGB | linearRGB
 rule decl:sym<color-interpolation-filters> { :i ("color-interpolation-filters") ":" <val(/<prop-val-color-interpolation-filters> /, &?ROUTINE.WHY)>}
-rule prop-val-color-interpolation-filters { :i [auto | sRGB | linearRGB ]& <keyw>  }
+rule prop-val-color-interpolation-filters { :i [auto | sRGB | linearRGB ]& <keyw> }
 #| filter: none | <filter-value-list>
 rule decl:sym<filter> { :i (filter) ":" <val(/<prop-val-filter> /, &?ROUTINE.WHY)>}
-rule prop-val-filter { :i [none & <keyw> ] || <filter-value-list>  }
+rule prop-val-filter { :i [none & <keyw> ] || <filter-value-list> }
 #| <filter-value-list> = [ <filter-function> | <url> ]+
 rule filter-value-list { :i [<filter-function> || <url> ] + }
 #| <filter-function> = <blur()> | <brightness()> | <contrast()> | <drop-shadow()> |  <grayscale()> | <hue-rotate()> | <invert()> | <opacity()> | <sepia()> | <saturate()>
-rule filter-function { :i <blur> || <brightness> || <contrast> || <drop-shadow> || <grayscale> || <hue-rotate> || <invert> || <opacity> || <sepia> || <saturate>  }
+rule filter-function { :i <blur> || <brightness> || <contrast> || <drop-shadow> || <grayscale> || <hue-rotate> || <invert> || <opacity> || <sepia> || <saturate> }
 #| blur( <length>? )
 rule blur { :i "blur(" [<length> ? || <usage(&?ROUTINE.WHY)> ] ")" }
 #| brightness( [ <number> |  <percentage> ]? )
@@ -16,9 +16,9 @@ rule brightness { :i "brightness(" [[<number> || <percentage> ] ? || <usage(&?RO
 #| contrast( [ <number> |  <percentage> ]? )
 rule contrast { :i "contrast(" [[<number> || <percentage> ] ? || <usage(&?ROUTINE.WHY)> ] ")" }
 #| drop-shadow( [ <color>? && <length>{2,3} ] )
-rule drop-shadow { :i "drop-shadow(" [[[<color> ? :my $*A;<!{
+rule drop-shadow { :i "drop-shadow(" [[[<color> ? :my $*A; <!{
     $*A++
-}>|| <length> ** 2..3 :my $*B;<!{
+}>|| <length> ** 2..3 :my $*B; <!{
     $*B++
 }>]** 2] || <usage(&?ROUTINE.WHY)> ] ")" }
 #| grayscale( [ <number> |  <percentage> ]? )

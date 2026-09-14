@@ -1,58 +1,58 @@
 unit grammar CSS::Snapshot2026::Masking::Gen::Grammar;
 #| clip: <rect()> | auto
 rule decl:sym<clip> { :i (clip) ":" <val(/<prop-val-clip> /, &?ROUTINE.WHY)>}
-rule prop-val-clip { :i <rect> || [auto & <keyw> ]  }
+rule prop-val-clip { :i <rect> || [auto & <keyw> ] }
 #| clip-path: <clip-source> | [ <basic-shape> || <geometry-box> ] | none
 rule decl:sym<clip-path> { :i ("clip-path") ":" <val(/<prop-val-clip-path> /, &?ROUTINE.WHY)>}
-rule prop-val-clip-path { :i <clip-source> || [[<basic-shape> :my $*A;<!{
+rule prop-val-clip-path { :i <clip-source> || [[<basic-shape> :my $*A; <!{
     $*A++
-}>|| <geometry-box> :my $*B;<!{
+}>|| <geometry-box> :my $*B; <!{
     $*B++
-}>]+] || [none & <keyw> ]  }
+}>]+] || [none & <keyw> ] }
 #| <geometry-box> = <shape-box> | fill-box | stroke-box | view-box
-rule geometry-box { :i <shape-box> || ["fill-box" | "stroke-box" | "view-box" ]& <keyw>   }
+rule geometry-box { :i <shape-box> || ["fill-box" | "stroke-box" | "view-box" ]& <keyw> }
 #| clip-rule: nonzero | evenodd
 rule decl:sym<clip-rule> { :i ("clip-rule") ":" <val(/<prop-val-clip-rule> /, &?ROUTINE.WHY)>}
-rule prop-val-clip-rule { :i [nonzero | evenodd ]& <keyw>  }
+rule prop-val-clip-rule { :i [nonzero | evenodd ]& <keyw> }
 #| mask: <mask-layer>#
 rule decl:sym<mask> { :i (mask) ":" <val(/<prop-val-mask> /, &?ROUTINE.WHY)>}
-rule prop-val-mask { :i <mask-layer> +% <op(",")>? }
+rule prop-val-mask { :i <mask-layer> + % <op(",")>? }
 #| <mask-layer> = <mask-reference> ||  <position> [ / <bg-size> ]? ||  <repeat-style> ||  <geometry-box> ||  [ <geometry-box> | no-clip ] ||  <compositing-operator> ||  <masking-mode>
-rule mask-layer { :i [<mask-reference> :my $*A;<!{
+rule mask-layer { :i [<mask-reference> :my $*A; <!{
     $*A++
-}>|| <position> [<op("/")> <bg-size> ] ?  :my $*B;<!{
+}>|| <position> [<op("/")> <bg-size> ] ? :my $*B; <!{
     $*B++
-}>|| <repeat-style> :my $*C;<!{
+}>|| <repeat-style> :my $*C; <!{
     $*C++
-}>|| <geometry-box> :my $*D;<!{
+}>|| <geometry-box> :my $*D; <!{
     $*D++
-}>|| [<geometry-box> || ["no-clip" & <keyw> ] ] :my $*E;<!{
+}>|| [<geometry-box> || ["no-clip" & <keyw> ] ] :my $*E; <!{
     $*E++
-}>|| <compositing-operator> :my $*F;<!{
+}>|| <compositing-operator> :my $*F; <!{
     $*F++
-}>|| <masking-mode> :my $*G;<!{
+}>|| <masking-mode> :my $*G; <!{
     $*G++
 }>]+ }
 #| <mask-reference> = none | <image> | <mask-source>
-rule mask-reference { :i [none & <keyw> ] || <image> || <mask-source>  }
+rule mask-reference { :i [none & <keyw> ] || <image> || <mask-source> }
 #| <mask-source> = <url>
 rule mask-source { :i <url> }
 #| <masking-mode> = alpha | luminance | match-source
-rule masking-mode { :i [alpha | luminance | "match-source" ]& <keyw>  }
+rule masking-mode { :i [alpha | luminance | "match-source" ]& <keyw> }
 #| mask-border: <'mask-border-source'> || <'mask-border-slice'> [ / <'mask-border-width'>? [ / <'mask-border-outset'> ]? ]? || <'mask-border-repeat'> || <'mask-border-mode'>
 rule decl:sym<mask-border> { :i ("mask-border") ":" <val(/<prop-val-mask-border> /, &?ROUTINE.WHY)>}
-rule prop-val-mask-border { :i [<prop-val-mask-border-source> :my $*A;<!{
+rule prop-val-mask-border { :i [<prop-val-mask-border-source> :my $*A; <!{
     $*A++
-}>|| <prop-val-mask-border-slice> [<op("/")> <prop-val-mask-border-width> ? [<op("/")> <prop-val-mask-border-outset> ] ? ] ?  :my $*B;<!{
+}>|| <prop-val-mask-border-slice> [<op("/")> <prop-val-mask-border-width> ? [<op("/")> <prop-val-mask-border-outset> ] ? ] ? :my $*B; <!{
     $*B++
-}>|| <prop-val-mask-border-repeat> :my $*C;<!{
+}>|| <prop-val-mask-border-repeat> :my $*C; <!{
     $*C++
-}>|| <prop-val-mask-border-mode> :my $*D;<!{
+}>|| <prop-val-mask-border-mode> :my $*D; <!{
     $*D++
 }>]+ }
 #| mask-border-mode: luminance | alpha
 rule decl:sym<mask-border-mode> { :i ("mask-border-mode") ":" <val(/<prop-val-mask-border-mode> /, &?ROUTINE.WHY)>}
-rule prop-val-mask-border-mode { :i [luminance | alpha ]& <keyw>  }
+rule prop-val-mask-border-mode { :i [luminance | alpha ]& <keyw> }
 #| mask-border-outset: <.'border-image-outset'>
 rule decl:sym<mask-border-outset> { :i ("mask-border-outset") ":" <val(/<prop-val-mask-border-outset> /, &?ROUTINE.WHY)>}
 rule prop-val-mask-border-outset { :i <prop-val-border-image-outset> }
@@ -70,40 +70,40 @@ rule decl:sym<mask-border-width> { :i ("mask-border-width") ":" <val(/<prop-val-
 rule prop-val-mask-border-width { :i <prop-val-border-image-width> }
 #| mask-clip: [ <coord-box> | no-clip ]#
 rule decl:sym<mask-clip> { :i ("mask-clip") ":" <val(/<prop-val-mask-clip> /, &?ROUTINE.WHY)>}
-rule prop-val-mask-clip { :i [<coord-box> || ["no-clip" & <keyw> ] ] +% <op(",")>? }
+rule prop-val-mask-clip { :i [<coord-box> || ["no-clip" & <keyw> ] ] + % <op(",")>? }
 #| <coord-box> = <paint-box> | view-box
-rule coord-box { :i <paint-box> || ["view-box" & <keyw> ]  }
+rule coord-box { :i <paint-box> || ["view-box" & <keyw> ] }
 #| <paint-box> = <visual-box> | fill-box | stroke-box
-rule paint-box { :i <visual-box> || ["fill-box" | "stroke-box" ]& <keyw>   }
+rule paint-box { :i <visual-box> || ["fill-box" | "stroke-box" ]& <keyw> }
 #| <visual-box> = content-box | padding-box | border-box
-rule visual-box { :i ["content-box" | "padding-box" | "border-box" ]& <keyw>  }
+rule visual-box { :i ["content-box" | "padding-box" | "border-box" ]& <keyw> }
 #| <layout-box> = <visual-box> | margin-box
-rule layout-box { :i <visual-box> || ["margin-box" & <keyw> ]  }
+rule layout-box { :i <visual-box> || ["margin-box" & <keyw> ] }
 #| <clip-source> = <url>
 rule clip-source { :i <url> }
 #| mask-composite: <compositing-operator>#
 rule decl:sym<mask-composite> { :i ("mask-composite") ":" <val(/<prop-val-mask-composite> /, &?ROUTINE.WHY)>}
-rule prop-val-mask-composite { :i <compositing-operator> +% <op(",")>? }
+rule prop-val-mask-composite { :i <compositing-operator> + % <op(",")>? }
 #| <compositing-operator> = add | subtract | intersect | exclude
-rule compositing-operator { :i [add | subtract | intersect | exclude ]& <keyw>  }
+rule compositing-operator { :i [add | subtract | intersect | exclude ]& <keyw> }
 #| mask-image: <mask-reference>#
 rule decl:sym<mask-image> { :i ("mask-image") ":" <val(/<prop-val-mask-image> /, &?ROUTINE.WHY)>}
-rule prop-val-mask-image { :i <mask-reference> +% <op(",")>? }
+rule prop-val-mask-image { :i <mask-reference> + % <op(",")>? }
 #| mask-mode: <masking-mode>#
 rule decl:sym<mask-mode> { :i ("mask-mode") ":" <val(/<prop-val-mask-mode> /, &?ROUTINE.WHY)>}
-rule prop-val-mask-mode { :i <masking-mode> +% <op(",")>? }
+rule prop-val-mask-mode { :i <masking-mode> + % <op(",")>? }
 #| mask-origin: <coord-box>#
 rule decl:sym<mask-origin> { :i ("mask-origin") ":" <val(/<prop-val-mask-origin> /, &?ROUTINE.WHY)>}
-rule prop-val-mask-origin { :i <coord-box> +% <op(",")>? }
+rule prop-val-mask-origin { :i <coord-box> + % <op(",")>? }
 #| mask-position: <position>#
 rule decl:sym<mask-position> { :i ("mask-position") ":" <val(/<prop-val-mask-position> /, &?ROUTINE.WHY)>}
-rule prop-val-mask-position { :i <position> +% <op(",")>? }
+rule prop-val-mask-position { :i <position> + % <op(",")>? }
 #| mask-repeat: <repeat-style>#
 rule decl:sym<mask-repeat> { :i ("mask-repeat") ":" <val(/<prop-val-mask-repeat> /, &?ROUTINE.WHY)>}
-rule prop-val-mask-repeat { :i <repeat-style> +% <op(",")>? }
+rule prop-val-mask-repeat { :i <repeat-style> + % <op(",")>? }
 #| mask-size: <bg-size>#
 rule decl:sym<mask-size> { :i ("mask-size") ":" <val(/<prop-val-mask-size> /, &?ROUTINE.WHY)>}
-rule prop-val-mask-size { :i <bg-size> +% <op(",")>? }
+rule prop-val-mask-size { :i <bg-size> + % <op(",")>? }
 #| mask-type: luminance | alpha
 rule decl:sym<mask-type> { :i ("mask-type") ":" <val(/<prop-val-mask-type> /, &?ROUTINE.WHY)>}
-rule prop-val-mask-type { :i [luminance | alpha ]& <keyw>  }
+rule prop-val-mask-type { :i [luminance | alpha ]& <keyw> }

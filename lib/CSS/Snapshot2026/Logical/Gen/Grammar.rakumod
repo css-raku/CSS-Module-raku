@@ -10,11 +10,11 @@ rule decl:sym<border-block-color> { :i ("border-block-color") ":" <val(/<prop-va
 rule prop-val-border-block-color { :i <prop-val-border-top-color> ** 1..2 }
 #| border-block-end: <.'border-top-width'> || <.'border-top-style'> || <color>
 rule decl:sym<border-block-end> { :i ("border-block-end") ":" <val(/<prop-val-border-block-end> /, &?ROUTINE.WHY)>}
-rule prop-val-border-block-end { :i [<prop-val-border-top-width> :my $*A;<!{
+rule prop-val-border-block-end { :i [<prop-val-border-top-width> :my $*A; <!{
     $*A++
-}>|| <prop-val-border-top-style> :my $*B;<!{
+}>|| <prop-val-border-top-style> :my $*B; <!{
     $*B++
-}>|| <color> :my $*C;<!{
+}>|| <color> :my $*C; <!{
     $*C++
 }>]+ }
 #| border-block-end-color: <.'border-top-color'>
@@ -28,11 +28,11 @@ rule decl:sym<border-block-end-width> { :i ("border-block-end-width") ":" <val(/
 rule prop-val-border-block-end-width { :i <prop-val-border-top-width> }
 #| border-block-start: <.'border-top-width'> || <.'border-top-style'> || <color>
 rule decl:sym<border-block-start> { :i ("border-block-start") ":" <val(/<prop-val-border-block-start> /, &?ROUTINE.WHY)>}
-rule prop-val-border-block-start { :i [<prop-val-border-top-width> :my $*A;<!{
+rule prop-val-border-block-start { :i [<prop-val-border-top-width> :my $*A; <!{
     $*A++
-}>|| <prop-val-border-top-style> :my $*B;<!{
+}>|| <prop-val-border-top-style> :my $*B; <!{
     $*B++
-}>|| <color> :my $*C;<!{
+}>|| <color> :my $*C; <!{
     $*C++
 }>]+ }
 #| border-block-start-color: <.'border-top-color'>
@@ -64,11 +64,11 @@ rule decl:sym<border-inline-color> { :i ("border-inline-color") ":" <val(/<prop-
 rule prop-val-border-inline-color { :i <prop-val-border-top-color> ** 1..2 }
 #| border-inline-end: <.'border-top-width'> || <.'border-top-style'> || <color>
 rule decl:sym<border-inline-end> { :i ("border-inline-end") ":" <val(/<prop-val-border-inline-end> /, &?ROUTINE.WHY)>}
-rule prop-val-border-inline-end { :i [<prop-val-border-top-width> :my $*A;<!{
+rule prop-val-border-inline-end { :i [<prop-val-border-top-width> :my $*A; <!{
     $*A++
-}>|| <prop-val-border-top-style> :my $*B;<!{
+}>|| <prop-val-border-top-style> :my $*B; <!{
     $*B++
-}>|| <color> :my $*C;<!{
+}>|| <color> :my $*C; <!{
     $*C++
 }>]+ }
 #| border-inline-end-color: <.'border-top-color'>
@@ -82,11 +82,11 @@ rule decl:sym<border-inline-end-width> { :i ("border-inline-end-width") ":" <val
 rule prop-val-border-inline-end-width { :i <prop-val-border-top-width> }
 #| border-inline-start: <.'border-top-width'> || <.'border-top-style'> || <color>
 rule decl:sym<border-inline-start> { :i ("border-inline-start") ":" <val(/<prop-val-border-inline-start> /, &?ROUTINE.WHY)>}
-rule prop-val-border-inline-start { :i [<prop-val-border-top-width> :my $*A;<!{
+rule prop-val-border-inline-start { :i [<prop-val-border-top-width> :my $*A; <!{
     $*A++
-}>|| <prop-val-border-top-style> :my $*B;<!{
+}>|| <prop-val-border-top-style> :my $*B; <!{
     $*B++
-}>|| <color> :my $*C;<!{
+}>|| <color> :my $*C; <!{
     $*C++
 }>]+ }
 #| border-inline-start-color: <.'border-top-color'>
