@@ -51,6 +51,7 @@ class Make {
                            >,
                           :Logical<src/css-snapshot-2026/css-logical-1.tsv>,
                           :Masking<src/css-snapshot-2026/css-masking-1.tsv>,
+                          :MediaQueries<src/css-snapshot-2026/css-mediaqueries-4.tsv>,
                           :Motion<src/css-snapshot-2026/css-motion-1.tsv>,
                           :MultiCol<src/css-snapshot-2026/css-multicol-1.tsv>,
                           :PagedMedia<src/css3x-paged-media.tsv>,
@@ -73,7 +74,10 @@ class Make {
                               src/css-snapshot-2026/css-transforms-2.tsv
                            >,
                           :UI<src/css-snapshot-2026/css-ui-3.tsv>,
-                          :Values<src/css-snapshot-2026/css-values-5.tsv>,
+                          :Values<
+                               src/css-snapshot-2026/css-values-4.tsv
+                               src/css-snapshot-2026/css-values-5.tsv
+                           >,
                           :WritingModes<src/css-snapshot-2026/css-writing-modes-4.tsv>,
                           :WillChange<src/css-snapshot-2026/css-will-change-1.tsv>,
                           :CSS21<src/css21-properties.tsv>,

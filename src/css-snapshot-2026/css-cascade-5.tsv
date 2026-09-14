@@ -6,7 +6,7 @@
 <layer-name> = <ident> [ '.' <ident> ]*
 
 <import-conditions> = [ supports( [ <supports-condition> | <declaration> ] ) ]?
-#\                     <media-query-list>?
+#                     <media-query-list>?
 
 
 @layer = @layer <layer-name>? <declarations>

@@ -1,4 +1,6 @@
 unit grammar CSS::Snapshot2026::Values::Gen::Grammar;
+#| <ratio> = <number [0,∞]> [ / <number [0,∞]> ]?
+rule ratio { :i <number> [<op("/")> <number> ] ?  }
 #| <position> = <position-four> | <position-two> | <position-one>
 rule position { :i <position-four> || <position-two> || <position-one>  }
 #| <position-one> = [  left | center | right | top | bottom |  x-start | x-end | y-start | y-end |  block-start | block-end | inline-start | inline-end |  <length-percentage>]

@@ -1,4 +1,7 @@
 unit class CSS::Snapshot2026::Values::Gen::Actions;
+method ratio ($/) {
+    make $.build.rule($/)
+}
 method position ($/) {
     make $.build.rule($/)
 }

@@ -176,6 +176,10 @@
       "CSS::Snapshot2026::Logical::Gen::Grammar": "lib/CSS/Snapshot2026/Logical/Gen/Grammar.rakumod",
       "CSS::Snapshot2026::Logical::Gen::External": "lib/CSS/Snapshot2026/Logical/Gen/External.rakumod",
 
+      "CSS::Snapshot2026::MediaQueries::Gen::Actions": "lib/CSS/Snapshot2026/MediaQueries/Gen/Actions.rakumod",
+      "CSS::Snapshot2026::MediaQueries::Gen::Grammar": "lib/CSS/Snapshot2026/MediaQueries/Gen/Grammar.rakumod",
+      "CSS::Snapshot2026::MediaQueries::Gen::External": "lib/CSS/Snapshot2026/MediaQueries/Gen/External.rakumod",
+
       "CSS::Snapshot2026::Masking::Gen::Actions": "lib/CSS/Snapshot2026/Masking/Gen/Actions.rakumod",
       "CSS::Snapshot2026::Masking::Gen::Grammar": "lib/CSS/Snapshot2026/Masking/Gen/Grammar.rakumod",
       "CSS::Snapshot2026::Masking::Gen::External": "lib/CSS/Snapshot2026/Masking/Gen/External.rakumod",

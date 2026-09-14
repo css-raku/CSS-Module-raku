@@ -40,6 +40,8 @@ use CSS::Snapshot2026::Logical::Gen::External;
 also does CSS::Snapshot2026::Logical::Gen::External;
 use CSS::Snapshot2026::Masking::Gen::External;
 also does CSS::Snapshot2026::Masking::Gen::External;
+use CSS::Snapshot2026::MediaQueries::Gen::External;
+also does CSS::Snapshot2026::MediaQueries::Gen::External;
 use CSS::Snapshot2026::Motion::Gen::External;
 also does CSS::Snapshot2026::Motion::Gen::External;
 use CSS::Snapshot2026::MultiCol::Gen::External;

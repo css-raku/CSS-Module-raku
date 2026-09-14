@@ -1,0 +1,19 @@
+unit role CSS::Snapshot2026::MediaQueries::Gen::External;
+method Ident (|) {
+    ...
+}
+method any-value (|) {
+    ...
+}
+method dimension (|) {
+    ...
+}
+method function (|) {
+    ...
+}
+method number (|) {
+    ...
+}
+method ratio (|) {
+    ...
+}

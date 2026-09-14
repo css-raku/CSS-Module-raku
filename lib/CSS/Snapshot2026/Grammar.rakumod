@@ -40,6 +40,8 @@ use CSS::Snapshot2026::Logical::Gen::Grammar;
 also is CSS::Snapshot2026::Logical::Gen::Grammar;
 use CSS::Snapshot2026::Masking::Gen::Grammar;
 also is CSS::Snapshot2026::Masking::Gen::Grammar;
+use CSS::Snapshot2026::MediaQueries::Gen::Grammar;
+also is CSS::Snapshot2026::MediaQueries::Gen::Grammar;
 use CSS::Snapshot2026::Motion::Gen::Grammar;
 also is CSS::Snapshot2026::Motion::Gen::Grammar;
 use CSS::Snapshot2026::MultiCol::Gen::Grammar;

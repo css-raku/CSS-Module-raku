@@ -40,6 +40,8 @@ use CSS::Snapshot2026::Logical::Gen::Actions;
 also is CSS::Snapshot2026::Logical::Gen::Actions;
 use CSS::Snapshot2026::Masking::Gen::Actions;
 also is CSS::Snapshot2026::Masking::Gen::Actions;
+use CSS::Snapshot2026::MediaQueries::Gen::Actions;
+also is CSS::Snapshot2026::MediaQueries::Gen::Actions;
 use CSS::Snapshot2026::Motion::Gen::Actions;
 also is CSS::Snapshot2026::Motion::Gen::Actions;
 use CSS::Snapshot2026::MultiCol::Gen::Actions;
