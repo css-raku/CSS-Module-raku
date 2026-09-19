@@ -23,3 +23,8 @@ rule general-enclosed { :i [<function> <op("(")> <any-value> ?<op(")")> ] || [<o
 rule function { :i <Ident> }
 #| supports( [ <supports-condition> | <declaration> ] )
 rule supports { :i "supports(" [[<supports-condition> || <declaration> ] || <usage(&?ROUTINE.WHY)> ] ")" }
+#| @namespace <namespace-prefix>? [ <string> | <url> ] ;
+rule decl:sym<@namespace> { "\@"<at-rule=.at-rule-namespace>}
+rule at-rule-namespace { (:i namespace) <namespace-prefix> ? [<string> || <url> ] ";" }
+#| <namespace-prefix> = <ident>
+rule namespace-prefix { :i <Ident> }

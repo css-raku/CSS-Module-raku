@@ -35,6 +35,15 @@ method general-enclosed ($/) {
 method function ($/) {
     make $.build.rule($/)
 }
+method at-rule:sym<namespace> ($/) {
+    make $<at-rule-namespace>.ast
+}
+method at-rule-namespace ($/) {
+    make $.build.at-rule($/)
+}
+method namespace-prefix ($/) {
+    make $.build.rule($/)
+}
 method supports ($/) {
     $.make-func("supports", $/)
 }

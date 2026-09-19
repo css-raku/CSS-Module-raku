@@ -1,7 +1,7 @@
 unit grammar CSS::Snapshot2026::Backgrounds::Gen::Grammar;
 #| background: <bg-layer>#? , <final-bg-layer>
 rule decl:sym<background> { :i (background) ":" <val(/<prop-val-background> /, &?ROUTINE.WHY)>}
-rule prop-val-background { :i [:!r <bg-layer> + % <op(",")><op(",")>]? <final-bg-layer> }
+rule prop-val-background { :i [:!r <bg-layer> + % <op(",")> <op(",")>]? <final-bg-layer> }
 #| <bg-layer> = <'background-image'> || <'background-position'> [ / <'background-size'> ]? || <'background-repeat'> || <'background-attachment'> || <'background-clip'>
 rule bg-layer { :i [<prop-val-background-image> :my $*A; <!{
     $*A++
