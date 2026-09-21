@@ -6,7 +6,7 @@ use v6;
 
 unit class CSS::Module::CSS3::Namespaces;
 
-rule at-decl:sym<namespace> {'@'(:i'namespace') <ns-prefix=.Ident>? [<url=.url-string>|<url>] ';' }
+rule at-decl:sym<namespace> {'@'(:i'namespace') <ns-prefix=.Ident>?! [<url=.url-string>|<url>] ';' }
 
 class Actions {
     use CSS::Grammar::Defs :CSSObject;
