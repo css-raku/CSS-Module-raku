@@ -6,7 +6,7 @@ use CSS::Module::CSS3;
 use CSS::Module::CSS3::Fonts::AtFontFace;
 use CSS::Module::SVG;
 
-lives-ok {require CSS::Specification:ver(v0.4.4..*) }, "CSS::Specification version";
+lives-ok {require CSS::Specification:ver(v0.4.4+) }, "CSS::Specification version";
 my \css1-module = CSS::Module::CSS1.module;
 isa-ok css1-module.grammar, 'CSS::Module::CSS1', 'css1 grammar';
 isa-ok css1-module.actions, 'CSS::Module::CSS1::Actions', 'css1 actions';
