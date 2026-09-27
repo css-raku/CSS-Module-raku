@@ -37,19 +37,20 @@ class Build {
                     my $file = $input-spec.join: '/';
                     my @defs = $compiler.load-defs: :$file;
                     my %child-props = $compiler.child-props;
+                    my %child-rules = $compiler.child-rules;
 
-                    my RakuAST::Package $grammar-ast = $compiler.build-grammar(@grammar-id, :$scope);
+                    my RakuAST::Package $grammar-ast = $compiler.compile-grammar(@grammar-id, :$scope);
                     "lib/{$grammar-ast.&path}.rakumod".IO.spurt: $grammar-ast.DEPARSE;
 
                     my @actions-id = @base-id.Slip, 'Actions';
-                    my RakuAST::Package $actions-ast = $compiler.build-actions(@actions-id, :$scope);
+                    my RakuAST::Package $actions-ast = $compiler.compile-actions(@actions-id, :$scope);
                     "lib/{$actions-ast.&path}.rakumod".IO.spurt: $actions-ast.DEPARSE;
 
                     my @external-id = @base-id.Slip, 'External';
-                    my RakuAST::Package $external-ast = $compiler.build-external(@external-id, :$scope);
+                    my RakuAST::Package $external-ast = $compiler.compile-external(@external-id, :$scope);
                     "lib/{$external-ast.&path}.rakumod".IO.spurt: $external-ast.DEPARSE;
 
-                    my %meta = @defs.&build-metadata(:%child-props);
+                    my %meta = @defs.&build-metadata(:%child-props, :%child-rules);
                     %props ,= %meta;
                 }
                 
