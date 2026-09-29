@@ -22,7 +22,7 @@ rule prop-val-offset-path { :i [none & <keyw> ] || [<offset-path> :my $*A; <!{
 #| <offset-path> = <ray()> | <url> | <basic-shape>
 rule offset-path { :i <ray> || <url> || <basic-shape> }
 #| ray( <angle> && <ray-size>? && contain? && [at <position>]? )
-rule ray { :i "ray(" [[<angle> :my $*A; <!{
+rule ray { [:i "ray(" [[[<angle> :my $*A; <!{
     $*A++
 }>|| <ray-size> ? :my $*B; <!{
     $*B++
@@ -30,7 +30,7 @@ rule ray { :i "ray(" [[<angle> :my $*A; <!{
     $*C++
 }>|| [[at & <keyw> ] <position> ] ? :my $*D; <!{
     $*D++
-}>]** 4 || <usage(&?ROUTINE.WHY)> ] ")" }
+}>]** 4 || <usage(&?ROUTINE.WHY)>] ] ")"] }
 #| <ray-size> = <radial-extent> | sides
 rule ray-size { :i <radial-extent> || [sides & <keyw> ] }
 #| offset-position: normal | auto | <position>

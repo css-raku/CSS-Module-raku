@@ -163,7 +163,7 @@ rule prop-val-clip { :i <shape> || [auto & <keyw> ] }
 #| <shape> = <rect()>
 rule shape { :i <rect> }
 #| rect([<length> | auto]#{4,4})
-rule rect { :i "rect(" [[<length> || [auto & <keyw> ] ] ** 4 % ","? || <usage(&?ROUTINE.WHY)> ] ")" }
+rule rect { [:i "rect(" [[[<length> || [auto & <keyw> ] ] ** 4 % ","? || <usage(&?ROUTINE.WHY)>] ] ")"] }
 #| color: <color>
 rule decl:sym<color> { :i (color) ":" <val(/<prop-val-color> /, &?ROUTINE.WHY)>}
 rule prop-val-color { :i <color> }
@@ -171,11 +171,11 @@ rule prop-val-color { :i <color> }
 rule decl:sym<content> { :i (content) ":" <val(/<prop-val-content> /, &?ROUTINE.WHY)>}
 rule prop-val-content { :i [normal | none ]& <keyw> || [<string> || <uri> || <counter> || <counters> || <attr> || ["open-quote" | "close-quote" | "no-open-quote" | "no-close-quote" ]& <keyw> ] + }
 #| attr(<identifier>)
-rule attr { :i "attr(" [<identifier> || <usage(&?ROUTINE.WHY)> ] ")" }
+rule attr { [:i "attr(" [[<identifier> || <usage(&?ROUTINE.WHY)>] ] ")"] }
 #| counter(<identifier>[, <'list-style-type'>]?)
-rule counter { :i "counter(" [<identifier> ["," <prop-val-list-style-type> ] ? || <usage(&?ROUTINE.WHY)> ] ")" }
+rule counter { [:i "counter(" [[<identifier> ["," <prop-val-list-style-type> ] ? || <usage(&?ROUTINE.WHY)>] ] ")"] }
 #| counters(<identifier> [, <string>]?)
-rule counters { :i "counters(" [<identifier> ["," <string> ] ? || <usage(&?ROUTINE.WHY)> ] ")" }
+rule counters { [:i "counters(" [[<identifier> ["," <string> ] ? || <usage(&?ROUTINE.WHY)>] ] ")"] }
 #| counter-increment: none | [ <identifier> <integer>? ]+
 rule decl:sym<counter-increment> { :i ("counter-increment") ":" <val(/<prop-val-counter-increment> /, &?ROUTINE.WHY)>}
 rule prop-val-counter-increment { :i [none & <keyw> ] || [<identifier> <integer> ? ] + }
@@ -237,7 +237,7 @@ rule decl:sym<font-variant> { :i ("font-variant") ":" <val(/<prop-val-font-varia
 rule prop-val-font-variant { :i [normal | "small-caps" ]& <keyw> }
 #| font-weight: normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
 rule decl:sym<font-weight> { :i ("font-weight") ":" <val(/<prop-val-font-weight> /, &?ROUTINE.WHY)>}
-rule prop-val-font-weight { :i [normal | bold | bolder | lighter ]& <keyw> || [100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 ]& <number> }
+rule prop-val-font-weight { :i [normal | bold | bolder | lighter ]& <keyw> || [[100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 ]& <number>] }
 #| font: [ [ 'font-style' || 'font-variant' || 'font-weight' ]? 'font-size' [ / 'line-height' ]? 'font-family'# ] | caption | icon | menu | message-box | small-caption | status-bar
 rule decl:sym<font> { :i (font) ":" <val(/<prop-val-font> /, &?ROUTINE.WHY)>}
 rule prop-val-font { :i [[[<prop-val-font-style> :my $*A; <!{

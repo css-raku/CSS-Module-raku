@@ -83,7 +83,7 @@ rule prop-val-shape-rendering { :i [auto | optimizeSpeed | crispEdges | geometri
 rule decl:sym<stop-color> { :i ("stop-color") ":" <val(/<prop-val-stop-color> /, &?ROUTINE.WHY)>}
 rule prop-val-stop-color { :i [currentColor & <keyw> ] || <color> }
 #| icc-color(<name> [,<number>]*)
-rule icc-color { :i "icc-color(" [<name> ["," <number> ] * || <usage(&?ROUTINE.WHY)> ] ")" }
+rule icc-color { [:i "icc-color(" [[<name> ["," <number> ] * || <usage(&?ROUTINE.WHY)>] ] ")"] }
 #| stop-opacity: <alpha-value>
 rule decl:sym<stop-opacity> { :i ("stop-opacity") ":" <val(/<prop-val-stop-opacity> /, &?ROUTINE.WHY)>}
 rule prop-val-stop-opacity { :i <alpha-value> }

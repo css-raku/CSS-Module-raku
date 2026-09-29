@@ -7,27 +7,27 @@ rule transform-list { :i <transform-function> + }
 #| <transform-function> = <matrix()> | <translate()> | <translateX()> | <translateY()> | <scale()> | <scaleX()> | <scaleY()> | <rotate()> | <skew()> | <skewX()> | <skewY()>
 rule transform-function { :i <matrix> || <translate> || <translateX> || <translateY> || <scale> || <scaleX> || <scaleY> || <rotate> || <skew> || <skewX> || <skewY> }
 #| matrix( <number>#{6} )
-rule matrix { :i "matrix(" [<number> ** 6 % ","? || <usage(&?ROUTINE.WHY)> ] ")" }
+rule matrix { [:i "matrix(" [[<number> ** 6 % ","? || <usage(&?ROUTINE.WHY)>] ] ")"] }
 #| translate( <length-percentage> , <length-percentage>? )
-rule translate { :i "translate(" [<length-percentage> ["," <length-percentage> ]? || <usage(&?ROUTINE.WHY)> ] ")" }
+rule translate { [:i "translate(" [[<length-percentage> ["," <length-percentage> ]? || <usage(&?ROUTINE.WHY)>] ] ")"] }
 #| translateX( <length-percentage> )
-rule translateX { :i "translateX(" [<length-percentage> || <usage(&?ROUTINE.WHY)> ] ")" }
+rule translateX { [:i "translateX(" [[<length-percentage> || <usage(&?ROUTINE.WHY)>] ] ")"] }
 #| translateY( <length-percentage> )
-rule translateY { :i "translateY(" [<length-percentage> || <usage(&?ROUTINE.WHY)> ] ")" }
+rule translateY { [:i "translateY(" [[<length-percentage> || <usage(&?ROUTINE.WHY)>] ] ")"] }
 #| scale( <number> , <number>? )
-rule scale { :i "scale(" [<number> ["," <number> ]? || <usage(&?ROUTINE.WHY)> ] ")" }
+rule scale { [:i "scale(" [[<number> ["," <number> ]? || <usage(&?ROUTINE.WHY)>] ] ")"] }
 #| scaleX( <number> )
-rule scaleX { :i "scaleX(" [<number> || <usage(&?ROUTINE.WHY)> ] ")" }
+rule scaleX { [:i "scaleX(" [[<number> || <usage(&?ROUTINE.WHY)>] ] ")"] }
 #| scaleY( <number> )
-rule scaleY { :i "scaleY(" [<number> || <usage(&?ROUTINE.WHY)> ] ")" }
+rule scaleY { [:i "scaleY(" [[<number> || <usage(&?ROUTINE.WHY)>] ] ")"] }
 #| rotate( [ <angle> | <zero> ] )
-rule rotate { :i "rotate(" [[<angle> || <zero> ] || <usage(&?ROUTINE.WHY)> ] ")" }
+rule rotate { [:i "rotate(" [[[<angle> || <zero> ] || <usage(&?ROUTINE.WHY)>] ] ")"] }
 #| skew( [ <angle> | <zero> ] , [ <angle> | <zero> ]? )
-rule skew { :i "skew(" [[<angle> || <zero> ] ["," [<angle> || <zero> ] ]? || <usage(&?ROUTINE.WHY)> ] ")" }
+rule skew { [:i "skew(" [[[<angle> || <zero> ] ["," [<angle> || <zero> ] ]? || <usage(&?ROUTINE.WHY)>] ] ")"] }
 #| skewX( [ <angle> | <zero> ] )
-rule skewX { :i "skewX(" [[<angle> || <zero> ] || <usage(&?ROUTINE.WHY)> ] ")" }
+rule skewX { [:i "skewX(" [[[<angle> || <zero> ] || <usage(&?ROUTINE.WHY)>] ] ")"] }
 #| skewY( [ <angle> | <zero> ] )
-rule skewY { :i "skewY(" [[<angle> || <zero> ] || <usage(&?ROUTINE.WHY)> ] ")" }
+rule skewY { [:i "skewY(" [[[<angle> || <zero> ] || <usage(&?ROUTINE.WHY)>] ] ")"] }
 #| transform-box: content-box | border-box | fill-box | stroke-box | view-box
 rule decl:sym<transform-box> { :i ("transform-box") ":" <val(/<prop-val-transform-box> /, &?ROUTINE.WHY)>}
 rule prop-val-transform-box { :i ["content-box" | "border-box" | "fill-box" | "stroke-box" | "view-box" ]& <keyw> }

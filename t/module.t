@@ -8,6 +8,7 @@ use CSS::Module::SVG;
 use CSS::Module::Snapshot2026;
 
 subtest 'CSS1', {
+    lives-ok {require CSS::Specification:ver(v0.4.4+) }, "CSS::Specification version";
     my \module = CSS::Module::CSS1.module;
     isa-ok module.grammar, 'CSS::Module::CSS1', 'css1 grammar';
     isa-ok module.actions, 'CSS::Module::CSS1::Actions', 'css1 actions';
@@ -17,7 +18,6 @@ subtest 'CSS1', {
     is-deeply css1-prop<border-style>, {:box, :edges[<border-top-style border-right-style border-bottom-style border-left-style>], :!inherit, :synopsis("[ none | dotted | dashed | solid | double | groove | ridge | inset | outset ]\{1,4}") }, 'css1 border-style';
     is-deeply module.parse-property('border-style', 'none' ), [{ :keyw<none> }, ], 'module.parse-property method';
     is-deeply module.parse-property('width', '5pt' ), [{ :pt(5) }, ], 'module.parse-property method';
-
     nok module.parse-property('border-style', 'flashy', :!warn), 'module.parse-property failure';
 
     is-deeply module.colors<red>, [ 255, 0,   0 ], "colors";

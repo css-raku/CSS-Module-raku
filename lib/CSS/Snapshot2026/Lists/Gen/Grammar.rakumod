@@ -5,7 +5,7 @@ rule prop-val-counter-increment { :i [<counter-name> <integer> ? ] + || [none & 
 #| <counter-name> = <identifier>
 rule counter-name { :i <identifier> }
 #| reversed( <counter-name> )
-rule reversed-counter-name { :i "reversed(" [<counter-name> || <usage(&?ROUTINE.WHY)> ] ")" }
+rule reversed-counter-name { [:i "reversed(" [[<counter-name> || <usage(&?ROUTINE.WHY)>] ] ")"] }
 #| counter-reset: [ <counter-name> <integer>? | <reversed-counter-name> <integer>? ]+ | none
 rule decl:sym<counter-reset> { :i ("counter-reset") ":" <val(/<prop-val-counter-reset> /, &?ROUTINE.WHY)>}
 rule prop-val-counter-reset { :i [<counter-name> <integer> ? || <reversed-counter-name> <integer> ? ] + || [none & <keyw> ] }
@@ -38,6 +38,6 @@ rule counter-style { :i <counter-style-name> || <symbols> }
 #| <counter-style-name> = decimal | decimal-leading-zero | arabic-indic | armenian |    upper-armenian | lower-armenian | bengali | cambodian | khmer | cjk-decimal |    devanagari | georgian | gujarati | gurmukhi | hebrew | kannada | lao | malayalam    | mongolian | myanmar | oriya | persian | lower-roman | upper-roman | tamil |    telugu | thai | tibetan | lower-alpha | lower-latin | upper-alpha | upper-latin |    lower-greek | disc | circle | square | disclosure-open | disclosure-closed |    cjk-earthly-branch | cjk-earthly-stem | japanese-informal | japanese-formal |    korean-hangul-formal | korean-hanja-informal | korean-hanja-formal |    simp-chinese-informal | simp-chinese-formal | trad-chinese-informal |    trad-chinese-formal | korean-hangul-formal | korean-hanja-informal |    korean-hanja-formal | cjk-decimal | ethiopic-numeric
 rule counter-style-name { :i [decimal | "decimal-leading-zero" | "arabic-indic" | armenian | "upper-armenian" | "lower-armenian" | bengali | cambodian | khmer | "cjk-decimal" | devanagari | georgian | gujarati | gurmukhi | hebrew | kannada | lao | malayalam | mongolian | myanmar | oriya | persian | "lower-roman" | "upper-roman" | tamil | telugu | thai | tibetan | "lower-alpha" | "lower-latin" | "upper-alpha" | "upper-latin" | "lower-greek" | disc | circle | square | "disclosure-open" | "disclosure-closed" | "cjk-earthly-branch" | "cjk-earthly-stem" | "japanese-informal" | "japanese-formal" | "korean-hangul-formal" | "korean-hanja-informal" | "korean-hanja-formal" | "simp-chinese-informal" | "simp-chinese-formal" | "trad-chinese-informal" | "trad-chinese-formal" | "korean-hangul-formal" | "korean-hanja-informal" | "korean-hanja-formal" | "cjk-decimal" | "ethiopic-numeric" ]& <keyw> }
 #| symbols( <symbols-type>? [ <string> | <image> ]+ )
-rule symbols { :i "symbols(" [<symbols-type> ? [<string> || <image> ] + || <usage(&?ROUTINE.WHY)> ] ")" }
+rule symbols { [:i "symbols(" [[<symbols-type> ? [<string> || <image> ] + || <usage(&?ROUTINE.WHY)>] ] ")"] }
 #| <symbols-type> = cyclic | numeric | alphabetic | symbolic | fixed
 rule symbols-type { :i [cyclic | numeric | alphabetic | symbolic | fixed ]& <keyw> }

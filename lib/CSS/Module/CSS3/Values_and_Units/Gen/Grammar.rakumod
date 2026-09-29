@@ -1,6 +1,6 @@
 unit grammar CSS::Module::CSS3::Values_and_Units::Gen::Grammar;
 #| calc( <calc-sum> )
-rule calc { :i "calc(" [<calc-sum> || <usage(&?ROUTINE.WHY)> ] ")" }
+rule calc { [:i "calc(" [[<calc-sum> || <usage(&?ROUTINE.WHY)>] ] ")"] }
 #| <calc-sum> = <calc-product> [ [ '+' | '-' ] <calc-product> ]*
 rule calc-sum { :i <calc-product> [[<op("+")> || <op("-")> ] <calc-product> ] * }
 #| <calc-product> = <calc-value> [ '*' <calc-value> | '/' <calc-number-value> ]*

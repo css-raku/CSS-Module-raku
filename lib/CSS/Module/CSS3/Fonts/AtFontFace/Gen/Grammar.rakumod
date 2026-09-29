@@ -58,7 +58,7 @@ rule prop-val-font-variant { :i [normal & <keyw> ] || [[<common-lig-values> :my 
 }>]+] }
 #| font-weight: normal | bold | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
 rule decl:sym<font-weight> { :i ("font-weight") ":" <val(/<prop-val-font-weight> /, &?ROUTINE.WHY)>}
-rule prop-val-font-weight { :i [normal | bold ]& <keyw> || [100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 ]& <number> }
+rule prop-val-font-weight { :i [normal | bold ]& <keyw> || [[100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 ]& <number>] }
 #| src: <font-src-expr>#
 rule decl:sym<src> { :i (src) ":" <val(/<prop-val-src> /, &?ROUTINE.WHY)>}
 rule prop-val-src { :i <font-src-expr> + % <op(",")>? }
@@ -69,9 +69,9 @@ rule font-format { :i [<string> || [collection | "embedded-opentype" | opentype 
 #| <font-face-name> = <identifiers> | <string>
 rule font-face-name { :i <identifiers> || <string> }
 #| local(<font-face-name>)
-rule local { :i "local(" [<font-face-name> || <usage(&?ROUTINE.WHY)> ] ")" }
+rule local { [:i "local(" [[<font-face-name> || <usage(&?ROUTINE.WHY)>] ] ")"] }
 #| format(<font-format>#)
-rule format { :i "format(" [<font-format> + % ","? || <usage(&?ROUTINE.WHY)> ] ")" }
+rule format { [:i "format(" [[<font-format> + % ","? || <usage(&?ROUTINE.WHY)>] ] ")"] }
 #| unicode-range: <urange>#
 rule decl:sym<unicode-range> { :i ("unicode-range") ":" <val(/<prop-val-unicode-range> /, &?ROUTINE.WHY)>}
 rule prop-val-unicode-range { :i <urange> + % <op(",")>? }

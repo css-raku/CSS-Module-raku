@@ -4,7 +4,7 @@ rule decl:sym<direction> { :i (direction) ":" <val(/<prop-val-direction> /, &?RO
 rule prop-val-direction { :i [ltr | rtl ]& <keyw> }
 #| glyph-orientation-vertical: auto | 0deg | 90deg | 0 | 90
 rule decl:sym<glyph-orientation-vertical> { :i ("glyph-orientation-vertical") ":" <val(/<prop-val-glyph-orientation-vertical> /, &?ROUTINE.WHY)>}
-rule prop-val-glyph-orientation-vertical { :i [auto | 0deg | 90deg ]& <keyw> || [0 | 90 ]& <number> }
+rule prop-val-glyph-orientation-vertical { :i [auto | 0deg | 90deg ]& <keyw> || [[0 | 90 ]& <number>] }
 #| text-combine-upright: none | all | [ digits <integer [2,4]>? ]
 rule decl:sym<text-combine-upright> { :i ("text-combine-upright") ":" <val(/<prop-val-text-combine-upright> /, &?ROUTINE.WHY)>}
 rule prop-val-text-combine-upright { :i [none | all ]& <keyw> || [[digits & <keyw> ] <integer> ? ] }

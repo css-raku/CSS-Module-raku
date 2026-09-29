@@ -27,7 +27,7 @@ rule generic-font-family { :i <generic-font-script-specific> || <generic-font-co
 #| <generic-font-script-specific> = <generic()>
 rule generic-font-script-specific { :i <generic> }
 #| generic([fangsong | kai | khmer-mul | nastaliq])
-rule generic { :i "generic(" [[[fangsong | kai | "khmer-mul" | nastaliq ]& <keyw> ] || <usage(&?ROUTINE.WHY)> ] ")" }
+rule generic { [:i "generic(" [[[[fangsong | kai | "khmer-mul" | nastaliq ]& <keyw> ] || <usage(&?ROUTINE.WHY)>] ] ")"] }
 #| <generic-font-complete> = serif | sans-serif | system-ui | cursive | fantasy | math | monospace
 rule generic-font-complete { :i [serif | "sans-serif" | "system-ui" | cursive | fantasy | math | monospace ]& <keyw> }
 #| <generic-font-incomplete> = ui-serif | ui-sans-serif | ui-monospace | ui-rounded
@@ -52,11 +52,11 @@ rule palette-identifier { :i <dashed-ident> }
 #| <dashed-ident> = <custom-ident>
 rule dashed-ident { :i <custom-ident> }
 #| palette-mix(<color-interpolation-method> , [ [normal | light | dark | <palette-identifier> | <palette-mix()> ] && <percentage [0,100]>? ]#{2})
-rule palette-mix { :i "palette-mix(" [<color-interpolation-method> "," [[[[normal | light | dark ]& <keyw> || <palette-identifier> || <palette-mix> ] :my $*A; <!{
+rule palette-mix { [:i "palette-mix(" [[<color-interpolation-method> "," [[[[normal | light | dark ]& <keyw> || <palette-identifier> || <palette-mix> ] :my $*A; <!{
     $*A++
 }>|| <percentage> ? :my $*B; <!{
     $*B++
-}>]** 2] ** 2 % ","? || <usage(&?ROUTINE.WHY)> ] ")" }
+}>]** 2] ** 2 % ","? || <usage(&?ROUTINE.WHY)>] ] ")"] }
 #| font-size: <absolute-size> | <relative-size> | <length-percentage [0,∞]> | math
 rule decl:sym<font-size> { :i ("font-size") ":" <val(/<prop-val-font-size> /, &?ROUTINE.WHY)>}
 rule prop-val-font-size { :i <absolute-size> || <relative-size> || <length-percentage> || [math & <keyw> ] }

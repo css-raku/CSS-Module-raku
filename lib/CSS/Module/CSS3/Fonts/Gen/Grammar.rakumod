@@ -152,7 +152,7 @@ rule decl:sym<font-variant-position> { :i ("font-variant-position") ":" <val(/<p
 rule prop-val-font-variant-position { :i [normal | sub | super ]& <keyw> }
 #| font-weight: normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
 rule decl:sym<font-weight> { :i ("font-weight") ":" <val(/<prop-val-font-weight> /, &?ROUTINE.WHY)>}
-rule prop-val-font-weight { :i [normal | bold | bolder | lighter ]& <keyw> || [100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 ]& <number> }
+rule prop-val-font-weight { :i [normal | bold | bolder | lighter ]& <keyw> || [[100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 ]& <number>] }
 #| line-height: normal | <number> | <length> | <percentage>
 rule decl:sym<line-height> { :i ("line-height") ":" <val(/<prop-val-line-height> /, &?ROUTINE.WHY)>}
 rule prop-val-line-height { :i [normal & <keyw> ] || <number> || <length> || <percentage> }

@@ -4,7 +4,7 @@ rule ratio { :i <number> [<op("/")> <number> ] ? }
 #| <length-percentage> = <length> | <percentage> | <number>
 rule length-percentage { :i <length> || <percentage> || <number> }
 #| calc( <calc-sum> )
-rule calc { :i "calc(" [<calc-sum> || <usage(&?ROUTINE.WHY)> ] ")" }
+rule calc { [:i "calc(" [[<calc-sum> || <usage(&?ROUTINE.WHY)>] ] ")"] }
 #| <calc-sum> = <calc-product> [ [ '+' | '-' ] <calc-product> ]*
 rule calc-sum { :i <calc-product> [[<op("+")> || <op("-")> ] <calc-product> ] * }
 #| <calc-product> = <calc-value> [ [ '*' | '/' ] <calc-value> ]*

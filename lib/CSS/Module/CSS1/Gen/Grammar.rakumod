@@ -14,7 +14,7 @@ rule decl:sym<font-variant> { :i ("font-variant") ":" <val(/<prop-val-font-varia
 rule prop-val-font-variant { :i [normal | "small-caps" ]& <keyw> }
 #| font-weight: normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
 rule decl:sym<font-weight> { :i ("font-weight") ":" <val(/<prop-val-font-weight> /, &?ROUTINE.WHY)>}
-rule prop-val-font-weight { :i [normal | bold | bolder | lighter ]& <keyw> || [100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 ]& <number> }
+rule prop-val-font-weight { :i [normal | bold | bolder | lighter ]& <keyw> || [[100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 ]& <number>] }
 #| font-size: <absolute-size> | <relative-size> | <length> | <percentage>
 rule decl:sym<font-size> { :i ("font-size") ":" <val(/<prop-val-font-size> /, &?ROUTINE.WHY)>}
 rule prop-val-font-size { :i <absolute-size> || <relative-size> || <length> || <percentage> }

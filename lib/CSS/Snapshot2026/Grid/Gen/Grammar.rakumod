@@ -65,11 +65,11 @@ rule explicit-track-list { :i [<line-names> ? <track-size> ] + <line-names> ? }
 #| <track-size> = <track-breadth> | <track-minmax>  | fit-content( <length-percentage [0,∞]> )
 rule track-size { :i <track-breadth> || <track-minmax> || <fit-content> }
 #| minmax( <inflexible-breadth> , <track-breadth> )
-rule track-minmax { :i "minmax(" [<inflexible-breadth> "," <track-breadth> || <usage(&?ROUTINE.WHY)> ] ")" }
+rule track-minmax { [:i "minmax(" [[<inflexible-breadth> "," <track-breadth> || <usage(&?ROUTINE.WHY)>] ] ")"] }
 #| <fixed-size> = <fixed-breadth> | <fixed-minmax> | <track-minmax>
 rule fixed-size { :i <fixed-breadth> || <fixed-minmax> || <track-minmax> }
 #| minmax( <fixed-breadth> , <track-breadth> )
-rule fixed-minmax { :i "minmax(" [<fixed-breadth> "," <track-breadth> || <usage(&?ROUTINE.WHY)> ] ")" }
+rule fixed-minmax { [:i "minmax(" [[<fixed-breadth> "," <track-breadth> || <usage(&?ROUTINE.WHY)>] ] ")"] }
 #| <track-breadth> = <length-percentage [0,∞]> | <flex [0,∞]> | min-content | max-content | auto
 rule track-breadth { :i <length-percentage> || <flex> || ["min-content" | "max-content" | auto ]& <keyw> }
 #| <inflexible-breadth> = <length-percentage [0,∞]> | min-content | max-content | auto
@@ -79,13 +79,13 @@ rule fixed-breadth { :i <length-percentage> }
 #| <line-names> = '[' <custom-ident>* ']'
 rule line-names { :i <op("[")> <custom-ident> * <op("]")> }
 #| repeat( [ <integer [1,∞]> ] , [ <line-names>? <track-size> ]+ <line-names>? )
-rule track-repeat { :i "repeat(" [<integer> "," [<line-names> ? <track-size> ] + <line-names> ? || <usage(&?ROUTINE.WHY)> ] ")" }
+rule track-repeat { [:i "repeat(" [[<integer> "," [<line-names> ? <track-size> ] + <line-names> ? || <usage(&?ROUTINE.WHY)>] ] ")"] }
 #| repeat( [ auto-fill | auto-fit ] , [ <line-names>? <fixed-size> ]+ <line-names>? )
-rule auto-repeat { :i "repeat(" [[["auto-fill" | "auto-fit" ]& <keyw> ] "," [<line-names> ? <fixed-size> ] + <line-names> ? || <usage(&?ROUTINE.WHY)> ] ")" }
+rule auto-repeat { [:i "repeat(" [[[["auto-fill" | "auto-fit" ]& <keyw> ] "," [<line-names> ? <fixed-size> ] + <line-names> ? || <usage(&?ROUTINE.WHY)>] ] ")"] }
 #| repeat( [ <integer [1,∞]> ] , [ <line-names>? <fixed-size> ]+ <line-names>? )
-rule fixed-repeat { :i "repeat(" [<integer> "," [<line-names> ? <fixed-size> ] + <line-names> ? || <usage(&?ROUTINE.WHY)> ] ")" }
+rule fixed-repeat { [:i "repeat(" [[<integer> "," [<line-names> ? <fixed-size> ] + <line-names> ? || <usage(&?ROUTINE.WHY)>] ] ")"] }
 #| fit-content( <length-percentage> )
-rule fit-content { :i "fit-content(" [<length-percentage> || <usage(&?ROUTINE.WHY)> ] ")" }
+rule fit-content { [:i "fit-content(" [[<length-percentage> || <usage(&?ROUTINE.WHY)>] ] ")"] }
 #| <grid-line> = auto | <custom-ident> |  [ [ <integer [-∞,-1]> | <integer [1,∞]> ] && <custom-ident>? ] |  [ span && [ <integer [1,∞]> || <custom-ident> ] ]
 rule grid-line { :i [auto & <keyw> ] || <custom-ident> || [[[<integer> || <integer> ] :my $*A; <!{
     $*A++

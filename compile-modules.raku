@@ -1,6 +1,5 @@
 use v6;
 
-use experimental :rakuast;
 use CSS::Specification::Compiler :&build-metadata;
 use NativeCall;
 

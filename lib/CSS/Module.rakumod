@@ -128,8 +128,9 @@ multi method parse-property(Str:D $property-name where .starts-with('@'), Str:D(
     $ast;
 }
 
-multi method parse-property(Str:D $property-name, Str:D :sub-module($)! where my ($sub-module = %!sub-module{$_}), |c) {
-    $sub-module.parse-property: $property-name, |c;
+#XXXX
+multi method parse-property(Str:D $property-name, Str:D :sub-module($_)! where %!sub-module{$_}, |c) {
+    %!sub-module{$_}.parse-property: $property-name, |c;
 }
 
 #| parse an individual property-specific expression
@@ -165,3 +166,4 @@ method subparse(Bool :$warn = True, :$actions = self.actions.new(:$warn), |c) {
 method parsefile(Bool :$warn = True, :$actions = self.actions.new(:$warn), |c) {
     $!grammar.parsefile(:$actions, |c);
 }
+     

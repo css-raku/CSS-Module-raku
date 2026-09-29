@@ -59,18 +59,18 @@ rule easing-function { :i <linear-easing-function> || <cubic-bezier-easing-funct
 #| <linear-easing-function> = linear | <linear()>
 rule linear-easing-function { :i [linear & <keyw> ] || <linear> }
 #| linear( [ <number> && <percentage>{0,2} ]# )
-rule linear { :i "linear(" [[[<number> :my $*A; <!{
+rule linear { [:i "linear(" [[[[<number> :my $*A; <!{
     $*A++
 }>|| <percentage> ** 0..2 :my $*B; <!{
     $*B++
-}>]** 2] + % ","? || <usage(&?ROUTINE.WHY)> ] ")" }
+}>]** 2] + % ","? || <usage(&?ROUTINE.WHY)>] ] ")"] }
 #| <cubic-bezier-easing-function> = ease | ease-in | ease-out | ease-in-out | <cubic-bezier()>
 rule cubic-bezier-easing-function { :i [ease | "ease-in" | "ease-out" | "ease-in-out" ]& <keyw> || <cubic-bezier> }
 #| cubic-bezier( [ <number [0,1]>, <number> ]#{2} )
-rule cubic-bezier { :i "cubic-bezier(" [[<number> "," <number> ] ** 2 % ","? || <usage(&?ROUTINE.WHY)> ] ")" }
+rule cubic-bezier { [:i "cubic-bezier(" [[[<number> "," <number> ] ** 2 % ","? || <usage(&?ROUTINE.WHY)>] ] ")"] }
 #| <step-easing-function> = step-start | step-end | <steps()>
 rule step-easing-function { :i ["step-start" | "step-end" ]& <keyw> || <steps> }
 #| steps( <integer>, <step-position>?)
-rule steps { :i "steps(" [<integer> ["," <step-position> ]? || <usage(&?ROUTINE.WHY)> ] ")" }
+rule steps { [:i "steps(" [[<integer> ["," <step-position> ]? || <usage(&?ROUTINE.WHY)>] ] ")"] }
 #| <step-position> = jump-start | jump-end | jump-none | jump-both | start | end
 rule step-position { :i ["jump-start" | "jump-end" | "jump-none" | "jump-both" | start | end ]& <keyw> }

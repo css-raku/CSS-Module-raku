@@ -22,17 +22,17 @@ rule historical-lig-values { :i [["historical-ligatures" | "no-historical-ligatu
 #| <contextual-alt-values> = [ contextual | no-contextual ]
 rule contextual-alt-values { :i [[contextual | "no-contextual" ]& <keyw> ] }
 #| stylistic(<font-feature-value-name>)
-rule stylistic { :i "stylistic(" [<font-feature-value-name> || <usage(&?ROUTINE.WHY)> ] ")" }
+rule stylistic { [:i "stylistic(" [[<font-feature-value-name> || <usage(&?ROUTINE.WHY)>] ] ")"] }
 #| styleset(<font-feature-value-name>#)
-rule styleset { :i "styleset(" [<font-feature-value-name> + % ","? || <usage(&?ROUTINE.WHY)> ] ")" }
+rule styleset { [:i "styleset(" [[<font-feature-value-name> + % ","? || <usage(&?ROUTINE.WHY)>] ] ")"] }
 #| character-variant(<font-feature-value-name>#)
-rule character-variant { :i "character-variant(" [<font-feature-value-name> + % ","? || <usage(&?ROUTINE.WHY)> ] ")" }
+rule character-variant { [:i "character-variant(" [[<font-feature-value-name> + % ","? || <usage(&?ROUTINE.WHY)>] ] ")"] }
 #| swash(<font-feature-value-name>)
-rule swash { :i "swash(" [<font-feature-value-name> || <usage(&?ROUTINE.WHY)> ] ")" }
+rule swash { [:i "swash(" [[<font-feature-value-name> || <usage(&?ROUTINE.WHY)>] ] ")"] }
 #| ornaments(<font-feature-value-name>)
-rule ornaments { :i "ornaments(" [<font-feature-value-name> || <usage(&?ROUTINE.WHY)> ] ")" }
+rule ornaments { [:i "ornaments(" [[<font-feature-value-name> || <usage(&?ROUTINE.WHY)>] ] ")"] }
 #| annotation(<font-feature-value-name>)
-rule annotation { :i "annotation(" [<font-feature-value-name> || <usage(&?ROUTINE.WHY)> ] ")" }
+rule annotation { [:i "annotation(" [[<font-feature-value-name> || <usage(&?ROUTINE.WHY)>] ] ")"] }
 #| <numeric-figure-values> = [ lining-nums | oldstyle-nums ]
 rule numeric-figure-values { :i [["lining-nums" | "oldstyle-nums" ]& <keyw> ] }
 #| <numeric-spacing-values> = [ proportional-nums | tabular-nums ]
@@ -44,11 +44,11 @@ rule font-weight-absolute { :i [[normal | bold ]& <keyw> || <number> ] }
 #| <font-src> = <url> [ format( <font-format> ) ]? [ tech( <font-tech># ) ]? | local( <font-family-name> )
 rule font-src { :i <url> <format> ? <tech> ? || <local> }
 #| format( <font-format> )
-rule format { :i "format(" [<font-format> || <usage(&?ROUTINE.WHY)> ] ")" }
+rule format { [:i "format(" [[<font-format> || <usage(&?ROUTINE.WHY)>] ] ")"] }
 #| tech( <font-tech># )
-rule tech { :i "tech(" [<font-tech> + % ","? || <usage(&?ROUTINE.WHY)> ] ")" }
+rule tech { [:i "tech(" [[<font-tech> + % ","? || <usage(&?ROUTINE.WHY)>] ] ")"] }
 #| local( <font-family-name> )
-rule local { :i "local(" [<font-family-name> || <usage(&?ROUTINE.WHY)> ] ")" }
+rule local { [:i "local(" [[<font-family-name> || <usage(&?ROUTINE.WHY)>] ] ")"] }
 #| <font-format> = [ <string> | collection | embedded-opentype | opentype      | svg | truetype | woff | woff2 ]
 rule font-format { :i [<string> || [collection | "embedded-opentype" | opentype | svg | truetype | woff | woff2 ]& <keyw> ] }
 #| <font-tech> = [ <font-features-tech> | <color-font-tech>      | variations | palettes | incremental ]
