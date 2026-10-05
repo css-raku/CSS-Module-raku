@@ -5,13 +5,11 @@ use JSON::Fast;
 
 use CSS::Module::CSS21;
 use CSS::Module::CSS3;
-use CSS::Module::Snapshot2026;
 use CSS::Grammar::Test;
 use CSS::Writer;
 
 my CSS::Module $css21 = CSS::Module::CSS21.module;
 my CSS::Module $css3  = CSS::Module::CSS3.module;
-my CSS::Module $snapshot2026  = CSS::Module::Snapshot2026.module;
 
 my %seen;
 
@@ -27,8 +25,7 @@ for 't/css21-properties.json'.IO.lines {
 
     subtest $input, {
         for { :module($css21), :proforma<inherit>},
-        { :module($css3), :proforma<inherit initial>, :$writer},
-        { :module($snapshot2026), :proforma<inherit initial>, :$writer}
+            { :module($css3), :proforma<inherit initial>, :$writer}
         -> % ( :$module!, :$proforma!, :$writer=Any) {
 
             my $level = $module.name;

@@ -2,13 +2,12 @@ use CSS::Module;
 use CSS::Module::CSS1;
 use CSS::Module::CSS21;
 use CSS::Module::CSS3;
-use CSS::Module::Snapshot2026;
 use CSS::Writer;
 
 sub MAIN(
     *@input,
     Str:D :$property!,
-    Str:D :$level = 'Snapshot2026',
+    Str:D :$level = 'css3',
     Bool  :$trace = True,
     Bool  :$warn = True,
     Str   :$at-rule,
@@ -20,7 +19,7 @@ sub MAIN(
         when /^[:i css]?1/      { CSS::Module::CSS1 }
         when /^[:i css]?2\.?1?/ { CSS::Module::CSS21 }
         when /^[:i css]?3/ { CSS::Module::CSS3 }
-        when /^[:i css|snapshot]?2026/ { CSS::Module::Snapshot2026 }
+        when /^[:i css|snapshot]?2026/ { require ::('CSS::Module::Snapshot2026') }
         default {
             fail "usage --level css?[1|2.1|3]|snapshot2026";
         }
