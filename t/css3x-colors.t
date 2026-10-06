@@ -43,6 +43,11 @@ for (
     },
     { :rule<term>, input => 'hsla( 180, -100%, 150%, 1.75 )',
                ast => :hsla[ :num(180), :percent(0), :percent(100), :num(1) ],
+               :writer{
+                   # writer converts hsla(...,1) to hsl(...)
+                   ast => :hsl[ :num(180), :percent(0), :percent(100) ],
+                   { :rule<token>, type => 'color', units => 'hsl'},
+               },
     },
     # a few invalid cases
     { :rule<term>, input => 'rgba(10%,20%,30%)',
@@ -50,11 +55,11 @@ for (
     },
     { :rule<term>, input => 'hsl(junk)',
               ast => Mu,
-              warnings => rx{^usage\: \s hsl\(},
+              warnings => rx{usage\: \s hsl\(},
     },
     { :rule<term>, input => 'hsla()',
               ast => Mu,
-              warnings => rx{^usage\: \s hsla\(},
+              warnings => rx{usage\: \s hsla\(},
     },
     { :rule<color>, input => 'orange', ast => :rgb[ :num(255), :num(165), :num(0) ]},
     { :rule<color>, input => 'hotpink', ast => :rgb[ :num(255), :num(105), :num(180) ]},
@@ -63,7 +68,7 @@ for (
     { :rule<color>, input => 'currentcolor', ast => :keyw<currentcolor>},
     { :rule<color>, input => 'transparent', ast => :keyw<transparent>},
 # http://www.w3.org/TR/2011/REC-css3-color-20110607
-# @color-profile is in the process of being dropped
+# @color-profile reintroduced in Snapshot-2026 with a different syntax
 ##    { :rule<at-rule>, input => '@color-profile { name: acme_cmyk; src: url(http://printers.example.com/acmecorp/model1234); }',
 ##                ast => {"declarations" => [{"ident" => "name", "expr" => ["keyw" => "acme_cmyk"]},
 ##                                           {"ident" => "src", "expr" => ["term" => "http://printers.example.com/acmecorp/model1234"]}}],

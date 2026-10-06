@@ -9,7 +9,7 @@ dominant-baseline	auto | use-script | no-change | reset-size | ideographic | alp
 fill	<paint>	black	shapes and text content elements	yes	N/A	visual	yes	as specified, but with <color> values computed and <url> values made absolute
     <paint> = none | <color> | <url> [none | <color>]? | context-fill | context-stroke
 fill-opacity	<alpha-value>	1	shapes and text content elements	yes	N/A	visual	yes	the specified value converted to a number, clamped to the range [0,1]
-    <alpha-value> = <percentage-range>
+    <alpha-value> = <number> | <percentage>
 fill-rule	nonzero | evenodd	nonzero	shapes and text content elements	yes	N/A	visual	yes	as specified
 font-variant	normal | small-caps	normal	text content elements	yes	N/A	visual	yes	see individual properties
 glyph-orientation-vertical	auto | <angle> | <number>	auto	text content elements	yes	N/A	visual	no	as specified

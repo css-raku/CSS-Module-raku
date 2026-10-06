@@ -50,7 +50,7 @@
 
 'empty-cells'	show | hide | inherit	show	'table-cell' elements	yes	 	visual
 'float'	left | right | none | inherit	none	all, but see 9.7	no	 	visual
-'font-family'	[ <generic-family> | <family-name> ]# | inherit	depends on user agent	 	yes	 	visual
+'font-family'	[ <family-name> | !<generic-family> ]# | inherit	depends on user agent	 	yes	 	visual
 	<generic-family> = serif | sans-serif | cursive | fantasy | monospace
 	<family-name> = <identifiers> | <string>
 'font-size'	<absolute-size> | <relative-size> | <length> | inherit	medium	 	yes	refer to inherited font size	visual

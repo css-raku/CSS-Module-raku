@@ -14,9 +14,6 @@ method number (|) {
 method percentage (|) {
     ...
 }
-method percentage-range (|) {
-    ...
-}
 method url (|) {
     ...
 }

@@ -3,46 +3,41 @@
 use Test;
 use JSON::Fast;
 
+use CSS::Module::CSS1;
 use CSS::Module::CSS21;
 use CSS::Module::CSS3;
-use CSS::Module::CSS1;
 use CSS::Grammar::Test;
 use CSS::Writer;
 
 my CSS::Module $css1  = CSS::Module::CSS1.module;
 my CSS::Module $css21 = CSS::Module::CSS21.module;
-my CSS::Module $css3x = CSS::Module::CSS3.module;
+my CSS::Module $css3  = CSS::Module::CSS3.module;
 
 my CSS::Writer $writer .= new;
 
 my %seen;
 
 for 't/css1-properties.json'.IO.lines {
-#for '/tmp/tst.json'.IO.lines {
-
     next if .substr(0,2) eq '//';
 
     my %expected = from-json($_);
     my $prop = %expected<prop>.lc;
     my $input = sprintf '{%s: %s}', $prop, %expected<decl>;
-    my $expr = %expected<expr>;
-
-    %expected<ast> = $expr ?? { :declarations[{ :property{ :ident($prop), :$expr } }] } !! Any;
 
     subtest $input, {
         for { :module($css1), :proforma[]},
        	{ :module($css21), :proforma<inherit>},	
-       	{ :module($css3x), :proforma<inherit initial>, :$writer}
+        { :module($css3), :proforma<inherit initial>, :$writer}
         ->  % ( :$module!, :$proforma!, |c) {
 
             my $level = $module.name;
-            my $grammar = $module.grammar;
-            my $actions = $module.actions.new;
+            temp %expected ,= .Hash with %expected{$level};
+            my $expr = %expected<expr>;
+            %expected<ast> = $expr ?? { :declarations[{ :property{ :ident($prop), :$expr } }] } !! Any;
 
             subtest $level, {
-	        CSS::Grammar::Test::parse-tests($grammar, $input,
+	        CSS::Grammar::Test::parse-tests($input, :$module,
 					        :rule<declarations>,
-					        :$actions,
 					        :%expected,
                                                 |c,
                                                );
@@ -52,8 +47,8 @@ for 't/css1-properties.json'.IO.lines {
                     subtest "Unexpected input", {
 	                my $junk = sprintf '{%s: %s}', $prop, 'junk +-42';
 
-	                $actions.reset;
-	                my $p = $grammar.parse( $junk, :rule<declarations>, :$actions);
+	                my $actions = $module.actions.new;
+	                my $p = $module.grammar.parse( $junk, :rule<declarations>, :$actions);
 	                ok($p.defined && ~$p eq $junk, "$prop: able to parse unexpected input")
 	                or note "unable to parse declaration list: $junk";
                 
@@ -67,10 +62,10 @@ for 't/css1-properties.json'.IO.lines {
 
 		            my $ast = { :declarations[{ :property{ :ident($prop), :expr[ { :$keyw} ] } }] };
 
-                            CSS::Grammar::Test::parse-tests($grammar, $decl,
+                            CSS::Grammar::Test::parse-tests($decl,
+                                                            :$module,
 						            :rule<declarations>,
                                                             :suite($keyw),
-						            :$actions,
 						            :expected{ :$ast } );
                         }
                     }

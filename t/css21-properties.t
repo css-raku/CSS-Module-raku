@@ -9,7 +9,7 @@ use CSS::Grammar::Test;
 use CSS::Writer;
 
 my CSS::Module $css21 = CSS::Module::CSS21.module;
-my CSS::Module $css3x = CSS::Module::CSS3.module;
+my CSS::Module $css3  = CSS::Module::CSS3.module;
 
 my %seen;
 
@@ -19,26 +19,23 @@ for 't/css21-properties.json'.IO.lines {
 
     my %expected = %( from-json($_) );
     my $prop = %expected<prop>.lc;
-    my $expr = %expected<expr>;
-
-    %expected<ast> = $expr ?? { :declarations[{ :property{ :ident($prop), :$expr } }] } !! Any;
 
     my $input = sprintf '{%s: %s}', $prop, %expected<decl>;
     my $writer = CSS::Writer.new;
 
     subtest $input, {
         for { :module($css21), :proforma<inherit>},
-        { :module($css3x), :proforma<inherit initial>, :$writer}
+            { :module($css3), :proforma<inherit initial>, :$writer}
         -> % ( :$module!, :$proforma!, :$writer=Any) {
 
             my $level = $module.name;
-            subtest $level, {
-	        my $grammar = $module.grammar;
-                my $actions = $module.actions.new;
+            temp %expected ,= .Hash with %expected{$level};
+            my $expr = %expected<expr>;
+            %expected<ast> = $expr ?? { :declarations[{ :property{ :ident($prop), :$expr } }] } !! Any;
 
-	        CSS::Grammar::Test::parse-tests($grammar, $input,
+            subtest $level, {
+	        CSS::Grammar::Test::parse-tests($input, :$module,
 					        :rule<declarations>,
-					        :$actions,
                                                 :$writer,
 					        :%expected );
 
@@ -46,8 +43,8 @@ for 't/css21-properties.json'.IO.lines {
 	            # usage and inheritence  tests
 	            my $junk = sprintf '{%s: %s}', $prop, 'junk +-42';
 
-	            $actions.reset;
-	            my $p = $grammar.parse( $junk, :rule<declarations>, :$actions);
+	            my $actions = $module.actions.new;
+	            my $p = $module.grammar.parse( $junk, :rule<declarations>, :$actions);
 	            ok($p.defined && ~$p eq $junk, "$prop: able to parse unexpected input")
 	                or note "unable to parse declaration list: $junk";
 
@@ -59,9 +56,8 @@ for 't/css21-properties.json'.IO.lines {
 
 		        my $ast = { :declarations[{ :property{ :ident($prop), :expr[ { :keyw($misc)} ] } }] };
 
-                        CSS::Grammar::Test::parse-tests($grammar, $decl,
+                        CSS::Grammar::Test::parse-tests($decl, :$module,
 						        :rule<declarations>,
-						        :$actions,
 						        :expected({ :$ast }) );
                     }
                 }

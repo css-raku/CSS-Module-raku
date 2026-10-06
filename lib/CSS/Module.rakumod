@@ -6,8 +6,8 @@ use CSS::Module::Property;
 use CSS::Writer;
 
 has Str $.name;
-has $.grammar is required  #| grammar
-              handles <parse subparse parsefile>;
+has $.grammar is required; #| grammar
+
 has $.actions is required  #| actions class
               handles <colors>;
 has CSS::Writer $!writer .= new;
@@ -98,27 +98,56 @@ multi method parse-property(Str:D $property-name where (%!coerce{.lc}:exists), $
     }
     else {
         if $warn {
-            note "unable to parse CSS property '$prop: $val;'";
+            note "unable to parse {$.name} property '$prop: $val;'";
             note .message with $!;
         }
         Nil;
     };
 }
 
-#| parse an individual property-specific expression
-multi method parse-property(Str:D $property-name, Str() $val, Bool :$warn = True) {
+#| parse an @property
+multi method parse-property(Str:D $property-name where .starts-with('@'), Str:D() $val, Bool :$warn = True, Bool :$trace) {
     my $actions = $.actions.new;
-    my $prop = $property-name.lc;
-    $prop = $_ with %!alias{$prop};
-    my $rule = %!is-expr{$prop} ?? 'expr' !! 'css-val-' ~ $prop;
+    my $prop = $property-name.substr(1).lc;
+    my $rule = 'at-rule-' ~ $prop;
     my $ast;
-
-    if $.grammar.parse($val, :$rule, :$actions ) -> \p {
+    if $.grammar.parse($prop ~ $val, :$rule, :$actions ) -> \p {
+        note p if $trace;
         $ast := $actions.build.list(p);
         $ast := Nil if $ast eqv [];
     }
     else {
-        note "unable to parse CSS property '$property-name: $val;'"
+        note "unable to parse {$.name} property '\@$prop $val'"
+            if $warn;
+    }
+
+    if $warn {
+        note $_ for $actions.warnings;
+    }
+
+    $ast;
+}
+
+#XXXX
+multi method parse-property(Str:D $property-name, Str:D :sub-module($_)! where %!sub-module{$_}, |c) {
+    %!sub-module{$_}.parse-property: $property-name, |c;
+}
+
+#| parse an individual property-specific expression
+multi method parse-property(Str:D $property-name, Str:D() $val, Bool :$warn = True, Bool :$trace) {
+    my $actions = $.actions.new;
+    my $prop = $property-name.lc;
+    $prop = $_ with %!alias{$prop};
+    my $rule = %!is-expr{$prop} ?? 'expr' !! 'prop-val-' ~ $prop;
+    my $ast;
+
+    if $.grammar.parse($val, :$rule, :$actions ) -> \p {
+        note p if $trace;
+        $ast := $actions.build.list(p);
+        $ast := Nil if $ast eqv [];
+    }
+    else {
+        note "unable to parse {$.name} property '$property-name: $val;'"
             if $warn;
     }
     if $warn {
@@ -127,3 +156,14 @@ multi method parse-property(Str:D $property-name, Str() $val, Bool :$warn = True
 
     $ast;
 }
+
+method parse(Bool :$warn = True, :$actions = self.actions.new(:$warn), |c) {
+    $!grammar.parse(:$actions, :$warn, |c);
+}
+method subparse(Bool :$warn = True, :$actions = self.actions.new(:$warn), |c) {
+    $!grammar.subparse(:$actions, |c);
+}
+method parsefile(Bool :$warn = True, :$actions = self.actions.new(:$warn), |c) {
+    $!grammar.parsefile(:$actions, |c);
+}
+     
