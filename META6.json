@@ -6,10 +6,10 @@
   "build-depends": [
   ],
   "depends": [
-    "CSS::Grammar:ver<0.4.1+>",
+    "CSS::Grammar:ver<0.5.0+>",
     "CSS::Module::CSS3::Selectors:ver<0.0.5+>",
-    "CSS::Specification:ver<0.5.3+>",
-    "CSS::Writer:ver<0.2.14+>",
+    "CSS::Specification:ver<0.6.0+>",
+    "CSS::Writer:ver<0.3.4+>",
     "JSON::Fast",
     "Method::Also"
   ],
@@ -56,7 +56,6 @@
     "CSS::Module::CSS3::Values_and_Units::Gen::Actions": "lib/CSS/Module/CSS3/Values_and_Units/Gen/Actions.rakumod",
     "CSS::Module::CSS3::Values_and_Units::Gen::External": "lib/CSS/Module/CSS3/Values_and_Units/Gen/External.rakumod",
     "CSS::Module::CSS3::Values_and_Units::Gen::Grammar": "lib/CSS/Module/CSS3/Values_and_Units/Gen/Grammar.rakumod",
-
     "CSS::Module::Property": "lib/CSS/Module/Property.rakumod",
     "CSS::Module::SVG": "lib/CSS/Module/SVG.rakumod",
     "CSS::Module::SVG::Actions": "lib/CSS/Module/SVG/Actions.rakumod",
