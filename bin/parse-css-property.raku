@@ -29,7 +29,7 @@ sub MAIN(
         my $module-name = $module.name;
         my $submodule-name = '@' ~ $at-rule.subst(/^\@/, '').lc;
         $module = $module.sub-module{ $submodule-name }
-            // fail "no such $module-name sub-module: $submodule-name" 
+            // fail "no such $module-name sub-module: $submodule-name"
     }
     my $expr = $module.parse-property($property.lc, @input.join(' '), :$warn, :$trace);
     dd $expr;
@@ -37,4 +37,3 @@ sub MAIN(
         say CSS::Writer.new(:$color-names, :$terse).write-property: %( :ident($property), :$expr );
     }
 }
-                          
