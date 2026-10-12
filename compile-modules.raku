@@ -22,7 +22,8 @@ sub MAIN(Str $working-directory = '.' ) {
             }
         }
         my %inherit = %props if $inherit;
-        %props = CSS::Specification::Compiler::Make.make-module($working-directory, $root, @sources, :%inherit);
+        my CSS::Specification::Compiler::Make $maker .= new;
+        %props = $maker.make-module($working-directory, $root, @sources, :%inherit);
     }
 }
 
