@@ -3,14 +3,13 @@
 use Test;
 use JSON::Fast;
 
-use CSS::Module::CSS3::Fonts;
-use CSS::Module::CSS21::Actions;
+use CSS::Module::CSS3;
 use CSS::Module::CSS21;
 use CSS::Grammar::Test;
 use CSS::Writer;
 
-my $css3x-actions = CSS::Module::CSS3::Fonts::Actions.new;
-my $css21-actions = CSS::Module::CSS21::Actions.new;
+my $css3 = CSS::Module::CSS3.module;
+my $css21 = CSS::Module::CSS21.module;
 my CSS::Writer $writer .= new;
 
 for 't/css3x-fonts.json'.IO.lines {
@@ -20,21 +19,17 @@ for 't/css3x-fonts.json'.IO.lines {
     my ($rule, $expected) = @( from-json($_) );
 
     my $input = $expected<input>;
+    for $css21, $css3 -> $module {
+        my %expected = %$expected;
+        %expected ,= .Hash with %expected{$module.name}:delete;
+        &CSS::Grammar::Test::parse-tests(
+            $input,
+	    :$rule,
+            :$module,
+            :$writer,
+	    :%expected );
 
-    &CSS::Grammar::Test::parse-tests( CSS::Module::CSS3::Fonts, $input,
-				     :$rule,
-				     :actions($css3x-actions),
-                                     :$writer,
-				     :suite<css3x-fonts>,
-				     :$expected );
-
-    my $css21 = $expected<css21> // {};
-    &CSS::Grammar::Test::parse-tests(CSS::Module::CSS21, $input,
-				    :$rule,
-				    :actions($css21-actions),
-				    :suite<css21>,
-                                    :$writer,
-				    :expected(%(%$expected, %$css21)) );
+    }
 }
 
 done-testing;

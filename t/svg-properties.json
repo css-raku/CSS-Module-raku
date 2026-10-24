@@ -15,7 +15,7 @@
 { "prop" : "direction", "decl" : "ltr", "expr" : [ { "keyw" : "ltr" } ] }
 { "prop" : "display", "decl" : "table-cell", "expr" : [ { "keyw" : "table-cell" } ] }
 { "prop" : "dominant-baseline", "decl" : "hanging", "expr" : [ { "keyw" : "hanging" } ] }
-{ "prop" : "fill", "decl" : "rgb(10,20,10%)", "expr" : [ { "rgb" : [{"num" : 10}, {"num" : 20}, {"num" : 26}] } ] }
+{ "prop" : "fill", "decl" : "rgb(10,20,10%)", "expr" : [ { "rgb" : [{"num" : 10}, {"num" : 20}, {"percent" : 10}] } ] }
 { "prop" : "fill-opacity", "decl" : "0.75", "expr" : [ { "num" : 0.75 } ] }
 { "prop" : "fill-opacity", "decl" : "75%", "expr" : [ { "percent" : 75 } ] }
 { "prop" : "fill-rule", "decl" : "evenOdD", "expr" : [ { "keyw" : "evenodd" } ] }

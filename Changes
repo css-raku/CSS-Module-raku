@@ -1,4 +1,6 @@
 {{$NEXT}}
+   - Remove references to Snapshot2026 from test suite.
+   - Adjust for CSS::Grammar 0.5.1 AST changes.
 
 0.7.8  2026-10-07T14:46:32+13:00
    - Adjust source specification for CSS::Specification 0.6.0
