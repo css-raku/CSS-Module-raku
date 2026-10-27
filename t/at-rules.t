@@ -18,7 +18,7 @@ for (
     :ast(:at-rule{:at-keyw<font-face>,
                   :declarations[
                            :property{:expr[:ident<Gentium>,], :ident<font-family>},
-                           :property{:expr[:url("http://example.com/fonts/Gentium.woff"),], :ident<src>}]}),
+                           :property{:expr[{:expr[:url("http://example.com/fonts/Gentium.woff"),]}], :ident<src>}]}),
     :warnings[ "dropping unknown property: color" ],
     },
 ) -> % ( :$rule!, :$input!, *%expected ) {

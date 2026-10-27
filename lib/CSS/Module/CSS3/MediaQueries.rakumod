@@ -17,12 +17,12 @@ rule rule-list {
 }
 
 rule unknown-media-list  { <CSS::Grammar::Core::_any>* }
-rule media-query {[<media-op>? <media-name> | '(' <media-expr> ')']
-                  [ <keyw(/:i and/)> '(' <media-expr> ')' ]*}
+rule media-query {[<media-op>? <media-name> | '(' <media-condition> ')']
+                  [ <keyw(/:i and/)> '(' <media-condition> ')' ]*}
 rule media-op    {:i'only'|'not'}
 
 rule _range {:i [$<prefix>=[min|max]\-]}
-rule media-expr  { <expr=.media-feature> || <media-feature-unknown> }
+rule media-condition  { <expr=.media-feature> || <media-feature-unknown> }
 
 proto rule media-feature  {*}
 
@@ -82,7 +82,7 @@ class Actions {
 
     method media-query($/) {
         return make [{keyw => "not"}, {ident => "all"}]
-            if @<media-expr> && @<media-expr>.grep({! .ast.defined});
+            if @<media-condition> && @<media-condition>.grep({! .ast.defined});
 
         make self!build.list($/);
     }
@@ -91,7 +91,7 @@ class Actions {
         make self!build.token($/.lc, :type<keyw>);
     }
 
-    method media-expr($obj: $/) {
+    method media-condition($obj: $/) {
         make self!build.token( self!build.decl($<expr>, :$obj), :type(CSSValue::Property) )
             if $<expr>;
     }
